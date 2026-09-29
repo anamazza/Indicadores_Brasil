@@ -27,3 +27,9 @@ out = os.path.join(BASE, "Painel_Internacao_2026.html")
 open(out, "w", encoding="utf-8").write(html)
 open(os.path.join(BASE, "index.html"), "w", encoding="utf-8").write(html)
 print(f"gerado {out} ({os.path.getsize(out) // 1024} KB) + index.html")
+# 29/09/2026: o painel e publicado como subpasta do repositorio do Painel NV (GitHub Pages
+# anamazza.github.io/Indicadores_NV/internacao/), por decisao da usuaria - copia o index.html para la
+internacao_no_nv = os.path.join(os.path.dirname(os.path.dirname(BASE)), "Pojeto Apresentações NV_2026", "Painel_2026_Novo", "internacao")
+os.makedirs(internacao_no_nv, exist_ok=True)
+open(os.path.join(internacao_no_nv, "index.html"), "w", encoding="utf-8").write(html)
+print(f"copiado para {internacao_no_nv}\index.html (publicar com commit + push do Painel NV)")
