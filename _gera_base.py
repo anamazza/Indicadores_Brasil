@@ -42,7 +42,8 @@ rep("""    <p class="eyebrow">Painel de Indicadores · Mortalidade Materna, Feta
     </div>
     <div class="hero-links" aria-label="Painéis da coordenação">
       <span class="rot">Painéis</span>
-      <a href="https://anamazza.github.io/Indicadores_NV/">Nascimentos</a>
+      <a href="https://anamazza.github.io/Indicadores_NV/">Início</a>
+      <a href="https://anamazza.github.io/Indicadores_NV/nascimentos/">Nascimentos</a>
       <a class="atual" aria-current="page">Internação</a>
       <a href="https://anamazza.github.io/Indicadores_mortalidade-2026/">Mortalidade</a>
     </div>""")
