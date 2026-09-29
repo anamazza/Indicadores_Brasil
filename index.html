@@ -78,6 +78,16 @@ select:focus-visible,input:focus-visible,button:focus-visible{outline:2.5px soli
   border-radius:999px; padding:.22rem .8rem; font-size:.78rem; font-weight:700; color:#E3F0E7;
 }
 
+/* botões dos painéis da família */
+.hero-links{display:flex; gap:.55rem; flex-wrap:wrap; margin-top:1.3rem; align-items:center}
+.hero-links .rot{font-size:.7rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:#C9DCD0; margin-right:.2rem}
+.hero-links a{
+  display:inline-flex; align-items:center; gap:.4rem; text-decoration:none;
+  background:rgba(255,255,255,.12); border:1.5px solid rgba(255,255,255,.35); color:#FFF;
+  border-radius:999px; padding:.42rem 1rem; font-size:.86rem; font-weight:800; transition:background .15s;
+}
+.hero-links a:hover{background:rgba(255,255,255,.24)}
+.hero-links a.atual{background:var(--verde-fiocruz); border-color:var(--verde-fiocruz); cursor:default}
 /* faixa de destaques abaixo do cabeçalho */
 .faixa-stats{
   display:flex; gap:.8rem; flex-wrap:wrap;
@@ -412,6 +422,12 @@ footer a{color:var(--verde-lima)}
     <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · óbitos ocorridos nas maternidades segundo o SIM (declarações de óbito e de óbito fetal) e nascidos vivos do SINASC, 2019 a 2025, com cadastro CNES e localização das unidades.</p>
     <div class="hero-blocos">
       <span>Mortalidade materna</span><span>Mortalidade fetal</span><span>Mortalidade perinatal</span><span>Mortalidade neonatal</span>
+    </div>
+    <div class="hero-links" aria-label="Painéis da coordenação">
+      <span class="rot">Painéis</span>
+      <a href="https://anamazza.github.io/Indicadores_NV/">Nascimentos</a>
+      <a href="https://anamazza.github.io/Indicadores_internacao-2026/">Internação</a>
+      <a class="atual" aria-current="page">Mortalidade</a>
     </div>
   </div>
 </header>
