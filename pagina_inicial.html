@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Painéis de Indicadores · Maternidades Estratégicas · IFF/Fiocruz</title>
+<meta name="description" content="Página principal dos painéis de indicadores das maternidades estratégicas: nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS) e mortalidade materna, fetal, perinatal e neonatal (SIM), 2019 a 2025."/>
+<style>
+:root{
+  --verde-lima:#7CB342; --verde-fiocruz:#279261; --verde-esmeralda:#1B5F51; --verde-profundo:#154A4B;
+  --indigo:#0A213D; --indigo-escuro:#071830; --mint:#EDF6EF; --mint-card:#F6FBF7; --branco:#FFFFFF;
+  --texto:#1D3229; --texto-suave:#4E6A5C; --borda:#D8E8DC;
+  --sombra-alta:0 18px 48px rgba(10,33,61,.22);
+  --radius:22px; --largura:min(1280px, 100% - 2rem);
+  /* foto de fundo do hero: substituída pela montagem (montar_pagina.py embute foto_hero.jpg) */
+  --foto-hero:url('foto_hero.jpg');
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; display:flex; flex-direction:column;
+  background:var(--mint); color:var(--texto);
+  font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2{margin:0; line-height:1.12; letter-spacing:-.025em; text-wrap:balance}
+h1{font-size:clamp(1.9rem,1.1rem+3vw,3.3rem); font-weight:800}
+p{margin:0}
+a{color:var(--verde-fiocruz)}
+.wrap{width:var(--largura); margin-inline:auto}
+.eyebrow{font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--verde-lima)}
+
+/* ---------------- hero: foto de fundo + véu nas cores da família ---------------- */
+.hero{
+  position:relative; isolation:isolate; overflow:hidden;
+  width:var(--largura); margin:1rem auto 0; border-radius:var(--radius); box-shadow:var(--sombra-alta);
+  min-height:600px; color:#F2F8F4; padding:2.6rem clamp(1.2rem, 4vw, 3.4rem) 3rem;
+  display:flex; flex-direction:column;
+  background-color:var(--indigo);
+}
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:-2;
+  background:var(--foto-hero) center / cover no-repeat;
+}
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:
+    linear-gradient(100deg, rgba(7,24,48,.94) 0%, rgba(10,33,61,.84) 42%, rgba(21,74,75,.55) 75%, rgba(21,74,75,.35) 100%),
+    radial-gradient(900px 420px at 90% 10%, rgba(39,146,97,.30) 0%, rgba(39,146,97,0) 60%);
+}
+.hero-topo{display:flex; align-items:center; justify-content:flex-start; gap:14px 40px; flex-wrap:wrap; margin-bottom:2.4rem}
+.hero-topo .coord{font-size:.8rem; font-weight:600; letter-spacing:.4px; color:rgba(255,255,255,.9); text-transform:uppercase; line-height:1.5; max-width:430px}
+.hero-topo img{width:min(360px,100%); height:auto}
+.hero h1{margin-top:.55rem; max-width:22ch}
+.hero p.sub{margin-top:.9rem; max-width:62ch; color:#D3E3D8; font-size:1.05rem}
+
+/* ---------------- botões redondos: um por painel ----------------
+   Para acrescentar um painel, copie um bloco <a class="painel"> dentro de <nav class="paineis">. */
+.paineis{
+  list-style:none; margin:2.8rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap; gap:1.6rem 1.2rem; align-items:flex-start;
+}
+.painel{
+  width:168px; display:flex; flex-direction:column; align-items:center; gap:.8rem;
+  text-decoration:none; color:#FFF; text-align:center;
+}
+.painel .circulo{
+  width:84px; height:84px; border-radius:50%; display:grid; place-items:center;
+  background:linear-gradient(145deg, #2FA66E 0%, var(--verde-fiocruz) 55%, var(--verde-esmeralda) 100%);
+  border:3px solid rgba(255,255,255,.55);
+  box-shadow:0 10px 26px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.35);
+  transition:transform .18s, box-shadow .18s, border-color .18s;
+}
+.painel .circulo svg{width:36px; height:36px; stroke:#FFF; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.painel .rotulo{font-weight:800; font-size:1rem; line-height:1.25; text-shadow:0 1px 6px rgba(0,0,0,.45); text-wrap:balance}
+.painel .sub{display:block; font-weight:600; font-size:.74rem; color:#C9DCD0; margin-top:.15rem; letter-spacing:.02em}
+.painel:hover .circulo,.painel:focus-visible .circulo{
+  transform:translateY(-4px) scale(1.04); border-color:#FFF;
+  box-shadow:0 16px 34px rgba(0,0,0,.36), 0 0 0 8px rgba(124,179,66,.22);
+}
+.painel:focus-visible{outline:none}
+.painel:focus-visible .rotulo{text-decoration:underline; text-underline-offset:4px}
+
+/* ---------------- notas ---------------- */
+main{flex:1}
+.notas{margin:1.6rem auto 2.4rem; display:grid; gap:1rem; grid-template-columns:repeat(2, minmax(0,1fr))}
+.nota{
+  background:var(--mint-card); border:1px solid var(--borda); border-radius:16px;
+  padding:1.1rem 1.3rem; color:var(--texto-suave); font-size:.92rem;
+}
+.nota b{color:var(--texto)}
+.nota a{font-weight:700}
+
+footer{background:var(--indigo); color:#B9CDC0; font-size:.82rem; padding:1.6rem 0}
+footer a{color:var(--verde-lima)}
+footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px auto 0}
+
+@media (max-width: 900px){
+  .notas{grid-template-columns:1fr}
+}
+@media (max-width: 680px){
+  .hero{width:100%; margin-top:0; border-radius:0; min-height:0; padding:2rem 1rem 2.4rem}
+  .hero-topo{margin-bottom:1.6rem}
+  .paineis{gap:1.3rem .4rem; justify-content:center; margin-top:2.2rem}
+  .painel{width:calc(33.333% - .4rem); min-width:104px}
+  .painel .circulo{width:70px; height:70px}
+  .painel .circulo svg{width:30px; height:30px}
+  .painel .rotulo{font-size:.9rem}
+}
+@media (prefers-reduced-motion: reduce){ .painel .circulo{transition:none} }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-topo">
+    <div class="coord">Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente</div>
+    <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde"/>
+  </div>
+
+  <p class="eyebrow">IFF/Fiocruz · Painéis de Indicadores · Maternidades Estratégicas · 2019 a 2025</p>
+  <h1>Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
+  <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · indicadores das maternidades apoiadas, das unidades EBSERH e do QUALINEO 2026/2027, com dossiê por unidade, mapas, comparadores e metodologia. Escolha um painel para começar.</p>
+
+  <nav class="paineis" aria-label="Painéis">
+
+    <a class="painel" href="https://anamazza.github.io/Indicadores_NV/nascimentos/">
+      <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></span>
+      <span class="rotulo">Nascimentos<span class="sub">SINASC · Painel NV 2026</span></span>
+    </a>
+
+    <a class="painel" href="https://anamazza.github.io/Indicadores_NV/internacao/">
+      <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/><path d="M12 10v6M9 13h6"/></svg></span>
+      <span class="rotulo">Internação<span class="sub">SIH/SUS · obstétrica e neonatal</span></span>
+    </a>
+
+    <a class="painel" href="https://anamazza.github.io/Indicadores_mortalidade-2026/">
+      <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 3-7 2 4h4"/></svg></span>
+      <span class="rotulo">Mortalidade<span class="sub">SIM · materna, fetal, perinatal e neonatal</span></span>
+    </a>
+
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="notas">
+      <div class="nota">
+        <b>Sobre os painéis.</b> Os painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025, comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. Os botões no cabeçalho de cada painel levam de um para o outro e de volta a esta página.
+      </div>
+      <div class="nota">
+        <b>Fontes e situação dos dados.</b> SINASC, SIH/SUS, SIM e CNES, 2019 a 2025; 2024 e 2025 são dados preliminares, sujeitos a revisão. Os painéis de internação e de mortalidade estão em versão para validação da coordenação.
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    Painéis de Indicadores · Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e Neonatal ·
+    Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente · IFF/Fiocruz ·
+    SINASC, SIH/SUS, SIM e CNES 2019–2025 · dados sujeitos a revisão ·
+    <a href="https://github.com/anamazza/Indicadores_Brasil">código desta página no GitHub</a>.
+    <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde"/>
+  </div>
+</footer>
+</body>
+</html>
