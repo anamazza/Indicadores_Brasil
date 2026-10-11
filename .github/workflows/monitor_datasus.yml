@@ -44,4 +44,5 @@ jobs:
           fi
           git add monitor/estado.json
           git commit -m "Monitor DATASUS: estado das fontes em $(date -u +%Y-%m-%d)"
+          git pull --rebase origin main     # se alguém enviou commits durante a execução
           git push
