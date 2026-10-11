@@ -36,3 +36,10 @@ O botão **Início** no cabeçalho de cada painel volta para esta página.
 Em `pagina_inicial.html`, dentro de `<nav class="paineis">`, copie um bloco `<a class="painel">` e troque
 o endereço (`href`), o ícone (SVG de 24×24 com traço) e o rótulo (`<span class="rotulo">`, com a fonte
 em `<span class="sub">`). Os botões se acomodam sozinhos em fileiras; não há limite de quantidade.
+
+## Licença
+
+O código desta página (HTML, CSS e o script de montagem) está sob a licença [Apache 2.0](LICENSE).
+As logos e os nomes do IFF, da Fiocruz, do SUS e do Ministério da Saúde são marcas das respectivas
+instituições e não estão cobertos pela licença. Os indicadores exibidos nos painéis vêm de bases públicas
+do DATASUS (SINASC, SIH/SUS, SIM e CNES).
