@@ -3,149 +3,25 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="refresh" content="0; url=https://anamazza.github.io/Indicadores_Brasil/"/>
+<link rel="canonical" href="https://anamazza.github.io/Indicadores_Brasil/"/>
 <title>Painéis de Indicadores · Maternidades Estratégicas · IFF/Fiocruz</title>
-<meta name="description" content="Página inicial dos painéis de indicadores das maternidades estratégicas: nascimentos (SINASC) e internações obstétricas e neonatais (SIH/SUS), 2019 a 2025."/>
+<meta name="description" content="A página inicial dos painéis de indicadores das maternidades estratégicas mudou para anamazza.github.io/Indicadores_Brasil."/>
 <style>
-:root{
-  --verde-lima:#7CB342; --verde-fiocruz:#279261; --verde-esmeralda:#1B5F51; --verde-profundo:#154A4B;
-  --indigo:#0A213D; --indigo-escuro:#071830; --mint:#EDF6EF; --mint-card:#F6FBF7; --branco:#FFFFFF;
-  --texto:#1D3229; --texto-suave:#4E6A5C; --borda:#D8E8DC; --ambar:#D68910;
-  --sombra:0 2px 12px rgba(14,122,86,.10); --sombra-alta:0 10px 28px rgba(10,33,61,.18);
-  --radius:16px; --largura:min(1100px, 100% - 2rem);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0; min-height:100vh; display:flex; flex-direction:column;
-  background:var(--mint); color:var(--texto);
-  font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3{margin:0; line-height:1.16; letter-spacing:-.02em; text-wrap:balance}
-h1{font-size:clamp(1.8rem,1.1rem+2.6vw,2.9rem); font-weight:800}
-h2{font-size:clamp(1.25rem,1rem+.9vw,1.6rem); font-weight:800}
-p{margin:0}
-a{color:var(--verde-fiocruz)}
-.wrap{width:var(--largura); margin-inline:auto}
-.eyebrow{font-size:.7rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--verde-lima)}
-
-/* ---------------- cabeçalho (mesmo degradê da família de painéis) ---------------- */
-.hero{
-  background:
-    radial-gradient(1100px 520px at 88% 18%, rgba(39,146,97,.42) 0%, rgba(39,146,97,0) 60%),
-    radial-gradient(700px 380px at 70% 95%, rgba(124,179,66,.22) 0%, rgba(124,179,66,0) 65%),
-    linear-gradient(105deg, var(--indigo-escuro) 0%, var(--indigo) 46%, #0E3050 72%, var(--verde-profundo) 100%);
-  color:#F2F8F4; padding:3.2rem 0 5.2rem;
-}
-.hero-topo{display:flex; align-items:center; justify-content:flex-start; gap:16px 40px; flex-wrap:wrap; margin-bottom:1.4rem}
-.hero-topo .coord{font-size:.82rem; font-weight:600; letter-spacing:.4px; color:rgba(255,255,255,.92); text-transform:uppercase; line-height:1.5; max-width:430px}
-.hero-topo img{width:min(380px,100%); height:auto}
-.hero p.sub{margin-top:.9rem; max-width:64ch; color:#C9DCD0; font-size:1.05rem}
-
-/* ---------------- cartões dos painéis ---------------- */
-main{flex:1}
-.cartoes{
-  display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:1.3rem;
-  margin-top:-3.4rem; position:relative; z-index:2;
-}
-.cartao{
-  background:var(--branco); border-radius:var(--radius); box-shadow:var(--sombra-alta);
-  padding:1.6rem 1.6rem 1.5rem; display:flex; flex-direction:column; gap:.75rem;
-  border-top:6px solid var(--verde-fiocruz); text-decoration:none; color:inherit;
-  transition:transform .15s, box-shadow .15s;
-}
-.cartao:hover,.cartao:focus-visible{transform:translateY(-3px); box-shadow:0 16px 36px rgba(10,33,61,.22); outline:none}
-.cartao:focus-visible{outline:3px solid var(--verde-fiocruz); outline-offset:3px}
-.cartao.internacao{border-top-color:var(--indigo)}
-.cartao .ico{
-  width:56px; height:56px; border-radius:14px; display:grid; place-items:center;
-  background:var(--mint); color:var(--verde-esmeralda);
-}
-.cartao.internacao .ico{background:#E8EEF6; color:var(--indigo)}
-.cartao .ico svg{width:30px; height:30px}
-.cartao .eyebrow{color:var(--verde-fiocruz)}
-.cartao.internacao .eyebrow{color:var(--indigo)}
-.cartao p.desc{color:var(--texto-suave); font-size:.95rem}
-.cartao .chips{display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.1rem}
-.cartao .chips span{background:var(--mint); color:var(--verde-esmeralda); border:1px solid var(--borda); border-radius:999px; padding:.18rem .65rem; font-size:.74rem; font-weight:700}
-.cartao.internacao .chips span{background:#E8EEF6; color:var(--indigo); border-color:#C9D6E6}
-.botao{
-  margin-top:auto; align-self:flex-start; display:inline-flex; align-items:center; gap:.5rem;
-  background:var(--verde-fiocruz); color:#FFF; font-weight:800; font-size:.95rem;
-  border-radius:999px; padding:.62rem 1.25rem;
-}
-.cartao.internacao .botao{background:var(--indigo)}
-.botao svg{width:18px; height:18px}
-
-/* ---------------- notas ---------------- */
-.notas{margin:2.2rem auto 2.6rem}
-.nota{
-  background:var(--mint-card); border:1px solid var(--borda); border-radius:var(--radius);
-  padding:1.1rem 1.3rem; color:var(--texto-suave); font-size:.92rem;
-}
-.nota b{color:var(--texto)}
-.nota a{font-weight:700}
-
-footer{background:var(--indigo); color:#B9CDC0; font-size:.82rem; padding:1.6rem 0}
-footer a{color:var(--verde-lima)}
-footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px auto 0}
-
-@media (max-width: 760px){
-  .cartoes{grid-template-columns:1fr; margin-top:-2.6rem}
-  .hero{padding-bottom:4.2rem}
-}
-@media (prefers-reduced-motion: reduce){ .cartao{transition:none} }
+body{margin:0; min-height:100vh; display:grid; place-items:center; background:#EDF6EF; color:#1D3229;
+  font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-size:16px; line-height:1.6}
+.caixa{max-width:560px; margin:1rem; background:#FFF; border-top:6px solid #279261; border-radius:16px; padding:1.6rem 1.8rem; box-shadow:0 10px 28px rgba(10,33,61,.18)}
+h1{margin:0 0 .6rem; font-size:1.3rem; letter-spacing:-.02em}
+p{margin:.4rem 0}
+a{color:#279261; font-weight:700}
+.suave{color:#4E6A5C; font-size:.92rem}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-topo">
-      <div class="coord">Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente</div>
-      <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde"/>
-    </div>
-    <p class="eyebrow">Painéis de Indicadores · Maternidades Estratégicas · 2019 a 2025</p>
-    <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
-    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · indicadores das maternidades apoiadas, das unidades EBSERH e do QUALINEO 2026/2027, com dossiê por unidade, mapas, comparadores e metodologia. Escolha um painel para começar.</p>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-    <nav class="cartoes" aria-label="Painéis">
-      <a class="cartao nascimentos" href="nascimentos/">
-        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></div>
-        <p class="eyebrow">Painel NV 2026</p>
-        <h2>Nascimentos</h2>
-        <p class="desc">Nascidos vivos ocorridos nas maternidades segundo o SINASC: pré-natal, peso e idade gestacional, via de parto, Apgar, Grupos de Robson, origem territorial das mães e perfil das mães, 2019 a 2025.</p>
-        <div class="chips"><span>SINASC</span><span>Mapa do Brasil por território</span><span>Dossiê por unidade</span><span>Comparador</span></div>
-        <span class="botao">Abrir painel de nascimentos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-      <a class="cartao internacao" href="internacao/">
-        <div class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/><path d="M12 10v6M9 13h6"/></svg></div>
-        <p class="eyebrow">Painel de Internação 2026</p>
-        <h2>Internação</h2>
-        <p class="desc">Internações obstétricas e neonatais faturadas ao SUS (SIH/SUS): motivos, acompanhante, AMIU, Centro de Parto Normal, assistência ao parto, morbidade materna grave, UTI neonatal, ocupação e permanência, 2019 a 2025.</p>
-        <div class="chips"><span>SIH/SUS · CNES · SINASC</span><span>Mapa de unidades</span><span>Dossiê por unidade</span><span>Comparador</span></div>
-        <span class="botao">Abrir painel de internação <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
-    </nav>
-    <div class="notas">
-      <div class="nota">
-        <b>Sobre os painéis.</b> Os dois painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025 e metodologia com a fonte oficial e o cálculo de cada indicador. O painel de internação está em versão para validação da coordenação. Os indicadores de mortalidade materna, fetal, perinatal e neonatal estão no <a href="https://anamazza.github.io/Indicadores_mortalidade-2026/">Painel de Mortalidade 2026</a>, da mesma família.
-      </div>
-    </div>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap">
-    Painéis de Indicadores · Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e Neonatal ·
-    Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente · IFF/Fiocruz ·
-    SINASC, SIH/SUS e CNES 2019–2025 · dados sujeitos a revisão.
-    <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde"/>
-  </div>
-</footer>
+<div class="caixa">
+  <h1>A página inicial dos painéis mudou de endereço</h1>
+  <p>Agora ela fica em <a href="https://anamazza.github.io/Indicadores_Brasil/">anamazza.github.io/Indicadores_Brasil</a>. Você será levada para lá automaticamente.</p>
+  <p class="suave">Os painéis deste repositório continuam nos mesmos endereços: <a href="nascimentos/">Nascimentos</a> · <a href="internacao/">Internação</a>.</p>
+</div>
 </body>
 </html>
