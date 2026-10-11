@@ -3,8 +3,14 @@
 Painel interativo de indicadores de **internação obstétrica e neonatal** (SIH/SUS) das maternidades da
 Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e
 Neonatal — Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente
-(IFF/Fiocruz). Mesma família e mesma estrutura do [Painel NV 2026](https://anamazza.github.io/Indicadores_NV/)
-e do Painel de Mortalidade 2026; os três painéis têm botões de acesso mútuo no cabeçalho.
+(IFF/Fiocruz). Mesma família e mesma estrutura do [Painel NV 2026](https://anamazza.github.io/Indicadores_NV/nascimentos/)
+e do [Painel de Mortalidade 2026](https://anamazza.github.io/Indicadores_mortalidade-2026/); os três painéis têm
+botões de acesso mútuo no cabeçalho e o botão **Início**, que leva à
+[página principal dos painéis](https://anamazza.github.io/Indicadores_Brasil/) (repositório Indicadores_Brasil).
+
+**Publicação:** https://anamazza.github.io/Indicadores_NV/internacao/ — este projeto não tem repositório próprio;
+`montar_painel.py` copia o `index.html` para a subpasta `internacao/` do repositório Indicadores_NV, e a
+publicação é o commit + push de lá.
 
 **Arquivo final:** `index.html` (idêntico a `Painel_Internacao_2026.html`) — HTML único e autocontido,
 pronto para o GitHub Pages. Requer internet só para o mapa de fundo do mapa de unidades (Leaflet/OpenStreetMap).
