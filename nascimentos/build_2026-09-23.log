@@ -1,0 +1,141 @@
+### patch
+build_dados.py atualizado (backup build_dados.py.bak_2026-09-23)
+### build_dados
+[1] 59 maternidades extraídas do painel antigo
+[2] 2811 estabelecimentos com coordenadas
+   todas as maternidades estratégicas têm lat/lon
+[2b] 59 unidades novas | total 118 | por conjunto: {'estrategica': 63, 'ebserh': 25, 'qualineo': 35}
+[2c] blocos assistenciais adicionais (JSON): 0
+[2c] indicadores assistenciais: 114 unidades com bloco | 4 sem
+     sem bloco: 2717387 Unidade Hospitalar de Iauareté
+     sem bloco: 2453665 Maternidade Carmosina Coutinho
+     sem bloco: 2705982 Santa Casa de Franca
+     sem bloco: 3021114 Santa Casa de Misericórdia de Sobral
+     AVISO: ADICIONAIS MA CE SP: arquivo ausente C:\Users\anapa\OneDrive\Documentos\Projeto Apresentações Internação\Extracao_SIH\saida\planilhas_adicionais_ma_ce_sp.json
+[3] GEO: uf=27, macro=121, rs=439
+[4] 745 pontos de contexto (>=480 partos, não estratégicos)
+[5] gravado C:\Users\anapa\OneDrive\Documentos\Pojeto Apresentações NV_2026\Painel_2026_Novo\dados_nv2026.js (2954 KB)
+exit_build=0
+### atualizar_cnes
+[ 1/118] 2000296 ok (1 habilitações) - Hospital da Mulher e da Criança do Juruá
+[ 2/118] 2000733 ok (6 habilitações) - Maternidade e Clínicas de Mulheres Bárbara Heliodora
+[ 3/118] 3151794 ok (9 habilitações) - Maternidade de Referência Ana Braga
+[ 4/118] 2012480 ok (6 habilitações) - Maternidade Municipal Dr Moura Tapajoz
+[ 5/118] 2020068 ok (9 habilitações) - SES AP Hospital da Mulher
+[ 6/118] 2329905 ok (10 habilitações) - Hospital Municipal de Santarém
+[ 7/118] 2752700 ok (27 habilitações) - Santa Casa de Misericórdia do Pará
+[ 8/118] 4001303 ok (28 habilitações) - Hospital de Base Porto Velho
+[ 9/118] 2798484 ok (10 habilitações) - Hospital Regional Adamastor Teixeira de Oliveira
+[10/118] 2566168 ok (9 habilitações) - Hospital Materno Infantil N Sra de Nazareth
+[11/118] 2755165 ok (15 habilitações) - Hospital Dom Orione de Araguaína
+[12/118] 2755157 ok (9 habilitações) - Hospital e Maternidade D Regina S Campos de Palmas
+[13/118] 2495279 ok (11 habilitações) - Hospital Dr Claudionor Couto Roriz
+[14/118] 2005050 ok (8 habilitações) - Hospital Regional de Arapiraca
+[15/118] 9923837 ok (6 habilitações) - Hospital da Mulher Dra Nise da Silveira
+[16/118] 3972925 ok (15 habilitações) - Hospital do Oeste
+[17/118] 6602533 ok (11 habilitações) - Hospital Estadual da Criança
+[18/118] 3956369 ok (7 habilitações) - Maternidade Professor José Maria de Magalhães Neto
+[19/118] 6848710 ok (8 habilitações) - Hospital Regional Norte
+[20/118] 2481286 ok (15 habilitações) - Maternidade Escola Assis Chateaubriand (Ebserh)
+[21/118] 2452383 ok (7 habilitações) - Maternidade de Alto Risco de Imperatriz
+[22/118] 2309254 ok (12 habilitações) - Maternidade de Alta Complexidade do Maranhão
+[23/118] 2362287 ok (10 habilitações) - Instituto de Saúde Elpídio de Almeida
+[24/118] 2707527 ok (13 habilitações) - Maternidade Frei Damião
+[25/118] 2430711 ok (12 habilitações) - Hospital Dom Malan
+[26/118] 2427427 ok (22 habilitações) - Hospital Barão de Lucena
+[27/118] 0000434 ok (82 habilitações) - IMIP
+[28/118] 8015899 ok (10 habilitações) - Hospital Estadual Dirceu Arcoverde
+[29/118] 2323397 ok (11 habilitações) - Maternidade Dona Evangelina Rosa
+[30/118] 2399644 ok (11 habilitações) - Maternidade Cândida Vargas
+[31/118] 2409208 ok (8 habilitações) - Maternidade Escola Januário Cicco
+[32/118] 5714397 ok (5 habilitações) - Maternidade Nossa Senhora de Lourdes
+[33/118] 0004731 ok (9 habilitações) - Maternidade Climério de Oliveira
+[34/118] 2410281 ok (7 habilitações) - Hospital Maternidade Almeida Castro
+[35/118] 2408570 ok (10 habilitações) - Hospital Dr José Pedro Bezerra
+[36/118] 0002232 ok (10 habilitações) - Hospital Santa Isabel
+[37/118] 5717515 ok (23 habilitações) - Hospital Regional Santa Maria
+[38/118] 0010537 ok (26 habilitações) - Hospital Materno Infantil Dr Antônio Lisboa - HMIB
+[39/118] 2339196 ok (10 habilitações) - Hospital Estadual da Mulher Dr Jurandir do Nascimento
+[40/118] 0009725 ok (23 habilitações) - Hospital Regional de Mato Grosso do Sul
+[41/118] 2376334 ok (7 habilitações) - Santa Casa de Corumbá
+[42/118] 2311682 ok (16 habilitações) - Hospital Santa Helena
+[43/118] 2396866 ok (17 habilitações) - Santa Casa de Rondonópolis
+[44/118] 7257406 ok (11 habilitações) - Hospital Estadual Dr Jayme Santos Neves
+[45/118] 2149990 ok (41 habilitações) - Santa Casa de Montes Claros
+[46/118] 0026794 ok (14 habilitações) - Hospital Sofia Feldman
+[47/118] 2290227 ok (5 habilitações) - Hospital Municipal Adão Pereira Nunes
+[48/118] 2298120 ok (10 habilitações) - SMS Hospital Municipal Albert Schweitzer AP 51
+[49/118] 2077396 ok (77 habilitações) - Hospital de Base de São José do Rio Preto
+[50/118] 2082187 ok (87 habilitações) - Hospital das Clínicas FAEPA Ribeirão Preto
+[51/118] 2269880 ok (21 habilitações) - Hospital Geral de Bonsucesso
+[52/118] 2268922 ok (6 habilitações) - Hospital Municipal Desembargador Leal Junior - HMDLJ
+[53/118] 0015369 ok (22 habilitações) - Complexo Hospitalar do Trabalhador
+[54/118] 2246988 ok (48 habilitações) - Hospital São Vicente de Paulo
+[55/118] 2237571 ok (48 habilitações) - Hospital Nossa Senhora da Conceição SA
+[56/118] 2522691 ok (28 habilitações) - Hospital e Maternidade Marieta Konder Bornhausen
+[57/118] 2715864 ok (9 habilitações) - Hospital e Maternidade Luísa de Marillac
+[58/118] 2265052 ok (19 habilitações) - Hospital Femina
+[59/118] 6854729 ok (5 habilitações) - Hospital Municipal Ruth Cardoso
+[60/118] 0000396 ok (44 habilitações) - Hospital das Clínicas
+[61/118] 0009709 ok (25 habilitações) - Hospital Universitário Maria Aparecida Pedrossian
+[62/118] 0010510 ok (39 habilitações) - Hospital Universitário de Brasília
+[63/118] 0012505 ok (29 habilitações) - Hospital Universitário Antônio Pedro
+[64/118] 0027049 ok (60 habilitações) - Hospital das Clínicas da UFMG
+[65/118] 2006197 ok (25 habilitações) - Hospital Universitário Prof Alberto Antunes
+[66/118] 2146355 ok (59 habilitações) - Hospital de Clínicas de Uberlândia
+[67/118] 2206595 ok (40 habilitações) - Hospital de Clínicas da UFTM
+[68/118] 2244306 ok (47 habilitações) - Hospital Universitário de Santa Maria
+[69/118] 2252694 ok (23 habilitações) - Hospital Escola da UFPel
+[70/118] 2270021 ok (8 habilitações) - Maternidade Escola da UFRJ
+[71/118] 2295415 ok (16 habilitações) - Hospital Universitário Gaffrée e Guinle
+[72/118] 2338424 ok (34 habilitações) - Hospital das Clínicas
+[73/118] 2384299 ok (58 habilitações) - Complexo do Hospital de Clínicas da UFPR
+[74/118] 2400243 ok (16 habilitações) - Hospital Universitário Lauro Wanderley
+[75/118] 2655411 ok (26 habilitações) - Hospital Universitário Júlio Müller
+[76/118] 2707675 ok (18 habilitações) - Hospital Universitário Dr Miguel Riet Corrêa Jr
+[77/118] 2710935 ok (15 habilitações) - Hospital Universitário da Grande Dourados
+[78/118] 2726653 ok (43 habilitações) - Hospital Universitário da UFMA
+[79/118] 3157245 ok (42 habilitações) - Hospital Universitário Polydoro Ernani de São Thiago
+[80/118] 4014111 ok (7 habilitações) - Hospital Universitário Ana Bezerra
+[81/118] 4044916 ok (35 habilitações) - Hospital Universitário Cassiano Antonio Moraes (HUCAM)
+[82/118] 0000418 ok (20 habilitações) - Hospital Agamenon Magalhães
+[83/118] 0003859 ok (37 habilitações) - Hospital Geral Roberto Santos
+[84/118] 0010499 ok (26 habilitações) - Hospital Regional de Taguatinga (HRT)
+[85/118] 2009250 ok (9 habilitações) - Maternidade Escola Santa Mônica
+[86/118] 2019558 ok (8 habilitações) - Maternidade Balbina Mestrinho
+[87/118] 2025507 ok (38 habilitações) - Hospital das Clínicas da FAMEMA
+[88/118] 2079720 ok (22 habilitações) - Hospital Guilherme Álvaro
+[89/118] 2145960 ok (12 habilitações) - Santa Casa de Misericórdia de Araguari
+[90/118] 2365146 ok (6 habilitações) - Hospital Regional Tibério Nunes
+[91/118] 2436477 ok (8 habilitações) - Maternidade Darcy Vargas
+[92/118] 2497654 ok (47 habilitações) - Hospital Geral de Fortaleza (HGF)
+[93/118] 2499363 ok (13 habilitações) - Hospital Geral Dr César Cals (HGCC)
+[94/118] 2506858 ok (9 habilitações) - Hospital e Maternidade Dona Íris
+[95/118] 2678179 ok (10 habilitações) - Hospital Infantil e Maternidade Alzir Bernardino Alves
+[96/118] 2702886 ok (7 habilitações) - Complexo Hospitalar Materno Infantil do Maranhão
+[97/118] 2727064 ok (5 habilitações) - Maternidade Municipal Prof Wall Ferraz
+[98/118] 2777746 ok (6 habilitações) - Hospital Regional Chagas Rodrigues
+[99/118] 2792176 ok (17 habilitações) - Hospital Geral de Itapecerica da Serra
+[100/118] 2906635 ok (3 habilitações) - Maternidade Zona Norte Dra Euclélia Américo
+[101/118] 3821978 ok (0 habilitações) - Maternidade Regional de Camaçari
+[102/118] 4099206 ok (4 habilitações) - Hospital da Mulher e Maternidade de Aracaju (HAMA)
+[103/118] 4306945 ok (3 habilitações) - Hospital da Mulher do Agreste
+[104/118] 6627595 ok (6 habilitações) - Instituto da Mulher Dona Lindu
+[105/118] 9461493 ok (4 habilitações) - Hospital Regional Público Materno Infantil de Barcarena
+[106/118] 0254460 ok (2 habilitações) - Hospital Geral Público Castelo dos Sonhos
+[107/118] 2016141 ok (7 habilitações) - Hospital Regional de Tefé
+[108/118] 2021064 ok (2 habilitações) - Hospital Estadual de Santana
+[109/118] 2077477 ok (47 habilitações) - Hospital Santa Marcelina (Itaquera)
+[110/118] 2079186 ok (18 habilitações) - Maternidade Escola Dr Mário de Moraes Altenfelder Silva (Cachoeirinha)
+[111/118] 2330830 ok (15 habilitações) - Hospital Geral de Altamira São Rafael (HGA)
+[112/118] 3210243 ok (6 habilitações) - Hospital Regional Dr Jofre de Matos Cohen
+[113/118] 6710158 ok (6 habilitações) - Hospital Regional Público do Marajó
+[114/118] 7459831 ok (1 habilitações) - Maternidade Enfermeira Celina Villacrez Ruiz
+[115/118] 2717387 ok (0 habilitações) - Unidade Hospitalar de Iauareté
+[116/118] 2453665 ok (5 habilitações) - Maternidade Carmosina Coutinho
+[117/118] 2705982 ok (31 habilitações) - Santa Casa de Franca
+[118/118] 3021114 ok (27 habilitações) - Santa Casa de Misericórdia de Sobral
+
+118 fichas gravadas em cnes_dados.json
+exit_cnes=0
+=== PAINEL DADOS OK ===
