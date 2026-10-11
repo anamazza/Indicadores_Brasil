@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 """Monta o painel em arquivo único: embute dados, ficha CNES, app e logos no HTML.
-Saída: Painel_Internacao_2026.html e index.html (cópia para o GitHub Pages)."""
-import base64, os
+Saída: Painel_Internacao_2026.html e index.html (idênticos).
+
+Publicação (desde 11/10/2026): os três painéis e a página principal estão reunidos no repositório
+Indicadores_Brasil (clone em Documentos/Página principal). Ao final, esta pasta é espelhada na subpasta
+internacao/ desse repositório; publicar = commit + push de lá. A antiga subpasta internacao/ do
+repositório Indicadores_NV só redireciona para o novo endereço."""
+import base64, os, shutil
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 html = open(os.path.join(BASE, "painel_base.html"), encoding="utf-8").read()
@@ -27,9 +32,48 @@ out = os.path.join(BASE, "Painel_Internacao_2026.html")
 open(out, "w", encoding="utf-8").write(html)
 open(os.path.join(BASE, "index.html"), "w", encoding="utf-8").write(html)
 print(f"gerado {out} ({os.path.getsize(out) // 1024} KB) + index.html")
-# 29/09/2026: o painel e publicado como subpasta do repositorio do Painel NV (GitHub Pages
-# anamazza.github.io/Indicadores_NV/internacao/), por decisao da usuaria - copia o index.html para la
-internacao_no_nv = os.path.join(os.path.dirname(os.path.dirname(BASE)), "Pojeto Apresentações NV_2026", "Painel_2026_Novo", "internacao")
-os.makedirs(internacao_no_nv, exist_ok=True)
-open(os.path.join(internacao_no_nv, "index.html"), "w", encoding="utf-8").write(html)
-print(f"copiado para {internacao_no_nv}/index.html (publicar com commit + push do Painel NV)")
+
+# ---------------------------------------------------------------------------------------------
+# Espelha esta pasta na subpasta internacao/ do repositório Indicadores_Brasil (11/10/2026).
+# ---------------------------------------------------------------------------------------------
+REPO = os.path.join(os.path.dirname(os.path.dirname(BASE)), "Página principal")
+DESTINO = os.path.join(REPO, "internacao")
+EXCLUIR_DIRS = {".git", ".git_antigo", ".claude", "deploy", "__pycache__"}
+EXCLUIR_ARQS = {"atualizacao_cnes.log"}
+EXCLUIR_EXT = {".pyc"}
+
+
+def espelhar(origem, destino):
+    """Copia tudo de origem para destino (fora as exclusões) e apaga em destino o que não existe mais."""
+    os.makedirs(destino, exist_ok=True)
+    mantidos, copiados, removidos = set(), 0, 0
+    for raiz, dirs, arqs in os.walk(origem):
+        dirs[:] = [d for d in dirs if d not in EXCLUIR_DIRS]
+        rel = os.path.relpath(raiz, origem)
+        for a in arqs:
+            if a in EXCLUIR_ARQS or os.path.splitext(a)[1].lower() in EXCLUIR_EXT:
+                continue
+            dst = os.path.normpath(os.path.join(destino, rel, a))
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(os.path.join(raiz, a), dst)
+            mantidos.add(os.path.normcase(dst)); copiados += 1
+    for raiz, dirs, arqs in os.walk(destino, topdown=False):
+        for a in arqs:
+            p = os.path.normpath(os.path.join(raiz, a))
+            if os.path.normcase(p) not in mantidos:
+                os.remove(p); removidos += 1
+        for d in dirs:
+            p = os.path.join(raiz, d)
+            if not os.listdir(p):
+                try:
+                    os.rmdir(p)
+                except OSError:
+                    pass  # pasta vazia presa pelo OneDrive; o git ignora pastas vazias
+    return copiados, removidos
+
+
+if os.path.isdir(os.path.join(REPO, ".git")):
+    c, r = espelhar(BASE, DESTINO)
+    print(f"espelhado em {DESTINO} ({c} arquivos copiados, {r} removidos) — publicar com commit + push do Indicadores_Brasil")
+else:
+    print(f"AVISO: repositório Indicadores_Brasil não encontrado em {REPO}; nada foi espelhado")

@@ -41,14 +41,13 @@ como no deck. Os indicadores de internação (SIH/SUS) estão no **Painel de Int
 (`Projeto Apresentações Internação/Painel_Internacao`), e o cabeçalho tem botões para os três painéis da família
 (Nascimentos · Internação · Mortalidade) e o botão **Início**, que leva à página principal dos painéis
 (https://anamazza.github.io/Indicadores_Brasil/). O patch está registrado em `_patch_split_2026-09-29.py`.
-| Remontar o painel | `py montar_painel.py` (gera `Painel_NV2026_Novo.html`, `nascimentos/index.html` e o `index.html` da raiz, que redireciona para a página principal, a partir de `pagina_inicial.html`) |
+| Remontar o painel | `py montar_painel.py` (gera `Painel_NV2026_Novo.html` e `index.html` e espelha esta pasta na subpasta `nascimentos/` do repositório Indicadores_Brasil) |
 
-**Publicação:** o painel de nascimentos fica em `nascimentos/`
-(https://anamazza.github.io/Indicadores_NV/nascimentos/) e o Painel de Internação 2026 em `internacao/`
-(o `montar_painel.py` do projeto de internação copia o `index.html` dele para cá). Publicar = commit + push
-deste repositório. Desde 11/10/2026 a página principal dos painéis, com um botão por painel, está no
-repositório [Indicadores_Brasil](https://github.com/anamazza/Indicadores_Brasil) (https://anamazza.github.io/Indicadores_Brasil/);
-a raiz deste site (`index.html`, gerado de `pagina_inicial.html`) apenas redireciona para ela.
+**Publicação (desde 11/10/2026):** https://anamazza.github.io/Indicadores_Brasil/nascimentos/ — os três painéis e a página principal estão
+reunidos no repositório [Indicadores_Brasil](https://github.com/anamazza/Indicadores_Brasil) (clone em `Documentos/Página principal`).
+O `montar_painel.py` espelha esta pasta de trabalho na subpasta `nascimentos/` de lá; publicar = commit + push
+daquele repositório. O repositório antigo Indicadores_NV (https://anamazza.github.io/Indicadores_NV/) só
+redireciona para os novos endereços.
 
 Atalho local: `atualizar_painel.bat` roda CNES + montagem e registra em `atualizacao_cnes.log`.
 

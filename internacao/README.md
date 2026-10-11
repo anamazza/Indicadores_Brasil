@@ -3,14 +3,15 @@
 Painel interativo de indicadores de **internação obstétrica e neonatal** (SIH/SUS) das maternidades da
 Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e
 Neonatal — Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente
-(IFF/Fiocruz). Mesma família e mesma estrutura do [Painel NV 2026](https://anamazza.github.io/Indicadores_NV/nascimentos/)
-e do [Painel de Mortalidade 2026](https://anamazza.github.io/Indicadores_mortalidade-2026/); os três painéis têm
+(IFF/Fiocruz). Mesma família e mesma estrutura do [Painel NV 2026](https://anamazza.github.io/Indicadores_Brasil/nascimentos/)
+e do [Painel de Mortalidade 2026](https://anamazza.github.io/Indicadores_Brasil/mortalidade/); os três painéis têm
 botões de acesso mútuo no cabeçalho e o botão **Início**, que leva à
 [página principal dos painéis](https://anamazza.github.io/Indicadores_Brasil/) (repositório Indicadores_Brasil).
 
-**Publicação:** https://anamazza.github.io/Indicadores_NV/internacao/ — este projeto não tem repositório próprio;
-`montar_painel.py` copia o `index.html` para a subpasta `internacao/` do repositório Indicadores_NV, e a
-publicação é o commit + push de lá.
+**Publicação (desde 11/10/2026):** https://anamazza.github.io/Indicadores_Brasil/internacao/ — `montar_painel.py` espelha esta pasta de
+trabalho na subpasta `internacao/` do repositório [Indicadores_Brasil](https://github.com/anamazza/Indicadores_Brasil) (clone em
+`Documentos/Página principal`); publicar = commit + push de lá. O endereço antigo
+(Indicadores_NV/internacao/) só redireciona para o novo.
 
 **Arquivo final:** `index.html` (idêntico a `Painel_Internacao_2026.html`) — HTML único e autocontido,
 pronto para o GitHub Pages. Requer internet só para o mapa de fundo do mapa de unidades (Leaflet/OpenStreetMap).
@@ -53,7 +54,7 @@ marcadas como anexo quando não constam da lista oficial.
 |---|---|
 | Indicadores (nova rodada das planilhas) | rerodar a esteira em `../Extracao_SIH` (55/56 ou 61) e depois `py build_dados.py` |
 | Ficha CNES + habilitações | `py atualizar_cnes.py` |
-| Remontar o painel | `py montar_painel.py` (gera `Painel_Internacao_2026.html` e `index.html`) |
+| Remontar o painel | `py montar_painel.py` (gera `Painel_Internacao_2026.html` e `index.html` e espelha esta pasta na subpasta `internacao/` do repositório Indicadores_Brasil) |
 | Estrutura/estilo da página | editar `painel_base.html` (ou regerar do painel de mortalidade com `_gera_base.py`) |
 
 `build_dados.py` lê, somente para leitura, o painel NV local (`Pojeto Apresentações NV_2026/Painel_2026_Novo`):

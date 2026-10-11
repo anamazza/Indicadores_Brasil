@@ -1192,7 +1192,7 @@ function assistenciaisHTML(mt){
     const fonte = c.fonte === "SIH" ? FONTE_SIH : c.fonte === "MISTA" ? FONTE_MISTA : FONTE_SINASC;
     html += `<div class="card"><h3>${esc(c.h)}</h3>${tabelaAssist(grupos[c.id], c.id)}<p class="fonte">${fonte}</p></div>`;
   });
-  html += `<div class="card full"><p class="suave" style="font-size:.9rem">Os indicadores de internação obstétrica e neonatal desta unidade (SIH/SUS: motivos, acompanhante, AMIU, Centro de Parto Normal, morbidade materna grave, ocupação e permanência, internações neonatais e UTI neonatal) estão no <a href="https://anamazza.github.io/Indicadores_NV/internacao/" target="_blank" rel="noopener">Painel de Internação 2026</a>.</p></div>`;
+  html += `<div class="card full"><p class="suave" style="font-size:.9rem">Os indicadores de internação obstétrica e neonatal desta unidade (SIH/SUS: motivos, acompanhante, AMIU, Centro de Parto Normal, morbidade materna grave, ocupação e permanência, internações neonatais e UTI neonatal) estão no <a href="https://anamazza.github.io/Indicadores_Brasil/internacao/" target="_blank" rel="noopener">Painel de Internação 2026</a>.</p></div>`;
   return html;
 }
 /* clique no INDICADOR (rótulo da linha): evolução 2019-2025 (pedido da Tatiana, 28/08) */
