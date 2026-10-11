@@ -1,5 +1,5 @@
 {
- "_atualizado_em": "2026-09-23",
+ "_atualizado_em": "2026-10-11",
  "2000296": {
   "codigo_cnes": 2000296,
   "numero_cnpj_entidade": "04034526000143",
@@ -48,7 +48,7 @@
     "dtPortaria": "27/05/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -250,8 +250,8 @@
     "dtPortaria": "23/10/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "2601",
@@ -310,8 +310,8 @@
     "dtPortaria": "07/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    }
   ]
  },
@@ -375,8 +375,8 @@
     "dtPortaria": "03/12/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "29/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -387,8 +387,8 @@
     "dtPortaria": "03/12/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "29/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -512,7 +512,7 @@
     "dtPortaria": "03/08/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -560,7 +560,7 @@
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -572,7 +572,7 @@
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    }
   ]
@@ -625,7 +625,7 @@
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -673,7 +673,7 @@
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -685,7 +685,7 @@
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -709,7 +709,7 @@
     "dtPortaria": "07/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -721,7 +721,7 @@
     "dtPortaria": "07/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -798,7 +798,7 @@
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -810,7 +810,7 @@
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -930,7 +930,7 @@
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -942,7 +942,7 @@
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -1074,7 +1074,7 @@
     "dtPortaria": "11/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -1086,7 +1086,7 @@
     "dtPortaria": "20/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -1098,7 +1098,7 @@
     "dtPortaria": "08/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    }
   ]
@@ -1552,7 +1552,7 @@
     "dtPortaria": "24/02/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -1564,7 +1564,7 @@
     "dtPortaria": "28/03/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -1612,7 +1612,7 @@
     "dtPortaria": "19/04/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -1636,7 +1636,7 @@
     "dtPortaria": "20/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    }
   ]
@@ -1725,7 +1725,7 @@
     "dtPortaria": "20/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -1785,7 +1785,7 @@
     "dtPortaria": "04/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -1922,7 +1922,7 @@
     "dtPortaria": "02/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    },
    {
@@ -1934,7 +1934,7 @@
     "dtPortaria": "02/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    },
    {
@@ -2006,7 +2006,7 @@
     "dtPortaria": "11/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    }
   ]
@@ -2095,7 +2095,7 @@
     "dtPortaria": "30/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "20/08/2026"
    },
    {
@@ -2220,7 +2220,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2232,7 +2232,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2244,7 +2244,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2256,7 +2256,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2268,7 +2268,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2280,7 +2280,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2292,7 +2292,7 @@
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2316,7 +2316,7 @@
     "dtPortaria": "07/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -2328,7 +2328,7 @@
     "dtPortaria": "13/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    }
   ]
@@ -2405,7 +2405,7 @@
     "dtPortaria": "03/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "17/07/2026"
    },
    {
@@ -2417,7 +2417,7 @@
     "dtPortaria": "03/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "17/07/2026"
    },
    {
@@ -2518,8 +2518,8 @@
     "dtPortaria": "05/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -2566,8 +2566,8 @@
     "dtPortaria": "10/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -2578,8 +2578,8 @@
     "dtPortaria": "04/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    }
   ]
  },
@@ -2631,8 +2631,8 @@
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -2643,8 +2643,8 @@
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -2655,8 +2655,8 @@
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1301",
@@ -2703,8 +2703,8 @@
     "dtPortaria": "13/03/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -2715,8 +2715,8 @@
     "dtPortaria": "13/03/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -2799,8 +2799,8 @@
     "dtPortaria": "28/08/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -3037,8 +3037,8 @@
     "dtPortaria": "23/04/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "03/06/2026"
    },
    {
     "coGrupo": "1902",
@@ -3049,8 +3049,8 @@
     "dtPortaria": "23/04/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "03/06/2026"
    },
    {
     "coGrupo": "2601",
@@ -3150,7 +3150,7 @@
     "dtPortaria": "02/10/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    },
    {
@@ -3162,7 +3162,7 @@
     "dtPortaria": "26/01/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    },
    {
@@ -3234,7 +3234,7 @@
     "dtPortaria": "18/03/2020",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    }
   ]
@@ -3544,7 +3544,7 @@
     "dtPortaria": "04/01/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "01/12/2025"
    },
    {
@@ -3669,8 +3669,8 @@
     "dtPortaria": "07/04/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -3681,8 +3681,8 @@
     "dtPortaria": "07/04/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -3765,8 +3765,8 @@
     "dtPortaria": "07/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -3866,8 +3866,8 @@
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "07/07/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -3878,8 +3878,8 @@
     "dtPortaria": "23/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "07/07/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -4003,7 +4003,7 @@
     "dtPortaria": "10/05/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -4015,7 +4015,7 @@
     "dtPortaria": "10/05/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -4111,7 +4111,7 @@
     "dtPortaria": "09/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -4123,7 +4123,7 @@
     "dtPortaria": "08/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -4224,7 +4224,7 @@
     "dtPortaria": "24/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "04/08/2026"
    },
    {
@@ -4308,7 +4308,7 @@
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "04/08/2026"
    }
   ]
@@ -4493,7 +4493,7 @@
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -4505,7 +4505,7 @@
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -4589,7 +4589,7 @@
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -4613,7 +4613,7 @@
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    }
   ]
@@ -4798,8 +4798,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -4810,8 +4810,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -4822,8 +4822,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -4834,8 +4834,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -4846,8 +4846,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -4858,8 +4858,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -4870,8 +4870,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -5110,8 +5110,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -5122,8 +5122,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2208",
@@ -5494,8 +5494,8 @@
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -5614,8 +5614,8 @@
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -5739,7 +5739,7 @@
     "dtPortaria": "21/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "19/06/2026"
    },
    {
@@ -5751,7 +5751,7 @@
     "dtPortaria": "21/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "19/06/2026"
    },
    {
@@ -5900,7 +5900,7 @@
     "dtPortaria": "13/05/2022",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "05/03/2026"
    },
    {
@@ -6061,7 +6061,7 @@
     "dtPortaria": "23/04/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    },
    {
@@ -6121,7 +6121,7 @@
     "dtPortaria": "20/06/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    },
    {
@@ -6145,7 +6145,7 @@
     "dtPortaria": "21/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    }
   ]
@@ -6222,8 +6222,8 @@
     "dtPortaria": "12/11/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "10/08/2026",
-    "dtAtualizacao": "07/08/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -6282,8 +6282,8 @@
     "dtPortaria": "07/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "10/08/2026",
-    "dtAtualizacao": "07/08/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -6347,8 +6347,8 @@
     "dtPortaria": "23/07/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "15/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2611",
@@ -6657,7 +6657,7 @@
     "dtPortaria": "10/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "22/05/2026"
    }
   ]
@@ -6734,7 +6734,7 @@
     "dtPortaria": "04/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -6746,7 +6746,7 @@
     "dtPortaria": "04/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -6806,7 +6806,7 @@
     "dtPortaria": "07/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -6818,7 +6818,7 @@
     "dtPortaria": "29/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    }
   ]
@@ -6883,8 +6883,8 @@
     "dtPortaria": "25/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -6895,8 +6895,8 @@
     "dtPortaria": "25/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -6979,8 +6979,8 @@
     "dtPortaria": "26/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    }
   ]
  },
@@ -7056,8 +7056,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -7068,8 +7068,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -7080,8 +7080,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -7092,8 +7092,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -7104,8 +7104,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -7116,8 +7116,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -7128,8 +7128,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0908",
@@ -7164,8 +7164,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -7176,8 +7176,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -7272,8 +7272,8 @@
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -7284,8 +7284,8 @@
     "dtPortaria": "17/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -7296,8 +7296,8 @@
     "dtPortaria": "20/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -7433,8 +7433,8 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -7445,8 +7445,8 @@
     "dtPortaria": "10/09/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -7541,8 +7541,8 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -7553,8 +7553,8 @@
     "dtPortaria": "27/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -7649,8 +7649,8 @@
     "dtPortaria": "05/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    }
   ]
  },
@@ -7738,7 +7738,7 @@
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7750,7 +7750,7 @@
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7786,7 +7786,7 @@
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7798,7 +7798,7 @@
     "dtPortaria": "27/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7810,7 +7810,7 @@
     "dtPortaria": "27/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    }
   ]
@@ -8007,7 +8007,7 @@
     "dtPortaria": "19/10/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -8019,7 +8019,7 @@
     "dtPortaria": "19/10/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -8127,7 +8127,7 @@
     "dtPortaria": "02/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -8204,7 +8204,7 @@
     "dtPortaria": "28/02/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -8216,7 +8216,7 @@
     "dtPortaria": "28/02/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -8240,7 +8240,7 @@
     "dtPortaria": "12/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -8252,7 +8252,7 @@
     "dtPortaria": "19/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    }
   ]
@@ -8401,8 +8401,8 @@
     "dtPortaria": "13/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -8413,8 +8413,8 @@
     "dtPortaria": "11/08/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -8473,8 +8473,8 @@
     "dtPortaria": "29/07/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -8485,8 +8485,8 @@
     "dtPortaria": "23/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -8634,7 +8634,7 @@
     "dtPortaria": "19/01/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -8646,7 +8646,7 @@
     "dtPortaria": "19/01/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -8795,8 +8795,8 @@
     "dtPortaria": "13/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2102",
@@ -8905,6 +8905,30 @@
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "01/06/2017",
     "dtAtualizacao": "01/06/2017"
+   },
+   {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
+   },
+   {
+    "coGrupo": "3801",
+    "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -9148,8 +9172,8 @@
     "dtPortaria": "14/08/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -9160,8 +9184,8 @@
     "dtPortaria": "04/09/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "2101",
@@ -9400,8 +9424,8 @@
     "dtPortaria": "29/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -9412,8 +9436,8 @@
     "dtPortaria": "15/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "3805",
@@ -9561,8 +9585,8 @@
     "dtPortaria": "04/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -9573,8 +9597,8 @@
     "dtPortaria": "04/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -9637,6 +9661,18 @@
     "dtAtualizacao": "21/12/2022"
    },
    {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "10/2026",
+    "dtCompFim": "99/9999",
+    "portaria": "PORTARIA SMSA/SUS-BH Nº 0431/2026",
+    "dtPortaria": "01/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
+   },
+   {
     "coGrupo": "3801",
     "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
     "dtCompInicio": "03/2025",
@@ -9645,8 +9681,8 @@
     "dtPortaria": "02/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    }
   ]
  },
@@ -9734,8 +9770,8 @@
     "dtPortaria": "20/04/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "25/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -9746,8 +9782,8 @@
     "dtPortaria": "20/04/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "25/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -9835,8 +9871,8 @@
     "dtPortaria": "23/02/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -9907,8 +9943,8 @@
     "dtPortaria": "28/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -10320,8 +10356,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -10332,8 +10368,8 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2205",
@@ -10728,8 +10764,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -10848,8 +10884,8 @@
     "dtPortaria": "28/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "3805",
@@ -11045,7 +11081,7 @@
     "dtPortaria": "03/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11057,7 +11093,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11069,7 +11105,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11081,7 +11117,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11093,7 +11129,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11105,7 +11141,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11117,7 +11153,7 @@
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11417,7 +11453,7 @@
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11429,7 +11465,7 @@
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11873,7 +11909,7 @@
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11945,7 +11981,7 @@
     "dtPortaria": "07/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -12226,8 +12262,8 @@
     "dtPortaria": "12/09/2013",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -12238,8 +12274,8 @@
     "dtPortaria": "31/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -12250,8 +12286,8 @@
     "dtPortaria": "21/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -12327,7 +12363,7 @@
     "dtPortaria": "04/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -12339,7 +12375,7 @@
     "dtPortaria": "04/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -12351,7 +12387,7 @@
     "dtPortaria": "11/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -12363,7 +12399,7 @@
     "dtPortaria": "25/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    }
   ]
@@ -12464,8 +12500,8 @@
     "dtPortaria": "07/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2208",
@@ -12632,8 +12668,8 @@
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -12644,8 +12680,8 @@
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3403",
@@ -12668,8 +12704,8 @@
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -12781,8 +12817,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -12793,8 +12829,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -12805,8 +12841,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -12817,8 +12853,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -12829,8 +12865,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -12841,8 +12877,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -12853,8 +12889,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -13225,8 +13261,8 @@
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -13237,8 +13273,8 @@
     "dtPortaria": "26/08/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -13261,8 +13297,8 @@
     "dtPortaria": "20/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -14099,8 +14135,8 @@
     "dtPortaria": "05/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -14255,8 +14291,8 @@
     "dtPortaria": "14/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -14267,8 +14303,8 @@
     "dtPortaria": "05/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -14344,7 +14380,7 @@
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -14416,7 +14452,7 @@
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -14428,7 +14464,7 @@
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -14601,7 +14637,7 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -14613,7 +14649,7 @@
     "dtPortaria": "30/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -14673,7 +14709,7 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -14685,7 +14721,7 @@
     "dtPortaria": "27/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -14697,7 +14733,7 @@
     "dtPortaria": "09/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    }
   ]
@@ -14750,7 +14786,7 @@
     "dtPortaria": "24/02/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -14762,7 +14798,7 @@
     "dtPortaria": "24/02/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -14798,7 +14834,7 @@
     "dtPortaria": "07/04/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    }
   ]
@@ -15715,8 +15751,8 @@
  },
  "0010510": {
   "codigo_cnes": 10510,
-  "numero_cnpj_entidade": "00038174000143",
-  "nome_razao_social": "FUNDACAO UNIVERSIDADE DE BRASILIA",
+  "numero_cnpj_entidade": null,
+  "nome_razao_social": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES EBSERH",
   "nome_fantasia": "HOSPITAL UNIVERSITARIO DE BRASILIA",
   "natureza_organizacao_entidade": null,
   "tipo_gestao": "E",
@@ -15731,14 +15767,14 @@
   "latitude_estabelecimento_decimo_grau": -15.771480871463751,
   "longitude_estabelecimento_decimo_grau": -47.873783111572266,
   "endereco_email_estabelecimento": null,
-  "numero_cnpj": "00038174000658",
+  "numero_cnpj": "15126437000305",
   "codigo_identificador_turno_atendimento": "06",
   "descricao_turno_atendimento": "ATENDIMENTO CONTINUO DE 24 HORAS/DIA (PLANTAO:INCLUI SABADOS, DOMINGOS E FERIADOS)",
   "estabelecimento_faz_atendimento_ambulatorial_sus": "SIM",
   "codigo_estabelecimento_saude": "5300100010510",
   "codigo_uf": 53,
   "codigo_municipio": 530010,
-  "descricao_natureza_juridica_estabelecimento": "1139",
+  "descricao_natureza_juridica_estabelecimento": "2011",
   "codigo_motivo_desabilitacao_estabelecimento": null,
   "estabelecimento_possui_centro_cirurgico": 1,
   "estabelecimento_possui_centro_obstetrico": 1,
@@ -15750,7 +15786,7 @@
   "codigo_natureza_organizacao_unidade": null,
   "codigo_nivel_hierarquia_unidade": null,
   "codigo_esfera_administrativa_unidade": "E ",
-  "data_atualizacao": "2025-09-03",
+  "data_atualizacao": "2026-10-10",
   "habilitacoes": [
    {
     "coGrupo": "0101",
@@ -16013,8 +16049,8 @@
     "dtPortaria": "20/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -16025,8 +16061,8 @@
     "dtPortaria": "25/02/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2205",
@@ -16181,8 +16217,8 @@
     "dtPortaria": "20/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -16193,8 +16229,8 @@
     "dtPortaria": "26/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -16205,8 +16241,8 @@
     "dtPortaria": "25/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -16426,8 +16462,8 @@
     "dtPortaria": "04/08/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -16438,8 +16474,8 @@
     "dtPortaria": "04/08/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -16594,8 +16630,8 @@
     "dtPortaria": "11/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -16606,8 +16642,8 @@
     "dtPortaria": "29/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    }
   ]
  },
@@ -16947,8 +16983,8 @@
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -16959,8 +16995,8 @@
     "dtPortaria": "27/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2203",
@@ -17271,8 +17307,8 @@
     "dtPortaria": "01/09/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -17283,8 +17319,8 @@
     "dtPortaria": "09/05/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -17367,8 +17403,8 @@
     "dtPortaria": "14/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    }
   ]
  },
@@ -17444,7 +17480,7 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17456,7 +17492,7 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17564,7 +17600,7 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17576,7 +17612,7 @@
     "dtPortaria": "18/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17648,7 +17684,7 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17660,7 +17696,7 @@
     "dtPortaria": "26/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -17696,7 +17732,7 @@
     "dtPortaria": "15/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -18049,8 +18085,8 @@
     "dtPortaria": "11/11/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -18061,8 +18097,8 @@
     "dtPortaria": "11/11/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2101",
@@ -18361,8 +18397,8 @@
     "dtPortaria": "03/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3002",
@@ -18445,8 +18481,8 @@
     "dtPortaria": "19/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -18714,8 +18750,8 @@
     "dtPortaria": "08/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -18726,8 +18762,8 @@
     "dtPortaria": "08/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "2201",
@@ -18930,8 +18966,8 @@
     "dtPortaria": "04/08/2020",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -18942,8 +18978,8 @@
     "dtPortaria": "23/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -18966,8 +19002,8 @@
     "dtPortaria": "23/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -19079,8 +19115,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -19091,8 +19127,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -19103,8 +19139,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -19115,8 +19151,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -19127,8 +19163,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -19139,8 +19175,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -19151,8 +19187,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -19319,8 +19355,8 @@
     "dtPortaria": "30/03/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -19331,8 +19367,8 @@
     "dtPortaria": "30/03/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2202",
@@ -19523,8 +19559,8 @@
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -19535,8 +19571,8 @@
     "dtPortaria": "18/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3507",
@@ -19571,8 +19607,8 @@
     "dtPortaria": "04/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -19636,7 +19672,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19648,7 +19684,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19660,7 +19696,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19672,7 +19708,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19684,7 +19720,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19696,7 +19732,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19780,7 +19816,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19852,7 +19888,7 @@
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19864,7 +19900,7 @@
     "dtPortaria": "29/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19888,7 +19924,7 @@
     "dtPortaria": "27/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -19977,8 +20013,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -19989,8 +20025,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -20037,8 +20073,8 @@
     "dtPortaria": "30/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -20210,8 +20246,8 @@
     "dtPortaria": "07/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "04/06/2026",
-    "dtAtualizacao": "08/05/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2501",
@@ -20270,8 +20306,8 @@
     "dtPortaria": "18/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "04/06/2026",
-    "dtAtualizacao": "08/05/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -20503,7 +20539,7 @@
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -20515,7 +20551,7 @@
     "dtPortaria": "31/03/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -20635,7 +20671,7 @@
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -20647,7 +20683,7 @@
     "dtPortaria": "19/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -20719,7 +20755,7 @@
     "dtPortaria": "09/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    }
   ]
@@ -21084,7 +21120,7 @@
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -21096,7 +21132,7 @@
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -21360,7 +21396,7 @@
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -21372,7 +21408,7 @@
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -21444,7 +21480,7 @@
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -21677,7 +21713,7 @@
     "dtPortaria": "10/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "15/09/2026"
    },
    {
@@ -21689,7 +21725,7 @@
     "dtPortaria": "20/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "15/09/2026"
    }
   ]
@@ -21778,8 +21814,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -21790,8 +21826,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -21802,8 +21838,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -21814,8 +21850,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -21826,8 +21862,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -21934,8 +21970,8 @@
     "dtPortaria": "02/03/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -21946,8 +21982,8 @@
     "dtPortaria": "02/03/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -22006,8 +22042,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -22018,8 +22054,8 @@
     "dtPortaria": "21/07/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -22042,8 +22078,8 @@
     "dtPortaria": "17/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -22155,8 +22191,8 @@
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -22167,8 +22203,8 @@
     "dtPortaria": "24/09/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2501",
@@ -22251,8 +22287,8 @@
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3002",
@@ -22299,8 +22335,8 @@
     "dtPortaria": "20/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    }
   ]
  },
@@ -23699,8 +23735,8 @@
     "dtPortaria": "10/05/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -23711,8 +23747,8 @@
     "dtPortaria": "20/05/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -23747,8 +23783,8 @@
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -24322,7 +24358,7 @@
     "nuLeitos": null,
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "18/12/2012",
-    "dtAtualizacao": "18/12/2012"
+    "dtAtualizacao": "18/12/2019"
    },
    {
     "coGrupo": "0807",
@@ -24382,7 +24418,7 @@
     "nuLeitos": "0",
     "tpOrigem": "P",
     "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacao": "03/08/2011"
    },
    {
     "coGrupo": "2205",
@@ -24394,7 +24430,7 @@
     "nuLeitos": null,
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "11/02/2014",
-    "dtAtualizacao": "11/02/2014"
+    "dtAtualizacao": "11/12/2016"
    },
    {
     "coGrupo": "2601",
@@ -25159,8 +25195,8 @@
     "dtPortaria": "15/05/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1901",
@@ -25171,8 +25207,8 @@
     "dtPortaria": "15/05/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -25183,8 +25219,8 @@
     "dtPortaria": "18/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -25195,8 +25231,8 @@
     "dtPortaria": "18/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -25291,8 +25327,8 @@
     "dtPortaria": "07/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3402",
@@ -25315,8 +25351,8 @@
     "dtPortaria": "07/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -25428,7 +25464,7 @@
     "dtPortaria": "28/01/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/02/2026"
    },
    {
@@ -25613,8 +25649,8 @@
     "dtPortaria": "05/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -25846,8 +25882,8 @@
     "dtPortaria": "25/08/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -25858,8 +25894,8 @@
     "dtPortaria": "25/08/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2001",
@@ -26074,8 +26110,8 @@
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -26098,8 +26134,8 @@
     "dtPortaria": "26/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -26271,8 +26307,8 @@
     "dtPortaria": "23/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -26283,8 +26319,8 @@
     "dtPortaria": "23/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -26391,8 +26427,8 @@
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -26504,7 +26540,7 @@
     "dtPortaria": "24/11/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -26516,7 +26552,7 @@
     "dtPortaria": "24/11/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -26588,7 +26624,7 @@
     "dtPortaria": "11/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -26600,7 +26636,7 @@
     "dtPortaria": "07/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    }
   ]
@@ -26653,7 +26689,7 @@
     "dtPortaria": "12/12/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -26665,7 +26701,7 @@
     "dtPortaria": "27/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -26701,7 +26737,7 @@
     "dtPortaria": "27/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -26713,7 +26749,7 @@
     "dtPortaria": "04/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    }
   ]
@@ -26802,8 +26838,8 @@
     "dtPortaria": "19/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -26850,8 +26886,8 @@
     "dtPortaria": "19/01/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "22/09/2026"
    }
   ]
  },
@@ -27131,7 +27167,7 @@
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -27143,7 +27179,7 @@
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -27371,7 +27407,7 @@
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -27383,7 +27419,7 @@
     "dtPortaria": "08/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -27455,7 +27491,7 @@
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    }
   ]
@@ -27604,7 +27640,7 @@
     "dtPortaria": "04/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "09/07/2026"
    },
    {
@@ -27616,7 +27652,7 @@
     "dtPortaria": "15/07/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "09/07/2026"
    },
    {
@@ -27741,7 +27777,7 @@
     "dtPortaria": "29/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    },
    {
@@ -27753,7 +27789,7 @@
     "dtPortaria": "06/05/2013",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    },
    {
@@ -27801,7 +27837,7 @@
     "dtPortaria": "25/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    }
   ]
@@ -27914,8 +27950,8 @@
     "dtPortaria": "13/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "16/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2603",
@@ -27964,6 +28000,30 @@
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "10/04/2013",
     "dtAtualizacao": "27/12/2016"
+   },
+   {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
+   },
+   {
+    "coGrupo": "3801",
+    "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 00402025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -28027,7 +28087,7 @@
     "dtPortaria": "04/01/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "10/12/2025"
    },
    {
@@ -28087,7 +28147,7 @@
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "10/12/2025"
    }
   ]
@@ -28152,7 +28212,7 @@
     "dtPortaria": "28/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/08/2026"
    },
    {
@@ -28188,7 +28248,7 @@
     "dtPortaria": "11/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/08/2026"
    }
   ]
@@ -28265,8 +28325,8 @@
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -28277,8 +28337,8 @@
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -28301,8 +28361,8 @@
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    }
   ]
  },
@@ -28402,8 +28462,8 @@
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -28414,8 +28474,8 @@
     "dtPortaria": "10/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -28522,8 +28582,8 @@
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -28534,8 +28594,8 @@
     "dtPortaria": "20/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -28546,8 +28606,8 @@
     "dtPortaria": "22/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -28611,7 +28671,7 @@
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "05/03/2026"
    },
    {
@@ -28623,7 +28683,7 @@
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "05/03/2026"
    }
   ]
@@ -28716,8 +28776,8 @@
     "dtPortaria": "02/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "12/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2611",
@@ -28829,7 +28889,7 @@
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -28942,8 +29002,8 @@
     "dtPortaria": "07/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -29084,8 +29144,8 @@
     "dtPortaria": "14/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "27/08/2026",
-    "dtAtualizacao": "12/06/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -29096,8 +29156,8 @@
     "dtPortaria": "14/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "27/08/2026",
-    "dtAtualizacao": "12/06/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -29831,8 +29891,8 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -29843,8 +29903,8 @@
     "dtPortaria": "20/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -29867,8 +29927,8 @@
     "dtPortaria": "22/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -30028,7 +30088,7 @@
     "dtPortaria": "04/11/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -30040,7 +30100,7 @@
     "dtPortaria": "04/11/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -30124,7 +30184,7 @@
     "dtPortaria": "27/06/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -30136,7 +30196,7 @@
     "dtPortaria": "20/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -30148,7 +30208,7 @@
     "dtPortaria": "12/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    }
   ]
@@ -30201,7 +30261,7 @@
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30213,7 +30273,7 @@
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30225,7 +30285,7 @@
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30237,7 +30297,7 @@
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30249,7 +30309,7 @@
     "dtPortaria": "22/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30261,7 +30321,7 @@
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30273,7 +30333,7 @@
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30297,7 +30357,7 @@
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30309,7 +30369,7 @@
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30333,7 +30393,7 @@
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30345,7 +30405,7 @@
     "dtPortaria": "23/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30357,7 +30417,7 @@
     "dtPortaria": "08/10/2025",
     "nuLeitos": "0",
     "tpOrigem": null,
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -30369,7 +30429,7 @@
     "dtPortaria": "27/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    }
   ]
@@ -30595,7 +30655,7 @@
     "dtPortaria": "01/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "21/08/2026"
    }
   ]
@@ -30765,7 +30825,7 @@
     "dtPortaria": "20/09/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "25/11/2025"
    },
    {
@@ -30998,7 +31058,7 @@
     "dtPortaria": "18/08/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -31010,7 +31070,7 @@
     "dtPortaria": "18/08/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -31166,7 +31226,7 @@
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -31178,7 +31238,7 @@
     "dtPortaria": "30/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -31190,7 +31250,7 @@
     "dtPortaria": "31/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -31519,8 +31579,8 @@
     "dtPortaria": "02/05/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -31531,8 +31591,8 @@
     "dtPortaria": "26/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -31543,8 +31603,8 @@
     "dtPortaria": "23/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3805",

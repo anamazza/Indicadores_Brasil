@@ -606,7 +606,7 @@ const PONTOS = [{"cnes":"2799278","nome":"Hospital Inacia Pinto Dos Santos","uf"
 const DICIONARIO = [{"secao":"PERFIL SÓCIO-DEMOGRÁFICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por idade da mãe","desc":"Total de nascidos vivos em cada faixa etária da mãe, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nIDADEMAE (idade da mãe em anos completos), nas faixas: 10 a 14, 15 a 19, 20 a 34, 35 a 39, 40 anos e mais.\nIDADEMAE 99, 0 ou em branco = \"Ignorado\", apresentado como categoria própria (decisão da coordenação, 09/09/2026)."},{"secao":"PERFIL SÓCIO-DEMOGRÁFICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por raça/cor da mãe","desc":"Total de nascidos vivos em cada categoria de raça/cor da mãe, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nRACACORMAE: 1 Branca, 2 Preta, 3 Amarela, 4 Parda, 5 Indígena. Campo em branco = \"Ignorado\", apresentado como categoria própria (a Declaração de Nascido Vivo não tem a opção \"ignorado\").\nVariável autodeclarada, disponível desde 2010."},{"secao":"PERFIL SÓCIO-DEMOGRÁFICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por escolaridade da mãe","desc":"Total de nascidos vivos em cada categoria de escolaridade da mãe, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nESCMAE (anos de estudo concluídos; desde 2010 derivada pelo SINASC de ESCMAE2010 e SERIESCMAE): \"Até 3 anos\" = ESCMAE 1 (nenhuma) ou 2 (1 a 3 anos); \"4 a 7 anos\" = 3; \"8 a 11 anos\" = 4; \"12 anos e mais\" = 5.\nESCMAE 9 ou em branco = \"Ignorado\", categoria própria. O código 0 pertence a ESCMAE2010 e não é usado."},{"secao":"PERFIL SÓCIO-DEMOGRÁFICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por situação conjugal da mãe","desc":"Total de nascidos vivos em cada categoria de situação conjugal da mãe, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nESTCIVMAE: 1 solteira, 3 viúva, 4 separada judicialmente/divorciada = \"Solteira, viúva ou separada\"; 2 casada, 5 união estável = \"Casada ou em união estável\" (rótulo oficial do código 5: união estável).\nESTCIVMAE 9 ou em branco = \"Ignorado\", categoria própria."},{"secao":"PERFIL OBSTÉTRICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por número de gestações anteriores da mãe","desc":"Total de nascidos vivos de mães em cada faixa de número de gestações anteriores, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nQTDGESTANT (número de gestações anteriores; inclui as gestações interrompidas), nas faixas: \"Nenhuma\", \"De 1 a 3\", \"De 4 a 6\", \"De 7 a 9\", \"10 ou mais\". QTDGESTANT 99 ou em branco = \"Ignorado\", categoria própria.\nTítulo alterado de \"partos anteriores\" para \"gestações anteriores\" (decisão da coordenação, 09/09/2026): a variável QTDGESTANT conta gestações. O rótulo será atualizado em conjunto na planilha, no painel e nas apresentações."},{"secao":"PERFIL OBSTÉTRICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por número de cesarianas anteriores da mãe","desc":"Total de nascidos vivos de mães em cada faixa de número de cesarianas anteriores, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nQTDPARTCES (número de cesarianas anteriores), nas faixas: \"Nenhuma\", \"De 1 a 3\", \"De 4 a 6\", \"De 7 a 9\", \"10 ou mais\". QTDPARTCES 99 ou em branco = \"Ignorado\", categoria própria.\nObservação: a literatura costuma usar 1, 2 e 3 ou mais; as faixas acima foram mantidas por padronização com a planilha."},{"secao":"PERFIL OBSTÉTRICO (SINASC)","ind":"Distribuição percentual dos nascidos vivos por tipo de gestação","desc":"Total de nascidos vivos com cada tipo de gestação, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nGRAVIDEZ: 1 Única, 2 Dupla, 3 Tripla ou mais. GRAVIDEZ 9 ou em branco = \"Ignorado\", categoria própria."},{"secao":"PERFIL OBSTÉTRICO (SINASC)","ind":"Porcentagem de mães de nascidos vivos com número adequado de consultas para a idade gestacional no parto","desc":"Proporção de nascidos vivos cujas mães tiveram número de consultas de pré-natal igual ou superior ao mínimo esperado para a idade gestacional no parto, segundo o calendário de 8 contatos da OMS (2016).","regra":"Fonte: SINASC. Referência: OMS, Recomendações sobre cuidados pré-natais para uma experiência positiva na gravidez (2016): contatos em até 12, 20, 26, 30, 34, 36, 38 e 40 semanas.\nMínimo de consultas por idade gestacional no parto (SEMAGESTAC): menos de 20 semanas = 1; 20 a 25 = 2; 26 a 29 = 3; 30 a 33 = 4; 34 a 35 = 5; 36 a 37 = 6; 38 a 39 = 7; 40 ou mais = 8. Adequado = CONSPRENAT maior ou igual ao mínimo.\nCONSPRENAT 99 ou em branco, ou SEMAGESTAC 99 ou em branco = \"Ignorado\", categoria própria, fora do denominador (correção aprovada; a regra anterior tratava o 99 como valor válido — decisão da coordenação, 09/09/2026)."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Número de internações obstétricas","desc":"Total de internações de mulheres de 10 a 59 anos com diagnóstico do capítulo XV da CID-10 (O00 a O99) em qualquer campo de diagnóstico da AIH.","regra":"Fonte: SIH-RD (AIH reduzida), todas as competências disponíveis; ano de referência pela data de internação (DT_INTER).\nUniverso obstétrico (decisão da coordenação, 09/09/2026): SEXO feminino, COD_IDADE = 4 e IDADE de 10 a 59 anos, com código O00 a O99 em qualquer campo de diagnóstico (DIAG_PRINC, DIAG_SECUN [preenchido até 2014], DIAGSEC1 a DIAGSEC9).\nObservação: nas 114 unidades, em 2019-2025, não há AIH de longa permanência (IDENT = 5) no recorte (conferido no microdado); cada AIH corresponde a um episódio de internação."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Distribuição percentual das internações obstétricas por motivos de internação (parto, aborto e intercorrências clínicas)","desc":"Proporção das internações obstétricas por motivo: Parto, Aborto, Intercorrências Clínicas e Outros.","regra":"Fonte: SIH-RD. Denominador: universo obstétrico (mulheres de 10 a 59 anos).\nGRUPO_INT_OBST pela variável PROC_REA:\nAborto: 0409060070 (AMIU), 0411020013 (curetagem pós-abortamento/puerperal).\nParto — vaginal: 0310010039, 0310010047, 0310010055 e 0409060313 (laqueadura tubária na mesma internação do parto normal; Portaria SAES/MS 1.549/2024, vigente desde a competência 04/2024; decisão da coordenação, 09/09/2026: é parto vaginal em todas as listas); cesariana: 0411010026, 0411010034, 0411010042.\nIntercorrências Clínicas: 0303100010, 0303100028, 0303100036, 0303100044, 0303100052, 0409060011, 0409060046, 0411010018, 0411010050, 0411010069, 0411010077, 0411010085, 0411020021, 0411020030, 0411020048, 0411020056 (vigente até 12/2018).\nOutros: demais procedimentos.\nA curetagem semiótica (0409060046) permanece aqui apenas como motivo de internação; ela não entra no indicador de AMIU."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Distribuição percentual das internações obstétricas por tipo de saída (alta, transferência e óbito)","desc":"Proporção das internações obstétricas por desfecho registrado na AIH.","regra":"Fonte: SIH-RD. Denominador: universo obstétrico.\nClassificação pelo primeiro dígito de COBRANCA (motivo de saída/permanência; Portaria SAS/MS 719/2007; Manual Técnico Operacional do SIH/SUS 2017, item 6.3): 1x = Alta; 2x = Permanência; 3x = Transferência; 4x = Óbito; 51 = Encerramento administrativo.\nCódigos 6x (desfecho conjunto mãe/recém-nascido, exclusivos de AIH de parto; Portaria SAS/MS 384/2010): 61, 62, 63 e 64 = Alta da mãe (64 = alta da mãe com óbito fetal); 65, 66 e 67 = Óbito da mãe (65 = óbito da gestante e do concepto). Registrar à parte a frequência de 64 e 65.\nIndicador mantido na planilha; retirado das apresentações por decisão da coordenação (31/08/2026)."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Número de internações obstétricas para interrupção da gestação em casos previstos por lei","desc":"Total de internações para interrupção da gestação nos casos previstos em lei (CID O04) com procedimento de esvaziamento uterino.","regra":"Fonte: SIH-RD.\nABORTO_LEGAL = 1 quando o motivo de internação é Aborto (PROC_REA 0409060070 ou 0411020013) e há O04 em qualquer campo de diagnóstico. Operacionalização alinhada a Jacobs e Boing (2021).\nLimitações: O04 inclui aborto terapêutico; interrupções medicamentosas sem esvaziamento instrumental podem não ser captadas."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Porcentagem de AMIU dentre procedimentos de esvaziamento uterino","desc":"Total de AMIU dividido pelo total de esvaziamentos uterinos pós-abortamento, multiplicado por 100. Quanto maior, melhor (Norma Técnica de Atenção Humanizada ao Abortamento, MS 2014).","regra":"Fonte: SIH-RD, sobre todas as AIH da unidade.\nNumerador: PROC_REA = 0409060070 (AMIU). Denominador: PROC_REA em 0409060070 ou 0411020013.\nA curetagem semiótica (0409060046) NÃO entra no denominador: no SIGTAP ela só tem CIDs ginecológicos e não é esvaziamento pós-abortamento (decisão da coordenação, 09/09/2026)."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Porcentagem de internações que resultaram em parto com presença de acompanhante","desc":"Proporção de internações por parto com registro de diária de acompanhante na AIH (proxy da presença de acompanhante, Lei 11.108/2005).","regra":"Fonte: SIH-RD, sobre todas as AIH da unidade.\nNumerador: PROC_REA em 0310010039, 0310010047, 0310010055, 0409060313, 0411010026, 0411010034 ou 0411010042, com DIAR_ACOM > 0. Denominador: as mesmas AIH, sem a condição de acompanhante.\nBase: Lei 11.108/2005; Portaria GM/MS 2.418/2005 (autoriza a cobrança das despesas com acompanhante na AIH); Portaria GM/MS 1.459/2011, art. 7º. Limitação: DIAR_ACOM registra diárias faturadas, não a presença durante o trabalho de parto."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Porcentagem de internações para assistência ao parto vaginal com presença de acompanhante","desc":"Proporção de internações por parto vaginal com registro de diária de acompanhante.","regra":"Como no indicador anterior, restrito aos partos vaginais: 0310010039, 0310010047, 0310010055 e 0409060313 (incluído — decisão da coordenação, 09/09/2026)."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Porcentagem de internações para cesariana com presença de acompanhante","desc":"Proporção de internações por cesariana com registro de diária de acompanhante.","regra":"Como no indicador de parto com acompanhante, restrito às cesarianas: 0411010026, 0411010034, 0411010042."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Porcentagem de internações para aborto com presença de acompanhante","desc":"Proporção de internações para interrupção da gestação nos casos previstos em lei com registro de diária de acompanhante.","regra":"Fonte: SIH-RD.\nNumerador: ABORTO_LEGAL = 1 com DIAR_ACOM > 0. Denominador: ABORTO_LEGAL = 1.\nCorreções (decisão da coordenação, 09/09/2026): retirada a curetagem semiótica (0409060046) e corrigida a descrição anterior, que dizia \"dividido pelo total de internações por parto\". Nota: a Lei 11.108/2005 assegura acompanhante à parturiente; para o abortamento, o indicador mede prática de registro."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Número de partos em Centro de Parto Normal","desc":"Número de partos registrados com o procedimento específico de Centro de Parto Normal.","regra":"Fonte: SIH-RD, sobre todas as AIH da unidade.\nPROC_REA = 0310010055 (Portaria GM/MS 11/2015, art. 51: o procedimento registra as ações do CPN).\nLimitações: partos realizados em CPN e faturados como 0310010039 não são captados; unidade sem habilitação de CPN registra zero."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Taxa de Ocupação","desc":"Dias de permanência das internações obstétricas divididos pelos leitos-dia obstétricos do ano, multiplicado por 100.","regra":"Fonte: SIH-RD e CNES-LT.\nNumerador: soma de DIAS_PERM das internações do universo obstétrico, por ano de internação.\nDenominador: leitos-dia do ano — soma, nas 12 competências, de leitos obstétricos EXISTENTES (QT_EXIST, CODLEITO 10 e 43) × dias do mês —, normalizado para ano de 365 dias (em anos bissextos, ajuste 365/366).\nLimitação (nota técnica do DATASUS): DIAS_PERM inclui dias de UTI; a taxa pode exceder 100% em unidades superlotadas. Referências: Portaria SAS/MS 312/2002; ANS QUALISS E-EFI-02."},{"secao":"INTERNAÇÕES OBSTÉTRICAS","ind":"Tempo médio de permanência (geral, parto vaginal, cesariana, aborto, intercorrências clínicas)","desc":"Soma dos dias de permanência dividida pelo número de internações, no total e por motivo de internação.","regra":"Fonte: SIH-RD. Universo obstétrico.\nTMP = soma de DIAS_PERM / número de AIH, no geral e por grupo (Parto Vaginal, Cesariana, Aborto, Intercorrências Clínicas), com os mesmos códigos do indicador de motivos (0409060313 incluído em parto vaginal). DIAS_PERM = DT_SAIDA − DT_INTER (internação e alta no mesmo dia = 0).\nReferência do MS para obstetrícia: 2,4 a 3,1 dias."},{"secao":"ASSISTÊNCIA AO PARTO","ind":"Porcentagem de nascidos vivos por partos vaginais pós-cesariana","desc":"Proporção de nascidos vivos por via vaginal entre mulheres com cesariana anterior (VBAC). Não é a taxa de sucesso da prova de trabalho de parto.","regra":"Fonte: SINASC.\nNumerador: PARTO = 1 (vaginal) e QTDPARTCES entre 1 e 98. Denominador: QTDPARTCES entre 1 e 98 e PARTO em 1 ou 2. QTDPARTCES 99 ou em branco e PARTO 9 ficam fora do cálculo (a regra anterior, QTDPARTCES > 0, incluía o 99)."},{"secao":"ASSISTÊNCIA AO PARTO","ind":"Porcentagem de realização de analgesia em internações para partos vaginais","desc":"Total de internações para parto vaginal com registro de analgesia, dividido pelo total de internações para parto vaginal e multiplicado por 100.","regra":"Fonte: SIH-RD e SIH-SP.\nNumerador: AIH do denominador com pelo menos um registro SP_ATOPROF = 0417010028 (analgesia obstétrica para parto normal) na base SIH-SP. Denominador: PROC_REA em 0310010039, 0310010047, 0310010055 ou 0409060313.\nNota: 0417010028 só existe em SP_ATOPROF e, no SIGTAP, é incompatível com 0310010055 (CPN); partos em CPN não terão o ato registrado."},{"secao":"ASSISTÊNCIA AO PARTO","ind":"Porcentagem de nascidos vivos com trabalho de parto induzido","desc":"Total de nascidos vivos com trabalho de parto induzido, dividido pelo total de nascidos vivos e multiplicado por 100.","regra":"Fonte: SINASC.\nNumerador: STTRABPART = 1. Denominador: total de nascidos vivos."},{"secao":"INTERNAÇÕES NEONATAIS","ind":"Número de internações neonatais","desc":"Internações (AIH próprias) de recém-nascidos com 0 a 27 dias de vida na data da internação (período neonatal, OMS).","regra":"Fonte: SIH-RD; ano pela data de internação.\nNEO = 1 quando COD_IDADE ≤ 2 e IDADE entre 0 e 27 (idade em dias; o código 0, idade não exigida, ocorre raramente e foi mantido por compatibilidade com a tabulação de referência).\nNota: o SIH só emite AIH própria para o recém-nascido internado separadamente da mãe (UTIN, permanência após a alta materna etc.); RN sadios em alojamento conjunto não são contados."},{"secao":"INTERNAÇÕES NEONATAIS","ind":"Porcentagem de internações neonatais em UTI neonatal","desc":"Proporção das internações neonatais com uso de UTI neonatal.","regra":"Fonte: SIH-RD.\nNumerador: NEO = 1 com MARCA_UTI 81 ou 82 (UTI neonatal tipos II e III; Portaria GM/MS 930/2012, art. 12, parágrafo único, e Portaria GM/MS 2.862/2023, art. 146). Denominador: NEO = 1.\nNota: MARCA_UTI registra um único tipo de UTI por AIH; uso de UTI pediátrica ou de UCIN não é computado."},{"secao":"INTERNAÇÕES NEONATAIS","ind":"Distribuição percentual das internações neonatais por tipo de saída (alta, transferência e óbito)","desc":"Proporção das internações neonatais por desfecho registrado na AIH.","regra":"Fonte: SIH-RD. Denominador: NEO = 1 (denominador corrigido; o texto anterior dizia OBST = 1).\nClassificação pelo primeiro dígito de COBRANCA (Portaria SAS/MS 719/2007; Manual Técnico Operacional do SIH/SUS 2017, item 6.3): 1x = Alta; 2x = Permanência; 3x = Transferência; 4x = Óbito; 51 = Encerramento administrativo.\nIndicador mantido na planilha; retirado das apresentações por decisão da coordenação (31/08/2026)."},{"secao":"INTERNAÇÕES NEONATAIS","ind":"Tempo médio de permanência em UTI neonatal (todas as AIH com uso de UTIN)","desc":"Média de diárias de UTIN por AIH com uso de UTIN, todas as idades.","regra":"Fonte: SIH-RD.\nSoma de UTI_MES_TO dividida pelo número de AIH com MARCA_UTI 81 ou 82 e UTI_MES_TO > 0, sem filtro de idade (Portaria SAS/MS 312/2002: estatísticas de unidade incluem todos os pacientes que passaram por ela)."},{"secao":"INTERNAÇÕES NEONATAIS","ind":"Taxa de Ocupação","desc":"Total de diárias de UTIN dividido pelos leitos-dia de UTIN do ano, multiplicado por 100.","regra":"Fonte: SIH-RD e CNES-LT.\nNumerador: soma de UTI_MES_TO das AIH com MARCA_UTI 81 ou 82, todas as idades, por ano de internação.\nDenominador: leitos-dia de UTIN — leitos EXISTENTES (QT_EXIST, CODLEITO 81 e 82) por competência × dias do mês —, normalizado para ano de 365 dias. Regra transitória aprovada pela coordenação (05/09/2026): o CODLEITO 80 (UTI neonatal tipo I) entra apenas nas competências em que a unidade não tem nenhum leito 81/82 (coerente com a Portaria SAES/MS 2.902/2025, que reclassificou os leitos tipo I)."},{"secao":"MORBIDADE MATERNA","ind":"Porcentagem de casos de morbidade materna grave (condições potencialmente ameaçadoras à vida, OMS)","desc":"Proporção de internações obstétricas com pelo menos uma condição potencialmente ameaçadora à vida (CPAV), operacionalizada no SIH/SUS conforme o Painel de Vigilância da Saúde Materna do Observatório Obstétrico Brasileiro (OOBr; Domingues et al. 2024). Não corresponde a near miss materno.","regra":"Fonte: SIH-RD e SIH-SP. Critério reescrito conforme o script do OOBr (decisão da coordenação, 09/09/2026), aplicado sobre o universo obstétrico da planilha (mulheres de 10 a 59 anos). Denominador: universo obstétrico.\nCaso = internação do universo com pelo menos um dos critérios:\n1. CID (qualquer campo de diagnóstico): descolamento prematuro de placenta O450, O458, O459; gravidez ectópica O000 a O002, O008, O009; hemorragia pós-parto O720 a O722; rotura uterina O710, O711; pré-eclâmpsia grave O141; eclâmpsia O150 a O152, O159; hipertensão grave O11, O13, O149, O16, O100 a O104, O109, I10 a I15; encefalopatia hipertensiva I674; endometrite O85; edema pulmonar J81; insuficiência respiratória J80, J960, J969, R092, I26x, O032, O037, O042, O047, O052, O057, O062, O067, O072, O077, O082, O880 a O883, O888; convulsões R568; sepse A40x, A41x, A021, A227, A267, A327, A427, B377, O080, O753, O85; choque E86, R570, R571, R578, R579, T811, I460, O083, O751; crise tireotóxica E055; transfusão Z513; histerectomia O822; intubação O29x, O74x, O89x (decisão da coordenação, 09/09/2026).\n2. Procedimento (PROC_REA) ou ato profissional (SP_ATOPROF) correspondente aos critérios: hipertensão grave, choque, transfusão, acesso venoso central, histerectomia, diárias de UTI, cirurgias, e ainda 0411020048 (ectópica), 0409060160 (rotura), 0303100028 (eclâmpsia), 0303040211 (encefalopatia), 0303060131 (edema agudo), 0303060140 (insuficiência respiratória).\n3. Admissão à UTI: UTI_MES_TO > 0, diária de UTI (0802010083, 0802010091, 0802010105, 0802010296, 0802010318) ou ato de UTI na base SP.\n4. Intervenção cirúrgica: procedimentos da lista do OOBr; curetagem 0411020013 apenas em episódio de parto ou com intercorrência puerperal (PROC_REA 0303100010 ou diagnóstico principal O70 a O94).\n5. Tempo de permanência maior que 7 dias (DT_SAIDA − DT_INTER) apenas em internações de parto (lista de partos do OOBr, incluído o 0409060313), excluindo AIH com diária de acompanhante 0802010024.\nLimitações de registro no SIH: Nakamura-Pereira et al. 2013; Domingues et al. 2024."},{"secao":"MORBIDADE MATERNA","ind":"Distribuição percentual dos casos de morbidade materna grave por grupo de causa","desc":"Porcentagem dos casos de MMG com diagnóstico em cada grupo de causa. Classificação não exclusiva: uma internação pode estar em mais de um grupo e a soma pode passar de 100.","regra":"Fonte: SIH-RD.\nGrupos marcados sobre os CASOS de MMG (critério OOBr acima), pelos códigos em qualquer campo de diagnóstico — os 7 grupos do modelo foram MANTIDOS por decisão da coordenação (09/09/2026):\nCausas obstétricas indiretas: O98 a O99.\nComplicações tromboembólicas: O880 a O883, O888; I26.\nHipertensão: O10 a O16.\nHemorragia: O00 a O08, O20 a O21, O44 a O46, O67, O72.\nInfecção: O23, O753, O85, O86, O98.\nOutras causas obstétricas: O09 a O19, O24 a O43, O47 a O71, O73 a O84, O87 a O92, O94 a O99, excluídos os códigos já alocados nos grupos anteriores.\nDemais causas: pelo menos um diagnóstico fora do capítulo XV (código não iniciado em O)."},{"secao":"MORBIDADE MATERNA","ind":"Porcentagem de casos de morbidade materna grave com internação em UTI","desc":"Proporção dos casos de MMG com admissão à UTI.","regra":"Fonte: SIH-RD e SIH-SP.\nNumerador: casos de MMG com UTI_MES_TO > 0, diária de UTI (0802010083, 0802010091, 0802010105, 0802010296, 0802010318) ou ato de UTI na base SP. Denominador: casos de MMG."},{"secao":"MORBIDADE MATERNA","ind":"Porcentagem de casos de morbidade materna grave com tempo de permanência prolongado pós-parto","desc":"Proporção dos casos de MMG, em internações de parto, com permanência maior que 7 dias.","regra":"Fonte: SIH-RD e SIH-SP.\nNumerador: casos de MMG em internação de parto (lista do OOBr, incluído o 0409060313) com DT_SAIDA − DT_INTER maior que 7 dias, excluindo AIH com diária de acompanhante 0802010024 (na RD ou na SP). Denominador: casos de MMG."},{"secao":"MORBIDADE MATERNA","ind":"Porcentagem de casos de morbidade materna grave com transfusão sanguínea","desc":"Proporção dos casos de MMG com registro de transfusão.","regra":"Fonte: SIH-RD e SIH-SP.\nNumerador: casos de MMG com Z513 em qualquer campo de diagnóstico, procedimento de transfusão ou ato de transfusão na base SP (0306020068, 0306020076, 0306020084, 0306020092, 0306020106, 0306020114, 0306020122, 0306020130, 0306020149). Denominador: casos de MMG.\nNota: registro no SIH em torno de 50% (Domingues et al. 2024)."},{"secao":"MORBIDADE MATERNA","ind":"Porcentagem de casos de morbidade materna grave com realização de histerectomia","desc":"Proporção dos casos de MMG com histerectomia.","regra":"Fonte: SIH-RD e SIH-SP.\nNumerador: casos de MMG com O822 em qualquer campo de diagnóstico ou procedimento/ato em 0411020030, 0409060100, 0409060119, 0409060127, 0409060135. Denominador: casos de MMG.\nNota: registro no SIH em torno de 36% (Domingues et al. 2024)."},{"secao":"MORBIDADE NEONATAL","ind":"Porcentagem de nascidos vivos com condições potencialmente ameaçadoras à vida","desc":"Proporção de nascidos vivos com pelo menos um critério pragmático de morbidade neonatal grave: peso ao nascer menor que 1.500 g, idade gestacional menor que 32 semanas ou Apgar no 5º minuto menor que 7 (Pileggi et al. 2010; Silva et al. 2014; Kale et al. 2017).","regra":"Fonte: SINASC.\nNumerador: PESO < 1500 (excluídos 0, 9999 e em branco), OU idade gestacional menor que 32 semanas (SEMAGESTAC < 32; se ignorada, GESTACAO 1, 2 ou 3), OU APGAR5 < 7 (excluídos valores fora de 0 a 10 e em branco). Denominador: total de nascidos vivos.\nEvitar rotular Apgar < 7 como \"asfixia\" (o manual da DN classifica 5 a 7 como asfixia leve)."},{"secao":"MORBIDADE NEONATAL","ind":"Distribuição percentual das internações neonatais por grupos de causas","desc":"Distribuição das internações neonatais por grupo de causa, classificação EXCLUSIVA pelo diagnóstico principal da AIH: cada internação entra em um único grupo e a soma é 100 (decisão da coordenação, 09/09/2026).","regra":"Fonte: SIH-RD. Denominador: NEO = 1.\nGrupo pelo DIAG_PRINC, na ordem: Asfixia/Hipóxia P20 a P21; Infecções perinatais P35 a P39; Transtornos cardiovasculares perinatais P29; Afecções respiratórias do RN P22 a P28; Condições relacionadas a fatores maternos P00 a P04; Prematuridade e baixo peso ao nascer P07; Transtornos metabólicos e endócrinos P70 a P74; Anomalias congênitas Q00 a Q99; Causas mal definidas R00 a R99; Outras afecções do período perinatal = demais códigos P00 a P96; Demais causas = diagnóstico principal fora dos grupos anteriores.\nMotivo da mudança: com a marcação em qualquer campo de diagnóstico, a soma passava de 100 (uma internação entrava em vários grupos); pelo diagnóstico principal a distribuição soma 100."}];
 
 const CNES_INFO = {
- "_atualizado_em": "2026-09-23",
+ "_atualizado_em": "2026-10-11",
  "0000396": {
   "codigo_cnes": 396,
   "numero_cnpj_entidade": "24134488000108",
@@ -1637,8 +1637,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -1649,8 +1649,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -1661,8 +1661,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -1673,8 +1673,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -1685,8 +1685,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -1697,8 +1697,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -1709,8 +1709,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -1949,8 +1949,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -1961,8 +1961,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2208",
@@ -2333,8 +2333,8 @@ const CNES_INFO = {
     "dtPortaria": "29/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -2453,8 +2453,8 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "08/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -2542,8 +2542,8 @@ const CNES_INFO = {
     "dtPortaria": "25/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -2554,8 +2554,8 @@ const CNES_INFO = {
     "dtPortaria": "25/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -2638,8 +2638,8 @@ const CNES_INFO = {
     "dtPortaria": "26/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    }
   ]
  },
@@ -3810,7 +3810,7 @@ const CNES_INFO = {
     "dtPortaria": "19/10/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -3822,7 +3822,7 @@ const CNES_INFO = {
     "dtPortaria": "19/10/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -3930,7 +3930,7 @@ const CNES_INFO = {
     "dtPortaria": "02/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -4115,8 +4115,8 @@ const CNES_INFO = {
     "dtPortaria": "15/05/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1901",
@@ -4127,8 +4127,8 @@ const CNES_INFO = {
     "dtPortaria": "15/05/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -4139,8 +4139,8 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -4151,8 +4151,8 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -4247,8 +4247,8 @@ const CNES_INFO = {
     "dtPortaria": "07/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3402",
@@ -4271,8 +4271,8 @@ const CNES_INFO = {
     "dtPortaria": "07/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -4290,8 +4290,8 @@ const CNES_INFO = {
  },
  "0010510": {
   "codigo_cnes": 10510,
-  "numero_cnpj_entidade": "00038174000143",
-  "nome_razao_social": "FUNDACAO UNIVERSIDADE DE BRASILIA",
+  "numero_cnpj_entidade": null,
+  "nome_razao_social": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES EBSERH",
   "nome_fantasia": "HOSPITAL UNIVERSITARIO DE BRASILIA",
   "natureza_organizacao_entidade": null,
   "tipo_gestao": "E",
@@ -4306,14 +4306,14 @@ const CNES_INFO = {
   "latitude_estabelecimento_decimo_grau": -15.771480871463751,
   "longitude_estabelecimento_decimo_grau": -47.873783111572266,
   "endereco_email_estabelecimento": null,
-  "numero_cnpj": "00038174000658",
+  "numero_cnpj": "15126437000305",
   "codigo_identificador_turno_atendimento": "06",
   "descricao_turno_atendimento": "ATENDIMENTO CONTINUO DE 24 HORAS/DIA (PLANTAO:INCLUI SABADOS, DOMINGOS E FERIADOS)",
   "estabelecimento_faz_atendimento_ambulatorial_sus": "SIM",
   "codigo_estabelecimento_saude": "5300100010510",
   "codigo_uf": 53,
   "codigo_municipio": 530010,
-  "descricao_natureza_juridica_estabelecimento": "1139",
+  "descricao_natureza_juridica_estabelecimento": "2011",
   "codigo_motivo_desabilitacao_estabelecimento": null,
   "estabelecimento_possui_centro_cirurgico": 1,
   "estabelecimento_possui_centro_obstetrico": 1,
@@ -4325,7 +4325,7 @@ const CNES_INFO = {
   "codigo_natureza_organizacao_unidade": null,
   "codigo_nivel_hierarquia_unidade": null,
   "codigo_esfera_administrativa_unidade": "E ",
-  "data_atualizacao": "2025-09-03",
+  "data_atualizacao": "2026-10-10",
   "habilitacoes": [
    {
     "coGrupo": "0101",
@@ -4588,8 +4588,8 @@ const CNES_INFO = {
     "dtPortaria": "20/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -4600,8 +4600,8 @@ const CNES_INFO = {
     "dtPortaria": "25/02/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2205",
@@ -4756,8 +4756,8 @@ const CNES_INFO = {
     "dtPortaria": "20/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -4768,8 +4768,8 @@ const CNES_INFO = {
     "dtPortaria": "26/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -4780,8 +4780,8 @@ const CNES_INFO = {
     "dtPortaria": "25/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -4929,8 +4929,8 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -4941,8 +4941,8 @@ const CNES_INFO = {
     "dtPortaria": "10/09/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -5037,8 +5037,8 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -5049,8 +5049,8 @@ const CNES_INFO = {
     "dtPortaria": "27/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -5145,8 +5145,8 @@ const CNES_INFO = {
     "dtPortaria": "05/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "02/10/2026"
    }
   ]
  },
@@ -5354,8 +5354,8 @@ const CNES_INFO = {
     "dtPortaria": "04/08/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -5366,8 +5366,8 @@ const CNES_INFO = {
     "dtPortaria": "04/08/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -5522,8 +5522,8 @@ const CNES_INFO = {
     "dtPortaria": "11/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -5534,8 +5534,8 @@ const CNES_INFO = {
     "dtPortaria": "29/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "31/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    }
   ]
  },
@@ -5635,8 +5635,8 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2208",
@@ -5803,8 +5803,8 @@ const CNES_INFO = {
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -5815,8 +5815,8 @@ const CNES_INFO = {
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3403",
@@ -5839,8 +5839,8 @@ const CNES_INFO = {
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "14/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -5964,8 +5964,8 @@ const CNES_INFO = {
     "dtPortaria": "04/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -5976,8 +5976,8 @@ const CNES_INFO = {
     "dtPortaria": "04/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2301",
@@ -6040,6 +6040,18 @@ const CNES_INFO = {
     "dtAtualizacao": "21/12/2022"
    },
    {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "10/2026",
+    "dtCompFim": "99/9999",
+    "portaria": "PORTARIA SMSA/SUS-BH Nº 0431/2026",
+    "dtPortaria": "01/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
+   },
+   {
     "coGrupo": "3801",
     "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
     "dtCompInicio": "03/2025",
@@ -6048,8 +6060,8 @@ const CNES_INFO = {
     "dtPortaria": "02/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    }
   ]
  },
@@ -6389,8 +6401,8 @@ const CNES_INFO = {
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -6401,8 +6413,8 @@ const CNES_INFO = {
     "dtPortaria": "27/06/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2203",
@@ -6713,8 +6725,8 @@ const CNES_INFO = {
     "dtPortaria": "01/09/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -6725,8 +6737,8 @@ const CNES_INFO = {
     "dtPortaria": "09/05/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -6809,8 +6821,8 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "06/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "28/09/2026"
    }
   ]
  },
@@ -6862,8 +6874,8 @@ const CNES_INFO = {
     "dtPortaria": "14/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "27/08/2026",
-    "dtAtualizacao": "12/06/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -6874,8 +6886,8 @@ const CNES_INFO = {
     "dtPortaria": "14/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "27/08/2026",
-    "dtAtualizacao": "12/06/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -6927,7 +6939,7 @@ const CNES_INFO = {
     "dtPortaria": "27/05/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -7117,7 +7129,7 @@ const CNES_INFO = {
     "dtPortaria": "03/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "17/07/2026"
    },
    {
@@ -7129,7 +7141,7 @@ const CNES_INFO = {
     "dtPortaria": "03/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "17/07/2026"
    },
    {
@@ -7254,7 +7266,7 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7266,7 +7278,7 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7374,7 +7386,7 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7386,7 +7398,7 @@ const CNES_INFO = {
     "dtPortaria": "18/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7458,7 +7470,7 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7470,7 +7482,7 @@ const CNES_INFO = {
     "dtPortaria": "26/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7506,7 +7518,7 @@ const CNES_INFO = {
     "dtPortaria": "15/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -7619,7 +7631,7 @@ const CNES_INFO = {
     "dtPortaria": "28/01/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "03/02/2026"
    },
    {
@@ -7732,8 +7744,8 @@ const CNES_INFO = {
     "dtPortaria": "03/12/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "29/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -7744,8 +7756,8 @@ const CNES_INFO = {
     "dtPortaria": "03/12/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "29/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "29/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -8042,8 +8054,8 @@ const CNES_INFO = {
     "dtPortaria": "05/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -8131,7 +8143,7 @@ const CNES_INFO = {
     "dtPortaria": "03/08/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -8179,7 +8191,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -8191,7 +8203,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "28/08/2026"
    }
   ]
@@ -8489,8 +8501,8 @@ const CNES_INFO = {
     "dtPortaria": "25/08/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -8501,8 +8513,8 @@ const CNES_INFO = {
     "dtPortaria": "25/08/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2001",
@@ -8717,8 +8729,8 @@ const CNES_INFO = {
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -8741,8 +8753,8 @@ const CNES_INFO = {
     "dtPortaria": "26/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -9166,8 +9178,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -9178,8 +9190,8 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2205",
@@ -9574,8 +9586,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -9694,8 +9706,8 @@ const CNES_INFO = {
     "dtPortaria": "28/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "18/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "3805",
@@ -10263,8 +10275,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -10275,8 +10287,8 @@ const CNES_INFO = {
     "dtPortaria": "20/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -10299,8 +10311,8 @@ const CNES_INFO = {
     "dtPortaria": "22/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "30/07/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -10460,7 +10472,7 @@ const CNES_INFO = {
     "dtPortaria": "04/11/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -10472,7 +10484,7 @@ const CNES_INFO = {
     "dtPortaria": "04/11/2010",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -10556,7 +10568,7 @@ const CNES_INFO = {
     "dtPortaria": "27/06/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -10568,7 +10580,7 @@ const CNES_INFO = {
     "dtPortaria": "20/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    },
    {
@@ -10580,7 +10592,7 @@ const CNES_INFO = {
     "dtPortaria": "12/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "14/07/2026"
    }
   ]
@@ -10741,8 +10753,8 @@ const CNES_INFO = {
     "dtPortaria": "23/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -10753,8 +10765,8 @@ const CNES_INFO = {
     "dtPortaria": "23/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -10861,8 +10873,8 @@ const CNES_INFO = {
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "30/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -11058,7 +11070,7 @@ const CNES_INFO = {
     "dtPortaria": "03/03/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11070,7 +11082,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11082,7 +11094,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11094,7 +11106,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11106,7 +11118,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11118,7 +11130,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11130,7 +11142,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11430,7 +11442,7 @@ const CNES_INFO = {
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11442,7 +11454,7 @@ const CNES_INFO = {
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11886,7 +11898,7 @@ const CNES_INFO = {
     "dtPortaria": "03/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -11958,7 +11970,7 @@ const CNES_INFO = {
     "dtPortaria": "07/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "18/08/2026"
    },
    {
@@ -12059,7 +12071,7 @@ const CNES_INFO = {
     "dtPortaria": "24/11/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -12071,7 +12083,7 @@ const CNES_INFO = {
     "dtPortaria": "24/11/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -12143,7 +12155,7 @@ const CNES_INFO = {
     "dtPortaria": "11/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    },
    {
@@ -12155,7 +12167,7 @@ const CNES_INFO = {
     "dtPortaria": "07/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "19/05/2026"
    }
   ]
@@ -12496,8 +12508,8 @@ const CNES_INFO = {
     "dtPortaria": "11/11/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -12508,8 +12520,8 @@ const CNES_INFO = {
     "dtPortaria": "11/11/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2101",
@@ -12808,8 +12820,8 @@ const CNES_INFO = {
     "dtPortaria": "03/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3002",
@@ -12892,8 +12904,8 @@ const CNES_INFO = {
     "dtPortaria": "19/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -13149,8 +13161,8 @@ const CNES_INFO = {
     "dtPortaria": "14/08/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -13161,8 +13173,8 @@ const CNES_INFO = {
     "dtPortaria": "04/09/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "2101",
@@ -13401,8 +13413,8 @@ const CNES_INFO = {
     "dtPortaria": "29/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -13413,8 +13425,8 @@ const CNES_INFO = {
     "dtPortaria": "15/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/08/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "3805",
@@ -13694,8 +13706,8 @@ const CNES_INFO = {
     "dtPortaria": "08/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -13706,8 +13718,8 @@ const CNES_INFO = {
     "dtPortaria": "08/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "2201",
@@ -13910,8 +13922,8 @@ const CNES_INFO = {
     "dtPortaria": "04/08/2020",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -13922,8 +13934,8 @@ const CNES_INFO = {
     "dtPortaria": "23/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "3202",
@@ -13946,8 +13958,8 @@ const CNES_INFO = {
     "dtPortaria": "23/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
-    "dtAtualizacao": "14/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "07/10/2026"
    },
    {
     "coGrupo": "3807",
@@ -14676,8 +14688,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -14688,8 +14700,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -14700,8 +14712,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -14712,8 +14724,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -14724,8 +14736,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -14736,8 +14748,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -14748,8 +14760,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -14916,8 +14928,8 @@ const CNES_INFO = {
     "dtPortaria": "30/03/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -14928,8 +14940,8 @@ const CNES_INFO = {
     "dtPortaria": "30/03/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2202",
@@ -15120,8 +15132,8 @@ const CNES_INFO = {
     "dtPortaria": "06/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -15132,8 +15144,8 @@ const CNES_INFO = {
     "dtPortaria": "18/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3507",
@@ -15168,8 +15180,8 @@ const CNES_INFO = {
     "dtPortaria": "04/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "03/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -15293,8 +15305,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -15305,8 +15317,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -15317,8 +15329,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -15329,8 +15341,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -15341,8 +15353,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -15353,8 +15365,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -15365,8 +15377,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -15737,8 +15749,8 @@ const CNES_INFO = {
     "dtPortaria": "04/06/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -15749,8 +15761,8 @@ const CNES_INFO = {
     "dtPortaria": "26/08/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -15773,8 +15785,8 @@ const CNES_INFO = {
     "dtPortaria": "20/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "05/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "21/09/2026"
    },
    {
     "coGrupo": "3805",
@@ -15850,7 +15862,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15862,7 +15874,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15874,7 +15886,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15886,7 +15898,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15898,7 +15910,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15910,7 +15922,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -15994,7 +16006,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -16066,7 +16078,7 @@ const CNES_INFO = {
     "dtPortaria": "14/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -16078,7 +16090,7 @@ const CNES_INFO = {
     "dtPortaria": "29/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -16102,7 +16114,7 @@ const CNES_INFO = {
     "dtPortaria": "27/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "01/07/2026"
    },
    {
@@ -16287,7 +16299,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -16299,7 +16311,7 @@ const CNES_INFO = {
     "dtPortaria": "30/11/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -16359,7 +16371,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -16371,7 +16383,7 @@ const CNES_INFO = {
     "dtPortaria": "27/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    },
    {
@@ -16383,7 +16395,7 @@ const CNES_INFO = {
     "dtPortaria": "09/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "27/08/2026"
    }
   ]
@@ -16460,7 +16472,7 @@ const CNES_INFO = {
     "dtPortaria": "04/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -16472,7 +16484,7 @@ const CNES_INFO = {
     "dtPortaria": "04/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -16484,7 +16496,7 @@ const CNES_INFO = {
     "dtPortaria": "11/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    },
    {
@@ -16496,7 +16508,7 @@ const CNES_INFO = {
     "dtPortaria": "25/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "02/06/2026"
    }
   ]
@@ -16765,8 +16777,8 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2013",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -16777,8 +16789,8 @@ const CNES_INFO = {
     "dtPortaria": "31/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -16789,8 +16801,8 @@ const CNES_INFO = {
     "dtPortaria": "21/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -16866,8 +16878,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -16878,8 +16890,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -16926,8 +16938,8 @@ const CNES_INFO = {
     "dtPortaria": "30/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "21/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -17015,8 +17027,8 @@ const CNES_INFO = {
     "dtPortaria": "20/04/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "25/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -17027,8 +17039,8 @@ const CNES_INFO = {
     "dtPortaria": "20/04/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "25/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -17200,8 +17212,8 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "04/06/2026",
-    "dtAtualizacao": "08/05/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2501",
@@ -17260,8 +17272,8 @@ const CNES_INFO = {
     "dtPortaria": "18/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "04/06/2026",
-    "dtAtualizacao": "08/05/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -17349,8 +17361,8 @@ const CNES_INFO = {
     "dtPortaria": "23/02/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -17421,8 +17433,8 @@ const CNES_INFO = {
     "dtPortaria": "28/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -17510,8 +17522,8 @@ const CNES_INFO = {
     "dtPortaria": "07/04/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -17522,8 +17534,8 @@ const CNES_INFO = {
     "dtPortaria": "07/04/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -17606,8 +17618,8 @@ const CNES_INFO = {
     "dtPortaria": "07/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -17755,8 +17767,8 @@ const CNES_INFO = {
     "dtPortaria": "13/03/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -17767,8 +17779,8 @@ const CNES_INFO = {
     "dtPortaria": "11/08/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -17827,8 +17839,8 @@ const CNES_INFO = {
     "dtPortaria": "29/07/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -17839,8 +17851,8 @@ const CNES_INFO = {
     "dtPortaria": "23/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -17940,7 +17952,7 @@ const CNES_INFO = {
     "dtPortaria": "13/05/2022",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "05/03/2026"
    },
    {
@@ -18065,7 +18077,7 @@ const CNES_INFO = {
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -18113,7 +18125,7 @@ const CNES_INFO = {
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -18125,7 +18137,7 @@ const CNES_INFO = {
     "dtPortaria": "01/04/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -18149,7 +18161,7 @@ const CNES_INFO = {
     "dtPortaria": "07/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -18161,7 +18173,7 @@ const CNES_INFO = {
     "dtPortaria": "07/05/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "25/08/2026"
    },
    {
@@ -18226,7 +18238,7 @@ const CNES_INFO = {
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18238,7 +18250,7 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18250,7 +18262,7 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18262,7 +18274,7 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18274,7 +18286,7 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18286,7 +18298,7 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18298,7 +18310,7 @@ const CNES_INFO = {
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18322,7 +18334,7 @@ const CNES_INFO = {
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18334,7 +18346,7 @@ const CNES_INFO = {
     "dtPortaria": "21/05/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18358,7 +18370,7 @@ const CNES_INFO = {
     "dtPortaria": "18/06/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18370,7 +18382,7 @@ const CNES_INFO = {
     "dtPortaria": "23/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18382,7 +18394,7 @@ const CNES_INFO = {
     "dtPortaria": "08/10/2025",
     "nuLeitos": "0",
     "tpOrigem": null,
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    },
    {
@@ -18394,7 +18406,7 @@ const CNES_INFO = {
     "dtPortaria": "27/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "11/09/2026"
    }
   ]
@@ -18627,7 +18639,7 @@ const CNES_INFO = {
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -18639,7 +18651,7 @@ const CNES_INFO = {
     "dtPortaria": "31/03/2009",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -18759,7 +18771,7 @@ const CNES_INFO = {
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -18771,7 +18783,7 @@ const CNES_INFO = {
     "dtPortaria": "19/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    },
    {
@@ -18843,7 +18855,7 @@ const CNES_INFO = {
     "dtPortaria": "09/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "08/07/2026"
    }
   ]
@@ -18932,7 +18944,7 @@ const CNES_INFO = {
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -18944,7 +18956,7 @@ const CNES_INFO = {
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -18980,7 +18992,7 @@ const CNES_INFO = {
     "dtPortaria": "15/01/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -18992,7 +19004,7 @@ const CNES_INFO = {
     "dtPortaria": "27/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    },
    {
@@ -19004,7 +19016,7 @@ const CNES_INFO = {
     "dtPortaria": "27/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "03/09/2026"
    }
   ]
@@ -19105,8 +19117,8 @@ const CNES_INFO = {
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "07/07/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -19117,8 +19129,8 @@ const CNES_INFO = {
     "dtPortaria": "23/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "07/07/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -19218,7 +19230,7 @@ const CNES_INFO = {
     "dtPortaria": "12/12/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -19230,7 +19242,7 @@ const CNES_INFO = {
     "dtPortaria": "27/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -19266,7 +19278,7 @@ const CNES_INFO = {
     "dtPortaria": "27/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -19278,7 +19290,7 @@ const CNES_INFO = {
     "dtPortaria": "04/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "17/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    }
   ]
@@ -19355,7 +19367,7 @@ const CNES_INFO = {
     "dtPortaria": "28/02/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -19367,7 +19379,7 @@ const CNES_INFO = {
     "dtPortaria": "28/02/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -19391,7 +19403,7 @@ const CNES_INFO = {
     "dtPortaria": "12/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -19403,7 +19415,7 @@ const CNES_INFO = {
     "dtPortaria": "19/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    }
   ]
@@ -19768,7 +19780,7 @@ const CNES_INFO = {
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -19780,7 +19792,7 @@ const CNES_INFO = {
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -20044,7 +20056,7 @@ const CNES_INFO = {
     "dtPortaria": "31/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -20056,7 +20068,7 @@ const CNES_INFO = {
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -20128,7 +20140,7 @@ const CNES_INFO = {
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "14/08/2026"
    },
    {
@@ -20289,7 +20301,7 @@ const CNES_INFO = {
     "dtPortaria": "19/01/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -20301,7 +20313,7 @@ const CNES_INFO = {
     "dtPortaria": "19/01/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "28/08/2026"
    },
    {
@@ -20474,7 +20486,7 @@ const CNES_INFO = {
     "dtPortaria": "23/04/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    },
    {
@@ -20534,7 +20546,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    },
    {
@@ -20558,7 +20570,7 @@ const CNES_INFO = {
     "dtPortaria": "21/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "31/08/2026"
    }
   ]
@@ -20779,7 +20791,7 @@ const CNES_INFO = {
     "dtPortaria": "10/12/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "15/09/2026"
    },
    {
@@ -20791,7 +20803,7 @@ const CNES_INFO = {
     "dtPortaria": "20/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "15/09/2026"
    }
   ]
@@ -20868,7 +20880,7 @@ const CNES_INFO = {
     "dtPortaria": "04/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -20880,7 +20892,7 @@ const CNES_INFO = {
     "dtPortaria": "04/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -20940,7 +20952,7 @@ const CNES_INFO = {
     "dtPortaria": "07/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    },
    {
@@ -20952,7 +20964,7 @@ const CNES_INFO = {
     "dtPortaria": "29/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/06/2026"
    }
   ]
@@ -21029,8 +21041,8 @@ const CNES_INFO = {
     "dtPortaria": "12/11/2008",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "10/08/2026",
-    "dtAtualizacao": "07/08/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -21089,8 +21101,8 @@ const CNES_INFO = {
     "dtPortaria": "07/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "10/08/2026",
-    "dtAtualizacao": "07/08/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -21214,7 +21226,7 @@ const CNES_INFO = {
     "dtPortaria": "10/12/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "22/05/2026"
    }
   ]
@@ -21399,7 +21411,7 @@ const CNES_INFO = {
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -21411,7 +21423,7 @@ const CNES_INFO = {
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -21495,7 +21507,7 @@ const CNES_INFO = {
     "dtPortaria": "05/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    },
    {
@@ -21519,7 +21531,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "03/08/2026"
    }
   ]
@@ -21620,7 +21632,7 @@ const CNES_INFO = {
     "dtPortaria": "24/07/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "04/08/2026"
    },
    {
@@ -21704,7 +21716,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "04/08/2026"
    }
   ]
@@ -21793,8 +21805,8 @@ const CNES_INFO = {
     "dtPortaria": "19/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "22/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -21841,8 +21853,8 @@ const CNES_INFO = {
     "dtPortaria": "19/01/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "22/09/2026"
    }
   ]
  },
@@ -21930,7 +21942,7 @@ const CNES_INFO = {
     "dtPortaria": "04/01/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "01/12/2025"
    },
    {
@@ -22043,7 +22055,7 @@ const CNES_INFO = {
     "dtPortaria": "20/09/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "25/11/2025"
    },
    {
@@ -22353,7 +22365,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22365,7 +22377,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22377,7 +22389,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22389,7 +22401,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22401,7 +22413,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22413,7 +22425,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22425,7 +22437,7 @@ const CNES_INFO = {
     "dtPortaria": "12/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22449,7 +22461,7 @@ const CNES_INFO = {
     "dtPortaria": "07/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    },
    {
@@ -22461,7 +22473,7 @@ const CNES_INFO = {
     "dtPortaria": "13/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "28/07/2026"
    }
   ]
@@ -22742,7 +22754,7 @@ const CNES_INFO = {
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -22754,7 +22766,7 @@ const CNES_INFO = {
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -22982,7 +22994,7 @@ const CNES_INFO = {
     "dtPortaria": "08/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -22994,7 +23006,7 @@ const CNES_INFO = {
     "dtPortaria": "08/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    },
    {
@@ -23066,7 +23078,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/05/2026"
    }
   ]
@@ -23215,7 +23227,7 @@ const CNES_INFO = {
     "dtPortaria": "04/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "09/07/2026"
    },
    {
@@ -23227,7 +23239,7 @@ const CNES_INFO = {
     "dtPortaria": "15/07/2019",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "09/07/2026"
    },
    {
@@ -23352,7 +23364,7 @@ const CNES_INFO = {
     "dtPortaria": "29/12/2014",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    },
    {
@@ -23364,7 +23376,7 @@ const CNES_INFO = {
     "dtPortaria": "06/05/2013",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    },
    {
@@ -23412,7 +23424,7 @@ const CNES_INFO = {
     "dtPortaria": "25/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "06/10/2026",
     "dtAtualizacao": "27/07/2026"
    }
   ]
@@ -23609,8 +23621,8 @@ const CNES_INFO = {
     "dtPortaria": "05/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -23765,8 +23777,8 @@ const CNES_INFO = {
     "dtPortaria": "14/03/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -23777,8 +23789,8 @@ const CNES_INFO = {
     "dtPortaria": "05/11/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "03/09/2026"
    },
    {
     "coGrupo": "3807",
@@ -23878,7 +23890,7 @@ const CNES_INFO = {
     "dtPortaria": "20/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -23938,7 +23950,7 @@ const CNES_INFO = {
     "dtPortaria": "04/05/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -24027,8 +24039,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -24039,8 +24051,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -24051,8 +24063,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -24063,8 +24075,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -24075,8 +24087,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1101",
@@ -24183,8 +24195,8 @@ const CNES_INFO = {
     "dtPortaria": "02/03/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -24195,8 +24207,8 @@ const CNES_INFO = {
     "dtPortaria": "02/03/2015",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -24255,8 +24267,8 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -24267,8 +24279,8 @@ const CNES_INFO = {
     "dtPortaria": "21/07/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    },
    {
     "coGrupo": "3202",
@@ -24291,8 +24303,8 @@ const CNES_INFO = {
     "dtPortaria": "17/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "28/09/2026",
+    "dtAtualizacao": "25/09/2026"
    }
   ]
  },
@@ -24404,8 +24416,8 @@ const CNES_INFO = {
     "dtPortaria": "13/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "16/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2603",
@@ -24454,6 +24466,30 @@ const CNES_INFO = {
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "10/04/2013",
     "dtAtualizacao": "27/12/2016"
+   },
+   {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
+   },
+   {
+    "coGrupo": "3801",
+    "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 00402025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -24517,7 +24553,7 @@ const CNES_INFO = {
     "dtPortaria": "04/01/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "10/12/2025"
    },
    {
@@ -24577,7 +24613,7 @@ const CNES_INFO = {
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "10/12/2025"
    }
   ]
@@ -24786,7 +24822,7 @@ const CNES_INFO = {
     "dtPortaria": "18/08/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -24798,7 +24834,7 @@ const CNES_INFO = {
     "dtPortaria": "18/08/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -24954,7 +24990,7 @@ const CNES_INFO = {
     "dtPortaria": "30/10/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -24966,7 +25002,7 @@ const CNES_INFO = {
     "dtPortaria": "30/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -24978,7 +25014,7 @@ const CNES_INFO = {
     "dtPortaria": "31/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -25067,7 +25103,7 @@ const CNES_INFO = {
     "dtPortaria": "10/05/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -25079,7 +25115,7 @@ const CNES_INFO = {
     "dtPortaria": "10/05/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -25175,7 +25211,7 @@ const CNES_INFO = {
     "dtPortaria": "09/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    },
    {
@@ -25187,7 +25223,7 @@ const CNES_INFO = {
     "dtPortaria": "08/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -25300,8 +25336,8 @@ const CNES_INFO = {
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "1902",
@@ -25312,8 +25348,8 @@ const CNES_INFO = {
     "dtPortaria": "24/09/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "2501",
@@ -25396,8 +25432,8 @@ const CNES_INFO = {
     "dtPortaria": "10/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    },
    {
     "coGrupo": "3002",
@@ -25444,8 +25480,8 @@ const CNES_INFO = {
     "dtPortaria": "20/12/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "05/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "08/10/2026"
    }
   ]
  },
@@ -25754,7 +25790,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "20/09/2026",
     "dtAtualizacao": "03/07/2026"
    },
    {
@@ -25766,7 +25802,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "20/09/2026",
     "dtAtualizacao": "03/07/2026"
    },
    {
@@ -25814,7 +25850,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "15/09/2026",
+    "dtAtualizacaoOrigem": "20/09/2026",
     "dtAtualizacao": "03/07/2026"
    },
    {
@@ -25891,7 +25927,7 @@ const CNES_INFO = {
     "dtPortaria": "08/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -25963,7 +25999,7 @@ const CNES_INFO = {
     "dtPortaria": "03/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    },
    {
@@ -25975,7 +26011,7 @@ const CNES_INFO = {
     "dtPortaria": "09/08/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "28/09/2026",
     "dtAtualizacao": "02/07/2026"
    }
   ]
@@ -26597,7 +26633,7 @@ const CNES_INFO = {
     "dtPortaria": "28/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/08/2026"
    },
    {
@@ -26633,7 +26669,7 @@ const CNES_INFO = {
     "dtPortaria": "11/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "26/08/2026"
    }
   ]
@@ -26698,7 +26734,7 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26710,7 +26746,7 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26830,7 +26866,7 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26842,7 +26878,7 @@ const CNES_INFO = {
     "dtPortaria": "07/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26974,7 +27010,7 @@ const CNES_INFO = {
     "dtPortaria": "11/12/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26986,7 +27022,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    },
    {
@@ -26998,7 +27034,7 @@ const CNES_INFO = {
     "dtPortaria": "08/01/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "23/06/2026"
    }
   ]
@@ -27087,7 +27123,7 @@ const CNES_INFO = {
     "dtPortaria": "30/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "20/08/2026"
    },
    {
@@ -27284,7 +27320,7 @@ const CNES_INFO = {
     "dtPortaria": "02/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    },
    {
@@ -27296,7 +27332,7 @@ const CNES_INFO = {
     "dtPortaria": "02/09/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    },
    {
@@ -27368,7 +27404,7 @@ const CNES_INFO = {
     "dtPortaria": "11/04/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "02/09/2026"
    }
   ]
@@ -27445,8 +27481,8 @@ const CNES_INFO = {
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -27457,8 +27493,8 @@ const CNES_INFO = {
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -27481,8 +27517,8 @@ const CNES_INFO = {
     "dtPortaria": "23/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
-    "dtAtualizacao": "23/02/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "17/09/2026"
    }
   ]
  },
@@ -27582,8 +27618,8 @@ const CNES_INFO = {
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -27594,8 +27630,8 @@ const CNES_INFO = {
     "dtPortaria": "10/10/2007",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -27702,8 +27738,8 @@ const CNES_INFO = {
     "dtPortaria": "01/11/2006",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -27714,8 +27750,8 @@ const CNES_INFO = {
     "dtPortaria": "20/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -27726,8 +27762,8 @@ const CNES_INFO = {
     "dtPortaria": "22/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "24/11/2025"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -27803,7 +27839,7 @@ const CNES_INFO = {
     "dtPortaria": "24/02/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -27815,7 +27851,7 @@ const CNES_INFO = {
     "dtPortaria": "28/03/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -27863,7 +27899,7 @@ const CNES_INFO = {
     "dtPortaria": "19/04/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    },
    {
@@ -27887,7 +27923,7 @@ const CNES_INFO = {
     "dtPortaria": "20/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "03/10/2026",
     "dtAtualizacao": "05/08/2026"
    }
   ]
@@ -27952,7 +27988,7 @@ const CNES_INFO = {
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "05/03/2026"
    },
    {
@@ -27964,7 +28000,7 @@ const CNES_INFO = {
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "05/03/2026"
    }
   ]
@@ -28281,8 +28317,8 @@ const CNES_INFO = {
     "dtPortaria": "02/05/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2902",
@@ -28293,8 +28329,8 @@ const CNES_INFO = {
     "dtPortaria": "26/10/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3801",
@@ -28305,8 +28341,8 @@ const CNES_INFO = {
     "dtPortaria": "23/07/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "07/09/2026",
-    "dtAtualizacao": "02/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "3805",
@@ -28418,8 +28454,8 @@ const CNES_INFO = {
     "dtPortaria": "23/10/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    },
    {
     "coGrupo": "2601",
@@ -28478,8 +28514,8 @@ const CNES_INFO = {
     "dtPortaria": "07/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "06/10/2026"
    }
   ]
  },
@@ -29241,8 +29277,8 @@ const CNES_INFO = {
     "dtPortaria": "23/04/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "03/06/2026"
    },
    {
     "coGrupo": "1902",
@@ -29253,8 +29289,8 @@ const CNES_INFO = {
     "dtPortaria": "23/04/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "03/09/2026",
-    "dtAtualizacao": "01/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "03/06/2026"
    },
    {
     "coGrupo": "2601",
@@ -29354,8 +29390,8 @@ const CNES_INFO = {
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -29366,8 +29402,8 @@ const CNES_INFO = {
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -29378,8 +29414,8 @@ const CNES_INFO = {
     "dtPortaria": "06/10/2011",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1301",
@@ -29426,8 +29462,8 @@ const CNES_INFO = {
     "dtPortaria": "13/03/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -29438,8 +29474,8 @@ const CNES_INFO = {
     "dtPortaria": "13/03/2012",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -29522,8 +29558,8 @@ const CNES_INFO = {
     "dtPortaria": "28/08/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "31/07/2026",
-    "dtAtualizacao": "24/07/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "23/09/2026"
    }
   ]
  },
@@ -29976,8 +30012,8 @@ const CNES_INFO = {
     "dtPortaria": "10/05/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -29988,8 +30024,8 @@ const CNES_INFO = {
     "dtPortaria": "20/05/2021",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2610",
@@ -30024,8 +30060,8 @@ const CNES_INFO = {
     "dtPortaria": "28/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "17/09/2026"
+    "dtAtualizacaoOrigem": "27/09/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -30538,8 +30574,8 @@ const CNES_INFO = {
     "dtPortaria": "02/02/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "12/08/2026"
+    "dtAtualizacaoOrigem": "06/10/2026",
+    "dtAtualizacao": "01/10/2026"
    },
    {
     "coGrupo": "2611",
@@ -30651,7 +30687,7 @@ const CNES_INFO = {
     "dtPortaria": "20/06/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "08/09/2026"
    }
   ]
@@ -30716,8 +30752,8 @@ const CNES_INFO = {
     "dtPortaria": "23/07/2024",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "15/09/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2611",
@@ -30829,8 +30865,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0902",
@@ -30841,8 +30877,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0903",
@@ -30853,8 +30889,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0904",
@@ -30865,8 +30901,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0905",
@@ -30877,8 +30913,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0906",
@@ -30889,8 +30925,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0907",
@@ -30901,8 +30937,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "0908",
@@ -30937,8 +30973,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "1902",
@@ -30949,8 +30985,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2301",
@@ -31045,8 +31081,8 @@ const CNES_INFO = {
     "dtPortaria": "22/09/2017",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "2902",
@@ -31057,8 +31093,8 @@ const CNES_INFO = {
     "dtPortaria": "17/09/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -31069,8 +31105,8 @@ const CNES_INFO = {
     "dtPortaria": "20/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "21/09/2026",
-    "dtAtualizacao": "24/08/2026"
+    "dtAtualizacaoOrigem": "09/10/2026",
+    "dtAtualizacao": "24/09/2026"
    }
   ]
  },
@@ -31355,8 +31391,8 @@ const CNES_INFO = {
     "dtPortaria": "07/06/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "04/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -31468,7 +31504,7 @@ const CNES_INFO = {
     "dtPortaria": "01/10/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "21/08/2026"
    }
   ]
@@ -31521,7 +31557,7 @@ const CNES_INFO = {
     "dtPortaria": "02/10/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    },
    {
@@ -31533,7 +31569,7 @@ const CNES_INFO = {
     "dtPortaria": "26/01/2018",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    },
    {
@@ -31605,7 +31641,7 @@ const CNES_INFO = {
     "dtPortaria": "18/03/2020",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "27/09/2026",
     "dtAtualizacao": "07/08/2026"
    }
   ]
@@ -31658,7 +31694,7 @@ const CNES_INFO = {
     "dtPortaria": "24/02/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -31670,7 +31706,7 @@ const CNES_INFO = {
     "dtPortaria": "24/02/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    },
    {
@@ -31706,7 +31742,7 @@ const CNES_INFO = {
     "dtPortaria": "07/04/2016",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "09/10/2026",
     "dtAtualizacao": "10/09/2026"
    }
   ]
@@ -31771,8 +31807,8 @@ const CNES_INFO = {
     "dtPortaria": "13/11/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "11/09/2026"
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    },
    {
     "coGrupo": "2102",
@@ -31881,6 +31917,30 @@ const CNES_INFO = {
     "tpOrigem": null,
     "dtAtualizacaoOrigem": "01/06/2017",
     "dtAtualizacao": "01/06/2017"
+   },
+   {
+    "coGrupo": "2902",
+    "dsGrupo": "PMAE - COMPONENTE CIRURGIAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
+   },
+   {
+    "coGrupo": "3801",
+    "dsGrupo": "PROGRAMA MAIS ACESSO A ESPECIALISTAS",
+    "dtCompInicio": "09/2026",
+    "dtCompFim": "12/2026",
+    "portaria": "CIB 004/2025",
+    "dtPortaria": "05/10/2026",
+    "nuLeitos": "0",
+    "tpOrigem": "P",
+    "dtAtualizacaoOrigem": "08/10/2026",
+    "dtAtualizacao": "05/10/2026"
    }
   ]
  },
@@ -32009,7 +32069,7 @@ const CNES_INFO = {
     "dtPortaria": "27/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "30/07/2026"
    },
    {
@@ -32021,7 +32081,7 @@ const CNES_INFO = {
     "dtPortaria": "27/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "30/07/2026"
    },
    {
@@ -32081,7 +32141,7 @@ const CNES_INFO = {
     "dtPortaria": "27/03/2026",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "30/07/2026"
    },
    {
@@ -32117,7 +32177,7 @@ const CNES_INFO = {
     "dtPortaria": "10/03/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "11/09/2026",
+    "dtAtualizacaoOrigem": "04/10/2026",
     "dtAtualizacao": "30/07/2026"
    }
   ]
@@ -32218,7 +32278,7 @@ const CNES_INFO = {
     "dtPortaria": "21/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "19/06/2026"
    },
    {
@@ -32230,7 +32290,7 @@ const CNES_INFO = {
     "dtPortaria": "21/07/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
+    "dtAtualizacaoOrigem": "08/10/2026",
     "dtAtualizacao": "19/06/2026"
    },
    {
@@ -32420,8 +32480,8 @@ const CNES_INFO = {
     "dtPortaria": "05/09/2023",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "2601",
@@ -32468,8 +32528,8 @@ const CNES_INFO = {
     "dtPortaria": "10/01/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    },
    {
     "coGrupo": "3801",
@@ -32480,8 +32540,8 @@ const CNES_INFO = {
     "dtPortaria": "04/02/2025",
     "nuLeitos": "0",
     "tpOrigem": "P",
-    "dtAtualizacaoOrigem": "20/09/2026",
-    "dtAtualizacao": "10/04/2026"
+    "dtAtualizacaoOrigem": "04/10/2026",
+    "dtAtualizacao": "28/09/2026"
    }
   ]
  }
