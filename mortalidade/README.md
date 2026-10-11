@@ -56,7 +56,7 @@ Sobral (CE, 3021114) e Santa Casa de Franca (SP, 2705982). Mesmas regras de cál
 | O quê | Como |
 |---|---|
 | Indicadores (novo recálculo do SIM/SINASC) | rodar o pipeline em `../Pipeline_Python` (gera `indicadores_recalculados.csv`) e depois `py build_dados.py` |
-| Ficha CNES + habilitações | `py atualizar_cnes.py` |
+| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Mortalidade_2026.html` e `index.html` e espelha esta pasta na subpasta `mortalidade/` do repositório Indicadores_Brasil) |
 
 `build_dados.py` lê, somente para leitura, o painel NV local (`Pojeto Apresentações NV_2026/Painel_2026_Novo`):

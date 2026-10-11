@@ -6,9 +6,30 @@ Publicação (desde 11/10/2026): os três painéis e a página principal estão 
 Indicadores_Brasil (clone em Documentos/Página principal). Ao final, esta pasta é espelhada na subpasta
 nascimentos/ desse repositório; publicar = commit + push de lá. O repositório antigo Indicadores_NV só
 redireciona para os novos endereços."""
-import base64, os, shutil
+import base64, json, os, shutil
+from datetime import date
 
 BASE = os.path.dirname(os.path.abspath(__file__))
+
+# ---------------------------------------------------------------------------------------------
+# CNES (desde 11/10/2026): a ficha CNES é atualizada na nuvem (GitHub Actions, workflow "Atualizar CNES"),
+# direto no repositório. Aqui só resgatamos o cnes_dados.json do repositório se ele for mais novo que o local.
+# ---------------------------------------------------------------------------------------------
+REPO = os.path.join(os.path.dirname(os.path.dirname(BASE)), "Página principal")
+DESTINO = os.path.join(REPO, "nascimentos")
+
+
+def _data_cnes(p):
+    try:
+        return json.load(open(p, encoding="utf-8")).get("_atualizado_em", "")
+    except Exception:
+        return ""
+
+
+_cnes_repo, _cnes_local = os.path.join(DESTINO, "cnes_dados.json"), os.path.join(BASE, "cnes_dados.json")
+if os.path.exists(_cnes_repo) and _data_cnes(_cnes_repo) > _data_cnes(_cnes_local):
+    shutil.copy2(_cnes_repo, _cnes_local)
+    print(f"cnes_dados.json resgatado do repositório (atualizado em {_data_cnes(_cnes_local)})")
 html = open(os.path.join(BASE, "painel_base.html"), encoding="utf-8").read()
 dados = open(os.path.join(BASE, "dados_nv2026.js"), encoding="utf-8").read()
 app = open(os.path.join(BASE, "painel_app.js"), encoding="utf-8").read()
@@ -85,6 +106,38 @@ def espelhar(origem, destino):
                     pass  # pasta vazia presa pelo OneDrive; o git ignora pastas vazias
     return copiados, removidos
 
+
+# ---------------------------------------------------------------------------------------------
+# Carimbo de atualização (lido por montar_pagina.py, que o mostra sob o botão do painel, e por verificar_site.py).
+# dados_gerados_em só é recalculado localmente (na nuvem o git não preserva datas de arquivo).
+# ---------------------------------------------------------------------------------------------
+def _contar_unidades():
+    try:
+        js = open(os.path.join(BASE, "dados_nv2026.js"), encoding="utf-8").read()
+        i = js.index("const DADOS = ") + len("const DADOS = ")
+        return len(json.JSONDecoder().raw_decode(js, i)[0].get("maternidades", []))
+    except Exception:
+        return None
+
+
+_carimbo_path = os.path.join(BASE, "atualizacao.json")
+try:
+    _anterior = json.load(open(_carimbo_path, encoding="utf-8"))
+except Exception:
+    _anterior = {}
+_dados_path = os.path.join(BASE, "dados_nv2026.js")
+_local = os.path.isdir(os.path.join(REPO, ".git"))
+carimbo = {
+    "painel": "nascimentos",
+    "montado_em": date.today().isoformat(),
+    "dados_gerados_em": (date.fromtimestamp(os.path.getmtime(_dados_path)).isoformat()
+                         if _local and os.path.exists(_dados_path) else _anterior.get("dados_gerados_em")),
+    "cnes_atualizado_em": _data_cnes(os.path.join(BASE, "cnes_dados.json")) or None,
+    "unidades": _contar_unidades(),
+}
+with open(_carimbo_path, "w", encoding="utf-8") as fh:
+    json.dump(carimbo, fh, ensure_ascii=False, indent=1)
+print(f"carimbo: montado em {carimbo['montado_em']}, dados de {carimbo['dados_gerados_em']}, CNES de {carimbo['cnes_atualizado_em']}, {carimbo['unidades']} unidades")
 
 if os.path.isdir(os.path.join(REPO, ".git")):
     c, r = espelhar(BASE, DESTINO)

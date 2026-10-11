@@ -1,0 +1,77 @@
+name: Atualizar CNES
+
+# Atualiza a ficha CNES e as habilitações das maternidades nos três painéis, remonta os painéis e a
+# página principal, verifica e, se algo mudou, faz commit e push (o GitHub Pages publica em seguida).
+# Agendado para 1º de junho e 1º de dezembro; também pode ser disparado à mão na aba Actions.
+# Regra: o CNES é atualizado SÓ aqui; o montar_painel.py local resgata o cnes_dados.json do repositório.
+on:
+  schedule:
+    - cron: "0 9 1 6,12 *"     # 09:00 UTC de 1º de junho e 1º de dezembro
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cnes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Guardar as contagens atuais (para não publicar uma atualização que perdeu fichas)
+        run: |
+          python - <<'EOF'
+          import json
+          antes = {}
+          for p in ["nascimentos", "internacao", "mortalidade"]:
+              d = json.load(open(f"{p}/cnes_dados.json", encoding="utf-8"))
+              fichas = [v for k, v in d.items() if not k.startswith("_")]
+              antes[p] = {"fichas": len(fichas), "com_hab": sum(1 for v in fichas if (v or {}).get("habilitacoes"))}
+          json.dump(antes, open("/tmp/cnes_antes.json", "w"))
+          print(antes)
+          EOF
+
+      - name: Atualizar fichas CNES e remontar os painéis
+        run: |
+          for p in nascimentos internacao mortalidade; do
+            echo "=== $p"
+            (cd "$p" && python atualizar_cnes.py && python montar_painel.py)
+          done
+
+      - name: Conferir que nenhuma ficha ou habilitação se perdeu
+        run: |
+          python - <<'EOF'
+          import json, sys
+          antes = json.load(open("/tmp/cnes_antes.json"))
+          erro = False
+          for p, a in antes.items():
+              d = json.load(open(f"{p}/cnes_dados.json", encoding="utf-8"))
+              fichas = [v for k, v in d.items() if not k.startswith("_")]
+              depois = {"fichas": len(fichas), "com_hab": sum(1 for v in fichas if (v or {}).get("habilitacoes"))}
+              print(p, "antes", a, "depois", depois)
+              if depois["fichas"] < a["fichas"] or depois["com_hab"] < 0.9 * a["com_hab"]:
+                  print(f"  {p}: perdeu fichas ou habilitações; a API do CNES deve ter falhado. Nada será publicado.")
+                  erro = True
+          sys.exit(1 if erro else 0)
+          EOF
+
+      - name: Remontar a página principal (carimbos de atualização)
+        run: python montar_pagina.py
+
+      - name: Verificar o site
+        run: python verificar_site.py
+
+      - name: Commit e push se algo mudou
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Nada mudou nas fichas CNES."
+            exit 0
+          fi
+          git add -A
+          git commit -m "CNES atualizado em $(date -u +%Y-%m-%d) pelo GitHub Actions"
+          git push

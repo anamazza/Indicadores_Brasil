@@ -31,7 +31,7 @@ via serviço do site do CNES) · SIH/AIH 2025 · malhas de macrorregiões e regi
 
 | O quê | Como |
 |---|---|
-| Ficha CNES + habilitações | `py atualizar_cnes.py` (agendado no Windows para 1º jun/dez) |
+| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Comparativo 2019×2024 | `py build_comparativo.py "planilha_macro.xlsx" "planilha_regiao.xlsx"` |
 | Dados SINASC das unidades | `py build_dados.py` (extrai do painel anterior + coordenadas; a lista `ADICIONAIS` registra as planilhas das unidades acrescentadas depois; `blocos_adicionais.py` monta o bloco de perfil das mães a partir do JSON v3 das planilhas de indicadores, `carregar_v3`, e dos JSON das unidades avulsas, `carregar`; as planilhas xlsx de 31/08 servem só de molde) |
 

@@ -74,6 +74,8 @@ a{color:var(--verde-fiocruz)}
 .painel .circulo svg{width:36px; height:36px; stroke:#FFF; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
 .painel .rotulo{font-weight:800; font-size:1rem; line-height:1.25; text-shadow:0 1px 6px rgba(0,0,0,.45); text-wrap:balance}
 .painel .sub{display:block; font-weight:600; font-size:.74rem; color:#C9DCD0; margin-top:.15rem; letter-spacing:.02em}
+.painel .data{display:block; font-weight:600; font-size:.68rem; color:#9FC3AE; margin-top:.35rem; letter-spacing:.02em}
+.painel .data:empty{display:none}
 .painel:hover .circulo,.painel:focus-visible .circulo{
   transform:translateY(-4px) scale(1.04); border-color:#FFF;
   box-shadow:0 16px 34px rgba(0,0,0,.36), 0 0 0 8px rgba(124,179,66,.22);
@@ -127,16 +129,19 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
     <a class="painel" href="https://anamazza.github.io/Indicadores_Brasil/nascimentos/">
       <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4"/><path d="M5 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5"/></svg></span>
       <span class="rotulo">Nascimentos<span class="sub">SINASC · Painel NV 2026</span></span>
+      <span class="data" data-painel="nascimentos">atualizado em 29/09/2026</span>
     </a>
 
     <a class="painel" href="https://anamazza.github.io/Indicadores_Brasil/internacao/">
       <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13"/><path d="M3 21h18"/><path d="M12 10v6M9 13h6"/></svg></span>
       <span class="rotulo">Internação<span class="sub">SIH/SUS · obstétrica e neonatal</span></span>
+      <span class="data" data-painel="internacao">atualizado em 29/09/2026</span>
     </a>
 
     <a class="painel" href="https://anamazza.github.io/Indicadores_Brasil/mortalidade/">
       <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 3-7 2 4h4"/></svg></span>
       <span class="rotulo">Mortalidade<span class="sub">SIM · materna, fetal, perinatal e neonatal</span></span>
+      <span class="data" data-painel="mortalidade">atualizado em 23/09/2026</span>
     </a>
 
   </nav>
@@ -149,7 +154,7 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
         <b>Sobre os painéis.</b> Os painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025, comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. Os botões no cabeçalho de cada painel levam de um para o outro e de volta a esta página.
       </div>
       <div class="nota">
-        <b>Fontes e situação dos dados.</b> SINASC, SIH/SUS, SIM e CNES, 2019 a 2025; 2024 e 2025 são dados preliminares, sujeitos a revisão. Os painéis de internação e de mortalidade estão em versão para validação da coordenação.
+        <b>Fontes e situação dos dados.</b> SINASC, SIH/SUS, SIM e CNES, 2019 a 2025; 2024 e 2025 são dados preliminares, sujeitos a revisão. Os painéis de internação e de mortalidade estão em versão para validação da coordenação. <span id="cnes-em">Ficha CNES e habilitações atualizadas em 23/09/2026.</span>
       </div>
     </div>
   </div>

@@ -53,7 +53,7 @@ marcadas como anexo quando não constam da lista oficial.
 | O quê | Como |
 |---|---|
 | Indicadores (nova rodada das planilhas) | rerodar a esteira em `../Extracao_SIH` (55/56 ou 61) e depois `py build_dados.py` |
-| Ficha CNES + habilitações | `py atualizar_cnes.py` |
+| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Internacao_2026.html` e `index.html` e espelha esta pasta na subpasta `internacao/` do repositório Indicadores_Brasil) |
 | Estrutura/estilo da página | editar `painel_base.html` (ou regerar do painel de mortalidade com `_gera_base.py`) |
 

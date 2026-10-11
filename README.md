@@ -21,9 +21,12 @@ Indicadores_mortalidade-2026) foram substituídos por este em 11/10/2026 e hoje 
 
 ```
 index.html               página principal (gerada)         pagina_inicial.html  fonte da página principal
-montar_pagina.py         monta index.html                  foto_hero.jpg, logos_institucionais.png
+montar_pagina.py         monta index.html e preenche os carimbos "atualizado em" (lê <painel>/atualizacao.json)
+verificar_site.py        verificação do site (arquivos, tamanhos, links, dados, carimbos); roda no Actions e localmente
+.github/workflows/       verificar.yml (a cada push) e cnes.yml (ficha CNES na nuvem, 1º jun e 1º dez)
+ESTRATEGIA_ATUALIZACAO.md estratégia de atualização automatizada (camadas, fases, regras)
 nascimentos/             Painel NV 2026: fontes (painel_base.html, painel_app.js), dados gerados
-                         (dados_nv2026.js, cnes_dados.json, comparativo_nv.js), scripts e index.html
+                         (dados_nv2026.js, cnes_dados.json, comparativo_nv.js), scripts, atualizacao.json e index.html
 internacao/              Painel de Internação 2026: mesma organização (dados_internacao.js)
 mortalidade/             Painel de Mortalidade 2026: mesma organização (dados_mortalidade.js)
 ```
@@ -41,16 +44,17 @@ de dados leem as pastas vizinhas (`Extracao_SINASC`, `Extracao_SIH`, `Pipeline_P
 | Internação | `Projeto Apresentações Internação/Painel_Internacao` |
 | Mortalidade | `Mortalidade Indicadores/Painel_Mortalidade` |
 
-O `montar_painel.py` de cada pasta de trabalho gera o `index.html` e, ao final, **espelha a pasta inteira**
-na subpasta correspondente deste repositório (clone em `Documentos/Página principal`), copiando fontes,
-dados e saídas e apagando o que deixou de existir. Por isso, edite os painéis nas pastas de trabalho, não
-aqui: o próximo espelhamento sobrescreve a subpasta.
+O `montar_painel.py` de cada pasta de trabalho gera o `index.html`, grava o carimbo `atualizacao.json` e, ao
+final, **espelha a pasta inteira** na subpasta correspondente deste repositório (clone em
+`Documentos/Página principal`), copiando fontes, dados e saídas e apagando o que deixou de existir. Por isso,
+edite os painéis nas pastas de trabalho, não aqui: o próximo espelhamento sobrescreve a subpasta.
 
 Fluxo de atualização de um painel:
 
-1. Na pasta de trabalho, rodar os scripts de dados (`build_dados.py`, `atualizar_cnes.py` etc., ver o README do painel).
-2. Rodar `py montar_painel.py` (gera o painel e espelha aqui).
-3. Neste repositório: `git add -A`, commit e push. O GitHub Pages publica em um ou dois minutos.
+1. Na pasta de trabalho, rodar os scripts de dados (`build_dados.py` etc., ver o README do painel).
+2. Rodar `py montar_painel.py` (gera o painel, grava o carimbo e espelha aqui).
+3. Neste repositório: `py montar_pagina.py` (atualiza os carimbos da página principal) e `py verificar_site.py`.
+4. `git add -A`, commit e push. O Actions verifica de novo e o GitHub Pages publica em um ou dois minutos.
 
 Página principal:
 
@@ -58,12 +62,30 @@ Página principal:
 2. Rodar `py montar_pagina.py`.
 3. Commit + push.
 
+## Automação (GitHub Actions)
+
+| Workflow | Quando roda | O que faz |
+|---|---|---|
+| **Verificar site** (`verificar.yml`) | a cada push na `main`, em pull requests e sob demanda | roda `verificar_site.py`; se falhar, o commit fica marcado em vermelho e o GitHub avisa por e-mail |
+| **Atualizar CNES** (`cnes.yml`) | 1º de junho e 1º de dezembro, e sob demanda (aba Actions → Run workflow) | roda `atualizar_cnes.py` e `montar_painel.py` nos três painéis, remonta a página principal, verifica e, se algo mudou e nenhuma ficha ou habilitação se perdeu, faz commit e push |
+
+Regra para não haver conflito: **a ficha CNES é atualizada só na nuvem.** O `montar_painel.py` de cada pasta de
+trabalho começa resgatando o `cnes_dados.json` deste repositório quando ele é mais novo que o local, então
+faça `git pull` aqui antes de montar um painel. Em emergência, `py atualizar_cnes.py` continua funcionando na
+pasta de trabalho.
+
+Carimbos: cada painel grava `atualizacao.json` (data de montagem, data dos dados, data da ficha CNES e
+número de unidades); a página principal mostra "atualizado em" sob cada botão e a data da ficha CNES na
+nota de fontes. As próximas fases da estratégia (monitor do DATASUS, um comando por painel com relatório
+de diferenças, JSON puro por painel) estão descritas em `ESTRATEGIA_ATUALIZACAO.md`.
+
 ### Acrescentar um painel
 
-Criar a pasta de trabalho do novo painel nos moldes dos existentes (fontes + `montar_painel.py` que espelha
-para uma nova subpasta aqui, por exemplo `novo_painel/`) e, em `pagina_inicial.html`, dentro de
-`<nav class="paineis">`, copiar um bloco `<a class="painel">` apontando para
-`https://anamazza.github.io/Indicadores_Brasil/novo_painel/`. Os botões se acomodam sozinhos em fileiras.
+Criar a pasta de trabalho do novo painel nos moldes dos existentes (fontes + `montar_painel.py` que grava o
+carimbo e espelha para uma nova subpasta aqui, por exemplo `novo_painel/`); em `pagina_inicial.html`, dentro
+de `<nav class="paineis">`, copiar um bloco `<a class="painel">` apontando para
+`https://anamazza.github.io/Indicadores_Brasil/novo_painel/` (com o `<span class="data" data-painel="novo_painel">`);
+incluir a pasta em `PAINEIS` no `montar_pagina.py` e no `verificar_site.py`, e no laço do `cnes.yml`.
 
 ## Licença
 
