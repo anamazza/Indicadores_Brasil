@@ -15,6 +15,7 @@ permissions:
 jobs:
   cnes:
     runs-on: ubuntu-latest
+    timeout-minutes: 90        # a consulta das ~360 fichas leva uns 12 minutos; mais que isso é problema nas APIs
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
