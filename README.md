@@ -4,7 +4,13 @@ Painel interativo de indicadores de **mortalidade materna, fetal, perinatal e ne
 maternidades da Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção
 à Saúde Materna e Neonatal — Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher,
 da Criança e do Adolescente (IFF/Fiocruz). Mesma família e mesma estrutura do
-[Painel NV 2026](https://anamazza.github.io/Indicadores_NV/).
+[Painel NV 2026](https://anamazza.github.io/Indicadores_NV/nascimentos/) e do
+[Painel de Internação 2026](https://anamazza.github.io/Indicadores_NV/internacao/); os três painéis têm botões de
+acesso mútuo no cabeçalho e o botão **Início**, que leva à
+[página principal dos painéis](https://anamazza.github.io/Indicadores_Brasil/) (repositório Indicadores_Brasil).
+
+**Publicação:** https://anamazza.github.io/Indicadores_mortalidade-2026/ (GitHub Pages deste repositório, branch
+`main`, raiz). Publicar = commit + push.
 
 **Arquivo final:** `index.html` (idêntico a `Painel_Mortalidade_2026.html`) — HTML único e
 autocontido, pronto para o GitHub Pages. Requer internet só para o mapa de fundo do mapa de
