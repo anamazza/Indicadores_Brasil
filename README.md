@@ -22,14 +22,21 @@ Indicadores_mortalidade-2026) foram substituídos por este em 11/10/2026 e hoje 
 ```
 index.html               página principal (gerada)         pagina_inicial.html  fonte da página principal
 montar_pagina.py         monta index.html e preenche os carimbos "atualizado em" (lê <painel>/atualizacao.json)
+publicar.ps1             um comando: pull, monta os 3 painéis, relatório de diferenças, verifica, commit e push (ou PR)
+relatorio_diferencas.py  o que mudou nos dados de cada painel em relação ao publicado (grava em relatorios/)
 verificar_site.py        verificação do site (arquivos, tamanhos, links, dados, carimbos); roda no Actions e localmente
-.github/workflows/       verificar.yml (a cada push) e cnes.yml (ficha CNES na nuvem, 1º jun e 1º dez)
+monitor/                 verificar_fontes.py (monitor do DATASUS) e estado.json (última consulta às fontes)
+.github/workflows/       verificar.yml (a cada push), cnes.yml (CNES na nuvem) e monitor_datasus.yml (mensal)
 ESTRATEGIA_ATUALIZACAO.md estratégia de atualização automatizada (camadas, fases, regras)
-nascimentos/             Painel NV 2026: fontes (painel_base.html, painel_app.js), dados gerados
-                         (dados_nv2026.js, cnes_dados.json, comparativo_nv.js), scripts, atualizacao.json e index.html
-internacao/              Painel de Internação 2026: mesma organização (dados_internacao.js)
-mortalidade/             Painel de Mortalidade 2026: mesma organização (dados_mortalidade.js)
+nascimentos/             Painel NV 2026: fontes (painel_base.html, painel_app.js), dados gerados (dados_nv2026.js,
+                         dados.json, cnes_dados.json, comparativo_nv.js), scripts, atualizacao.json e index.html
+internacao/              Painel de Internação 2026: mesma organização (dados_internacao.js, dados.json)
+mortalidade/             Painel de Mortalidade 2026: mesma organização (dados_mortalidade.js, dados.json)
 ```
+
+Cada painel também publica os seus indicadores como JSON puro, sem depender do HTML (API estática):
+`https://anamazza.github.io/Indicadores_Brasil/nascimentos/dados.json` (e `internacao/dados.json`,
+`mortalidade/dados.json`), além da ficha CNES em `cnes_dados.json`.
 
 Cada pasta de painel tem o seu `README.md` com o conteúdo, as fontes e os scripts de atualização.
 
@@ -52,9 +59,14 @@ edite os painéis nas pastas de trabalho, não aqui: o próximo espelhamento sob
 Fluxo de atualização de um painel:
 
 1. Na pasta de trabalho, rodar os scripts de dados (`build_dados.py` etc., ver o README do painel).
-2. Rodar `py montar_painel.py` (gera o painel, grava o carimbo e espelha aqui).
-3. Neste repositório: `py montar_pagina.py` (atualiza os carimbos da página principal) e `py verificar_site.py`.
-4. `git add -A`, commit e push. O Actions verifica de novo e o GitHub Pages publica em um ou dois minutos.
+2. Neste repositório, rodar `.\publicar.ps1` (PowerShell). Ele faz `git pull`, roda o `montar_painel.py` dos três
+   painéis, gera o relatório de diferenças em `relatorios/`, remonta a página principal, verifica e, se tudo
+   passar, faz commit e push. Com `-PullRequest`, publica numa branch `atualizacao-<data>` e mostra o link do
+   pull request, para a coordenação validar o relatório antes do merge.
+
+Passo a passo equivalente, à mão: `py montar_painel.py` na pasta de trabalho; aqui `py relatorio_diferencas.py`,
+`py montar_pagina.py`, `py verificar_site.py`, `git add -A`, commit e push. O Actions verifica de novo e o GitHub
+Pages publica em um ou dois minutos.
 
 Página principal:
 
@@ -68,6 +80,7 @@ Página principal:
 |---|---|---|
 | **Verificar site** (`verificar.yml`) | a cada push na `main`, em pull requests e sob demanda | roda `verificar_site.py`; se falhar, o commit fica marcado em vermelho e o GitHub avisa por e-mail |
 | **Atualizar CNES** (`cnes.yml`) | 1º de junho e 1º de dezembro, e sob demanda (aba Actions → Run workflow) | roda `atualizar_cnes.py` e `montar_painel.py` nos três painéis, remonta a página principal, verifica e, se algo mudou e nenhuma ficha ou habilitação se perdeu, faz commit e push |
+| **Monitor DATASUS** (`monitor_datasus.yml`) | dia 5 de cada mês, e sob demanda | consulta o SINASC (OpenDataSUS) e o SIM e o SIH (FTP do DATASUS); se houver arquivo novo ou republicado desde a consulta anterior, abre uma issue com o resumo e guarda o estado em `monitor/estado.json` |
 
 Regra para não haver conflito: **a ficha CNES é atualizada só na nuvem.** O `montar_painel.py` de cada pasta de
 trabalho começa resgatando o `cnes_dados.json` deste repositório quando ele é mais novo que o local, então

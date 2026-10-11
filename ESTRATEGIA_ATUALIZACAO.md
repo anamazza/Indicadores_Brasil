@@ -121,6 +121,18 @@ Script `verificar_site.py`, rodado no Actions e também no fim do (C):
 | 5 | (F) JSON puro por painel | pequeno | base para o sistema e para painéis novos |
 | 6 | SINASC e SIM na nuvem (download e cálculo no Actions; SIH continua local) | grande | opcional; só se a máquina local virar gargalo |
 
+### Situação em 11/10/2026
+
+- Fases 1 a 5 implementadas no mesmo dia: `verificar_site.py` + workflow "Verificar site"; carimbos
+  (`atualizacao.json` por painel, exibidos na página principal); workflow "Atualizar CNES" com proteção contra
+  perda de fichas; monitor do DATASUS (`monitor/verificar_fontes.py` + workflow mensal com issue automática;
+  linha de base gravada localmente); `publicar.ps1` com `relatorio_diferencas.py` e opção de pull request;
+  `dados.json` por painel. O fluxo (C) cobre o "último quilômetro"; os scripts de dados de cada pipeline
+  continuam sendo rodados à mão na pasta de trabalho quando há dado novo.
+- Pendente: fase 6 (SINASC e SIM na nuvem), só se a máquina local virar gargalo. Conferir na aba Actions se as
+  primeiras execuções manuais de "Atualizar CNES" e "Monitor DATASUS" passaram: é o teste de que as APIs do CNES
+  e o FTP do DATASUS aceitam conexões do runner do GitHub.
+
 ## 4. Regras que mantêm tudo coerente
 
 - Fonte da verdade do código e dos dados calculados: as pastas de trabalho, espelhadas no repositório pelo

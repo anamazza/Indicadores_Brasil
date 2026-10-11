@@ -105,6 +105,17 @@ for pasta, (gemeo, minimo_kb, dados_js, min_unidades) in PAINEIS.items():
             ok(f"{pasta}: {dados_js} válido, {n_unidades} unidades")
     except Exception as e:
         falha(f"{pasta}: {dados_js} inválido ({e})")
+    # JSON puro (API estática)
+    try:
+        puro = json.load(open(os.path.join(base, "dados.json"), encoding="utf-8"))
+        if n_unidades is not None and len(puro.get("maternidades", [])) != n_unidades:
+            falha(f"{pasta}: dados.json tem {len(puro.get('maternidades', []))} unidades e {dados_js} tem {n_unidades} (remontar o painel)")
+        else:
+            ok(f"{pasta}: dados.json válido")
+    except FileNotFoundError:
+        falha(f"{pasta}: falta dados.json (gerado pelo montar_painel.py)")
+    except Exception as e:
+        falha(f"{pasta}: dados.json inválido ({e})")
     # fichas CNES
     try:
         cnes = json.load(open(os.path.join(base, "cnes_dados.json"), encoding="utf-8"))

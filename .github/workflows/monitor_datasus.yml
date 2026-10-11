@@ -1,0 +1,47 @@
+name: Monitor DATASUS
+
+# Todo mês consulta as fontes dos painéis (SINASC no OpenDataSUS; SIM e SIH no FTP do DATASUS) e, se houver
+# arquivo novo ou republicado desde a consulta anterior, abre uma issue com o resumo (o GitHub avisa por e-mail).
+# O estado da última consulta fica em monitor/estado.json. Também pode ser disparado à mão na aba Actions.
+on:
+  schedule:
+    - cron: "0 10 5 * *"      # dia 5 de cada mês, 10:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Consultar as fontes
+        run: python monitor/verificar_fontes.py
+
+      - name: Abrir issue com as novidades
+        if: ${{ hashFiles('monitor/novidades.md') != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "Novos dados no DATASUS ($(date -u +%Y-%m-%d))" \
+            --body-file monitor/novidades.md
+
+      - name: Guardar o estado da consulta
+        run: |
+          rm -f monitor/novidades.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- monitor/estado.json; then
+            echo "Estado não mudou."
+            exit 0
+          fi
+          git add monitor/estado.json
+          git commit -m "Monitor DATASUS: estado das fontes em $(date -u +%Y-%m-%d)"
+          git push

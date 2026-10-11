@@ -34,6 +34,20 @@ html = open(os.path.join(BASE, "painel_base.html"), encoding="utf-8").read()
 dados = open(os.path.join(BASE, "dados_mortalidade.js"), encoding="utf-8").read()
 app = open(os.path.join(BASE, "painel_app.js"), encoding="utf-8").read()
 
+# ---------------------------------------------------------------------------------------------
+# JSON puro dos indicadores (desde 11/10/2026): o mesmo DADOS que o HTML embute, gravado em dados.json
+# e servido pelo GitHub Pages em <site>/<pasta>/dados.json — "API estática" para outros painéis e para o
+# futuro sistema, sem depender do HTML.
+# ---------------------------------------------------------------------------------------------
+try:
+    _i = dados.index("const DADOS = ") + len("const DADOS = ")
+    _D = json.JSONDecoder().raw_decode(dados, _i)[0]
+    with open(os.path.join(BASE, "dados.json"), "w", encoding="utf-8") as fh:
+        json.dump(_D, fh, ensure_ascii=False, separators=(",", ":"))
+    print(f"dados.json gravado ({len(_D.get('maternidades', []))} unidades)")
+except Exception as e:
+    print("aviso: dados.json não gerado:", e)
+
 # ficha CNES + habilitações (build_dados.py / atualizar_cnes.py)
 cnes_path = os.path.join(BASE, "cnes_dados.json")
 cnes_js = ""
