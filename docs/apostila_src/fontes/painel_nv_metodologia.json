@@ -1,0 +1,268 @@
+{
+ "inds": [
+  {
+   "id": "nv",
+   "rot": "Nascidos vivos ocorridos",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Total de nascidos vivos ocorridos na unidade (SINASC)."
+  },
+  {
+   "id": "shareUF",
+   "rot": "% dos nascimentos da UF ocorridos nas maternidades",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Participação das maternidades estratégicas do território no total de nascidos vivos da UF."
+  },
+  {
+   "id": "resRS",
+   "rot": "% de NV ocorridos na região de residência",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Percentual dos nascidos vivos da maternidade cujas mães residem na própria região de saúde da unidade."
+  },
+  {
+   "id": "pn7",
+   "rot": "% com 7 ou mais consultas de pré-natal",
+   "sentido": "maior",
+   "meta": null,
+   "desc": "Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal (exclui ignorados)."
+  },
+  {
+   "id": "tri1",
+   "rot": "% com pré-natal iniciado no 1º trimestre",
+   "sentido": "maior",
+   "meta": null,
+   "desc": "Entre quem fez ao menos uma consulta, proporção que começou no primeiro trimestre (exclui ignorados)."
+  },
+  {
+   "id": "ces",
+   "rot": "% de cesárea",
+   "sentido": "menor",
+   "meta": null,
+   "desc": "Partos cesáreos sobre o total de nascidos vivos com via informada."
+  },
+  {
+   "id": "enf",
+   "rot": "% de parto vaginal assistido por enfermeira ou obstetriz",
+   "sentido": "maior",
+   "meta": "50",
+   "desc": "Entre os partos vaginais, proporção assistida por enfermeira obstétrica ou obstetriz. Meta institucional ≥50%."
+  },
+  {
+   "id": "p2500",
+   "rot": "% de baixo peso (<2500 g)",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Perfil de risco recebido: são maternidades de referência para gestação de alto risco."
+  },
+  {
+   "id": "p1500",
+   "rot": "% de muito baixo peso (<1500 g)",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Concentração de recém-nascidos de muito baixo peso: complexidade assumida pela unidade."
+  },
+  {
+   "id": "prem",
+   "rot": "% de prematuridade (<37 semanas)",
+   "sentido": "neutro",
+   "meta": null,
+   "desc": "Nascidos vivos com menos de 37 semanas de gestação (exclui idade gestacional não informada)."
+  },
+  {
+   "id": "asf",
+   "rot": "% de Apgar <7 no 5º minuto",
+   "sentido": "menor",
+   "meta": null,
+   "desc": "Apgar de 0 a 6 no 5º minuto, entre nascidos com ≥2500 g e sem anomalias congênitas."
+  },
+  {
+   "id": "rg1",
+   "rot": "Taxa de cesárea no grupo 1 de Robson",
+   "sentido": "menor",
+   "meta": "10",
+   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤10%."
+  },
+  {
+   "id": "rg2",
+   "rot": "Taxa de cesárea no grupo 2 de Robson",
+   "sentido": "menor",
+   "meta": "35",
+   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤35%."
+  },
+  {
+   "id": "rg3",
+   "rot": "Taxa de cesárea no grupo 3 de Robson",
+   "sentido": "menor",
+   "meta": "3",
+   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤3%."
+  },
+  {
+   "id": "rg4",
+   "rot": "Taxa de cesárea no grupo 4 de Robson",
+   "sentido": "menor",
+   "meta": "15",
+   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤15%."
+  },
+  {
+   "id": "rg5",
+   "rot": "Taxa de cesárea no grupo 5 de Robson",
+   "sentido": "menor",
+   "meta": null,
+   "desc": "Multíparas com pelo menos uma cesárea anterior, feto único cefálico, ≥37 semanas."
+  }
+ ],
+ "calculos": {
+  "nv": {
+   "n": "Soma dos nascidos vivos ocorridos na unidade no ano (contagem simples).",
+   "d": "Não se aplica: é um número absoluto, não uma taxa.",
+   "obs": null
+  },
+  "shareUF": {
+   "n": "Nascidos vivos ocorridos nas maternidades estratégicas da seleção.",
+   "d": "Nascidos vivos totais da UF (com mais de uma unidade na seleção, o total da UF é contado uma única vez).",
+   "obs": null
+  },
+  "resRS": {
+   "n": "Nascidos vivos da unidade cuja mãe reside na região de saúde da própria unidade.",
+   "d": "Nascidos vivos ocorridos na unidade.",
+   "obs": null
+  },
+  "pn7": {
+   "n": "Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal.",
+   "d": "Nascidos vivos totais, excluídos os registros com número de consultas ignorado.",
+   "obs": null
+  },
+  "tri1": {
+   "n": "Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
+   "d": "Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado.",
+   "obs": "Atenção: a linha \"% Primeiro Trimestre\" da tabela do dossiê segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."
+  },
+  "ces": {
+   "n": "Partos cesáreos.",
+   "d": "Nascidos vivos totais, excluídos os registros com via de nascimento ignorada.",
+   "obs": null
+  },
+  "enf": {
+   "n": "Partos vaginais assistidos por enfermeira ou obstetriz.",
+   "d": "Partos vaginais, excluídos os registros com profissional ignorado.",
+   "obs": null
+  },
+  "p2500": {
+   "n": "Nascidos vivos com menos de 2500 g.",
+   "d": "Nascidos vivos com peso ao nascer informado.",
+   "obs": null
+  },
+  "p1500": {
+   "n": "Nascidos vivos com menos de 1500 g.",
+   "d": "Nascidos vivos com peso ao nascer informado.",
+   "obs": null
+  },
+  "prem": {
+   "n": "Nascidos vivos com menos de 37 semanas de gestação.",
+   "d": "Nascidos vivos com idade gestacional informada.",
+   "obs": null
+  },
+  "asf": {
+   "n": "Nascidos vivos com Apgar de 0 a 6 no 5º minuto.",
+   "d": "Nascidos vivos com Apgar informado, considerando somente os com 2500 g ou mais e sem anomalias congênitas (os demais não entram nem no numerador nem no denominador).",
+   "obs": null
+  },
+  "rg1": {
+   "n": "Partos cesáreos do grupo 1 de Robson.",
+   "d": "Nascidos vivos do grupo 1 de Robson.",
+   "obs": null
+  },
+  "rg2": {
+   "n": "Partos cesáreos do grupo 2 de Robson.",
+   "d": "Nascidos vivos do grupo 2 de Robson.",
+   "obs": null
+  },
+  "rg3": {
+   "n": "Partos cesáreos do grupo 3 de Robson.",
+   "d": "Nascidos vivos do grupo 3 de Robson.",
+   "obs": null
+  },
+  "rg4": {
+   "n": "Partos cesáreos do grupo 4 de Robson.",
+   "d": "Nascidos vivos do grupo 4 de Robson.",
+   "obs": null
+  },
+  "rg5": {
+   "n": "Partos cesáreos do grupo 5 de Robson.",
+   "d": "Nascidos vivos do grupo 5 de Robson.",
+   "obs": null
+  }
+ },
+ "extras": [
+  {
+   "rot": "% Residentes no município / região de saúde / macro / UF (dossiê, perspectiva Local de residência)",
+   "desc": "Dos bebês que nascem na maternidade, quantos têm mãe moradora de cada nível territorial da unidade.",
+   "n": "Nascidos vivos ocorridos na maternidade cuja mãe reside no nível territorial (município, região de saúde, macro ou UF da unidade).",
+   "d": "Nascidos vivos ocorridos na maternidade.",
+   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025. Também calculado para os nascidos vivos <1500 g."
+  },
+  {
+   "rot": "% Município / região de saúde / macro / UF (dossiê, perspectiva Local de ocorrência)",
+   "desc": "De todos os nascimentos que acontecem em cada território, quantos ocorrem dentro da maternidade.",
+   "n": "Nascidos vivos ocorridos na maternidade.",
+   "d": "Nascidos vivos ocorridos no território (município, região de saúde, macro ou UF).",
+   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025. Também calculado para os nascidos vivos <1500 g."
+  },
+  {
+   "rot": "% Primeiro Trimestre (tabela de trimestre do dossiê)",
+   "desc": "Linha percentual da tabela de trimestre de início de pré-natal, no formato da apresentação.",
+   "n": "Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
+   "d": "Total de nascidos vivos com ao menos uma consulta, incluindo os registros com trimestre ignorado (por isso pode diferir do indicador \"% com pré-natal iniciado no 1º trimestre\" dos mapas, que exclui os ignorados).",
+   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025."
+  },
+  {
+   "rot": "% de NV ocorridos no território de residência (Comparativo entre anos)",
+   "desc": "Retenção territorial de nascimentos: das mães residentes em cada território, quantas pariram dentro do próprio território. Considera todos os nascimentos, não apenas maternidades estratégicas. Nos níveis macrorregião e UF, o percentual agrega os nascidos na própria região de saúde (recorte todos) ou na própria macro (recorte <1500 g), seguindo a semântica das planilhas oficiais.",
+   "n": "Nascidos vivos de mães residentes que ocorreram no próprio território de residência (nível região de saúde; agregado nos níveis macro e UF).",
+   "d": "Nascidos vivos de mães residentes no território, independentemente de onde ocorreu o parto.",
+   "fonte": "Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025, com 2025 preliminar. Ambos os recortes (todos e <1500 g) por região de saúde, macro e UF. Extração própria validada contra as planilhas NV por Região e NV por Macro (2019 e 2024): diferenças médias de 0,1 a 0,4 ponto percentual."
+  },
+  {
+   "rot": "Participação da unidade nos nascimentos da UF e do Brasil (topo do dossiê)",
+   "desc": "Peso relativo da maternidade no total de nascimentos do seu estado e do país, no ano mais recente.",
+   "n": "Nascidos vivos ocorridos na unidade em 2025.",
+   "d": "Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
+   "fonte": "Ministério da Saúde - SINASC, 2025."
+  },
+  {
+   "rot": "Média do grupo (comparador)",
+   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
+   "d": "Soma dos denominadores correspondentes nas mesmas unidades.",
+   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025."
+  }
+ ],
+ "fontes": [
+  [
+   "SINASC",
+   "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."
+  ],
+  [
+   "CNES",
+   "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES, com atualização automática semestral (1º de junho e 1º de dezembro)."
+  ],
+  [
+   "SIH/AIH",
+   "Sistema de Informações Hospitalares do SUS. Origem do volume anual de partos por estabelecimento e dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025)."
+  ],
+  [
+   "Malhas territoriais",
+   "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização."
+  ],
+  [
+   "Comparativo entre anos",
+   "Microdados públicos do SINASC (OpenDataSUS), série 2019-2025, processados por território de residência e ocorrência: todos os nascidos vivos e <1500 g, por região de saúde, macro e UF. Nos níveis macro e UF, o percentual agrega os nascidos na própria região de saúde (todos) ou na própria macro (<1500 g), como nas planilhas oficiais. 2025 preliminar. Extração validada contra as planilhas NV por Região e NV por Macro (2019 e 2024)."
+  ],
+  [
+   "Localização das unidades",
+   "Coordenadas geográficas (latitude e longitude) de cada estabelecimento, georreferenciadas a partir do cadastro CNES."
+  ]
+ ]
+}

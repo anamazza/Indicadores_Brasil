@@ -83,6 +83,36 @@ a{color:var(--verde-fiocruz)}
 .painel:focus-visible{outline:none}
 .painel:focus-visible .rotulo{text-decoration:underline; text-underline-offset:4px}
 
+/* ---------------- documentos (apostila) ---------------- */
+.documentos{margin:0 auto 2.6rem}
+.documentos h2{font-size:1.25rem; color:var(--indigo); margin:0 0 .8rem}
+.doc-card{
+  display:flex; gap:1.2rem; align-items:flex-start; background:var(--branco); border-radius:16px;
+  border-top:6px solid var(--verde-fiocruz); box-shadow:var(--sombra-alta); padding:1.4rem 1.6rem 1.3rem;
+}
+.doc-card .doc-ico{flex:0 0 56px; width:56px; height:56px; border-radius:14px; display:grid; place-items:center; background:var(--mint); color:var(--verde-fiocruz)}
+.doc-card .doc-ico svg{width:30px; height:30px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.doc-card .eyebrow{color:var(--verde-fiocruz)}
+.doc-card h3{margin:.2rem 0 .4rem; font-size:1.15rem; color:var(--indigo)}
+.doc-card p.desc{color:var(--texto-suave); font-size:.95rem; margin:0 0 .9rem}
+.botoes{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center}
+.botoes .botao, .leitor-barra .botao{display:inline-flex; align-items:center; gap:.4rem; margin:0; background:var(--verde-fiocruz); color:#FFF; font-weight:800; font-size:.92rem; border-radius:999px; padding:.55rem 1.1rem; text-decoration:none; border:2px solid var(--verde-fiocruz); cursor:pointer; font-family:inherit; line-height:1.2}
+.botoes .botao.secundario, .leitor-barra .botao.secundario{background:var(--branco); color:var(--verde-fiocruz)}
+.botoes .botao:hover, .leitor-barra .botao:hover{filter:brightness(1.06)}
+.botoes .botao:focus-visible, .leitor-barra .botao:focus-visible{outline:3px solid var(--verde-lima); outline-offset:2px}
+.botoes .link-simples{font-size:.9rem; font-weight:700; color:var(--verde-esmeralda)}
+dialog#leitor{width:min(1100px, 96vw); height:92vh; border:0; border-radius:16px; padding:0; overflow:hidden; box-shadow:var(--sombra-alta)}
+dialog#leitor::backdrop{background:rgba(10,33,61,.62)}
+.leitor-barra{display:flex; align-items:center; gap:.8rem; padding:.55rem 1rem; background:var(--indigo); color:#FFF; font-size:.92rem; font-weight:700}
+.leitor-barra span{flex:1}
+.leitor-barra .botao{padding:.38rem .9rem; font-size:.84rem}
+#leitorFrame{display:block; width:100%; height:calc(92vh - 48px); border:0; background:#FFF}
+@media (max-width: 680px){
+  .doc-card{flex-direction:column}
+  dialog#leitor{width:100vw; height:100vh; border-radius:0}
+  #leitorFrame{height:calc(100vh - 48px)}
+}
+
 /* ---------------- notas ---------------- */
 main{flex:1}
 .notas{margin:1.6rem auto 2.4rem; display:grid; gap:1rem; grid-template-columns:repeat(2, minmax(0,1fr))}
@@ -149,6 +179,23 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
 
 <main>
   <div class="wrap">
+
+    <section class="documentos" aria-labelledby="doc-titulo">
+      <h2 id="doc-titulo">Documentos</h2>
+      <div class="doc-card">
+        <div class="doc-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M9 7h7M9 11h7"/></svg></div>
+        <div class="doc-texto">
+          <p class="eyebrow">Apostila</p>
+          <h3>Dicionários de Dados dos Painéis</h3>
+          <p class="desc">Definições e regras de cálculo dos indicadores dos três painéis: fontes, unidades e grupos, fichas de numerador e denominador, grupos de Robson, glossário e referências. Versão 1.1, outubro de 2026.</p>
+          <div class="botoes">
+            <button type="button" class="botao" id="btnLer">Ler na janela</button>
+            <a class="botao secundario" href="docs/apostila/Apostila_Dicionarios_de_Dados_Paineis_Maternidades.pdf" download>Baixar PDF</a>
+            <a class="link-simples" href="docs/apostila/apostila.html" target="_blank" rel="noopener">Abrir em nova aba</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="notas">
       <div class="nota">
         <b>Sobre os painéis.</b> Os painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025, comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. Os botões no cabeçalho de cada painel levam de um para o outro e de volta a esta página.
@@ -159,6 +206,26 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
     </div>
   </div>
 </main>
+
+<dialog id="leitor" aria-label="Apostila dos Dicionários de Dados">
+  <div class="leitor-barra">
+    <span>Apostila dos Dicionários de Dados · versão 1.1</span>
+    <a class="botao secundario" href="docs/apostila/Apostila_Dicionarios_de_Dados_Paineis_Maternidades.pdf" download>Baixar PDF</a>
+    <button type="button" class="botao" id="btnFechar">Fechar</button>
+  </div>
+  <iframe id="leitorFrame" title="Apostila dos Dicionários de Dados"></iframe>
+</dialog>
+<script>
+(function(){
+  var dlg = document.getElementById("leitor"), fr = document.getElementById("leitorFrame");
+  document.getElementById("btnLer").addEventListener("click", function(){
+    if (!fr.getAttribute("src")) fr.setAttribute("src", "docs/apostila/apostila.html");
+    if (typeof dlg.showModal === "function") dlg.showModal(); else window.open("docs/apostila/apostila.html", "_blank");
+  });
+  document.getElementById("btnFechar").addEventListener("click", function(){ dlg.close(); });
+  dlg.addEventListener("click", function(e){ if (e.target === dlg) dlg.close(); });
+})();
+</script>
 
 <footer>
   <div class="wrap">

@@ -1,0 +1,543 @@
+[
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "DICIONÁRIO DA PLANILHA DE INDICADORES AIH. GRUPO DE MATERNIDADES"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "VERSÃO FINAL — 10/09/2026"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Versão consolidada com as decisões da coordenação registradas nos comentários ao documento de sugestões de melhoria (09/09/2026) e nas mensagens de 30/08 a 09/09/2026. Substitui a versão de 02/09/2026 e o documento de revisão comentada de 07/09/2026. As regras abaixo são exatamente as aplicadas na retabulação de 09/09/2026 (planilhas \"regras aprovadas 2026-09-09\" e apresentações de setembro/2026)."
+ },
+ {
+  "tipo": "tabela",
+  "linhas": [
+   [
+    [
+     "INDICADOR"
+    ],
+    [
+     "DESCRIÇÃO"
+    ],
+    [
+     "VARIÁVEIS / REGRA"
+    ]
+   ],
+   [
+    [
+     "PERFIL SÓCIO-DEMOGRÁFICO (SINASC)"
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por idade da mãe"
+    ],
+    [
+     "Total de nascidos vivos em cada faixa etária da mãe, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "IDADEMAE (idade da mãe em anos completos), nas faixas: 10 a 14, 15 a 19, 20 a 34, 35 a 39, 40 anos e mais.",
+     "IDADEMAE 99, 0 ou em branco = \"Ignorado\", apresentado como categoria própria (decisão da coordenação, 09/09/2026)."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por raça/cor da mãe"
+    ],
+    [
+     "Total de nascidos vivos em cada categoria de raça/cor da mãe, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "RACACORMAE: 1 Branca, 2 Preta, 3 Amarela, 4 Parda, 5 Indígena. Campo em branco = \"Ignorado\", apresentado como categoria própria (a Declaração de Nascido Vivo não tem a opção \"ignorado\").",
+     "Variável autodeclarada, disponível desde 2010."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por escolaridade da mãe"
+    ],
+    [
+     "Total de nascidos vivos em cada categoria de escolaridade da mãe, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "ESCMAE (anos de estudo concluídos; desde 2010 derivada pelo SINASC de ESCMAE2010 e SERIESCMAE): \"Até 3 anos\" = ESCMAE 1 (nenhuma) ou 2 (1 a 3 anos); \"4 a 7 anos\" = 3; \"8 a 11 anos\" = 4; \"12 anos e mais\" = 5.",
+     "ESCMAE 9 ou em branco = \"Ignorado\", categoria própria. O código 0 pertence a ESCMAE2010 e não é usado."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por situação conjugal da mãe"
+    ],
+    [
+     "Total de nascidos vivos em cada categoria de situação conjugal da mãe, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "ESTCIVMAE: 1 solteira, 3 viúva, 4 separada judicialmente/divorciada = \"Solteira, viúva ou separada\"; 2 casada, 5 união estável = \"Casada ou em união estável\" (rótulo oficial do código 5: união estável).",
+     "ESTCIVMAE 9 ou em branco = \"Ignorado\", categoria própria."
+    ]
+   ],
+   [
+    [
+     "PERFIL OBSTÉTRICO (SINASC)"
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por número de gestações anteriores da mãe"
+    ],
+    [
+     "Total de nascidos vivos de mães em cada faixa de número de gestações anteriores, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "QTDGESTANT (número de gestações anteriores; inclui as gestações interrompidas), nas faixas: \"Nenhuma\", \"De 1 a 3\", \"De 4 a 6\", \"De 7 a 9\", \"10 ou mais\". QTDGESTANT 99 ou em branco = \"Ignorado\", categoria própria.",
+     "Título alterado de \"partos anteriores\" para \"gestações anteriores\" (decisão da coordenação, 09/09/2026): a variável QTDGESTANT conta gestações. O rótulo será atualizado em conjunto na planilha, no painel e nas apresentações."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por número de cesarianas anteriores da mãe"
+    ],
+    [
+     "Total de nascidos vivos de mães em cada faixa de número de cesarianas anteriores, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "QTDPARTCES (número de cesarianas anteriores), nas faixas: \"Nenhuma\", \"De 1 a 3\", \"De 4 a 6\", \"De 7 a 9\", \"10 ou mais\". QTDPARTCES 99 ou em branco = \"Ignorado\", categoria própria.",
+     "Observação: a literatura costuma usar 1, 2 e 3 ou mais; as faixas acima foram mantidas por padronização com a planilha."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos nascidos vivos por tipo de gestação"
+    ],
+    [
+     "Total de nascidos vivos com cada tipo de gestação, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "GRAVIDEZ: 1 Única, 2 Dupla, 3 Tripla ou mais. GRAVIDEZ 9 ou em branco = \"Ignorado\", categoria própria."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de mães de nascidos vivos com número adequado de consultas para a idade gestacional no parto"
+    ],
+    [
+     "Proporção de nascidos vivos cujas mães tiveram número de consultas de pré-natal igual ou superior ao mínimo esperado para a idade gestacional no parto, segundo o calendário de 8 contatos da OMS (2016)."
+    ],
+    [
+     "Fonte: SINASC. Referência: OMS, Recomendações sobre cuidados pré-natais para uma experiência positiva na gravidez (2016): contatos em até 12, 20, 26, 30, 34, 36, 38 e 40 semanas.",
+     "Mínimo de consultas por idade gestacional no parto (SEMAGESTAC): menos de 20 semanas = 1; 20 a 25 = 2; 26 a 29 = 3; 30 a 33 = 4; 34 a 35 = 5; 36 a 37 = 6; 38 a 39 = 7; 40 ou mais = 8. Adequado = CONSPRENAT maior ou igual ao mínimo.",
+     "CONSPRENAT 99 ou em branco, ou SEMAGESTAC 99 ou em branco = \"Ignorado\", categoria própria, fora do denominador (correção aprovada; a regra anterior tratava o 99 como valor válido — decisão da coordenação, 09/09/2026)."
+    ]
+   ],
+   [
+    [
+     "INTERNAÇÕES OBSTÉTRICAS"
+    ]
+   ],
+   [
+    [
+     "Número de internações obstétricas"
+    ],
+    [
+     "Total de internações de mulheres de 10 a 59 anos com diagnóstico do capítulo XV da CID-10 (O00 a O99) em qualquer campo de diagnóstico da AIH."
+    ],
+    [
+     "Fonte: SIH-RD (AIH reduzida), todas as competências disponíveis; ano de referência pela data de internação (DT_INTER).",
+     "Universo obstétrico (decisão da coordenação, 09/09/2026): SEXO feminino, COD_IDADE = 4 e IDADE de 10 a 59 anos, com código O00 a O99 em qualquer campo de diagnóstico (DIAG_PRINC, DIAG_SECUN [preenchido até 2014], DIAGSEC1 a DIAGSEC9).",
+     "Observação: nas 114 unidades, em 2019-2025, não há AIH de longa permanência (IDENT = 5) no recorte (conferido no microdado); cada AIH corresponde a um episódio de internação."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual das internações obstétricas por motivos de internação (parto, aborto e intercorrências clínicas)"
+    ],
+    [
+     "Proporção das internações obstétricas por motivo: Parto, Aborto, Intercorrências Clínicas e Outros."
+    ],
+    [
+     "Fonte: SIH-RD. Denominador: universo obstétrico (mulheres de 10 a 59 anos).",
+     "GRUPO_INT_OBST pela variável PROC_REA:",
+     "Aborto: 0409060070 (AMIU), 0411020013 (curetagem pós-abortamento/puerperal).",
+     "Parto — vaginal: 0310010039, 0310010047, 0310010055 e 0409060313 (laqueadura tubária na mesma internação do parto normal; Portaria SAES/MS 1.549/2024, vigente desde a competência 04/2024; decisão da coordenação, 09/09/2026: é parto vaginal em todas as listas); cesariana: 0411010026, 0411010034, 0411010042.",
+     "Intercorrências Clínicas: 0303100010, 0303100028, 0303100036, 0303100044, 0303100052, 0409060011, 0409060046, 0411010018, 0411010050, 0411010069, 0411010077, 0411010085, 0411020021, 0411020030, 0411020048, 0411020056 (vigente até 12/2018).",
+     "Outros: demais procedimentos.",
+     "A curetagem semiótica (0409060046) permanece aqui apenas como motivo de internação; ela não entra no indicador de AMIU."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual das internações obstétricas por tipo de saída (alta, transferência e óbito)"
+    ],
+    [
+     "Proporção das internações obstétricas por desfecho registrado na AIH."
+    ],
+    [
+     "Fonte: SIH-RD. Denominador: universo obstétrico.",
+     "Classificação pelo primeiro dígito de COBRANCA (motivo de saída/permanência; Portaria SAS/MS 719/2007; Manual Técnico Operacional do SIH/SUS 2017, item 6.3): 1x = Alta; 2x = Permanência; 3x = Transferência; 4x = Óbito; 51 = Encerramento administrativo.",
+     "Códigos 6x (desfecho conjunto mãe/recém-nascido, exclusivos de AIH de parto; Portaria SAS/MS 384/2010): 61, 62, 63 e 64 = Alta da mãe (64 = alta da mãe com óbito fetal); 65, 66 e 67 = Óbito da mãe (65 = óbito da gestante e do concepto). Registrar à parte a frequência de 64 e 65.",
+     "Indicador mantido na planilha; retirado das apresentações por decisão da coordenação (31/08/2026)."
+    ]
+   ],
+   [
+    [
+     "Número de internações obstétricas para interrupção da gestação em casos previstos por lei"
+    ],
+    [
+     "Total de internações para interrupção da gestação nos casos previstos em lei (CID O04) com procedimento de esvaziamento uterino."
+    ],
+    [
+     "Fonte: SIH-RD.",
+     "ABORTO_LEGAL = 1 quando o motivo de internação é Aborto (PROC_REA 0409060070 ou 0411020013) e há O04 em qualquer campo de diagnóstico. Operacionalização alinhada a Jacobs e Boing (2021).",
+     "Limitações: O04 inclui aborto terapêutico; interrupções medicamentosas sem esvaziamento instrumental podem não ser captadas."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de AMIU dentre procedimentos de esvaziamento uterino"
+    ],
+    [
+     "Total de AMIU dividido pelo total de esvaziamentos uterinos pós-abortamento, multiplicado por 100. Quanto maior, melhor (Norma Técnica de Atenção Humanizada ao Abortamento, MS 2014)."
+    ],
+    [
+     "Fonte: SIH-RD, sobre todas as AIH da unidade.",
+     "Numerador: PROC_REA = 0409060070 (AMIU). Denominador: PROC_REA em 0409060070 ou 0411020013.",
+     "A curetagem semiótica (0409060046) NÃO entra no denominador: no SIGTAP ela só tem CIDs ginecológicos e não é esvaziamento pós-abortamento (decisão da coordenação, 09/09/2026)."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de internações que resultaram em parto com presença de acompanhante"
+    ],
+    [
+     "Proporção de internações por parto com registro de diária de acompanhante na AIH (proxy da presença de acompanhante, Lei 11.108/2005)."
+    ],
+    [
+     "Fonte: SIH-RD, sobre todas as AIH da unidade.",
+     "Numerador: PROC_REA em 0310010039, 0310010047, 0310010055, 0409060313, 0411010026, 0411010034 ou 0411010042, com DIAR_ACOM > 0. Denominador: as mesmas AIH, sem a condição de acompanhante.",
+     "Base: Lei 11.108/2005; Portaria GM/MS 2.418/2005 (autoriza a cobrança das despesas com acompanhante na AIH); Portaria GM/MS 1.459/2011, art. 7º. Limitação: DIAR_ACOM registra diárias faturadas, não a presença durante o trabalho de parto."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de internações para assistência ao parto vaginal com presença de acompanhante"
+    ],
+    [
+     "Proporção de internações por parto vaginal com registro de diária de acompanhante."
+    ],
+    [
+     "Como no indicador anterior, restrito aos partos vaginais: 0310010039, 0310010047, 0310010055 e 0409060313 (incluído — decisão da coordenação, 09/09/2026)."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de internações para cesariana com presença de acompanhante"
+    ],
+    [
+     "Proporção de internações por cesariana com registro de diária de acompanhante."
+    ],
+    [
+     "Como no indicador de parto com acompanhante, restrito às cesarianas: 0411010026, 0411010034, 0411010042."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de internações para aborto com presença de acompanhante"
+    ],
+    [
+     "Proporção de internações para interrupção da gestação nos casos previstos em lei com registro de diária de acompanhante."
+    ],
+    [
+     "Fonte: SIH-RD.",
+     "Numerador: ABORTO_LEGAL = 1 com DIAR_ACOM > 0. Denominador: ABORTO_LEGAL = 1.",
+     "Correções (decisão da coordenação, 09/09/2026): retirada a curetagem semiótica (0409060046) e corrigida a descrição anterior, que dizia \"dividido pelo total de internações por parto\". Nota: a Lei 11.108/2005 assegura acompanhante à parturiente; para o abortamento, o indicador mede prática de registro."
+    ]
+   ],
+   [
+    [
+     "Número de partos em Centro de Parto Normal"
+    ],
+    [
+     "Número de partos registrados com o procedimento específico de Centro de Parto Normal."
+    ],
+    [
+     "Fonte: SIH-RD, sobre todas as AIH da unidade.",
+     "PROC_REA = 0310010055 (Portaria GM/MS 11/2015, art. 51: o procedimento registra as ações do CPN).",
+     "Limitações: partos realizados em CPN e faturados como 0310010039 não são captados; unidade sem habilitação de CPN registra zero."
+    ]
+   ],
+   [
+    [
+     "Taxa de Ocupação"
+    ],
+    [
+     "Dias de permanência das internações obstétricas divididos pelos leitos-dia obstétricos do ano, multiplicado por 100."
+    ],
+    [
+     "Fonte: SIH-RD e CNES-LT.",
+     "Numerador: soma de DIAS_PERM das internações do universo obstétrico, por ano de internação.",
+     "Denominador: leitos-dia do ano — soma, nas 12 competências, de leitos obstétricos EXISTENTES (QT_EXIST, CODLEITO 10 e 43) × dias do mês —, normalizado para ano de 365 dias (em anos bissextos, ajuste 365/366).",
+     "Limitação (nota técnica do DATASUS): DIAS_PERM inclui dias de UTI; a taxa pode exceder 100% em unidades superlotadas. Referências: Portaria SAS/MS 312/2002; ANS QUALISS E-EFI-02."
+    ]
+   ],
+   [
+    [
+     "Tempo médio de permanência (geral, parto vaginal, cesariana, aborto, intercorrências clínicas)"
+    ],
+    [
+     "Soma dos dias de permanência dividida pelo número de internações, no total e por motivo de internação."
+    ],
+    [
+     "Fonte: SIH-RD. Universo obstétrico.",
+     "TMP = soma de DIAS_PERM / número de AIH, no geral e por grupo (Parto Vaginal, Cesariana, Aborto, Intercorrências Clínicas), com os mesmos códigos do indicador de motivos (0409060313 incluído em parto vaginal). DIAS_PERM = DT_SAIDA − DT_INTER (internação e alta no mesmo dia = 0).",
+     "Referência do MS para obstetrícia: 2,4 a 3,1 dias."
+    ]
+   ],
+   [
+    [
+     "ASSISTÊNCIA AO PARTO"
+    ]
+   ],
+   [
+    [
+     "Porcentagem de nascidos vivos por partos vaginais pós-cesariana"
+    ],
+    [
+     "Proporção de nascidos vivos por via vaginal entre mulheres com cesariana anterior (VBAC). Não é a taxa de sucesso da prova de trabalho de parto."
+    ],
+    [
+     "Fonte: SINASC.",
+     "Numerador: PARTO = 1 (vaginal) e QTDPARTCES entre 1 e 98. Denominador: QTDPARTCES entre 1 e 98 e PARTO em 1 ou 2. QTDPARTCES 99 ou em branco e PARTO 9 ficam fora do cálculo (a regra anterior, QTDPARTCES > 0, incluía o 99)."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de realização de analgesia em internações para partos vaginais"
+    ],
+    [
+     "Total de internações para parto vaginal com registro de analgesia, dividido pelo total de internações para parto vaginal e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP.",
+     "Numerador: AIH do denominador com pelo menos um registro SP_ATOPROF = 0417010028 (analgesia obstétrica para parto normal) na base SIH-SP. Denominador: PROC_REA em 0310010039, 0310010047, 0310010055 ou 0409060313.",
+     "Nota: 0417010028 só existe em SP_ATOPROF e, no SIGTAP, é incompatível com 0310010055 (CPN); partos em CPN não terão o ato registrado."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de nascidos vivos com trabalho de parto induzido"
+    ],
+    [
+     "Total de nascidos vivos com trabalho de parto induzido, dividido pelo total de nascidos vivos e multiplicado por 100."
+    ],
+    [
+     "Fonte: SINASC.",
+     "Numerador: STTRABPART = 1. Denominador: total de nascidos vivos."
+    ]
+   ],
+   [
+    [
+     "INTERNAÇÕES NEONATAIS"
+    ]
+   ],
+   [
+    [
+     "Número de internações neonatais"
+    ],
+    [
+     "Internações (AIH próprias) de recém-nascidos com 0 a 27 dias de vida na data da internação (período neonatal, OMS)."
+    ],
+    [
+     "Fonte: SIH-RD; ano pela data de internação.",
+     "NEO = 1 quando COD_IDADE ≤ 2 e IDADE entre 0 e 27 (idade em dias; o código 0, idade não exigida, ocorre raramente e foi mantido por compatibilidade com a tabulação de referência).",
+     "Nota: o SIH só emite AIH própria para o recém-nascido internado separadamente da mãe (UTIN, permanência após a alta materna etc.); RN sadios em alojamento conjunto não são contados."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de internações neonatais em UTI neonatal"
+    ],
+    [
+     "Proporção das internações neonatais com uso de UTI neonatal."
+    ],
+    [
+     "Fonte: SIH-RD.",
+     "Numerador: NEO = 1 com MARCA_UTI 81 ou 82 (UTI neonatal tipos II e III; Portaria GM/MS 930/2012, art. 12, parágrafo único, e Portaria GM/MS 2.862/2023, art. 146). Denominador: NEO = 1.",
+     "Nota: MARCA_UTI registra um único tipo de UTI por AIH; uso de UTI pediátrica ou de UCIN não é computado."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual das internações neonatais por tipo de saída (alta, transferência e óbito)"
+    ],
+    [
+     "Proporção das internações neonatais por desfecho registrado na AIH."
+    ],
+    [
+     "Fonte: SIH-RD. Denominador: NEO = 1 (denominador corrigido; o texto anterior dizia OBST = 1).",
+     "Classificação pelo primeiro dígito de COBRANCA (Portaria SAS/MS 719/2007; Manual Técnico Operacional do SIH/SUS 2017, item 6.3): 1x = Alta; 2x = Permanência; 3x = Transferência; 4x = Óbito; 51 = Encerramento administrativo.",
+     "Indicador mantido na planilha; retirado das apresentações por decisão da coordenação (31/08/2026)."
+    ]
+   ],
+   [
+    [
+     "Tempo médio de permanência em UTI neonatal (todas as AIH com uso de UTIN)"
+    ],
+    [
+     "Média de diárias de UTIN por AIH com uso de UTIN, todas as idades."
+    ],
+    [
+     "Fonte: SIH-RD.",
+     "Soma de UTI_MES_TO dividida pelo número de AIH com MARCA_UTI 81 ou 82 e UTI_MES_TO > 0, sem filtro de idade (Portaria SAS/MS 312/2002: estatísticas de unidade incluem todos os pacientes que passaram por ela)."
+    ]
+   ],
+   [
+    [
+     "Taxa de Ocupação"
+    ],
+    [
+     "Total de diárias de UTIN dividido pelos leitos-dia de UTIN do ano, multiplicado por 100."
+    ],
+    [
+     "Fonte: SIH-RD e CNES-LT.",
+     "Numerador: soma de UTI_MES_TO das AIH com MARCA_UTI 81 ou 82, todas as idades, por ano de internação.",
+     "Denominador: leitos-dia de UTIN — leitos EXISTENTES (QT_EXIST, CODLEITO 81 e 82) por competência × dias do mês —, normalizado para ano de 365 dias. Regra transitória aprovada pela coordenação (05/09/2026): o CODLEITO 80 (UTI neonatal tipo I) entra apenas nas competências em que a unidade não tem nenhum leito 81/82 (coerente com a Portaria SAES/MS 2.902/2025, que reclassificou os leitos tipo I)."
+    ]
+   ],
+   [
+    [
+     "MORBIDADE MATERNA"
+    ]
+   ],
+   [
+    [
+     "Porcentagem de casos de morbidade materna grave (condições potencialmente ameaçadoras à vida, OMS)"
+    ],
+    [
+     "Proporção de internações obstétricas com pelo menos uma condição potencialmente ameaçadora à vida (CPAV), operacionalizada no SIH/SUS conforme o Painel de Vigilância da Saúde Materna do Observatório Obstétrico Brasileiro (OOBr; Domingues et al. 2024). Não corresponde a near miss materno."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP. Critério reescrito conforme o script do OOBr (decisão da coordenação, 09/09/2026), aplicado sobre o universo obstétrico da planilha (mulheres de 10 a 59 anos). Denominador: universo obstétrico.",
+     "Caso = internação do universo com pelo menos um dos critérios:",
+     "1. CID (qualquer campo de diagnóstico): descolamento prematuro de placenta O450, O458, O459; gravidez ectópica O000 a O002, O008, O009; hemorragia pós-parto O720 a O722; rotura uterina O710, O711; pré-eclâmpsia grave O141; eclâmpsia O150 a O152, O159; hipertensão grave O11, O13, O149, O16, O100 a O104, O109, I10 a I15; encefalopatia hipertensiva I674; endometrite O85; edema pulmonar J81; insuficiência respiratória J80, J960, J969, R092, I26x, O032, O037, O042, O047, O052, O057, O062, O067, O072, O077, O082, O880 a O883, O888; convulsões R568; sepse A40x, A41x, A021, A227, A267, A327, A427, B377, O080, O753, O85; choque E86, R570, R571, R578, R579, T811, I460, O083, O751; crise tireotóxica E055; transfusão Z513; histerectomia O822; intubação O29x, O74x, O89x (decisão da coordenação, 09/09/2026).",
+     "2. Procedimento (PROC_REA) ou ato profissional (SP_ATOPROF) correspondente aos critérios: hipertensão grave, choque, transfusão, acesso venoso central, histerectomia, diárias de UTI, cirurgias, e ainda 0411020048 (ectópica), 0409060160 (rotura), 0303100028 (eclâmpsia), 0303040211 (encefalopatia), 0303060131 (edema agudo), 0303060140 (insuficiência respiratória).",
+     "3. Admissão à UTI: UTI_MES_TO > 0, diária de UTI (0802010083, 0802010091, 0802010105, 0802010296, 0802010318) ou ato de UTI na base SP.",
+     "4. Intervenção cirúrgica: procedimentos da lista do OOBr; curetagem 0411020013 apenas em episódio de parto ou com intercorrência puerperal (PROC_REA 0303100010 ou diagnóstico principal O70 a O94).",
+     "5. Tempo de permanência maior que 7 dias (DT_SAIDA − DT_INTER) apenas em internações de parto (lista de partos do OOBr, incluído o 0409060313), excluindo AIH com diária de acompanhante 0802010024.",
+     "Limitações de registro no SIH: Nakamura-Pereira et al. 2013; Domingues et al. 2024."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos casos de morbidade materna grave por grupo de causa"
+    ],
+    [
+     "Porcentagem dos casos de MMG com diagnóstico em cada grupo de causa. Classificação não exclusiva: uma internação pode estar em mais de um grupo e a soma pode passar de 100."
+    ],
+    [
+     "Fonte: SIH-RD.",
+     "Grupos marcados sobre os CASOS de MMG (critério OOBr acima), pelos códigos em qualquer campo de diagnóstico — os 7 grupos do modelo foram MANTIDOS por decisão da coordenação (09/09/2026):",
+     "Causas obstétricas indiretas: O98 a O99.",
+     "Complicações tromboembólicas: O880 a O883, O888; I26.",
+     "Hipertensão: O10 a O16.",
+     "Hemorragia: O00 a O08, O20 a O21, O44 a O46, O67, O72.",
+     "Infecção: O23, O753, O85, O86, O98.",
+     "Outras causas obstétricas: O09 a O19, O24 a O43, O47 a O71, O73 a O84, O87 a O92, O94 a O99, excluídos os códigos já alocados nos grupos anteriores.",
+     "Demais causas: pelo menos um diagnóstico fora do capítulo XV (código não iniciado em O)."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de casos de morbidade materna grave com internação em UTI"
+    ],
+    [
+     "Proporção dos casos de MMG com admissão à UTI."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP.",
+     "Numerador: casos de MMG com UTI_MES_TO > 0, diária de UTI (0802010083, 0802010091, 0802010105, 0802010296, 0802010318) ou ato de UTI na base SP. Denominador: casos de MMG."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de casos de morbidade materna grave com tempo de permanência prolongado pós-parto"
+    ],
+    [
+     "Proporção dos casos de MMG, em internações de parto, com permanência maior que 7 dias."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP.",
+     "Numerador: casos de MMG em internação de parto (lista do OOBr, incluído o 0409060313) com DT_SAIDA − DT_INTER maior que 7 dias, excluindo AIH com diária de acompanhante 0802010024 (na RD ou na SP). Denominador: casos de MMG."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de casos de morbidade materna grave com transfusão sanguínea"
+    ],
+    [
+     "Proporção dos casos de MMG com registro de transfusão."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP.",
+     "Numerador: casos de MMG com Z513 em qualquer campo de diagnóstico, procedimento de transfusão ou ato de transfusão na base SP (0306020068, 0306020076, 0306020084, 0306020092, 0306020106, 0306020114, 0306020122, 0306020130, 0306020149). Denominador: casos de MMG.",
+     "Nota: registro no SIH em torno de 50% (Domingues et al. 2024)."
+    ]
+   ],
+   [
+    [
+     "Porcentagem de casos de morbidade materna grave com realização de histerectomia"
+    ],
+    [
+     "Proporção dos casos de MMG com histerectomia."
+    ],
+    [
+     "Fonte: SIH-RD e SIH-SP.",
+     "Numerador: casos de MMG com O822 em qualquer campo de diagnóstico ou procedimento/ato em 0411020030, 0409060100, 0409060119, 0409060127, 0409060135. Denominador: casos de MMG.",
+     "Nota: registro no SIH em torno de 36% (Domingues et al. 2024)."
+    ]
+   ],
+   [
+    [
+     "MORBIDADE NEONATAL"
+    ]
+   ],
+   [
+    [
+     "Porcentagem de nascidos vivos com condições potencialmente ameaçadoras à vida"
+    ],
+    [
+     "Proporção de nascidos vivos com pelo menos um critério pragmático de morbidade neonatal grave: peso ao nascer menor que 1.500 g, idade gestacional menor que 32 semanas ou Apgar no 5º minuto menor que 7 (Pileggi et al. 2010; Silva et al. 2014; Kale et al. 2017)."
+    ],
+    [
+     "Fonte: SINASC.",
+     "Numerador: PESO < 1500 (excluídos 0, 9999 e em branco), OU idade gestacional menor que 32 semanas (SEMAGESTAC < 32; se ignorada, GESTACAO 1, 2 ou 3), OU APGAR5 < 7 (excluídos valores fora de 0 a 10 e em branco). Denominador: total de nascidos vivos.",
+     "Evitar rotular Apgar < 7 como \"asfixia\" (o manual da DN classifica 5 a 7 como asfixia leve)."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual das internações neonatais por grupos de causas"
+    ],
+    [
+     "Distribuição das internações neonatais por grupo de causa, classificação EXCLUSIVA pelo diagnóstico principal da AIH: cada internação entra em um único grupo e a soma é 100 (decisão da coordenação, 09/09/2026)."
+    ],
+    [
+     "Fonte: SIH-RD. Denominador: NEO = 1.",
+     "Grupo pelo DIAG_PRINC, na ordem: Asfixia/Hipóxia P20 a P21; Infecções perinatais P35 a P39; Transtornos cardiovasculares perinatais P29; Afecções respiratórias do RN P22 a P28; Condições relacionadas a fatores maternos P00 a P04; Prematuridade e baixo peso ao nascer P07; Transtornos metabólicos e endócrinos P70 a P74; Anomalias congênitas Q00 a Q99; Causas mal definidas R00 a R99; Outras afecções do período perinatal = demais códigos P00 a P96; Demais causas = diagnóstico principal fora dos grupos anteriores.",
+     "Motivo da mudança: com a marcação em qualquer campo de diagnóstico, a soma passava de 100 (uma internação entrava em vários grupos); pelo diagnóstico principal a distribuição soma 100."
+    ]
+   ]
+  ]
+ }
+]

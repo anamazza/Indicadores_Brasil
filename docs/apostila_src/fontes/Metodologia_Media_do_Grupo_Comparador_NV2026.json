@@ -1,0 +1,393 @@
+[
+ {
+  "tipo": "p",
+  "estilo": "Heading1",
+  "texto": "Comparação da unidade com a média do seu grupo"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Nota metodológica · Painel NV 2026 — Saúde Materna e Neonatal"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Agosto de 2026 · Fonte dos dados: Ministério da Saúde – SINASC, 2019 a 2025 (2025 preliminar)"
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "1. O que a funcionalidade faz"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "O comparador do painel (“Comparar unidades lado a lado”) passou a permitir que cada maternidade seja comparada com a média do seu próprio grupo. O usuário escolhe primeiro o grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027 —, seleciona de uma a quatro maternidades desse grupo e pode incluir a coluna “Média do grupo” como referência. O filtro por grupo é obrigatório: o painel não permite comparar unidades de grupos diferentes entre si, nem uma unidade com a média de outro grupo."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "A comparação está disponível para cada ano de 2019 a 2025 e para o acumulado 2019–2025, em todos os indicadores do comparador (perfil, pré-natal, via de nascimento, recém-nascido e grupos de Robson)."
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "2. Os três grupos"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Cada unidade do painel pertence a pelo menos um dos três grupos. Algumas unidades pertencem a dois (por exemplo, hospitais universitários EBSERH que também são maternidades estratégicas). Para efeito de exibição, cada unidade aparece uma única vez nos seletores, no primeiro grupo da ordem estratégicas → EBSERH → QUALINEO; para efeito de cálculo da média, a unidade conta em todos os grupos a que pertence."
+ },
+ {
+  "tipo": "tabela",
+  "linhas": [
+   [
+    [
+     "Grupo"
+    ],
+    [
+     "Unidades no seletor"
+    ],
+    [
+     "Unidades na média do grupo"
+    ]
+   ],
+   [
+    [
+     "Maternidades estratégicas"
+    ],
+    [
+     "60"
+    ],
+    [
+     "60"
+    ]
+   ],
+   [
+    [
+     "Unidades EBSERH"
+    ],
+    [
+     "22"
+    ],
+    [
+     "25"
+    ]
+   ],
+   [
+    [
+     "QUALINEO 2026/2027"
+    ],
+    [
+     "33"
+    ],
+    [
+     "35"
+    ]
+   ]
+  ]
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "A diferença entre as colunas corresponde às unidades que pertencem a mais de um grupo: elas aparecem no seletor apenas no primeiro grupo, mas entram no cálculo da média de todos os grupos de que fazem parte."
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "3. Como a média do grupo é calculada"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "3.1. Indicadores percentuais — taxa agregada do grupo. A média não é a média aritmética das taxas das unidades: é a taxa agregada do grupo, obtida somando os numeradores e os denominadores de todas as unidades do grupo com dado no ano e calculando a razão:"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Média do grupo (%)  =  Σ numeradores das unidades do grupo  ÷  Σ denominadores das unidades do grupo  × 100"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Cada indicador usa exatamente o mesmo numerador e denominador da ficha individual da unidade, com as mesmas exclusões de registros ignorados (seção 6). O resultado equivale a uma média das unidades ponderada pelo volume de cada uma, e se interpreta como “a taxa do conjunto das unidades do grupo”."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Essa é a mesma regra de agregação já utilizada em todo o painel quando se somam territórios ou seleções de unidades (mapas e panorama), o que garante uma metodologia única. Ela também é mais robusta do que a média simples, porque unidades com poucos partos não distorcem o resultado."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "3.2. Grupos de Robson. A taxa de cesárea agregada de cada grupo de Robson é ponderada pelo número de nascidos vivos do respectivo grupo de Robson em cada unidade: somam-se as cesáreas do grupo de Robson de todas as unidades e divide-se pela soma dos nascidos vivos daquele grupo de Robson — o que corresponde à mesma lógica de soma de numeradores e denominadores."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "3.3. Volume de nascidos vivos. Por ser um número absoluto (e não uma taxa), o indicador “Nascidos vivos ocorridos” usa a média por unidade: o total de nascidos vivos do grupo dividido pelo número de unidades com dado no ano. Assim, o volume de uma maternidade é comparado com o porte médio das unidades do seu grupo, e não com a soma do grupo inteiro."
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "4. Regras complementares"
+ },
+ {
+  "tipo": "p",
+  "estilo": "ListParagraph",
+  "texto": "A unidade é comparada somente com o seu próprio grupo: o filtro do comparador impede a mistura de grupos na mesma comparação."
+ },
+ {
+  "tipo": "p",
+  "estilo": "ListParagraph",
+  "texto": "Unidade sem dado em determinado ano fica fora do cálculo da média daquele ano (não entra nem no numerador nem no denominador)."
+ },
+ {
+  "tipo": "p",
+  "estilo": "ListParagraph",
+  "texto": "Unidade que pertence a mais de um grupo conta na média de todos os grupos a que pertence."
+ },
+ {
+  "tipo": "p",
+  "estilo": "ListParagraph",
+  "texto": "A coluna da média do grupo é apenas referência: ela não participa do destaque de “melhor posição”, que segue comparando apenas as unidades entre si."
+ },
+ {
+  "tipo": "p",
+  "estilo": "ListParagraph",
+  "texto": "Anos disponíveis: 2019 a 2025, ano a ano, e o acumulado 2019–2025. Os dados de 2025 são preliminares e toda a série está sujeita a revisão."
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "5. Exemplo numérico"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Percentual de cesárea do grupo EBSERH em 2025: as 25 unidades do grupo com dado no ano somaram 28.638 partos cesáreos em 50.084 nascidos vivos com via de nascimento informada."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "28.638 ÷ 50.084 × 100  =  57,2%"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "No comparador, cada hospital EBSERH é comparado a essa referência de 57,2% — por exemplo, uma unidade com 64,4% de cesárea aparece 7,2 pontos percentuais acima da média do seu grupo no ano."
+ },
+ {
+  "tipo": "p",
+  "estilo": "Heading2",
+  "texto": "6. Numerador e denominador de cada indicador"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "A média do grupo soma, entre as unidades do grupo, exatamente os numeradores e denominadores abaixo — os mesmos das fichas individuais do painel (página “Metodologia”)."
+ },
+ {
+  "tipo": "tabela",
+  "linhas": [
+   [
+    [
+     "Indicador"
+    ],
+    [
+     "Numerador (somado no grupo)"
+    ],
+    [
+     "Denominador (somado no grupo)"
+    ]
+   ],
+   [
+    [
+     "Nascidos vivos ocorridos"
+    ],
+    [
+     "Soma dos nascidos vivos ocorridos na unidade no ano (contagem simples)."
+    ],
+    [
+     "Não se aplica: é um número absoluto. Na média do grupo, divide-se o total do grupo pelo número de unidades com dado no ano."
+    ]
+   ],
+   [
+    [
+     "% dos nascimentos da UF ocorridos nas maternidades"
+    ],
+    [
+     "Nascidos vivos ocorridos nas maternidades da seleção."
+    ],
+    [
+     "Nascidos vivos totais da UF (com mais de uma unidade na mesma UF, o total da UF é contado uma única vez)."
+    ]
+   ],
+   [
+    [
+     "% de NV ocorridos na região de residência"
+    ],
+    [
+     "Nascidos vivos da unidade cuja mãe reside na região de saúde da própria unidade."
+    ],
+    [
+     "Nascidos vivos ocorridos na unidade."
+    ]
+   ],
+   [
+    [
+     "% com 7 ou mais consultas de pré-natal"
+    ],
+    [
+     "Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal."
+    ],
+    [
+     "Nascidos vivos totais, excluídos os registros com número de consultas ignorado."
+    ]
+   ],
+   [
+    [
+     "% com pré-natal iniciado no 1º trimestre"
+    ],
+    [
+     "Nascidos vivos com pré-natal iniciado no primeiro trimestre."
+    ],
+    [
+     "Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado."
+    ]
+   ],
+   [
+    [
+     "% de cesárea"
+    ],
+    [
+     "Partos cesáreos."
+    ],
+    [
+     "Nascidos vivos totais, excluídos os registros com via de nascimento ignorada."
+    ]
+   ],
+   [
+    [
+     "% de parto vaginal assistido por enfermeira ou obstetriz (meta ≥ 50%)"
+    ],
+    [
+     "Partos vaginais assistidos por enfermeira ou obstetriz."
+    ],
+    [
+     "Partos vaginais, excluídos os registros com profissional ignorado."
+    ]
+   ],
+   [
+    [
+     "% de baixo peso (<2500 g)"
+    ],
+    [
+     "Nascidos vivos com menos de 2500 g."
+    ],
+    [
+     "Nascidos vivos com peso ao nascer informado."
+    ]
+   ],
+   [
+    [
+     "% de muito baixo peso (<1500 g)"
+    ],
+    [
+     "Nascidos vivos com menos de 1500 g."
+    ],
+    [
+     "Nascidos vivos com peso ao nascer informado."
+    ]
+   ],
+   [
+    [
+     "% de prematuridade (<37 semanas)"
+    ],
+    [
+     "Nascidos vivos com menos de 37 semanas de gestação."
+    ],
+    [
+     "Nascidos vivos com idade gestacional informada."
+    ]
+   ],
+   [
+    [
+     "% de Apgar <7 no 5º minuto"
+    ],
+    [
+     "Nascidos vivos com Apgar de 0 a 6 no 5º minuto."
+    ],
+    [
+     "Nascidos vivos com Apgar informado, considerando somente os com 2500 g ou mais e sem anomalias congênitas."
+    ]
+   ],
+   [
+    [
+     "Taxa de cesárea no grupo 1 de Robson (meta ≤ 10%)"
+    ],
+    [
+     "Partos cesáreos do grupo 1 de Robson."
+    ],
+    [
+     "Nascidos vivos do grupo 1 de Robson."
+    ]
+   ],
+   [
+    [
+     "Taxa de cesárea no grupo 2 de Robson (meta ≤ 35%)"
+    ],
+    [
+     "Partos cesáreos do grupo 2 de Robson."
+    ],
+    [
+     "Nascidos vivos do grupo 2 de Robson."
+    ]
+   ],
+   [
+    [
+     "Taxa de cesárea no grupo 3 de Robson (meta ≤ 3%)"
+    ],
+    [
+     "Partos cesáreos do grupo 3 de Robson."
+    ],
+    [
+     "Nascidos vivos do grupo 3 de Robson."
+    ]
+   ],
+   [
+    [
+     "Taxa de cesárea no grupo 4 de Robson (meta ≤ 15%)"
+    ],
+    [
+     "Partos cesáreos do grupo 4 de Robson."
+    ],
+    [
+     "Nascidos vivos do grupo 4 de Robson."
+    ]
+   ],
+   [
+    [
+     "Taxa de cesárea no grupo 5 de Robson"
+    ],
+    [
+     "Partos cesáreos do grupo 5 de Robson."
+    ],
+    [
+     "Nascidos vivos do grupo 5 de Robson."
+    ]
+   ]
+  ]
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Observação: no indicador “% dos nascimentos da UF”, quando o grupo tem mais de uma unidade na mesma UF, o total de nascidos vivos da UF é contado uma única vez no denominador."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Fonte: Ministério da Saúde – SINASC, microdados por estabelecimento, 2019 a 2025 (2025 preliminar) · dados sujeitos a revisão. Cálculos realizados no Painel NV 2026 (https://anamazza.github.io/Indicadores_NV/), seção “Comparar unidades lado a lado”, com ficha resumida na página “Metodologia” do próprio painel."
+ }
+]

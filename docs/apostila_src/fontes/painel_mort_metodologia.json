@@ -1,0 +1,657 @@
+{
+ "inds": [
+  {
+   "id": "nv",
+   "rot": "Nascidos vivos ocorridos",
+   "eixo": "geral",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SINASC",
+   "desc": "Total de nascidos vivos ocorridos na unidade (SINASC): denominador da razão de mortalidade materna e das taxas neonatais.",
+   "alias": null
+  },
+  {
+   "id": "rmm",
+   "rot": "Razão de mortalidade materna (por 100 mil NV)",
+   "eixo": "geral",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por 100 mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos maternos ocorridos na unidade por 100 mil nascidos vivos ocorridos na unidade (definição do Ministério da Saúde para óbito materno).",
+   "alias": "rmm_m"
+  },
+  {
+   "id": "tmf",
+   "rot": "Taxa de mortalidade fetal (por mil nascimentos)",
+   "eixo": "geral",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil nascimentos",
+   "fonte": "SIM-DOFET e SINASC",
+   "desc": "Óbitos fetais (22 semanas ou mais, ou 500 g ou mais) por mil nascimentos (nascidos vivos + óbitos fetais) ocorridos na unidade.",
+   "alias": "tmf_f"
+  },
+  {
+   "id": "tmp",
+   "rot": "Taxa de mortalidade perinatal (por mil nascimentos)",
+   "eixo": "geral",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil nascimentos",
+   "fonte": "SIM-DOFET, SIM-DO e SINASC",
+   "desc": "Óbitos fetais mais óbitos neonatais precoces (0 a 6 dias) por mil nascimentos ocorridos na unidade.",
+   "alias": "tmp_p"
+  },
+  {
+   "id": "tmn",
+   "rot": "Taxa de mortalidade neonatal (por mil NV)",
+   "eixo": "geral",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos de nascidos vivos com 0 a 27 dias de vida ocorridos na unidade por mil nascidos vivos ocorridos na unidade.",
+   "alias": "tmn_n"
+  },
+  {
+   "id": "obm",
+   "rot": "Número de óbitos maternos",
+   "eixo": "materna",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Óbitos de mulheres na gestação ou até 42 dias após o seu término, por causa relacionada ou agravada pela gravidez, ocorridos na unidade (regra do Ministério da Saúde).",
+   "alias": null
+  },
+  {
+   "id": "rmm_m",
+   "rot": "Razão de mortalidade materna (por 100 mil NV)",
+   "eixo": "materna",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por 100 mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos maternos ocorridos na unidade por 100 mil nascidos vivos ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "mdir",
+   "rot": "% de óbitos maternos por causas obstétricas diretas",
+   "eixo": "materna",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos maternos, proporção por causas obstétricas diretas (complicações da gravidez, parto e puerpério).",
+   "alias": null
+  },
+  {
+   "id": "mind",
+   "rot": "% de óbitos maternos por causas obstétricas indiretas",
+   "eixo": "materna",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos maternos, proporção por causas obstétricas indiretas (doenças pré-existentes ou que surgiram na gravidez, agravadas por ela).",
+   "alias": null
+  },
+  {
+   "id": "mhip",
+   "rot": "% dos óbitos maternos diretos por hipertensão",
+   "eixo": "materna",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos maternos por causas diretas, proporção por hipertensão (pré-eclâmpsia/eclâmpsia, O11 a O16).",
+   "alias": null
+  },
+  {
+   "id": "mhem",
+   "rot": "% dos óbitos maternos diretos por hemorragia",
+   "eixo": "materna",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos maternos por causas diretas, proporção por hemorragia (O20, O44 a O46, O67, O72).",
+   "alias": null
+  },
+  {
+   "id": "minf",
+   "rot": "% dos óbitos maternos diretos por infecção puerperal",
+   "eixo": "materna",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos maternos por causas diretas, proporção por infecção puerperal (O85, O86, O91).",
+   "alias": null
+  },
+  {
+   "id": "obf",
+   "rot": "Número de óbitos fetais",
+   "eixo": "fetal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais, ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "tmf_f",
+   "rot": "Taxa de mortalidade fetal (por mil nascimentos)",
+   "eixo": "fetal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil nascimentos",
+   "fonte": "SIM-DOFET e SINASC",
+   "desc": "Óbitos fetais por mil nascimentos (nascidos vivos + óbitos fetais) ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "fante",
+   "rot": "% de óbitos fetais anteparto",
+   "eixo": "fetal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Entre os óbitos fetais com momento informado, proporção ocorrida antes do trabalho de parto.",
+   "alias": null
+  },
+  {
+   "id": "fintra",
+   "rot": "% de óbitos fetais intraparto",
+   "eixo": "fetal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Entre os óbitos fetais com momento informado, proporção ocorrida durante o parto — óbitos potencialmente sensíveis à assistência ao parto.",
+   "alias": null
+  },
+  {
+   "id": "f1500",
+   "rot": "% de óbitos fetais com peso <1500 g",
+   "eixo": "fetal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Entre os óbitos fetais com peso informado, proporção com menos de 1500 g.",
+   "alias": null
+  },
+  {
+   "id": "f2500",
+   "rot": "% de óbitos fetais com peso ≥2500 g",
+   "eixo": "fetal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Entre os óbitos fetais com peso informado, proporção com 2500 g ou mais — fetos a termo ou próximos do termo, óbitos em geral mais evitáveis.",
+   "alias": null
+  },
+  {
+   "id": "fmal",
+   "rot": "% de óbitos fetais por causas mal definidas",
+   "eixo": "fetal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET",
+   "desc": "Entre os óbitos fetais, proporção com causa básica mal definida (R00 a R99, P95) — indicador da qualidade da investigação do óbito.",
+   "alias": null
+  },
+  {
+   "id": "obp",
+   "rot": "Número de óbitos perinatais",
+   "eixo": "perinatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET e SIM-DO",
+   "desc": "Óbitos fetais (22 semanas ou mais, ou 500 g ou mais) mais óbitos neonatais precoces (0 a 6 dias) ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "tmp_p",
+   "rot": "Taxa de mortalidade perinatal (por mil nascimentos)",
+   "eixo": "perinatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil nascimentos",
+   "fonte": "SIM-DOFET, SIM-DO e SINASC",
+   "desc": "Óbitos perinatais por mil nascimentos (nascidos vivos + óbitos fetais) ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "pfet",
+   "rot": "% do componente fetal na mortalidade perinatal",
+   "eixo": "perinatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET e SIM-DO",
+   "desc": "Entre os óbitos perinatais, proporção de óbitos fetais (o restante são óbitos neonatais precoces).",
+   "alias": null
+  },
+  {
+   "id": "p1500",
+   "rot": "% de óbitos perinatais com peso <1500 g",
+   "eixo": "perinatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET e SIM-DO",
+   "desc": "Entre os óbitos perinatais com peso informado, proporção com menos de 1500 g.",
+   "alias": null
+  },
+  {
+   "id": "phip",
+   "rot": "% de óbitos perinatais por hipóxia/asfixia e transtornos respiratórios",
+   "eixo": "perinatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET e SIM-DO",
+   "desc": "Entre os óbitos perinatais, proporção por hipóxia/asfixia e transtornos respiratórios (P10 a P15, P20, P21, P24, P28).",
+   "alias": null
+  },
+  {
+   "id": "panom",
+   "rot": "% de óbitos perinatais por anomalias congênitas",
+   "eixo": "perinatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DOFET e SIM-DO",
+   "desc": "Entre os óbitos perinatais, proporção por anomalias congênitas (capítulo XVII da CID-10).",
+   "alias": null
+  },
+  {
+   "id": "obn",
+   "rot": "Número de óbitos neonatais (0 a 27 dias)",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Óbitos de nascidos vivos com 0 a 27 dias completos de vida ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "tmn_n",
+   "rot": "Taxa de mortalidade neonatal (por mil NV)",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos neonatais (0 a 27 dias) por mil nascidos vivos ocorridos na unidade.",
+   "alias": null
+  },
+  {
+   "id": "tmnp",
+   "rot": "Taxa de mortalidade neonatal precoce (por mil NV)",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos de 0 a 6 dias de vida por mil nascidos vivos ocorridos na unidade (IDB C.1.1).",
+   "alias": null
+  },
+  {
+   "id": "tmnt",
+   "rot": "Taxa de mortalidade neonatal tardia (por mil NV)",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": "por mil NV",
+   "fonte": "SIM-DO e SINASC",
+   "desc": "Óbitos de 7 a 27 dias de vida por mil nascidos vivos ocorridos na unidade (IDB C.1.2).",
+   "alias": null
+  },
+  {
+   "id": "n0d",
+   "rot": "% de óbitos neonatais no 1º dia de vida",
+   "eixo": "neonatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção ocorrida nas primeiras 24 horas de vida.",
+   "alias": null
+  },
+  {
+   "id": "n1500",
+   "rot": "% de óbitos neonatais com peso <1500 g",
+   "eixo": "neonatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais com peso informado, proporção com menos de 1500 g.",
+   "alias": null
+  },
+  {
+   "id": "n2500",
+   "rot": "% de óbitos neonatais com peso ≥2500 g",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais com peso informado, proporção com 2500 g ou mais — recém-nascidos de peso adequado, óbitos em geral mais evitáveis.",
+   "alias": null
+  },
+  {
+   "id": "nevit",
+   "rot": "% de óbitos neonatais por causas evitáveis (LBE)",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção por causas evitáveis por intervenções do SUS (Lista Brasileira: imunoprevenção, atenção à gestação, ao parto, ao recém-nascido, diagnóstico/tratamento e promoção à saúde).",
+   "alias": null
+  },
+  {
+   "id": "nges",
+   "rot": "% de óbitos neonatais reduzíveis por atenção à mulher na gestação",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção por causas reduzíveis por adequada atenção à mulher na gestação (LBE).",
+   "alias": null
+  },
+  {
+   "id": "npar",
+   "rot": "% de óbitos neonatais reduzíveis por atenção à mulher no parto",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção por causas reduzíveis por adequada atenção à mulher no parto (LBE).",
+   "alias": null
+  },
+  {
+   "id": "nrn",
+   "rot": "% de óbitos neonatais reduzíveis por atenção ao recém-nascido",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção por causas reduzíveis por adequada atenção ao recém-nascido (LBE).",
+   "alias": null
+  },
+  {
+   "id": "nmal",
+   "rot": "% de óbitos neonatais por causas mal definidas",
+   "eixo": "neonatal",
+   "sentido": "menor",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção com causa básica mal definida (R00 a R99, P95) — qualidade da investigação do óbito.",
+   "alias": null
+  },
+  {
+   "id": "nanom",
+   "rot": "% de óbitos neonatais por anomalias congênitas",
+   "eixo": "neonatal",
+   "sentido": "neutro",
+   "meta": null,
+   "unidade": null,
+   "fonte": "SIM-DO",
+   "desc": "Entre os óbitos neonatais, proporção por anomalias congênitas (capítulo XVII da CID-10).",
+   "alias": null
+  }
+ ],
+ "calculos": {
+  "nv": {
+   "n": "Nascidos vivos ocorridos na unidade no ano (SINASC, CODESTAB = CNES da unidade, ano de DTNASC), independentemente do município de residência da mãe.",
+   "d": "Não se aplica: é um número absoluto.",
+   "obs": null
+  },
+  "obm": {
+   "n": "Óbitos de mulheres (SEXO = feminino) ocorridos na unidade (CODESTAB) com causa básica (CAUSABAS) O00-O95, O98 ou O99; ou A34, F53, M83.0 com óbito no puerpério até 42 dias ou ignorado; ou B20-B24, D39.2, E23.0 somente quando OBITOGRAV = 1 ou OBITOPUERP = 1. Sem filtro de idade.",
+   "d": "Não se aplica: é um número absoluto.",
+   "obs": "Regra do Ministério da Saúde (IDB C.3, Anexo I; Guia de Vigilância do Óbito Materno, 2009), a mesma do painel OOBr. Difere das planilhas anteriores a 10/09/2026, que contavam também homens e óbitos por HIV com os campos 43/44 ignorados."
+  },
+  "rmm_m": {
+   "n": "Óbitos maternos ocorridos na unidade no ano (regra acima).",
+   "d": "Nascidos vivos ocorridos na unidade no ano (SINASC), × 100.000. Sem fator de correção.",
+   "obs": "Razão por estabelecimento de ocorrência: o numerador inclui mulheres cujo parto ocorreu em outro serviço ou transferidas; em unidades com poucos nascidos vivos, um único óbito produz valores altos — leia junto com o número absoluto."
+  },
+  "mdir": {
+   "n": "Óbitos maternos por causas obstétricas diretas: O00-O08, O11-O23, O24.4, O26-O92, A34, D39.2, E23.0, F53, M83.0.",
+   "d": "Total de óbitos maternos da unidade no ano.",
+   "obs": null
+  },
+  "mind": {
+   "n": "Óbitos maternos por causas obstétricas indiretas: O10, O24 (exceto O24.4), O25, O94, O98, O99, B20-B24.",
+   "d": "Total de óbitos maternos da unidade no ano. Os óbitos O95 (inespecíficos) completam o total.",
+   "obs": null
+  },
+  "mhip": {
+   "n": "Óbitos maternos diretos por hipertensão: O11 a O16.",
+   "d": "Total de óbitos maternos por causas diretas.",
+   "obs": null
+  },
+  "mhem": {
+   "n": "Óbitos maternos diretos por hemorragia: O20, O44, O45, O46, O67, O72.",
+   "d": "Total de óbitos maternos por causas diretas.",
+   "obs": null
+  },
+  "minf": {
+   "n": "Óbitos maternos diretos por infecção puerperal: O85, O86, O91.",
+   "d": "Total de óbitos maternos por causas diretas.",
+   "obs": null
+  },
+  "obf": {
+   "n": "Declarações de óbito fetal (SIM-DOFET) da unidade com SEMAGESTAC ≥ 22 semanas ou PESO ≥ 500 g.",
+   "d": "Não se aplica: é um número absoluto.",
+   "obs": "Registros com os dois campos ignorados não entram (opção conservadora; o IDB recomenda incluí-los). A DO fetal é obrigatória a partir de 20 semanas, por isso o arquivo tem registros abaixo do limite estatístico."
+  },
+  "tmf_f": {
+   "n": "Óbitos fetais (regra acima).",
+   "d": "Nascimentos ocorridos na unidade: nascidos vivos (SINASC) + óbitos fetais, × 1.000 (IDB C.5).",
+   "obs": null
+  },
+  "fante": {
+   "n": "Óbitos fetais com OBITOPARTO = 1 (antes do parto).",
+   "d": "Óbitos fetais com momento informado (exclui ignorado).",
+   "obs": null
+  },
+  "fintra": {
+   "n": "Óbitos fetais com OBITOPARTO = 2 (durante o parto).",
+   "d": "Óbitos fetais com momento informado (exclui ignorado).",
+   "obs": null
+  },
+  "f1500": {
+   "n": "Óbitos fetais com peso de 100 a 1499 g.",
+   "d": "Óbitos fetais com peso informado (100 a 8.000 g).",
+   "obs": null
+  },
+  "f2500": {
+   "n": "Óbitos fetais com peso de 2500 g ou mais.",
+   "d": "Óbitos fetais com peso informado (100 a 8.000 g).",
+   "obs": null
+  },
+  "fmal": {
+   "n": "Óbitos fetais com causa básica R00-R99 ou P95.",
+   "d": "Total de óbitos fetais.",
+   "obs": null
+  },
+  "obp": {
+   "n": "Óbitos fetais (≥22 semanas ou ≥500 g) + óbitos de nascidos vivos com 0 a 6 dias de vida (SIM-DO) ocorridos na unidade.",
+   "d": "Não se aplica: é um número absoluto.",
+   "obs": null
+  },
+  "tmp_p": {
+   "n": "Óbitos perinatais (regra acima).",
+   "d": "Nascimentos ocorridos na unidade: nascidos vivos + óbitos fetais, × 1.000 (IDB C.5).",
+   "obs": "O componente neonatal precoce é atribuído pelo local do óbito; a DO não informa o estabelecimento de nascimento. Em maternidades com UTI neonatal, recém-nascidos nascidos em outro serviço entram no numerador sem entrar no denominador."
+  },
+  "pfet": {
+   "n": "Óbitos fetais (componente fetal).",
+   "d": "Total de óbitos perinatais.",
+   "obs": null
+  },
+  "p1500": {
+   "n": "Óbitos perinatais com peso de 100 a 1499 g.",
+   "d": "Óbitos perinatais com peso informado.",
+   "obs": null
+  },
+  "phip": {
+   "n": "Óbitos perinatais com causa básica P10-P15, P20, P21, P24, P28.",
+   "d": "Total de óbitos perinatais.",
+   "obs": null
+  },
+  "panom": {
+   "n": "Óbitos perinatais com causa básica Q00-Q99.",
+   "d": "Total de óbitos perinatais.",
+   "obs": null
+  },
+  "obn": {
+   "n": "Óbitos de nascidos vivos com 0 a 27 dias completos de vida ocorridos na unidade (SIM-DO). Idade = DTOBITO − DTNASC; sem DTNASC, recuperada do campo IDADE (minutos/horas = 0 dias; dias = quantidade).",
+   "d": "Não se aplica: é um número absoluto.",
+   "obs": null
+  },
+  "tmn_n": {
+   "n": "Óbitos neonatais (0 a 27 dias) ocorridos na unidade.",
+   "d": "Nascidos vivos ocorridos na unidade (SINASC), × 1.000.",
+   "obs": "Taxa por estabelecimento de ocorrência: inclui recém-nascidos transferidos de outros serviços (o denominador só tem os nascidos vivos da própria unidade). Não é comparável à taxa populacional do IDB."
+  },
+  "tmnp": {
+   "n": "Óbitos de 0 a 6 dias de vida ocorridos na unidade.",
+   "d": "Nascidos vivos ocorridos na unidade, × 1.000 (IDB C.1.1).",
+   "obs": null
+  },
+  "tmnt": {
+   "n": "Óbitos de 7 a 27 dias de vida ocorridos na unidade.",
+   "d": "Nascidos vivos ocorridos na unidade, × 1.000 (IDB C.1.2).",
+   "obs": null
+  },
+  "n0d": {
+   "n": "Óbitos neonatais com 0 dias de vida (primeiras 24 horas).",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "n1500": {
+   "n": "Óbitos neonatais com peso de 100 a 1499 g.",
+   "d": "Óbitos neonatais com peso informado.",
+   "obs": null
+  },
+  "n2500": {
+   "n": "Óbitos neonatais com peso de 2500 g ou mais.",
+   "d": "Óbitos neonatais com peso informado.",
+   "obs": null
+  },
+  "nevit": {
+   "n": "Óbitos neonatais nos seis grupos de causas evitáveis da Lista Brasileira (imunoprevenção; atenção à mulher na gestação; no parto; ao recém-nascido; diagnóstico e tratamento; promoção à saúde).",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "nges": {
+   "n": "Óbitos neonatais reduzíveis por atenção à mulher na gestação: A50, B20-B24, P00, P01, P02.2, P02.3, P02.7-P02.9, P04, P05, P07, P22.0, P26, P52, P55.0, P55.1, P55.8, P55.9, P56, P57, P77.",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "npar": {
+   "n": "Óbitos neonatais reduzíveis por atenção à mulher no parto: P02.0, P02.1, P02.4-P02.6, P03, P08, P10-P15, P20, P21, P24.0-P24.2, P24.8, P24.9.",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "nrn": {
+   "n": "Óbitos neonatais reduzíveis por atenção ao recém-nascido: P22.1, P22.8, P22.9, P23, P25, P27, P28, P35.1, P35.2, P35.4-P35.9, P36-P39, P50, P51, P53, P54, P58-P61, P70-P76, P78, P80-P83, P90-P94, P96.0-P96.8.",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "nmal": {
+   "n": "Óbitos neonatais com causa básica R00-R99 ou P95.",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  },
+  "nanom": {
+   "n": "Óbitos neonatais com causa básica Q00-Q99.",
+   "d": "Total de óbitos neonatais.",
+   "obs": null
+  }
+ },
+ "extras": [
+  {
+   "rot": "Grupos de causas dos óbitos fetais, perinatais e neonatais (tabelas do dossiê)",
+   "desc": "Classificação própria do projeto por faixas da CID-10, com precedência na ordem listada. Não há lista oficial do Ministério da Saúde para este recorte (a OMS publica a ICD-PM).",
+   "n": "Fatores maternos, placenta, cordão e membranas = P00-P04 · Gestação e crescimento fetal = P05, P07, P08 · Hipóxia/asfixia e transtornos respiratórios = P10-P15, P20, P21, P24, P28 · Infecções perinatais = P35-P39, A50 · Anomalias congênitas = Q00-Q99 · Hemorrágicos e hematológicos = P50-P61 · Mal definidas = R00-R99, P95 · Demais causas = outros códigos.",
+   "d": "Total de óbitos do bloco (fetal, perinatal ou neonatal) na unidade e no ano; a linha Total soma 100%.",
+   "fonte": "Ministério da Saúde - SIM (DO e DOFET), 2019 a 2025."
+  },
+  {
+   "rot": "Grupos de causas maternas diretas e indiretas (tabelas do dossiê)",
+   "desc": "Classificação por faixas da CID-10 aplicada aos óbitos maternos, com precedência na ordem listada.",
+   "n": "Diretas: Aborto = O00-O08 · Hipertensão = O11-O16 · Hemorragia = O20, O44-O46, O67, O72 · Infecção puerperal = O85, O86, O91 · Tromboembolismo = O88 · Outras diretas = demais causas diretas. Indiretas: Infecciosas e parasitárias = O98, B20-B24 · Cardiopatias = O99.4 · Respiratórias = O99.5 · Hipertensão/diabetes pré-existentes = O10, O24 (exceto O24.4), O25 · Outras afecções maternas = O99 (demais), O94.",
+   "d": "Total de causas diretas ou de causas indiretas da unidade no ano (os percentuais das tabelas). Óbitos O95 não entram nos grupos.",
+   "fonte": "Ministério da Saúde - SIM-DO, 2019 a 2025."
+  },
+  {
+   "rot": "Faixas de peso ao nascer (tabelas do dossiê)",
+   "desc": "Categorias do campo PESO (gramas) das declarações de óbito e de óbito fetal.",
+   "n": "Menos de 1000 g (100 a 999) · 1000 a 1499 g · 1500 a 2499 g · 2500 a 3999 g · 4000 g e mais (4.000 a 8.000) · Ignorado (branco, 0, 9999 ou fora de 100 a 8.000).",
+   "d": "Total de óbitos do bloco na unidade e no ano.",
+   "fonte": "Ministério da Saúde - SIM (DO e DOFET), 2019 a 2025."
+  },
+  {
+   "rot": "Agregado do grupo (comparador)",
+   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (apoiadas, EBSERH ou QUALINEO 2026/2027). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
+   "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano (nos números absolutos, média por unidade).",
+   "d": "Soma dos denominadores correspondentes nas mesmas unidades — a mesma regra de agregação usada nos mapas e no painel lateral.",
+   "fonte": "Ministério da Saúde - SIM e SINASC, 2019 a 2025."
+  },
+  {
+   "rot": "HCFAMEMA (Marília/SP): complexo hospitalar",
+   "desc": "Os CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) são tratados como um único complexo.",
+   "n": "Óbitos dos dois códigos CNES.",
+   "d": "Nascidos vivos do CNES 2025523 (unidade materno-infantil).",
+   "fonte": "Ministério da Saúde - SIM e SINASC, 2019 a 2025."
+  }
+ ],
+ "fontes": [
+  [
+   "SIM · declarações de óbito (DO)",
+   "Sistema de Informações sobre Mortalidade, Ministério da Saúde. Arquivos DO<UF><ano>.dbc de todas as 27 UFs (2019 a 2023 definitivos; 2024 e 2025 preliminares, extração de 10 e 11/09/2026 — as unidades acrescentadas em 23/09/2026, de MA, CE e SP, foram extraídas nessa data, com as mesmas regras; na mesma data, o Hospital Santa Marcelina/SP e o Hospital da Mulher do Recife/PE tiveram os óbitos neonatais de residentes em outras UFs incorporados). Os óbitos são atribuídos ao estabelecimento onde ocorreram (CODESTAB) e ao ano da data do óbito. Base dos óbitos maternos, neonatais e do componente neonatal precoce da mortalidade perinatal."
+  ],
+  [
+   "SIM · declarações de óbito fetal (DOFET)",
+   "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025. Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."
+  ],
+  [
+   "SINASC",
+   "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal."
+  ],
+  [
+   "CNES",
+   "Cadastro Nacional dos Estabelecimentos de Saúde. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES; coordenadas geográficas georreferenciadas a partir do cadastro."
+  ],
+  [
+   "Lista de maternidades",
+   "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, o Hospital do Rocio (PR) e a Unidade Hospitalar de Iauaretê (AM)."
+  ],
+  [
+   "Malhas territoriais",
+   "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização — as mesmas do Painel NV 2026."
+  ]
+ ]
+}

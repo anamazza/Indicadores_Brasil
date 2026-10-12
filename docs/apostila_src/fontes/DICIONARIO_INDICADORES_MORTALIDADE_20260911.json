@@ -1,0 +1,452 @@
+[
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "DICIONÁRIO DA PLANILHA DE INDICADORES DE MORTALIDADE. GRUPO DE MATERNIDADES"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Versão de 11/09/2026. Descreve os indicadores das planilhas TABELAS_MORTALIDADE_VALIDACAO_2019_2025 (uma aba por CNES) e das apresentações por maternidade, com as regras aplicadas no recálculo de 11/09/2026: óbito materno pela definição do Ministério da Saúde, Lista Brasileira de Causas Evitáveis oficial e recuperação da idade neonatal pelo campo IDADE da Declaração de Óbito."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Referências: IDB/DATASUS, Indicadores e Dados Básicos, fichas C.1.1 (mortalidade neonatal precoce), C.1.2 (neonatal tardia), C.3 e Anexo I (razão de mortalidade materna e conceito de óbito materno) e C.5 (perinatal); Guia de Vigilância Epidemiológica do Óbito Materno (MS, 2009); Lista de Tabulação de Causas Evitáveis de menores de 5 anos (DATASUS/SVS; Malta et al., 2007 e 2010); dicionários de variáveis do SIM e do SINASC; painel Óbitos de Gestantes e Puérperas do Observatório Obstétrico Brasileiro (OOBr). Os códigos citados são da CID-10."
+ },
+ {
+  "tipo": "tabela",
+  "linhas": [
+   [
+    [
+     "INDICADOR"
+    ],
+    [
+     "DESCRIÇÃO"
+    ],
+    [
+     "VARIÁVEIS"
+    ]
+   ],
+   [
+    [
+     "DEFINIÇÕES GERAIS (SIM E SINASC)"
+    ]
+   ],
+   [
+    [
+     "Unidade de análise e ano de referência"
+    ],
+    [
+     "Óbitos atribuídos ao estabelecimento de saúde onde ocorreram e ao ano da data do óbito."
+    ],
+    [
+     "Fonte: SIM, arquivos DO (Declarações de Óbito) e DOFET (Declarações de Óbito Fetal).",
+     "Estabelecimento: CODESTAB (código CNES do local de ocorrência, 7 dígitos, completado com zeros à esquerda). Ano: ano de DTOBITO (data do óbito, ddmmaaaa).",
+     "Arquivos do DATASUS: DO<UF><ano>.dbc de 2019 a 2024 (definitivos), DO<UF>2025.dbc (preliminar) e DOFET<aa>.dbc de 2019 a 2025 (arquivo nacional). Todas as UFs são lidas, porque o óbito é contado na unidade onde ocorreu, independentemente da residência.",
+     "Registros com CODESTAB em branco (óbitos em domicílio, via pública ou sem identificação do estabelecimento) não são atribuídos a nenhuma unidade. HCFAMEMA (Marília, SP): os CNES 2025507 (hospital adulto) e 2025523 (materno-infantil) são tratados como um único complexo: óbitos dos dois códigos e nascidos vivos do 2025523."
+    ]
+   ],
+   [
+    [
+     "Nascidos vivos (denominador)"
+    ],
+    [
+     "Total de nascidos vivos ocorridos no estabelecimento no ano."
+    ],
+    [
+     "Fonte: SINASC.",
+     "Estabelecimento: CODESTAB = CNES da unidade. Ano: ano de DTNASC (data de nascimento). Arquivos DN<UF><ano>.dbc.",
+     "Inclui todos os nascidos vivos ocorridos na unidade, independentemente do município de residência da mãe. É o denominador da razão de mortalidade materna e das taxas neonatais e compõe, com os óbitos fetais, o denominador das taxas fetal e perinatal."
+    ]
+   ],
+   [
+    [
+     "Situação dos dados"
+    ],
+    [
+     "Anos definitivos e preliminares da série 2019 a 2025."
+    ],
+    [
+     "Fonte: SIM e SINASC.",
+     "2019 a 2023: dados definitivos. 2024 e 2025: dados preliminares do DATASUS, sujeitos a revisão; extração de 10 e 11/09/2026. Totais de 2024 e 2025 podem diferir de tabulações feitas em outra data. As apresentações trazem a nota \"dados sujeitos a revisão\"."
+    ]
+   ],
+   [
+    [
+     "MORTALIDADE MATERNA (SIM E SINASC)"
+    ]
+   ],
+   [
+    [
+     "Número de óbitos maternos"
+    ],
+    [
+     "Total de óbitos de mulheres durante a gestação ou até 42 dias após o seu término, por causa relacionada ou agravada pela gravidez ou por medidas tomadas em relação a ela, excluídas as causas acidentais ou incidentais (OMS, CID-10; IDB C.3, Anexo I)."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável OBITO_MATERNO = 1 quando SEXO = 2 (feminino; \"F\" nos arquivos preliminares) e a causa básica (CAUSABAS) atende a uma das três condições:",
+     "(a) O00 a O95, O98 ou O99 (capítulo XV da CID-10, excluídos O96 e O97, óbitos maternos tardios): conta sempre;",
+     "(b) A34 (tétano obstétrico), F53 (transtornos mentais e comportamentais associados ao puerpério) ou M83.0 (osteomalácia puerperal): conta quando OBITOPUERP = 1 ou ignorado;",
+     "(c) B20 a B24 (doença pelo HIV), D39.2 (mola hidatiforme invasiva) ou E23.0 (hipopituitarismo, inclui a necrose hipofisária pós-parto): conta somente quando OBITOGRAV = 1 ou OBITOPUERP = 1.",
+     "OBITOGRAV (campo 43 da DO, óbito na gravidez): 1 sim, 2 não, 9 ignorado; branco = 9. OBITOPUERP (campo 44, óbito no puerpério): 1 sim, até 42 dias; 2 sim, de 43 dias a 1 ano; 3 não; 9 ignorado; branco, 0, 4 e 8 = 9.",
+     "Não há filtro de idade. Registros com OBITOGRAV e OBITOPUERP ignorados entram apenas pelas condições (a) e (b). Homens e óbitos com causa presumível sem confirmação do momento (condição c com campos ignorados) não entram: essa era a diferença da regra anterior, que contava todos os B20 a B24 com os campos em branco.",
+     "Referência: IDB/DATASUS C.3, Anexo I; Guia de Vigilância Epidemiológica do Óbito Materno (MS, 2009); regra do painel OOBr."
+    ]
+   ],
+   [
+    [
+     "Razão de Mortalidade Materna (RMM)"
+    ],
+    [
+     "Número de óbitos maternos ocorridos na unidade, dividido pelo número de nascidos vivos ocorridos na unidade no mesmo ano e multiplicado por 100.000."
+    ],
+    [
+     "Fonte: SIM-DO e SINASC.",
+     "Numerador: OBITO_MATERNO = 1, por CODESTAB e ano de DTOBITO. Denominador: nascidos vivos por CODESTAB e ano de DTNASC. Sem fator de correção (o IDB aplica fator de correção apenas aos agregados de UF e país).",
+     "A RMM por estabelecimento de ocorrência não é comparável à RMM populacional (IDB C.3): o numerador inclui óbitos de mulheres cujo parto ocorreu em outro serviço ou que foram transferidas para a unidade, e o denominador contém apenas os partos da própria unidade. Em unidades com poucos nascidos vivos, um único óbito produz valores elevados; o número absoluto deve ser lido junto com a razão."
+    ]
+   ],
+   [
+    [
+     "Distribuição dos óbitos maternos por tipo de causa obstétrica (diretas, indiretas e inespecíficas)"
+    ],
+    [
+     "Número de óbitos maternos em cada tipo de causa obstétrica: direta, indireta ou não especificada."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável TIPO_CAUSA a partir de CAUSABAS dos registros com OBITO_MATERNO = 1:",
+     "\"Direta\" = O00 a O08, O11 a O23, O24.4, O26 a O92, A34, D39.2, E23.0, F53, M83.0;",
+     "\"Indireta\" = O10, O24 (exceto O24.4), O25, O94, O98, O99, B20 a B24;",
+     "\"Inespecífica\" = O95 (morte obstétrica de causa não especificada).",
+     "O94 (sequelas de complicações da gravidez, parto e puerpério) é classificado como indireta, conforme o OOBr. Referência: CID-10, capítulo XV; Guia de Vigilância Epidemiológica do Óbito Materno (MS, 2009)."
+    ]
+   ],
+   [
+    [
+     "Distribuição dos óbitos maternos diretos por grupo de causas"
+    ],
+    [
+     "Número de óbitos maternos por causas obstétricas diretas em cada grupo de causas, com o total de diretas."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável GRUPO_DIRETA a partir de CAUSABAS dos registros com TIPO_CAUSA = \"Direta\", com precedência na ordem listada:",
+     "\"Aborto\" = O00 a O08;",
+     "\"Hipertensão (pré-eclâmpsia/eclâmpsia)\" = O11 a O16;",
+     "\"Hemorragia\" = O20, O44, O45, O46, O67, O72;",
+     "\"Infecção puerperal\" = O85, O86, O91;",
+     "\"Tromboembolismo\" = O88;",
+     "\"Outras causas diretas\" = demais causas diretas (O21 a O23, O24.4, O26 a O43, O47 a O66, O68 a O71, O73 a O84, O87, O89, O90, O92, A34, D39.2, E23.0, F53, M83.0).",
+     "\"Total diretas\" = soma dos seis grupos = TIPO_CAUSA = \"Direta\". Grupo sem ocorrência é apresentado com zero. A tabela traz números absolutos; o percentual de cada grupo é calculado sobre o total de diretas."
+    ]
+   ],
+   [
+    [
+     "Distribuição dos óbitos maternos indiretos por grupo de causas"
+    ],
+    [
+     "Número de óbitos maternos por causas obstétricas indiretas em cada grupo de causas, com o total de indiretas."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável GRUPO_INDIRETA a partir de CAUSABAS dos registros com TIPO_CAUSA = \"Indireta\":",
+     "\"Doenças infecciosas e parasitárias\" = O98, B20 a B24;",
+     "\"Cardiopatias (O99.4)\" = O99.4;",
+     "\"Doenças respiratórias (O99.5)\" = O99.5;",
+     "\"Hipertensão/diabetes pré-existentes\" = O10, O24 (exceto O24.4), O25;",
+     "\"Outras afecções maternas (O99)\" = O99 (exceto O99.4 e O99.5), O94.",
+     "\"Total indiretas\" = soma dos cinco grupos = TIPO_CAUSA = \"Indireta\". Óbitos com O95 (inespecífica) não entram nas tabelas de grupos; aparecem apenas na linha \"Inespecíficas\" do indicador anterior.",
+     "Observação: O25 (desnutrição na gravidez) está agrupado com O10 e O24 por decisão do script original; o rótulo do grupo não o descreve. Recomenda-se renomear o grupo para \"Doenças pré-existentes (hipertensão, diabetes e desnutrição)\" ou mover O25 para \"Outras afecções maternas\"."
+    ]
+   ],
+   [
+    [
+     "MORTALIDADE FETAL (SIM-DOFET E SINASC)"
+    ]
+   ],
+   [
+    [
+     "Número de óbitos fetais"
+    ],
+    [
+     "Total de óbitos fetais ocorridos na unidade no ano, com 22 semanas ou mais de gestação ou peso de 500 g ou mais."
+    ],
+    [
+     "Fonte: SIM-DOFET (declarações de óbito fetal; TIPOBITO = 1).",
+     "Criada a variável OBITO_FETAL = 1 quando SEMAGESTAC ≥ 22 (valores válidos de 1 a 44 semanas) ou PESO ≥ 500 (valores válidos de 100 a 8.000 g).",
+     "Não entram: registros com idade gestacional inferior a 22 semanas e peso inferior a 500 g; e registros com os dois campos ignorados (branco, 99 ou 9999, ou fora da faixa válida). Este segundo grupo é uma exclusão, não uma estimativa: o IDB recomenda incluir no numerador os óbitos fetais com idade gestacional ignorada. A opção adotada é conservadora e deve constar nas notas das apresentações.",
+     "Estabelecimento: CODESTAB; ano: DTOBITO. Referência: IDB/DATASUS C.5; CID-10, volume 2 (limite de 22 semanas ou 500 g para as estatísticas perinatais nacionais); Portaria SVS/MS 116/2009 (a DO fetal é obrigatória a partir de 20 semanas, 500 g ou 25 cm, por isso o arquivo contém registros abaixo do limite estatístico)."
+    ]
+   ],
+   [
+    [
+     "Taxa de Mortalidade Fetal"
+    ],
+    [
+     "Número de óbitos fetais dividido pelo total de nascimentos (nascidos vivos mais óbitos fetais) ocorridos na unidade no ano, multiplicado por 1.000."
+    ],
+    [
+     "Fonte: SIM-DOFET e SINASC.",
+     "Numerador: OBITO_FETAL = 1. Denominador: nascidos vivos (SINASC, CODESTAB, ano de DTNASC) + OBITO_FETAL = 1.",
+     "Referência: IDB C.5 (mesmo denominador da taxa de mortalidade perinatal). Taxa por estabelecimento de ocorrência: unidades de referência recebem gestantes com óbito fetal já diagnosticado, o que eleva a taxa em relação ao conjunto do território."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos fetais por faixa de peso"
+    ],
+    [
+     "Total de óbitos fetais em cada faixa de peso ao nascer, dividido pelo total de óbitos fetais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET.",
+     "Criada a variável FAIXA_PESO a partir de PESO (gramas) com as seguintes categorias: \"Menos de 1000g\" (100 a 999), \"1000g a 1499g\", \"1500g a 2499g\", \"2500g a 3999g\", \"4000g e mais\" (4.000 a 8.000), \"Ignorado / sem informação\" (branco, 0, 9999 ou fora de 100 a 8.000).",
+     "Denominador: OBITO_FETAL = 1. A linha Total soma 100%."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos fetais por momento do óbito em relação ao parto"
+    ],
+    [
+     "Total de óbitos fetais em cada momento do óbito (anteparto, intraparto), dividido pelo total de óbitos fetais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET.",
+     "Categorização da variável OBITOPARTO (morte em relação ao parto): 1 = \"Antes do parto (anteparto)\", 2 = \"Durante o parto (intraparto)\", 3 = \"Após o parto\", 9 ou branco = \"Ignorado / sem informação\".",
+     "O código 3 não se aplica a óbito fetal e indica erro de preenchimento; a linha \"Após o parto\" é omitida da apresentação quando é zero em todos os anos. Denominador: OBITO_FETAL = 1."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos fetais por grupo de causas"
+    ],
+    [
+     "Total de óbitos fetais em cada grupo de causa básica, dividido pelo total de óbitos fetais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET.",
+     "Criada a variável GRUPO_CAUSA a partir de CAUSABAS (classificação própria, por faixas da CID-10, com precedência na ordem listada):",
+     "\"Feto/RN afetado por fatores maternos, placenta, cordão e membranas\" = P00 a P04;",
+     "\"Transtornos ligados à gestação e crescimento fetal\" = P05, P07, P08;",
+     "\"Hipóxia/asfixia e transtornos respiratórios\" = P10 a P15, P20, P21, P24, P28;",
+     "\"Infecções específicas do período perinatal\" = P35 a P39, A50;",
+     "\"Anomalias congênitas\" = Q00 a Q99;",
+     "\"Transtornos hemorrágicos e hematológicos do feto/RN\" = P50 a P61;",
+     "\"Causas mal definidas\" = R00 a R99, P95 (morte fetal de causa não especificada);",
+     "\"Demais causas\" = todos os outros códigos (inclui P22, P23, P25 a P27, P29, P70 a P94, P96 e causas fora dos capítulos XVI e XVII).",
+     "Não existe lista oficial do Ministério da Saúde para este recorte; a classificação deve ser rotulada como própria (a OMS publica a ICD-PM para óbitos perinatais). Recomenda-se avaliar a inclusão de P22 (desconforto respiratório do recém-nascido) e P23 (pneumonia congênita) no grupo de hipóxia/asfixia e transtornos respiratórios, onde já estão P24 e P28. Denominador: OBITO_FETAL = 1."
+    ]
+   ],
+   [
+    [
+     "MORTALIDADE PERINATAL (SIM-DOFET, SIM-DO E SINASC)"
+    ]
+   ],
+   [
+    [
+     "Número de óbitos perinatais"
+    ],
+    [
+     "Total de óbitos fetais (22 semanas ou mais, ou 500 g ou mais) mais óbitos de nascidos vivos com 0 a 6 dias completos de vida, ocorridos na unidade no ano."
+    ],
+    [
+     "Fonte: SIM-DOFET e SIM-DO.",
+     "OBITO_PERINATAL = OBITO_FETAL = 1 (DOFET) ou OBITO_NEONATAL = 1 com IDADE_DIAS entre 0 e 6 (DO). As regras de OBITO_FETAL e IDADE_DIAS são as descritas nas seções de mortalidade fetal e neonatal.",
+     "Referência: IDB/DATASUS C.5; CID-10 (período perinatal: de 22 semanas completas de gestação a 7 dias completos após o nascimento)."
+    ]
+   ],
+   [
+    [
+     "Taxa de Mortalidade Perinatal"
+    ],
+    [
+     "Número de óbitos perinatais dividido pelo total de nascimentos (nascidos vivos mais óbitos fetais) ocorridos na unidade no ano, multiplicado por 1.000."
+    ],
+    [
+     "Fonte: SIM-DOFET, SIM-DO e SINASC.",
+     "Numerador: OBITO_PERINATAL = 1. Denominador: nascidos vivos (SINASC, CODESTAB, ano de DTNASC) + OBITO_FETAL = 1.",
+     "Referência: IDB C.5. Limitação: o componente neonatal precoce é atribuído pelo local do óbito, e a DO não informa o estabelecimento de nascimento; em maternidades com UTI neonatal, recém-nascidos nascidos em outro serviço entram no numerador sem entrar no denominador."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos perinatais por faixa de peso"
+    ],
+    [
+     "Total de óbitos perinatais em cada faixa de peso ao nascer, dividido pelo total de óbitos perinatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET e SIM-DO.",
+     "FAIXA_PESO a partir de PESO (peso ao nascer, em gramas, nas duas declarações), com as mesmas categorias do indicador fetal: \"Menos de 1000g\", \"1000g a 1499g\", \"1500g a 2499g\", \"2500g a 3999g\", \"4000g e mais\", \"Ignorado / sem informação\". Denominador: OBITO_PERINATAL = 1."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos perinatais por momento do óbito (componente fetal e neonatal precoce)"
+    ],
+    [
+     "Total de óbitos perinatais em cada componente (fetal ou neonatal precoce), dividido pelo total de óbitos perinatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET e SIM-DO.",
+     "\"Fetal\" = OBITO_FETAL = 1 (registro da DOFET); \"Neonatal precoce\" = óbito da DO com IDADE_DIAS entre 0 e 6. Denominador: OBITO_PERINATAL = 1."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos perinatais por grupo de causas"
+    ],
+    [
+     "Total de óbitos perinatais em cada grupo de causa básica, dividido pelo total de óbitos perinatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DOFET e SIM-DO.",
+     "GRUPO_CAUSA a partir de CAUSABAS das duas declarações, com a mesma classificação própria do indicador fetal (P00 a P04; P05, P07, P08; P10 a P15, P20, P21, P24, P28; P35 a P39, A50; Q00 a Q99; P50 a P61; R00 a R99, P95; demais causas). Denominador: OBITO_PERINATAL = 1."
+    ]
+   ],
+   [
+    [
+     "MORTALIDADE NEONATAL (SIM-DO E SINASC)"
+    ]
+   ],
+   [
+    [
+     "Número de óbitos neonatais (0 a 27 dias)"
+    ],
+    [
+     "Total de óbitos de nascidos vivos com 0 a 27 dias completos de vida ocorridos na unidade no ano."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável IDADE_DIAS = DTOBITO menos DTNASC, em dias. Quando DTNASC está em branco ou é inválida, IDADE_DIAS é recuperada do campo IDADE do SIM (3 dígitos: unidade + quantidade): unidade 0 (minutos) ou 1 (horas) = 0 dias; unidade 2 (dias) = quantidade; unidades 3 (meses), 4 e 5 (anos), 999 (ignorada) ou campo em branco = não neonatal.",
+     "OBITO_NEONATAL = 1 quando IDADE_DIAS entre 0 e 27. Estabelecimento: CODESTAB; ano: DTOBITO. Sem filtro de peso ou idade gestacional.",
+     "A recuperação pelo campo IDADE é a diferença em relação às planilhas anteriores, que descartavam os registros sem DTNASC; por isso alguns totais neonatais aumentaram de 1 a 3 óbitos. Referência: IDB/DATASUS C.1.1 e C.1.2."
+    ]
+   ],
+   [
+    [
+     "Taxa de Mortalidade Neonatal"
+    ],
+    [
+     "Número de óbitos neonatais (0 a 27 dias) dividido pelo número de nascidos vivos ocorridos na unidade no ano, multiplicado por 1.000."
+    ],
+    [
+     "Fonte: SIM-DO e SINASC.",
+     "Numerador: OBITO_NEONATAL = 1. Denominador: nascidos vivos (SINASC, CODESTAB, ano de DTNASC).",
+     "Limitação estrutural: o óbito é atribuído pelo local de ocorrência e a DO não informa o estabelecimento de nascimento. Em maternidades de referência com UTI neonatal, óbitos de recém-nascidos nascidos em outro serviço entram no numerador enquanto o denominador só tem os nascidos vivos da própria unidade, o que eleva a taxa. A taxa por estabelecimento não é comparável à taxa populacional do IDB."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos neonatais por momento do óbito (dias de vida)"
+    ],
+    [
+     "Total de óbitos neonatais em cada faixa de idade ao morrer (0 dias, 1 a 6 dias, 7 a 27 dias), dividido pelo total de óbitos neonatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Categorização de IDADE_DIAS: \"0 dias\" = 0 (óbito nas primeiras 24 horas); \"1-6 dias\" = 1 a 6; \"7-27 dias\" = 7 a 27. Denominador: OBITO_NEONATAL = 1."
+    ]
+   ],
+   [
+    [
+     "Número e Taxa de Mortalidade Neonatal Precoce (0 a 6 dias)"
+    ],
+    [
+     "Total de óbitos de nascidos vivos com 0 a 6 dias completos de vida, e esse total dividido pelo número de nascidos vivos ocorridos na unidade no ano, multiplicado por 1.000."
+    ],
+    [
+     "Fonte: SIM-DO e SINASC.",
+     "Numerador: OBITO_NEONATAL = 1 e IDADE_DIAS entre 0 e 6. Denominador: nascidos vivos. Referência: IDB C.1.1."
+    ]
+   ],
+   [
+    [
+     "Número e Taxa de Mortalidade Neonatal Tardia (7 a 27 dias)"
+    ],
+    [
+     "Total de óbitos de nascidos vivos com 7 a 27 dias completos de vida, e esse total dividido pelo número de nascidos vivos ocorridos na unidade no ano, multiplicado por 1.000."
+    ],
+    [
+     "Fonte: SIM-DO e SINASC.",
+     "Numerador: OBITO_NEONATAL = 1 e IDADE_DIAS entre 7 e 27. Denominador: nascidos vivos. Referência: IDB C.1.2. Precoce + tardia = neonatal total."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos neonatais por faixa de peso"
+    ],
+    [
+     "Total de óbitos neonatais em cada faixa de peso ao nascer, dividido pelo total de óbitos neonatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "FAIXA_PESO a partir de PESO (peso ao nascer registrado na DO, em gramas), com as categorias \"Menos de 1000g\", \"1000g a 1499g\", \"1500g a 2499g\", \"2500g a 3999g\", \"4000g e mais\", \"Ignorado / sem informação\". Denominador: OBITO_NEONATAL = 1."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos neonatais por grupo de causas"
+    ],
+    [
+     "Total de óbitos neonatais em cada grupo de causa básica, dividido pelo total de óbitos neonatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "GRUPO_CAUSA a partir de CAUSABAS, com a mesma classificação própria dos indicadores fetal e perinatal (P00 a P04; P05, P07, P08; P10 a P15, P20, P21, P24, P28; P35 a P39, A50; Q00 a Q99; P50 a P61; R00 a R99, P95; demais causas). Denominador: OBITO_NEONATAL = 1."
+    ]
+   ],
+   [
+    [
+     "Distribuição percentual dos óbitos neonatais por grupo de causas evitáveis (Lista Brasileira de Causas Evitáveis)"
+    ],
+    [
+     "Total de óbitos neonatais em cada grupo da Lista Brasileira de Causas de Mortes Evitáveis por intervenções do SUS em menores de 5 anos, dividido pelo total de óbitos neonatais e multiplicado por 100."
+    ],
+    [
+     "Fonte: SIM-DO.",
+     "Criada a variável GRUPO_LBE a partir de CAUSABAS, conforme a Lista de Tabulação de Causas Evitáveis de menores de 5 anos do DATASUS/SVS (Malta et al., 2007, atualizada em 2010). Regras de subcategoria (4 caracteres) têm precedência sobre regras de categoria (3 caracteres):",
+     "\"Reduzíveis por imunoprevenção\" = A17, A19, A33, A35 a A37, A80, B05, B06, B16, B26, G00.0, P35.0, P35.3;",
+     "\"Reduzíveis por atenção à mulher na gestação\" = A50, B20 a B24, P00, P01, P02.2, P02.3, P02.7 a P02.9, P04, P05, P07, P22.0, P26, P52, P55.0, P55.1, P55.8, P55.9, P56, P57, P77;",
+     "\"Reduzíveis por atenção à mulher no parto\" = P02.0, P02.1, P02.4 a P02.6, P03, P08, P10 a P15, P20, P21, P24.0 a P24.2, P24.8, P24.9;",
+     "\"Reduzíveis por atenção ao recém-nascido\" = P22.1, P22.8, P22.9, P23, P25, P27, P28, P35.1, P35.2, P35.4 a P35.9, P36 a P39, P50, P51, P53, P54, P58 a P61, P70 a P76, P78, P80 a P83, P90 a P94, P96.0 a P96.8;",
+     "\"Reduzíveis por diagnóstico e tratamento adequados\" = A15, A16, A18, A30 a A32, A38 a A41, A46, A49, A70 a A74, E03.0, E03.1, E10 a E14, E70.0, E73.0, G00.1 a G00.9, G03, G40, G41, I00 a I09, J00 a J06, J12 a J18, J20 a J22, J38.4, J40 a J42, J45 a J47, J68, J69, N39.0, Q90;",
+     "\"Reduzíveis por promoção à saúde\" = A00 a A09, A20 a A28, A75 a A79, A82, A90 a A99, B50 a B64, B65 a B83, B99, D50 a D53, E40 a E64, E86, R95 (síndrome da morte súbita) e causas externas V01 a V99, W00 a W19, W20 a W49, W65 a W74, W75 a W84, W85 a W99, X00 a X09, X30 a X39, X40 a X49, X85 a Y09, Y10 a Y34, Y40 a Y59, Y60 a Y69, Y83, Y84;",
+     "\"Causas mal definidas\" = R00 a R94, R96 a R99, P95, P96.9;",
+     "\"Anomalias congênitas\" = Q00 a Q99, exceto Q90 (linha apresentada em separado para leitura; na lista oficial esses códigos pertencem a \"Demais causas, não claramente evitáveis\");",
+     "\"Demais causas (não claramente evitáveis)\" = todos os outros códigos.",
+     "Denominador: OBITO_NEONATAL = 1. A lista é definida para menores de 5 anos e é aplicada aqui apenas aos óbitos neonatais, dentro do seu escopo. Diferença em relação às planilhas anteriores: o script original usava uma tabela própria que alocava P22.0, P26, P52, P55 a P57 e P77 em \"atenção ao recém-nascido\"; na lista oficial esses códigos pertencem a \"atenção à mulher na gestação\"."
+    ]
+   ]
+  ]
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "Notas metodológicas"
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "1. Ocorrência versus nascimento. Todos os óbitos são atribuídos ao CNES do local de ocorrência (CODESTAB da DO ou da DOFET). A DO não informa o estabelecimento de nascimento, e as taxas neonatais e perinatais de maternidades de referência incluem recém-nascidos transferidos de outros serviços. A razão de mortalidade materna tem a mesma limitação para gestantes e puérperas transferidas. Os indicadores medem a mortalidade ocorrida na unidade, não o risco da população atendida."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "2. Diferenças em relação às planilhas anteriores. Óbito materno: a regra anterior contava homens e óbitos por HIV (B20 a B24) com OBITOGRAV e OBITOPUERP ignorados, o que superestimava o número em 78 das 106 unidades; a regra atual é a do Ministério da Saúde. Causas evitáveis: substituição da tabela própria pela lista oficial. Neonatal: recuperação da idade pelo campo IDADE quando falta DTNASC. Fetal e perinatal: sem mudança de regra."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "3. Dados preliminares. Os anos de 2024 e 2025 são preliminares e os totais podem mudar nas próximas versões dos arquivos do DATASUS."
+ },
+ {
+  "tipo": "p",
+  "estilo": "",
+  "texto": "4. Classificações próprias. Os grupos de causas dos óbitos fetais, perinatais e neonatais e os grupos de causas maternas diretas e indiretas seguem faixas de CID-10 definidas neste projeto e devem ser citados como tais."
+ }
+]

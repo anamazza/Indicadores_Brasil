@@ -66,6 +66,10 @@ def verificar_pagina(nome, path, minimo_kb):
 
 
 print("== Página principal")
+for arq in ["docs/apostila/apostila.html", "docs/apostila/Apostila_Dicionarios_de_Dados_Paineis_Maternidades.pdf"]:
+    p = os.path.join(RAIZ, *arq.split("/"))
+    if os.path.exists(p) and os.path.getsize(p) > 20000: ok(f"{arq} presente ({kb(p)} KB)")
+    else: falha(f"{arq} ausente ou vazio (botões da apostila na página principal)")
 html_raiz = verificar_pagina("raiz", os.path.join(RAIZ, "index.html"), RAIZ_MIN_KB)
 if html_raiz:
     for pasta in PAINEIS:
