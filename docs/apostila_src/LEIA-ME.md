@@ -9,6 +9,7 @@ projetos, sem redigitação: as tabelas dos dicionários e as fichas dos painéi
 | `apostila_lib.js` | identidade visual comum (cores com contraste 4,5:1, Calibri, tabelas sem células mescladas, legendas, hiperlinks, cabeçalho e rodapé) |
 | `gera_apostila_v2.js` | monta a apostila (versão 1.1, revisada pela banca de 11/10/2026) |
 | `gera_parecer.js` | monta o parecer da banca |
+| `docx_para_html.py` | gera a versão de leitura `../apostila/apostila.html` a partir do .docx (sem Word); o PDF sai dela com o Edge: `msedge --headless=new --no-pdf-header-footer --print-to-pdf=saida.pdf file:///caminho-sem-acentos/apostila.html` |
 | `extrai_fichas_painel.py` | extrai as fichas da página Metodologia de um painel (`painel_app.js`) para JSON (INDS, CALCULOS, FICHAS_EXTRAS, fontes) |
 | `fontes/DICIONARIO_INDICADORES_AIH_versao_final_2026-09-10.json` | tabela e parágrafos do Dicionário AIH (Projeto Apresentações Internação), extraídos do Word |
 | `fontes/DICIONARIO_INDICADORES_MORTALIDADE_20260911.json` | idem, Dicionário de Mortalidade (Mortalidade Indicadores) |
@@ -23,8 +24,9 @@ projetos, sem redigitação: as tabelas dos dicionários e as fichas dos painéi
 2. Se um painel mudou: `py -I extrai_fichas_painel.py <pasta_de_trabalho>/painel_app.js fontes/painel_<x>_metodologia.json`.
 3. Instalar a biblioteca uma vez (`npm install docx`) e rodar
    `node gera_apostila_v2.js fontes imagens/logos_iff_fiocruz_sus_ms.png imagens/faixa_capa.png ../Apostila_Dicionarios_de_Dados_Paineis_Maternidades.docx`.
-4. Abrir no Word e atualizar os campos (sumário e numeração), ou deixar que o Word pergunte ao abrir. Ao exportar PDF,
-   marcar "Marcas estruturais do documento para acessibilidade".
+4. Abrir no Word e atualizar os campos (sumário e numeração), ou deixar que o Word pergunte ao abrir.
+   Depois gerar a versão de leitura e o PDF: `py -I docx_para_html.py ../apostila/<arquivo>.docx ../apostila` e o comando do Edge acima;
+   copiar também o .docx para `../apostila/`.
 5. Registrar a nova versão na seção 1.5 da apostila (controle de versões) e revisar os textos de ligação em
    `gera_apostila_v2.js`: são os únicos trechos escritos para a apostila; tudo o mais vem dos documentos de origem.
 6. Após 26/10/2026 (fim do período de defeso eleitoral), trocar a faixa de marcas pela completa, conforme o manual da
