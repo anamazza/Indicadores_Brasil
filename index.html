@@ -54,6 +54,20 @@ a{color:var(--verde-fiocruz)}
 .hero h1{margin-top:.55rem; max-width:22ch}
 .hero p.sub{margin-top:.9rem; max-width:62ch; color:#D3E3D8; font-size:1.05rem}
 
+/* ---------------- saudação personalizada (?para=Nome) ---------------- */
+.boas-vindas{
+  display:flex; gap:.9rem; align-items:flex-start; margin:1.4rem 0 0; max-width:62ch;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.28); border-left:5px solid var(--verde-lima);
+  border-radius:14px; padding:.9rem 1.1rem; color:#F2F8F4; backdrop-filter:blur(4px);
+}
+.boas-vindas[hidden]{display:none}
+.boas-vindas .bv-ico{flex:0 0 38px; width:38px; height:38px; border-radius:50%; display:grid; place-items:center; background:var(--verde-fiocruz); color:#FFF}
+.boas-vindas .bv-ico svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.boas-vindas p{margin:0; font-size:.98rem; line-height:1.5}
+.boas-vindas p strong{color:#FFF}
+.boas-vindas .bv-fechar{margin-left:auto; flex:0 0 auto; background:transparent; border:1px solid rgba(255,255,255,.45); color:#FFF; border-radius:999px; width:30px; height:30px; cursor:pointer; font-size:1rem; line-height:1}
+.boas-vindas .bv-fechar:hover{background:rgba(255,255,255,.15)}
+
 /* ---------------- botões redondos: um por painel ----------------
    Para acrescentar um painel, copie um bloco <a class="painel"> dentro de <nav class="paineis">. */
 .paineis{
@@ -154,6 +168,12 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
   <h1>Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
   <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · indicadores das maternidades apoiadas, das unidades EBSERH e do QUALINEO 2026/2027, com dossiê por unidade, mapas, comparadores e metodologia. Escolha um painel para começar.</p>
 
+  <div class="boas-vindas" id="boasVindas" role="status" hidden>
+    <div class="bv-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7"/><path d="M2 7h20v5H2z"/><path d="M12 7v13"/><path d="M12 7c-2-3-6-3-6 0 0 2 3 2 6 0zM12 7c2-3 6-3 6 0 0 2-3 2-6 0z"/></svg></div>
+    <p><strong id="bvSaudacao">Olá!</strong> <span id="bvTexto">Esta é a página principal dos painéis de indicadores das maternidades estratégicas. Os botões abaixo abrem os painéis de nascimentos, internação e mortalidade; o botão <em>Início</em>, no alto de cada painel, traz de volta a esta página. Mais abaixo está a apostila dos dicionários de dados, para ler na tela ou baixar.</span></p>
+    <button type="button" class="bv-fechar" id="bvFechar" aria-label="Fechar a mensagem de boas-vindas">×</button>
+  </div>
+
   <nav class="paineis" aria-label="Painéis">
 
     <a class="painel" href="https://anamazza.github.io/Indicadores_Brasil/nascimentos/">
@@ -217,6 +237,20 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
 </dialog>
 <script>
 (function(){
+  /* saudação personalizada: ?para=Nome (só letras, espaços, ponto, hífen e apóstrofo; até 40 caracteres) */
+  try {
+    var nome = new URLSearchParams(window.location.search).get("para");
+    if (nome) {
+      nome = nome.trim().replace(/\s+/g, " ");
+      if (/^[\p{L} .'-]{2,40}$/u.test(nome)) {
+        nome = nome.split(" ").map(function(p){ return p.charAt(0).toUpperCase() + p.slice(1); }).join(" ");
+        var bv = document.getElementById("boasVindas");
+        document.getElementById("bvSaudacao").textContent = "Olá, " + nome + "!";
+        bv.hidden = false;
+        document.getElementById("bvFechar").addEventListener("click", function(){ bv.hidden = true; });
+      }
+    }
+  } catch (e) {}
   var dlg = document.getElementById("leitor"), fr = document.getElementById("leitorFrame");
   document.getElementById("btnLer").addEventListener("click", function(){
     if (!fr.getAttribute("src")) fr.setAttribute("src", "docs/apostila/apostila.html");
