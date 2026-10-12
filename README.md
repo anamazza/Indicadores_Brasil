@@ -13,8 +13,8 @@ Cooperação em Saúde da Mulher, da Criança e do Adolescente (IFF/Fiocruz).
 | Internação (SIH/SUS) | https://anamazza.github.io/Indicadores_Brasil/internacao/ | `internacao/` |
 | Mortalidade (SIM) | https://anamazza.github.io/Indicadores_Brasil/mortalidade/ | `mortalidade/` |
 
-Cada painel é um HTML único e autocontido (`index.html`), com botões no cabeçalho para os outros painéis e
-o botão **Início**, que volta à página principal. Os repositórios antigos (Indicadores_NV e
+Cada painel é um HTML único e autocontido (`index.html`), com um botão no cabeçalho que volta à página
+principal (os botões cruzados entre painéis foram retirados em 12/10/2026). Os repositórios antigos (Indicadores_NV e
 Indicadores_mortalidade-2026) foram substituídos por este em 11/10/2026 e hoje só redirecionam para cá.
 
 ## Estrutura

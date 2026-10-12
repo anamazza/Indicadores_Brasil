@@ -65,6 +65,7 @@ const s1 = [
   ...tabelaL("Partes e termos dos painéis", [2400, 7238], ["Termo", "O que é"], [
     ["Mapa do Brasil", "Mapa coroplético por unidade da federação (UF), macrorregião ou região de saúde, com filtros e faixas de cor recalculadas por recorte; existe nos painéis de Nascimentos e de Mortalidade."],
     ["Mapa de unidades", "Mapa com um ponto por maternidade, colorido por grupo, com filtros, busca e pontos de contexto (estabelecimentos com 480 ou mais partos por ano, segundo o SIH/SUS de 2025)."],
+    ["Botão Página principal", "Único botão de navegação no alto de cada painel; volta à página principal dos painéis."],
     ["Dossiê da unidade", "Página de detalhe de cada maternidade: ficha de cadastro CNES, habilitações ativas (serviços que o SUS autoriza o estabelecimento a realizar) e todas as tabelas da apresentação, com gráficos ao clicar nos anos e nos rótulos; permite baixar em PDF."],
     ["Blocos e quadros", "As tabelas do dossiê (chamadas blocos) e os quadros de perfil da mãe (chamados cards no código do painel)."],
     ["Comparador", "Tela que compara de duas a quatro unidades do mesmo grupo, por ano, com uma coluna de referência do grupo (seção 3.2), e a mesma unidade entre anos (variação e tendência)."],

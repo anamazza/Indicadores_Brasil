@@ -39,7 +39,7 @@ Desde 29/09/2026 este painel traz **só nascimentos**: os 16 blocos do deck de N
 (idade, raça/cor, escolaridade, situação conjugal, cesarianas anteriores, tipo de gestação e pré-natal adequado),
 como no deck. Os indicadores de internação (SIH/SUS) estão no **Painel de Internação 2026**
 (`Projeto Apresentações Internação/Painel_Internacao`), e o cabeçalho tem botões para os três painéis da família
-(Nascimentos · Internação · Mortalidade) e o botão **Início**, que leva à página principal dos painéis
+e, desde 12/10/2026, um único botão no cabeçalho, **Página principal**, que leva à página principal dos painéis
 (https://anamazza.github.io/Indicadores_Brasil/). O patch está registrado em `_patch_split_2026-09-29.py`.
 | Remontar o painel | `py montar_painel.py` (gera `Painel_NV2026_Novo.html` e `index.html` e espelha esta pasta na subpasta `nascimentos/` do repositório Indicadores_Brasil) |
 

@@ -94,10 +94,7 @@ for pasta, (gemeo, minimo_kb, dados_js, min_unidades) in PAINEIS.items():
         ok(f"{pasta}: index.html idêntico a {gemeo}")
     # navegação entre painéis
     if f'href="{SITE}"' not in html:
-        falha(f"{pasta}: sem botão Início para a página principal")
-    for outra in PAINEIS:
-        if outra != pasta and f'href="{SITE}{outra}/"' not in html:
-            falha(f"{pasta}: sem botão para {outra}/")
+        falha(f"{pasta}: sem botão de volta à página principal")
     # dados
     n_unidades = None
     try:

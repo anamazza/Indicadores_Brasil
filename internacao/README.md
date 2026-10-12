@@ -4,8 +4,7 @@ Painel interativo de indicadores de **internação obstétrica e neonatal** (SIH
 Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e
 Neonatal — Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente
 (IFF/Fiocruz). Mesma família e mesma estrutura do [Painel NV 2026](https://anamazza.github.io/Indicadores_Brasil/nascimentos/)
-e do [Painel de Mortalidade 2026](https://anamazza.github.io/Indicadores_Brasil/mortalidade/); os três painéis têm
-botões de acesso mútuo no cabeçalho e o botão **Início**, que leva à
+e do [Painel de Mortalidade 2026](https://anamazza.github.io/Indicadores_Brasil/mortalidade/); desde 12/10/2026 o cabeçalho tem um único botão, **Página principal**, que leva à
 [página principal dos painéis](https://anamazza.github.io/Indicadores_Brasil/) (repositório Indicadores_Brasil).
 
 **Publicação (desde 11/10/2026):** https://anamazza.github.io/Indicadores_Brasil/internacao/ — `montar_painel.py` espelha esta pasta de
