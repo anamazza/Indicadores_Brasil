@@ -265,7 +265,7 @@ table.dados th.th-ano{cursor:pointer; padding:.3rem .3rem}
 table.tab-verde thead .btn-ano{background:rgba(255,255,255,.92); color:var(--verde-esmeralda)}
 table.tab-verde thead .btn-ano:hover{background:#FFF}
 
-/* ---------------- dossiê: um seletor por conjunto ---------------- */
+/* ---------------- perfil da unidade: um seletor por conjunto ---------------- */
 .dossie-conjuntos{display:grid; gap:1.05rem}
 .dossie-conj{background:var(--mint-card); border:1px solid var(--borda); border-radius:14px; padding:.85rem 1rem}
 .rot-conj{display:flex; align-items:center; gap:.5rem; margin:0 0 .55rem;
@@ -278,9 +278,9 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .legenda-pontos{display:flex; flex-wrap:wrap; gap:.9rem; margin:.15rem 0 .9rem; font-size:.8rem}
 .legenda-pontos span.item{display:flex; align-items:center; gap:.4rem}
 
-/* ---------------- página do dossiê (sobreposta) ---------------- */
+/* ---------------- página do perfil da unidade (sobreposta) ---------------- */
 .pagina-dossie{position:fixed; inset:0; z-index:3000; overflow:auto; background:var(--mint); overscroll-behavior:contain}
-/* página do dossiê mais larga, para as tabelas de 8 colunas caberem sem corte */
+/* página do perfil da unidade mais larga, para as tabelas de 8 colunas caberem sem corte */
 .pagina-dossie .wrap{width:min(1560px, 100% - 2.6rem)}
 .pd-topo{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.95); border-bottom:1px solid var(--borda); padding:.65rem 0; backdrop-filter:blur(8px)}
 .pd-topo-linha{display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap}
@@ -304,7 +304,7 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .chip-acao:hover{background:var(--verde-esmeralda)}
 body.dossie-aberto{overflow:hidden}
 
-/* ---------------- dossiê ---------------- */
+/* ---------------- perfil da unidade ---------------- */
 .dossie-topo{
   background:linear-gradient(135deg, var(--verde-profundo), var(--verde-esmeralda));
   color:#F1F8F3; border-radius:var(--radius); padding:1.4rem 1.5rem; box-shadow:var(--sombra-alta);
@@ -384,7 +384,7 @@ footer a{color:var(--verde-lima)}
 @media print{
   .navbar,.mapa-controles,.filtros-mapa,.trilho,footer{display:none !important}
   body{padding-left:0 !important; background:#FFF}
-  /* com o dossiê aberto, imprime somente o dossiê */
+  /* com o perfil da unidade aberto, imprime somente o perfil da unidade */
   body.dossie-aberto{overflow:visible}
   body.dossie-aberto > *:not(#paginaDossie){display:none !important}
   .pagina-dossie{position:static !important; overflow:visible !important; background:#FFF}
@@ -489,7 +489,7 @@ footer a{color:var(--verde-lima)}
     <details class="acordeao acordeao-mapa" id="detUnidades">
       <summary>Mapa de unidades · toque para abrir</summary>
       <div class="acordeao-corpo">
-        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o dossiê. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
+        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o perfil da unidade. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
         <p class="legenda-pontos">
           <span class="item"><span class="bolinha bola-estr"></span>maternidades estratégicas</span>
           <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
@@ -509,34 +509,34 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= DOSSIÊ (abre página própria) ========================= -->
+<!-- ========================= PERFIL DA UNIDADE (abre página própria) ========================= -->
 <section id="secDossie">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Dossiê da unidade</p>
-      <h2>Escolha uma maternidade para abrir o dossiê completo</h2>
-      <p style="max-width:none">O dossiê abre em página própria com todas as seções da apresentação: identificação, ficha de cadastro CNES e habilitações ativas, série de nascidos vivos, abrangência territorial, pré-natal, perfil do recém-nascido, via de nascimento e grupos de Robson. Em qualquer tabela, toque em um ano para ver o gráfico daquele ano, e você pode baixar o dossiê em PDF.</p>
+      <p class="eyebrow">Perfil da unidade</p>
+      <h2>Escolha uma maternidade para abrir o perfil da unidade completo</h2>
+      <p style="max-width:none">O perfil da unidade abre em página própria com todas as seções da apresentação: identificação, ficha de cadastro CNES e habilitações ativas, série de nascidos vivos, abrangência territorial, pré-natal, perfil do recém-nascido, via de nascimento e grupos de Robson. Em qualquer tabela, toque em um ano para ver o gráfico daquele ano, e você pode baixar o perfil da unidade em PDF.</p>
     </div>
     <div class="dossie-conjuntos">
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-estr"></span>Maternidades estratégicas <b id="nEstr"></b></p>
         <div class="mapa-controles">
           <select id="selUnidade" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossie">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossie">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeEbserh" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 · novas <b id="nQualineo"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeQualineo" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir perfil da unidade →</button>
         </div>
       </div>
     </div>
@@ -621,14 +621,14 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= PÁGINA DO DOSSIÊ (sobreposta) ========================= -->
+<!-- ========================= PÁGINA DO PERFIL DA UNIDADE (sobreposta) ========================= -->
 <div id="paginaDossie" class="pagina-dossie" hidden>
   <div class="pd-topo">
     <div class="wrap pd-topo-linha">
       <button class="chip chip-acao" id="btnVoltarDossie">← Voltar ao painel</button>
       <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
         <select id="selUnidadePd" style="min-width:280px" aria-label="Trocar de maternidade"></select>
-        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o dossiê em PDF">⬇ Baixar PDF</button>
+        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o perfil da unidade em PDF">⬇ Baixar PDF</button>
       </div>
     </div>
   </div>
@@ -33001,7 +33001,7 @@ function desenhaPontos(){
       <div style="margin-top:.25rem">Nascidos vivos ${nomeAno(ULT)}: <b>${fmtInt(nv)}</b></div>
       <div><u>Via de nascimento</u>: Cesárea <b>${fmtPct(ces)}</b> · Vaginal: <b>${ces == null ? "—" : fmtPct(100 - ces)}</b></div>
       <div>Parto vaginal por enfermeira/obstetriz: <b>${fmtPct(enf)}</b> <span style="color:#4E6A5C">(meta ≥50%)</span></div>
-      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir dossiê →</a>`);
+      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
     camadaEstr.addLayer(mk);
   });
@@ -33099,7 +33099,7 @@ function grafRanking(alvo, itens, opts = {}){
 }
 
 /* ============================================================
-   ABRANGÊNCIA TERRITORIAL (bloco do dossiê)
+   ABRANGÊNCIA TERRITORIAL (bloco do perfil da unidade)
    ============================================================ */
 let dosRec = "nv", dosPersp = "res";
 
@@ -33697,7 +33697,7 @@ function desenhaDossie(){
 
   grafBarras("dNV", ANOS.map((_, i) => nomeAno(i)), ANOS.map((_, a) => mt.blocos.nv_territorio[0][1][a]));
 
-  // bloco de abrangência territorial dentro do dossiê
+  // bloco de abrangência territorial dentro do perfil da unidade
   const rTer = () => { document.getElementById("dTerr").innerHTML = montaTerritorioHTML(mt, dosRec, dosPersp); };
   const sRD = document.getElementById("selRecorteDos");
   sRD.value = dosRec;
@@ -33885,7 +33885,7 @@ const CALCULOS = {
   resRS:{n:"Nascidos vivos da unidade cuja mãe reside na região de saúde da própria unidade.", d:"Nascidos vivos ocorridos na unidade."},
   pn7:{n:"Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal.", d:"Nascidos vivos totais, excluídos os registros com número de consultas ignorado."},
   tri1:{n:"Nascidos vivos com pré-natal iniciado no primeiro trimestre.", d:"Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado.",
-    obs:"Atenção: a linha \"% Primeiro Trimestre\" da tabela do dossiê segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."},
+    obs:"Atenção: a linha \"% Primeiro Trimestre\" da tabela do perfil da unidade segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."},
   ces:{n:"Partos cesáreos.", d:"Nascidos vivos totais, excluídos os registros com via de nascimento ignorada."},
   enf:{n:"Partos vaginais assistidos por enfermeira ou obstetriz.", d:"Partos vaginais, excluídos os registros com profissional ignorado."},
   p2500:{n:"Nascidos vivos com menos de 2500 g.", d:"Nascidos vivos com peso ao nascer informado."},
@@ -33901,17 +33901,17 @@ const CALCULOS = {
 
 /* cálculos que não são indicadores do mapa, mas aparecem no painel */
 const FICHAS_EXTRAS = [
-  {rot:"% Residentes no município / região de saúde / macro / UF (dossiê, perspectiva Local de residência)",
+  {rot:"% Residentes no município / região de saúde / macro / UF (perfil da unidade, perspectiva Local de residência)",
    desc:"Dos bebês que nascem na maternidade, quantos têm mãe moradora de cada nível territorial da unidade.",
    n:"Nascidos vivos ocorridos na maternidade cuja mãe reside no nível territorial (município, região de saúde, macro ou UF da unidade).",
    d:"Nascidos vivos ocorridos na maternidade.",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + ". Também calculado para os nascidos vivos <1500 g."},
-  {rot:"% Município / região de saúde / macro / UF (dossiê, perspectiva Local de ocorrência)",
+  {rot:"% Município / região de saúde / macro / UF (perfil da unidade, perspectiva Local de ocorrência)",
    desc:"De todos os nascimentos que acontecem em cada território, quantos ocorrem dentro da maternidade.",
    n:"Nascidos vivos ocorridos na maternidade.",
    d:"Nascidos vivos ocorridos no território (município, região de saúde, macro ou UF).",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + ". Também calculado para os nascidos vivos <1500 g."},
-  {rot:"% Primeiro Trimestre (tabela de trimestre do dossiê)",
+  {rot:"% Primeiro Trimestre (tabela de trimestre do perfil da unidade)",
    desc:"Linha percentual da tabela de trimestre de início de pré-natal, no formato da apresentação.",
    n:"Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
    d:"Total de nascidos vivos com ao menos uma consulta, incluindo os registros com trimestre ignorado (por isso pode diferir do indicador \"% com pré-natal iniciado no 1º trimestre\" dos mapas, que exclui os ignorados).",
@@ -33921,7 +33921,7 @@ const FICHAS_EXTRAS = [
    n:"Nascidos vivos de mães residentes que ocorreram no próprio território de residência (nível região de saúde; agregado nos níveis macro e UF).",
    d:"Nascidos vivos de mães residentes no território, independentemente de onde ocorreu o parto.",
    fonte:"Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025, com 2025 preliminar. Ambos os recortes (todos e <1500 g) por região de saúde, macro e UF. Extração própria validada contra as planilhas NV por Região e NV por Macro (2019 e 2024): diferenças médias de 0,1 a 0,4 ponto percentual."},
-  {rot:"Participação da unidade nos nascimentos da UF e do Brasil (topo do dossiê)",
+  {rot:"Participação da unidade nos nascimentos da UF e do Brasil (topo do perfil da unidade)",
    desc:"Peso relativo da maternidade no total de nascimentos do seu estado e do país, no ano mais recente.",
    n:"Nascidos vivos ocorridos na unidade em " + ANOS[ULT] + " (último ano completo).",
    d:"Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
@@ -34044,7 +34044,7 @@ function inicia(){
     {alvo:"inicio", rot:"Início", ico:ICO('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>')},
     {alvo:"secMapa", rot:"Mapa do Brasil", ico:ICO('<path d="M9 20l-6-2V4l6 2 6-2 6 2v14l-6-2-6 2z"/><path d="M9 6v14M15 4v14"/>')},
     {alvo:"secUnidades", rot:"Mapa de unidades", ico:ICO('<path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')},
-    {alvo:"secDossie", rot:"Dossiê da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
+    {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
     {alvo:"secComparativo", rot:"Comparativo entre anos", ico:ICO('<rect x="3" y="5" width="7.5" height="14" rx="1.5"/><rect x="13.5" y="5" width="7.5" height="14" rx="1.5"/>')},
     {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
@@ -34191,7 +34191,7 @@ function inicia(){
     if(leaf) leaf.setView([-14.5, -52], 4);
   });
 
-  // dossiê — um seletor por conjunto + página sobreposta
+  // perfil da unidade — um seletor por conjunto + página sobreposta
   const sU = document.getElementById("selUnidade");
   opcaoUnidades(sU, "estrategica");
   sU.value = estado.cnes;

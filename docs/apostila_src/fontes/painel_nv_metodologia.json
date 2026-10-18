@@ -3,114 +3,178 @@
   {
    "id": "nv",
    "rot": "Nascidos vivos ocorridos",
+   "eixo": "geral",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Total de nascidos vivos ocorridos na unidade (SINASC)."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Total de nascidos vivos ocorridos na unidade (SINASC).",
+   "alias": null
   },
   {
    "id": "shareUF",
    "rot": "% dos nascimentos da UF ocorridos nas maternidades",
+   "eixo": "geral",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Participação das maternidades estratégicas do território no total de nascidos vivos da UF."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Participação das maternidades estratégicas do território no total de nascidos vivos da UF.",
+   "alias": null
   },
   {
    "id": "resRS",
    "rot": "% de NV ocorridos na região de residência",
+   "eixo": "geral",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Percentual dos nascidos vivos da maternidade cujas mães residem na própria região de saúde da unidade."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Percentual dos nascidos vivos da maternidade cujas mães residem na própria região de saúde da unidade.",
+   "alias": null
   },
   {
    "id": "pn7",
    "rot": "% com 7 ou mais consultas de pré-natal",
+   "eixo": "prenatal",
    "sentido": "maior",
    "meta": null,
-   "desc": "Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal (exclui ignorados)."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal (exclui ignorados).",
+   "alias": null
   },
   {
    "id": "tri1",
    "rot": "% com pré-natal iniciado no 1º trimestre",
+   "eixo": "prenatal",
    "sentido": "maior",
    "meta": null,
-   "desc": "Entre quem fez ao menos uma consulta, proporção que começou no primeiro trimestre (exclui ignorados)."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Entre quem fez ao menos uma consulta, proporção que começou no primeiro trimestre (exclui ignorados).",
+   "alias": null
   },
   {
    "id": "ces",
    "rot": "% de cesárea",
+   "eixo": "parto",
    "sentido": "menor",
    "meta": null,
-   "desc": "Partos cesáreos sobre o total de nascidos vivos com via informada."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Partos cesáreos sobre o total de nascidos vivos com via informada.",
+   "alias": null
   },
   {
    "id": "enf",
    "rot": "% de parto vaginal assistido por enfermeira ou obstetriz",
+   "eixo": "parto",
    "sentido": "maior",
    "meta": "50",
-   "desc": "Entre os partos vaginais, proporção assistida por enfermeira obstétrica ou obstetriz. Meta institucional ≥50%."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Entre os partos vaginais, proporção assistida por enfermeira obstétrica ou obstetriz. Meta institucional ≥50%.",
+   "alias": null
   },
   {
    "id": "p2500",
    "rot": "% de baixo peso (<2500 g)",
+   "eixo": "rn",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Perfil de risco recebido: são maternidades de referência para gestação de alto risco."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Perfil de risco recebido: são maternidades de referência para gestação de alto risco.",
+   "alias": null
   },
   {
    "id": "p1500",
    "rot": "% de muito baixo peso (<1500 g)",
+   "eixo": "rn",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Concentração de recém-nascidos de muito baixo peso: complexidade assumida pela unidade."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Concentração de recém-nascidos de muito baixo peso: complexidade assumida pela unidade.",
+   "alias": null
   },
   {
    "id": "prem",
    "rot": "% de prematuridade (<37 semanas)",
+   "eixo": "rn",
    "sentido": "neutro",
    "meta": null,
-   "desc": "Nascidos vivos com menos de 37 semanas de gestação (exclui idade gestacional não informada)."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Nascidos vivos com menos de 37 semanas de gestação (exclui idade gestacional não informada).",
+   "alias": null
   },
   {
    "id": "asf",
    "rot": "% de Apgar <7 no 5º minuto",
+   "eixo": "rn",
    "sentido": "menor",
    "meta": null,
-   "desc": "Apgar de 0 a 6 no 5º minuto, entre nascidos com ≥2500 g e sem anomalias congênitas."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Apgar de 0 a 6 no 5º minuto, entre nascidos com ≥2500 g e sem anomalias congênitas.",
+   "alias": null
   },
   {
    "id": "rg1",
    "rot": "Taxa de cesárea no grupo 1 de Robson",
+   "eixo": "robson",
    "sentido": "menor",
    "meta": "10",
-   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤10%."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤10%.",
+   "alias": null
   },
   {
    "id": "rg2",
    "rot": "Taxa de cesárea no grupo 2 de Robson",
+   "eixo": "robson",
    "sentido": "menor",
    "meta": "35",
-   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤35%."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Nulíparas, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤35%.",
+   "alias": null
   },
   {
    "id": "rg3",
    "rot": "Taxa de cesárea no grupo 3 de Robson",
+   "eixo": "robson",
    "sentido": "menor",
    "meta": "3",
-   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤3%."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤3%.",
+   "alias": null
   },
   {
    "id": "rg4",
    "rot": "Taxa de cesárea no grupo 4 de Robson",
+   "eixo": "robson",
    "sentido": "menor",
    "meta": "15",
-   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤15%."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤15%.",
+   "alias": null
   },
   {
    "id": "rg5",
    "rot": "Taxa de cesárea no grupo 5 de Robson",
+   "eixo": "robson",
    "sentido": "menor",
    "meta": null,
-   "desc": "Multíparas com pelo menos uma cesárea anterior, feto único cefálico, ≥37 semanas."
+   "unidade": null,
+   "fonte": null,
+   "desc": "Multíparas com pelo menos uma cesárea anterior, feto único cefálico, ≥37 semanas.",
+   "alias": null
   }
  ],
  "calculos": {
@@ -137,7 +201,7 @@
   "tri1": {
    "n": "Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
    "d": "Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado.",
-   "obs": "Atenção: a linha \"% Primeiro Trimestre\" da tabela do dossiê segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."
+   "obs": "Atenção: a linha \"% Primeiro Trimestre\" da tabela do perfil da unidade segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."
   },
   "ces": {
    "n": "Partos cesáreos.",
@@ -197,25 +261,25 @@
  },
  "extras": [
   {
-   "rot": "% Residentes no município / região de saúde / macro / UF (dossiê, perspectiva Local de residência)",
+   "rot": "% Residentes no município / região de saúde / macro / UF (perfil da unidade, perspectiva Local de residência)",
    "desc": "Dos bebês que nascem na maternidade, quantos têm mãe moradora de cada nível territorial da unidade.",
    "n": "Nascidos vivos ocorridos na maternidade cuja mãe reside no nível territorial (município, região de saúde, macro ou UF da unidade).",
    "d": "Nascidos vivos ocorridos na maternidade.",
-   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025. Também calculado para os nascidos vivos <1500 g."
+   "fonte": "Ministério da Saúde - SINASC, "
   },
   {
-   "rot": "% Município / região de saúde / macro / UF (dossiê, perspectiva Local de ocorrência)",
+   "rot": "% Município / região de saúde / macro / UF (perfil da unidade, perspectiva Local de ocorrência)",
    "desc": "De todos os nascimentos que acontecem em cada território, quantos ocorrem dentro da maternidade.",
    "n": "Nascidos vivos ocorridos na maternidade.",
    "d": "Nascidos vivos ocorridos no território (município, região de saúde, macro ou UF).",
-   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025. Também calculado para os nascidos vivos <1500 g."
+   "fonte": "Ministério da Saúde - SINASC, "
   },
   {
-   "rot": "% Primeiro Trimestre (tabela de trimestre do dossiê)",
+   "rot": "% Primeiro Trimestre (tabela de trimestre do perfil da unidade)",
    "desc": "Linha percentual da tabela de trimestre de início de pré-natal, no formato da apresentação.",
    "n": "Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
    "d": "Total de nascidos vivos com ao menos uma consulta, incluindo os registros com trimestre ignorado (por isso pode diferir do indicador \"% com pré-natal iniciado no 1º trimestre\" dos mapas, que exclui os ignorados).",
-   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025."
+   "fonte": "Ministério da Saúde - SINASC, "
   },
   {
    "rot": "% de NV ocorridos no território de residência (Comparativo entre anos)",
@@ -225,24 +289,24 @@
    "fonte": "Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025, com 2025 preliminar. Ambos os recortes (todos e <1500 g) por região de saúde, macro e UF. Extração própria validada contra as planilhas NV por Região e NV por Macro (2019 e 2024): diferenças médias de 0,1 a 0,4 ponto percentual."
   },
   {
-   "rot": "Participação da unidade nos nascimentos da UF e do Brasil (topo do dossiê)",
+   "rot": "Participação da unidade nos nascimentos da UF e do Brasil (topo do perfil da unidade)",
    "desc": "Peso relativo da maternidade no total de nascimentos do seu estado e do país, no ano mais recente.",
-   "n": "Nascidos vivos ocorridos na unidade em 2025.",
+   "n": "Nascidos vivos ocorridos na unidade em ",
    "d": "Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
-   "fonte": "Ministério da Saúde - SINASC, 2025."
+   "fonte": "Ministério da Saúde - SINASC, "
   },
   {
    "rot": "Média do grupo (comparador)",
    "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    "d": "Soma dos denominadores correspondentes nas mesmas unidades.",
-   "fonte": "Ministério da Saúde - SINASC, 2019 a 2025."
+   "fonte": "Ministério da Saúde - SINASC, "
   }
  ],
  "fontes": [
   [
    "SINASC",
-   "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."
+   "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025 e 1º semestre de 2026, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."
   ],
   [
    "CNES",

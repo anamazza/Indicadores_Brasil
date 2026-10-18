@@ -736,7 +736,7 @@ function desenhaPontos(){
       ${li("Óbitos maternos", "obm", "rmm")}
       ${li("Óbitos fetais", "obf", "tmf")}
       ${li("Óbitos neonatais", "obn", "tmn")}
-      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir dossiê →</a>`);
+      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
     camadaEstr.addLayer(mk);
   });
@@ -1450,17 +1450,17 @@ const CALCULOS = {
   nanom:{n:"Óbitos neonatais com causa básica Q00-Q99.", d:"Total de óbitos neonatais."}
 };
 const FICHAS_EXTRAS = [
-  {rot:"Grupos de causas dos óbitos fetais, perinatais e neonatais (tabelas do dossiê)",
+  {rot:"Grupos de causas dos óbitos fetais, perinatais e neonatais (tabelas do perfil da unidade)",
    desc:"Classificação própria do projeto por faixas da CID-10, com precedência na ordem listada. Não há lista oficial do Ministério da Saúde para este recorte (a OMS publica a ICD-PM).",
    n:"Fatores maternos, placenta, cordão e membranas = P00-P04 · Gestação e crescimento fetal = P05, P07, P08 · Hipóxia/asfixia e transtornos respiratórios = P10-P15, P20, P21, P24, P28 · Infecções perinatais = P35-P39, A50 · Anomalias congênitas = Q00-Q99 · Hemorrágicos e hematológicos = P50-P61 · Mal definidas = R00-R99, P95 · Demais causas = outros códigos.",
    d:"Total de óbitos do bloco (fetal, perinatal ou neonatal) na unidade e no ano; a linha Total soma 100%.",
    fonte:"Ministério da Saúde - SIM (DO e DOFET), " + SERIE_ROT + "."},
-  {rot:"Grupos de causas maternas diretas e indiretas (tabelas do dossiê)",
+  {rot:"Grupos de causas maternas diretas e indiretas (tabelas do perfil da unidade)",
    desc:"Classificação por faixas da CID-10 aplicada aos óbitos maternos, com precedência na ordem listada.",
    n:"Diretas: Aborto = O00-O08 · Hipertensão = O11-O16 · Hemorragia = O20, O44-O46, O67, O72 · Infecção puerperal = O85, O86, O91 · Tromboembolismo = O88 · Outras diretas = demais causas diretas. Indiretas: Infecciosas e parasitárias = O98, B20-B24 · Cardiopatias = O99.4 · Respiratórias = O99.5 · Hipertensão/diabetes pré-existentes = O10, O24 (exceto O24.4), O25 · Outras afecções maternas = O99 (demais), O94.",
    d:"Total de causas diretas ou de causas indiretas da unidade no ano (os percentuais das tabelas). Óbitos O95 não entram nos grupos.",
    fonte:"Ministério da Saúde - SIM-DO, " + SERIE_ROT + "."},
-  {rot:"Faixas de peso ao nascer (tabelas do dossiê)",
+  {rot:"Faixas de peso ao nascer (tabelas do perfil da unidade)",
    desc:"Categorias do campo PESO (gramas) das declarações de óbito e de óbito fetal.",
    n:"Menos de 1000 g (100 a 999) · 1000 a 1499 g · 1500 a 2499 g · 2500 a 3999 g · 4000 g e mais (4.000 a 8.000) · Ignorado (branco, 0, 9999 ou fora de 100 a 8.000).",
    d:"Total de óbitos do bloco na unidade e no ano.",
@@ -1602,7 +1602,7 @@ function inicia(){
     {alvo:"inicio", rot:"Início", ico:ICO('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>')},
     {alvo:"secMapa", rot:"Mapa do Brasil", ico:ICO('<path d="M9 20l-6-2V4l6 2 6-2 6 2v14l-6-2-6 2z"/><path d="M9 6v14M15 4v14"/>')},
     {alvo:"secUnidades", rot:"Mapa de unidades", ico:ICO('<path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')},
-    {alvo:"secDossie", rot:"Dossiê da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
+    {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
     {alvo:"secComparativo", rot:"Comparativo entre anos", ico:ICO('<rect x="3" y="5" width="7.5" height="14" rx="1.5"/><rect x="13.5" y="5" width="7.5" height="14" rx="1.5"/>')},
     {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
@@ -1737,7 +1737,7 @@ function inicia(){
     if(leaf) leaf.setView([-14.5, -52], 4);
   });
 
-  // dossiê — um seletor por grupo + página sobreposta
+  // perfil da unidade — um seletor por grupo + página sobreposta
   const sU = document.getElementById("selUnidade");
   opcaoUnidades(sU, "apoiada");
   sU.value = estado.cnes;

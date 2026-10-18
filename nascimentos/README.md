@@ -14,7 +14,7 @@ pronto para GitHub Pages. Requer internet para os mapas de fundo (Leaflet/CARTO)
   maternidades de cada território.
 - **Mapa de unidades**: as 59 maternidades estratégicas (Leaflet), com filtros, busca e pontos de
   contexto (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
-- **Dossiê da unidade**: página própria com ficha CNES e habilitações ativas (API oficial),
+- **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial),
   todas as tabelas da apresentação (anos clicáveis abrem gráficos) e download em PDF.
 - **Comparador**: entre unidades (2 a 4, por ano) e da mesma unidade entre anos (variação e
   tendência; variação clicável abre o gráfico).

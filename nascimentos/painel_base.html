@@ -264,7 +264,7 @@ table.dados th.th-ano{cursor:pointer; padding:.3rem .3rem}
 table.tab-verde thead .btn-ano{background:rgba(255,255,255,.92); color:var(--verde-esmeralda)}
 table.tab-verde thead .btn-ano:hover{background:#FFF}
 
-/* ---------------- dossiê: um seletor por conjunto ---------------- */
+/* ---------------- perfil da unidade: um seletor por conjunto ---------------- */
 .dossie-conjuntos{display:grid; gap:1.05rem}
 .dossie-conj{background:var(--mint-card); border:1px solid var(--borda); border-radius:14px; padding:.85rem 1rem}
 .rot-conj{display:flex; align-items:center; gap:.5rem; margin:0 0 .55rem;
@@ -277,9 +277,9 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .legenda-pontos{display:flex; flex-wrap:wrap; gap:.9rem; margin:.15rem 0 .9rem; font-size:.8rem}
 .legenda-pontos span.item{display:flex; align-items:center; gap:.4rem}
 
-/* ---------------- página do dossiê (sobreposta) ---------------- */
+/* ---------------- página do perfil da unidade (sobreposta) ---------------- */
 .pagina-dossie{position:fixed; inset:0; z-index:3000; overflow:auto; background:var(--mint); overscroll-behavior:contain}
-/* página do dossiê mais larga, para as tabelas de 8 colunas caberem sem corte */
+/* página do perfil da unidade mais larga, para as tabelas de 8 colunas caberem sem corte */
 .pagina-dossie .wrap{width:min(1560px, 100% - 2.6rem)}
 .pd-topo{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.95); border-bottom:1px solid var(--borda); padding:.65rem 0; backdrop-filter:blur(8px)}
 .pd-topo-linha{display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap}
@@ -303,7 +303,7 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .chip-acao:hover{background:var(--verde-esmeralda)}
 body.dossie-aberto{overflow:hidden}
 
-/* ---------------- dossiê ---------------- */
+/* ---------------- perfil da unidade ---------------- */
 .dossie-topo{
   background:linear-gradient(135deg, var(--verde-profundo), var(--verde-esmeralda));
   color:#F1F8F3; border-radius:var(--radius); padding:1.4rem 1.5rem; box-shadow:var(--sombra-alta);
@@ -383,7 +383,7 @@ footer a{color:var(--verde-lima)}
 @media print{
   .navbar,.mapa-controles,.filtros-mapa,.trilho,footer{display:none !important}
   body{padding-left:0 !important; background:#FFF}
-  /* com o dossiê aberto, imprime somente o dossiê */
+  /* com o perfil da unidade aberto, imprime somente o perfil da unidade */
   body.dossie-aberto{overflow:visible}
   body.dossie-aberto > *:not(#paginaDossie){display:none !important}
   .pagina-dossie{position:static !important; overflow:visible !important; background:#FFF}
@@ -488,7 +488,7 @@ footer a{color:var(--verde-lima)}
     <details class="acordeao acordeao-mapa" id="detUnidades">
       <summary>Mapa de unidades · toque para abrir</summary>
       <div class="acordeao-corpo">
-        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o dossiê. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
+        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o perfil da unidade. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
         <p class="legenda-pontos">
           <span class="item"><span class="bolinha bola-estr"></span>maternidades estratégicas</span>
           <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
@@ -508,34 +508,34 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= DOSSIÊ (abre página própria) ========================= -->
+<!-- ========================= PERFIL DA UNIDADE (abre página própria) ========================= -->
 <section id="secDossie">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Dossiê da unidade</p>
-      <h2>Escolha uma maternidade para abrir o dossiê completo</h2>
-      <p style="max-width:none">O dossiê abre em página própria com todas as seções da apresentação: identificação, ficha de cadastro CNES e habilitações ativas, série de nascidos vivos, abrangência territorial, pré-natal, perfil do recém-nascido, via de nascimento e grupos de Robson. Em qualquer tabela, toque em um ano para ver o gráfico daquele ano, e você pode baixar o dossiê em PDF.</p>
+      <p class="eyebrow">Perfil da unidade</p>
+      <h2>Escolha uma maternidade para abrir o perfil da unidade completo</h2>
+      <p style="max-width:none">O perfil da unidade abre em página própria com todas as seções da apresentação: identificação, ficha de cadastro CNES e habilitações ativas, série de nascidos vivos, abrangência territorial, pré-natal, perfil do recém-nascido, via de nascimento e grupos de Robson. Em qualquer tabela, toque em um ano para ver o gráfico daquele ano, e você pode baixar o perfil da unidade em PDF.</p>
     </div>
     <div class="dossie-conjuntos">
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-estr"></span>Maternidades estratégicas <b id="nEstr"></b></p>
         <div class="mapa-controles">
           <select id="selUnidade" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossie">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossie">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeEbserh" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 · novas <b id="nQualineo"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeQualineo" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir perfil da unidade →</button>
         </div>
       </div>
     </div>
@@ -620,14 +620,14 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= PÁGINA DO DOSSIÊ (sobreposta) ========================= -->
+<!-- ========================= PÁGINA DO PERFIL DA UNIDADE (sobreposta) ========================= -->
 <div id="paginaDossie" class="pagina-dossie" hidden>
   <div class="pd-topo">
     <div class="wrap pd-topo-linha">
       <button class="chip chip-acao" id="btnVoltarDossie">← Voltar ao painel</button>
       <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
         <select id="selUnidadePd" style="min-width:280px" aria-label="Trocar de maternidade"></select>
-        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o dossiê em PDF">⬇ Baixar PDF</button>
+        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o perfil da unidade em PDF">⬇ Baixar PDF</button>
       </div>
     </div>
   </div>

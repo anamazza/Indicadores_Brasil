@@ -1,4 +1,4 @@
-// Apostila dos Dicionários de Dados · versão 1.3 (18/10/2026: sem a seção de documentos de origem; 1.2 = 1º semestre de 2026; 1.1 revisada pela banca de 11/10/2026).
+// Apostila dos Dicionários de Dados · versão 1.4 (18/10/2026: "dossiê" -> "perfil da unidade"; 1.3 sem a seção de documentos de origem e em registro formal; 1.2 = 1º semestre de 2026; 1.1 revisada pela banca de 11/10/2026).
 // Uso: node gera_apostila_v2.js <pasta_fontes_json> <logo_png> <faixa_png> <saida.docx>
 const fs = require("fs");
 const path = require("path");
@@ -44,7 +44,7 @@ capa.push(P([{ t: "Qualificação do Modelo de Gestão em Maternidades Estratég
 capa.push(P([{ t: "Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente", size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Instituto Nacional de Saúde da Mulher, da Criança e do Adolescente Fernandes Figueira (IFF/Fiocruz)", size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Ministério da Saúde", size: 24 }], { spacing: { after: 600 } }));
-capa.push(P([{ t: "Versão 1.3 · Rio de Janeiro, 18 de outubro de 2026", bold: true, color: C.verdeTexto, size: 24 }], { spacing: { after: 80 } }));
+capa.push(P([{ t: "Versão 1.4 · Rio de Janeiro, 18 de outubro de 2026", bold: true, color: C.verdeTexto, size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Documento de trabalho da equipe. Reproduz os dicionários e as páginas de metodologia aprovados em cada projeto (listados nas referências, seção 9), com as regras em vigor nos painéis publicados em ", color: C.suave, size: 20 }, link(SITE, SITE, 20), { t: ". Dados: bases públicas do Ministério da Saúde (SINASC, SIH/SUS, SIM e CNES), 2019 a 2025 e 1º semestre de 2026, sujeitos a revisão.", color: C.suave, size: 20 }], { spacing: { after: 0 } }));
 capa.push(quebra());
 
@@ -66,8 +66,8 @@ const s1 = [
     ["Mapa do Brasil", "Mapa coroplético por unidade da federação (UF), macrorregião ou região de saúde, com filtros e faixas de cor recalculadas por recorte; existe nos painéis de Nascimentos e de Mortalidade."],
     ["Mapa de unidades", "Mapa com um ponto por maternidade, colorido por grupo, com filtros, busca e pontos de contexto (estabelecimentos com 480 ou mais partos por ano, segundo o SIH/SUS de 2025)."],
     ["Botão Página principal", "Único botão de navegação no alto de cada painel; volta à página principal dos painéis."],
-    ["Dossiê da unidade", "Página de detalhe de cada maternidade: ficha de cadastro CNES, habilitações ativas (serviços que o SUS autoriza o estabelecimento a realizar) e todas as tabelas da apresentação, com gráficos ao clicar nos anos e nos rótulos; permite baixar em PDF."],
-    ["Blocos e quadros", "As tabelas do dossiê (chamadas blocos) e os quadros de perfil da mãe (chamados cards no código do painel)."],
+    ["Perfil da unidade", "Página de detalhe de cada maternidade: ficha de cadastro CNES, habilitações ativas (serviços que o SUS autoriza o estabelecimento a realizar) e todas as tabelas da apresentação, com gráficos ao clicar nos anos e nos rótulos; permite baixar em PDF."],
+    ["Blocos e quadros", "As tabelas do perfil da unidade (chamadas blocos) e os quadros de perfil da mãe (chamados cards no código do painel)."],
     ["Comparador", "Tela que compara de duas a quatro unidades do mesmo grupo, por ano, com uma coluna de referência do grupo (seção 3.2), e a mesma unidade entre anos (variação e tendência)."],
     ["Destaque de melhor posição", "Realce que o comparador dá à unidade com o melhor resultado em cada indicador que tem direção definida (quanto maior ou quanto menor, melhor)."],
     ["Comparativo entre anos", "Dois mapas lado a lado do mesmo indicador, com faixas de cor comuns (Nascimentos e Mortalidade)."],
@@ -80,6 +80,7 @@ const s1 = [
     ["1.1", "11/10/2026", "Revisão: correções nos textos de ligação, novas seções 1.3, 4.5, 4.6, 5.1 e 6.2, glossário e referências ampliados, identidade visual e acessibilidade ajustadas. O material de auditoria e validação passou ao parecer da revisão, fora deste dicionário.", "Coordenação (equipe dos painéis)"],
     ["1.2", "18/10/2026", "Período parcial: os painéis passaram a trazer a coluna \"1º sem. 2026\" (janeiro a junho de 2026, dados preliminares). Atualizados o período na capa e na seção 2, a nota de dados preliminares e a tabela da seção 7.2, e acrescentada a nota \"Período parcial\" na seção 7.1. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
     ["1.3", "18/10/2026", "Retirada, a pedido da coordenação, a seção \"Documentos de origem\" (antiga 1.4); os documentos continuam citados nas referências (seção 9), e o controle de versões passou a ser a seção 1.4. Textos de ligação revisados para o registro formal, com citação das fontes oficiais e dos documentos aprovados no lugar das etapas internas de trabalho. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
+    ["1.4", "18/10/2026", "A página de cada maternidade nos painéis, antes chamada \"dossiê\", passou a chamar-se \"perfil da unidade\", a pedido da coordenação; o termo foi atualizado nesta apostila. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
   ]),
   P("Responsável pela atualização: a coordenação, por meio da equipe dos painéis, sempre que um documento de origem for alterado. Contato: pela coordenação, no IFF/Fiocruz."),
 ];
@@ -153,15 +154,15 @@ const s4 = [
   ...tabelaL("Indicadores dos mapas e do comparador do Painel de Nascimentos", [1800, 2100, 1900, 1900, 1938], ["Indicador", "O que mede", "Numerador", "Denominador", "Direção, referência e observações"], linhasIndsNV),
   nota("Fonte: Ministério da Saúde, SINASC, 2019 a 2025; dados sujeitos a revisão. Fichas da página \"Metodologia\" do Painel de Nascimentos. A coluna \"Direção, referência e observações\" foi montada a partir do campo de direção de cada ficha (maior, menor ou neutro) e dos valores de referência do painel; indicadores sem direção não entram no destaque de melhor posição do comparador. Os valores de referência dos grupos de Robson são comentados na seção 4.6."),
   H2("4.3 Demais cálculos do painel"),
-  P("Esta seção reúne os cálculos que não são indicadores do mapa, mas aparecem no dossiê da unidade, no comparativo entre anos e no comparador."),
+  P("Esta seção reúne os cálculos que não são indicadores do mapa, mas aparecem no perfil da unidade, no comparativo entre anos e no comparador."),
   ...tabelaL("Demais cálculos do Painel de Nascimentos", [2000, 2100, 1800, 1800, 1938], ["Cálculo", "O que mede", "Numerador", "Denominador", "Fonte"], linhasExtrasNV),
-  H2("4.4 Perfil da mãe (quadros do dossiê)"),
+  H2("4.4 Perfil da mãe (quadros do perfil da unidade)"),
   P("Os quadros de perfil da mãe seguem as regras das seções de perfil do dicionário de indicadores de internação (versão final de 10/09/2026), reproduzidas abaixo. O painel mostra sete quadros: idade, raça/cor, escolaridade, situação conjugal, cesarianas anteriores, tipo de gestação e pré-natal adequado à idade gestacional. A linha de gestações anteriores consta do dicionário, mas não está entre os sete quadros do painel."),
   ...secoesPerfil.flatMap((s) => [H3(titulo(s.secao)), ...tabelaL(`${titulo(s.secao)}: indicadores e regras`, DIC, ["Indicador", "O que mede", "Variáveis e regra"], s.linhas)]),
   nota("Fonte: Dicionário de indicadores de internação (AIH) do grupo de maternidades, versão final de 10/09/2026, seções \"Perfil sócio-demográfico (SINASC)\" e \"Perfil obstétrico (SINASC)\" (grafia original do dicionário)."),
-  H2("4.5 Tabelas do dossiê (blocos de nascidos vivos)"),
-  P("As tabelas do dossiê reproduzem a apresentação de cada maternidade. As categorias de cada tabela seguem as variáveis da Declaração de Nascido Vivo, conforme a Estrutura do SINASC (Ministério da Saúde, versão de 22/02/2024), e as faixas adotadas nas apresentações oficiais das maternidades. A tabela abaixo resume a variável do SINASC e as categorias de cada bloco."),
-  ...tabelaL("Variáveis e categorias das tabelas do dossiê de nascimentos", [2300, 2000, 5338], ["Tabela do dossiê", "Variável do SINASC", "Categorias"], [
+  H2("4.5 Tabelas do perfil da unidade (blocos de nascidos vivos)"),
+  P("As tabelas do perfil da unidade reproduzem a apresentação de cada maternidade. As categorias de cada tabela seguem as variáveis da Declaração de Nascido Vivo, conforme a Estrutura do SINASC (Ministério da Saúde, versão de 22/02/2024), e as faixas adotadas nas apresentações oficiais das maternidades. A tabela abaixo resume a variável do SINASC e as categorias de cada bloco."),
+  ...tabelaL("Variáveis e categorias das tabelas do perfil da unidade no Painel de Nascimentos", [2300, 2000, 5338], ["Tabela do perfil da unidade", "Variável do SINASC", "Categorias"], [
     ["Nascidos vivos e território (ocorrência e residência)", "CODESTAB, CODMUNNASC, CODMUNRES", "Totais por município, região de saúde, macrorregião e UF de ocorrência e de residência, para todos os nascidos vivos e para os de menos de 1.500 g (fichas na seção 4.3)."],
     ["Residência da mãe por região do país e UF", "CODMUNRES", "Região Norte, Nordeste, Sudeste, Sul e Centro-Oeste; UF de residência."],
     ["Consultas de pré-natal", "CONSULTAS", "Nenhuma; 1 a 3 consultas; 4 a 6 consultas; 7 e mais consultas; Ignorado."],
@@ -222,7 +223,7 @@ const s6 = [
   H2("6.1 Notas metodológicas do dicionário"),
   ...notasMort.map((t) => numerado(t.replace(/^[1-4]\.\s*/, ""))),
   H2("6.2 Indicadores dos mapas e do comparador"),
-  P("O Painel de Mortalidade tem 38 indicadores de mapa e comparador, em cinco blocos (visão geral, materna, fetal, perinatal e neonatal), derivados das tabelas do dicionário, mas com denominadores próprios. As fichas abaixo são as da página \"Metodologia\" do painel. Nas tabelas do dossiê, os percentuais de peso e de momento do óbito incluem a categoria \"Ignorado\" (o total soma 100%); nos mapas e no comparador, os ignorados ficam fora do denominador."),
+  P("O Painel de Mortalidade tem 38 indicadores de mapa e comparador, em cinco blocos (visão geral, materna, fetal, perinatal e neonatal), derivados das tabelas do dicionário, mas com denominadores próprios. As fichas abaixo são as da página \"Metodologia\" do painel. Nas tabelas do perfil da unidade, os percentuais de peso e de momento do óbito incluem a categoria \"Ignorado\" (o total soma 100%); nos mapas e no comparador, os ignorados ficam fora do denominador."),
   ...Object.keys(eixoNome).flatMap((eixo) => {
     const linhas = linhasIndsMort.filter((_, k) => PM.inds[k].eixo === eixo);
     return linhas.length ? [H3(eixoNome[eixo]), ...tabelaL(`Indicadores do bloco \"${eixoNome[eixo]}\" (mapas e comparador)`, [1800, 2000, 2000, 1900, 1938], ["Indicador", "O que mede", "Numerador", "Denominador", "Fonte, direção e observações"], linhas)] : [];
@@ -237,7 +238,7 @@ const s7 = [
   H2("7.1 Notas gerais"),
   item([b("Dados preliminares. "), "Os anos mais recentes são preliminares: SINASC 2025 nos painéis de Nascimentos e de Internação, e 2024 e 2025 no Painel de Mortalidade; SIM 2024 e 2025; SIH 2025 sujeito a acréscimos; e, nos três painéis, o 1º semestre de 2026. Os totais podem mudar nas próximas versões dos arquivos do DATASUS. Painéis e apresentações trazem a nota \"dados sujeitos a revisão\"."]),
   item([b("Período parcial (1º semestre de 2026). "), "Desde 18 de outubro de 2026 os painéis trazem a coluna \"1º sem. 2026\": nascidos vivos de janeiro a junho de 2026 (data de nascimento), óbitos de janeiro a junho (data do óbito) e internações de janeiro a junho (data de internação), calculados com as mesmas regras das colunas de 2019 a 2025, a partir dos arquivos preliminares de 2026. Por ser um semestre, a coluna não entra na coluna Total (acumulado), que continua 2019 a 2025, nem nas linhas de tendência; os seletores de ano abrem no último ano completo; e os números absolutos do semestre (nascidos vivos, internações, óbitos) não são comparáveis com anos completos, enquanto percentuais, taxas e tempos médios são. No Painel de Internação, a coluna usa as AIH apresentadas até a competência de agosto de 2026: medido em 2025, esse recorte já continha de 97,5% a 99,6% das internações do semestre, conforme a UF, e o restante entra nas competências seguintes. A página \"Metodologia\" de cada painel registra a fonte, a data da extração e as unidades sem registro no período."]),
-  item([b("Ocorrência e residência. "), "Nascimentos e óbitos são atribuídos ao estabelecimento onde ocorreram. A Declaração de Óbito não informa o estabelecimento de nascimento; por isso as taxas neonatais e perinatais de maternidades de referência incluem recém-nascidos transferidos de outros serviços, e a razão de mortalidade materna tem a mesma limitação para gestantes e puérperas transferidas. Os indicadores medem o que ocorreu na unidade, não o risco da população atendida. No Painel de Nascimentos, o dossiê mostra as duas perspectivas, local de residência e local de ocorrência (seção 4.3)."]),
+  item([b("Ocorrência e residência. "), "Nascimentos e óbitos são atribuídos ao estabelecimento onde ocorreram. A Declaração de Óbito não informa o estabelecimento de nascimento; por isso as taxas neonatais e perinatais de maternidades de referência incluem recém-nascidos transferidos de outros serviços, e a razão de mortalidade materna tem a mesma limitação para gestantes e puérperas transferidas. Os indicadores medem o que ocorreu na unidade, não o risco da população atendida. No Painel de Nascimentos, o perfil da unidade mostra as duas perspectivas, local de residência e local de ocorrência (seção 4.3)."]),
   item([b("Datas de referência. "), "Internações: ano da data de internação. Óbitos: ano da data do óbito. Nascidos vivos: ano da data de nascimento."]),
   item([b("Regras aprovadas. "), "Internação e perfil da mãe: Dicionário de indicadores de internação (AIH) do grupo de maternidades, versão final de 10 de setembro de 2026, que consolida as decisões da coordenação de 30 de agosto a 9 de setembro de 2026. Mortalidade: Dicionário de indicadores de mortalidade do grupo de maternidades, de 11 de setembro de 2026. Nascimentos: fichas da página \"Metodologia\" do painel e nota metodológica do comparador, de agosto de 2026."]),
   item([b("Limitações de registro no SIH. "), "A diária de acompanhante registra diárias faturadas, não a presença durante o trabalho de parto. O registro de transfusão e o de histerectomia no SIH ficam em torno de 50% e 36%, respectivamente (Domingues et al., 2024). Partos em centro de parto normal faturados pelo código comum de parto não são captados."]),
@@ -276,7 +277,7 @@ const glossario = [
   ["DIAS_PERM", "Dias de permanência da internação: data de saída menos data de internação (DT_SAIDA − DT_INTER)."],
   ["DN", "Declaração de Nascido Vivo, documento de origem do SINASC."],
   ["DO e DOFET", "Declaração de Óbito e Declaração de Óbito Fetal, documentos de origem do SIM."],
-  ["Dossiê", "Página de detalhe de cada maternidade no painel (seção 1.3)."],
+  ["Perfil da unidade", "Página de detalhe de cada maternidade no painel (seção 1.3)."],
   ["EBSERH", "Empresa Brasileira de Serviços Hospitalares; grupo dos hospitais universitários federais do painel."],
   ["FTP", "Servidor de arquivos do DATASUS na internet (do inglês file transfer protocol)."],
   ["Habilitações", "Serviços que o SUS autoriza o estabelecimento a realizar, registrados no CNES."],

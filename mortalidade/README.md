@@ -26,7 +26,7 @@ unidades (Leaflet/OpenStreetMap).
 - **Mapa de unidades**: as 120 maternidades (Leaflet), coloridas por grupo (apoiadas, EBSERH,
   QUALINEO 2026/2027), com filtros, busca, resumo de 2025 no popup e pontos de contexto
   (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
-- **Dossiê da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as
+- **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as
   23 seções da apresentação de indicadores de mortalidade (razão de mortalidade materna e causas
   obstétricas; taxas fetal, perinatal e neonatal; faixa de peso, momento do óbito, grupos de causas
   e causas evitáveis). Anos clicáveis abrem o gráfico do ano; rótulos clicáveis abrem a evolução

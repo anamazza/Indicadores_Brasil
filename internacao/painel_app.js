@@ -183,7 +183,7 @@ function desenhaPontos(){
       ${li("mot_parto", "Partos entre as internações")}
       ${li("mmg", "Morbidade materna grave")}
       ${li("neo_n", "Internações neonatais")}
-      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir dossiê →</a>`);
+      <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
     camadaEstr.addLayer(mk);
   });
@@ -855,7 +855,7 @@ function inicia(){
   const TRILHO = [
     {alvo:"inicio", rot:"Início", ico:ICO('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>')},
     {alvo:"secUnidades", rot:"Mapa de unidades", ico:ICO('<path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')},
-    {alvo:"secDossie", rot:"Dossiê da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
+    {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
     {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
   ];
@@ -892,7 +892,7 @@ function inicia(){
     if(leaf) leaf.setView([-14.5, -52], 4);
   });
 
-  // dossiê — um seletor por grupo + página sobreposta
+  // perfil da unidade — um seletor por grupo + página sobreposta
   const sU = document.getElementById("selUnidade");
   opcaoUnidades(sU, "apoiada");
   sU.value = estado.cnes;

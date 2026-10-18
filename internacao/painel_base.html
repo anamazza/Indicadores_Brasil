@@ -265,7 +265,7 @@ table.dados th.th-ano{cursor:pointer; padding:.3rem .3rem}
 table.tab-verde thead .btn-ano{background:rgba(255,255,255,.92); color:var(--verde-esmeralda)}
 table.tab-verde thead .btn-ano:hover{background:#FFF}
 
-/* ---------------- dossiê: um seletor por grupo ---------------- */
+/* ---------------- perfil da unidade: um seletor por grupo ---------------- */
 .dossie-conjuntos{display:grid; gap:1.05rem}
 .dossie-conj{background:var(--mint-card); border:1px solid var(--borda); border-radius:14px; padding:.85rem 1rem}
 .rot-conj{display:flex; align-items:center; gap:.5rem; margin:0 0 .55rem;
@@ -278,7 +278,7 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .legenda-pontos{display:flex; flex-wrap:wrap; gap:.9rem; margin:.15rem 0 .9rem; font-size:.8rem}
 .legenda-pontos span.item{display:flex; align-items:center; gap:.4rem}
 
-/* ---------------- página do dossiê (sobreposta) ---------------- */
+/* ---------------- página do perfil da unidade (sobreposta) ---------------- */
 .pagina-dossie{position:fixed; inset:0; z-index:3000; overflow:auto; background:var(--mint); overscroll-behavior:contain}
 .pagina-dossie .wrap{width:min(1560px, 100% - 2.6rem)}
 .pd-topo{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.95); border-bottom:1px solid var(--borda); padding:.65rem 0; backdrop-filter:blur(8px)}
@@ -302,7 +302,7 @@ table.tab-verde thead .btn-ano:hover{background:#FFF}
 .chip-acao:hover{background:var(--verde-esmeralda)}
 body.dossie-aberto{overflow:hidden}
 
-/* ---------------- dossiê ---------------- */
+/* ---------------- perfil da unidade ---------------- */
 .dossie-topo{
   background:linear-gradient(135deg, var(--verde-profundo), var(--verde-esmeralda));
   color:#F1F8F3; border-radius:var(--radius); padding:1.4rem 1.5rem; box-shadow:var(--sombra-alta);
@@ -450,12 +450,12 @@ footer a{color:var(--verde-lima)}
     <div class="sec-head">
       <p class="eyebrow">Unidades</p>
       <h2>Mapa de unidades: localização das maternidades</h2>
-      <p style="max-width:none">Cada ponto é uma maternidade do painel. Toque em um ponto para ver o resumo das internações de 2025 e abrir o dossiê da unidade.</p>
+      <p style="max-width:none">Cada ponto é uma maternidade do painel. Toque em um ponto para ver o resumo das internações de 2025 e abrir o perfil da unidade.</p>
     </div>
     <details class="acordeao acordeao-mapa" id="detUnidades" open>
       <summary>Mapa de unidades · toque para abrir</summary>
       <div class="acordeao-corpo">
-        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo das internações de 2025 e abrir o dossiê. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
+        <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo das internações de 2025 e abrir o perfil da unidade. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
         <p class="legenda-pontos">
           <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
           <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
@@ -475,34 +475,34 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= DOSSIÊ (abre página própria) ========================= -->
+<!-- ========================= PERFIL DA UNIDADE (abre página própria) ========================= -->
 <section id="secDossie">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Dossiê da unidade</p>
-      <h2>Escolha uma maternidade para abrir o dossiê completo</h2>
-      <p style="max-width:none">O dossiê abre em página própria com todas as seções da apresentação de indicadores de internação: identificação, ficha de cadastro CNES e habilitações ativas, internações obstétricas (volume, motivos, interrupção da gestação prevista em lei, AMIU, acompanhante, Centro de Parto Normal, assistência ao parto, morbidade materna grave, ocupação e permanência) e internações neonatais (volume, grupos de causas, UTI neonatal, morbidade neonatal, ocupação e permanência na UTIN). Em qualquer tabela, toque em um ano para ver o gráfico daquele ano ou no nome da linha para ver a evolução, e você pode baixar o dossiê em PDF.</p>
+      <p class="eyebrow">Perfil da unidade</p>
+      <h2>Escolha uma maternidade para abrir o perfil da unidade completo</h2>
+      <p style="max-width:none">O perfil da unidade abre em página própria com todas as seções da apresentação de indicadores de internação: identificação, ficha de cadastro CNES e habilitações ativas, internações obstétricas (volume, motivos, interrupção da gestação prevista em lei, AMIU, acompanhante, Centro de Parto Normal, assistência ao parto, morbidade materna grave, ocupação e permanência) e internações neonatais (volume, grupos de causas, UTI neonatal, morbidade neonatal, ocupação e permanência na UTIN). Em qualquer tabela, toque em um ano para ver o gráfico daquele ano ou no nome da linha para ver a evolução, e você pode baixar o perfil da unidade em PDF.</p>
     </div>
     <div class="dossie-conjuntos">
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-apoiada"></span>Maternidades apoiadas (estratégicas) <b id="nApoiada"></b></p>
         <div class="mapa-controles">
           <select id="selUnidade" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossie">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossie">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeEbserh" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
         <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 <b id="nQualineo"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeQualineo" style="min-width:340px"></select>
-          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir dossiê →</button>
+          <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir perfil da unidade →</button>
         </div>
       </div>
     </div>
@@ -546,14 +546,14 @@ footer a{color:var(--verde-lima)}
   </div>
 </section>
 
-<!-- ========================= PÁGINA DO DOSSIÊ (sobreposta) ========================= -->
+<!-- ========================= PÁGINA DO PERFIL DA UNIDADE (sobreposta) ========================= -->
 <div id="paginaDossie" class="pagina-dossie" hidden>
   <div class="pd-topo">
     <div class="wrap pd-topo-linha">
       <button class="chip chip-acao" id="btnVoltarDossie">← Voltar ao painel</button>
       <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
         <select id="selUnidadePd" style="min-width:280px" aria-label="Trocar de maternidade"></select>
-        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o dossiê em PDF">⬇ Baixar PDF</button>
+        <button class="chip" id="btnPdfDossie" title="Imprimir ou salvar o perfil da unidade em PDF">⬇ Baixar PDF</button>
       </div>
     </div>
   </div>

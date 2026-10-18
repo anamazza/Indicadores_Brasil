@@ -593,39 +593,39 @@
  },
  "extras": [
   {
-   "rot": "Grupos de causas dos óbitos fetais, perinatais e neonatais (tabelas do dossiê)",
+   "rot": "Grupos de causas dos óbitos fetais, perinatais e neonatais (tabelas do perfil da unidade)",
    "desc": "Classificação própria do projeto por faixas da CID-10, com precedência na ordem listada. Não há lista oficial do Ministério da Saúde para este recorte (a OMS publica a ICD-PM).",
    "n": "Fatores maternos, placenta, cordão e membranas = P00-P04 · Gestação e crescimento fetal = P05, P07, P08 · Hipóxia/asfixia e transtornos respiratórios = P10-P15, P20, P21, P24, P28 · Infecções perinatais = P35-P39, A50 · Anomalias congênitas = Q00-Q99 · Hemorrágicos e hematológicos = P50-P61 · Mal definidas = R00-R99, P95 · Demais causas = outros códigos.",
    "d": "Total de óbitos do bloco (fetal, perinatal ou neonatal) na unidade e no ano; a linha Total soma 100%.",
-   "fonte": "Ministério da Saúde - SIM (DO e DOFET), 2019 a 2025."
+   "fonte": "Ministério da Saúde - SIM (DO e DOFET), "
   },
   {
-   "rot": "Grupos de causas maternas diretas e indiretas (tabelas do dossiê)",
+   "rot": "Grupos de causas maternas diretas e indiretas (tabelas do perfil da unidade)",
    "desc": "Classificação por faixas da CID-10 aplicada aos óbitos maternos, com precedência na ordem listada.",
    "n": "Diretas: Aborto = O00-O08 · Hipertensão = O11-O16 · Hemorragia = O20, O44-O46, O67, O72 · Infecção puerperal = O85, O86, O91 · Tromboembolismo = O88 · Outras diretas = demais causas diretas. Indiretas: Infecciosas e parasitárias = O98, B20-B24 · Cardiopatias = O99.4 · Respiratórias = O99.5 · Hipertensão/diabetes pré-existentes = O10, O24 (exceto O24.4), O25 · Outras afecções maternas = O99 (demais), O94.",
    "d": "Total de causas diretas ou de causas indiretas da unidade no ano (os percentuais das tabelas). Óbitos O95 não entram nos grupos.",
-   "fonte": "Ministério da Saúde - SIM-DO, 2019 a 2025."
+   "fonte": "Ministério da Saúde - SIM-DO, "
   },
   {
-   "rot": "Faixas de peso ao nascer (tabelas do dossiê)",
+   "rot": "Faixas de peso ao nascer (tabelas do perfil da unidade)",
    "desc": "Categorias do campo PESO (gramas) das declarações de óbito e de óbito fetal.",
    "n": "Menos de 1000 g (100 a 999) · 1000 a 1499 g · 1500 a 2499 g · 2500 a 3999 g · 4000 g e mais (4.000 a 8.000) · Ignorado (branco, 0, 9999 ou fora de 100 a 8.000).",
    "d": "Total de óbitos do bloco na unidade e no ano.",
-   "fonte": "Ministério da Saúde - SIM (DO e DOFET), 2019 a 2025."
+   "fonte": "Ministério da Saúde - SIM (DO e DOFET), "
   },
   {
    "rot": "Agregado do grupo (comparador)",
    "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (apoiadas, EBSERH ou QUALINEO 2026/2027). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
    "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano (nos números absolutos, média por unidade).",
    "d": "Soma dos denominadores correspondentes nas mesmas unidades — a mesma regra de agregação usada nos mapas e no painel lateral.",
-   "fonte": "Ministério da Saúde - SIM e SINASC, 2019 a 2025."
+   "fonte": "Ministério da Saúde - SIM e SINASC, "
   },
   {
    "rot": "HCFAMEMA (Marília/SP): complexo hospitalar",
    "desc": "Os CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) são tratados como um único complexo.",
    "n": "Óbitos dos dois códigos CNES.",
    "d": "Nascidos vivos do CNES 2025523 (unidade materno-infantil).",
-   "fonte": "Ministério da Saúde - SIM e SINASC, 2019 a 2025."
+   "fonte": "Ministério da Saúde - SIM e SINASC, "
   }
  ],
  "fontes": [
@@ -635,7 +635,7 @@
   ],
   [
    "SIM · declarações de óbito fetal (DOFET)",
-   "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025. Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."
+   "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025 (e DOFET26, preliminar, para o 1º semestre de 2026). Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."
   ],
   [
    "SINASC",
