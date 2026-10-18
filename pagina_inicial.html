@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- aplicativo instalável (PWA, 18/10/2026): manifesto, ícones e cor do tema; o service worker é registrado no fim da página -->
+<link rel="manifest" href="manifest.webmanifest"/>
+<meta name="theme-color" content="#279261"/>
+<link rel="icon" href="icons/icon-192.png" type="image/png"/>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="Indicadores"/>
 <title>Painéis de Indicadores · Maternidades Estratégicas · IFF/Fiocruz</title>
 <meta name="description" content="Página principal dos painéis de indicadores das maternidades estratégicas: nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS) e mortalidade materna, fetal, perinatal e neonatal (SIM), 2019 a 2025."/>
 <style>
@@ -217,6 +224,11 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
       </div>
     </section>
     <div class="notas">
+      <div class="nota" id="instalarApp" hidden>
+        <b>Instalar como aplicativo.</b> Esta página pode ser instalada no computador ou no celular, com ícone próprio, e abre como um aplicativo, com os três painéis.
+        <span id="instalarComo"></span>
+        <button type="button" class="botao" id="btnInstalar" style="margin-left:.6rem">Instalar</button>
+      </div>
       <div class="nota">
         <b>Sobre os painéis.</b> Os painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025 (e, nos painéis de nascimentos e de mortalidade, o 1º semestre de 2026), comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. O botão “Página principal”, no alto de cada painel, traz de volta a esta página.
       </div>
@@ -270,5 +282,27 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
     <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde"/>
   </div>
 </footer>
+<script>
+/* aplicativo instalável (PWA): registra o service worker e mostra o convite de instalação quando o navegador permite */
+(function(){
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", function(){ navigator.serviceWorker.register("sw.js").catch(function(){}); });
+  }
+  var pedido = null, bloco = document.getElementById("instalarApp"), btn = document.getElementById("btnInstalar"), como = document.getElementById("instalarComo");
+  var instalado = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  window.addEventListener("beforeinstallprompt", function(e){ e.preventDefault(); pedido = e; if(bloco && !instalado) bloco.hidden = false; });
+  if(btn) btn.addEventListener("click", function(){
+    if(!pedido) return;
+    pedido.prompt();
+    pedido.userChoice.then(function(){ pedido = null; if(bloco) bloco.hidden = true; });
+  });
+  window.addEventListener("appinstalled", function(){ if(bloco) bloco.hidden = true; });
+  var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if(ios && !instalado && bloco){
+    bloco.hidden = false; if(btn) btn.hidden = true;
+    if(como) como.textContent = " No iPhone ou iPad: toque em Compartilhar e depois em “Adicionar à Tela de Início”.";
+  }
+})();
+</script>
 </body>
 </html>

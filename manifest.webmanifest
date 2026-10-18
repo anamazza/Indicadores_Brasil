@@ -1,0 +1,25 @@
+{
+  "name": "Indicadores Brasil · Maternidades Estratégicas",
+  "short_name": "Indicadores",
+  "description": "Painéis de indicadores das maternidades estratégicas (IFF/Fiocruz): nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS) e mortalidade materna, fetal, perinatal e neonatal (SIM).",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "/Indicadores_Brasil/",
+  "start_url": "/Indicadores_Brasil/",
+  "scope": "/Indicadores_Brasil/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0A213D",
+  "theme_color": "#279261",
+  "categories": ["health", "government", "education"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Nascimentos (SINASC)", "short_name": "Nascimentos", "url": "/Indicadores_Brasil/nascimentos/", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Internação (SIH/SUS)", "short_name": "Internação", "url": "/Indicadores_Brasil/internacao/", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Mortalidade (SIM)", "short_name": "Mortalidade", "url": "/Indicadores_Brasil/mortalidade/", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

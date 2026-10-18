@@ -70,11 +70,23 @@ for arq in ["docs/apostila/apostila.html", "docs/apostila/Apostila_Dicionarios_d
     p = os.path.join(RAIZ, *arq.split("/"))
     if os.path.exists(p) and os.path.getsize(p) > 20000: ok(f"{arq} presente ({kb(p)} KB)")
     else: falha(f"{arq} ausente ou vazio (botões da apostila na página principal)")
+# aplicativo instalável (PWA, 18/10/2026)
+for arq in ["manifest.webmanifest", "sw.js", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"]:
+    p = os.path.join(RAIZ, *arq.split("/"))
+    if os.path.exists(p) and os.path.getsize(p) > 200: ok(f"{arq} presente")
+    else: falha(f"{arq} ausente (aplicativo instalável)")
+try:
+    man = json.load(open(os.path.join(RAIZ, "manifest.webmanifest"), encoding="utf-8"))
+    if man.get("start_url") != "/Indicadores_Brasil/" or man.get("display") != "standalone": falha("manifest.webmanifest: start_url ou display inesperados")
+except Exception as e:
+    falha(f"manifest.webmanifest inválido ({e})")
 html_raiz = verificar_pagina("raiz", os.path.join(RAIZ, "index.html"), RAIZ_MIN_KB)
 if html_raiz:
     for pasta in PAINEIS:
         if f'href="{SITE}{pasta}/"' not in html_raiz:
             falha(f"raiz: não tem botão para {pasta}/")
+    for trecho in ('rel="manifest"', 'serviceWorker.register("sw.js")'):
+        if trecho not in html_raiz: falha(f"raiz: index.html sem {trecho} (aplicativo instalável)")
     if 'data-painel=' in html_raiz and re.search(r'<span class="data" data-painel="[a-z]+"></span>', html_raiz):
         aviso("raiz: há carimbo de atualização vazio (montar_pagina.py não encontrou atualizacao.json de algum painel)")
 
@@ -92,6 +104,8 @@ for pasta, (gemeo, minimo_kb, dados_js, min_unidades) in PAINEIS.items():
         falha(f"{pasta}: index.html difere de {gemeo} (montagem incompleta?)")
     else:
         ok(f"{pasta}: index.html idêntico a {gemeo}")
+    if 'rel="manifest"' not in html:
+        falha(f"{pasta}: index.html sem o manifesto do aplicativo")
     # navegação entre painéis
     if f'href="{SITE}"' not in html:
         falha(f"{pasta}: sem botão de volta à página principal")
