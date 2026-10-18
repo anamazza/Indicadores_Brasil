@@ -26,15 +26,24 @@ DOCS = os.path.dirname(PROJ)                                   # "Documentos"
 # indicadores: o recálculo de 11/09 (117 unidades) + as unidades acrescentadas depois, cada
 # arquivo com a data em que o SIM foi extraído (vai para o campo extraidoEm da unidade)
 CSVS_IND = [(os.path.join(PROJ, "Pipeline_Python", "indicadores_recalculados.csv"), "2026-09-11"),
-            (os.path.join(PROJ, "Pipeline_Python", "indicadores_novas_2026-09.csv"), "2026-09-23")]
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_novas_2026-09.csv"), "2026-09-23"),
+            # 18/10/2026: 1º semestre de 2026 (óbitos de janeiro a junho, pela data do óbito; SIM preliminar de 28/09/2026,
+            # 27 UFs + DOFET26; nascidos vivos contados no SINASC 2026 preliminar). Mesmas regras (calcula_periodo.py é
+            # gerado a partir do calcula_indicadores.py). Período parcial: não entra no acumulado.
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv"), "2026-10-18")]
+PERIODO_CSV = {os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv")}   # não sobrescreve o extraidoEm das unidades
 LISTA_OFICIAL = os.path.join(PROJ, "lista_oficial_116.csv")    # LISTA MATERNIDADES POR GRUPO_09092026
 RELATORIO = os.path.join(PROJ, "Apresentacoes_Mortalidade_2026-09", "relatorio_geracao.csv")
 PAINEL_NV = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Painel_2026_Novo")   # leitura apenas
 NV_DADOS = os.path.join(PAINEL_NV, "dados_nv2026.js")
 NV_CNES = os.path.join(PAINEL_NV, "cnes_dados.json")
 
-ANOS = list(range(2019, 2026))
-PRELIMINARES = [2024, 2025]
+ANOS = list(range(2019, 2027))
+PRELIMINARES = [2024, 2025, 2026]
+PARCIAIS = [2026]                   # períodos incompletos: fora do acumulado e das tendências
+PERIODOS = {"2026": {"rotulo": "1º sem. 2026", "meses": list(range(1, 7)), "descricao": "janeiro a junho de 2026",
+                     "fonte": "SIM 2026 preliminar (FTP do DATASUS, arquivos de 28/09/2026) e SINASC 2026 preliminar (OpenDataSUS, 02/10/2026)",
+                     "extraidoEm": "2026-10-18"}}
 EXTRAIDO_EM = "2026-09-11"          # data da extração do SIM/SINASC (calcula_indicadores.py)
 
 # HCFAMEMA (Marília/SP): os CNES 2025507 (HC adulto) e 2025523 (materno-infantil) formam um
@@ -192,13 +201,31 @@ for caminho, data_extracao in CSVS_IND:
             bl = por_cnes.setdefault(cnes, {})
             sec = bl.setdefault(k, {})
             sec.setdefault(r["rotulo"], [None] * len(ANOS))[ANOS.index(ano)] = to_num(r["n"])
-            extraido[cnes] = data_extracao
+            if caminho not in PERIODO_CSV:
+                extraido[cnes] = data_extracao
             n_lin += 1
 # unidades do recálculo de 11/09 cujas linhas foram substituídas em 23/09 pelo SIM das 27 UFs
 # (Pipeline_Python/corrige_extras_2026-09.py): óbitos neonatais de moradores de outras UFs
 CORRIGIDAS_EM = {"2077477": "2026-09-23", "7958838": "2026-09-23"}
 extraido.update({c: d for c, d in CORRIGIDAS_EM.items() if c in por_cnes})
 print(f"[3] {n_lin} linhas dos CSV long -> {len(por_cnes)} CNES")
+
+# período parcial sem nascidos vivos NEM óbitos na unidade = sem dados transmitidos (fica "—", não 0):
+# 18/10/2026, HGCC (2499363) não tem registro algum no SINASC nem no SIM de 2026
+sem_dados_periodo = {}
+for cnes, bl in por_cnes.items():
+    for ano in PARCIAIS:
+        i = ANOS.index(ano)
+        nv_i = bl.get("mat_serie", {}).get("Nascidos vivos (denominador)", [None] * len(ANOS))[i]
+        tem_obito = any((vals[i] or 0) > 0 for k, sec in bl.items() for vals in sec.values())
+        if not nv_i and not tem_obito:
+            for k, sec in bl.items():
+                for vals in sec.values():
+                    vals[i] = None
+            sem_dados_periodo.setdefault(str(ano), []).append(cnes)
+for ano, lst in sem_dados_periodo.items():
+    PERIODOS[ano]["unidadesSemDados"] = lst
+    print(f"    período {ano}: sem registro no SINASC nem no SIM -> {lst}")
 
 # nascidos vivos ausentes (unidade ainda não existia): denominadores ficam nulos
 for cnes, bl in por_cnes.items():
@@ -210,8 +237,8 @@ for cnes, bl in por_cnes.items():
 
 
 def com_total(vals):
-    """Acrescenta a coluna Acumulado 2019-2025 (soma; nula se todos os anos forem nulos)."""
-    ok = [v for v in vals if v is not None]
+    """Acrescenta a coluna Acumulado 2019-2025 (soma dos anos COMPLETOS; nula se todos forem nulos)."""
+    ok = [v for a, v in zip(ANOS, vals) if v is not None and a not in PARCIAIS]
     return list(vals) + [sum(ok) if ok else None]
 
 
@@ -358,7 +385,8 @@ contexto = [p for p in pontos_nv if p["cnes"] not in alvo]
 print(f"[6] {len(contexto)} pontos de contexto (>=480 partos/ano, fora do painel)")
 
 # ----------------------------------------------------------------------------- 7. saída
-dados = {"anos": ANOS, "preliminares": PRELIMINARES, "extraidoEm": EXTRAIDO_EM,
+dados = {"anos": ANOS, "preliminares": PRELIMINARES, "parciais": PARCIAIS, "periodos": PERIODOS,
+         "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()}, "extraidoEm": EXTRAIDO_EM,
          "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026", "maternidades": mats}
 out = os.path.join(BASE, "dados_mortalidade.js")
 with open(out, "w", encoding="utf-8") as fh:

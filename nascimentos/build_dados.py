@@ -189,6 +189,19 @@ for cnes, b in assist.items():
 for a in avisos_a:
     print("     AVISO:", a)
 
+# ---------- 2d. 1º semestre de 2026 (18/10/2026): coluna extraída direto do microdado ----------
+# Extracao_SINASC: py 1_coleta_unidades.py 2026S1 -> py 2_tabelas_unidades.py 2026S1 ->
+# py 10_perfil_sociodemografico.py --periodo 2026S1 -> py 11_perfil_obstetrico_novos.py --periodo 2026S1.
+# A coluna entra antes do Total de cada bloco (e ao fim das linhas de perfil); o Total continua sendo o
+# acumulado 2019-2025. Validação do conversor: py coluna_periodo.py 2025 (reproduz a coluna 2025 em 99,9%).
+import coluna_periodo
+PERIODOS = [("2026S1", 2026, "1º sem. 2026", list(range(1, 7)), "janeiro a junho de 2026",
+             "SINASC 2026 preliminar (OpenDataSUS, arquivo de 02/10/2026)", "2026-10-18")]
+for per, ano_p, rot_p, meses_p, desc_p, fonte_p, data_p in PERIODOS:
+    av_p, sem_p = coluna_periodo.acrescentar(dados, per, ano_p, rot_p, meses_p, desc_p, fonte_p, data_p)
+    print(f"[2d] coluna {rot_p} ({per}) acrescentada em {len(mats)} unidades | anos: {dados['anos']} | sem registros no período: {sem_p or 'nenhuma'}")
+    for a in av_p: print("     AVISO:", a)
+
 # ---------- 3. GEO compactado da referência ----------
 ref = open(REF_PAGE, encoding="utf-8").read()
 m = re.search(r'const GEO = (\{.*?\});', ref, re.S)

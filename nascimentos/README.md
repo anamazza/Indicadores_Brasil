@@ -24,7 +24,7 @@ pronto para GitHub Pages. Requer internet para os mapas de fundo (Leaflet/CARTO)
 
 ## Fontes
 
-SINASC 2019–2025 (dados sujeitos a revisão) · CNES (ficha via API de Dados Abertos; habilitações
+SINASC 2019–2025 e 1º semestre de 2026 (preliminar; dados sujeitos a revisão) · CNES (ficha via API de Dados Abertos; habilitações
 via serviço do site do CNES) · SIH/AIH 2025 · malhas de macrorregiões e regiões de saúde.
 
 ## Como atualizar
@@ -41,6 +41,7 @@ como no deck. Os indicadores de internação (SIH/SUS) estão no **Painel de Int
 (`Projeto Apresentações Internação/Painel_Internacao`), e o cabeçalho tem botões para os três painéis da família
 e, desde 12/10/2026, um único botão no cabeçalho, **Página principal**, que leva à página principal dos painéis
 (https://anamazza.github.io/Indicadores_Brasil/). O patch está registrado em `_patch_split_2026-09-29.py`.
+| Coluna de período parcial (1º sem. 2026, desde 18/10/2026) | na `Extracao_SINASC`: `py 1_coleta_unidades.py 2026S1`, `py 2_tabelas_unidades.py 2026S1`, `py 10_perfil_sociodemografico.py --periodo 2026S1`, `py 11_perfil_obstetrico_novos.py --periodo 2026S1`; depois `py build_dados.py` aqui (passo 2d chama `coluna_periodo.py`, que insere a coluna antes do Total de cada bloco; o Total continua sendo o acumulado 2019-2025). Validação do conversor: `py coluna_periodo.py 2025` (99,93% das células de 2025 reproduzidas). Para trocar o período (ex.: `2026` inteiro quando o ano fechar), editar `PERIODOS` no `build_dados.py`. No painel, `DADOS.anos` traz 2026 e `DADOS.rotulosAno`/`parciais`/`periodos` explicam o período: rótulo "1º sem. 2026", fora do acumulado e das tendências, padrão dos seletores = último ano completo |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_NV2026_Novo.html` e `index.html` e espelha esta pasta na subpasta `nascimentos/` do repositório Indicadores_Brasil) |
 
 **Publicação (desde 11/10/2026):** https://anamazza.github.io/Indicadores_Brasil/nascimentos/ — os três painéis e a página principal estão

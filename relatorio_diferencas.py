@@ -11,6 +11,8 @@ antes, depois). Grava relatorios/diferencas_<painel>_<data>.md quando há difere
 import json, os, subprocess, sys
 from datetime import date
 
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")   # o "→" do resumo quebrava no console cp1252
+
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 ARQUIVOS = {"nascimentos": "dados_nv2026.js", "internacao": "dados_internacao.js", "mortalidade": "dados_mortalidade.js"}
 PASTA_RELATORIOS = os.path.join(RAIZ, "relatorios")
@@ -41,6 +43,40 @@ def folhas(obj, caminho=""):
         yield caminho, obj
 
 
+def rotular_anos(dados):
+    """18/10/2026: séries por ANO em vez de por posição, para que uma coluna nova (ex.: 1º sem. 2026) apareça como
+    "valor novo" e não desloque a comparação de todas as colunas seguintes. Blocos: [rot, [v...]] com len = anos
+    ou anos+1 (Total/Acumulado); linhas de perfil: "valores" com len = anos."""
+    anos = [str(a) for a in dados.get("anos", [])]
+    if not anos:
+        return dados
+    def serie(vals):
+        if not isinstance(vals, list) or not all(v is None or isinstance(v, (int, float)) for v in vals):
+            return vals
+        if len(vals) == len(anos):
+            return {a: v for a, v in zip(anos, vals)}
+        if len(vals) == len(anos) + 1:
+            d = {a: v for a, v in zip(anos, vals)}; d["Total"] = vals[-1]; return d
+        return vals
+    for m in dados.get("maternidades", []):
+        for bloco, linhas in list((m.get("blocos") or {}).items()):
+            if not isinstance(linhas, list):
+                continue
+            # linhas por RÓTULO (não por posição): uma linha nova (ex.: UF de residência inédita) não desloca as demais
+            por_rot, vistos = {}, {}
+            for l in linhas:
+                if not (isinstance(l, list) and len(l) >= 2):
+                    continue
+                rot = str(l[0]); vistos[rot] = vistos.get(rot, 0) + 1
+                chave = rot if vistos[rot] == 1 else f"{rot} #{vistos[rot]}"
+                por_rot[chave] = [serie(l[1])] + list(l[2:])
+            m["blocos"][bloco] = por_rot
+        for sec in (m.get("assistenciais") or {}).get("secoes", []):
+            for l in sec.get("linhas", []):
+                l["valores"] = serie(l.get("valores"))
+    return dados
+
+
 def fmt(v):
     if isinstance(v, float):
         return f"{v:g}"
@@ -56,8 +92,13 @@ def comparar(pasta, arquivo):
     antigo = versao_publicada(pasta, arquivo)
     if antigo is None:
         return None, f"{pasta}: sem versão publicada para comparar"
+    novo, antigo = rotular_anos(novo), rotular_anos(antigo)
+    anos_novos = [a for a in novo.get("anos", []) if a not in antigo.get("anos", [])]
 
-    linhas, resumo = [], {"entraram": 0, "sairam": 0, "unidades_alteradas": 0, "valores_alterados": 0}
+    linhas, resumo = [], {"entraram": 0, "sairam": 0, "unidades_alteradas": 0, "valores_alterados": 0, "valores_novos": 0}
+    if anos_novos:
+        linhas.append(f"- **Coluna(s) nova(s)**: {', '.join(str(a) for a in anos_novos)} — os valores dessa coluna entram como "
+                      f"novos (∅ → valor) e são contados à parte; as colunas antigas são comparadas ano a ano.")
     # cabeçalho do DADOS (anos, preliminares, regras, datas de extração...)
     for k in sorted(set(antigo) | set(novo)):
         if k == "maternidades":
@@ -76,6 +117,9 @@ def comparar(pasta, arquivo):
     for cnes in sorted(set(a) & set(n)):
         fa, fn = dict(folhas(a[cnes])), dict(folhas(n[cnes]))
         mudancas = [(c, fa.get(c, "∅"), fn.get(c, "∅")) for c in sorted(set(fa) | set(fn)) if fa.get(c, "∅") != fn.get(c, "∅")]
+        novos = [x for x in mudancas if x[1] == "∅" and any(x[0].endswith(f".{a}") for a in anos_novos)]
+        mudancas = [x for x in mudancas if x not in novos]
+        resumo["valores_novos"] += len(novos)
         if not mudancas:
             continue
         resumo["unidades_alteradas"] += 1
@@ -83,11 +127,14 @@ def comparar(pasta, arquivo):
         linhas.append(f"\n### {cnes} · {n[cnes].get('nome', '')} ({n[cnes].get('uf', '')}) — {len(mudancas)} valor(es)")
         for c, va, vn in mudancas:
             bloco = c.split(".")[0] + ("." + c.split(".")[1].split("[")[0] if c.startswith("blocos.") else "")
+            if c.startswith("blocos."): bloco = "blocos." + c.split(".")[1]
             por_bloco[bloco] = por_bloco.get(bloco, 0) + 1
             if len(linhas) < LIMITE_LINHAS:
                 linhas.append(f"- `{c}`: {fmt(va)} → {fmt(vn)}")
-    if not linhas:
+    if not linhas and not resumo["valores_novos"]:
         return resumo, None
+    if resumo["valores_novos"]:
+        linhas.insert(1 if anos_novos else 0, f"- Valores da(s) coluna(s) nova(s): {resumo['valores_novos']}")
 
     hoje = date.today().isoformat()
     cab = [f"# Diferenças · {pasta} · {hoje}", "",
@@ -117,5 +164,6 @@ if __name__ == "__main__":
         else:
             houve = True
             print(f"{pasta}: entraram {resumo['entraram']}, saíram {resumo['sairam']}, {resumo['unidades_alteradas']} unidades "
-                  f"com {resumo['valores_alterados']} valores alterados → {os.path.relpath(saida, RAIZ)}")
+                  f"com {resumo['valores_alterados']} valores alterados, {resumo['valores_novos']} valores de coluna nova "
+                  f"→ {os.path.relpath(saida, RAIZ)}")
     sys.exit(0)

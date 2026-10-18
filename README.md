@@ -105,4 +105,5 @@ incluir a pasta em `PAINEIS` no `montar_pagina.py` e no `verificar_site.py`, e n
 O código (HTML, CSS, JavaScript e scripts Python) está sob a licença [Apache 2.0](LICENSE).
 As logos e os nomes do IFF, da Fiocruz, do SUS e do Ministério da Saúde são marcas das respectivas
 instituições e não estão cobertos pela licença. Os indicadores exibidos vêm de bases públicas do DATASUS
-(SINASC, SIH/SUS, SIM e CNES); 2024 e 2025 são dados preliminares, sujeitos a revisão.
+(SINASC, SIH/SUS, SIM e CNES); 2024 e 2025 são dados preliminares, sujeitos a revisão. Desde 18/10/2026 os painéis de
+nascimentos e de mortalidade trazem também o 1º semestre de 2026 (preliminar, período parcial; ver os README de cada painel).

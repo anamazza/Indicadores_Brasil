@@ -9,6 +9,17 @@ const ANOS = DADOS.anos;                 // [2019..2025]
 const NT = ANOS.length;                  // índice da coluna Acumulado nos blocos
 const MAT = DADOS.maternidades;
 const PRELIM = new Set(DADOS.preliminares || []);
+const ROTULO_ANO = DADOS.rotulosAno || {};          // {2026: "1º sem. 2026"} (18/10/2026)
+const PARCIAIS = new Set(DADOS.parciais || []);       // períodos incompletos: fora do acumulado e das tendências
+const ULT = (() => { let u = 0; ANOS.forEach((a, i) => { if(!PARCIAIS.has(a)) u = i; }); return u; })();   // último ano completo
+const ROT_ACUM = `Acumulado ${ANOS[0]}–${ANOS[ULT]}`;
+const nomeAno = i => i >= NT ? ROT_ACUM : (ROTULO_ANO[ANOS[i]] || String(ANOS[i]));
+const SERIE_ROT = PARCIAIS.size ? `${ANOS[0]} a ${ANOS[ULT]} e ${[...PARCIAIS].map(a => ROTULO_ANO[a] || a).join(", ")}` : `${ANOS[0]} a ${ANOS[NT-1]}`;
+const NOTA_PARCIAL = [...PARCIAIS].map(a => {
+  const p = (DADOS.periodos || {})[a] || {};
+  return `${ROTULO_ANO[a] || a}: período parcial (${p.descricao || "parte do ano"}), dados preliminares; números absolutos não são comparáveis com anos completos, taxas e percentuais são.`;
+}).join(" ");
+const temParcial = idx => idx.some(i => i < NT && PARCIAIS.has(ANOS[i]));
 const NS = "http://www.w3.org/2000/svg";
 
 const UF_NOME = {AC:"Acre",AL:"Alagoas",AM:"Amazonas",AP:"Amapá",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",
@@ -23,8 +34,8 @@ const fmtInt = v => v == null ? "—" : Math.round(v).toLocaleString("pt-BR");
 const fmtPct = v => v == null ? "—" : v.toLocaleString("pt-BR", {minimumFractionDigits:1, maximumFractionDigits:1}) + "%";
 const fmtTaxa = v => v == null ? "—" : v.toLocaleString("pt-BR", {minimumFractionDigits:1, maximumFractionDigits:1});
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const rotAno = i => i >= NT ? "Acumulado 2019-2025" : String(ANOS[i]) + (PRELIM.has(ANOS[i]) ? " (preliminar)" : "");
-const rotAnoCurto = i => i >= NT ? "Acumulado" : String(ANOS[i]);
+const rotAno = i => i >= NT ? ROT_ACUM : nomeAno(i) + (PRELIM.has(ANOS[i]) ? " (preliminar)" : "");
+const rotAnoCurto = i => i >= NT ? "Acumulado" : nomeAno(i);
 
 /* ---------------- acesso aos blocos ----------------
    mt.blocos[bloco] = [[rotulo, [v2019..v2025, acumulado]], ...] — sempre números absolutos */
@@ -225,7 +236,7 @@ function agrega(lista, ind, a){
 /* ---------------- estado ---------------- */
 const estado = {
   nivel:"uf", regiao:null, uf:null,
-  eixoMapa:"geral", indMapa:"tmn", anoMapa:NT-1,
+  eixoMapa:"geral", indMapa:"tmn", anoMapa:ULT,
   cnes:MAT[0].cnes,
   comparar:[]
 };
@@ -708,7 +719,7 @@ function desenhaPontos(){
   }
   camadaEstr = L.markerClusterGroup({maxClusterRadius:30, disableClusteringAtZoom:7});
   const visiveis = [];
-  const a = NT - 1;
+  const a = ULT;
   MAT.filter(m => passaFiltroPonto({uf:m.uf, nome:m.nome + " " + (m.nomePlanilha || "")})).forEach(m => {
     if(m.lat == null) return;
     visiveis.push([m.lat, m.lon]);
@@ -721,7 +732,7 @@ function desenhaPontos(){
     mk.bindPopup(`<div class="pop-nome">${esc(m.nome)}</div>
       <div>${esc(m.territorio.municipio)} · ${m.uf} · CNES ${m.cnes}</div>
       <div style="color:${cor.borda}; font-weight:700">${esc(rotuloConjuntos(m))}</div>
-      <div style="margin-top:.25rem">Nascidos vivos ${ANOS[a]}: <b>${fmtInt(NV(m, a))}</b></div>
+      <div style="margin-top:.25rem">Nascidos vivos ${nomeAno(a)}: <b>${fmtInt(NV(m, a))}</b></div>
       ${li("Óbitos maternos", "obm", "rmm")}
       ${li("Óbitos fetais", "obf", "tmf")}
       ${li("Óbitos neonatais", "obn", "tmn")}
@@ -758,7 +769,7 @@ function grafLinhas(alvo, series, opts = {}){
     s += `<text x="${mL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="11.5" fill="#4E6A5C">${opts.pct ? Math.round(v) + "%" : opts.taxa ? fmtTaxa(v) : fmtInt(v)}</text>`;
   }
   ANOS.forEach((ano, i) => {
-    s += `<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#1D3229">${ano}${PRELIM.has(ano) ? "*" : ""}</text>`;
+    s += `<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="${PARCIAIS.has(ano) ? 10.5 : 12}" font-weight="700" fill="#1D3229">${nomeAno(i)}${PRELIM.has(ano) ? "*" : ""}</text>`;
   });
   series.forEach(sr => {
     let d = "", prev = false;
@@ -771,7 +782,7 @@ function grafLinhas(alvo, series, opts = {}){
     sr.vals.forEach((v, i) => {
       if(v == null) return;
       const _rot = fmt(v);
-      s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="${sr.cor}"><title>${esc(sr.nome)} · ${ANOS[i]} · ${_rot}${sr.extra && sr.extra[i] ? " · " + esc(sr.extra[i]) : ""}</title></circle>`;
+      s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="${sr.cor}"><title>${esc(sr.nome)} · ${nomeAno(i)} · ${_rot}${sr.extra && sr.extra[i] ? " · " + esc(sr.extra[i]) : ""}</title></circle>`;
       if(comRotulos){
         s += `<text x="${X(i).toFixed(1)}" y="${(Y(v) - 11).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1D3229">${_rot}</text>`;
       }
@@ -782,7 +793,8 @@ function grafLinhas(alvo, series, opts = {}){
   if(series.length > 1 || opts.legenda){
     leg = `<div class="legenda">` + series.map(sr => `<span><i style="background:${sr.cor}"></i>${esc(sr.nome)}</span>`).join("") + `</div>`;
   }
-  el.innerHTML = s + leg + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">* dados preliminares, sujeitos a revisão.</p>` : "");
+  const comParcial = series.some(sr => sr.vals.some((v, i) => v != null && i < NT && PARCIAIS.has(ANOS[i])));
+  el.innerHTML = s + leg + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">* dados preliminares, sujeitos a revisão.${comParcial ? " " + esc(NOTA_PARCIAL) : ""}</p>` : "");
 }
 function grafRanking(alvo, itens, opts = {}){
   const linhas = itens.filter(i => i.v != null).sort((a,b) => opts.sentido === "menor" ? a.v - b.v : b.v - a.v).slice(0, 15);
@@ -905,11 +917,11 @@ function thsAno(comTotal = true, npct = false){
   const th = (i, rot) => npct
     ? `<th class="th-ano par" data-a="${i}" colspan="2"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`
     : `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`;
-  let s = ANOS.map((a, i) => th(i, String(a) + (PRELIM.has(a) ? "*" : ""))).join("");
+  let s = ANOS.map((a, i) => th(i, nomeAno(i) + (PRELIM.has(a) ? "*" : ""))).join("");
   if(comTotal) s += th(NT, "Total");
   return s;
 }
-const notaPrelim = `<span class="chip chip-prelim" title="2024 e 2025: dados preliminares do DATASUS">* preliminar</span>`;
+const notaPrelim = `<span class="chip chip-prelim" title="${[...PRELIM].map(a => ROTULO_ANO[a] || a).join(", ")}: dados preliminares do DATASUS${PARCIAIS.size ? ". " + NOTA_PARCIAL : ""}">* preliminar</span>`;
 
 /* tabela de série: óbitos, denominador e taxa (como nos slides "Razão/Taxa de Mortalidade …") */
 function tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind){
@@ -1134,7 +1146,7 @@ window.addEventListener("popstate", () => { fecharDossie(false); fecharMetodo(fa
 function cardGrafTab(id, titulo, mt, bloco, rotN, rotD, rotTaxa, indId, fonteExtra){
   const ind = indPorId(indId);
   return `<div class="card full">
-    <h3>${esc(titulo)}, ${ANOS[0]} a ${ANOS[NT-1]} ${notaPrelim}</h3>
+    <h3>${esc(titulo)}, ${SERIE_ROT} ${notaPrelim}</h3>
     <div id="${id}" style="max-width:820px; margin:.7rem auto 0"></div>
     <div style="margin-top:.9rem">${tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind)}</div>
     <p class="fonte">${FONTE_SIM_SINASC}${fonteExtra ? " " + fonteExtra : ""}</p></div>`;
@@ -1144,10 +1156,10 @@ function desenhaDossie(){
   const mt = MAT.find(m => m.cnes === estado.cnes) || MAT[0];
   const el = document.getElementById("dossieConteudo");
   const t = mt.territorio;
-  const a = NT - 1;
+  const a = ULT;
   const k = (idN, idT, rot) => {
     const n = valorUnidade(mt, indPorId(idN), a), tx = idT ? valorUnidade(mt, indPorId(idT), a) : null, ind = idT ? indPorId(idT) : null;
-    return `<div class="k"><div class="n mono">${fmtInt(n)}</div><div class="t">${rot} ${ANOS[a]}</div>${ind ? `<div class="s">${esc(ind.curto)}: <b>${fmtTaxa(tx)}</b> ${ind.unidade}</div>` : `<div class="s">&nbsp;</div>`}</div>`;
+    return `<div class="k"><div class="n mono">${fmtInt(n)}</div><div class="t">${rot} ${nomeAno(a)}</div>${ind ? `<div class="s">${esc(ind.curto)}: <b>${fmtTaxa(tx)}</b> ${ind.unidade}</div>` : `<div class="s">&nbsp;</div>`}</div>`;
   };
   const sep = txt => `<div class="full"><p class="eyebrow titulo-linha" style="margin:.6rem 0 .1rem">${txt}</p></div>`;
   el.innerHTML = `
@@ -1176,7 +1188,7 @@ function desenhaDossie(){
     ${sep("Mortalidade materna")}
     ${cardGrafTab("gRMM", "Razão de Mortalidade Materna", mt, "mat_serie", R.obMat, R.nv, "Razão de Mortalidade Materna (por 100.000 NV)", "rmm",
       "Óbito materno segundo a definição do Ministério da Saúde (IDB, Anexo I); razão por estabelecimento de ocorrência.")}
-    <div class="card full"><h3>Óbitos maternos por causas obstétricas diretas e indiretas, ${ANOS[0]} a ${ANOS[NT-1]} ${notaPrelim}</h3>
+    <div class="card full"><h3>Óbitos maternos por causas obstétricas diretas e indiretas, ${SERIE_ROT} ${notaPrelim}</h3>
       ${tabelaN(mt, "mat_tipo", {cab:"Tipo de causa obstétrica", pctDe:R.totMat})}
       <p class="fonte">${FONTE_SIM} Diretas: O00-O08, O11-O23, O24.4, O26-O92 (e A34, D39.2, E23.0, F53, M83.0); indiretas: O10, O24, O25, O94, O98, O99, B20-B24; inespecíficas: O95. Percentuais sobre o total de óbitos maternos.</p></div>
     <div class="card full"><h3>Óbitos maternos diretos por grupo de causas ${notaPrelim}</h3>
@@ -1229,7 +1241,7 @@ function desenhaDossie(){
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
 const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
-let anoComp = NT - 1;
+let anoComp = ULT;
 let grupoComp = "apoiada";
 function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["apoiada"]).includes(g)); }
 function entradaComp(c){
@@ -1333,7 +1345,7 @@ function desenhaComparador(){
    EVOLUÇÃO — a mesma unidade comparada entre anos
    ============================================================ */
 let evoCnes = MAT[0].cnes;
-let anosEvoSel = new Set([NT - 2, NT - 1]);
+let anosEvoSel = new Set([ULT - 1, ULT]);
 function sparkline(vals){
   const ok = vals.map((v, i) => [i, v]).filter(p => p[1] != null);
   if(ok.length < 2) return "";
@@ -1358,6 +1370,8 @@ function desenhaEvolucao(){
     return;
   }
   const a0 = anos[0], a1 = anos[anos.length - 1];
+  const parcialSel = temParcial(anos);
+  const extremoParcial = PARCIAIS.has(ANOS[a0]) || PARCIAIS.has(ANOS[a1]);   // número absoluto de período parcial não se compara
   let linhas = "";
   EIXOS.forEach(ex => {
     linhas += `<tr class="grupo"><td colspan="${anos.length + 3}">${esc(ex.rot)}</td></tr>`;
@@ -1366,7 +1380,7 @@ function desenhaEvolucao(){
       const tds = anos.map(a => `<td class="mono">${fmtInd(ind, serie[a])}</td>`).join("");
       const v0 = serie[a0], v1 = serie[a1];
       let varTxt = "—", cls = "var-neutra";
-      if(v0 != null && v1 != null){
+      if(v0 != null && v1 != null && !(ind.tipo === "num" && extremoParcial)){
         if(ind.tipo === "num"){
           const d = v0 ? (v1 - v0) / v0 * 100 : null;
           varTxt = d == null ? (v1 > 0 ? "▲ +" + fmtInt(v1) : "—") : (d >= 0 ? "▲ +" : "▼ ") + d.toLocaleString("pt-BR", {maximumFractionDigits:1}) + "%";
@@ -1378,16 +1392,16 @@ function desenhaEvolucao(){
         }
       }
       linhas += `<tr><td>${esc(ind.rot)}</td>
-        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie)}</td></tr>`;
+        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1))}</td></tr>`;
     });
   });
   el.innerHTML = `
   <div class="card comp-grid">
-    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${ANOS[a0]} a ${ANOS[a1]}</span></h3>
+    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span></h3>
     <div class="tab-wrap"><table class="comp">
-      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${ANOS[a]}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência 2019-2025</th></tr></thead>
+      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th></tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação entre o primeiro e o último ano marcados: taxas em diferença absoluta (por mil ou por 100 mil), percentuais em pontos percentuais, números absolutos em variação relativa. Verde = a mortalidade caiu; vermelho = subiu; sem cor = número absoluto ou indicador de perfil, sem julgamento. A tendência mostra a série completa de 2019 a 2025. * 2024 e 2025 preliminares. ${FONTE_SIM_SINASC}</p>
+    <p class="fonte">Variação entre o primeiro e o último ano marcados: taxas em diferença absoluta (por mil ou por 100 mil), percentuais em pontos percentuais, números absolutos em variação relativa. Verde = a mortalidade caiu; vermelho = subiu; sem cor = número absoluto ou indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2024 e 2025 preliminares. ${FONTE_SIM_SINASC}</p>
   </div>`;
 }
 
@@ -1469,7 +1483,8 @@ function desenhaMetodologia(){
   _metodoPronta = true;
   const fontes = [
     ["SIM · declarações de óbito (DO)", "Sistema de Informações sobre Mortalidade, Ministério da Saúde. Arquivos DO<UF><ano>.dbc de todas as 27 UFs (2019 a 2023 definitivos; 2024 e 2025 preliminares, extração de 10 e 11/09/2026 — as unidades acrescentadas em 23/09/2026, de MA, CE e SP, foram extraídas nessa data, com as mesmas regras; na mesma data, o Hospital Santa Marcelina/SP e o Hospital da Mulher do Recife/PE tiveram os óbitos neonatais de residentes em outras UFs incorporados). Os óbitos são atribuídos ao estabelecimento onde ocorreram (CODESTAB) e ao ano da data do óbito. Base dos óbitos maternos, neonatais e do componente neonatal precoce da mortalidade perinatal."],
-    ["SIM · declarações de óbito fetal (DOFET)", "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025. Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."],
+    ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: óbitos de ${p.descricao || "janeiro a junho de 2026"}, pela data do óbito, dos arquivos preliminares DO<UF>2026.dbc das 27 UFs e DOFET26.dbc (${p.fonte || "SIM 2026 preliminar"}), com as mesmas regras das colunas 2019-2025 (o cálculo do período é gerado a partir do script do recálculo e reproduziu o ano de 2025 célula a célula). Nascidos vivos do período contados diretamente no SINASC 2026 preliminar, por estabelecimento de ocorrência. Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro no SINASC nem no SIM no período (coluna em branco): " + p.unidadesSemDados.map(c => { const m = MAT.find(x => x.cnes === c); return m ? m.nome + " (CNES " + c + ")" : c; }).join("; ") + "." : ""}`; })()],
+    ["SIM · declarações de óbito fetal (DOFET)", "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025 (e DOFET26, preliminar, para o 1º semestre de 2026). Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal."],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES; coordenadas geográficas georreferenciadas a partir do cadastro."],
     ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, o Hospital do Rocio (PR) e a Unidade Hospitalar de Iauaretê (AM)."],
@@ -1520,7 +1535,8 @@ function desenhaMetodologia(){
         Ao agregar territórios ou grupos, somam-se numeradores e denominadores das maternidades da seleção (taxa agregada); a coluna Acumulado 2019-2025 usa a mesma regra ao longo dos anos.
         Nos mapas, as faixas são quintis calculados sobre os territórios visíveis no recorte atual, na rampa creme → vinho (mais escuro = maior mortalidade); no comparativo entre anos, os quintis são calculados sobre os dois anos juntos, para que as cores sejam comparáveis.
         Territórios em cinza não possuem maternidade do painel ou não têm óbitos/denominador no período.
-        2024 e 2025 são dados preliminares do DATASUS e os totais podem mudar nas próximas versões dos arquivos.
+        2024, 2025 e o 1º semestre de 2026 são dados preliminares do DATASUS e os totais podem mudar nas próximas versões dos arquivos.
+        O 1º semestre de 2026 (óbitos de janeiro a junho, pela data do óbito) é período parcial: não entra na coluna Acumulado nem nas tendências, e os seus números absolutos não são comparáveis com anos completos (as taxas são).
       </p>
     </div>`;
 }
@@ -1566,14 +1582,14 @@ function opcaoUnidadesPorGrupo(sel){
   }).join("");
 }
 const opcoesAno = (sel, padrao) => {
-  sel.innerHTML = ANOS.map((a, i) => `<option value="${i}" ${i === padrao ? "selected" : ""}>${a}${PRELIM.has(a) ? " · preliminar" : ""}</option>`).join("") +
-    `<option value="${NT}" ${padrao === NT ? "selected" : ""}>Acumulado 2019–2025</option>`;
+  sel.innerHTML = ANOS.map((a, i) => `<option value="${i}" ${i === padrao ? "selected" : ""}>${nomeAno(i)}${PRELIM.has(a) ? " · preliminar" : ""}</option>`).join("") +
+    `<option value="${NT}" ${padrao === NT ? "selected" : ""}>${ROT_ACUM}</option>`;
 };
 function inicia(){
   // faixa de destaques
   document.getElementById("statMats").textContent = MAT.length;
   document.getElementById("statUFs").textContent = new Set(MAT.map(m => m.uf)).size;
-  const a = NT - 1;
+  const a = ULT;
   document.getElementById("statNV").textContent = fmtInt(agrega(MAT, indPorId("nv"), a));
   document.getElementById("statMat").textContent = fmtInt(agrega(MAT, indPorId("obm"), a));
   document.getElementById("statMatSub").textContent = "RMM " + fmtTaxa(agrega(MAT, indPorId("rmm"), a)) + " por 100 mil NV";
@@ -1666,7 +1682,7 @@ function inicia(){
   };
   desenhaPillsEixo(); desenhaPillsInd();
   const sAM = document.getElementById("selAnoMapa");
-  opcoesAno(sAM, NT - 1);
+  opcoesAno(sAM, ULT);
   sAM.addEventListener("change", () => { estado.anoMapa = +sAM.value; desenhaMapa(); });
   document.getElementById("btnResetMapa").addEventListener("click", limparSelecaoMapa);
 
@@ -1698,7 +1714,7 @@ function inicia(){
   sNC.addEventListener("change", () => { compSel.nivel = sNC.value; desenhaComparativo(); });
   const sAA = document.getElementById("selAnoCompA");
   const sAB = document.getElementById("selAnoCompB");
-  opcoesAno(sAA, 0); opcoesAno(sAB, NT - 1);
+  opcoesAno(sAA, 0); opcoesAno(sAB, ULT);
   sAA.addEventListener("change", desenhaComparativo);
   sAB.addEventListener("change", desenhaComparativo);
   preencheUFComp();
@@ -1762,7 +1778,7 @@ function inicia(){
   document.getElementById("btnAddComp").addEventListener("click", () => addComp(sC.value));
   document.getElementById("btnAddMedia").addEventListener("click", addMediaGrupo);
   const sAC = document.getElementById("selAnoComp");
-  opcoesAno(sAC, NT - 1);
+  opcoesAno(sAC, ULT);
   sAC.addEventListener("change", () => { anoComp = +sAC.value; desenhaComparador(); });
 
   // modo "mesma unidade entre anos"
@@ -1782,7 +1798,7 @@ function inicia(){
   sEvo.addEventListener("change", () => { evoCnes = sEvo.value; desenhaEvolucao(); });
   const anosBox = document.getElementById("anosEvo");
   anosBox.innerHTML = ANOS.map((a, i) =>
-    `<button class="chip chip-ano ${anosEvoSel.has(i) ? "ativo" : ""}" data-a="${i}">${a}</button>`).join("");
+    `<button class="chip chip-ano ${anosEvoSel.has(i) ? "ativo" : ""}" data-a="${i}">${nomeAno(i)}</button>`).join("");
   anosBox.querySelectorAll("button").forEach(b => {
     b.addEventListener("click", () => {
       const i = +b.dataset.a;
