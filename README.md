@@ -104,8 +104,8 @@ incluir a pasta em `PAINEIS` no `montar_pagina.py` e no `verificar_site.py`, e n
 
 Desde 18/10/2026 o site pode ser instalado como aplicativo (no Chrome e no Edge, pelo ícone de instalação na
 barra de endereço ou pelo botão "Instalar" da página principal; no iPhone, por "Adicionar à Tela de Início").
-Arquivos: `manifest.webmanifest` (nome, ícones, cor do tema, atalhos para os três painéis), `icons/` (ícones na
-identidade dos painéis, gerados com Pillow) e `sw.js` (service worker: rede primeiro, cópia local das páginas já
+Arquivos: `manifest.webmanifest` (nome, ícones, cor do tema, atalhos para os três painéis), `icons/` (ícones com a foto das mãos
+da página principal, recorte quadrado gerado com Pillow; ao trocar um ícone, troque também o nome do arquivo, porque os navegadores guardam o anterior em cache) e `sw.js` (service worker: rede primeiro, cópia local das páginas já
 visitadas para abrir sem internet; os mapas de fundo sempre vêm da rede). A página principal e os três painéis
 referenciam o manifesto e registram o service worker (`painel_base.html` de cada pasta de trabalho). Para forçar a
 renovação das cópias locais de todos os usuários, mude `VERSAO` no `sw.js`.

@@ -71,7 +71,7 @@ for arq in ["docs/apostila/apostila.html", "docs/apostila/Apostila_Dicionarios_d
     if os.path.exists(p) and os.path.getsize(p) > 20000: ok(f"{arq} presente ({kb(p)} KB)")
     else: falha(f"{arq} ausente ou vazio (botões da apostila na página principal)")
 # aplicativo instalável (PWA, 18/10/2026)
-for arq in ["manifest.webmanifest", "sw.js", "icons/icon-192.png", "icons/icon-512.png", "icons/icon-maskable-512.png", "icons/apple-touch-icon.png"]:
+for arq in ["manifest.webmanifest", "sw.js", "icons/maos-192.png", "icons/maos-512.png", "icons/maos-maskable-512.png", "icons/maos-180.png"]:
     p = os.path.join(RAIZ, *arq.split("/"))
     if os.path.exists(p) and os.path.getsize(p) > 200: ok(f"{arq} presente")
     else: falha(f"{arq} ausente (aplicativo instalável)")
