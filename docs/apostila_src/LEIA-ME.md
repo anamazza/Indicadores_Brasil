@@ -7,7 +7,7 @@ projetos, sem redigitação: as tabelas dos dicionários e as fichas dos painéi
 | Arquivo | O que é |
 |---|---|
 | `apostila_lib.js` | identidade visual comum (cores com contraste 4,5:1, Calibri, tabelas sem células mescladas, legendas, hiperlinks, cabeçalho e rodapé) |
-| `gera_apostila_v2.js` | monta a apostila (versão 1.2 de 18/10/2026: período 2019-2025 e 1º semestre de 2026, nota de período parcial; v1.1 revisada pela banca de 11/10/2026) |
+| `gera_apostila_v2.js` | monta a apostila (versão 1.3 de 18/10/2026: sem a seção de documentos de origem; 1.2 = período 2019-2025 e 1º semestre de 2026; 1.1 revisada pela banca de 11/10/2026) |
 | `gera_parecer.js` | monta o parecer da banca |
 | `docx_para_html.py` | gera a versão de leitura `../apostila/apostila.html` a partir do .docx (sem Word); o PDF sai dela com o Edge: `msedge --headless=new --no-pdf-header-footer --print-to-pdf=saida.pdf file:///caminho-sem-acentos/apostila.html` |
 | `extrai_fichas_painel.py` | extrai as fichas da página Metodologia de um painel (`painel_app.js`) para JSON (INDS, CALCULOS, FICHAS_EXTRAS, fontes) |
@@ -27,7 +27,7 @@ projetos, sem redigitação: as tabelas dos dicionários e as fichas dos painéi
 4. Abrir no Word e atualizar os campos (sumário e numeração), ou deixar que o Word pergunte ao abrir.
    Depois gerar a versão de leitura e o PDF: `py -I docx_para_html.py ../apostila/<arquivo>.docx ../apostila` e o comando do Edge acima;
    copiar também o .docx para `../apostila/`.
-5. Registrar a nova versão na seção 1.5 da apostila (controle de versões) e revisar os textos de ligação em
+5. Registrar a nova versão na seção 1.4 da apostila (controle de versões) e revisar os textos de ligação em
    `gera_apostila_v2.js`: são os únicos trechos escritos para a apostila; tudo o mais vem dos documentos de origem.
 6. Após 26/10/2026 (fim do período de defeso eleitoral), trocar a faixa de marcas pela completa, conforme o manual da
    Secom vigente.
