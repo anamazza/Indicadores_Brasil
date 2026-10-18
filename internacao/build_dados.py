@@ -40,8 +40,22 @@ NV_DADOS = os.path.join(PAINEL_NV, "dados_nv2026.js")
 NV_CNES = os.path.join(PAINEL_NV, "cnes_dados.json")
 MORT_CNES = os.path.join(DOCS, "Mortalidade Indicadores", "Painel_Mortalidade", "cnes_dados.json")
 
-ANOS = list(range(2019, 2026))
-PRELIMINARES = [2025]               # competências até jun/2026: 2025 sujeito a acréscimos
+ANOS = list(range(2019, 2027))
+PRELIMINARES = [2025, 2026]         # 2025: competências até jun/2026; 2026 (1º semestre): competências até ago/2026
+PARCIAIS = [2026]                   # períodos incompletos: fora das tendências; números absolutos não comparáveis
+# 18/10/2026: 1º semestre de 2026 = internações com data de internação de janeiro a junho de 2026, tabuladas com as
+# regras v3 (tabula_periodo.py, gerado a partir do 55_tabula_114_v3.py) a partir dos RD/SP de 2601 a 2608 e dos
+# leitos LT de 2601 a 2606; linhas do SINASC (VBAC, induzido, CPAV) do SINASC 2026 preliminar (passo 11 do projeto NV).
+PERIODOS = {"2026": {"rotulo": "1º sem. 2026", "meses": list(range(1, 7)),
+                     "descricao": "internações de janeiro a junho de 2026, pela data de internação, com as AIH apresentadas até a competência de agosto de 2026",
+                     "completude": "medido em 2025, esse recorte (AIH até agosto do mesmo ano) já continha de 97,5% a 99,6% das internações do semestre, conforme a UF; o restante entra nas competências seguintes",
+                     "fonte": "SIH/SUS RD e SP até 2026-08 (FTP do DATASUS, arquivos de 06/09/2026), CNES-LT 2026-01 a 2026-06 e SINASC 2026 preliminar (OpenDataSUS, 02/10/2026)",
+                     "extraidoEm": "2026-10-18"}}
+TAB_PERIODO = os.path.join(SAIDA_SIH, "tabulacao_2026S1")
+P11_PERIODO = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Extracao_SINASC", "saida", "perfil_obstetrico_novos_2026S1.json")
+LINHAS_SINASC = {"Porcentagem de nascidos vivos por partos vaginais pós-cesariana": ("vbac", "sem99"),
+                 "Porcentagem de nascidos vivos com trabalho de parto induzido": ("induzido", None),
+                 "Porcentagem de nascidos vivos com condições potencialmente ameaçadoras à vida": ("cpav", None)}
 
 UF_NOME = {"AC":"Acre","AL":"Alagoas","AM":"Amazonas","AP":"Amapá","BA":"Bahia","CE":"Ceará",
            "DF":"Distrito Federal","ES":"Espírito Santo","GO":"Goiás","MA":"Maranhão","MG":"Minas Gerais",
@@ -194,6 +208,33 @@ for arq, data_tab in FONTES:
                       "linhas": {l["rotulo"].strip(): [to_num(v) for v in l["valores"]] for l in u["linhas"]}}
 print(f"[3] {len(plan)} unidades com planilha de internação")
 
+# ----------------------------------------------------------------------------- 3b. coluna do 1º semestre de 2026
+tab26 = {}
+for arq in sorted(glob_json := [os.path.join(TAB_PERIODO, f) for f in os.listdir(TAB_PERIODO) if f.endswith(".json")]) if os.path.isdir(TAB_PERIODO) else []:
+    j = json.load(open(arq, encoding="utf-8"))
+    for cnes, linhas in j["unidades"].items():
+        tab26[cnes.zfill(7)] = {rot.strip(): vals[0] for rot, vals in linhas.items()}
+p11 = json.load(open(P11_PERIODO, encoding="utf-8")) if os.path.exists(P11_PERIODO) else {}
+sem_tab, n_sinasc = [], 0
+for cnes, u in plan.items():
+    t26 = tab26.get(cnes)
+    if t26 is None:
+        sem_tab.append(cnes)
+    e11 = p11.get(cnes) or p11.get({"2025507": "2025523"}.get(cnes, ""))
+    for rot, vals in u["linhas"].items():
+        v = None
+        if rot in LINHAS_SINASC:
+            g, var = LINHAS_SINASC[rot]
+            if e11:
+                x = e11[g][var][0] if var else e11[g][0]
+                v = None if x is None else round(float(x), 2); n_sinasc += 1
+        elif t26 is not None:
+            v = to_num(t26.get(rot))
+        u["linhas"][rot] = list(vals[:7]) + [v]
+print(f"[3b] coluna 1º sem. 2026: {len(tab26)} unidades tabuladas ({len(sem_tab)} sem tabulação: {sem_tab}), "
+      f"{n_sinasc} linhas do SINASC preenchidas")
+PERIODOS["2026"]["unidadesSemDados"] = sem_tab
+
 faltas = {}
 def blocos_de(cnes):
     bl = {}
@@ -310,7 +351,8 @@ else:
     print("    [aviso] dicionário Word não encontrado; metodologia sem fichas")
 
 # ----------------------------------------------------------------------------- 7. saída
-dados = {"anos": ANOS, "preliminares": PRELIMINARES, "regras": "v3 2026-09-09",
+dados = {"anos": ANOS, "preliminares": PRELIMINARES, "parciais": PARCIAIS, "periodos": PERIODOS,
+         "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()}, "regras": "v3 2026-09-09",
          "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026", "maternidades": mats}
 out = os.path.join(BASE, "dados_internacao.js")
 with open(out, "w", encoding="utf-8") as fh:

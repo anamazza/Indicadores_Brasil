@@ -37,7 +37,7 @@ sem tabulação por região ou macrorregião de saúde.
 
 ## Fontes
 
-SIH/SUS 2019–2025 (AIH reduzida e serviços profissionais, competências até junho de 2026; 2025 sujeito a
+SIH/SUS 2019–2025 e 1º semestre de 2026 (AIH reduzida e serviços profissionais, competências até junho de 2026 para 2019-2025 e até agosto de 2026 para o semestre; 2025 e 2026 sujeitos a
 acréscimos), CNES-LT (leitos-dia), SINASC 2019–2025 (parto vaginal após cesariana, trabalho de parto
 induzido e condições potencialmente ameaçadoras à vida) · CNES (ficha via API de Dados Abertos; habilitações
 via serviço do site do CNES) · lista oficial de maternidades por grupo de 09/09/2026.
@@ -53,6 +53,7 @@ marcadas como anexo quando não constam da lista oficial.
 |---|---|
 | Indicadores (nova rodada das planilhas) | rerodar a esteira em `../Extracao_SIH` (55/56 ou 61) e depois `py build_dados.py` |
 | Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
+| Coluna de período parcial (1º sem. 2026, desde 18/10/2026) | em `../Extracao_SIH`: `py -3.12 63_baixar_2026.py` (RD/SP/LT de 2026), `py -3.12 66_sp_marcas_2026.py` (marcas SP de 2026), `py -3.12 extrai_leitos_periodo.py 2026S1`, `py -3.12 gera_tabula_periodo.py` e `py -3.12 tabula_periodo.py 2026S1` (checkpoint em `saida/tabulacao_2026S1/`; apagar para refazer); no projeto NV, `py 11_perfil_obstetrico_novos.py --periodo 2026S1` (linhas do SINASC); depois `py build_dados.py` aqui (passo 3b). Regressão do tabulador: `tabula_periodo.py 2024 AC SE PE` = 506/506 células da v3. Período parcial: fora das tendências, padrão dos seletores = último ano completo; refazer quando o SIH publicar as competências até 2026-12 |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Internacao_2026.html` e `index.html` e espelha esta pasta na subpasta `internacao/` do repositório Indicadores_Brasil) |
 | Estrutura/estilo da página | editar `painel_base.html` (ou regerar do painel de mortalidade com `_gera_base.py`) |
 

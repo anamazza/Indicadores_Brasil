@@ -12,6 +12,17 @@ const ANOS = DADOS.anos;                 // [2019..2025]
 const NT = ANOS.length;
 const MAT = DADOS.maternidades;
 const PRELIM = new Set(DADOS.preliminares || []);
+const ROTULO_ANO = DADOS.rotulosAno || {};          // {2026: "1º sem. 2026"} (18/10/2026)
+const PARCIAIS = new Set(DADOS.parciais || []);       // períodos incompletos: fora das tendências
+const ULT = (() => { let u = 0; ANOS.forEach((a, i) => { if(!PARCIAIS.has(a)) u = i; }); return u; })();   // último ano completo
+const nomeAno = i => ROTULO_ANO[ANOS[i]] || String(ANOS[i]);
+const SERIE_ROT = PARCIAIS.size ? `${ANOS[0]} a ${ANOS[ULT]} e ${[...PARCIAIS].map(a => ROTULO_ANO[a] || a).join(", ")}` : `${ANOS[0]} a ${ANOS[NT-1]}`;
+const NOTA_PARCIAL = [...PARCIAIS].map(a => {
+  const p = (DADOS.periodos || {})[a] || {};
+  return `${ROTULO_ANO[a] || a}: ${p.descricao || "período parcial"}${p.completude ? " (" + p.completude + ")" : ""}; período parcial e preliminar: números absolutos não são comparáveis com anos completos, percentuais, taxas e tempos médios são.`;
+}).join(" ");
+const NOTA_PRELIM = "* 2025: competências até junho de 2026, sujeito a acréscimos." + (PARCIAIS.size ? " " + NOTA_PARCIAL : "");
+const temParcial = idx => idx.some(i => i < NT && PARCIAIS.has(ANOS[i]));
 const NS = "http://www.w3.org/2000/svg";
 
 const UF_NOME = {AC:"Acre",AL:"Alagoas",AM:"Amazonas",AP:"Amapá",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",
@@ -28,8 +39,8 @@ const fmtDias = v => v == null ? "—" : v.toLocaleString("pt-BR", {minimumFract
 const FMT = {int:fmtInt, pct:fmtPct, dias:fmtDias};
 const fmtDe = (fmt, v) => (FMT[fmt] || fmtInt)(v);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const rotAno = i => String(ANOS[i]) + (PRELIM.has(ANOS[i]) ? " (parcial)" : "");
-const rotAnoCurto = i => String(ANOS[i]);
+const rotAno = i => nomeAno(i) + (PRELIM.has(ANOS[i]) ? " (parcial)" : "");
+const rotAnoCurto = i => nomeAno(i);
 
 /* ---------------- acesso aos blocos ---------------- */
 function linhaB(mt, bloco, i){ const b = mt.blocos[bloco]; return b ? b[i] || null : null; }
@@ -157,7 +168,7 @@ function desenhaPontos(){
   }
   camadaEstr = L.markerClusterGroup({maxClusterRadius:30, disableClusteringAtZoom:7});
   const visiveis = [];
-  const a = NT - 1;
+  const a = ULT;
   MAT.filter(m => passaFiltroPonto({uf:m.uf, nome:m.nome + " " + (m.nomePlanilha || "")})).forEach(m => {
     if(m.lat == null) return;
     visiveis.push([m.lat, m.lon]);
@@ -167,7 +178,7 @@ function desenhaPontos(){
     mk.bindPopup(`<div class="pop-nome">${esc(m.nome)}</div>
       <div>${esc(m.territorio.municipio)} · ${m.uf} · CNES ${m.cnes}</div>
       <div style="color:${cor.borda}; font-weight:700">${esc(rotuloConjuntos(m))}</div>
-      <div style="margin-top:.25rem; font-weight:700">${ANOS[a]}${PRELIM.has(ANOS[a]) ? " (parcial)" : ""}</div>
+      <div style="margin-top:.25rem; font-weight:700">${nomeAno(a)}${PRELIM.has(ANOS[a]) ? " (parcial)" : ""}</div>
       ${li("obst_n", "Internações obstétricas")}
       ${li("mot_parto", "Partos entre as internações")}
       ${li("mmg", "Morbidade materna grave")}
@@ -204,7 +215,7 @@ function grafLinhas(alvo, series, opts = {}){
     s += `<text x="${mL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="11.5" fill="#4E6A5C">${fmtEixo(v)}</text>`;
   }
   ANOS.forEach((ano, i) => {
-    s += `<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#1D3229">${ano}${PRELIM.has(ano) ? "*" : ""}</text>`;
+    s += `<text x="${X(i).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="${PARCIAIS.has(ano) ? 10.5 : 12}" font-weight="700" fill="#1D3229">${nomeAno(i)}${PRELIM.has(ano) ? "*" : ""}</text>`;
   });
   series.forEach(sr => {
     let d = "", prev = false;
@@ -217,7 +228,7 @@ function grafLinhas(alvo, series, opts = {}){
     sr.vals.forEach((v, i) => {
       if(v == null) return;
       const _rot = fmt(v);
-      s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="${sr.cor}"><title>${esc(sr.nome)} · ${ANOS[i]} · ${_rot}</title></circle>`;
+      s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" fill="${sr.cor}"><title>${esc(sr.nome)} · ${nomeAno(i)} · ${_rot}</title></circle>`;
       if(comRotulos) s += `<text x="${X(i).toFixed(1)}" y="${(Y(v) - 11).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1D3229">${_rot}</text>`;
     });
   });
@@ -226,7 +237,7 @@ function grafLinhas(alvo, series, opts = {}){
   if(series.length > 1 || opts.legenda){
     leg = `<div class="legenda">` + series.map(sr => `<span><i style="background:${sr.cor}"></i>${esc(sr.nome)}</span>`).join("") + `</div>`;
   }
-  el.innerHTML = s + leg + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">* 2025: competências até junho de 2026, sujeito a acréscimos.</p>` : "");
+  el.innerHTML = s + leg + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">${esc(NOTA_PRELIM)}</p>` : "");
 }
 /* barras verticais por ano (como nos slides "Número de internações …" da apresentação) */
 function grafBarrasV(alvo, vals, cor, fmt = fmtInt){
@@ -245,13 +256,13 @@ function grafBarrasV(alvo, vals, cor, fmt = fmtInt){
   }
   vals.forEach((v, i) => {
     const x = mL + bw * i + (bw - larg) / 2;
-    s += `<text x="${(x + larg/2).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="12" font-weight="700" fill="#1D3229">${ANOS[i]}${PRELIM.has(ANOS[i]) ? "*" : ""}</text>`;
+    s += `<text x="${(x + larg/2).toFixed(1)}" y="${H-8}" text-anchor="middle" font-size="${PARCIAIS.has(ANOS[i]) ? 10.5 : 12}" font-weight="700" fill="#1D3229">${nomeAno(i)}${PRELIM.has(ANOS[i]) ? "*" : ""}</text>`;
     if(v == null) return;
-    s += `<rect x="${x.toFixed(1)}" y="${Y(v).toFixed(1)}" width="${larg.toFixed(1)}" height="${(H - mB - Y(v)).toFixed(1)}" rx="4" fill="${cor}"><title>${ANOS[i]} · ${fmt(v)}</title></rect>`;
+    s += `<rect x="${x.toFixed(1)}" y="${Y(v).toFixed(1)}" width="${larg.toFixed(1)}" height="${(H - mB - Y(v)).toFixed(1)}" rx="4" fill="${cor}"><title>${nomeAno(i)} · ${fmt(v)}</title></rect>`;
     s += `<text x="${(x + larg/2).toFixed(1)}" y="${(Y(v) - 6).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1D3229">${fmt(v)}</text>`;
   });
   s += "</svg>";
-  el.innerHTML = s + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">* 2025: competências até junho de 2026, sujeito a acréscimos.</p>` : "");
+  el.innerHTML = s + (PRELIM.size ? `<p class="fonte" style="margin-top:.3rem">${esc(NOTA_PRELIM)}</p>` : "");
 }
 function grafRanking(alvo, itens, opts = {}){
   const linhas = itens.filter(i => i.v != null).sort((a,b) => opts.sentido === "menor" ? a.v - b.v : b.v - a.v).slice(0, 15);
@@ -367,12 +378,12 @@ function cardHabilitacoesHTML(mt){
 const FONTE_SIH = "Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil (CNES) e Sistema de Informações Hospitalares do SUS (SIH/SUS) · competências até junho de 2026 · dados sujeitos a revisão.";
 const FONTE_SINASC = "Fonte: Ministério da Saúde - Sistema de Informações sobre Nascidos Vivos (SINASC) · dados sujeitos a revisão.";
 const FONTE_MISTA = "Fonte: Ministério da Saúde - Sistema de Informações sobre Nascidos Vivos (SINASC) e Sistema de Informações Hospitalares do SUS (SIH/SUS) · dados sujeitos a revisão.";
-const notaPrelim = `<span class="chip chip-prelim" title="2025: competências até junho de 2026, sujeito a acréscimos">* 2025 parcial</span>`;
+const notaPrelim = `<span class="chip chip-prelim" title="${esc(NOTA_PRELIM)}">* preliminar</span>`;
 
 function thsAno(clicavel){
   return ANOS.map((a, i) => clicavel
-    ? `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${a}">${a}${PRELIM.has(a) ? "*" : ""}</button></th>`
-    : `<th>${a}${PRELIM.has(a) ? "*" : ""}</th>`).join("");
+    ? `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${nomeAno(i)}">${nomeAno(i)}${PRELIM.has(a) ? "*" : ""}</button></th>`
+    : `<th>${nomeAno(i)}${PRELIM.has(a) ? "*" : ""}</th>`).join("");
 }
 /* tabela de um bloco: linhas [rótulo, valores, fmt]; anos clicáveis quando há ≥2 linhas do mesmo formato */
 function tabelaBloco(mt, bloco, cab){
@@ -380,7 +391,7 @@ function tabelaBloco(mt, bloco, cab){
   if(!b || !b.length) return "<p class='suave'>Sem dados.</p>";
   const uniforme = b.length >= 2 && b.every(l => l[2] === b[0][2]);
   const rows = b.map((l, ri) =>
-    `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, 2019 a 2025">${esc(l[0])}</td>${l[1].map(v => `<td class="mono">${fmtDe(l[2], v)}</td>`).join("")}</tr>`).join("");
+    `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(l[0])}</td>${l[1].map(v => `<td class="mono">${fmtDe(l[2], v)}</td>`).join("")}</tr>`).join("");
   return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}"${uniforme ? ' data-dist="1"' : ""}>
     <thead><tr><th>${esc(cab || "")}</th>${thsAno(uniforme)}</tr></thead>
     <tbody>${rows}</tbody></table></div>`;
@@ -440,7 +451,7 @@ function abrirTendenciaBloco(tbl, rowKey, tituloCard){
   const mt = MAT.find(m => m.cnes === estado.cnes) || MAT[0];
   const l = linhaB(mt, tbl.dataset.bloco, +rowKey);
   if(!l) return;
-  document.getElementById("mgTitulo").textContent = (tituloCard ? tituloCard + " · " : "") + l[0] + " · evolução 2019-2025";
+  document.getElementById("mgTitulo").textContent = (tituloCard ? tituloCard + " · " : "") + l[0] + " · evolução " + SERIE_ROT;
   document.getElementById("mgSub").textContent = mt.nome + " - " + mt.uf + " · Fonte: SIH/SUS e SINASC, dados sujeitos a revisão.";
   document.getElementById("modalGrafico").hidden = false;
   grafLinhas("mgConteudo", [{nome: l[0], cor: "#279261", vals: l[1].slice(0, NT)}], {fmt: FMT[l[2]] || fmtInt, legenda:false});
@@ -448,7 +459,7 @@ function abrirTendenciaBloco(tbl, rowKey, tituloCard){
 function abrirTendencia(indId, cnes){
   const ind = indPorId(indId);
   const mt = MAT.find(m => m.cnes === cnes) || MAT[0];
-  document.getElementById("mgTitulo").textContent = ind.rot + " · tendência 2019-2025";
+  document.getElementById("mgTitulo").textContent = ind.rot + " · tendência " + SERIE_ROT;
   document.getElementById("mgSub").textContent = mt.nome + " - " + mt.uf + " · Fonte: SIH/SUS e SINASC, dados sujeitos a revisão.";
   document.getElementById("modalGrafico").hidden = false;
   grafLinhas("mgConteudo", [{nome:ind.curto, cor:"#279261", vals:ANOS.map((_, i) => valorUnidade(mt, ind, i))}], {fmt: FMT[ind.fmt], legenda:false});
@@ -508,13 +519,13 @@ function desenhaDossie(){
   const mt = MAT.find(m => m.cnes === estado.cnes) || MAT[0];
   const el = document.getElementById("dossieConteudo");
   const t = mt.territorio;
-  const a = NT - 1;
+  const a = ULT;
   const k = (id, rot, sub) => {
     const ind = indPorId(id);
-    return `<div class="k"><div class="n mono">${fmtInd(ind, valorUnidade(mt, ind, a))}</div><div class="t">${rot} ${ANOS[a]}</div><div class="s">${sub || "&nbsp;"}</div></div>`;
+    return `<div class="k"><div class="n mono">${fmtInd(ind, valorUnidade(mt, ind, a))}</div><div class="t">${rot} ${nomeAno(a)}</div><div class="s">${sub || "&nbsp;"}</div></div>`;
   };
   const sep = txt => `<div class="full"><p class="eyebrow titulo-linha" style="margin:.6rem 0 .1rem">${txt}</p></div>`;
-  const periodo = `${ANOS[0]} a ${ANOS[NT-1]}`;
+  const periodo = SERIE_ROT;
   el.innerHTML = `
   <div class="dossie-topo">
     <div>
@@ -583,7 +594,7 @@ function desenhaDossie(){
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
 const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
-let anoComp = NT - 1;
+let anoComp = ULT;
 let grupoComp = "apoiada";
 function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["apoiada"]).includes(g)); }
 function entradaComp(c){
@@ -676,7 +687,7 @@ function desenhaComparador(){
    EVOLUÇÃO — a mesma unidade comparada entre anos
    ============================================================ */
 let evoCnes = MAT[0].cnes;
-let anosEvoSel = new Set([NT - 2, NT - 1]);
+let anosEvoSel = new Set([ULT - 1, ULT]);
 function sparkline(vals){
   const ok = vals.map((v, i) => [i, v]).filter(p => p[1] != null);
   if(ok.length < 2) return "";
@@ -701,6 +712,8 @@ function desenhaEvolucao(){
     return;
   }
   const a0 = anos[0], a1 = anos[anos.length - 1];
+  const parcialSel = temParcial(anos);
+  const extremoParcial = PARCIAIS.has(ANOS[a0]) || PARCIAIS.has(ANOS[a1]);   // número absoluto de período parcial não se compara
   let linhas = "";
   EIXOS.forEach(ex => {
     linhas += `<tr class="grupo"><td colspan="${anos.length + 3}">${esc(ex.rot)}</td></tr>`;
@@ -709,7 +722,7 @@ function desenhaEvolucao(){
       const tds = anos.map(a => `<td class="mono">${fmtInd(ind, serie[a])}</td>`).join("");
       const v0 = serie[a0], v1 = serie[a1];
       let varTxt = "—", cls = "var-neutra";
-      if(v0 != null && v1 != null){
+      if(v0 != null && v1 != null && !(ind.fmt === "int" && extremoParcial)){
         if(ind.fmt === "int"){
           const d = v0 ? (v1 - v0) / v0 * 100 : null;
           varTxt = d == null ? (v1 > 0 ? "▲ +" + fmtInt(v1) : "—") : (d >= 0 ? "▲ +" : "▼ ") + d.toLocaleString("pt-BR", {maximumFractionDigits:1}) + "%";
@@ -722,16 +735,16 @@ function desenhaEvolucao(){
         }
       }
       linhas += `<tr><td>${esc(ind.rot)}</td>
-        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie)}</td></tr>`;
+        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1))}</td></tr>`;
     });
   });
   el.innerHTML = `
   <div class="card comp-grid">
-    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${ANOS[a0]} a ${ANOS[a1]}</span></h3>
+    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span></h3>
     <div class="tab-wrap"><table class="comp">
-      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${ANOS[a]}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência 2019-2025</th></tr></thead>
+      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th></tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação entre o primeiro e o último ano marcados: percentuais em pontos percentuais, permanência em dias, números absolutos em variação relativa. Verde = melhorou (mais boas práticas ou menos morbidade); vermelho = piorou; sem cor = número absoluto, distribuição, ocupação ou permanência, sem julgamento. A tendência mostra a série completa de 2019 a 2025. * 2025 parcial (competências até junho de 2026). ${FONTE_MISTA}</p>
+    <p class="fonte">Variação entre o primeiro e o último ano marcados: percentuais em pontos percentuais, permanência em dias, números absolutos em variação relativa. Verde = melhorou (mais boas práticas ou menos morbidade); vermelho = piorou; sem cor = número absoluto, distribuição, ocupação ou permanência, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2025 parcial (competências até junho de 2026). ${FONTE_MISTA}</p>
   </div>`;
 }
 
@@ -744,10 +757,11 @@ function desenhaMetodologia(){
   if(_metodoPronta) return;
   _metodoPronta = true;
   const fontes = [
-    ["SIH/SUS · AIH reduzida (RD)", "Sistema de Informações Hospitalares do SUS, arquivos RD<UF><aaaamm>.dbc de todas as competências de 2019 a junho de 2026, das 27 UFs. Internações atribuídas ao CNES do estabelecimento e ao ano da data de internação; o universo obstétrico são as mulheres de 10 a 59 anos com diagnóstico ou procedimento obstétrico. Base do volume, motivos, acompanhante, CPN, permanência, morbidade materna grave, internações neonatais e UTI neonatal."],
+    ["SIH/SUS · AIH reduzida (RD)", "Sistema de Informações Hospitalares do SUS, arquivos RD<UF><aaaamm>.dbc de todas as competências de 2019 a junho de 2026 (colunas 2019-2025) e até agosto de 2026 (1º semestre de 2026), das 27 UFs. Internações atribuídas ao CNES do estabelecimento e ao ano da data de internação; o universo obstétrico são as mulheres de 10 a 59 anos com diagnóstico ou procedimento obstétrico. Base do volume, motivos, acompanhante, CPN, permanência, morbidade materna grave, internações neonatais e UTI neonatal."],
+    ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: ${p.descricao || "internações de janeiro a junho de 2026"}. Mesmas regras v3 das colunas 2019-2025 (o tabulador do período é gerado a partir do script da tabulação v3 e reproduziu a coluna de 2024). ${p.completude ? p.completude.charAt(0).toUpperCase() + p.completude.slice(1) + "." : ""} Taxas de ocupação com os leitos-dia de janeiro a junho de 2026. Período parcial e preliminar: fora das tendências; números absolutos não comparáveis com anos completos.${(p.unidadesSemDados || []).length ? " Sem AIH no período: " + p.unidadesSemDados.map(c => { const m = MAT.find(x => x.cnes === c); return m ? m.nome + " (CNES " + c + ")" : c; }).join("; ") + "." : ""}`; })()],
     ["SIH/SUS · serviços profissionais (SP)", "Arquivos SP<UF><aaaamm>.dbc: atos profissionais de cada AIH, usados para marcar analgesia, transfusão, histerectomia, admissão em UTI, AMIU e curetagens, diárias de acompanhante e demais critérios de morbidade materna grave."],
     ["CNES · leitos (LT)", "Arquivos LT<UF><aaaamm>.dbc: leitos existentes por competência. Leitos-dia obstétricos (códigos 10 e 43) e de UTI neonatal tipo II e III (códigos 81 e 82) são os denominadores das taxas de ocupação."],
-    ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2024 e 2025 preliminares."],
+    ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2024 e 2025 preliminares; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
     ["CNES · ficha e habilitações", "Ficha de cadastro pela API oficial de Dados Abertos do Ministério da Saúde e habilitações ativas pelo serviço do próprio site do CNES; coordenadas georreferenciadas a partir do cadastro."],
     ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (apoiadas, EBSERH e QUALINEO 2026/2027) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Unidades acrescentadas depois da lista (12 e 23/09/2026) entram como anexo, com as mesmas regras."]
   ];
@@ -822,11 +836,11 @@ function opcaoUnidadesPorGrupo(sel){
   }).join("");
 }
 const opcoesAno = (sel, padrao) => {
-  sel.innerHTML = ANOS.map((a, i) => `<option value="${i}" ${i === padrao ? "selected" : ""}>${a}${PRELIM.has(a) ? " · parcial" : ""}</option>`).join("");
+  sel.innerHTML = ANOS.map((a, i) => `<option value="${i}" ${i === padrao ? "selected" : ""}>${nomeAno(i)}${PRELIM.has(a) ? " · parcial" : ""}</option>`).join("");
 };
 function inicia(){
   // faixa de destaques
-  const a = NT - 1;
+  const a = ULT;
   document.getElementById("statMats").textContent = MAT.length;
   document.getElementById("statUFs").textContent = new Set(MAT.map(m => m.uf)).size;
   document.getElementById("statObst").textContent = fmtInt(soma(MAT, indPorId("obst_n"), a));
@@ -919,7 +933,7 @@ function inicia(){
   document.getElementById("btnAddComp").addEventListener("click", () => addComp(sC.value));
   document.getElementById("btnAddMedia").addEventListener("click", addMediaGrupo);
   const sAC = document.getElementById("selAnoComp");
-  opcoesAno(sAC, NT - 1);
+  opcoesAno(sAC, ULT);
   sAC.addEventListener("change", () => { anoComp = +sAC.value; desenhaComparador(); });
 
   // modo "mesma unidade entre anos"
@@ -938,7 +952,7 @@ function inicia(){
   sEvo.value = evoCnes;
   sEvo.addEventListener("change", () => { evoCnes = sEvo.value; desenhaEvolucao(); });
   const anosBox = document.getElementById("anosEvo");
-  anosBox.innerHTML = ANOS.map((a, i) => `<button class="chip chip-ano ${anosEvoSel.has(i) ? "ativo" : ""}" data-a="${i}">${a}</button>`).join("");
+  anosBox.innerHTML = ANOS.map((a, i) => `<button class="chip chip-ano ${anosEvoSel.has(i) ? "ativo" : ""}" data-a="${i}">${nomeAno(i)}</button>`).join("");
   anosBox.querySelectorAll("button").forEach(b => {
     b.addEventListener("click", () => {
       const i = +b.dataset.a;
