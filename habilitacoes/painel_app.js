@@ -341,55 +341,178 @@ function montarLocal(){
 }
 
 /* ============================================================
-   4. MAPA — unidades com a habilitação escolhida, com o nome
+   4. MAPA — malha do Brasil (SVG, UF / macro / RS) com os pontos e nomes das unidades, e vista OpenStreetMap
    ============================================================ */
-const MP = {hab: "", grupo: "", nomes: true};
-let leaf = null, camadaPontos = null;
+const NS = "http://www.w3.org/2000/svg";
+const TEM_GEO = typeof GEO !== "undefined" && GEO && GEO.niveis;
+/* Conversão aproximada lat/lon -> coordenadas da malha: polinômio de grau 3 ajustado por mínimos quadrados às regiões
+   de saúde das unidades (habilitacoes/ajusta_projecao.js). Depois, cada ponto é encaixado dentro da própria região de
+   saúde (ver encaixaPontos). */
+const PROJ = {lon0: -54, lat0: -14, deg: 3,
+  cx: [389.6693924797041,-25.669375918899323,2.2974764087746746,6.94771717316214,227.5848973996615,10.44407831174322,-15.59958425479866,2.614872436012288,11.203067014348914,-9.255000451100843],
+  cy: [384.79217286263037,-206.11315840845927,-1.297115372976244,0.4508034745453812,5.709727699623541,5.132886143071913,2.0589199190583702,3.9090790755116522,2.524876252788176,-5.129157042018251]};
+function projeta(lon, lat){
+  const u = (lon - PROJ.lon0) / 10, v = (lat - PROJ.lat0) / 10, t = [];
+  for(let a = 0; a <= PROJ.deg; a++) for(let b = 0; b <= PROJ.deg - a; b++) t.push(Math.pow(u, a) * Math.pow(v, b));
+  return [t.reduce((s, x, k) => s + x * PROJ.cx[k], 0), t.reduce((s, x, k) => s + x * PROJ.cy[k], 0)];
+}
+const terrId = (nivel, mt) => nivel === "uf" ? mt.uf : String((mt.geo || {})[nivel] ?? "");
+function encaixaPontos(){
+  /* calcula mt._xy para cada unidade e, se cair fora da sua região de saúde (ou UF), move para dentro */
+  if(!TEM_GEO) return;
+  const svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", `0 0 ${GEO.W} ${GEO.H}`);
+  svg.style.cssText = "position:absolute; width:0; height:0; overflow:hidden"; document.body.appendChild(svg);
+  const paths = {};
+  ["rs", "macro", "uf"].forEach(n => { paths[n] = {}; GEO.niveis[n].forEach(t => { const p = document.createElementNS(NS, "path"); p.setAttribute("d", t.d); svg.appendChild(p); paths[n][String(t.id)] = p; }); });
+  const dentro = (p, xy) => { const pt = svg.createSVGPoint(); pt.x = xy[0]; pt.y = xy[1]; return p.isPointInFill(pt); };
+  const interior = p => {
+    const pts = [...p.getAttribute("d").matchAll(/(-?\d+\.?\d*),(-?\d+\.?\d*)/g)].map(m => [+m[1], +m[2]]);
+    const c = [pts.reduce((s, q) => s + q[0], 0) / pts.length, pts.reduce((s, q) => s + q[1], 0) / pts.length];
+    if(dentro(p, c)) return c;
+    const bb = p.getBBox(), b = [bb.x + bb.width / 2, bb.y + bb.height / 2];
+    if(dentro(p, b)) return b;
+    for(let k = 0; k < pts.length; k += Math.max(1, Math.floor(pts.length / 40))){ const q = [(pts[k][0] * 2 + c[0]) / 3, (pts[k][1] * 2 + c[1]) / 3]; if(dentro(p, q)) return q; }
+    return pts[0];
+  };
+  let ajustados = 0;
+  MAT.forEach(mt => {
+    if(mt.lat == null || mt.lon == null){ mt._xy = null; return; }
+    let xy = projeta(mt.lon, mt.lat), alvo = null;
+    for(const n of ["rs", "macro", "uf"]){ const p = paths[n][terrId(n, mt)]; if(p){ alvo = p; break; } }
+    if(alvo && !dentro(alvo, xy)){ xy = interior(alvo); ajustados++; mt._ajustado = true; }
+    mt._xy = xy;
+  });
+  svg.remove();
+  return ajustados;
+}
+
+const MP = {hab: "", grupo: "", nomes: true, nivel: "uf", fundo: "malha", uf: null};
+let leaf = null, camadaPontos = null, svgEl = null, animId = null;
+const vbHome = TEM_GEO ? [0, 0, GEO.W, GEO.H] : null;
 const unidadesMapa = () => doGrupo(MAT, MP.grupo).filter(m => !MP.hab || temCodigo(m, MP.hab));
+const RAMPA_MAPA = ["#D8EEDF", "#A9DBBC", "#6DBF93", "#2F9A68", "#1B5F51"];
+const classeMapa = n => n <= 0 ? -1 : n === 1 ? 0 : n === 2 ? 1 : n <= 4 ? 2 : n <= 9 ? 3 : 4;
+const ROT_CLASSES = ["1 unidade", "2 unidades", "3 a 4", "5 a 9", "10 ou mais"];
+const ufDoTerr = (nivel, t) => nivel === "uf" ? t.id : ((/-\s*([A-Z]{2})\s*$/.exec(t.nome || "") || [])[1] || null);
+
+function mostraTipMapa(e, html){
+  const tip = document.getElementById("tipMapa"); tip.innerHTML = html; tip.hidden = false;
+  tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 332) + "px";
+  tip.style.top = Math.min(e.clientY + 14, window.innerHeight - tip.offsetHeight - 12) + "px";
+}
+function escondeTipMapa(){ document.getElementById("tipMapa").hidden = true; }
+function animaViewBox(alvo){
+  if(!svgEl) return; cancelAnimationFrame(animId);
+  const de = svgEl.getAttribute("viewBox").split(" ").map(Number), t0 = performance.now(), dur = 480;
+  const passo = now => { const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3); svgEl.setAttribute("viewBox", de.map((v, i) => v + (alvo[i] - v) * e).map(v => v.toFixed(1)).join(" ")); ajustaEscalaSvg(); if(k < 1) animId = requestAnimationFrame(passo); };
+  animId = requestAnimationFrame(passo);
+}
+function ajustaEscalaSvg(){
+  if(!svgEl) return;
+  const vbw = Number(svgEl.getAttribute("viewBox").split(" ")[2]), k = vbw / GEO.W;
+  svgEl.querySelectorAll("circle.ponto").forEach(c => c.setAttribute("r", (5.2 * k).toFixed(2)));
+  svgEl.querySelectorAll("text.rotulo").forEach(t => { t.setAttribute("font-size", (10.5 * k).toFixed(2)); t.setAttribute("x", (Number(t.dataset.x) + 7 * k).toFixed(1)); t.setAttribute("y", (Number(t.dataset.y) + 3.6 * k).toFixed(1)); });
+  svgEl.querySelectorAll("text.sigla").forEach(t => { t.setAttribute("font-size", (13 * k).toFixed(2)); t.setAttribute("y", (Number(t.dataset.cy) + 4.5 * k).toFixed(1)); });
+}
+function bboxUF(uf){
+  if(!svgEl) return null;
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9, achou = false;
+  svgEl.querySelectorAll("path.t").forEach(p => { if(p.dataset.uf !== uf) return; const bb = p.getBBox(); x0 = Math.min(x0, bb.x); y0 = Math.min(y0, bb.y); x1 = Math.max(x1, bb.x + bb.width); y1 = Math.max(y1, bb.y + bb.height); achou = true; });
+  if(!achou) return null;
+  const pad = Math.max(x1 - x0, y1 - y0) * 0.12;
+  return [x0 - pad, y0 - pad, (x1 - x0) + 2 * pad, (y1 - y0) + 2 * pad];
+}
+function desenhaMapaSvg(){
+  const box = document.getElementById("mapaSvg"); if(!TEM_GEO){ box.innerHTML = `<p class="suave" style="padding:1rem">Malhas não disponíveis nesta montagem.</p>`; return; }
+  const lista = unidadesMapa(), terr = GEO.niveis[MP.nivel];
+  const porTerr = new Map(); lista.forEach(m => { const id = terrId(MP.nivel, m); if(!porTerr.has(id)) porTerr.set(id, []); porTerr.get(id).push(m); });
+  box.innerHTML = "";
+  svgEl = document.createElementNS(NS, "svg"); svgEl.setAttribute("viewBox", vbHome.join(" ")); svgEl.setAttribute("role", "img"); svgEl.setAttribute("aria-label", "Mapa do Brasil");
+  const g = document.createElementNS(NS, "g");
+  terr.forEach(t => {
+    const uf = ufDoTerr(MP.nivel, t), us = porTerr.get(String(t.id)) || [];
+    const p = document.createElementNS(NS, "path"); p.setAttribute("d", t.d); p.setAttribute("class", "t"); p.dataset.uf = uf || "";
+    const cls = classeMapa(us.length); p.setAttribute("fill", cls < 0 ? "#EEF3EF" : RAMPA_MAPA[cls]);
+    const nome = MP.nivel === "uf" ? UF_NOME[t.id] : t.nome, max = 8;
+    const tip = `<div class="tm-titulo">${esc(nome)}</div><div class="tm-valor">${us.length ? plural(us.length, "unidade", "unidades") + (MP.hab ? " com a habilitação" : "") : (MP.hab ? "Nenhuma unidade com a habilitação" : "Sem unidade do painel")}</div>` +
+      (us.length ? `<ul>${us.slice(0, max).map(m => `<li>${esc(m.nome)}</li>`).join("")}${us.length > max ? `<li>+ ${us.length - max} outras</li>` : ""}</ul>` : "");
+    p.addEventListener("mousemove", e => mostraTipMapa(e, tip)); p.addEventListener("mouseleave", escondeTipMapa);
+    p.addEventListener("click", () => { escondeTipMapa(); if(!uf) return; MP.uf = MP.uf === uf ? null : uf; renderMapa(); });
+    g.appendChild(p);
+  });
+  if(MP.nivel !== "uf" && GEO.bordaUF){ const b = document.createElementNS(NS, "path"); b.setAttribute("d", GEO.bordaUF); b.setAttribute("fill", "none"); b.setAttribute("stroke", "var(--indigo)"); b.setAttribute("stroke-width", "1"); b.setAttribute("vector-effect", "non-scaling-stroke"); b.setAttribute("pointer-events", "none"); b.setAttribute("opacity", ".45"); g.appendChild(b); }
+  svgEl.appendChild(g); box.appendChild(svgEl);
+  if(MP.nivel === "uf"){
+    svgEl.querySelectorAll("path.t").forEach(p => { const bb = p.getBBox(); if(bb.width < 14 && bb.height < 14) return; const tx = document.createElementNS(NS, "text"); tx.setAttribute("x", (bb.x + bb.width / 2).toFixed(1)); tx.dataset.cy = (bb.y + bb.height / 2).toFixed(1); tx.setAttribute("text-anchor", "middle"); tx.setAttribute("class", "sigla"); tx.setAttribute("fill", classeMapa((porTerr.get(p.dataset.uf) || []).length) >= 3 ? "#FFFFFF" : "#0A213D"); tx.setAttribute("opacity", ".75"); tx.textContent = p.dataset.uf; g.appendChild(tx); });
+  }
+  // pontos e nomes das unidades
+  const gp = document.createElementNS(NS, "g");
+  const visiveis = lista.filter(m => m._xy && (!MP.uf || m.uf === MP.uf)).sort((a, b) => a._xy[1] - b._xy[1]);
+  visiveis.forEach(m => {
+    const cor = COR_GRUPO[m._grupoCor];
+    const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", m._xy[0].toFixed(1)); c.setAttribute("cy", m._xy[1].toFixed(1)); c.setAttribute("class", "ponto"); c.setAttribute("fill", cor.fundo); c.setAttribute("stroke", cor.borda);
+    const habs = MP.hab ? (m._habs.get(MP.hab) || []) : [];
+    const det = MP.hab ? habs.map(h => `<div>${esc(h.co)} ${esc(dsCurta(h.co))}${h.leitos ? ` · ${h.leitos} leitos` : ""}<br><span style="color:#C5E3CC">desde ${esc(h.ini)} · ${esc(fimRot(h))}${h.portaria ? ` · ${esc(h.portaria)}` : ""}</span></div>`).join("") : `<div>${plural(m.habilitacoes.length, "habilitação registrada", "habilitações registradas")}</div>`;
+    const tip = `<div class="tm-titulo">${esc(m.nome)}</div><div>${esc(m.municipio || "")} · ${esc(m.uf)} · CNES ${m.cnes}</div><div class="tm-valor">${m.grupos.map(g => GRUPOS[g]).join(" · ")}</div>${det}<div class="tm-sem">toque para abrir a ficha${m._ajustado ? " · posição aproximada, dentro da região de saúde" : ""}</div>`;
+    c.addEventListener("mousemove", e => mostraTipMapa(e, tip)); c.addEventListener("mouseleave", escondeTipMapa); c.addEventListener("click", () => { escondeTipMapa(); abrirDossie(m.cnes); });
+    gp.appendChild(c);
+    if(MP.nomes){ const tx = document.createElementNS(NS, "text"); tx.setAttribute("class", "rotulo"); tx.dataset.x = m._xy[0].toFixed(1); tx.dataset.y = m._xy[1].toFixed(1); tx.textContent = m.nome.length > 34 ? m.nome.slice(0, 33) + "…" : m.nome; gp.appendChild(tx); }
+  });
+  svgEl.appendChild(gp);
+  if(MP.uf){ const vb = bboxUF(MP.uf); if(vb) svgEl.setAttribute("viewBox", vb.map(v => v.toFixed(1)).join(" ")); }
+  ajustaEscalaSvg();
+  const nivelRot = {uf: "estado", macro: "macrorregião de saúde", rs: "região de saúde"}[MP.nivel];
+  document.getElementById("legendaMapa").innerHTML = `<span><i style="background:#EEF3EF"></i>sem unidade</span>` + ROT_CLASSES.map((r, i) => `<span><i style="background:${RAMPA_MAPA[i]}"></i>${r}</span>`).join("") + `<span>por ${nivelRot}${MP.hab ? ", unidades com a habilitação" : ""}</span>`;
+  const nAj = visiveis.filter(m => m._ajustado).length;
+  document.getElementById("notaMapa").textContent = `Malhas de ${nivelRot}s iguais às dos outros painéis. Pontos nas coordenadas do cadastro CNES convertidas para a malha (posição aproximada; ${nAj ? nAj + " ponto(s) deslocado(s) para dentro da própria região de saúde" : "todos dentro da própria região de saúde"}). Toque em um ponto para abrir a ficha; passe o mouse sobre um território para ver as unidades.`;
+}
 function iniciaLeaflet(){
-  if(typeof L === "undefined"){ document.getElementById("mapaLeaflet").innerHTML = `<p class="suave" style="padding:1rem">O mapa precisa de internet para carregar a biblioteca e o fundo (OpenStreetMap).</p>`; return; }
+  if(leaf || typeof L === "undefined"){ if(!leaf) document.getElementById("mapaLeaflet").innerHTML = `<p class="suave" style="padding:1rem">A vista OpenStreetMap precisa de internet para carregar a biblioteca e o fundo.</p>`; return; }
   leaf = L.map("mapaLeaflet", {scrollWheelZoom: true}).setView([-14.5, -52], 4);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 18}).addTo(leaf);
   leaf.on("popupopen", e => { const b = e.popup.getElement().querySelector("button[data-cnes]"); if(b) b.addEventListener("click", () => abrirDossie(b.dataset.cnes)); });
 }
+function desenhaLeaflet(lista){
+  if(!leaf) return;
+  if(camadaPontos) leaf.removeLayer(camadaPontos);
+  camadaPontos = L.layerGroup(); const pontos = [];
+  lista.forEach(m => {
+    if(m.lat == null || m.lon == null) return;
+    pontos.push([m.lat, m.lon]);
+    const cor = COR_GRUPO[m._grupoCor];
+    const mk = L.circleMarker([m.lat, m.lon], {radius: 8, color: cor.borda, weight: 2, fillColor: cor.fundo, fillOpacity: .95});
+    const habs = MP.hab ? (m._habs.get(MP.hab) || []) : [];
+    const detalhe = MP.hab ? habs.map(h => `<div><b>${esc(h.co)} ${esc(dsCurta(h.co))}</b>${h.leitos ? ` · ${h.leitos} leitos` : ""}<br><span style="color:#4E6A5C">desde ${esc(h.ini)} · ${esc(fimRot(h))}${h.portaria ? ` · ${esc(h.portaria)}` : ""}</span></div>`).join("") : `<div>${plural(m.habilitacoes.length, "habilitação registrada", "habilitações registradas")}</div>`;
+    mk.bindPopup(`<div class="pop-nome">${esc(m.nome)}</div><div>${esc(m.municipio || "")} · ${esc(m.uf)} · CNES ${m.cnes}</div><div style="margin:.2rem 0">${m.grupos.map(g => GRUPOS[g]).join(" · ")}</div>${detalhe}<button class="pop-btn" data-cnes="${m.cnes}">Abrir ficha →</button>`);
+    mk.bindTooltip(m.nome, {permanent: MP.nomes, direction: "right", offset: [8, 0], className: "rotulo-unid", opacity: 1});
+    camadaPontos.addLayer(mk);
+  });
+  leaf.addLayer(camadaPontos);
+  if(pontos.length) leaf.fitBounds(pontos, {padding: [24, 24], maxZoom: 7});
+}
 function renderMapa(){
-  const lista = unidadesMapa().sort(porUFNome);
-  if(leaf){
-    if(camadaPontos){ leaf.removeLayer(camadaPontos); }
-    camadaPontos = L.layerGroup();
-    const pontos = [];
-    lista.forEach(m => {
-      if(m.lat == null || m.lon == null) return;
-      pontos.push([m.lat, m.lon]);
-      const cor = COR_GRUPO[m._grupoCor];
-      const mk = L.circleMarker([m.lat, m.lon], {radius: 8, color: cor.borda, weight: 2, fillColor: cor.fundo, fillOpacity: .95});
-      const habs = MP.hab ? (m._habs.get(MP.hab) || []) : [];
-      const detalhe = MP.hab
-        ? habs.map(h => `<div><b>${esc(h.co)} ${esc(dsCurta(h.co))}</b>${h.leitos ? ` · ${h.leitos} leitos` : ""}<br><span style="color:#4E6A5C">desde ${esc(h.ini)} · ${esc(fimRot(h))}${h.portaria ? ` · ${esc(h.portaria)}` : ""}</span></div>`).join("")
-        : `<div>${plural(m.habilitacoes.length, "habilitação registrada", "habilitações registradas")}</div>`;
-      mk.bindPopup(`<div class="pop-nome">${esc(m.nome)}</div><div>${esc(m.municipio || "")} · ${esc(m.uf)} · CNES ${m.cnes}</div><div style="margin:.2rem 0">${m.grupos.map(g => GRUPOS[g]).join(" · ")}</div>${detalhe}<button class="pop-btn" data-cnes="${m.cnes}">Abrir ficha →</button>`);
-      mk.bindTooltip(m.nome, {permanent: MP.nomes, direction: "right", offset: [8, 0], className: "rotulo-unid", opacity: 1});
-      camadaPontos.addLayer(mk);
-    });
-    leaf.addLayer(camadaPontos);
-    if(pontos.length) leaf.fitBounds(pontos, {padding: [24, 24], maxZoom: 7});
-  }
+  const lista = unidadesMapa().sort(porUFNome), visiveis = lista.filter(m => !MP.uf || m.uf === MP.uf);
+  document.getElementById("btnResetMapa").hidden = !MP.uf;
+  document.getElementById("mapaSvgBox").hidden = MP.fundo !== "malha";
+  document.getElementById("mapaLeaflet").hidden = MP.fundo !== "osm";
+  if(MP.fundo === "malha") desenhaMapaSvg();
+  else { iniciaLeaflet(); if(leaf){ leaf.invalidateSize(); desenhaLeaflet(visiveis); } }
   const el = document.getElementById("mapaLateral");
-  const porGrupo = ORDEM_GRUPO.map(g => { const n = lista.filter(m => m.grupos.includes(g)).length; return n ? `<div class="kpi"><span>${bolinha(g)} ${esc(GRUPOS[g])}</span><span class="v">${n}</span></div>` : ""; }).join("");
-  const leitos = MP.hab ? lista.reduce((s, m) => s + (m._habs.get(MP.hab) || []).reduce((t, h) => t + (h.leitos || 0), 0), 0) : 0;
-  const total = doGrupo(MAT, MP.grupo).length;
-  el.innerHTML = `<p class="eyebrow">${MP.hab ? `Habilitação ${esc(MP.hab)}` : "Todas as unidades"}</p>
+  const porGrupo = ORDEM_GRUPO.map(g => { const n = visiveis.filter(m => m.grupos.includes(g)).length; return n ? `<div class="kpi"><span>${bolinha(g)} ${esc(GRUPOS[g])}</span><span class="v">${n}</span></div>` : ""; }).join("");
+  const leitos = MP.hab ? visiveis.reduce((s, m) => s + (m._habs.get(MP.hab) || []).reduce((t, h) => t + (h.leitos || 0), 0), 0) : 0;
+  const total = doGrupo(MAT, MP.grupo).filter(m => !MP.uf || m.uf === MP.uf).length;
+  el.innerHTML = `<p class="eyebrow">${MP.hab ? `Habilitação ${esc(MP.hab)}` : "Todas as unidades"}${MP.uf ? ` · ${esc(UF_NOME[MP.uf])}` : ""}</p>
     <h3 style="margin-top:.2rem">${MP.hab ? esc(dsCurta(MP.hab)) : esc(MP.grupo ? GRUPOS[MP.grupo] : "os três grupos")}</h3>
     ${MP.hab ? `<p class="suave" style="font-size:.78rem; margin-top:.2rem">${esc(DS[MP.hab])}</p>` : ""}
-    <div class="num-grande" style="margin-top:.6rem">${fmtInt(lista.length)} <span style="font-size:1rem; font-weight:700; color:var(--texto-suave)">${MP.hab ? `de ${fmtInt(total)} unidades` : "unidades no mapa"}</span></div>
-    <div class="kpi-lista">${porGrupo}${leitos ? `<div class="kpi"><span>Leitos habilitados</span><span class="v">${fmtInt(leitos)}</span></div>` : ""}<div class="kpi"><span>Estados</span><span class="v">${new Set(lista.map(m => m.uf)).size}</span></div></div>
+    <div class="num-grande" style="margin-top:.6rem">${fmtInt(visiveis.length)} <span style="font-size:1rem; font-weight:700; color:var(--texto-suave)">${MP.hab ? `de ${fmtInt(total)} unidades` : "unidades no mapa"}</span></div>
+    <div class="kpi-lista">${porGrupo}${leitos ? `<div class="kpi"><span>Leitos habilitados</span><span class="v">${fmtInt(leitos)}</span></div>` : ""}<div class="kpi"><span>Estados</span><span class="v">${new Set(visiveis.map(m => m.uf)).size}</span></div></div>
     <p class="suave" style="font-size:.8rem; margin-top:.8rem"><b style="color:var(--texto)">Unidades no mapa</b> (toque para abrir a ficha):</p>
-    <ul class="lista-unid" style="max-height:420px">${lista.map(m => `<li>${bolinhas(m)}<button data-cnes="${m.cnes}">${esc(m.nome)}</button><small>${esc(m.uf)}</small></li>`).join("") || "<li class='suave'>nenhuma</li>"}</ul>
+    <ul class="lista-unid" style="max-height:420px">${visiveis.map(m => `<li>${bolinhas(m)}<button data-cnes="${m.cnes}">${esc(m.nome)}</button><small>${esc(m.uf)}</small></li>`).join("") || "<li class='suave'>nenhuma</li>"}</ul>
     <button class="chip chip-botao" id="btnCsvMapa" style="margin-top:.8rem">⬇ Baixar a lista (CSV)</button>`;
   el.querySelectorAll("button[data-cnes]").forEach(b => b.addEventListener("click", () => abrirDossie(b.dataset.cnes)));
   document.getElementById("btnCsvMapa").addEventListener("click", () => {
-    const linhas = MP.hab ? lista.flatMap(m => (m._habs.get(MP.hab) || []).map(h => [m.cnes, m.nome, m.municipio || "", m.uf, m.grupos.map(g => GRUPO_CURTO[g]).join(" + "), m.lat, m.lon, h.co, h.ds, h.ini, ativaSemPrazo(h) ? "sem prazo final" : h.fim, h.portaria || "", h.leitos || 0]))
-      : lista.map(m => [m.cnes, m.nome, m.municipio || "", m.uf, m.grupos.map(g => GRUPO_CURTO[g]).join(" + "), m.lat, m.lon, "", "", "", "", "", m.habilitacoes.length]);
+    const linhas = MP.hab ? visiveis.flatMap(m => (m._habs.get(MP.hab) || []).map(h => [m.cnes, m.nome, m.municipio || "", m.uf, m.grupos.map(g => GRUPO_CURTO[g]).join(" + "), m.lat, m.lon, h.co, h.ds, h.ini, ativaSemPrazo(h) ? "sem prazo final" : h.fim, h.portaria || "", h.leitos || 0]))
+      : visiveis.map(m => [m.cnes, m.nome, m.municipio || "", m.uf, m.grupos.map(g => GRUPO_CURTO[g]).join(" + "), m.lat, m.lon, "", "", "", "", "", m.habilitacoes.length]);
     baixarCSV(`mapa_habilitacao_${MP.hab || "todas"}_${hoje()}.csv`, [cabecalhoCSV(MP.hab ? `${MP.hab} ${DS[MP.hab]}` : "todas as unidades"), ["CNES", "Unidade", "Município", "UF", "Grupos", "Latitude", "Longitude", "Código", "Habilitação", "Competência inicial", "Competência final", "Portaria", "Leitos (ou total de habilitações)"], ...linhas]);
   });
 }
@@ -397,8 +520,12 @@ function montarMapa(){
   const sel = document.getElementById("selHabMapa"); preencheSelectHab(sel);
   sel.addEventListener("change", () => { MP.hab = sel.value; renderMapa(); });
   segmento("segGrupoMapa", d => { MP.grupo = d.grupo; renderMapa(); });
+  segmento("segFundoMapa", d => { MP.fundo = d.fundo; renderMapa(); });
+  document.getElementById("selNivelMapa").addEventListener("change", e => { MP.nivel = e.target.value; renderMapa(); });
   document.getElementById("chkNomes").addEventListener("change", e => { MP.nomes = e.target.checked; renderMapa(); });
-  iniciaLeaflet(); renderMapa();
+  document.getElementById("btnResetMapa").addEventListener("click", () => { MP.uf = null; renderMapa(); });
+  encaixaPontos();
+  renderMapa();
 }
 
 /* ============================================================

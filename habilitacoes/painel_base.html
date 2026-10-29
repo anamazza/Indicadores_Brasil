@@ -286,7 +286,25 @@ table.local tbody tr:hover td{background:var(--mint)}
 table.local tfoot td{background:var(--mint); font-weight:800; border-top:2px solid var(--borda); position:sticky; bottom:0}
 table.local tfoot td.col-uf{background:var(--mint)}
 .local-wrap{overflow:auto; max-height:70vh; border-radius:var(--radius); border:1px solid var(--borda); background:var(--branco)}
-/* ---------------- mapa ---------------- */
+/* ---------------- mapa do Brasil (malhas) ---------------- */
+.mapa-svg-box{position:relative; background:var(--branco); border-radius:var(--radius); box-shadow:var(--sombra); padding:.6rem}
+.mapa-svg-box svg{width:100%; height:auto; display:block}
+.mapa-svg-box .t{cursor:pointer; stroke:#FFF; stroke-width:1; vector-effect:non-scaling-stroke; transition:opacity .15s}
+.mapa-svg-box .t:hover{opacity:.8; stroke:var(--verde-esmeralda); stroke-width:1.4}
+.mapa-svg-box .sigla{pointer-events:none; font-weight:800}
+.mapa-svg-box .ponto{cursor:pointer; stroke-width:1.6; vector-effect:non-scaling-stroke}
+.mapa-svg-box .ponto:hover{stroke:#FFF; stroke-width:2.4}
+.mapa-svg-box .rotulo{pointer-events:none; font-weight:700; fill:#0A213D; paint-order:stroke; stroke:#FFF; stroke-width:3px; stroke-linejoin:round}
+.tip-mapa{position:fixed; z-index:5000; background:var(--indigo); color:#FFF; padding:.6rem .85rem; border-radius:10px; font-size:.8rem; line-height:1.5; max-width:320px; box-shadow:var(--sombra-alta); pointer-events:none}
+.tip-mapa .tm-titulo{font-weight:800; font-size:.86rem}
+.tip-mapa .tm-valor{color:#C5E3CC; font-weight:700; margin-top:.1rem}
+.tip-mapa ul{margin:.35rem 0 0; padding-left:1.05rem}
+.tip-mapa li{margin:.1rem 0}
+.tip-mapa .tm-sem{color:#B9CDC0; font-style:italic}
+.legenda-mapa{display:flex; gap:.7rem 1rem; flex-wrap:wrap; margin-top:.6rem; font-size:.76rem; color:var(--texto-suave)}
+.legenda-mapa span{display:inline-flex; align-items:center; gap:.35rem}
+.legenda-mapa i{width:14px; height:14px; border-radius:4px; display:inline-block; border:1px solid rgba(0,0,0,.12)}
+/* ---------------- mapa (OpenStreetMap) ---------------- */
 .mapa-grid{display:grid; grid-template-columns:1.6fr 1fr; gap:1.1rem; align-items:start}
 .mapa-grid > *{min-width:0}
 #mapaLeaflet{height:620px; border-radius:var(--radius); border:1px solid var(--borda); box-shadow:var(--sombra); background:#E9EEF0}
@@ -452,16 +470,27 @@ table.local tfoot td.col-uf{background:var(--mint)}
       <label class="filtro larga" style="flex:1; min-width:320px"><span>Habilitação</span><select id="selHabMapa"><option value="">Todas as unidades (sem filtro de habilitação)</option></select></label>
       <label class="filtro" style="flex:0 0 auto"><span>Grupo</span>
         <div class="seg" id="segGrupoMapa"><button data-grupo="" class="ativo">Os três</button><button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button><button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button><button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button></div></label>
-      <label class="toggle" style="align-self:end; padding-bottom:.5rem"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes no mapa</label>
+      <label class="filtro" style="flex:0 0 auto; min-width:200px"><span>Malha</span>
+        <select id="selNivelMapa"><option value="uf">Estados (UF)</option><option value="macro">Macrorregiões de saúde</option><option value="rs">Regiões de saúde</option></select></label>
+      <label class="filtro" style="flex:0 0 auto"><span>Fundo</span>
+        <div class="seg" id="segFundoMapa"><button data-fundo="malha" class="ativo">Malha do Brasil</button><button data-fundo="osm">OpenStreetMap</button></div></label>
+      <label class="toggle" style="align-self:end; padding-bottom:.5rem"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes</label>
+      <button class="chip chip-botao" id="btnResetMapa" style="align-self:end" hidden>✕ limpar seleção</button>
     </div>
     <p class="legenda-pontos">
       <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
       <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
       <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
-      <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem</span>
+      <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem · toque em um estado para dar zoom e filtrar a lista</span>
     </p>
     <div class="mapa-grid">
-      <div id="mapaLeaflet"></div>
+      <div>
+        <div class="mapa-svg-box" id="mapaSvgBox"><div id="mapaSvg"></div>
+          <div class="legenda-mapa" id="legendaMapa"></div>
+          <p class="suave" style="font-size:.72rem; margin-top:.4rem" id="notaMapa"></p>
+        </div>
+        <div id="mapaLeaflet" hidden></div>
+      </div>
       <div class="card painel-lateral" id="mapaLateral"></div>
     </div>
   </div>
@@ -486,6 +515,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
         <p id="notaUnidades"></p>
         <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: maternidades apoiadas (estratégicas), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO 2026/2027. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
         <p id="notaAnexos"></p>
+        <p id="notaPosicao"><b>Posição no mapa do Brasil:</b> as malhas de estados, macrorregiões e regiões de saúde são as mesmas dos outros painéis. As coordenadas de cada unidade (cadastro CNES) são convertidas para a malha por uma aproximação ajustada e, quando o ponto cai fora da região de saúde da unidade, ele é deslocado para dentro dela; a posição é, portanto, aproximada, sempre na região de saúde correta. A vista OpenStreetMap usa as coordenadas exatas.</p>
         <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) aparecem como duas linhas, porque as habilitações são registradas por código CNES; no Painel de Mortalidade os dois formam um único complexo.</p>
       </div>
       <div class="card">
@@ -509,6 +539,8 @@ table.local tfoot td.col-uf{background:var(--mint)}
 </section>
 
 <!-- ========================= PÁGINA DA UNIDADE (sobreposta) ========================= -->
+<div id="tipMapa" class="tip-mapa" hidden></div>
+
 <div id="paginaDossie" class="pagina-dossie" hidden>
   <div class="pd-topo">
     <div class="wrap pd-topo-linha">

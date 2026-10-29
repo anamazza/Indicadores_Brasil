@@ -19,9 +19,11 @@ coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos
   habilitações do grupo.
 - **Por local**: tabela estado × famílias materno-infantis (unidades que têm / total do estado), com filtros de
   região, estado e grupo, CSV e cartões das unidades do local.
-- **Mapa** (Leaflet, fundo OpenStreetMap, precisa de internet): escolhida a habilitação, marca com o nome as
-  unidades que a têm, coloridas pelo grupo; o ponto abre o detalhe (leitos, competência, portaria) e a ficha;
-  lista lateral com CSV (inclui latitude e longitude).
+- **Mapa**: malha do Brasil (estados, macrorregiões e regiões de saúde, a mesma dos outros painéis) colorida pelo
+  número de unidades com a habilitação escolhida, com os pontos e os nomes das unidades por cima (cor do grupo),
+  tooltip por território, zoom ao tocar num estado e detalhe no ponto; vista alternativa em OpenStreetMap (Leaflet,
+  precisa de internet) com as coordenadas exatas; lista lateral com CSV (inclui latitude e longitude). A posição na
+  malha é aproximada (`ajusta_projecao.js`) e cada ponto é encaixado dentro da própria região de saúde.
 - **Notas metodológicas**: fonte e data, composição da lista (lista oficial de 09/09/2026, anexos, complexo da
   FAMEMA) e como ler cada campo.
 
@@ -51,7 +53,8 @@ Não há pasta de trabalho local nem espelhamento: esta pasta é a fonte, editad
 
 - `painel_base.html` — estrutura e estilos (fonte editável)
 - `painel_app.js` — lógica do painel (fonte editável)
-- `build_dados.py` — consolidação das unidades e habilitações dos três painéis (gera `dados_habilitacoes.js` e `cnes_dados.json`)
+- `build_dados.py` — consolidação das unidades e habilitações dos três painéis (gera `dados_habilitacoes.js`, com as malhas GEO copiadas do painel de Mortalidade e os ids de região de saúde e macrorregião por unidade, e `cnes_dados.json`)
+- `ajusta_projecao.js` — ajuste da conversão lat/lon para a malha usada no mapa do Brasil (documentação; só precisa ser rodado se a malha mudar)
 - `montar_painel.py` — monta `index.html`, `dados.json` e `atualizacao.json`
 - `dados_habilitacoes.js`, `dados.json`, `cnes_dados.json`, `atualizacao.json` — gerados
 - `logos_institucionais.png` — imagem embutida na montagem

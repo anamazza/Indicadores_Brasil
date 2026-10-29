@@ -7,7 +7,8 @@ Lê, nas pastas vizinhas nascimentos/, internacao/ e mortalidade/, o dados.json 
 cnes_dados.json (ficha CNES e habilitações, atualizados na nuvem pelo workflow "Atualizar CNES") e grava aqui:
 
 - cnes_dados.json          ficha completa de cada unidade da união dos três painéis (mesmo formato dos outros painéis)
-- dados_habilitacoes.js    const DADOS = {...} embutido no painel: unidades com grupos, ficha resumida e habilitações
+- dados_habilitacoes.js    const GEO = {...} (malhas de UF, macrorregiões e regiões de saúde, copiadas do painel de
+                           Mortalidade) e const DADOS = {...}: unidades com grupos, ids de malha, ficha resumida e habilitações
 
 Regras de composição (ver README.md):
 - A união dos três painéis define as unidades (um registro por código CNES).
@@ -16,6 +17,8 @@ Regras de composição (ver README.md):
   Internação e, só se a unidade não estiver em nenhum deles, do de Nascimentos ("estrategica" vale como "apoiada").
 - Unidades fora da lista oficial (acrescentadas pela coordenação) ficam marcadas como complementares (oficial = false).
 - Ficha e habilitações: o registro do CNES com a data de atualização mais recente entre as cópias dos três painéis.
+- Ids de malha (geo.rs, geo.macro): os resolvidos no painel de Mortalidade; para as demais unidades, pelo nome da região
+  de saúde e da macrorregião (mesma heurística do painel), na UF da unidade.
 """
 import json, os, re
 from collections import Counter
@@ -88,6 +91,46 @@ def _habilitacao(h):
     }
 
 
+def _carrega_geo():
+    """Malhas (const GEO) do painel de Mortalidade, com o de Nascimentos como reserva."""
+    for p, arq in (("mortalidade", "dados_mortalidade.js"), ("nascimentos", "dados_nv2026.js")):
+        caminho = os.path.join(RAIZ, p, arq)
+        if os.path.exists(caminho):
+            js = open(caminho, encoding="utf-8").read()
+            i = js.find("const GEO = ")
+            if i >= 0:
+                return json.JSONDecoder().raw_decode(js, i + len("const GEO = "))[0]
+    return None
+
+
+def _norm_terr(s):
+    import unicodedata
+    s = unicodedata.normalize("NFD", str(s or "")).encode("ascii", "ignore").decode().upper()
+    s = re.sub(r"MACRORREGIONAL|MACRORREGIAO|MACROREGIAO|MACRO|REGIAO DE SAUDE|REGIONAL|\bRS\b|SAUDE|\bDE\b|\bDA\b|\bDO\b|\bE\b|\bUNICA\b|[^A-Z0-9 ]", " ", s)
+    return set(s.split())
+
+
+def _resolve_geo(geo, uf, nome_rs, nome_macro):
+    """Ids da região de saúde e da macrorregião pelo nome, na UF (heurística do painel de Mortalidade)."""
+    saida = {}
+    for nivel, alvo in (("rs", nome_rs), ("macro", nome_macro)):
+        A = _norm_terr(alvo)
+        if not A:
+            continue
+        melhor, nota = None, 0
+        for t in geo["niveis"][nivel]:
+            m = re.search(r"-\s*([A-Z]{2})\s*$", t["nome"] or "")
+            if not m or m.group(1) != uf:
+                continue
+            B = _norm_terr(t["nome"])
+            inter = len(A & B)
+            if inter and inter / min(len(A), len(B)) >= 0.5 and inter > nota:
+                melhor, nota = t["id"], inter
+        if melhor is not None:
+            saida[nivel] = melhor
+    return saida
+
+
 def consolidar(verboso=True):
     dados, cnes = {}, {}
     for p in PAINEIS:
@@ -111,6 +154,8 @@ def consolidar(verboso=True):
                 })
                 if u.get("cnesComplexo"):
                     reg["complexo"] = list(u["cnesComplexo"])
+            if not reg.get("geo") and u.get("geo"):
+                reg["geo"] = {k: v for k, v in u["geo"].items() if v is not None}
             if not reg.get("grupos"):
                 reg["grupos"] = _grupos(u)
             if reg.get("oficial") is None and u.get("oficial") is not None:
@@ -132,6 +177,13 @@ def consolidar(verboso=True):
         habs.sort(key=lambda h: (h["co"], h["ini"] or ""))
         reg["habilitacoes"] = habs
         reg["paineis"] = sorted(reg["paineis"], key=["nascimentos", "internacao", "mortalidade"].index)
+    # ids de malha para as unidades sem geo (pelo nome da região de saúde e da macrorregião, na UF)
+    geo = _carrega_geo()
+    if geo:
+        for reg in unidades.values():
+            if not reg.get("geo") or "rs" not in reg["geo"]:
+                r = _resolve_geo(geo, reg.get("uf"), reg.get("regiaoSaude"), reg.get("macro"))
+                reg["geo"] = {**r, **(reg.get("geo") or {})}
     # catálogo dos tipos de habilitação (código -> descrição mais frequente, nº de unidades, leitos somados)
     desc, n_unid, leitos = {}, Counter(), Counter()
     for reg in unidades.values():
@@ -164,6 +216,8 @@ def consolidar(verboso=True):
         json.dump(saida_cnes, fh, ensure_ascii=False, indent=1)
     with open(os.path.join(BASE, "dados_habilitacoes.js"), "w", encoding="utf-8") as fh:
         fh.write("/* gerado por build_dados.py: unidades dos três painéis com ficha CNES resumida e habilitações */\n")
+        if geo:
+            fh.write("const GEO = " + json.dumps(geo, ensure_ascii=False, separators=(",", ":")) + ";\n")
         fh.write("const DADOS = " + json.dumps(DADOS, ensure_ascii=False, separators=(",", ":")) + ";\n")
     if verboso:
         n_habs = sum(len(r["habilitacoes"]) for r in lista)
@@ -173,6 +227,11 @@ def consolidar(verboso=True):
               f"{len(fichas)} fichas CNES, {n_habs} habilitações de {len(tipos)} tipos; consulta ao CNES em {consulta}")
         if sem:
             print("sem habilitação registrada:", "; ".join(sem))
+        sem_geo = [f"{r['nome']} ({r['uf']})" for r in lista if not (r.get("geo") or {}).get("rs")]
+        if sem_geo:
+            print("AVISO: sem região de saúde na malha:", "; ".join(sem_geo))
+        if not geo:
+            print("AVISO: malhas (GEO) não encontradas nos painéis vizinhos; o mapa do Brasil ficará sem malha")
         sem_grupo = [r["nome"] for r in lista if not r["grupos"]]
         if sem_grupo:
             print("AVISO: unidades sem grupo:", "; ".join(sem_grupo))
