@@ -117,7 +117,7 @@ function montarCabecalho(){
   document.getElementById("notaUnidades").innerHTML = `<b>Unidades:</b> ${fmtInt(MAT.length)} códigos CNES, união das unidades dos painéis de Nascimentos (${fmtInt(u.nascimentos)}), Internação (${fmtInt(u.internacao)}) e Mortalidade (${fmtInt(u.mortalidade)}). Grupos: ${porGrupo}; uma unidade pode contar em mais de um grupo.`;
   const anexos = MAT.filter(m => m.oficial === false);
   document.getElementById("notaAnexos").innerHTML = anexos.length
-    ? `<b>Anexos:</b> ${anexos.length} unidades acrescentadas pela coordenação fora da lista oficial (${anexos.map(a => `${a.nome}, ${a.uf}`).join("; ")}) entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
+    ? `<b>Lista oficial e anexos:</b> a lista oficial de 09/09/2026 tem ${fmtInt(DADOS.listaOficialN || 115)} códigos CNES, todos presentes neste painel, com os grupos lidos da própria lista. As ${anexos.length} unidades fora dela (${anexos.map(a => `${a.nome}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis ou são o segundo código de um complexo; entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
   document.getElementById("notaFamilias").innerHTML = FAMILIAS.map(f => `<li><b>${esc(f.rot)}</b>: ${f.codigos.map(co => `${co} ${esc(dsCurta(co))}`).join("; ")}.</li>`).join("");
   document.getElementById("btnNotas").addEventListener("click", () => document.getElementById("secNotas").scrollIntoView({behavior: "smooth"}));
 }

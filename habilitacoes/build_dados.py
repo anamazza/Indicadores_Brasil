@@ -12,10 +12,11 @@ cnes_dados.json (ficha CNES e habilitações, atualizados na nuvem pelo workflow
 
 Regras de composição (ver README.md):
 - A união dos três painéis define as unidades (um registro por código CNES).
-- Os grupos (apoiada, EBSERH, QUALINEO) seguem a lista oficial de maternidades por grupo de 09/09/2026, como nos
-  painéis de Internação e de Mortalidade: a classificação é lida primeiro do painel de Mortalidade, depois do de
-  Internação e, só se a unidade não estiver em nenhum deles, do de Nascimentos ("estrategica" vale como "apoiada").
-- Unidades fora da lista oficial (acrescentadas pela coordenação) ficam marcadas como complementares (oficial = false).
+- Os grupos (apoiada, EBSERH, QUALINEO) vêm da lista oficial de maternidades por grupo de 09/09/2026, guardada em
+  lista_oficial_2026-09-09.csv (planilha LISTA_MATERNIDADES_POR_GRUPO_09092026 da coordenação, conferida em
+  29/10/2026): TIPO_DE_APOIO "APOIADA", "APOIADA/EXTRA", "EBSERH", "QUALINEO" e combinações com "/". Unidade fora da
+  lista (anexo) fica com oficial = false e com os grupos lidos dos painéis (Mortalidade, depois Internação, depois
+  Nascimentos; "estrategica" vale como "apoiada").
 - Ficha e habilitações: o registro do CNES com a data de atualização mais recente entre as cópias dos três painéis.
 - Ids de malha (geo.rs, geo.macro): os resolvidos no painel de Mortalidade; para as demais unidades, pelo nome da região
   de saúde e da macrorregião (mesma heurística do painel), na UF da unidade.
@@ -131,7 +132,26 @@ def _resolve_geo(geo, uf, nome_rs, nome_macro):
     return saida
 
 
+def _lista_oficial():
+    """{cnes: {"grupos": [...], "tipo": str, "nome": str}} da lista oficial de 09/09/2026 (csv ao lado deste script)."""
+    import csv
+    caminho = os.path.join(BASE, "lista_oficial_2026-09-09.csv")
+    if not os.path.exists(caminho):
+        return {}
+    saida = {}
+    with open(caminho, encoding="utf-8", newline="") as fh:
+        for r in csv.DictReader(fh, delimiter=";"):
+            gs = []
+            for t in (r.get("TIPO_DE_APOIO") or "").upper().replace(" ", "").split("/"):
+                g = {"APOIADA": "apoiada", "EXTRA": "apoiada", "EBSERH": "ebserh", "QUALINEO": "qualineo"}.get(t)
+                if g and g not in gs:
+                    gs.append(g)
+            saida[str(r["CNES"]).strip().zfill(7)] = {"grupos": gs, "tipo": r.get("TIPO_DE_APOIO"), "nome": r.get("ESTABELECIMENTO")}
+    return saida
+
+
 def consolidar(verboso=True):
+    oficial = _lista_oficial()
     dados, cnes = {}, {}
     for p in PAINEIS:
         dados[p], cnes[p] = _carrega(p)
@@ -170,7 +190,14 @@ def consolidar(verboso=True):
         fichas[c] = candidatos[0]
     for c, reg in unidades.items():
         info = fichas.get(c)
-        if reg.get("oficial") is None:
+        if oficial:                                   # lista oficial manda nos grupos e na marca de anexo
+            if c in oficial:
+                reg["grupos"] = [g for g in GRUPOS if g in oficial[c]["grupos"]]
+                reg["tipoApoio"] = oficial[c]["tipo"]
+                reg["oficial"] = True
+            else:
+                reg["oficial"] = False
+        elif reg.get("oficial") is None:
             reg["oficial"] = True
         reg["ficha"] = _ficha(info) if info else None
         habs = [_habilitacao(h) for h in (info.get("habilitacoes") or [])] if info else []
@@ -201,7 +228,8 @@ def consolidar(verboso=True):
         "painel": "habilitacoes",
         "consultaCnes": consulta,
         "consultasPorPainel": consultas,
-        "listaOficial": next((dados[p].get("listaOficial") for p in PAINEIS if dados[p].get("listaOficial")), None),
+        "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026" if oficial else next((dados[p].get("listaOficial") for p in PAINEIS if dados[p].get("listaOficial")), None),
+        "listaOficialN": len(oficial) or None,
         "unidadesPorPainel": {p: len(dados[p]["maternidades"]) for p in PAINEIS},
         "grupos": GRUPOS,
         "tipos": tipos,
@@ -223,6 +251,10 @@ def consolidar(verboso=True):
         n_habs = sum(len(r["habilitacoes"]) for r in lista)
         por_grupo = {g: sum(1 for r in lista if g in r["grupos"]) for g in GRUPOS}
         sem = [r["nome"] for r in lista if not r["habilitacoes"]]
+        faltam = sorted(set(oficial) - set(unidades))
+        if faltam:
+            print("AVISO: unidades da lista oficial ausentes nos painéis:", faltam)
+        print(f"lista oficial: {len(oficial)} CNES; anexos (fora da lista): {sum(1 for r in lista if r['oficial'] is False)}")
         print(f"{len(lista)} unidades (união dos painéis {dict(DADOS['unidadesPorPainel'])}), grupos {por_grupo}, "
               f"{len(fichas)} fichas CNES, {n_habs} habilitações de {len(tipos)} tipos; consulta ao CNES em {consulta}")
         if sem:

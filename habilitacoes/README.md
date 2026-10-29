@@ -33,8 +33,10 @@ coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos
 - Não há coleta própria: `build_dados.py` lê, nas pastas vizinhas `nascimentos/`, `internacao/` e `mortalidade/`,
   o `dados.json` (unidades e grupos) e o `cnes_dados.json` (ficha CNES e habilitações, atualizados na nuvem pelo
   workflow "Atualizar CNES") e consolida a união das unidades (122 códigos CNES em 29/10/2026).
-- Grupos pela lista oficial de 09/09/2026, lidos do painel de Mortalidade, depois do de Internação e só então do de
-  Nascimentos ("estrategica" vale como "apoiada"). Unidades fora da lista oficial ficam marcadas como anexo.
+- Grupos pela lista oficial de 09/09/2026, guardada em `lista_oficial_2026-09-09.csv` (115 CNES, planilha
+  LISTA_MATERNIDADES_POR_GRUPO_09092026 da coordenação, conferida com os painéis em 29/10/2026, ver
+  `relatorios/conferencia_lista_oficial_2026-10-29.md`). Unidades fora da lista ficam marcadas como anexo, com os grupos
+  lidos dos painéis (Mortalidade, depois Internação, depois Nascimentos; "estrategica" vale como "apoiada").
 - Ficha e habilitações: a cópia com a data de atualização do cadastro mais recente entre os três painéis.
 - Vigência: `dtCompFim` 99/9999 = sem prazo final; outra competência = vigente com prazo (todas as habilitações do
   serviço estavam vigentes na data da consulta; as encerradas não constam). Origem "P" = ato do gestor estadual ou
@@ -54,6 +56,7 @@ Não há pasta de trabalho local nem espelhamento: esta pasta é a fonte, editad
 
 - `painel_base.html` — estrutura e estilos (fonte editável)
 - `painel_app.js` — lógica do painel (fonte editável)
+- `lista_oficial_2026-09-09.csv` — lista oficial de maternidades por grupo (fonte dos grupos e da marca de anexo)
 - `build_dados.py` — consolidação das unidades e habilitações dos três painéis (gera `dados_habilitacoes.js`, com as malhas GEO copiadas do painel de Mortalidade e os ids de região de saúde e macrorregião por unidade, e `cnes_dados.json`)
 - `ajusta_projecao.js` — ajuste da conversão lat/lon para a malha usada no mapa do Brasil (documentação; só precisa ser rodado se a malha mudar)
 - `montar_painel.py` — monta `index.html`, `dados.json` e `atualizacao.json`
