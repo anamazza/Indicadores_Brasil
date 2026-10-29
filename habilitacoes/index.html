@@ -126,7 +126,7 @@ section:nth-of-type(even) .card, section:nth-of-type(even) .filtros-topo, sectio
 .barras{display:grid; gap:.42rem; margin-top:.9rem}
 .barra{display:grid; grid-template-columns:minmax(200px, 2.3fr) minmax(0, 3fr) 92px; gap:.7rem; align-items:center; border:none; background:transparent; padding:.18rem .3rem; border-radius:8px; text-align:left; color:var(--texto)}
 .barra:hover,.barra.ativa{background:var(--mint)}
-.barra .rot{font-size:.82rem; font-weight:600; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.barra .rot{font-size:.82rem; font-weight:600; line-height:1.25; min-width:0; overflow-wrap:anywhere}
 .barra .rot small{display:block; font-size:.68rem; color:var(--texto-suave); font-weight:600}
 .barra .trilha{height:16px; background:var(--mint); border-radius:999px; overflow:hidden; position:relative}
 .barra .trilha i{position:absolute; inset:0 auto 0 0; background:linear-gradient(90deg, var(--verde-fiocruz), var(--verde-esmeralda)); border-radius:999px}
@@ -246,6 +246,12 @@ footer a{color:var(--verde-lima)}
 @media (max-width: 1080px){ .grid-2,.notas-grid{grid-template-columns:1fr} .kpis-topo{grid-template-columns:repeat(2, auto)} }
 @media (max-width: 900px){
   .dossie-topo{grid-template-columns:1fr} .kpis-topo .k{text-align:left}
+  .barras{min-width:0}
+  .barra{grid-template-columns:minmax(0,1fr) 72px; grid-template-rows:auto auto; row-gap:.1rem; padding:.3rem .3rem}
+  .barra .rot{grid-column:1 / -1}
+  .barra .trilha{grid-column:1; height:12px} .barra .n{grid-column:2}
+  .card h3{min-width:0; overflow-wrap:anywhere} .card h3 .seg{margin-left:0 !important; width:100%}
+  .painel-lateral .kpi{flex-wrap:wrap}
   .mapa-controles select, .dossie-conj select, #selAddCol, #selHabMapa{min-width:0 !important; width:100%; flex:1 1 100%}
   .mapa-controles .filtro{min-width:0 !important; max-width:none; flex:1 1 100% !important; width:100%}
   .seg{display:flex; flex-wrap:wrap}
