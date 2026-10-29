@@ -246,6 +246,13 @@ footer a{color:var(--verde-lima)}
 @media (max-width: 1080px){ .grid-2,.notas-grid{grid-template-columns:1fr} .kpis-topo{grid-template-columns:repeat(2, auto)} }
 @media (max-width: 900px){
   .dossie-topo{grid-template-columns:1fr} .kpis-topo .k{text-align:left}
+  .mapa-controles select, .dossie-conj select, #selAddCol, #selHabMapa{min-width:0 !important; width:100%; flex:1 1 100%}
+  .mapa-controles .filtro{min-width:0 !important; max-width:none; flex:1 1 100% !important; width:100%}
+  .seg{display:flex; flex-wrap:wrap}
+  .dossie-conj .mapa-controles{flex-direction:column; align-items:stretch}
+  .seg{width:100%} .seg button{flex:1 1 auto; justify-content:center}
+  .grade-unidades{grid-template-columns:1fr}
+  .wrap{width:min(1280px, 100% - 1.6rem)}
   .barra{grid-template-columns:minmax(120px, 1.4fr) minmax(0, 2fr) 70px}
   table.matriz thead th.col-unid, table.matriz td.col-unid{min-width:190px}
 }
@@ -455,6 +462,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
       <span class="suave" id="unidadesResumo" style="font-size:.86rem"></span>
     </div>
     <div class="grade-unidades" id="gradeUnidades"></div>
+    <div style="margin-top:1rem; text-align:center"><button class="chip chip-botao" id="btnMaisCartoes" hidden></button></div>
   </div>
 </section>
 
@@ -875,9 +883,16 @@ function csvLocal(){
   baixarCSV(`habilitacoes_por_estado_${hoje()}.csv`, [cabecalhoCSV(rotLocal()), ["UF", "Estado", "Região", "Unidades", ...FAMILIAS.map(f => `${f.rot} (${f.codigos.join("/")})`)],
     ...linhas.map(l => [l.uf, l.nome, l.regiao, l.n, ...l.fam]), ["Total", "", "", base.length, ...FAMILIAS.map(f => base.filter(m => temFamilia(m, f)).length)]]);
 }
+const LIMITE_CARTOES = 24;
+let mostrarTodosCartoes = false;
 function renderCartoes(sel){
-  const lista = sel.slice().sort(porUFNome), el = document.getElementById("gradeUnidades");
-  document.getElementById("unidadesResumo").textContent = `${plural(lista.length, "unidade", "unidades")} · ${rotLocal()}`;
+  const todas = sel.slice().sort(porUFNome), el = document.getElementById("gradeUnidades");
+  const lista = mostrarTodosCartoes ? todas : todas.slice(0, LIMITE_CARTOES);
+  document.getElementById("unidadesResumo").textContent = `${plural(todas.length, "unidade", "unidades")} · ${rotLocal()}${lista.length < todas.length ? ` · mostrando as ${lista.length} primeiras` : ""}`;
+  const btn = document.getElementById("btnMaisCartoes");
+  btn.hidden = todas.length <= LIMITE_CARTOES;
+  btn.textContent = mostrarTodosCartoes ? "mostrar menos" : `mostrar todas as ${todas.length} unidades`;
+  btn.onclick = () => { mostrarTodosCartoes = !mostrarTodosCartoes; renderCartoes(sel); };
   el.innerHTML = lista.map(mt => {
     const n = mt.habilitacoes.length, nPrazo = mt.habilitacoes.filter(h => !ativaSemPrazo(h)).length;
     const tags = FAMILIAS.filter(f => temFamilia(mt, f)).map(f => {
@@ -909,9 +924,9 @@ function montarLocal(){
     selUF.value = [...selUF.options].some(o => o.value === atual) ? atual : ""; LOC.uf = selUF.value;
   };
   preencheUF();
-  selRegiao.addEventListener("change", () => { LOC.regiao = selRegiao.value; preencheUF(); renderLocal(); });
-  selUF.addEventListener("change", () => { LOC.uf = selUF.value; renderLocal(); });
-  segmento("segGrupoLocal", d => { LOC.grupo = d.grupo; renderLocal(); });
+  selRegiao.addEventListener("change", () => { LOC.regiao = selRegiao.value; preencheUF(); mostrarTodosCartoes = false; renderLocal(); });
+  selUF.addEventListener("change", () => { LOC.uf = selUF.value; mostrarTodosCartoes = false; renderLocal(); });
+  segmento("segGrupoLocal", d => { LOC.grupo = d.grupo; mostrarTodosCartoes = false; renderLocal(); });
   document.getElementById("btnCsvLocal").addEventListener("click", csvLocal);
 }
 

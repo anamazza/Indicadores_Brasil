@@ -300,9 +300,16 @@ function csvLocal(){
   baixarCSV(`habilitacoes_por_estado_${hoje()}.csv`, [cabecalhoCSV(rotLocal()), ["UF", "Estado", "Região", "Unidades", ...FAMILIAS.map(f => `${f.rot} (${f.codigos.join("/")})`)],
     ...linhas.map(l => [l.uf, l.nome, l.regiao, l.n, ...l.fam]), ["Total", "", "", base.length, ...FAMILIAS.map(f => base.filter(m => temFamilia(m, f)).length)]]);
 }
+const LIMITE_CARTOES = 24;
+let mostrarTodosCartoes = false;
 function renderCartoes(sel){
-  const lista = sel.slice().sort(porUFNome), el = document.getElementById("gradeUnidades");
-  document.getElementById("unidadesResumo").textContent = `${plural(lista.length, "unidade", "unidades")} · ${rotLocal()}`;
+  const todas = sel.slice().sort(porUFNome), el = document.getElementById("gradeUnidades");
+  const lista = mostrarTodosCartoes ? todas : todas.slice(0, LIMITE_CARTOES);
+  document.getElementById("unidadesResumo").textContent = `${plural(todas.length, "unidade", "unidades")} · ${rotLocal()}${lista.length < todas.length ? ` · mostrando as ${lista.length} primeiras` : ""}`;
+  const btn = document.getElementById("btnMaisCartoes");
+  btn.hidden = todas.length <= LIMITE_CARTOES;
+  btn.textContent = mostrarTodosCartoes ? "mostrar menos" : `mostrar todas as ${todas.length} unidades`;
+  btn.onclick = () => { mostrarTodosCartoes = !mostrarTodosCartoes; renderCartoes(sel); };
   el.innerHTML = lista.map(mt => {
     const n = mt.habilitacoes.length, nPrazo = mt.habilitacoes.filter(h => !ativaSemPrazo(h)).length;
     const tags = FAMILIAS.filter(f => temFamilia(mt, f)).map(f => {
@@ -334,9 +341,9 @@ function montarLocal(){
     selUF.value = [...selUF.options].some(o => o.value === atual) ? atual : ""; LOC.uf = selUF.value;
   };
   preencheUF();
-  selRegiao.addEventListener("change", () => { LOC.regiao = selRegiao.value; preencheUF(); renderLocal(); });
-  selUF.addEventListener("change", () => { LOC.uf = selUF.value; renderLocal(); });
-  segmento("segGrupoLocal", d => { LOC.grupo = d.grupo; renderLocal(); });
+  selRegiao.addEventListener("change", () => { LOC.regiao = selRegiao.value; preencheUF(); mostrarTodosCartoes = false; renderLocal(); });
+  selUF.addEventListener("change", () => { LOC.uf = selUF.value; mostrarTodosCartoes = false; renderLocal(); });
+  segmento("segGrupoLocal", d => { LOC.grupo = d.grupo; mostrarTodosCartoes = false; renderLocal(); });
   document.getElementById("btnCsvLocal").addEventListener("click", csvLocal);
 }
 

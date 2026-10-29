@@ -246,6 +246,13 @@ footer a{color:var(--verde-lima)}
 @media (max-width: 1080px){ .grid-2,.notas-grid{grid-template-columns:1fr} .kpis-topo{grid-template-columns:repeat(2, auto)} }
 @media (max-width: 900px){
   .dossie-topo{grid-template-columns:1fr} .kpis-topo .k{text-align:left}
+  .mapa-controles select, .dossie-conj select, #selAddCol, #selHabMapa{min-width:0 !important; width:100%; flex:1 1 100%}
+  .mapa-controles .filtro{min-width:0 !important; max-width:none; flex:1 1 100% !important; width:100%}
+  .seg{display:flex; flex-wrap:wrap}
+  .dossie-conj .mapa-controles{flex-direction:column; align-items:stretch}
+  .seg{width:100%} .seg button{flex:1 1 auto; justify-content:center}
+  .grade-unidades{grid-template-columns:1fr}
+  .wrap{width:min(1280px, 100% - 1.6rem)}
   .barra{grid-template-columns:minmax(120px, 1.4fr) minmax(0, 2fr) 70px}
   table.matriz thead th.col-unid, table.matriz td.col-unid{min-width:190px}
 }
@@ -455,6 +462,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
       <span class="suave" id="unidadesResumo" style="font-size:.86rem"></span>
     </div>
     <div class="grade-unidades" id="gradeUnidades"></div>
+    <div style="margin-top:1rem; text-align:center"><button class="chip chip-botao" id="btnMaisCartoes" hidden></button></div>
   </div>
 </section>
 
