@@ -16,6 +16,7 @@ PAINEIS = {
     "nascimentos": ("Painel_NV2026_Novo.html", 2500, "dados_nv2026.js", 100),
     "internacao":  ("Painel_Internacao_2026.html", 1200, "dados_internacao.js", 100),
     "mortalidade": ("Painel_Mortalidade_2026.html", 1800, "dados_mortalidade.js", 100),
+    "habilitacoes": ("Painel_Habilitacoes_2026.html", 400, "dados_habilitacoes.js", 110),   # 29/10/2026: consolida a união dos três
 }
 RAIZ_MIN_KB = 150          # a página principal embute a foto e as logos
 TAMANHO_MAX_KB = 12000

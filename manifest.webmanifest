@@ -1,7 +1,7 @@
 {
   "name": "Indicadores Brasil · Maternidades Estratégicas",
   "short_name": "Indicadores",
-  "description": "Painéis de indicadores das maternidades estratégicas (IFF/Fiocruz): nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS) e mortalidade materna, fetal, perinatal e neonatal (SIM).",
+  "description": "Painéis de indicadores das maternidades estratégicas (IFF/Fiocruz): nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS), mortalidade materna, fetal, perinatal e neonatal (SIM) e habilitações das unidades no CNES.",
   "lang": "pt-BR",
   "dir": "ltr",
   "id": "/Indicadores_Brasil/",
@@ -20,6 +20,7 @@
   "shortcuts": [
     { "name": "Nascimentos (SINASC)", "short_name": "Nascimentos", "url": "/Indicadores_Brasil/nascimentos/", "icons": [{ "src": "icons/maos-192.png", "sizes": "192x192" }] },
     { "name": "Internação (SIH/SUS)", "short_name": "Internação", "url": "/Indicadores_Brasil/internacao/", "icons": [{ "src": "icons/maos-192.png", "sizes": "192x192" }] },
-    { "name": "Mortalidade (SIM)", "short_name": "Mortalidade", "url": "/Indicadores_Brasil/mortalidade/", "icons": [{ "src": "icons/maos-192.png", "sizes": "192x192" }] }
+    { "name": "Mortalidade (SIM)", "short_name": "Mortalidade", "url": "/Indicadores_Brasil/mortalidade/", "icons": [{ "src": "icons/maos-192.png", "sizes": "192x192" }] },
+    { "name": "Habilitações (CNES)", "short_name": "Habilitações", "url": "/Indicadores_Brasil/habilitacoes/", "icons": [{ "src": "icons/maos-192.png", "sizes": "192x192" }] }
   ]
 }

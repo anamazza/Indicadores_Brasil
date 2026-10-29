@@ -12,6 +12,7 @@ Cooperação em Saúde da Mulher, da Criança e do Adolescente (IFF/Fiocruz).
 | Nascimentos · Painel NV 2026 (SINASC) | https://anamazza.github.io/Indicadores_Brasil/nascimentos/ | `nascimentos/` |
 | Internação (SIH/SUS) | https://anamazza.github.io/Indicadores_Brasil/internacao/ | `internacao/` |
 | Mortalidade (SIM) | https://anamazza.github.io/Indicadores_Brasil/mortalidade/ | `mortalidade/` |
+| Habilitações (CNES, todas as unidades dos três grupos) | https://anamazza.github.io/Indicadores_Brasil/habilitacoes/ | `habilitacoes/` |
 
 Cada painel é um HTML único e autocontido (`index.html`), com um botão no cabeçalho que volta à página
 principal (os botões cruzados entre painéis foram retirados em 12/10/2026). Os repositórios antigos (Indicadores_NV e
@@ -22,7 +23,7 @@ Indicadores_mortalidade-2026) foram substituídos por este em 11/10/2026 e hoje 
 ```
 index.html               página principal (gerada)         pagina_inicial.html  fonte da página principal
 montar_pagina.py         monta index.html e preenche os carimbos "atualizado em" (lê <painel>/atualizacao.json)
-publicar.ps1             um comando: pull, monta os 3 painéis, relatório de diferenças, verifica, commit e push (ou PR)
+publicar.ps1             um comando: pull, monta os 4 painéis, relatório de diferenças, verifica, commit e push (ou PR)
 relatorio_diferencas.py  o que mudou nos dados de cada painel em relação ao publicado (grava em relatorios/)
 verificar_site.py        verificação do site (arquivos, tamanhos, links, dados, carimbos); roda no Actions e localmente
 monitor/                 verificar_fontes.py (monitor do DATASUS) e estado.json (última consulta às fontes)
@@ -32,11 +33,13 @@ nascimentos/             Painel NV 2026: fontes (painel_base.html, painel_app.js
                          dados.json, cnes_dados.json, comparativo_nv.js), scripts, atualizacao.json e index.html
 internacao/              Painel de Internação 2026: mesma organização (dados_internacao.js, dados.json)
 mortalidade/             Painel de Mortalidade 2026: mesma organização (dados_mortalidade.js, dados.json)
+habilitacoes/            Painel de Habilitações (29/10/2026): vive só no repositório; build_dados.py consolida as unidades e as
+                         habilitações CNES dos três painéis (dados_habilitacoes.js, cnes_dados.json, dados.json) e montar_painel.py monta o index.html
 ```
 
 Cada painel também publica os seus indicadores como JSON puro, sem depender do HTML (API estática):
 `https://anamazza.github.io/Indicadores_Brasil/nascimentos/dados.json` (e `internacao/dados.json`,
-`mortalidade/dados.json`), além da ficha CNES em `cnes_dados.json`.
+`mortalidade/dados.json` e `habilitacoes/dados.json`), além da ficha CNES em `cnes_dados.json`.
 
 Cada pasta de painel tem o seu `README.md` com o conteúdo, as fontes e os scripts de atualização.
 
@@ -56,11 +59,15 @@ final, **espelha a pasta inteira** na subpasta correspondente deste repositório
 `Documentos/Página principal`), copiando fontes, dados e saídas e apagando o que deixou de existir. Por isso,
 edite os painéis nas pastas de trabalho, não aqui: o próximo espelhamento sobrescreve a subpasta.
 
+Exceção: o **painel de habilitações** (`habilitacoes/`, 29/10/2026) não tem pasta de trabalho. Ele só depende do CNES, que é
+atualizado na nuvem, e consolida as unidades e as habilitações dos três painéis; edita-se direto aqui e monta-se com
+`py habilitacoes\montar_painel.py` (o `publicar.ps1` e o workflow "Atualizar CNES" já o fazem).
+
 Fluxo de atualização de um painel:
 
 1. Na pasta de trabalho, rodar os scripts de dados (`build_dados.py` etc., ver o README do painel).
 2. Neste repositório, rodar `.\publicar.ps1` (PowerShell). Ele faz `git pull`, roda o `montar_painel.py` dos três
-   painéis, gera o relatório de diferenças em `relatorios/`, remonta a página principal, verifica e, se tudo
+   painéis e o do painel de habilitações, gera o relatório de diferenças em `relatorios/`, remonta a página principal, verifica e, se tudo
    passar, faz commit e push. Com `-PullRequest`, publica numa branch `atualizacao-<data>` e mostra o link do
    pull request, para a coordenação validar o relatório antes do merge.
 
@@ -79,7 +86,7 @@ Página principal:
 | Workflow | Quando roda | O que faz |
 |---|---|---|
 | **Verificar site** (`verificar.yml`) | a cada push na `main`, em pull requests e sob demanda | roda `verificar_site.py`; se falhar, o commit fica marcado em vermelho e o GitHub avisa por e-mail |
-| **Atualizar CNES** (`cnes.yml`) | 1º de junho e 1º de dezembro, e sob demanda (aba Actions → Run workflow) | roda `atualizar_cnes.py` e `montar_painel.py` nos três painéis, remonta a página principal, verifica e, se algo mudou e nenhuma ficha ou habilitação se perdeu, faz commit e push |
+| **Atualizar CNES** (`cnes.yml`) | 1º de junho e 1º de dezembro, e sob demanda (aba Actions → Run workflow) | roda `atualizar_cnes.py` e `montar_painel.py` nos três painéis, remonta o painel de habilitações e a página principal, verifica e, se algo mudou e nenhuma ficha ou habilitação se perdeu, faz commit e push |
 | **Monitor DATASUS** (`monitor_datasus.yml`) | dia 5 de cada mês, e sob demanda | consulta o SINASC (OpenDataSUS) e o SIM e o SIH (FTP do DATASUS); se houver arquivo novo ou republicado desde a consulta anterior, abre uma issue com o resumo e guarda o estado em `monitor/estado.json` |
 
 Regra para não haver conflito: **a ficha CNES é atualizada só na nuvem.** O `montar_painel.py` de cada pasta de
@@ -98,15 +105,17 @@ Criar a pasta de trabalho do novo painel nos moldes dos existentes (fontes + `mo
 carimbo e espelha para uma nova subpasta aqui, por exemplo `novo_painel/`); em `pagina_inicial.html`, dentro
 de `<nav class="paineis">`, copiar um bloco `<a class="painel">` apontando para
 `https://anamazza.github.io/Indicadores_Brasil/novo_painel/` (com o `<span class="data" data-painel="novo_painel">`);
-incluir a pasta em `PAINEIS` no `montar_pagina.py` e no `verificar_site.py`, e no laço do `cnes.yml`.
+incluir a pasta em `PAINEIS` no `montar_pagina.py` e no `verificar_site.py`, em `ARQUIVOS` do `relatorio_diferencas.py`, nos atalhos do
+`manifest.webmanifest` e, se depender do CNES, no `cnes.yml`. Um painel que só use dados já publicados aqui pode viver no próprio
+repositório, sem pasta de trabalho, como o de habilitações.
 
 ## Aplicativo instalável (PWA)
 
 Desde 18/10/2026 o site pode ser instalado como aplicativo (no Chrome e no Edge, pelo ícone de instalação na
 barra de endereço ou pelo botão "Instalar" da página principal; no iPhone, por "Adicionar à Tela de Início").
-Arquivos: `manifest.webmanifest` (nome, ícones, cor do tema, atalhos para os três painéis), `icons/` (ícones com a foto das mãos
+Arquivos: `manifest.webmanifest` (nome, ícones, cor do tema, atalhos para os quatro painéis), `icons/` (ícones com a foto das mãos
 da página principal, recorte quadrado gerado com Pillow; ao trocar um ícone, troque também o nome do arquivo, porque os navegadores guardam o anterior em cache) e `sw.js` (service worker: rede primeiro, cópia local das páginas já
-visitadas para abrir sem internet; os mapas de fundo sempre vêm da rede). A página principal e os três painéis
+visitadas para abrir sem internet; os mapas de fundo sempre vêm da rede). A página principal e os quatro painéis
 referenciam o manifesto e registram o service worker (`painel_base.html` de cada pasta de trabalho). Para forçar a
 renovação das cópias locais de todos os usuários, mude `VERSAO` no `sw.js`.
 

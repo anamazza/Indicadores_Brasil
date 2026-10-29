@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- aplicativo instalável (PWA): o painel faz parte do aplicativo da página principal (manifesto na raiz do site) -->
+<link rel="manifest" href="../manifest.webmanifest?v=20261029"/>
+<meta name="theme-color" content="#279261"/>
+<link rel="icon" href="../icons/maos-192.png" type="image/png"/>
+<link rel="apple-touch-icon" href="../icons/maos-180.png"/>
+<title>Painel de Habilitações · Maternidades Estratégicas · CNES</title>
+<meta name="description" content="Habilitações registradas no CNES das maternidades estratégicas (apoiadas, EBSERH e QUALINEO 2026/2027): matriz de cobertura, consulta por unidade e por habilitação, ficha de cadastro e notas metodológicas."/>
+<style>
+:root{
+  --verde-lima:#7CB342; --verde-claro:#8FBC4E; --verde-fiocruz:#279261; --verde-esmeralda:#1B5F51; --verde-profundo:#154A4B;
+  --indigo:#0A213D; --indigo-escuro:#071830; --mint:#EDF6EF; --mint-card:#F6FBF7; --branco:#FFFFFF;
+  --texto:#1D3229; --texto-suave:#4E6A5C; --alerta:#C0392B; --ambar:#D68910; --ambar-claro:#FFF3DB;
+  --azul-ebserh:#2471A3; --azul-ebserh-borda:#103B5E; --azul-qualineo:#5FB0D9; --azul-qualineo-borda:#1B6B8F;
+  --borda:#D8E8DC; --sombra:0 2px 12px rgba(14,122,86,.10); --sombra-alta:0 10px 28px rgba(10,33,61,.18);
+  --radius:14px; --largura:min(1280px, 100% - 2.6rem);
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--mint); color:var(--texto);
+  font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0; line-height:1.16; letter-spacing:-.02em; text-wrap:balance}
+h1{font-size:clamp(1.75rem,1.1rem+2.4vw,2.8rem); font-weight:800}
+h2{font-size:clamp(1.3rem,1rem+1vw,1.72rem); font-weight:800}
+h3{font-size:1.04rem; font-weight:700}
+p{margin:0}
+a{color:var(--verde-fiocruz)}
+button{font:inherit; cursor:pointer}
+select,input[type=search]{font:inherit; padding:.5rem .7rem; border:1.5px solid var(--borda); border-radius:10px; background:var(--branco); color:var(--texto); max-width:100%}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2.5px solid var(--verde-fiocruz); outline-offset:2px}
+.wrap{width:var(--largura); margin-inline:auto}
+.eyebrow{font-size:.68rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; color:var(--verde-fiocruz)}
+.suave{color:var(--texto-suave)}
+.mono{font-variant-numeric:tabular-nums}
+
+/* ---------------- hero (degradê da família, sem foto) ---------------- */
+.hero{
+  background:
+    radial-gradient(1100px 520px at 88% 18%, rgba(39,146,97,.42) 0%, rgba(39,146,97,0) 60%),
+    radial-gradient(700px 380px at 70% 95%, rgba(124,179,66,.22) 0%, rgba(124,179,66,0) 65%),
+    linear-gradient(105deg, var(--indigo-escuro) 0%, var(--indigo) 46%, #0E3050 72%, var(--verde-profundo) 100%);
+  color:#F2F8F4; padding:3.6rem 0 3rem; position:relative; overflow:hidden;
+}
+.hero .eyebrow{color:var(--verde-lima)}
+.hero p.sub{margin-top:.9rem; max-width:62ch; color:#C9DCD0; font-size:1.02rem}
+.hero-blocos{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:1.1rem}
+.hero-blocos span{display:inline-flex; align-items:center; gap:.45rem; background:rgba(255,255,255,.10); border:1px solid rgba(255,255,255,.18); border-radius:999px; padding:.22rem .8rem; font-size:.78rem; font-weight:700; color:#E3F0E7}
+.hero-links{display:flex; gap:.55rem; flex-wrap:wrap; margin-top:1.3rem; align-items:center}
+.hero-links a{display:inline-flex; align-items:center; gap:.4rem; text-decoration:none; background:rgba(255,255,255,.12); border:1.5px solid rgba(255,255,255,.35); color:#FFF; border-radius:999px; padding:.42rem 1rem; font-size:.86rem; font-weight:800; transition:background .15s}
+.hero-links a:hover{background:rgba(255,255,255,.24)}
+.faixa-stats{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:-1.3rem; position:relative; z-index:5}
+.stat{background:var(--branco); border:none; border-radius:12px; padding:.5rem .75rem; min-width:110px; max-width:212px; box-shadow:var(--sombra-alta); flex:0 1 auto}
+.stat .num{font-size:1.35rem; font-weight:800; color:var(--verde-esmeralda); letter-spacing:-.02em}
+.stat .rot{font-size:.62rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--texto-suave)}
+.stat .sub{font-size:.68rem; color:var(--texto-suave); margin-top:-.1rem}
+.stat-btn{cursor:pointer; text-align:left}
+.stat-btn:hover{background:var(--mint-card)}
+.stat-btn .num{color:var(--verde-fiocruz)}
+
+/* ---------------- trilho lateral ---------------- */
+.trilho{position:fixed; left:14px; top:50%; transform:translateY(-50%); z-index:1000; display:flex; flex-direction:column; gap:8px; background:rgba(255,255,255,.93); padding:9px; border-radius:28px; box-shadow:var(--sombra-alta); backdrop-filter:blur(6px); border:1px solid var(--borda)}
+.trilho button{position:relative; width:40px; height:40px; border-radius:50%; border:none; background:transparent; color:var(--texto-suave); display:grid; place-items:center; transition:background .15s, color .15s}
+.trilho button svg{width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.trilho button:hover{background:var(--mint); color:var(--verde-esmeralda)}
+.trilho button.ativo{background:var(--verde-fiocruz); color:#FFF}
+.trilho button::after{content:attr(data-rotulo); position:absolute; left:calc(100% + 10px); top:50%; transform:translateY(-50%); background:var(--indigo); color:#FFF; padding:.3rem .65rem; border-radius:8px; font-size:.76rem; font-weight:700; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s}
+.trilho button:hover::after,.trilho button:focus-visible::after{opacity:1}
+@media (max-width: 900px){
+  .trilho{left:50%; top:auto; bottom:10px; transform:translateX(-50%); flex-direction:row; border-radius:999px}
+  .trilho button::after{display:none}
+  body{padding-bottom:76px}
+}
+
+/* ---------------- seções e cards ---------------- */
+section{padding:2.4rem 0}
+.faixa-stats + section{padding-top:1.1rem}
+section:nth-of-type(even){background:var(--branco)}
+section:nth-of-type(even) .card, section:nth-of-type(even) .filtros-topo, section:nth-of-type(even) .unidade{background:var(--mint-card)}
+.sec-head{margin-bottom:1.2rem}
+.sec-head p{max-width:76ch; margin-top:.35rem; color:var(--texto-suave)}
+.sec-head h2{display:flex; align-items:center; gap:1.1rem}
+.sec-head h2::after{content:""; flex:1; min-width:56px; height:3px; border-radius:2px; background:linear-gradient(90deg, var(--verde-fiocruz), rgba(39,146,97,.08))}
+.card{background:var(--branco); border:none; border-radius:var(--radius); box-shadow:var(--sombra); padding:1.15rem 1.25rem}
+.card h3{display:flex; align-items:center; gap:.5rem; flex-wrap:wrap}
+.card .fonte{font-size:.72rem; color:var(--texto-suave); margin-top:.7rem}
+.grid-2{display:grid; grid-template-columns:1.5fr 1fr; gap:1.1rem; align-items:start}
+.grid-2 > *{min-width:0}
+.chip{display:inline-flex; align-items:center; gap:.35rem; border-radius:999px; padding:.22rem .7rem; font-size:.78rem; font-weight:700; background:var(--mint); color:var(--verde-esmeralda); border:1px solid var(--borda)}
+.chip-acao{background:var(--verde-fiocruz); color:#FFF; border-color:var(--verde-fiocruz); cursor:pointer}
+.chip-acao:hover{background:var(--verde-esmeralda)}
+.chip-botao{cursor:pointer; background:var(--branco)}
+.chip-botao:hover{background:var(--mint)}
+.chip-prazo{background:var(--ambar-claro); color:#8A5A00; border-color:#F2D48A}
+.chip-anexo{background:#FBE9DA; color:#7A3E1E; border-color:#F2C9AE}
+.seg{display:inline-flex; border:1.5px solid var(--borda); border-radius:10px; overflow:hidden; background:var(--branco); flex-wrap:wrap}
+.seg button{border:none; background:transparent; padding:.4rem .8rem; font-weight:700; font-size:.84rem; color:var(--texto-suave); display:inline-flex; align-items:center; gap:.4rem}
+.seg button.ativo{background:var(--verde-fiocruz); color:#FFF}
+.seg button.ativo .bolinha{box-shadow:0 0 0 2px #FFF inset}
+.bolinha{width:.72rem; height:.72rem; border-radius:50%; flex:none; display:inline-block}
+.bola-apoiada{background:var(--verde-fiocruz); box-shadow:0 0 0 2px var(--verde-profundo) inset}
+.bola-ebserh{background:var(--azul-ebserh); box-shadow:0 0 0 2px var(--azul-ebserh-borda) inset}
+.bola-qualineo{background:var(--azul-qualineo); box-shadow:0 0 0 2px var(--azul-qualineo-borda) inset}
+.hero .bola-apoiada{box-shadow:0 0 0 2px rgba(255,255,255,.7) inset}
+.hero .bola-ebserh,.hero .bola-qualineo{box-shadow:0 0 0 2px rgba(255,255,255,.7) inset}
+
+/* ---------------- filtros ---------------- */
+.filtros-topo{background:var(--branco); border-radius:var(--radius); padding:.9rem 1.1rem; box-shadow:var(--sombra)}
+.filtros-grid{display:flex; gap:.8rem 1rem; flex-wrap:wrap; align-items:end}
+.filtro{display:flex; flex-direction:column; gap:.25rem; flex:1; min-width:150px; max-width:360px}
+.filtro.larga{max-width:520px; flex:2}
+.filtro > span{font-size:.66rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--texto)}
+.filtro select,.filtro input{width:100%}
+.filtros-rodape{display:flex; gap:.6rem 1rem; flex-wrap:wrap; align-items:center; margin-top:.7rem; font-size:.84rem; color:var(--texto-suave)}
+.filtros-rodape b{color:var(--texto)}
+
+/* ---------------- panorama: barras ---------------- */
+.barras{display:grid; gap:.42rem; margin-top:.9rem}
+.barra{display:grid; grid-template-columns:minmax(200px, 2.3fr) minmax(0, 3fr) 92px; gap:.7rem; align-items:center; border:none; background:transparent; padding:.18rem .3rem; border-radius:8px; text-align:left; color:var(--texto)}
+.barra:hover,.barra.ativa{background:var(--mint)}
+.barra .rot{font-size:.82rem; font-weight:600; line-height:1.25; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.barra .rot small{display:block; font-size:.68rem; color:var(--texto-suave); font-weight:600}
+.barra .trilha{height:16px; background:var(--mint); border-radius:999px; overflow:hidden; position:relative}
+.barra .trilha i{position:absolute; inset:0 auto 0 0; background:linear-gradient(90deg, var(--verde-fiocruz), var(--verde-esmeralda)); border-radius:999px}
+.barra.ativa .trilha i{background:var(--indigo)}
+.barra .n{font-size:.86rem; font-weight:800; text-align:right}
+.barra .n small{font-weight:600; color:var(--texto-suave); font-size:.72rem}
+.painel-lateral .num-grande{font-size:2.2rem; font-weight:800; letter-spacing:-.03em; color:var(--verde-esmeralda); line-height:1.1}
+.kpi-lista{display:flex; flex-direction:column; gap:.3rem; margin-top:.5rem; font-size:.86rem}
+.kpi{display:flex; justify-content:space-between; align-items:baseline; gap:.8rem; border-bottom:1px dashed var(--borda); padding-bottom:.22rem}
+.kpi .v{font-weight:800; font-size:.92rem}
+.kpi .v small{font-weight:600; font-size:.72rem; color:var(--texto-suave)}
+.lista-unid{list-style:none; margin:.6rem 0 0; padding:0; display:flex; flex-direction:column; gap:.25rem; font-size:.84rem; max-height:360px; overflow:auto}
+.lista-unid li{display:flex; align-items:center; gap:.45rem}
+.lista-unid button{border:none; background:transparent; padding:0; text-align:left; color:var(--verde-esmeralda); font-weight:700; text-decoration:underline dotted; text-underline-offset:3px}
+.lista-unid small{color:var(--texto-suave)}
+
+/* ---------------- matriz de cobertura ---------------- */
+.matriz-controles{display:flex; gap:.6rem 1rem; flex-wrap:wrap; align-items:center; margin-bottom:.9rem}
+.matriz-wrap{overflow:auto; max-height:72vh; border-radius:var(--radius); border:1px solid var(--borda); background:var(--branco)}
+table.matriz{border-collapse:separate; border-spacing:0; width:100%; font-size:.82rem}
+table.matriz th,table.matriz td{padding:.38rem .5rem; border-bottom:1px solid var(--borda); white-space:nowrap}
+table.matriz thead th{position:sticky; top:0; z-index:3; background:var(--verde-esmeralda); color:#FFF; font-size:.72rem; font-weight:700; text-align:center; vertical-align:bottom; line-height:1.25; padding:.55rem .4rem}
+table.matriz thead th.col-unid{text-align:left; left:0; z-index:4; min-width:260px}
+table.matriz thead th .th-rot{display:block; max-width:112px; white-space:normal; margin:0 auto}
+table.matriz thead th .th-n{display:block; font-weight:600; color:#C5E3CC; font-size:.66rem; margin-top:.15rem}
+table.matriz thead th .th-x{display:inline-grid; place-items:center; width:16px; height:16px; border-radius:50%; background:rgba(255,255,255,.18); color:#FFF; border:none; font-size:.68rem; margin-top:.25rem; padding:0}
+table.matriz thead th .th-x:hover{background:var(--alerta)}
+table.matriz td.col-unid{position:sticky; left:0; z-index:2; background:var(--branco); text-align:left; white-space:normal; min-width:260px; font-weight:600; line-height:1.3; box-shadow:2px 0 0 var(--borda)}
+table.matriz td.col-unid small{display:block; font-size:.7rem; color:var(--texto-suave); font-weight:600}
+table.matriz td.col-unid button{border:none; background:transparent; padding:0; text-align:left; font:inherit; color:var(--texto); cursor:pointer}
+table.matriz td.col-unid button:hover{color:var(--verde-esmeralda); text-decoration:underline dotted; text-underline-offset:3px}
+table.matriz td.cel{text-align:center; color:var(--texto-suave)}
+table.matriz td.cel.sim{background:#E4F3E8}
+table.matriz td.cel.prazo{background:var(--ambar-claro)}
+table.matriz td.cel .ponto{display:inline-block; width:11px; height:11px; border-radius:50%; background:var(--verde-fiocruz); vertical-align:middle}
+table.matriz td.cel.prazo .ponto{background:var(--ambar)}
+table.matriz td.cel .leitos{display:inline-block; margin-left:.3rem; font-weight:800; color:var(--verde-esmeralda); font-variant-numeric:tabular-nums}
+table.matriz td.cel.prazo .leitos{color:#8A5A00}
+table.matriz td.cel .tipo{display:inline-block; margin-left:.25rem; font-size:.7rem; font-weight:800; color:var(--verde-esmeralda)}
+table.matriz td.cel.nao{color:#C9D6CC}
+table.matriz tbody tr:hover td{background:var(--mint)}
+table.matriz tbody tr:hover td.cel.sim{background:#D3ECDA}
+table.matriz tbody tr:hover td.cel.prazo{background:#FBE7BE}
+table.matriz td.col-tot{text-align:right; font-weight:800; font-variant-numeric:tabular-nums}
+table.matriz tfoot td{position:sticky; bottom:0; background:var(--mint); font-weight:800; text-align:center; border-top:2px solid var(--borda); font-size:.78rem}
+table.matriz tfoot td.col-unid{text-align:left; background:var(--mint)}
+.legenda{display:flex; gap:.9rem 1.2rem; flex-wrap:wrap; margin-top:.8rem; font-size:.78rem; color:var(--texto-suave)}
+.legenda span{display:inline-flex; align-items:center; gap:.4rem}
+.legenda i{width:14px; height:14px; border-radius:4px; display:inline-block; border:1px solid rgba(0,0,0,.12)}
+
+/* ---------------- unidades (cards) ---------------- */
+.unidades-controles{display:flex; gap:.6rem 1rem; flex-wrap:wrap; align-items:center; margin-bottom:.9rem}
+.grade-unidades{display:grid; grid-template-columns:repeat(auto-fill, minmax(330px, 1fr)); gap:1rem}
+.unidade{background:var(--branco); border-radius:var(--radius); box-shadow:var(--sombra); padding:1rem 1.1rem; display:flex; flex-direction:column; gap:.55rem; border-top:5px solid var(--verde-fiocruz)}
+.unidade.anexo{border-top-color:#E8926B}
+.unidade .u-topo{display:flex; justify-content:space-between; gap:.6rem; align-items:flex-start}
+.unidade h3{font-size:.98rem; line-height:1.3}
+.unidade .u-local{font-size:.78rem; color:var(--texto-suave); font-weight:600}
+.unidade .u-cnes{font-size:.72rem; color:var(--texto-suave); font-variant-numeric:tabular-nums; white-space:nowrap}
+.unidade .u-grupos{display:flex; gap:.4rem; flex-wrap:wrap}
+.unidade .u-grupos span{display:inline-flex; align-items:center; gap:.35rem; font-size:.72rem; font-weight:700; color:var(--texto-suave)}
+.unidade .u-n{display:flex; gap:.9rem; flex-wrap:wrap; align-items:baseline}
+.unidade .u-n b{font-size:1.5rem; font-weight:800; color:var(--verde-esmeralda); letter-spacing:-.02em; line-height:1}
+.unidade .u-n span{font-size:.76rem; color:var(--texto-suave)}
+.unidade .u-tags{display:flex; gap:.35rem; flex-wrap:wrap}
+.unidade .u-tags .tag{font-size:.7rem; font-weight:700; border-radius:7px; padding:.14rem .5rem; background:#E4F3E8; color:var(--verde-esmeralda); border:1px solid #BFE3CB}
+.unidade .u-tags .tag.prazo{background:var(--ambar-claro); color:#8A5A00; border-color:#F2D48A}
+.unidade .u-tags .tag.mais{background:var(--mint); color:var(--texto-suave); border-color:var(--borda)}
+.unidade .u-tags .tag.nenhuma{background:#F3F4F3; color:var(--texto-suave); border-color:var(--borda); font-style:italic}
+.unidade .u-rodape{display:flex; justify-content:space-between; align-items:center; gap:.6rem; margin-top:auto; padding-top:.3rem}
+.unidade .u-rodape small{font-size:.7rem; color:var(--texto-suave)}
+
+/* ---------------- página da unidade (sobreposta) ---------------- */
+.pagina-dossie{position:fixed; inset:0; z-index:3000; overflow:auto; background:var(--mint); overscroll-behavior:contain}
+.pagina-dossie .wrap{width:min(1280px, 100% - 2.6rem)}
+.pd-topo{position:sticky; top:0; z-index:20; background:rgba(255,255,255,.95); border-bottom:1px solid var(--borda); padding:.65rem 0; backdrop-filter:blur(8px)}
+.pd-topo-linha{display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap}
+body.dossie-aberto{overflow:hidden}
+.dossie-topo{background:linear-gradient(135deg, var(--verde-profundo), var(--verde-esmeralda)); color:#F1F8F3; border-radius:var(--radius); padding:1.4rem 1.5rem; box-shadow:var(--sombra-alta); display:grid; grid-template-columns:1fr auto; gap:1rem; align-items:center}
+.dossie-topo .meta{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem}
+.dossie-topo .meta span{display:inline-flex; align-items:center; gap:.4rem; background:rgba(255,255,255,.13); border-radius:999px; padding:.2rem .7rem; font-size:.78rem; font-weight:700}
+.dossie-topo .meta span.anexo{background:#F6C6A8; color:#5A2A12}
+.kpis-topo{display:grid; grid-template-columns:repeat(3, auto); gap:.6rem}
+.kpis-topo .k{background:rgba(255,255,255,.12); border-radius:10px; padding:.45rem .8rem; min-width:118px; text-align:right}
+.kpis-topo .k .n{font-size:1.35rem; font-weight:800; letter-spacing:-.02em; color:#FFF; line-height:1.1}
+.kpis-topo .k .t{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:#C5E3CC; font-weight:700}
+.dossie-cards{display:grid; grid-template-columns:1fr; gap:1.1rem; margin-top:1.1rem}
+.cnes-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.75rem 1.3rem; margin-top:.8rem}
+.cnes-item span{display:block; font-size:.62rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--texto-suave)}
+.cnes-item b{font-size:.92rem; font-weight:700; overflow-wrap:anywhere}
+.badges{display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.9rem}
+.badge-sim{background:#E4F3E8; color:var(--verde-esmeralda); border:1px solid #BFE3CB; border-radius:999px; padding:.22rem .75rem; font-size:.78rem; font-weight:700}
+.tab-wrap{overflow-x:auto}
+table.dados{border-collapse:collapse; width:100%; font-size:.83rem}
+table.dados th,table.dados td{padding:.38rem .55rem; text-align:left; vertical-align:top}
+table.dados.tab-verde th{background:var(--verde-esmeralda); color:#FFF; font-size:.78rem; font-weight:700; padding:.45rem .6rem; white-space:nowrap}
+table.dados.tab-verde th:first-child{border-radius:8px 0 0 0}
+table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
+table.dados tbody tr:nth-child(odd){background:var(--mint-card)}
+table.dados td.c{text-align:center; white-space:nowrap}
+table.dados td.r{text-align:right; white-space:nowrap}
+table.dados tr.destaque td{font-weight:700}
+table.dados td .pz{display:inline-block; background:var(--ambar-claro); color:#8A5A00; border:1px solid #F2D48A; border-radius:6px; padding:0 .4rem; font-size:.72rem; font-weight:700}
+
+/* ---------------- notas ---------------- */
+.notas-grid{display:grid; grid-template-columns:1fr 1fr; gap:1.1rem}
+.notas-grid .card p{font-size:.9rem; color:var(--texto-suave); margin-top:.5rem}
+.notas-grid .card p b{color:var(--texto)}
+.notas-grid .card ul{margin:.5rem 0 0; padding-left:1.1rem; font-size:.9rem; color:var(--texto-suave)}
+.notas-grid .card li{margin:.2rem 0}
+.notas-grid .card li b{color:var(--texto)}
+
+footer{background:var(--indigo); color:#B9CDC0; font-size:.82rem; padding:1.6rem 0; margin-top:3rem}
+footer a{color:var(--verde-lima)}
+
+@media (min-width: 901px){ body{padding-left:76px} }
+@media (max-width: 1080px){ .grid-2,.notas-grid{grid-template-columns:1fr} .kpis-topo{grid-template-columns:repeat(2, auto)} }
+@media (max-width: 900px){
+  .dossie-topo{grid-template-columns:1fr} .kpis-topo .k{text-align:left}
+  .barra{grid-template-columns:minmax(120px, 1.4fr) minmax(0, 2fr) 70px}
+  table.matriz thead th.col-unid, table.matriz td.col-unid{min-width:190px}
+}
+@media print{
+  .trilho,.pd-topo,footer,.filtros-topo{display:none !important}
+  body{padding-left:0 !important; background:#FFF}
+  body.dossie-aberto{overflow:visible}
+  body.dossie-aberto > *:not(#paginaDossie){display:none !important}
+  .pagina-dossie{position:static !important; overflow:visible !important; background:#FFF}
+  .card{break-inside:avoid; box-shadow:none}
+  table.dados tbody tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= HERO ========================= -->
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div style="display:flex; align-items:center; justify-content:flex-start; gap:16px 40px; flex-wrap:wrap; margin-bottom:16px">
+      <div style="font-size:.82rem; font-weight:600; letter-spacing:.4px; color:rgba(255,255,255,.92); text-transform:uppercase; line-height:1.5; max-width:430px">Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente</div>
+      <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde" style="width:min(380px,100%); height:auto"/>
+    </div>
+    <p class="eyebrow">Painel de Habilitações · Cadastro Nacional de Estabelecimentos de Saúde (CNES) · <span id="heroConsulta">consulta ao CNES</span></p>
+    <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
+    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para cada unidade dos três grupos, em um só lugar: cobertura das habilitações de interesse materno e infantil, consulta por unidade e por habilitação, com portaria, competência, vigência e leitos habilitados.</p>
+    <div class="hero-blocos" id="heroGrupos">
+      <span><i class="bolinha bola-apoiada"></i>Maternidades apoiadas (estratégicas)</span>
+      <span><i class="bolinha bola-ebserh"></i>Unidades EBSERH</span>
+      <span><i class="bolinha bola-qualineo"></i>QUALINEO 2026/2027</span>
+    </div>
+    <div class="hero-links" aria-label="Navegação">
+      <a href="https://anamazza.github.io/Indicadores_Brasil/">← Página principal</a>
+    </div>
+  </div>
+</header>
+
+<!-- faixa de destaques -->
+<div class="wrap faixa-stats">
+  <div class="stat"><div class="num" id="statUnid">—</div><div class="rot">Unidades</div><div class="sub" id="statUnidSub"></div></div>
+  <div class="stat"><div class="num" id="statHabs">—</div><div class="rot">Habilitações ativas</div><div class="sub" id="statHabsSub"></div></div>
+  <div class="stat"><div class="num" id="statTipos">—</div><div class="rot">Tipos de habilitação</div><div class="sub">códigos distintos no CNES</div></div>
+  <div class="stat"><div class="num" id="statUtin">—</div><div class="rot">Unidades com UTI neonatal</div><div class="sub" id="statUtinSub"></div></div>
+  <div class="stat"><div class="num" id="statHgpar">—</div><div class="rot">Referência alto risco (HGPAR)</div><div class="sub" id="statHgparSub"></div></div>
+  <button class="stat stat-btn" id="btnNotas" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
+</div>
+
+<nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
+
+<!-- ========================= PANORAMA ========================= -->
+<section id="secPanorama">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Panorama</p>
+      <h2>Quais habilitações as maternidades têm</h2>
+      <p>Os filtros valem para todo o painel: escolha o grupo, a região ou o estado, procure uma unidade pelo nome ou pelo código CNES, ou selecione uma habilitação para ver quem a tem e quem não a tem. Toque em uma barra para filtrar por aquela habilitação.</p>
+    </div>
+
+    <div class="filtros-topo" id="filtros">
+      <div class="filtros-grid">
+        <label class="filtro" style="max-width:none; flex:0 0 auto"><span>Grupo</span>
+          <div class="seg" id="segGrupo">
+            <button data-grupo="" class="ativo">Todas</button>
+            <button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button>
+            <button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button>
+            <button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button>
+          </div></label>
+        <label class="filtro"><span>Região</span><select id="selRegiao"><option value="">Brasil</option></select></label>
+        <label class="filtro"><span>Estado</span><select id="selUF"><option value="">Todos os estados</option></select></label>
+        <label class="filtro larga"><span>Unidade</span><input type="search" id="busca" placeholder="Nome, município ou código CNES…"/></label>
+        <label class="filtro larga"><span>Habilitação</span><select id="selHab"><option value="">Todas as habilitações</option></select></label>
+        <label class="filtro" style="max-width:none; flex:0 0 auto"><span>Mostrar unidades</span>
+          <div class="seg" id="segModoHab"><button data-modo="com" class="ativo">que têm</button><button data-modo="sem">que não têm</button></div></label>
+        <button class="chip chip-botao" id="btnLimpar" style="align-self:end">✕ limpar filtros</button>
+      </div>
+      <div class="filtros-rodape" id="resumoFiltro"></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:1.1rem">
+      <div class="card">
+        <h3>Habilitações mais frequentes nas unidades selecionadas
+          <span class="seg" id="segFoco" style="margin-left:auto"><button data-foco="mi" class="ativo">Materno-infantil</button><button data-foco="todas">Todas</button></span>
+        </h3>
+        <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
+        <div class="barras" id="barras"></div>
+        <p class="fonte">Cada barra conta as unidades selecionadas com a habilitação registrada no CNES na data da consulta. Fonte: Ministério da Saúde - CNES.</p>
+      </div>
+      <div class="card painel-lateral" id="painelLateral"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= MATRIZ ========================= -->
+<section id="secMatriz">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Matriz de cobertura</p>
+      <h2>Unidades × habilitações de interesse materno e infantil</h2>
+      <p>Cada linha é uma unidade e cada coluna, uma habilitação ou família de habilitações do CNES. O número na célula é a quantidade de leitos habilitados, quando a habilitação os tem; "II" e "III" indicam o tipo da UTI. Acrescente outras habilitações do catálogo como coluna e baixe a matriz em CSV.</p>
+    </div>
+    <div class="matriz-controles">
+      <select id="selAddCol" style="min-width:320px" aria-label="Acrescentar habilitação como coluna"><option value="">+ acrescentar habilitação como coluna…</option></select>
+      <div class="seg" id="segOrdem"><button data-ordem="uf" class="ativo">Ordenar por estado</button><button data-ordem="nome">Nome</button><button data-ordem="n">Nº de habilitações</button></div>
+      <button class="chip chip-botao" id="btnCsvMatriz">⬇ Baixar matriz (CSV)</button>
+      <button class="chip chip-botao" id="btnColunasPadrao" hidden>↺ colunas padrão</button>
+    </div>
+    <div class="matriz-wrap"><table class="matriz" id="matriz"></table></div>
+    <div class="legenda">
+      <span><i style="background:#E4F3E8"></i>habilitação registrada, sem prazo final</span>
+      <span><i style="background:#FFF3DB"></i>habilitação registrada com competência final definida (vigente na data da consulta)</span>
+      <span><i style="background:#FFF"></i>sem a habilitação no CNES</span>
+      <span>Toque no nome da unidade para abrir a ficha completa.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= UNIDADES ========================= -->
+<section id="secUnidades">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Unidades</p>
+      <h2>Consulta por unidade</h2>
+      <p>Um cartão por maternidade selecionada, com os grupos a que pertence, o total de habilitações registradas e as habilitações de interesse materno e infantil. Abra a ficha para ver todas as habilitações, com portaria, competência inicial e final, origem e leitos, e para baixar em PDF.</p>
+    </div>
+    <div class="unidades-controles">
+      <span class="suave" id="unidadesResumo" style="font-size:.86rem"></span>
+      <button class="chip chip-botao" id="btnCsvTudo" style="margin-left:auto" title="Uma linha por habilitação de cada unidade selecionada">⬇ Baixar todas as habilitações (CSV)</button>
+    </div>
+    <div class="grade-unidades" id="gradeUnidades"></div>
+  </div>
+</section>
+
+<!-- ========================= NOTAS ========================= -->
+<section id="secNotas">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Notas metodológicas</p>
+      <h2>Fontes, composição da lista e como ler as habilitações</h2>
+    </div>
+    <div class="notas-grid">
+      <div class="card">
+        <h3>Fonte e data</h3>
+        <p><b>Habilitações</b> são os serviços que o SUS autoriza o estabelecimento a realizar, registrados no Cadastro Nacional de Estabelecimentos de Saúde (CNES). A ficha de cadastro de cada unidade vem do serviço de acesso automatizado (API) de Dados Abertos do Ministério da Saúde; as habilitações vêm do serviço do portal do CNES na internet (cnes.datasus.gov.br), o mesmo que alimenta a aba "Habilitações" da página de cada estabelecimento.</p>
+        <p id="notaConsulta"></p>
+        <p>A atualização é automática, em 1º de junho e 1º de dezembro, pelo mesmo processo que atualiza a ficha CNES dos painéis de Nascimentos, Internação e Mortalidade; este painel consolida as cópias dos três.</p>
+      </div>
+      <div class="card">
+        <h3>Unidades e grupos</h3>
+        <p id="notaUnidades"></p>
+        <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: maternidades apoiadas (estratégicas), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO 2026/2027. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
+        <p id="notaAnexos"></p>
+        <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) aparecem como duas linhas, porque as habilitações são registradas por código CNES; no Painel de Mortalidade os dois formam um único complexo.</p>
+      </div>
+      <div class="card">
+        <h3>Como ler cada habilitação</h3>
+        <ul>
+          <li><b>Código e descrição</b>: como constam no CNES. O código de quatro dígitos identifica o grupo e o subgrupo da habilitação na tabela do SCNES; a descrição é reproduzida sem alteração.</li>
+          <li><b>Competência inicial e final</b>: mês e ano em que a habilitação passou a valer e em que deixa de valer. "Sem prazo final" corresponde ao valor 99/9999 do CNES. Todas as habilitações deste painel estavam vigentes na data da consulta; as que têm competência final definida aparecem em âmbar.</li>
+          <li><b>Portaria</b>: ato que concedeu a habilitação e a sua data, como registrados no CNES (abreviaturas do próprio cadastro).</li>
+          <li><b>Origem</b>: campo do serviço do CNES. Nos dados, as habilitações marcadas "P" correspondem a resoluções e deliberações de Comissões Intergestores Bipartite e a portarias de secretarias estaduais ("gestor estadual ou municipal"); as demais, a portarias do Ministério da Saúde (GM, SAS e SAES).</li>
+          <li><b>Leitos</b>: número de leitos habilitados, informado em habilitações como UTI neonatal, UTI adulto, UCINCo, UCINCa e referência à gestação de alto risco (HGPAR). Não é o total de leitos cadastrados da unidade.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Habilitações de interesse materno e infantil</h3>
+        <p>As colunas padrão da matriz e os marcadores dos cartões reúnem as habilitações do CNES ligadas ao parto, ao recém-nascido e ao planejamento reprodutivo, agrupadas por família quando há mais de um código:</p>
+        <ul id="notaFamilias"></ul>
+        <p>A seleção é uma conveniência de leitura deste painel, não uma classificação oficial. Todas as demais habilitações continuam disponíveis no catálogo (filtro "Habilitação" e coluna adicional da matriz) e na ficha de cada unidade.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= PÁGINA DA UNIDADE (sobreposta) ========================= -->
+<div id="paginaDossie" class="pagina-dossie" hidden>
+  <div class="pd-topo">
+    <div class="wrap pd-topo-linha">
+      <button class="chip chip-acao" id="btnVoltarDossie">← Voltar ao painel</button>
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
+        <select id="selUnidadePd" style="min-width:280px" aria-label="Trocar de unidade"></select>
+        <button class="chip chip-botao" id="btnCsvUnidade" title="Baixar as habilitações desta unidade em CSV">⬇ CSV</button>
+        <button class="chip chip-botao" id="btnPdfDossie" title="Imprimir ou salvar a ficha em PDF">⬇ Baixar PDF</button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" id="dossieConteudo" style="padding:1.3rem 0 3rem"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Painel de Habilitações · Qualificação do Modelo de Gestão em Maternidades Estratégicas na Rede de Atenção à Saúde Materna e Neonatal ·
+    Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente · IFF/Fiocruz ·
+    Ministério da Saúde - Cadastro Nacional de Estabelecimentos de Saúde (CNES), <span id="rodapeConsulta">consulta semestral</span> · dados sujeitos a revisão ·
+    <a href="https://github.com/anamazza/Indicadores_Brasil">código no GitHub</a>.
+    <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde" style="display:block; max-width:420px; width:100%; height:auto; margin:16px auto 0"/>
+  </div>
+</footer>
+
+<script src="dados_habilitacoes.js"></script>
+<script src="painel_app.js"></script>
+<script>
+/* aplicativo instalável (PWA): registra o service worker da raiz do site; fora do site publicado, falha em silêncio */
+if("serviceWorker" in navigator){ window.addEventListener("load", function(){ navigator.serviceWorker.register("/Indicadores_Brasil/sw.js").catch(function(){}); }); }
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@ Fonte editável: pagina_inicial.html. Saída: index.html (publicado pelo GitHub 
 import base64, json, os, re
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-PAINEIS = ["nascimentos", "internacao", "mortalidade"]
+PAINEIS = ["nascimentos", "internacao", "mortalidade", "habilitacoes"]
 html = open(os.path.join(BASE, "pagina_inicial.html"), encoding="utf-8").read()
 
 

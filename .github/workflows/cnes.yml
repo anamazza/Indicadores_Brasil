@@ -1,7 +1,7 @@
 name: Atualizar CNES
 
-# Atualiza a ficha CNES e as habilitações das maternidades nos três painéis, remonta os painéis e a
-# página principal, verifica e, se algo mudou, faz commit e push (o GitHub Pages publica em seguida).
+# Atualiza a ficha CNES e as habilitações das maternidades nos três painéis, remonta os painéis, o painel de
+# habilitações (que consolida os três) e a página principal, verifica e, se algo mudou, faz commit e push (o GitHub Pages publica em seguida).
 # Agendado para 1º de junho e 1º de dezembro; também pode ser disparado à mão na aba Actions.
 # Regra: o CNES é atualizado SÓ aqui; o montar_painel.py local resgata o cnes_dados.json do repositório.
 on:
@@ -41,6 +41,8 @@ jobs:
             echo "=== $p"
             (cd "$p" && python atualizar_cnes.py && python montar_painel.py)
           done
+          echo "=== habilitacoes (consolida os três)"
+          python habilitacoes/montar_painel.py
 
       - name: Conferir que nenhuma ficha ou habilitação se perdeu
         run: |

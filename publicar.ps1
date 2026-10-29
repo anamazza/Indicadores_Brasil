@@ -1,6 +1,6 @@
 # Publica os paineis: um comando para montar, comparar, verificar, commitar e enviar.
 #
-#   .\publicar.ps1                       monta os 3 paineis, relatorio de diferencas, verifica, commit na main e push
+#   .\publicar.ps1                       monta os 4 paineis, relatorio de diferencas, verifica, commit na main e push
 #   .\publicar.ps1 -PullRequest          idem, mas em branch atualizacao-<data> (abre o link do pull request no fim)
 #   .\publicar.ps1 -SemMontar            nao roda os montar_painel.py (usa o que ja esta espelhado)
 #   .\publicar.ps1 -Mensagem "..."       mensagem do commit
@@ -42,6 +42,10 @@ if (-not $SemMontar) {
         Pop-Location
         if ($rc -ne 0) { Falha "montar_painel.py de $p falhou" }
     }
+    # painel de habilitacoes (29/10/2026): vive no repositorio e consolida os tres paineis ja espelhados
+    Etapa "montar_painel.py de habilitacoes"
+    py -3.12 (Join-Path $repo "habilitacoes\montar_painel.py")
+    if ($LASTEXITCODE -ne 0) { Falha "montar_painel.py de habilitacoes falhou" }
 }
 
 Etapa "relatorio de diferencas em relacao ao publicado"

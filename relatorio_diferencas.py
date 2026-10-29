@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Relatório do que mudou nos dados de um painel em relação à versão publicada (último commit).
 
-    py relatorio_diferencas.py                      compara os três painéis
+    py relatorio_diferencas.py                      compara os quatro painéis
     py relatorio_diferencas.py nascimentos          só um painel
 
 Compara o DADOS do dados_*.js que está na subpasta (recém-espelhado da pasta de trabalho) com a versão em
@@ -14,7 +14,8 @@ from datetime import date
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")   # o "→" do resumo quebrava no console cp1252
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
-ARQUIVOS = {"nascimentos": "dados_nv2026.js", "internacao": "dados_internacao.js", "mortalidade": "dados_mortalidade.js"}
+ARQUIVOS = {"nascimentos": "dados_nv2026.js", "internacao": "dados_internacao.js", "mortalidade": "dados_mortalidade.js",
+            "habilitacoes": "dados_habilitacoes.js"}
 PASTA_RELATORIOS = os.path.join(RAIZ, "relatorios")
 LIMITE_LINHAS = 400      # linhas de detalhe por relatório (o resto fica só nas contagens)
 

@@ -4,14 +4,14 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <!-- aplicativo instalável (PWA, 18/10/2026): manifesto, ícones e cor do tema; o service worker é registrado no fim da página -->
-<link rel="manifest" href="manifest.webmanifest?v=20261018b"/>
+<link rel="manifest" href="manifest.webmanifest?v=20261029"/>
 <meta name="theme-color" content="#279261"/>
 <link rel="icon" href="icons/maos-192.png" type="image/png"/>
 <link rel="apple-touch-icon" href="icons/maos-180.png"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-title" content="Indicadores"/>
 <title>Painéis de Indicadores · Maternidades Estratégicas · IFF/Fiocruz</title>
-<meta name="description" content="Página principal dos painéis de indicadores das maternidades estratégicas: nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS) e mortalidade materna, fetal, perinatal e neonatal (SIM), 2019 a 2025."/>
+<meta name="description" content="Página principal dos painéis de indicadores das maternidades estratégicas: nascimentos (SINASC), internações obstétricas e neonatais (SIH/SUS), mortalidade materna, fetal, perinatal e neonatal (SIM), 2019 a 2025, e habilitações das unidades no CNES."/>
 <style>
 :root{
   --verde-lima:#7CB342; --verde-fiocruz:#279261; --verde-esmeralda:#1B5F51; --verde-profundo:#154A4B;
@@ -173,11 +173,11 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
 
   <p class="eyebrow">IFF/Fiocruz · Painéis de Indicadores · Maternidades Estratégicas · 2019 a 2025 e 1º semestre de 2026</p>
   <h1>Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
-  <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · indicadores das maternidades apoiadas, das unidades EBSERH e do QUALINEO 2026/2027, com perfil por unidade, mapas, comparadores e metodologia. Escolha um painel para começar.</p>
+  <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · indicadores das maternidades apoiadas, das unidades EBSERH e do QUALINEO 2026/2027, com perfil por unidade, mapas, comparadores e metodologia, e as habilitações de todas as unidades no CNES. Escolha um painel para começar.</p>
 
   <div class="boas-vindas" id="boasVindas" role="status" hidden>
     <div class="bv-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7"/><path d="M2 7h20v5H2z"/><path d="M12 7v13"/><path d="M12 7c-2-3-6-3-6 0 0 2 3 2 6 0zM12 7c2-3 6-3 6 0 0 2-3 2-6 0z"/></svg></div>
-    <p><strong id="bvSaudacao">Olá!</strong> <span id="bvTexto">Esta é a página principal dos painéis de indicadores das maternidades estratégicas. Os botões abaixo abrem os painéis de nascimentos, internação e mortalidade; o botão <em>Página principal</em>, no alto de cada painel, traz de volta a esta página. Mais abaixo está a apostila dos dicionários de dados, para ler na tela ou baixar.</span></p>
+    <p><strong id="bvSaudacao">Olá!</strong> <span id="bvTexto">Esta é a página principal dos painéis de indicadores das maternidades estratégicas. Os botões abaixo abrem os painéis de nascimentos, internação e mortalidade e o painel de habilitações do CNES; o botão <em>Página principal</em>, no alto de cada painel, traz de volta a esta página. Mais abaixo está a apostila dos dicionários de dados, para ler na tela ou baixar.</span></p>
     <button type="button" class="bv-fechar" id="bvFechar" aria-label="Fechar a mensagem de boas-vindas">×</button>
   </div>
 
@@ -199,6 +199,12 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
       <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 10 3-7 2 4h4"/></svg></span>
       <span class="rotulo">Mortalidade<span class="sub">SIM · materna, fetal, perinatal e neonatal</span></span>
       <span class="data" data-painel="mortalidade"></span>
+    </a>
+
+    <a class="painel" href="https://anamazza.github.io/Indicadores_Brasil/habilitacoes/">
+      <span class="circulo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 2.1 3.3-.3.9 3.2 2.9 1.6-1.4 3 1.4 3-2.9 1.6-.9 3.2-3.3-.3L12 21l-2.6-2.1-3.3.3-.9-3.2-2.9-1.6 1.4-3-1.4-3 2.9-1.6.9-3.2 3.3.3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="rotulo">Habilitações<span class="sub">CNES · todas as unidades</span></span>
+      <span class="data" data-painel="habilitacoes"></span>
     </a>
 
   </nav>
@@ -225,12 +231,12 @@ footer img{display:block; max-width:420px; width:100%; height:auto; margin:16px 
     </section>
     <div class="notas">
       <div class="nota" id="instalarApp" hidden>
-        <b>Instalar como aplicativo.</b> Esta página pode ser instalada no computador ou no celular, com ícone próprio, e abre como um aplicativo, com os três painéis.
+        <b>Instalar como aplicativo.</b> Esta página pode ser instalada no computador ou no celular, com ícone próprio, e abre como um aplicativo, com os quatro painéis.
         <span id="instalarComo"></span>
         <button type="button" class="botao" id="btnInstalar" style="margin-left:.6rem">Instalar</button>
       </div>
       <div class="nota">
-        <b>Sobre os painéis.</b> Os painéis têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025 (e, nos painéis de nascimentos e de mortalidade, o 1º semestre de 2026), comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. O botão “Página principal”, no alto de cada painel, traz de volta a esta página.
+        <b>Sobre os painéis.</b> Os painéis de nascimentos, internação e mortalidade têm a mesma estrutura e as mesmas unidades: ficha de cadastro CNES e habilitações ativas, indicadores por ano de 2019 a 2025 (e, nos painéis de nascimentos e de mortalidade, o 1º semestre de 2026), comparador entre unidades e entre anos, e metodologia com a fonte oficial e o cálculo de cada indicador. O painel de habilitações reúne, para todas as unidades dos três grupos, as habilitações registradas no CNES, com matriz de cobertura, consulta por unidade e por habilitação e download em CSV. O botão “Página principal”, no alto de cada painel, traz de volta a esta página.
       </div>
       <div class="nota">
         <b>Fontes e situação dos dados.</b> SINASC, SIH/SUS, SIM e CNES, 2019 a 2025; 2024 e 2025 são dados preliminares, sujeitos a revisão. Desde 18/10/2026, os painéis de nascimentos e de mortalidade trazem também o 1º semestre de 2026 (janeiro a junho, dados preliminares; período parcial, fora do acumulado e não comparável em números absolutos com anos completos). O painel de internação ganha o semestre quando o SIH/SUS fechar as competências do período. Os painéis de internação e de mortalidade estão em versão para validação da coordenação. <span id="cnes-em"></span>

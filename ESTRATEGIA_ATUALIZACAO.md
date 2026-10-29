@@ -141,4 +141,6 @@ Script `verificar_site.py`, rodado no Actions e também no fim do (C):
 - Toda atualização de dados deixa rastro: commit com a competência/ano e a data de extração, relatório de
   diferenças na pasta `relatorios/`, e carimbo na página.
 - Novo painel = nova pasta de trabalho com `montar_painel.py` nos mesmos moldes, nova subpasta, novo botão,
-  e entrada no `verificar_site.py`.
+  e entrada no `verificar_site.py`. Painel que só reaproveita dados já publicados no repositório (caso do painel de
+  habilitações, 29/10/2026, que consolida o CNES dos três) vive só aqui, sem pasta de trabalho, e é remontado pelo
+  `publicar.ps1` e pelo workflow "Atualizar CNES".

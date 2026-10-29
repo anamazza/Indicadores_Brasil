@@ -2,7 +2,7 @@
    Permite instalar o site como aplicativo (PWA) e guarda uma cópia das páginas já visitadas para abrir sem internet.
    Estratégia: rede primeiro (os painéis são atualizados com frequência); se a rede falhar, usa a cópia guardada.
    Só o próprio site é guardado; os mapas de fundo (CDN) sempre vêm da rede. */
-const VERSAO = "2026-10-18b";
+const VERSAO = "2026-10-29";
 const CACHE = "indicadores-brasil-" + VERSAO;
 const BASE = "/Indicadores_Brasil/";
 const PRECACHE = [BASE, BASE + "manifest.webmanifest", BASE + "icons/maos-192.png", BASE + "icons/maos-512.png"];
