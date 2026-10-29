@@ -393,7 +393,7 @@ function encaixaPontos(){
   return ajustados;
 }
 
-const MP = {hab: "", grupo: "", nomes: true, nivel: "uf", fundo: "malha", uf: null};
+const MP = {hab: "", grupo: "", nomes: true, nivel: "uf", fundo: "osm", uf: null, pontosMalha: false};
 let leaf = null, camadaPontos = null, svgEl = null, animId = null;
 const vbHome = TEM_GEO ? [0, 0, GEO.W, GEO.H] : null;
 const unidadesMapa = () => doGrupo(MAT, MP.grupo).filter(m => !MP.hab || temCodigo(m, MP.hab));
@@ -452,9 +452,9 @@ function desenhaMapaSvg(){
   if(MP.nivel === "uf"){
     svgEl.querySelectorAll("path.t").forEach(p => { const bb = p.getBBox(); if(bb.width < 14 && bb.height < 14) return; const tx = document.createElementNS(NS, "text"); tx.setAttribute("x", (bb.x + bb.width / 2).toFixed(1)); tx.dataset.cy = (bb.y + bb.height / 2).toFixed(1); tx.setAttribute("text-anchor", "middle"); tx.setAttribute("class", "sigla"); tx.setAttribute("fill", classeMapa((porTerr.get(p.dataset.uf) || []).length) >= 3 ? "#FFFFFF" : "#0A213D"); tx.setAttribute("opacity", ".75"); tx.textContent = p.dataset.uf; g.appendChild(tx); });
   }
-  // pontos e nomes das unidades
+  // pontos e nomes das unidades (opcionais na malha: posição aproximada)
   const gp = document.createElementNS(NS, "g");
-  const visiveis = lista.filter(m => m._xy && (!MP.uf || m.uf === MP.uf)).sort((a, b) => a._xy[1] - b._xy[1]);
+  const visiveis = MP.pontosMalha ? lista.filter(m => m._xy && (!MP.uf || m.uf === MP.uf)).sort((a, b) => a._xy[1] - b._xy[1]) : [];
   visiveis.forEach(m => {
     const cor = COR_GRUPO[m._grupoCor];
     const c = document.createElementNS(NS, "circle"); c.setAttribute("cx", m._xy[0].toFixed(1)); c.setAttribute("cy", m._xy[1].toFixed(1)); c.setAttribute("class", "ponto"); c.setAttribute("fill", cor.fundo); c.setAttribute("stroke", cor.borda);
@@ -471,7 +471,8 @@ function desenhaMapaSvg(){
   const nivelRot = {uf: "estado", macro: "macrorregião de saúde", rs: "região de saúde"}[MP.nivel];
   document.getElementById("legendaMapa").innerHTML = `<span><i style="background:#EEF3EF"></i>sem unidade</span>` + ROT_CLASSES.map((r, i) => `<span><i style="background:${RAMPA_MAPA[i]}"></i>${r}</span>`).join("") + `<span>por ${nivelRot}${MP.hab ? ", unidades com a habilitação" : ""}</span>`;
   const nAj = visiveis.filter(m => m._ajustado).length;
-  document.getElementById("notaMapa").textContent = `Malhas de ${nivelRot}s iguais às dos outros painéis. Pontos nas coordenadas do cadastro CNES convertidas para a malha (posição aproximada; ${nAj ? nAj + " ponto(s) deslocado(s) para dentro da própria região de saúde" : "todos dentro da própria região de saúde"}). Toque em um ponto para abrir a ficha; passe o mouse sobre um território para ver as unidades.`;
+  document.getElementById("notaMapa").textContent = `Malhas de ${nivelRot}s iguais às dos outros painéis; a cor conta as unidades do território pelos ids de malha. Passe o mouse sobre um território para ver as unidades; toque em um estado para dar zoom.` +
+    (MP.pontosMalha ? ` Pontos em posição aproximada (${nAj ? nAj + " deslocado(s) para dentro da própria região de saúde" : "todos dentro da própria região de saúde"}); para a posição exata, use o mapa de unidades.` : "");
 }
 function iniciaLeaflet(){
   if(leaf || typeof L === "undefined"){ if(!leaf) document.getElementById("mapaLeaflet").innerHTML = `<p class="suave" style="padding:1rem">A vista OpenStreetMap precisa de internet para carregar a biblioteca e o fundo.</p>`; return; }
@@ -502,6 +503,7 @@ function renderMapa(){
   document.getElementById("btnResetMapa").hidden = !MP.uf;
   document.getElementById("mapaSvgBox").hidden = MP.fundo !== "malha";
   document.getElementById("mapaLeaflet").hidden = MP.fundo !== "osm";
+  document.getElementById("lblPontosMalha").hidden = MP.fundo !== "malha";
   if(MP.fundo === "malha") desenhaMapaSvg();
   else { iniciaLeaflet(); if(leaf){ leaf.invalidateSize(); desenhaLeaflet(visiveis); } }
   const el = document.getElementById("mapaLateral");
@@ -530,6 +532,7 @@ function montarMapa(){
   segmento("segFundoMapa", d => { MP.fundo = d.fundo; renderMapa(); });
   document.getElementById("selNivelMapa").addEventListener("change", e => { MP.nivel = e.target.value; renderMapa(); });
   document.getElementById("chkNomes").addEventListener("change", e => { MP.nomes = e.target.checked; renderMapa(); });
+  document.getElementById("chkPontosMalha").addEventListener("change", e => { MP.pontosMalha = e.target.checked; renderMapa(); });
   document.getElementById("btnResetMapa").addEventListener("click", () => { MP.uf = null; renderMapa(); });
   encaixaPontos();
   renderMapa();

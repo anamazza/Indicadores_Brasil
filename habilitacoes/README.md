@@ -19,11 +19,12 @@ coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos
   habilitações do grupo.
 - **Por local**: tabela estado × famílias materno-infantis (unidades que têm / total do estado), com filtros de
   região, estado e grupo, CSV e cartões das unidades do local.
-- **Mapa**: malha do Brasil (estados, macrorregiões e regiões de saúde, a mesma dos outros painéis) colorida pelo
-  número de unidades com a habilitação escolhida, com os pontos e os nomes das unidades por cima (cor do grupo),
-  tooltip por território, zoom ao tocar num estado e detalhe no ponto; vista alternativa em OpenStreetMap (Leaflet,
-  precisa de internet) com as coordenadas exatas; lista lateral com CSV (inclui latitude e longitude). A posição na
-  malha é aproximada (`ajusta_projecao.js`) e cada ponto é encaixado dentro da própria região de saúde.
+- **Mapa**: vista principal igual ao mapa de unidades dos outros painéis (Leaflet, OpenStreetMap, coordenadas do
+  CNES; precisa de internet): escolhida a habilitação, marca com o nome as unidades que a têm, coloridas pelo grupo,
+  com detalhe no ponto e abertura da ficha. Vista por território com as mesmas malhas dos outros painéis (estados,
+  macrorregiões e regiões de saúde) coloridas pelo número de unidades com a habilitação, tooltip e zoom; os pontos
+  sobre a malha são opcionais e aproximados (`ajusta_projecao.js`, encaixe na própria região de saúde). Lista lateral
+  com CSV (inclui latitude e longitude).
 - **Notas metodológicas**: fonte e data, composição da lista (lista oficial de 09/09/2026, anexos, complexo da
   FAMEMA) e como ler cada campo.
 
