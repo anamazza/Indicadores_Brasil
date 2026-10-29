@@ -9,6 +9,7 @@
 <link rel="icon" href="../icons/maos-192.png" type="image/png"/>
 <link rel="apple-touch-icon" href="../icons/maos-180.png"/>
 <title>Painel de Habilitações · Maternidades Estratégicas · CNES</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <meta name="description" content="Habilitações registradas no CNES das maternidades estratégicas (apoiadas, EBSERH e QUALINEO 2026/2027): matriz de cobertura, consulta por unidade e por habilitação, ficha de cadastro e notas metodológicas."/>
 <style>
 :root{
@@ -257,6 +258,49 @@ footer a{color:var(--verde-lima)}
   .card{break-inside:avoid; box-shadow:none}
   table.dados tbody tr{break-inside:avoid}
 }
+
+/* ---------------- consulta individual ---------------- */
+.dossie-conjuntos{display:grid; gap:1.05rem}
+.dossie-conj{background:var(--mint-card); border:1px solid var(--borda); border-radius:14px; padding:.85rem 1rem}
+.rot-conj{display:flex; align-items:center; gap:.5rem; margin:0 0 .55rem; font-size:.82rem; font-weight:800; letter-spacing:.02em; color:var(--verde-esmeralda)}
+.rot-conj b{font-weight:800; color:var(--texto-suave)}
+.mapa-controles{display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:.9rem; align-items:center}
+.dossie-conj .mapa-controles{margin-bottom:0}
+.busca-res{list-style:none; margin:.6rem 0 0; padding:0; display:flex; flex-direction:column; gap:.3rem; max-height:300px; overflow:auto}
+.busca-res li button{width:100%; text-align:left; border:1px solid var(--borda); background:var(--branco); border-radius:10px; padding:.45rem .7rem; font-weight:700; color:var(--texto); display:flex; align-items:center; gap:.5rem}
+.busca-res li button:hover{background:var(--mint)}
+.busca-res li button small{font-weight:600; color:var(--texto-suave); margin-left:auto; white-space:nowrap}
+/* ---------------- por local ---------------- */
+table.local{border-collapse:separate; border-spacing:0; width:100%; font-size:.82rem}
+table.local th,table.local td{padding:.4rem .5rem; border-bottom:1px solid var(--borda); text-align:center; white-space:nowrap}
+table.local thead th{position:sticky; top:0; background:var(--verde-esmeralda); color:#FFF; font-size:.7rem; font-weight:700; line-height:1.25; vertical-align:bottom; padding:.5rem .4rem}
+table.local thead th .th-rot{display:block; max-width:104px; white-space:normal; margin:0 auto}
+table.local th.col-uf,table.local td.col-uf{text-align:left; position:sticky; left:0; background:var(--branco); z-index:2; font-weight:700; min-width:170px}
+table.local thead th.col-uf{background:var(--verde-esmeralda); z-index:3}
+table.local td.col-uf small{display:block; font-weight:600; color:var(--texto-suave); font-size:.68rem}
+table.local td.cel{font-variant-numeric:tabular-nums}
+table.local td.cel b{color:var(--verde-esmeralda)}
+table.local td.cel small{color:var(--texto-suave)}
+table.local td.cel.zero{color:#C9D6CC}
+table.local tbody tr:hover td{background:var(--mint)}
+table.local tfoot td{background:var(--mint); font-weight:800; border-top:2px solid var(--borda); position:sticky; bottom:0}
+table.local tfoot td.col-uf{background:var(--mint)}
+.local-wrap{overflow:auto; max-height:70vh; border-radius:var(--radius); border:1px solid var(--borda); background:var(--branco)}
+/* ---------------- mapa ---------------- */
+.mapa-grid{display:grid; grid-template-columns:1.6fr 1fr; gap:1.1rem; align-items:start}
+.mapa-grid > *{min-width:0}
+#mapaLeaflet{height:620px; border-radius:var(--radius); border:1px solid var(--borda); box-shadow:var(--sombra); background:#E9EEF0}
+.leaflet-popup-content{font-family:inherit; font-size:.86rem; line-height:1.45}
+.pop-nome{font-weight:800; font-size:.92rem; margin-bottom:.15rem}
+.pop-btn{display:inline-block; margin-top:.5rem; background:var(--verde-fiocruz); color:#FFF !important; padding:.3rem .7rem; border-radius:8px; font-weight:700; text-decoration:none; font-size:.8rem; border:none; cursor:pointer}
+.rotulo-unid{background:rgba(255,255,255,.92); border:1px solid var(--borda); border-radius:6px; padding:1px 6px; font-size:.7rem; font-weight:700; color:var(--texto); box-shadow:0 1px 4px rgba(0,0,0,.18); white-space:nowrap}
+.rotulo-unid::before{display:none}
+.toggle{display:inline-flex; align-items:center; gap:.45rem; font-size:.86rem; font-weight:600; color:var(--texto-suave); cursor:pointer}
+.toggle input{accent-color:var(--verde-fiocruz); width:17px; height:17px}
+.legenda-pontos{display:flex; flex-wrap:wrap; gap:.9rem; margin:.15rem 0 .9rem; font-size:.8rem}
+.legenda-pontos span.item{display:flex; align-items:center; gap:.4rem}
+@media (max-width: 1080px){ .mapa-grid{grid-template-columns:1fr} }
+@media (max-width: 900px){ #mapaLeaflet{height:460px} }
 </style>
 </head>
 <body>
@@ -270,7 +314,7 @@ footer a{color:var(--verde-lima)}
     </div>
     <p class="eyebrow">Painel de Habilitações · Cadastro Nacional de Estabelecimentos de Saúde (CNES) · <span id="heroConsulta">consulta ao CNES</span></p>
     <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
-    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para cada unidade dos três grupos, em um só lugar: cobertura das habilitações de interesse materno e infantil, consulta por unidade e por habilitação, com portaria, competência, vigência e leitos habilitados.</p>
+    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para cada unidade dos três grupos, em um só lugar: consulta individual com a ficha completa, habilitações por grupo e por local, e mapa das unidades que têm cada habilitação.</p>
     <div class="hero-blocos" id="heroGrupos">
       <span><i class="bolinha bola-apoiada"></i>Maternidades apoiadas (estratégicas)</span>
       <span><i class="bolinha bola-ebserh"></i>Unidades EBSERH</span>
@@ -294,86 +338,132 @@ footer a{color:var(--verde-lima)}
 
 <nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
 
-<!-- ========================= PANORAMA ========================= -->
-<section id="secPanorama">
+<nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
+
+<!-- ========================= CONSULTA INDIVIDUAL ========================= -->
+<section id="secConsulta">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Panorama</p>
-      <h2>Quais habilitações as maternidades têm</h2>
-      <p>Os filtros valem para todo o painel: escolha o grupo, a região ou o estado, procure uma unidade pelo nome ou pelo código CNES, ou selecione uma habilitação para ver quem a tem e quem não a tem. Toque em uma barra para filtrar por aquela habilitação.</p>
+      <p class="eyebrow">Consulta individual</p>
+      <h2>Escolha o grupo e a unidade para abrir a ficha de habilitações</h2>
+      <p style="max-width:none">A ficha abre em página própria, com o cadastro CNES da unidade e todas as habilitações registradas (código, descrição, competência inicial e final, portaria, leitos e origem), com download em PDF e em CSV. Uma unidade que pertence a mais de um grupo aparece em cada um deles.</p>
     </div>
-
-    <div class="filtros-topo" id="filtros">
-      <div class="filtros-grid">
-        <label class="filtro" style="max-width:none; flex:0 0 auto"><span>Grupo</span>
-          <div class="seg" id="segGrupo">
-            <button data-grupo="" class="ativo">Todas</button>
-            <button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button>
-            <button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button>
-            <button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button>
-          </div></label>
-        <label class="filtro"><span>Região</span><select id="selRegiao"><option value="">Brasil</option></select></label>
-        <label class="filtro"><span>Estado</span><select id="selUF"><option value="">Todos os estados</option></select></label>
-        <label class="filtro larga"><span>Unidade</span><input type="search" id="busca" placeholder="Nome, município ou código CNES…"/></label>
-        <label class="filtro larga"><span>Habilitação</span><select id="selHab"><option value="">Todas as habilitações</option></select></label>
-        <label class="filtro" style="max-width:none; flex:0 0 auto"><span>Mostrar unidades</span>
-          <div class="seg" id="segModoHab"><button data-modo="com" class="ativo">que têm</button><button data-modo="sem">que não têm</button></div></label>
-        <button class="chip chip-botao" id="btnLimpar" style="align-self:end">✕ limpar filtros</button>
+    <div class="grid-2">
+      <div class="dossie-conjuntos">
+        <div class="dossie-conj">
+          <p class="rot-conj"><span class="bolinha bola-apoiada"></span>Maternidades apoiadas (estratégicas) <b id="nApoiada"></b></p>
+          <div class="mapa-controles"><select id="selUnidadeApoiada" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeApoiada">Abrir ficha →</button></div>
+        </div>
+        <div class="dossie-conj">
+          <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
+          <div class="mapa-controles"><select id="selUnidadeEbserh" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeEbserh">Abrir ficha →</button></div>
+        </div>
+        <div class="dossie-conj">
+          <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 <b id="nQualineo"></b></p>
+          <div class="mapa-controles"><select id="selUnidadeQualineo" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeQualineo">Abrir ficha →</button></div>
+        </div>
       </div>
-      <div class="filtros-rodape" id="resumoFiltro"></div>
-    </div>
-
-    <div class="grid-2" style="margin-top:1.1rem">
       <div class="card">
-        <h3>Habilitações mais frequentes nas unidades selecionadas
-          <span class="seg" id="segFoco" style="margin-left:auto"><button data-foco="mi" class="ativo">Materno-infantil</button><button data-foco="todas">Todas</button></span>
-        </h3>
-        <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
-        <div class="barras" id="barras"></div>
-        <p class="fonte">Cada barra conta as unidades selecionadas com a habilitação registrada no CNES na data da consulta. Fonte: Ministério da Saúde - CNES.</p>
+        <h3>Buscar unidade</h3>
+        <p class="suave" style="font-size:.84rem; margin-top:.3rem">Pelo nome, pelo município, pelo estado ou pelo código CNES, em todos os grupos.</p>
+        <input type="search" id="busca" placeholder="Ex.: Sofia Feldman, Recife, PE, 2000296…" style="width:100%; margin-top:.7rem"/>
+        <ul class="busca-res" id="buscaRes"></ul>
       </div>
-      <div class="card painel-lateral" id="painelLateral"></div>
     </div>
   </div>
 </section>
 
-<!-- ========================= MATRIZ ========================= -->
-<section id="secMatriz">
+<!-- ========================= POR GRUPO ========================= -->
+<section id="secGrupo">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Matriz de cobertura</p>
-      <h2>Unidades × habilitações de interesse materno e infantil</h2>
-      <p>Cada linha é uma unidade e cada coluna, uma habilitação ou família de habilitações do CNES. O número na célula é a quantidade de leitos habilitados, quando a habilitação os tem; "II" e "III" indicam o tipo da UTI. Acrescente outras habilitações do catálogo como coluna e baixe a matriz em CSV.</p>
+      <p class="eyebrow">Por grupo</p>
+      <h2>Habilitações dentro de cada grupo</h2>
+      <p style="max-width:none">Escolha o grupo para ver quantas unidades têm cada habilitação (foco materno-infantil ou as 20 mais frequentes). Toque em uma barra para listar, ao lado, as unidades do grupo que têm e as que não têm aquela habilitação. Abaixo, a matriz de cobertura do grupo, com os leitos habilitados em cada célula e download em CSV.</p>
     </div>
+    <div class="mapa-controles">
+      <div class="seg" id="segGrupo">
+        <button data-grupo="apoiada" class="ativo"><i class="bolinha bola-apoiada"></i>Maternidades apoiadas</button>
+        <button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>Unidades EBSERH</button>
+        <button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO 2026/2027</button>
+        <button data-grupo="">Os três grupos</button>
+      </div>
+      <div class="seg" id="segFoco"><button data-foco="mi" class="ativo">Materno-infantil</button><button data-foco="todas">20 mais frequentes</button></div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3 id="barrasTitulo">Habilitações no grupo</h3>
+        <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
+        <div class="barras" id="barras"></div>
+        <p class="fonte">Cada barra conta as unidades do grupo com a habilitação registrada no CNES na data da consulta. Fonte: Ministério da Saúde - CNES.</p>
+      </div>
+      <div class="card painel-lateral" id="painelLateral"></div>
+    </div>
+    <h3 style="margin:1.4rem 0 .6rem" id="matrizTitulo">Matriz de cobertura do grupo</h3>
     <div class="matriz-controles">
       <select id="selAddCol" style="min-width:320px" aria-label="Acrescentar habilitação como coluna"><option value="">+ acrescentar habilitação como coluna…</option></select>
       <div class="seg" id="segOrdem"><button data-ordem="uf" class="ativo">Ordenar por estado</button><button data-ordem="nome">Nome</button><button data-ordem="n">Nº de habilitações</button></div>
       <button class="chip chip-botao" id="btnCsvMatriz">⬇ Baixar matriz (CSV)</button>
+      <button class="chip chip-botao" id="btnCsvTudo" title="Uma linha por habilitação de cada unidade do grupo">⬇ Todas as habilitações do grupo (CSV)</button>
       <button class="chip chip-botao" id="btnColunasPadrao" hidden>↺ colunas padrão</button>
     </div>
     <div class="matriz-wrap"><table class="matriz" id="matriz"></table></div>
     <div class="legenda">
       <span><i style="background:#E4F3E8"></i>habilitação registrada, sem prazo final</span>
-      <span><i style="background:#FFF3DB"></i>habilitação registrada com competência final definida (vigente na data da consulta)</span>
+      <span><i style="background:#FFF3DB"></i>registrada com competência final definida (vigente na data da consulta)</span>
       <span><i style="background:#FFF"></i>sem a habilitação no CNES</span>
-      <span>Toque no nome da unidade para abrir a ficha completa.</span>
+      <span>Número na célula = leitos habilitados; II e III = tipo da UTI. Toque no nome da unidade para abrir a ficha.</span>
     </div>
   </div>
 </section>
 
-<!-- ========================= UNIDADES ========================= -->
-<section id="secUnidades">
+<!-- ========================= POR LOCAL ========================= -->
+<section id="secLocal">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Unidades</p>
-      <h2>Consulta por unidade</h2>
-      <p>Um cartão por maternidade selecionada, com os grupos a que pertence, o total de habilitações registradas e as habilitações de interesse materno e infantil. Abra a ficha para ver todas as habilitações, com portaria, competência inicial e final, origem e leitos, e para baixar em PDF.</p>
+      <p class="eyebrow">Por local</p>
+      <h2>Habilitações por região e estado</h2>
+      <p style="max-width:none">Cada linha é um estado e cada coluna, uma família de habilitações de interesse materno e infantil: a célula mostra quantas unidades do estado têm a habilitação, sobre o total de unidades do estado no recorte. Escolha a região, o estado e o grupo; abaixo da tabela ficam os cartões das unidades do local.</p>
     </div>
-    <div class="unidades-controles">
+    <div class="mapa-controles">
+      <label class="filtro" style="flex:0 0 auto; min-width:180px"><span>Região</span><select id="selRegiao"><option value="">Brasil</option></select></label>
+      <label class="filtro" style="flex:0 0 auto; min-width:220px"><span>Estado</span><select id="selUF"><option value="">Todos os estados</option></select></label>
+      <label class="filtro" style="flex:0 0 auto"><span>Grupo</span>
+        <div class="seg" id="segGrupoLocal"><button data-grupo="" class="ativo">Os três</button><button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button><button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button><button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button></div></label>
+      <button class="chip chip-botao" id="btnCsvLocal" style="align-self:end">⬇ Baixar tabela (CSV)</button>
+    </div>
+    <div class="local-wrap"><table class="local" id="tabelaLocal"></table></div>
+    <div class="unidades-controles" style="margin-top:1.4rem">
       <span class="suave" id="unidadesResumo" style="font-size:.86rem"></span>
-      <button class="chip chip-botao" id="btnCsvTudo" style="margin-left:auto" title="Uma linha por habilitação de cada unidade selecionada">⬇ Baixar todas as habilitações (CSV)</button>
     </div>
     <div class="grade-unidades" id="gradeUnidades"></div>
+  </div>
+</section>
+
+<!-- ========================= MAPA ========================= -->
+<section id="secMapa">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Mapa</p>
+      <h2>Onde estão as unidades com cada habilitação</h2>
+      <p style="max-width:none">Selecione o tipo de habilitação: o mapa marca, com o nome, as unidades que a têm registrada no CNES, coloridas pelo grupo. Toque em um ponto para ver o detalhe da habilitação (leitos, competência, portaria) e abrir a ficha. Sem habilitação selecionada, o mapa mostra todas as unidades.</p>
+    </div>
+    <div class="mapa-controles">
+      <label class="filtro larga" style="flex:1; min-width:320px"><span>Habilitação</span><select id="selHabMapa"><option value="">Todas as unidades (sem filtro de habilitação)</option></select></label>
+      <label class="filtro" style="flex:0 0 auto"><span>Grupo</span>
+        <div class="seg" id="segGrupoMapa"><button data-grupo="" class="ativo">Os três</button><button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button><button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button><button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button></div></label>
+      <label class="toggle" style="align-self:end; padding-bottom:.5rem"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes no mapa</label>
+    </div>
+    <p class="legenda-pontos">
+      <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
+      <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
+      <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
+      <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem</span>
+    </p>
+    <div class="mapa-grid">
+      <div id="mapaLeaflet"></div>
+      <div class="card painel-lateral" id="mapaLateral"></div>
+    </div>
   </div>
 </section>
 
@@ -443,6 +533,7 @@ footer a{color:var(--verde-lima)}
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="dados_habilitacoes.js"></script>
 <script src="painel_app.js"></script>
 <script>

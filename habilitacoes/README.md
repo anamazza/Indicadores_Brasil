@@ -5,23 +5,23 @@ todas as unidades dos três grupos (maternidades apoiadas, unidades EBSERH e QUA
 coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
 
 **Publicação:** https://anamazza.github.io/Indicadores_Brasil/habilitacoes/ · **Arquivo final:** `index.html`
-(idêntico a `Painel_Habilitacoes_2026.html`), HTML único e autocontido, sem bibliotecas externas.
+(idêntico a `Painel_Habilitacoes_2026.html`), HTML único e autocontido; só o mapa depende da internet (Leaflet e OpenStreetMap, como nos outros painéis).
 
 ## O que o painel contém
 
-- **Panorama**: filtros válidos para todo o painel (grupo, região, estado, busca por nome, município ou CNES,
-  habilitação, "que têm / que não têm"), barras das habilitações mais frequentes (foco materno-infantil ou as 20
-  mais frequentes) e painel lateral com a cobertura por grupo da habilitação escolhida e a lista de quem tem ou
-  não tem.
-- **Matriz de cobertura**: unidades × famílias de habilitações de interesse materno e infantil (alto risco HGPAR,
-  UTI neonatal II/III, UCINCo, UCINCa, UTI pediátrica, UTI adulto, Hospital Amigo da Criança, Casa da Gestante,
-  Centro de Parto Normal, triagem neonatal, laqueadura, vasectomia), com leitos habilitados na célula, colunas
-  adicionais a partir do catálogo completo, totais por coluna e download em CSV.
-- **Unidades**: um cartão por maternidade (grupos, total de habilitações, marcadores das famílias) e download de
-  todas as habilitações do recorte em CSV (uma linha por habilitação).
-- **Ficha da unidade**: página sobreposta com a ficha de cadastro CNES e a tabela completa de habilitações
-  (código, descrição, competência inicial e final, portaria e data, leitos, origem), PDF pela impressão e CSV.
-  O endereço `index.html#<CNES>` abre a ficha direto.
+- **Consulta individual**: um seletor por grupo (apoiadas, EBSERH, QUALINEO) e busca por nome, município, estado
+  ou CNES; a ficha abre em página própria, com o cadastro CNES e a tabela completa de habilitações (código,
+  descrição, competência inicial e final, portaria e data, leitos, origem), PDF pela impressão e CSV. O endereço
+  `index.html#<CNES>` abre a ficha direto.
+- **Por grupo**: barras das habilitações mais frequentes no grupo escolhido (foco materno-infantil ou as 20 mais
+  frequentes); tocar numa barra lista quem tem e quem não tem; matriz de cobertura do grupo (unidades × famílias
+  materno-infantis, com leitos e tipo de UTI, colunas adicionais do catálogo) e CSV da matriz e de todas as
+  habilitações do grupo.
+- **Por local**: tabela estado × famílias materno-infantis (unidades que têm / total do estado), com filtros de
+  região, estado e grupo, CSV e cartões das unidades do local.
+- **Mapa** (Leaflet, fundo OpenStreetMap, precisa de internet): escolhida a habilitação, marca com o nome as
+  unidades que a têm, coloridas pelo grupo; o ponto abre o detalhe (leitos, competência, portaria) e a ficha;
+  lista lateral com CSV (inclui latitude e longitude).
 - **Notas metodológicas**: fonte e data, composição da lista (lista oficial de 09/09/2026, anexos, complexo da
   FAMEMA) e como ler cada campo.
 
