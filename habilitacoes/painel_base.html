@@ -299,6 +299,34 @@ table.local tbody tr:hover td{background:var(--mint)}
 table.local tfoot td{background:var(--mint); font-weight:800; border-top:2px solid var(--borda); position:sticky; bottom:0}
 table.local tfoot td.col-uf{background:var(--mint)}
 .local-wrap{overflow:auto; max-height:70vh; border-radius:var(--radius); border:1px solid var(--borda); background:var(--branco)}
+/* ---------------- mapa do Brasil (modelo do Painel NV) ---------------- */
+.filtros-grid{display:flex; gap:.8rem 1rem; flex-wrap:wrap; align-items:end}
+.mapa-layout{display:grid; grid-template-columns:230px 1fr 310px; gap:1.1rem; align-items:start; margin-top:1.1rem}
+.mapa-layout > *{min-width:0}
+.col-eixos,.col-dir{display:flex; flex-direction:column; gap:1rem}
+.bloco-filtro{background:var(--branco); border:none; border-radius:var(--radius); padding:.85rem; box-shadow:var(--sombra)}
+.rotulo-bloco{display:block; font-size:.66rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; color:var(--texto); margin-bottom:.6rem}
+.lista-pills{display:flex; flex-direction:column; gap:.45rem}
+.lista-pills button{display:flex; align-items:center; gap:.5rem; text-align:left; border:1px solid var(--borda); background:var(--mint-card); color:var(--texto); padding:.5rem .75rem; border-radius:12px; font-weight:700; font-size:.84rem; line-height:1.25; transition:background .15s, color .15s}
+.lista-pills button small{margin-left:auto; font-weight:700; color:var(--texto-suave); font-size:.74rem}
+.lista-pills button:hover{background:var(--mint)}
+.lista-pills button.ativo{background:var(--verde-fiocruz); color:#FFF; border-color:var(--verde-fiocruz)}
+.lista-pills button.ativo small{color:#E3F0E7}
+.titulo-legenda{font-size:.9rem; margin-bottom:.6rem}
+.legenda-v{flex-direction:column; gap:.45rem; margin-top:0; align-items:flex-start}
+.nota-mapa{font-size:.78rem; line-height:1.55}
+.acordeao{background:var(--branco); border:none; border-radius:12px; padding:.15rem 1rem; margin-top:1.2rem; box-shadow:var(--sombra)}
+.acordeao summary{cursor:pointer; font-weight:700; padding:.75rem 0; color:var(--verde-esmeralda); list-style:none; display:flex; align-items:center; gap:.55rem; font-size:1rem}
+.acordeao summary::-webkit-details-marker{display:none}
+.acordeao summary::before{content:"▸"; color:var(--verde-fiocruz); transition:transform .18s; font-size:.9rem}
+.acordeao[open] summary::before{transform:rotate(90deg)}
+.acordeao-corpo{padding:.3rem 0 1rem}
+.filtros-mapa{display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom:.9rem; align-items:center}
+@media (max-width: 1080px){
+  .mapa-layout{grid-template-columns:1fr}
+  .col-eixos{flex-direction:row; flex-wrap:wrap} .col-eixos .bloco-filtro{flex:1; min-width:220px}
+  .lista-pills{flex-direction:row; flex-wrap:wrap}
+}
 /* ---------------- mapa do Brasil (malhas) ---------------- */
 .mapa-svg-box{position:relative; background:var(--branco); border-radius:var(--radius); box-shadow:var(--sombra); padding:.6rem}
 .mapa-svg-box svg{width:100%; height:auto; display:block}
@@ -320,7 +348,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
 /* ---------------- mapa (OpenStreetMap) ---------------- */
 .mapa-grid{display:grid; grid-template-columns:1.6fr 1fr; gap:1.1rem; align-items:start}
 .mapa-grid > *{min-width:0}
-#mapaLeaflet{height:620px; border-radius:var(--radius); border:1px solid var(--borda); box-shadow:var(--sombra); background:#E9EEF0}
+#mapaLeaflet{height:560px; border-radius:var(--radius); border:1px solid var(--borda); box-shadow:var(--sombra); background:#E9EEF0}
 .leaflet-popup-content{font-family:inherit; font-size:.86rem; line-height:1.45}
 .pop-nome{font-weight:800; font-size:.92rem; margin-bottom:.15rem}
 .pop-btn{display:inline-block; margin-top:.5rem; background:var(--verde-fiocruz); color:#FFF !important; padding:.3rem .7rem; border-radius:8px; font-weight:700; text-decoration:none; font-size:.8rem; border:none; cursor:pointer}
@@ -472,42 +500,76 @@ table.local tfoot td.col-uf{background:var(--mint)}
   </div>
 </section>
 
-<!-- ========================= MAPA ========================= -->
+<!-- ========================= MAPA (modelo do Painel NV) ========================= -->
 <section id="secMapa">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow">Mapa</p>
-      <h2>Onde estão as unidades com cada habilitação</h2>
-      <p style="max-width:none">Selecione o tipo de habilitação: o mapa de unidades marca, com o nome e nas coordenadas do cadastro CNES, as unidades que a têm registrada, coloridas pelo grupo, como nos outros painéis. Toque em um ponto para ver o detalhe da habilitação (leitos, competência, portaria) e abrir a ficha. A vista por território colore estados, macrorregiões ou regiões de saúde pelo número de unidades com a habilitação. Sem habilitação selecionada, o mapa mostra todas as unidades.</p>
+      <p class="eyebrow">Território</p>
+      <h2>Mapa do Brasil: habilitações das maternidades por território</h2>
+      <p>Escolha a habilitação, alterne o nível territorial e toque em um estado para dar zoom e filtrar · toque novamente para desfazer. A cor de cada território conta as unidades ali localizadas que têm a habilitação; o painel à direita lista essas unidades. O mapa de unidades, abaixo, marca cada maternidade com o nome, nas coordenadas do cadastro CNES.</p>
     </div>
-    <div class="mapa-controles">
-      <label class="filtro larga" style="flex:1; min-width:320px"><span>Habilitação</span><select id="selHabMapa"><option value="">Todas as unidades (sem filtro de habilitação)</option></select></label>
-      <label class="filtro" style="flex:0 0 auto"><span>Grupo</span>
-        <div class="seg" id="segGrupoMapa"><button data-grupo="" class="ativo">Os três</button><button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button><button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button><button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button></div></label>
-      <label class="filtro" style="flex:0 0 auto; min-width:200px"><span>Malha</span>
-        <select id="selNivelMapa"><option value="uf">Estados (UF)</option><option value="macro">Macrorregiões de saúde</option><option value="rs">Regiões de saúde</option></select></label>
-      <label class="filtro" style="flex:0 0 auto"><span>Vista</span>
-        <div class="seg" id="segFundoMapa"><button data-fundo="osm" class="ativo">Mapa de unidades (OpenStreetMap)</button><button data-fundo="malha">Malha do Brasil por território</button></div></label>
-      <label class="toggle" style="align-self:end; padding-bottom:.5rem"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes</label>
-      <label class="toggle" id="lblPontosMalha" style="align-self:end; padding-bottom:.5rem" hidden><input type="checkbox" id="chkPontosMalha"/> pontos na malha (posição aproximada)</label>
-      <button class="chip chip-botao" id="btnResetMapa" style="align-self:end" hidden>✕ limpar seleção</button>
+    <div class="filtros-grid filtros-topo">
+      <label class="filtro"><span>Território</span>
+        <select id="selRegiaoMapa">
+          <option value="">Brasil</option>
+          <option>Norte</option><option>Nordeste</option><option>Centro-Oeste</option>
+          <option>Sudeste</option><option>Sul</option>
+        </select></label>
+      <label class="filtro"><span>Estado</span>
+        <select id="selUFMapa"><option value="">Todo o Brasil</option></select></label>
+      <label class="filtro"><span>Detalhe do mapa</span>
+        <select id="selNivelMapa">
+          <option value="uf">Estados (UF)</option>
+          <option value="macro">Macrorregiões de saúde</option>
+          <option value="rs">Regiões de saúde</option>
+        </select></label>
+      <label class="filtro"><span>Grupo</span>
+        <select id="selGrupoMapa">
+          <option value="">Os três grupos</option>
+          <option value="apoiada">Maternidades apoiadas (estratégicas)</option>
+          <option value="ebserh">Unidades EBSERH</option>
+          <option value="qualineo">QUALINEO 2026/2027</option>
+        </select></label>
+      <button class="chip chip-botao" id="btnResetMapa" hidden>✕ limpar seleção</button>
     </div>
-    <p class="legenda-pontos">
-      <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
-      <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
-      <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
-      <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem · toque em um estado para dar zoom e filtrar a lista</span>
-    </p>
-    <div class="mapa-grid">
-      <div>
-        <div class="mapa-svg-box" id="mapaSvgBox" hidden><div id="mapaSvg"></div>
-          <div class="legenda-mapa" id="legendaMapa"></div>
-          <p class="suave" style="font-size:.72rem; margin-top:.4rem" id="notaMapa"></p>
+    <div class="mapa-layout">
+      <div class="col-eixos">
+        <div class="bloco-filtro">
+          <span class="rotulo-bloco">Habilitação</span>
+          <div class="lista-pills" id="listaHabsMapa"></div>
+        </div>
+        <div class="bloco-filtro">
+          <span class="rotulo-bloco">Outra habilitação do catálogo</span>
+          <select id="selHabMapa" style="width:100%"><option value="">escolher pelo código…</option></select>
+        </div>
+      </div>
+      <div class="card mapa-svg-box" id="mapaSvgBox"><div id="mapaSvg"></div></div>
+      <div class="col-dir">
+        <div class="card"><h4 class="titulo-legenda" id="tituloLegenda">—</h4><div class="legenda legenda-v" id="legendaMapa"></div></div>
+        <div class="card painel-lateral" id="mapaLateral"></div>
+        <label class="toggle" style="font-size:.78rem"><input type="checkbox" id="chkPontosMalha"/> pontos das unidades sobre a malha (posição aproximada)</label>
+        <p class="nota-mapa suave" style="font-size:.74rem" id="notaMapa">Malhas de estados, macrorregiões e regiões de saúde iguais às dos outros painéis. Cinza: sem unidade do painel (ou sem a habilitação) no território.</p>
+      </div>
+    </div>
+
+    <details class="acordeao acordeao-mapa" id="detUnidades">
+      <summary>Mapa de unidades · localização das maternidades · toque para abrir</summary>
+      <div class="acordeao-corpo">
+        <p class="suave" style="margin-bottom:.55rem">Cada ponto é uma unidade do recorte acima (território, grupo e habilitação), nas coordenadas do cadastro CNES, com o nome ao lado. Toque em um ponto para ver o detalhe da habilitação e abrir a ficha. Precisa de internet para o fundo (OpenStreetMap).</p>
+        <p class="legenda-pontos">
+          <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
+          <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
+          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
+          <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem</span>
+        </p>
+        <div class="filtros-mapa">
+          <input type="search" id="buscaUnidadeMapa" placeholder="Buscar maternidade…" style="flex:1; min-width:190px"/>
+          <label class="toggle"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes</label>
+          <button class="chip chip-botao" id="btnCsvMapa">⬇ Baixar a lista (CSV)</button>
         </div>
         <div id="mapaLeaflet"></div>
       </div>
-      <div class="card painel-lateral" id="mapaLateral"></div>
-    </div>
+    </details>
   </div>
 </section>
 
