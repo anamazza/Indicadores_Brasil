@@ -63,3 +63,23 @@ Consequência: no Painel de Nascimentos, a média do grupo QUALINEO é calculada
 quatro unidades acima entram na média das apoiadas sem constar da lista. Alinhar o painel à lista exige rodar o
 `build_dados.py` da pasta de trabalho `Painel_2026_Novo` com a lista oficial e remontar; é decisão da coordenação,
 porque muda as médias de grupo publicadas.
+
+## Complemento de 30/10/2026: planilha "Lista de Maternidades" (apoio IFF/DAHU e CER Canguru)
+
+Arquivo `Lista_de_MaternidadesMaternidades.csv` (83 linhas: 72 com CNES e 11 só com o nome). Colunas: região, UF,
+macrorregião e região de saúde, município, CNES, estabelecimento, APOIO IFF DAHU, CER CANGURU, esfera, tipo e
+nascidos vivos por faixa de peso.
+
+- Todos os 72 CNES da planilha estão nos painéis (71 na lista oficial de 09/09; o 2025507 da FAMEMA é o código que a
+  Internação e o Nascimentos usam).
+- A coluna APOIO IFF DAHU = SIM (46 unidades) coincide com o grupo "apoiada" em todas as 72 unidades com CNES.
+- Nomes sem CNES: IMIP, Sofia Feldman, FAEPA Ribeirão Preto e Assis Chateaubriand (apoio SIM) estão nos painéis como
+  apoiadas da lista oficial; Carmosina Coutinho, Santa Casa de Sobral e Santa Casa de Franca são os anexos;
+  Maternidade Cachoeirinha (SP) está nos painéis como QUALINEO. **Maternidade Benedito Leite (São Luís/MA)** aparece
+  duas vezes, sem CNES, e não está em nenhum painel nem na lista oficial.
+- Apoiadas da lista oficial que não constam desta planilha: Hospital Femina (RS), Hospital Geral de Bonsucesso (RJ),
+  Hospital Municipal Desembargador Leal Junior (RJ) e Hospital Regional Adamastor Teixeira de Oliveira (RO).
+
+Decisão aplicada no mesmo dia, a pedido da coordenação: o **Hospital do Rocio (PR, CNES 0013846)** foi retirado do
+Painel de Habilitações (`EXCLUIR` no `build_dados.py`). Ele continua como anexo no Painel de Mortalidade, cuja pasta
+de trabalho é local; a retirada de lá depende de remontar aquele painel.

@@ -29,6 +29,10 @@ RAIZ = os.path.dirname(BASE)
 PAINEIS = ["mortalidade", "internacao", "nascimentos"]          # ordem de prioridade para grupos e nomes
 GRUPOS = {"apoiada": "Maternidades apoiadas (estratégicas)", "ebserh": "Unidades EBSERH", "qualineo": "QUALINEO 2026/2027"}
 NORMALIZA_GRUPO = {"estrategica": "apoiada", "apoiadas": "apoiada"}
+# Unidades retiradas deste painel por decisão da coordenação (continuam nos painéis de origem até serem retiradas lá).
+EXCLUIR = {
+    "0013846": "Hospital do Rocio (PR): retirado em 30/10/2026 a pedido da coordenação; anexo só do painel de Mortalidade",
+}
 
 
 def _carrega(painel):
@@ -160,6 +164,8 @@ def consolidar(verboso=True):
         consultas[p] = cnes[p].get("_atualizado_em")
         for u in dados[p]["maternidades"]:
             c = u["cnes"]
+            if c in EXCLUIR:
+                continue
             reg = unidades.setdefault(c, {"cnes": c, "paineis": []})
             reg["paineis"].append(p)
             if "nome" not in reg:                      # primeiro painel na ordem de prioridade define nome e grupos
@@ -230,6 +236,7 @@ def consolidar(verboso=True):
         "consultasPorPainel": consultas,
         "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026" if oficial else next((dados[p].get("listaOficial") for p in PAINEIS if dados[p].get("listaOficial")), None),
         "listaOficialN": len(oficial) or None,
+        "excluidas": EXCLUIR,
         "unidadesPorPainel": {p: len(dados[p]["maternidades"]) for p in PAINEIS},
         "grupos": GRUPOS,
         "tipos": tipos,
@@ -254,7 +261,8 @@ def consolidar(verboso=True):
         faltam = sorted(set(oficial) - set(unidades))
         if faltam:
             print("AVISO: unidades da lista oficial ausentes nos painéis:", faltam)
-        print(f"lista oficial: {len(oficial)} CNES; anexos (fora da lista): {sum(1 for r in lista if r['oficial'] is False)}")
+        print(f"lista oficial: {len(oficial)} CNES; anexos (fora da lista): {sum(1 for r in lista if r['oficial'] is False)}; "
+              f"retiradas por decisão da coordenação: {len(EXCLUIR)}")
         print(f"{len(lista)} unidades (união dos painéis {dict(DADOS['unidadesPorPainel'])}), grupos {por_grupo}, "
               f"{len(fichas)} fichas CNES, {n_habs} habilitações de {len(tipos)} tipos; consulta ao CNES em {consulta}")
         if sem:

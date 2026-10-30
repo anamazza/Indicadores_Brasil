@@ -37,6 +37,7 @@ coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos
   LISTA_MATERNIDADES_POR_GRUPO_09092026 da coordenação, conferida com os painéis em 29/10/2026, ver
   `relatorios/conferencia_lista_oficial_2026-10-29.md`). Unidades fora da lista ficam marcadas como anexo, com os grupos
   lidos dos painéis (Mortalidade, depois Internação, depois Nascimentos; "estrategica" vale como "apoiada").
+- `EXCLUIR` no `build_dados.py`: unidades retiradas deste painel por decisão da coordenação (Hospital do Rocio/PR, 30/10/2026).
 - Ficha e habilitações: a cópia com a data de atualização do cadastro mais recente entre os três painéis.
 - Vigência: `dtCompFim` 99/9999 = sem prazo final; outra competência = vigente com prazo (todas as habilitações do
   serviço estavam vigentes na data da consulta; as encerradas não constam). Origem "P" = ato do gestor estadual ou
