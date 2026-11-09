@@ -15,7 +15,6 @@ projetos, sem redigitação: as tabelas dos dicionários e as fichas dos painéi
 | `fontes/DICIONARIO_INDICADORES_MORTALIDADE_20260911.json` | idem, Dicionário de Mortalidade (Mortalidade Indicadores) |
 | `fontes/Metodologia_Media_do_Grupo_Comparador_NV2026.json` | idem, nota metodológica do grupo comparador (Projeto NV 2026) |
 | `fontes/painel_nv_metodologia.json` e `fontes/painel_mort_metodologia.json` | fichas das páginas Metodologia dos painéis de nascimentos e de mortalidade |
-| `fontes/DICIONARIO_SMCON_2026-11-09.json` | Dicionário de Dados do SMCON (IFF/Fiocruz), compilado dos instrutivos e fichas de coleta públicos dos módulos Parto e Nascimento, Abortamento e Cuidado Neonatal; gerado por `gera_dicionario_smcon.py` (versão de leitura em `../DICIONARIO_SMCON_2026-11-09.md`). Ainda não entra na apostila. |
 | `imagens/` | faixa da capa e faixa de marcas dos painéis em preto (IFF, Fiocruz, SUS, Ministério da Saúde; sem Governo do Brasil até 25/10/2026) |
 
 ## Para atualizar a apostila quando um dicionário mudar
