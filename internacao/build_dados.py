@@ -235,6 +235,72 @@ print(f"[3b] coluna 1º sem. 2026: {len(tab26)} unidades tabuladas ({len(sem_tab
       f"{n_sinasc} linhas do SINASC preenchidas")
 PERIODOS["2026"]["unidadesSemDados"] = sem_tab
 
+# ----------------------------------------------------------------------------- 3c. motivos de internação em números absolutos
+# (13/11/2026, pedido da coordenação) A tabulação guarda o total de internações obstétricas e os quatro percentuais
+# com 2 casas, calculados como round(100 * n / total, 2). Para cada unidade e período, procuram-se os inteiros que
+# reproduzem exatamente os quatro percentuais e somam o total. Quando o conjunto é único, o número é exato. Em
+# unidades com mais de 10 mil internações no ano pode haver mais de um conjunto: nesses casos vale a recontagem nos
+# microdados do SIH, com as mesmas regras, gravada em saida/motivos_absolutos/<UF>.json por
+# Extracao_SIH/67_motivos_absolutos.py. Sem conjunto único e sem recontagem, a montagem para e diz o que rodar.
+import itertools, math
+MOT_LINHAS = [("Parto", "Distribuição percentual das internações obstétricas por motivos de internação - Parto"),
+              ("Aborto", "Distribuição percentual das internações obstétricas por motivos de internação - Aborto"),
+              ("Intercorrências Clínicas", "Distribuição percentual das internações obstétricas por motivos de internação - Intercorrências Clínicas"),
+              ("Outros", "Distribuição percentual das internações obstétricas por motivos de internação - Outros")]
+MOT_CURTO = ["Partos", "Abortos", "Intercorrências clínicas", "Outros motivos"]
+recontagem = {}
+_pasta_mot = os.path.join(SAIDA_SIH, "motivos_absolutos")
+for _f in sorted(os.listdir(_pasta_mot)) if os.path.isdir(_pasta_mot) else []:
+    if _f.endswith(".json"):
+        for _c, _por_ano in json.load(open(os.path.join(_pasta_mot, _f), encoding="utf-8"))["contagens"].items():
+            recontagem.setdefault(_c.zfill(7), {}).update(_por_ano)
+mot_stats = {"conjunto único": 0, "recontagem nos microdados": 0, "sem dado": 0, "total zero": 0}
+mot_pendentes = []
+
+
+def motivos_abs(cnes):
+    """4 séries (uma por motivo) com o número absoluto em cada período, ou None onde não há dado."""
+    linhas = plan[cnes]["linhas"]
+    tot = linhas.get("Número de internações obstétricas")
+    pcts = [linhas.get(rot) for _k, rot in MOT_LINHAS]
+    out = [[None] * len(ANOS) for _ in MOT_LINHAS]
+    if tot is None or any(p is None for p in pcts):
+        return out
+    for a, ano in enumerate(ANOS):
+        t = tot[a] if a < len(tot) else None
+        ps = [p[a] if a < len(p) else None for p in pcts]
+        if t is None or any(x is None for x in ps):
+            mot_stats["sem dado"] += 1
+            continue
+        t = int(t)
+        if t == 0:
+            mot_stats["total zero"] += 1
+            for k in range(4):
+                out[k][a] = 0
+            continue
+        cands = [[n for n in range(max(0, math.floor(p * t / 100.0) - 2), math.ceil(p * t / 100.0) + 3)
+                  if round(100.0 * n / t, 2) == p] for p in ps]
+        sols = [c for c in itertools.product(*cands) if sum(c) == t]
+        rec = recontagem.get(cnes, {}).get(str(ano))
+        escolha = None
+        if rec is not None:
+            ns = tuple(rec[k] for k, _rot in MOT_LINHAS)
+            if rec.get("obst") == t and ns in sols:
+                escolha = ns
+                mot_stats["recontagem nos microdados"] += 1
+            else:
+                print(f"    [aviso] recontagem de {cnes} em {ano} não reproduz o painel (total {t}, recontagem {rec}); ignorada")
+        if escolha is None and len(sols) == 1:
+            escolha = sols[0]
+            mot_stats["conjunto único"] += 1
+        if escolha is None:
+            mot_pendentes.append((cnes, ano, t, len(sols)))
+            continue
+        for k in range(4):
+            out[k][a] = escolha[k]
+    return out
+
+
 faltas = {}
 def blocos_de(cnes):
     bl = {}
@@ -243,6 +309,7 @@ def blocos_de(cnes):
         if vals is None:
             faltas.setdefault(rot, []).append(cnes); vals = [None] * len(ANOS)
         bl.setdefault(bloco, []).append([curto, list(vals[:len(ANOS)]), fmt])
+    bl["motivos_n"] = [[curto, vals, "int"] for curto, vals in zip(MOT_CURTO, motivos_abs(cnes))]
     return bl
 
 # ----------------------------------------------------------------------------- 4. maternidades
@@ -277,6 +344,10 @@ print(f"[4] {len(mats)} maternidades | por grupo (com sobreposição): {conta} |
 for rot, lst in faltas.items():
     print(f"    ATENÇÃO linha ausente '{rot[:60]}' em {len(lst)} unidades: {lst[:5]}")
 for a in avisos: print("    ATENÇÃO:", a)
+print(f"[3c] motivos de internação em números absolutos: {mot_stats}")
+if mot_pendentes:
+    sys.exit("ERRO: motivos de internação sem número absoluto determinado (cnes, ano, total, conjuntos possíveis): "
+             f"{mot_pendentes}. Rode Extracao_SIH/67_motivos_absolutos.py UF ANO para esses casos e monte de novo.")
 
 # ----------------------------------------------------------------------------- 5. ficha CNES
 API = "https://apidadosabertos.saude.gov.br/cnes/estabelecimentos/{}"
