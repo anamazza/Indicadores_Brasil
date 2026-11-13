@@ -342,6 +342,7 @@ table.dados.tab-verde th{
 table.dados.tab-verde th:first-child{border-radius:8px 0 0 0}
 table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
 table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
+table.dados tr.pct td{font-style:italic; font-weight:700}
 table.dados.tab-verde tr.total td{background:var(--mint)}
 
 /* ---------------- comparador ---------------- */
@@ -478,7 +479,7 @@ footer a{color:var(--verde-lima)}
       <div class="col-dir">
         <div class="card"><h4 class="titulo-legenda" id="tituloLegenda">—</h4><div class="legenda legenda-v" id="legendaMapa"></div></div>
         <div class="card painel-lateral" id="painelSelecao"></div>
-        <p class="nota-mapa suave" style="font-size:.74rem">Verdes: faixas por quintis (mais escuro = maior). Cesárea: faixas fixas na meta de 35% (azul = na meta; vermelho = acima). Cinza: sem maternidade estratégica.</p>
+        <p class="nota-mapa suave" style="font-size:.74rem">Verdes: faixas por quintis (mais escuro = maior). Cesariana: faixas fixas na meta de 35% (azul = na meta; vermelho = acima). Cinza: sem maternidade estratégica.</p>
       </div>
     </div>
   </div>
@@ -32344,6 +32345,9 @@ const NOTA_PARCIAL = [...PARCIAIS].map(a => {
 }).join(" ");
 const temParcial = idx => idx.some(i => i < NT && PARCIAIS.has(ANOS[i]));
 const MAT = DADOS.maternidades;
+/* Rótulo de exibição "Cesariana" no lugar de "Cesárea" (pedido da coordenação em 13/11/2026). Os arquivos de dados
+   mantêm a chave original; a troca é feita aqui, na carga, e vale para tabelas, gráficos e comparações. */
+MAT.forEach(m => ((m.blocos || {}).via || []).forEach(r => { if(r[0] === "Cesárea") r[0] = "Cesariana"; }));
 const NS = "http://www.w3.org/2000/svg";
 
 const UF_NOME = {AC:"Acre",AL:"Alagoas",AM:"Amazonas",AP:"Amapá",BA:"Bahia",CE:"Ceará",DF:"Distrito Federal",
@@ -32393,8 +32397,8 @@ const INDS = [
    num:(m,a)=> linha(m,"trimestre","Primeiro Trimestre")?.[a],
    den:(m,a)=>{ const t=linha(m,"trimestre","Total")?.[a], i=linha(m,"trimestre","Ignorado")?.[a]||0; return t==null?null:t-i; },
    desc:"Entre quem fez ao menos uma consulta, proporção que começou no primeiro trimestre (exclui ignorados)."},
-  {id:"ces", eixo:"parto", rot:"% de cesárea", curto:"Cesárea", tipo:"pct", sentido:"menor", faixas:[30,35,45,55],
-   num:(m,a)=> linha(m,"via","Cesárea")?.[a],
+  {id:"ces", eixo:"parto", rot:"% de cesariana", curto:"Cesariana", tipo:"pct", sentido:"menor", faixas:[30,35,45,55],
+   num:(m,a)=> linha(m,"via","Cesariana")?.[a],
    den:(m,a)=>{ const t=linha(m,"via","Total")?.[a], i=linha(m,"via","Ignorado")?.[a]||0; return t==null?null:t-i; },
    desc:"Partos cesáreos sobre o total de nascidos vivos com via informada."},
   {id:"enf", eixo:"parto", rot:"% de parto vaginal assistido por enfermeira ou obstetriz", curto:"Enfermeira/obstetriz", tipo:"pct", sentido:"maior", meta:50,
@@ -32417,16 +32421,16 @@ const INDS = [
    num:(m,a)=> somaLinhas(m,"apgar",["0 a 3","4 a 6"],a),
    den:(m,a)=>{ const t=linha(m,"apgar","Total")?.[a], ni=(linha(m,"apgar","N Inf")?.[a]||0)+(linha(m,"apgar","Ign")?.[a]||0); return t==null?null:t-ni; },
    desc:"Apgar de 0 a 6 no 5º minuto, entre nascidos com ≥2500 g e sem anomalias congênitas."},
-  {id:"rg1", eixo:"robson", rot:"Taxa de cesárea no grupo 1 de Robson", curto:"Robson G1", tipo:"robson", g:"Grupo 1", sentido:"menor", meta:10,
+  {id:"rg1", eixo:"robson", rot:"Taxa de cesariana no grupo 1 de Robson", curto:"Robson G1", tipo:"robson", g:"Grupo 1", sentido:"menor", meta:10,
    desc:"Nulíparas, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤10%."},
-  {id:"rg2", eixo:"robson", rot:"Taxa de cesárea no grupo 2 de Robson", curto:"Robson G2", tipo:"robson", g:"Grupo 2", sentido:"menor", meta:35,
-   desc:"Nulíparas, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤35%."},
-  {id:"rg3", eixo:"robson", rot:"Taxa de cesárea no grupo 3 de Robson", curto:"Robson G3", tipo:"robson", g:"Grupo 3", sentido:"menor", meta:3,
-   desc:"Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤3%."},
-  {id:"rg4", eixo:"robson", rot:"Taxa de cesárea no grupo 4 de Robson", curto:"Robson G4", tipo:"robson", g:"Grupo 4", sentido:"menor", meta:15,
-   desc:"Multíparas sem cesárea anterior, feto único cefálico, ≥37 semanas, parto induzido ou cesárea antes do trabalho de parto. Meta ≤15%."},
-  {id:"rg5", eixo:"robson", rot:"Taxa de cesárea no grupo 5 de Robson", curto:"Robson G5", tipo:"robson", g:"Grupo 5", sentido:"menor",
-   desc:"Multíparas com pelo menos uma cesárea anterior, feto único cefálico, ≥37 semanas."}
+  {id:"rg2", eixo:"robson", rot:"Taxa de cesariana no grupo 2 de Robson", curto:"Robson G2", tipo:"robson", g:"Grupo 2", sentido:"menor", meta:35,
+   desc:"Nulíparas, feto único cefálico, ≥37 semanas, parto induzido ou cesariana antes do trabalho de parto. Meta ≤35%."},
+  {id:"rg3", eixo:"robson", rot:"Taxa de cesariana no grupo 3 de Robson", curto:"Robson G3", tipo:"robson", g:"Grupo 3", sentido:"menor", meta:3,
+   desc:"Multíparas sem cesariana anterior, feto único cefálico, ≥37 semanas, trabalho de parto espontâneo. Meta ≤3%."},
+  {id:"rg4", eixo:"robson", rot:"Taxa de cesariana no grupo 4 de Robson", curto:"Robson G4", tipo:"robson", g:"Grupo 4", sentido:"menor", meta:15,
+   desc:"Multíparas sem cesariana anterior, feto único cefálico, ≥37 semanas, parto induzido ou cesariana antes do trabalho de parto. Meta ≤15%."},
+  {id:"rg5", eixo:"robson", rot:"Taxa de cesariana no grupo 5 de Robson", curto:"Robson G5", tipo:"robson", g:"Grupo 5", sentido:"menor",
+   desc:"Multíparas com pelo menos uma cesariana anterior, feto único cefálico, ≥37 semanas."}
 ];
 const EIXOS = [
   {id:"geral", rot:"Visão geral"}, {id:"prenatal", rot:"Pré-natal"},
@@ -32524,7 +32528,7 @@ function limiaresQuintis(vals){
 function corIndicador(v, ind, lims){
   if(v == null) return "var(--sem-dado)";
   if(ind.classifica) return ind.classifica(v);       // faixas fixas com cores próprias
-  if(ind.sentido === "menor" && ind.faixas){         // faixas fixas (cesárea)
+  if(ind.sentido === "menor" && ind.faixas){         // faixas fixas (cesariana)
     const f = ind.faixas;
     const cores = ["#2471A3","#7FB3D5","#F5B041","#E67E22","#C0392B"];
     let i = f.findIndex(x => v <= x); if(i < 0) i = f.length;
@@ -33004,7 +33008,7 @@ function desenhaPontos(){
       <div>${esc(m.territorio.municipio)} · ${m.uf} · CNES ${m.cnes}</div>
       <div style="color:${cor.borda}; font-weight:700">${esc(rotuloConjuntos(m))}</div>
       <div style="margin-top:.25rem">Nascidos vivos ${nomeAno(ULT)}: <b>${fmtInt(nv)}</b></div>
-      <div><u>Via de nascimento</u>: Cesárea <b>${fmtPct(ces)}</b> · Vaginal: <b>${ces == null ? "—" : fmtPct(100 - ces)}</b></div>
+      <div><u>Via de nascimento</u>: Cesariana <b>${fmtPct(ces)}</b> · Vaginal: <b>${ces == null ? "—" : fmtPct(100 - ces)}</b></div>
       <div>Parto vaginal por enfermeira/obstetriz: <b>${fmtPct(enf)}</b> <span style="color:#4E6A5C">(meta ≥50%)</span></div>
       <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
@@ -33309,7 +33313,16 @@ function tabelaBloco(mt, bloco, opts = {}){
   }).join("");
   return `<div class="tab-wrap"><table class="dados" data-bloco="${bloco}"${opts.pct ? ' data-pct="1"' : ""}>
     <thead><tr><th></th>${thsAno()}</tr></thead>
-    <tbody>${rows}</tbody></table></div>`;
+    <tbody>${rows}${opts.rodape || ""}</tbody></table></div>`;
+}
+/* Via de nascimento: percentual de cesariana e de parto vaginal em cada período e no acumulado. Mesmo cálculo do
+   indicador "% de cesariana": denominador = nascidos vivos com via de nascimento informada (exclui "Ignorado"). */
+function linhasPctVia(mt){
+  const vag = linha(mt, "via", "Parto Vaginal") || [], ces = linha(mt, "via", "Cesariana") || [];
+  const tot = linha(mt, "via", "Total") || [], ign = linha(mt, "via", "Ignorado") || [];
+  const cel = num => tot.map((t, a) => { const den = t == null ? null : t - (ign[a] || 0);
+    return `<td class="mono">${num[a] != null && den ? fmtPct(num[a] / den * 100) : "—"}</td>`; }).join("");
+  return `<tr class="pct"><td>% Cesariana</td>${cel(ces)}</tr><tr class="pct"><td>% Parto vaginal</td>${cel(vag)}</tr>`;
 }
 /* cabeçalhos de ano como botões (abre o gráfico do ano) */
 function thsAno(comTotal = true){
@@ -33690,11 +33703,11 @@ function desenhaDossie(){
     <div class="card">${cardTrimestreHTML(mt)}</div>
     <div class="card"><h3>Peso ao nascer</h3>${tabelaBloco(mt, "peso")}<p class="fonte">${FONTE_SINASC}</p></div>
     <div class="card"><h3>Idade gestacional</h3>${tabelaBloco(mt, "gestacao")}<p class="fonte">${FONTE_SINASC}</p></div>
-    <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via")}<p class="fonte">${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via", {rodape: linhasPctVia(mt)})}<p class="fonte">Percentuais sobre os nascidos vivos com via de nascimento informada (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
     <div class="card"><h3>Assistência ao parto vaginal</h3>${tabelaBloco(mt, "assistencia")}<p class="fonte">${FONTE_SINASC} Somente partos vaginais. Meta: ≥50% por enfermeira/obstetriz.</p></div>
     <div class="card"><h3>Apgar no 5º minuto</h3>${tabelaBloco(mt, "apgar")}<p class="fonte">${FONTE_SINASC} Somente ≥2500 g e sem anomalias congênitas.</p></div>
     <div class="card"><h3>Grupos de Robson: nascidos vivos</h3>${tabelaBloco(mt, "robson_n")}<p class="fonte">${FONTE_SINASC}</p></div>
-    <div class="card full"><h3>Taxa de cesárea segundo grupo de Robson</h3>
+    <div class="card full"><h3>Taxa de cesariana segundo grupo de Robson</h3>
       ${tabelaBloco(mt, "robson_taxa", {pct:true, metaCol:true, metas:{"Grupo 1":10,"Grupo 2":35,"Grupo 3":3,"Grupo 4":15}})}
       <p class="fonte">${FONTE_SINASC} Metas: G1 ≤10% · G2 ≤35% · G3 ≤3% · G4 ≤15% (verde = na meta, vermelho = acima).</p></div>
     ${assistenciaisHTML(mt)}
@@ -33799,7 +33812,7 @@ function desenhaComparador(){
     <div class="tab-wrap"><table class="comp">
       <thead><tr><th>Indicador</th>${lst.map((m, i) => `<th style="color:${cores[i]}">${esc(m.nome.length > 26 ? m.nome.slice(0,25) + "…" : m.nome)}<br><span class="suave" style="font-weight:400">${m.media ? m.sub : m.uf}</span></th>`).join("")}</tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">“Melhor” considera o sentido de cada indicador (menor cesárea é melhor; mais pré-natal é melhor). Indicadores de perfil (peso, prematuridade) não têm destaque.${temMedia ? " A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade) — e não participa do destaque. Detalhes na Metodologia." : ""}</p>
+    <p class="fonte">“Melhor” considera o sentido de cada indicador (menor taxa de cesariana é melhor; mais pré-natal é melhor). Indicadores de perfil (peso, prematuridade) não têm destaque.${temMedia ? " A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade) — e não participa do destaque. Detalhes na Metodologia." : ""}</p>
   </div>
   <div class="grid-2" style="margin-top:1.1rem">
     <div class="card"><h3 style="display:flex; justify-content:space-between; align-items:center; gap:.6rem">Série comparada <select id="selIndComp"></select></h3><div id="grafComp"></div></div>
@@ -33983,9 +33996,9 @@ function desenhaMetodologia(){
     <div class="card" style="margin-top:1.4rem">
       <h3>Agregações e faixas de cores</h3>
       <p class="suave" style="font-size:.9rem; margin-top:.5rem">
-        Ao agregar territórios, somam-se numeradores e denominadores das maternidades da seleção; a taxa de cesárea por grupo de Robson é ponderada pelo número de nascidos vivos do grupo em cada unidade.
+        Ao agregar territórios, somam-se numeradores e denominadores das maternidades da seleção; a taxa de cesariana por grupo de Robson é ponderada pelo número de nascidos vivos do grupo em cada unidade.
         Nos mapas, os indicadores usam quintis calculados sobre os territórios visíveis no recorte atual, em escala de verdes (mais escuro = maior), com as faixas de valores exibidas na legenda.
-        A taxa de cesárea usa faixas fixas ancoradas na meta de 35% (azul = na meta ou abaixo; vermelho = acima).
+        A taxa de cesariana usa faixas fixas ancoradas na meta de 35% (azul = na meta ou abaixo; vermelho = acima).
         A retenção no território de residência usa as faixas fixas &gt;95 · 90-95 · 75-89 · 50-74 · &lt;50.
         Territórios em cinza não possuem maternidade estratégica ou não têm dados na planilha.
       </p>
