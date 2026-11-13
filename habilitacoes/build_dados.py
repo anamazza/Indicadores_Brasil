@@ -30,9 +30,12 @@ PAINEIS = ["mortalidade", "internacao", "nascimentos"]          # ordem de prior
 GRUPOS = {"apoiada": "Maternidades apoiadas (estratégicas)", "ebserh": "Unidades EBSERH", "qualineo": "QUALINEO 2026/2027"}
 NORMALIZA_GRUPO = {"estrategica": "apoiada", "apoiadas": "apoiada"}
 # Unidades retiradas deste painel por decisão da coordenação (continuam nos painéis de origem até serem retiradas lá).
-EXCLUIR = {
-    "0013846": "Hospital do Rocio (PR): retirado em 30/10/2026 a pedido da coordenação; anexo só do painel de Mortalidade",
-}
+# (O Hospital do Rocio/PR, 0013846, foi retirado daqui em 30/10/2026 e, em 13/11/2026, também do painel de Mortalidade.)
+EXCLUIR = {}
+# Complexos (13/11/2026, igualação das unidades entre os painéis): códigos CNES que formam UMA unidade. Chave = código
+# secundário, valor = código principal (o da lista oficial). FAMEMA, Marília/SP: 2025507 (hospital adulto, usado nos
+# painéis de Nascimentos e de Internação) e 2025523 (materno-infantil, lista oficial e painel de Mortalidade).
+COMPLEXOS = {"2025507": "2025523"}
 
 
 def _carrega(painel):
@@ -163,11 +166,16 @@ def consolidar(verboso=True):
     for p in PAINEIS:
         consultas[p] = cnes[p].get("_atualizado_em")
         for u in dados[p]["maternidades"]:
-            c = u["cnes"]
-            if c in EXCLUIR:
+            c0 = u["cnes"]
+            if c0 in EXCLUIR:
                 continue
-            reg = unidades.setdefault(c, {"cnes": c, "paineis": []})
-            reg["paineis"].append(p)
+            c = COMPLEXOS.get(c0, c0)                    # os códigos de um complexo formam uma única unidade
+            reg = unidades.setdefault(c, {"cnes": c, "paineis": [], "codigos": [c]})
+            if p not in reg["paineis"]:
+                reg["paineis"].append(p)
+            for cod in [c0] + list(u.get("cnesComplexo") or []):
+                if cod not in reg["codigos"]:
+                    reg["codigos"].append(cod)
             if "nome" not in reg:                      # primeiro painel na ordem de prioridade define nome e grupos
                 t = u.get("territorio") or {}
                 reg.update({
@@ -188,14 +196,17 @@ def consolidar(verboso=True):
                 reg["oficial"] = u.get("oficial")
     # ficha e habilitações: a cópia mais recente entre os três painéis
     fichas = {}
-    for c in unidades:
+    for c in sorted({cod for reg in unidades.values() for cod in reg["codigos"]}):
         candidatos = [cnes[p][c] for p in PAINEIS if c in cnes[p] and cnes[p][c]]
         if not candidatos:
             continue
         candidatos.sort(key=lambda i: (i.get("data_atualizacao") or "", len(i.get("habilitacoes") or [])), reverse=True)
         fichas[c] = candidatos[0]
     for c, reg in unidades.items():
-        info = fichas.get(c)
+        codigos = sorted(reg.pop("codigos"))
+        if len(codigos) > 1:
+            reg["complexo"] = codigos
+        info = fichas.get(c) or next((fichas[x] for x in codigos if x in fichas), None)
         if oficial:                                   # lista oficial manda nos grupos e na marca de anexo
             if c in oficial:
                 reg["grupos"] = [g for g in GRUPOS if g in oficial[c]["grupos"]]
@@ -206,7 +217,13 @@ def consolidar(verboso=True):
         elif reg.get("oficial") is None:
             reg["oficial"] = True
         reg["ficha"] = _ficha(info) if info else None
-        habs = [_habilitacao(h) for h in (info.get("habilitacoes") or [])] if info else []
+        habs = []
+        for cod in codigos:                           # complexo: habilitações de todos os códigos, cada uma com o seu
+            for h in ((fichas.get(cod) or {}).get("habilitacoes") or []):
+                hh = _habilitacao(h)
+                if len(codigos) > 1:
+                    hh["cnes"] = cod
+                habs.append(hh)
         habs.sort(key=lambda h: (h["co"], h["ini"] or ""))
         reg["habilitacoes"] = habs
         reg["paineis"] = sorted(reg["paineis"], key=["nascimentos", "internacao", "mortalidade"].index)
@@ -245,8 +262,9 @@ def consolidar(verboso=True):
     # cnes_dados.json consolidado (ficha completa, mesmo formato dos outros painéis)
     saida_cnes = {"_atualizado_em": consulta}
     for reg in lista:
-        if reg["cnes"] in fichas:
-            saida_cnes[reg["cnes"]] = fichas[reg["cnes"]]
+        for cod in (reg.get("complexo") or [reg["cnes"]]):
+            if cod in fichas:
+                saida_cnes[cod] = fichas[cod]
     with open(os.path.join(BASE, "cnes_dados.json"), "w", encoding="utf-8") as fh:
         json.dump(saida_cnes, fh, ensure_ascii=False, indent=1)
     with open(os.path.join(BASE, "dados_habilitacoes.js"), "w", encoding="utf-8") as fh:

@@ -94,7 +94,13 @@ ADICIONAIS = [
     # por grupo de 09/09, por isso entram como o Iauarete (estrategicas/apoiadas)
     ("estrategica", "INDICADORES MATERNIDADES ADICIONAIS MA CE SP_2019_2025.xlsx",
      "_config_adicionais_ma_ce_sp"),
+    # 13/11/2026: igualacao das unidades entre os paineis (pedido da coordenacao). CISAM e Hospital da Mulher do
+    # Recife constam da lista oficial de 09/09 (QUALINEO) e ja estavam nos paineis de Internacao e de Mortalidade;
+    # a planilha de indicadores e os perfis foram gerados em 12/09 (lote ADICIONAIS PE), mas nao tinham entrado aqui
+    ("qualineo", "INDICADORES MATERNIDADES ADICIONAIS PE_2019_2025.xlsx", "_config_adicionais_pe"),
 ]
+# nome de exibicao igual ao ja publicado nos paineis de Internacao e de Mortalidade
+NOME_NO_PAINEL = {"2711613": "CISAM - Centro Integrado de Saúde Amaury de Medeiros"}
 
 # coordenadas de unidades fora do acervo AIH (sem producao de parto na AIH):
 # Iauarete = ficha CNES (API apidadosabertos, 28/08/2026)
@@ -131,7 +137,7 @@ for conjunto, xlsx, cfg_nome in ADICIONAIS:
             if conjunto not in ja["conjuntos"]: ja["conjuntos"].append(conjunto)
             continue
         uf = cfg.UF_POR_CNES[cnes]
-        mt = {"cnes": cnes, "nome": cfg.NOME_EXIBICAO[cnes], "nomePlanilha": nome_pl,
+        mt = {"cnes": cnes, "nome": NOME_NO_PAINEL.get(cnes, cfg.NOME_EXIBICAO[cnes]), "nomePlanilha": nome_pl,
               "uf": uf, "regiao": aba,
               "territorio": {"municipio": terr.get("municipio", ""),
                              "regiao_saude": terr.get("regiao_saude", ""),

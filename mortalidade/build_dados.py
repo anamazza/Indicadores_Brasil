@@ -30,8 +30,17 @@ CSVS_IND = [(os.path.join(PROJ, "Pipeline_Python", "indicadores_recalculados.csv
             # 18/10/2026: 1º semestre de 2026 (óbitos de janeiro a junho, pela data do óbito; SIM preliminar de 28/09/2026,
             # 27 UFs + DOFET26; nascidos vivos contados no SINASC 2026 preliminar). Mesmas regras (calcula_periodo.py é
             # gerado a partir do calcula_indicadores.py). Período parcial: não entra no acumulado.
-            (os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv"), "2026-10-18")]
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv"), "2026-10-18"),
+            # 13/11/2026: igualação das unidades entre os painéis (pedido da coordenação). Hospital Dr. Claudionor Couto
+            # Roriz (2495279, Ji-Paraná/RO), que já estava nos painéis de Nascimentos e de Internação: 2019 a 2025 e
+            # 1º semestre de 2026, SIM das 27 UFs + DOFET, mesmas regras (calcula_adicional_2026-11.py, que confere
+            # antes a unidade de controle 4001303 contra os valores publicados).
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_adicional_2026-11.csv"), "2026-11-13")]
 PERIODO_CSV = {os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv")}   # não sobrescreve o extraidoEm das unidades
+# 13/11/2026: o Hospital do Rocio (PR, 0013846) sai do painel. Era a única unidade que só existia aqui; com a saída,
+# os quatro painéis (Nascimentos, Internação, Mortalidade e Habilitações) passam a ter as mesmas unidades.
+# As linhas dele continuam nos CSV de indicadores, apenas não entram no painel.
+EXCLUIR = {"0013846"}
 LISTA_OFICIAL = os.path.join(PROJ, "lista_oficial_116.csv")    # LISTA MATERNIDADES POR GRUPO_09092026
 RELATORIO = os.path.join(PROJ, "Apresentacoes_Mortalidade_2026-09", "relatorio_geracao.csv")
 PAINEL_NV = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Painel_2026_Novo")   # leitura apenas
@@ -63,9 +72,6 @@ for reg, ufs in {"Norte":["AC","AM","AP","PA","RO","RR","TO"],"Nordeste":["AL","
 
 # unidades fora do painel NV: metadados de território (região de saúde / macro como nas malhas)
 EXTRA_META = {
-    "0013846": {"nome": "Hospital do Rocio", "uf": "PR",
-                "territorio": {"municipio": "Campo Largo", "regiao_saude": "2ª RS METROPOLITANA",
-                               "macro": "MACRORREGIONAL LESTE", "uf": "Paraná"}},
     "2711613": {"nome": "CISAM - Centro Integrado de Saúde Amaury de Medeiros", "uf": "PE",
                 "territorio": {"municipio": "Recife", "regiao_saude": "I REGIÃO DE SAÚDE",
                                "macro": "METROPOLITANA", "uf": "Pernambuco"}},
@@ -198,6 +204,8 @@ for caminho, data_extracao in CSVS_IND:
             if not k or ROTULOS_TAXA.match(r["rotulo"]):
                 continue
             cnes = r["cnes"].zfill(7); ano = int(r["ano"])
+            if cnes in EXCLUIR:
+                continue
             bl = por_cnes.setdefault(cnes, {})
             sec = bl.setdefault(k, {})
             sec.setdefault(r["rotulo"], [None] * len(ANOS))[ANOS.index(ano)] = to_num(r["n"])
@@ -345,6 +353,8 @@ def busca(url):
 saida_cnes_path = os.path.join(BASE, "cnes_dados.json")
 saida_cnes = json.load(open(saida_cnes_path, encoding="utf-8")) if os.path.exists(saida_cnes_path) else {}
 saida_cnes.setdefault("_atualizado_em", cnes_nv.get("_atualizado_em", date.today().isoformat()))
+for c in EXCLUIR:                                      # unidade retirada do painel: a ficha sai junto
+    saida_cnes.pop(c, None)
 buscadas = 0
 for m in mats:
     c = m["cnes"]

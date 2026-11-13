@@ -1,0 +1,407 @@
+# Diferenças · habilitacoes · 2026-11-13
+
+Comparação de `habilitacoes/dados_habilitacoes.js` (pasta de trabalho espelhada) com a versão publicada (HEAD).
+
+- Unidades que entraram: 0 · saíram: 1 · com valores alterados: 5 · valores alterados: 386
+- Valores alterados por bloco: habilitacoes[10] (9), habilitacoes[11] (9), habilitacoes[12] (9), habilitacoes[13] (9), habilitacoes[14] (9), habilitacoes[15] (9), habilitacoes[16] (9), habilitacoes[17] (9), habilitacoes[18] (9), habilitacoes[19] (9), habilitacoes[20] (9), habilitacoes[21] (9), habilitacoes[22] (9), habilitacoes[23] (9), habilitacoes[24] (9)
+
+- Cabeçalho `excluidas`: {"0013846": "Hospital do Rocio (PR): ... → {}
+- Cabeçalho `tipos`: [{"co": "0101", "ds": "CENTRO DE REFE... → [{"co": "0101", "ds": "CENTRO DE REFE...
+- Cabeçalho `unidadesPorPainel`: {"mortalidade": 120, "internacao": 11... → {"mortalidade": 120, "internacao": 12...
+- **Saiu** 2025507 · Hospital das Clínicas da FAMEMA (SP)
+
+### 2025523 · Hospital das Clínicas da FAMEMA (complexo HCFAMEMA) (SP) — 374 valor(es)
+- `habilitacoes[0].cnes`: "∅" → "2025507"
+- `habilitacoes[10].cnes`: "∅" → "2025507"
+- `habilitacoes[10].co`: "∅" → "1301"
+- `habilitacoes[10].ds`: "∅" → "INTERNACAO DOMICILIAR"
+- `habilitacoes[10].dtPortaria`: "∅" → "05/01/2007"
+- `habilitacoes[10].fim`: "∅" → "99/9999"
+- `habilitacoes[10].ini`: "∅" → "08/2003"
+- `habilitacoes[10].leitos`: "∅" → 0
+- `habilitacoes[10].origem`: "∅" → null
+- `habilitacoes[10].portaria`: "∅" → "677"
+- `habilitacoes[11].cnes`: "∅" → "2025507"
+- `habilitacoes[11].co`: "∅" → "1404"
+- `habilitacoes[11].ds`: "∅" → "HOSPITAL AMIGO DA CRIANCA"
+- `habilitacoes[11].dtPortaria`: "∅" → "09/01/2019"
+- `habilitacoes[11].fim`: "∅" → "99/9999"
+- `habilitacoes[11].ini`: "∅" → "12/2018"
+- `habilitacoes[11].leitos`: "∅" → 0
+- `habilitacoes[11].origem`: "∅" → null
+- `habilitacoes[11].portaria`: "∅" → "PT SAS/MS N°23"
+- `habilitacoes[12].cnes`: "∅" → "2025507"
+- `habilitacoes[12].co`: "∅" → "1420"
+- `habilitacoes[12].ds`: "∅" → "HOSPITAL DE REFERENCIA A GESTACAO E ...
+- `habilitacoes[12].dtPortaria`: "∅" → "26/06/2025"
+- `habilitacoes[12].fim`: "∅" → "99/9999"
+- `habilitacoes[12].ini`: "∅" → "08/2025"
+- `habilitacoes[12].leitos`: "∅" → 1
+- `habilitacoes[12].origem`: "∅" → null
+- `habilitacoes[12].portaria`: "∅" → "2902/SAES/MS"
+- `habilitacoes[13].cnes`: "∅" → "2025507"
+- `habilitacoes[13].co`: "∅" → "1601"
+- `habilitacoes[13].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
+- `habilitacoes[13].dtPortaria`: "∅" → "10/11/2008"
+- `habilitacoes[13].fim`: "∅" → "99/9999"
+- `habilitacoes[13].ini`: "∅" → "01/2008"
+- `habilitacoes[13].leitos`: "∅" → 0
+- `habilitacoes[13].origem`: "∅" → null
+- `habilitacoes[13].portaria`: "∅" → "PT SAS 646"
+- `habilitacoes[14].cnes`: "∅" → "2025507"
+- `habilitacoes[14].co`: "∅" → "1615"
+- `habilitacoes[14].ds`: "∅" → "CENTRO DE ATENDIMENTO DE URGENCIA TI...
+- `habilitacoes[14].dtPortaria`: "∅" → "16/09/2015"
+- `habilitacoes[14].fim`: "∅" → "99/9999"
+- `habilitacoes[14].ini`: "∅" → "09/2015"
+- `habilitacoes[14].leitos`: "∅" → 0
+- `habilitacoes[14].origem`: "∅" → null
+- `habilitacoes[14].portaria`: "∅" → "SAS 870"
+- `habilitacoes[15].cnes`: "∅" → "2025507"
+- `habilitacoes[15].co`: "∅" → "1616"
+- `habilitacoes[15].ds`: "∅" → "CENTRO DE ATENDIMENTO DE URGENCIA TI...
+- `habilitacoes[15].dtPortaria`: "∅" → "29/05/2025"
+- `habilitacoes[15].fim`: "∅" → "99/9999"
+- `habilitacoes[15].ini`: "∅" → "05/1995"
+- `habilitacoes[15].leitos`: "∅" → 0
+- `habilitacoes[15].origem`: "∅" → null
+- `habilitacoes[15].portaria`: "∅" → "GM/MS 7031"
+- `habilitacoes[16].cnes`: "∅" → "2025507"
+- `habilitacoes[16].co`: "∅" → "1713"
+- `habilitacoes[16].ds`: "∅" → "CACON COM SERVICO DE ONCOLOGIA PEDIA...
+- `habilitacoes[16].dtPortaria`: "∅" → "28/03/2017"
+- `habilitacoes[16].fim`: "∅" → "99/9999"
+- `habilitacoes[16].ini`: "∅" → "03/2008"
+- `habilitacoes[16].leitos`: "∅" → 0
+- `habilitacoes[16].origem`: "∅" → null
+- `habilitacoes[16].portaria`: "∅" → "PT SAS 630"
+- `habilitacoes[17].cnes`: "∅" → "2025507"
+- `habilitacoes[17].co`: "∅" → "1901"
+- `habilitacoes[17].ds`: "∅" → "LAQUEADURA"
+- `habilitacoes[17].dtPortaria`: "∅" → "25/08/2014"
+- `habilitacoes[17].fim`: "∅" → "99/9999"
+- `habilitacoes[17].ini`: "∅" → "11/2000"
+- `habilitacoes[17].leitos`: "∅" → 0
+- `habilitacoes[17].origem`: "∅" → "P"
+- `habilitacoes[17].portaria`: "∅" → "PORT CPS-40 DE 16--11-2000"
+- `habilitacoes[18].cnes`: "∅" → "2025523"
+- `habilitacoes[18].co`: "∅" → "1901"
+- `habilitacoes[18].ds`: "∅" → "LAQUEADURA"
+- `habilitacoes[18].dtPortaria`: "∅" → "25/08/2014"
+- `habilitacoes[18].fim`: "∅" → "99/9999"
+- `habilitacoes[18].ini`: "∅" → "11/2000"
+- `habilitacoes[18].leitos`: "∅" → 0
+- `habilitacoes[18].origem`: "∅" → "P"
+- `habilitacoes[18].portaria`: "∅" → "PORT CPS-40 DE 16-11-2000"
+- `habilitacoes[19].cnes`: "∅" → "2025507"
+- `habilitacoes[19].co`: "∅" → "1902"
+- `habilitacoes[19].ds`: "∅" → "VASECTOMIA"
+- `habilitacoes[19].dtPortaria`: "∅" → "25/08/2014"
+- `habilitacoes[19].fim`: "∅" → "99/9999"
+- `habilitacoes[19].ini`: "∅" → "11/2000"
+- `habilitacoes[19].leitos`: "∅" → 0
+- `habilitacoes[19].origem`: "∅" → "P"
+- `habilitacoes[19].portaria`: "∅" → "PORT CPS-40 DE 16-11-2000"
+- `habilitacoes[1].cnes`: "∅" → "2025523"
+- `habilitacoes[1].co`: "1101" → "0101"
+- `habilitacoes[1].ds`: "SERVICO HOSPITALAR PARA TRATAMENTO A... → "CENTRO DE REFERENCIA EM ATENCAO A SA...
+- `habilitacoes[20].cnes`: "∅" → "2025507"
+- `habilitacoes[20].co`: "∅" → "2001"
+- `habilitacoes[20].ds`: "∅" → "PROGRAMA DE ASSISTENCIA VENTILADORA ...
+- `habilitacoes[20].dtPortaria`: "∅" → "16/11/2010"
+- `habilitacoes[20].fim`: "∅" → "99/9999"
+- `habilitacoes[20].ini`: "∅" → "11/2010"
+- `habilitacoes[20].leitos`: "∅" → 0
+- `habilitacoes[20].origem`: "∅" → null
+- `habilitacoes[20].portaria`: "∅" → "SAS 370"
+- `habilitacoes[21].cnes`: "∅" → "2025507"
+- `habilitacoes[21].co`: "∅" → "2201"
+- `habilitacoes[21].ds`: "∅" → "CENTRO DE REFERENCIA DE REABILITACAO...
+- `habilitacoes[21].dtPortaria`: "∅" → "09/01/2019"
+- `habilitacoes[21].fim`: "∅" → "99/9999"
+- `habilitacoes[21].ini`: "∅" → "12/2018"
+- `habilitacoes[21].leitos`: "∅" → 0
+- `habilitacoes[21].origem`: "∅" → null
+- `habilitacoes[21].portaria`: "∅" → "PT SAS/MS N°23"
+- `habilitacoes[22].cnes`: "∅" → "2025507"
+- `habilitacoes[22].co`: "∅" → "2204"
+- `habilitacoes[22].ds`: "∅" → "CENTRO DE REABILITAÇÃO AUDITIVA NA M...
+- `habilitacoes[22].dtPortaria`: "∅" → "30/12/2013"
+- `habilitacoes[22].fim`: "∅" → "99/9999"
+- `habilitacoes[22].ini`: "∅" → "01/2014"
+- `habilitacoes[22].leitos`: "∅" → 0
+- `habilitacoes[22].origem`: "∅" → null
+- `habilitacoes[22].portaria`: "∅" → "SAS 1462"
+- `habilitacoes[23].cnes`: "∅" → "2025507"
+- `habilitacoes[23].co`: "∅" → "2205"
+- `habilitacoes[23].ds`: "∅" → "CENTRO DE REABILITAÇÃO AUDITIVA NA A...
+- `habilitacoes[23].dtPortaria`: "∅" → "30/12/2013"
+- `habilitacoes[23].fim`: "∅" → "99/9999"
+- `habilitacoes[23].ini`: "∅" → "01/2014"
+- `habilitacoes[23].leitos`: "∅" → 0
+- `habilitacoes[23].origem`: "∅" → null
+- `habilitacoes[23].portaria`: "∅" → "SAS 1462"
+- `habilitacoes[24].cnes`: "∅" → "2025507"
+- `habilitacoes[24].co`: "∅" → "2301"
+- `habilitacoes[24].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
+- `habilitacoes[24].dtPortaria`: "∅" → "14/04/2009"
+- `habilitacoes[24].fim`: "∅" → "99/9999"
+- `habilitacoes[24].ini`: "∅" → "06/2009"
+- `habilitacoes[24].leitos`: "∅" → 0
+- `habilitacoes[24].origem`: "∅" → null
+- `habilitacoes[24].portaria`: "∅" → "SAS 120 RETIF"
+- `habilitacoes[25].cnes`: "∅" → "2025523"
+- `habilitacoes[25].co`: "∅" → "2301"
+- `habilitacoes[25].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
+- `habilitacoes[25].dtPortaria`: "∅" → "22/07/2010"
+- `habilitacoes[25].fim`: "∅" → "99/9999"
+- `habilitacoes[25].ini`: "∅" → "07/2010"
+- `habilitacoes[25].leitos`: "∅" → 0
+- `habilitacoes[25].origem`: "∅" → null
+- `habilitacoes[25].portaria`: "∅" → "SAS 349"
+- `habilitacoes[26].cnes`: "∅" → "2025507"
+- `habilitacoes[26].co`: "∅" → "2304"
+- `habilitacoes[26].ds`: "∅" → "ENTERAL E PARENTERAL"
+- `habilitacoes[26].dtPortaria`: "∅" → "14/04/2009"
+- `habilitacoes[26].fim`: "∅" → "99/9999"
+- `habilitacoes[26].ini`: "∅" → "01/2008"
+- `habilitacoes[26].leitos`: "∅" → 0
+- `habilitacoes[26].origem`: "∅" → null
+- `habilitacoes[26].portaria`: "∅" → "SAS 120 RETIF"
+- `habilitacoes[27].cnes`: "∅" → "2025523"
+- `habilitacoes[27].co`: "∅" → "2304"
+- `habilitacoes[27].ds`: "∅" → "ENTERAL E PARENTERAL"
+- `habilitacoes[27].dtPortaria`: "∅" → "22/07/2010"
+- `habilitacoes[27].fim`: "∅" → "99/9999"
+- `habilitacoes[27].ini`: "∅" → "07/2010"
+- `habilitacoes[27].leitos`: "∅" → 0
+- `habilitacoes[27].origem`: "∅" → null
+- `habilitacoes[27].portaria`: "∅" → "SAS 349"
+- `habilitacoes[28].cnes`: "∅" → "2025507"
+- `habilitacoes[28].co`: "∅" → "2407"
+- `habilitacoes[28].ds`: "∅" → "TRANSPLANTE DE CORNEA/ESCLERA"
+- `habilitacoes[28].dtPortaria`: "∅" → "07/10/2024"
+- `habilitacoes[28].fim`: "∅" → "10/2028"
+- `habilitacoes[28].ini`: "∅" → "12/2022"
+- `habilitacoes[28].leitos`: "∅" → 0
+- `habilitacoes[28].origem`: "∅" → null
+- `habilitacoes[28].portaria`: "∅" → "2147/SAES/MS"
+- `habilitacoes[29].cnes`: "∅" → "2025507"
+- `habilitacoes[29].co`: "∅" → "2413"
+- `habilitacoes[29].ds`: "∅" → "BANCO DE TECIDO OCULAR HUMANO"
+- `habilitacoes[29].dtPortaria`: "∅" → "26/02/2025"
+- `habilitacoes[29].fim`: "∅" → "02/2027"
+- `habilitacoes[29].ini`: "∅" → "01/2023"
+- `habilitacoes[29].leitos`: "∅" → 0
+- `habilitacoes[29].origem`: "∅" → null
+- `habilitacoes[29].portaria`: "∅" → "SAES/MS 2585"
+- `habilitacoes[2].cnes`: "∅" → "2025507"
+- `habilitacoes[2].co`: "1901" → "0203"
+- `habilitacoes[2].ds`: "LAQUEADURA" → "ASSISTÊNCIA DE ALTA COMPLEXIDADE AO ...
+- `habilitacoes[2].dtPortaria`: "25/08/2014" → "29/12/2016"
+- `habilitacoes[2].ini`: "11/2000" → "12/2016"
+- `habilitacoes[2].origem`: "P" → null
+- `habilitacoes[2].portaria`: "PORT CPS-40 DE 16-11-2000" → "PT GM 3252"
+- `habilitacoes[30].cnes`: "∅" → "2025507"
+- `habilitacoes[30].co`: "∅" → "2420"
+- `habilitacoes[30].ds`: "∅" → "RETIRADA DE ORGAOS E TECIDOS"
+- `habilitacoes[30].dtPortaria`: "∅" → "07/10/2024"
+- `habilitacoes[30].fim`: "∅" → "10/2028"
+- `habilitacoes[30].ini`: "∅" → "12/2010"
+- `habilitacoes[30].leitos`: "∅" → 0
+- `habilitacoes[30].origem`: "∅" → null
+- `habilitacoes[30].portaria`: "∅" → "2147/SAES/MS"
+- `habilitacoes[31].cnes`: "∅" → "2025507"
+- `habilitacoes[31].co`: "∅" → "2422"
+- `habilitacoes[31].ds`: "∅" → "TRANSPLANTE DE TECIDO MÚSCULO ESQUEL...
+- `habilitacoes[31].dtPortaria`: "∅" → "04/09/2023"
+- `habilitacoes[31].fim`: "∅" → "08/2027"
+- `habilitacoes[31].ini`: "∅" → "08/2019"
+- `habilitacoes[31].leitos`: "∅" → 0
+- `habilitacoes[31].origem`: "∅" → null
+- `habilitacoes[31].portaria`: "∅" → "709/SAES/MS"
+- `habilitacoes[32].cnes`: "∅" → "2025507"
+- `habilitacoes[32].co`: "∅" → "2501"
+- `habilitacoes[32].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
+- `habilitacoes[32].dtPortaria`: "∅" → "30/03/2009"
+- `habilitacoes[32].fim`: "∅" → "99/9999"
+- `habilitacoes[32].ini`: "∅" → "01/2008"
+- `habilitacoes[32].leitos`: "∅" → 0
+- `habilitacoes[32].origem`: "∅" → null
+- `habilitacoes[32].portaria`: "∅" → "SAS90RETF"
+- `habilitacoes[33].cnes`: "∅" → "2025507"
+- `habilitacoes[33].co`: "∅" → "2601"
+- `habilitacoes[33].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA ADULTO ...
+- `habilitacoes[33].dtPortaria`: "∅" → "04/08/2022"
+- `habilitacoes[33].fim`: "∅" → "99/9999"
+- `habilitacoes[33].ini`: "∅" → "08/2003"
+- `habilitacoes[33].leitos`: "∅" → 40
+- `habilitacoes[33].origem`: "∅" → null
+- `habilitacoes[33].portaria`: "∅" → "3209/GM/MS"
+- `habilitacoes[34].cnes`: "∅" → "2025507"
+- `habilitacoes[34].co`: "∅" → "2603"
+- `habilitacoes[34].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA PEDIÁTR...
+- `habilitacoes[34].dtPortaria`: "∅" → "09/01/2019"
+- `habilitacoes[34].fim`: "∅" → "99/9999"
+- `habilitacoes[34].ini`: "∅" → "12/2018"
+- `habilitacoes[34].leitos`: "∅" → 7
+- `habilitacoes[34].origem`: "∅" → null
+- `habilitacoes[34].portaria`: "∅" → "PT SAS/MS N°23"
+- `habilitacoes[35].cnes`: "∅" → "2025507"
+- `habilitacoes[35].co`: "∅" → "2608"
+- `habilitacoes[35].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA CORONAR...
+- `habilitacoes[35].dtPortaria`: "∅" → "28/03/2023"
+- `habilitacoes[35].fim`: "∅" → "99/9999"
+- `habilitacoes[35].ini`: "∅" → "03/2023"
+- `habilitacoes[35].leitos`: "∅" → 6
+- `habilitacoes[35].origem`: "∅" → null
+- `habilitacoes[35].portaria`: "∅" → "369/GM/MS"
+- `habilitacoes[36].cnes`: "∅" → "2025507"
+- `habilitacoes[36].co`: "∅" → "2610"
+- `habilitacoes[36].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA NEONATA...
+- `habilitacoes[36].dtPortaria`: "∅" → "09/01/2019"
+- `habilitacoes[36].fim`: "∅" → "99/9999"
+- `habilitacoes[36].ini`: "∅" → "12/2018"
+- `habilitacoes[36].leitos`: "∅" → 8
+- `habilitacoes[36].origem`: "∅" → null
+- `habilitacoes[36].portaria`: "∅" → "PT SAS/MS N°23"
+- `habilitacoes[37].cnes`: "∅" → "2025507"
+- `habilitacoes[37].co`: "∅" → "2703"
+- `habilitacoes[37].ds`: "∅" → "HOSPITAL TIPO III EM URGENCIA"
+- `habilitacoes[37].dtPortaria`: "∅" → null
+- `habilitacoes[37].fim`: "∅" → "99/9999"
+- `habilitacoes[37].ini`: "∅" → "08/2003"
+- `habilitacoes[37].leitos`: "∅" → 0
+- `habilitacoes[37].origem`: "∅" → null
+- `habilitacoes[37].portaria`: "∅" → null
+- `habilitacoes[38].cnes`: "∅" → "2025523"
+- `habilitacoes[38].co`: "∅" → "2703"
+- `habilitacoes[38].ds`: "∅" → "HOSPITAL TIPO III EM URGENCIA"
+- `habilitacoes[38].dtPortaria`: "∅" → null
+- `habilitacoes[38].fim`: "∅" → "99/9999"
+- `habilitacoes[38].ini`: "∅" → "08/2003"
+- `habilitacoes[38].leitos`: "∅" → 0
+- `habilitacoes[38].origem`: "∅" → null
+- `habilitacoes[38].portaria`: "∅" → null
+- `habilitacoes[39].cnes`: "∅" → "2025507"
+- `habilitacoes[39].co`: "∅" → "2802"
+- `habilitacoes[39].ds`: "∅" → "UNIDADE DE CUIDADOS INTERMEDIARIOS N...
+- `habilitacoes[39].dtPortaria`: "∅" → "09/01/2019"
+- `habilitacoes[39].fim`: "∅" → "99/9999"
+- `habilitacoes[39].ini`: "∅" → "12/2018"
+- `habilitacoes[39].leitos`: "∅" → 8
+- `habilitacoes[39].origem`: "∅" → null
+- `habilitacoes[39].portaria`: "∅" → "PT SAS/MS N°23"
+- `habilitacoes[3].cnes`: "∅" → "2025507"
+- `habilitacoes[3].co`: "2301" → "0305"
+- `habilitacoes[3].ds`: "UNIDADE DE ASSISTENCIA DE ALTA COMPL... → "ATENCAO ESPECIALIZADA AS PESSOAS COM...
+- `habilitacoes[3].dtPortaria`: "22/07/2010" → "28/12/2018"
+- `habilitacoes[3].ini`: "07/2010" → "12/2018"
+- `habilitacoes[3].portaria`: "SAS 349" → "PT GM Nº 4421"
+- `habilitacoes[40].cnes`: "∅" → "2025507"
+- `habilitacoes[40].co`: "∅" → "2901"
+- `habilitacoes[40].ds`: "∅" → "VIDEOCIRURGIAS"
+- `habilitacoes[40].dtPortaria`: "∅" → "01/11/2006"
+- `habilitacoes[40].fim`: "∅" → "99/9999"
+- `habilitacoes[40].ini`: "∅" → "08/2003"
+- `habilitacoes[40].leitos`: "∅" → 0
+- `habilitacoes[40].origem`: "∅" → "P"
+- `habilitacoes[40].portaria`: "∅" → null
+- `habilitacoes[41].cnes`: "∅" → "2025507"
+- `habilitacoes[41].co`: "∅" → "3202"
+- `habilitacoes[41].ds`: "∅" → "LABORATÓRIO DE EXAMES CITOPATOLOGICO...
+- `habilitacoes[41].dtPortaria`: "∅" → "02/01/2014"
+- `habilitacoes[41].fim`: "∅" → "99/9999"
+- `habilitacoes[41].ini`: "∅" → "09/2014"
+- `habilitacoes[41].leitos`: "∅" → 0
+- `habilitacoes[41].origem`: "∅" → null
+- `habilitacoes[41].portaria`: "∅" → "GM/MS 2046/2014"
+- `habilitacoes[42].cnes`: "∅" → "2025507"
+- `habilitacoes[42].co`: "∅" → "3801"
+- `habilitacoes[42].ds`: "∅" → "PROGRAMA MAIS ACESSO A ESPECIALISTAS"
+- `habilitacoes[42].dtPortaria`: "∅" → "26/03/2025"
+- `habilitacoes[42].fim`: "∅" → "99/9999"
+- `habilitacoes[42].ini`: "∅" → "03/2025"
+- `habilitacoes[42].leitos`: "∅" → 0
+- `habilitacoes[42].origem`: "∅" → "P"
+- `habilitacoes[42].portaria`: "∅" → "PORTARIA 02/2025, 19 DE FEV 2025"
+- `habilitacoes[43].cnes`: "∅" → "2025507"
+- `habilitacoes[43].co`: "∅" → "3807"
+- `habilitacoes[43].ds`: "∅" → "COMPONENTE ACESSO A RADIOTERAPIA"
+- `habilitacoes[43].dtPortaria`: "∅" → "23/10/2025"
+- `habilitacoes[43].fim`: "∅" → "99/9999"
+- `habilitacoes[43].ini`: "∅" → "11/2025"
+- `habilitacoes[43].leitos`: "∅" → 0
+- `habilitacoes[43].origem`: "∅" → null
+- `habilitacoes[43].portaria`: "∅" → "GM/MS 8516"
+- `habilitacoes[4].cnes`: "∅" → "2025507"
+- `habilitacoes[4].co`: "2304" → "0508"
+- `habilitacoes[4].ds`: "ENTERAL E PARENTERAL" → "TRATAMENTO DO GLAUCOMA COM MEDICAMEN...
+- `habilitacoes[4].dtPortaria`: "22/07/2010" → "31/05/2016"
+- `habilitacoes[4].ini`: "07/2010" → "06/2016"
+- `habilitacoes[4].portaria`: "SAS 349" → "25000.083866/2016-44"
+- `habilitacoes[5].cnes`: "∅" → "2025507"
+- `habilitacoes[5].co`: "2703" → "0801"
+- `habilitacoes[5].ds`: "HOSPITAL TIPO III EM URGENCIA" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
+- `habilitacoes[5].dtPortaria`: null → "28/09/2006"
+- `habilitacoes[5].ini`: "08/2003" → "10/2006"
+- `habilitacoes[5].portaria`: null → "SAS 721"
+- `habilitacoes[6].cnes`: "∅" → "2025507"
+- `habilitacoes[6].co`: "∅" → "0803"
+- `habilitacoes[6].ds`: "∅" → "CIRURGIA CARDIOVASCULAR E PROCEDIMEN...
+- `habilitacoes[6].dtPortaria`: "∅" → "18/10/2016"
+- `habilitacoes[6].fim`: "∅" → "99/9999"
+- `habilitacoes[6].ini`: "∅" → "10/2016"
+- `habilitacoes[6].leitos`: "∅" → 0
+- `habilitacoes[6].origem`: "∅" → null
+- `habilitacoes[6].portaria`: "∅" → "PT SAS 1448"
+- `habilitacoes[7].cnes`: "∅" → "2025507"
+- `habilitacoes[7].co`: "∅" → "0805"
+- `habilitacoes[7].ds`: "∅" → "CIRURGIA VASCULAR"
+- `habilitacoes[7].dtPortaria`: "∅" → "28/09/2006"
+- `habilitacoes[7].fim`: "∅" → "99/9999"
+- `habilitacoes[7].ini`: "∅" → "10/2006"
+- `habilitacoes[7].leitos`: "∅" → 0
+- `habilitacoes[7].origem`: "∅" → null
+- `habilitacoes[7].portaria`: "∅" → "SAS 721"
+- `habilitacoes[8].cnes`: "∅" → "2025507"
+- `habilitacoes[8].co`: "∅" → "1101"
+- `habilitacoes[8].ds`: "∅" → "SERVICO HOSPITALAR PARA TRATAMENTO A...
+- `habilitacoes[8].dtPortaria`: "∅" → null
+- `habilitacoes[8].fim`: "∅" → "99/9999"
+- `habilitacoes[8].ini`: "∅" → "08/2003"
+- `habilitacoes[8].leitos`: "∅" → 0
+- `habilitacoes[8].origem`: "∅" → null
+- `habilitacoes[8].portaria`: "∅" → null
+- `habilitacoes[9].cnes`: "∅" → "2025523"
+- `habilitacoes[9].co`: "∅" → "1101"
+- `habilitacoes[9].ds`: "∅" → "SERVICO HOSPITALAR PARA TRATAMENTO A...
+- `habilitacoes[9].dtPortaria`: "∅" → null
+- `habilitacoes[9].fim`: "∅" → "99/9999"
+- `habilitacoes[9].ini`: "∅" → "08/2003"
+- `habilitacoes[9].leitos`: "∅" → 0
+- `habilitacoes[9].origem`: "∅" → null
+- `habilitacoes[9].portaria`: "∅" → null
+- `paineis[0]`: "mortalidade" → "nascimentos"
+- `paineis[1]`: "∅" → "internacao"
+- `paineis[2]`: "∅" → "mortalidade"
+
+### 2495279 · Hospital Dr Claudionor Couto Roriz (RO) — 2 valor(es)
+- `listaOrigem`: "internacao" → "mortalidade"
+- `paineis[2]`: "∅" → "mortalidade"
+
+### 2711613 · CISAM - Centro Integrado de Saúde Amaury de Medeiros (PE) — 4 valor(es)
+- `paineis[0]`: "internacao" → "nascimentos"
+- `paineis[1]`: "mortalidade" → "internacao"
+- `paineis[2]`: "∅" → "mortalidade"
+- `regiaoSaude`: "I REGIÃO DE SAÚDE" → "RECIFE"
+
+### 2717387 · Unidade Hospitalar de Iauareté (AM) — 2 valor(es)
+- `paineis[1]`: "mortalidade" → "internacao"
+- `paineis[2]`: "∅" → "mortalidade"
+
+### 7958838 · Hospital da Mulher do Recife (PE) — 4 valor(es)
+- `paineis[0]`: "internacao" → "nascimentos"
+- `paineis[1]`: "mortalidade" → "internacao"
+- `paineis[2]`: "∅" → "mortalidade"
+- `regiaoSaude`: "I REGIÃO DE SAÚDE" → "RECIFE"

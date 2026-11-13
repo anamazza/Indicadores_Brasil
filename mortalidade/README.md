@@ -50,6 +50,18 @@ como anexo): Maternidade Carmosina Coutinho (Caxias/MA, CNES 2453665), Santa Cas
 Sobral (CE, 3021114) e Santa Casa de Franca (SP, 2705982). Mesmas regras de cálculo; SIM extraído em
 23/09/2026 das 27 UFs (`Pipeline_Python/indicadores_novas_2026-09.csv`).
 
+Igualação das unidades entre os painéis, em 13/11/2026, a pedido da coordenação (Nascimentos, Internação,
+Mortalidade e Habilitações passam a ter as mesmas 120 unidades):
+
+- entra o Hospital Dr. Claudionor Couto Roriz (Ji-Paraná/RO, CNES 2495279), que já estava nos painéis de
+  Nascimentos e de Internação; também fora da lista oficial de 09/09, marcado como anexo. SIM das 27 UFs e
+  DOFET de 2019 a 2026 (`Pipeline_Python/extrai_adicional_2026-11.py`), nascidos vivos do SINASC por CODESTAB
+  (`conta_nv_adicional_2026-11.py`) e as mesmas regras de cálculo (`calcula_adicional_2026-11.py`, que antes
+  confere uma unidade já publicada, o Hospital de Base Porto Velho, linha a linha contra os valores publicados);
+  saída em `Pipeline_Python/indicadores_adicional_2026-11.csv`;
+- sai o Hospital do Rocio (PR, CNES 0013846), que só existia neste painel (`EXCLUIR` em `build_dados.py`; as
+  linhas dele continuam nos CSV de indicadores).
+
 ## Como atualizar
 
 | O quê | Como |
@@ -59,8 +71,8 @@ Sobral (CE, 3021114) e Santa Casa de Franca (SP, 2705982). Mesmas regras de cál
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Mortalidade_2026.html` e `index.html` e espelha esta pasta na subpasta `mortalidade/` do repositório Indicadores_Brasil) |
 
 `build_dados.py` lê, somente para leitura, o painel NV local (`Pojeto Apresentações NV_2026/Painel_2026_Novo`):
-malhas SVG, coordenadas, território, nomes e fichas CNES das unidades em comum; as unidades que só
-existem neste painel (Rocio, CISAM, Hospital da Mulher do Recife, HCFAMEMA) têm a ficha buscada na API.
+malhas SVG, coordenadas, território, nomes e fichas CNES das unidades em comum; o código materno-infantil do
+complexo HCFAMEMA (2025523), que o painel NV não usa, tem a ficha buscada na API.
 
 ## Estrutura
 

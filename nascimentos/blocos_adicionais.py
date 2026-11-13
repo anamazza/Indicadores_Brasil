@@ -17,7 +17,8 @@ import os
 from blocos_assistenciais import _fmt
 
 # (origem mostrada no painel, sufixo dos arquivos JSON)
-LOTES = [("ADICIONAIS MA CE SP", "adicionais_ma_ce_sp")]
+LOTES = [("ADICIONAIS MA CE SP", "adicionais_ma_ce_sp"),
+         ("ADICIONAIS PE", "adicionais_pe")]      # 13/11/2026: CISAM e Hospital da Mulher do Recife
 PROJ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SINASC = os.path.join(PROJ, "Extracao_SINASC", "saida")
 SIH = os.path.join(os.path.dirname(PROJ), "Projeto Apresentações Internação", "Extracao_SIH", "saida")

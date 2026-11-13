@@ -562,6 +562,7 @@ function desenhaDossie(){
     </div>
   </div>
   <div class="dossie-cards">
+    ${mt.semSIH ? `<div class="card full aviso-sih"><p><b>Unidade sem internações registradas no SIH/SUS.</b> Não há nenhuma Autorização de Internação Hospitalar (AIH) desta unidade de 2019 a 2026. Por isso os números de internações são zero, e as taxas, os percentuais e os tempos médios calculados com o SIH não se aplicam. Os indicadores calculados com o SINASC aparecem normalmente.</p></div>` : ""}
     <div class="card full">${cardCnesHTML(mt)}</div>
     ${cardHabilitacoesHTML(mt) ? `<div class="card full">${cardHabilitacoesHTML(mt)}</div>` : ""}
 

@@ -32,12 +32,17 @@ coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos
 
 - Não há coleta própria: `build_dados.py` lê, nas pastas vizinhas `nascimentos/`, `internacao/` e `mortalidade/`,
   o `dados.json` (unidades e grupos) e o `cnes_dados.json` (ficha CNES e habilitações, atualizados na nuvem pelo
-  workflow "Atualizar CNES") e consolida a união das unidades (122 códigos CNES em 29/10/2026).
+  workflow "Atualizar CNES") e consolida as unidades. Desde 13/11/2026 os quatro painéis têm as mesmas 120 unidades
+  (121 códigos CNES, porque o complexo da FAMEMA tem dois).
+- `COMPLEXOS` no `build_dados.py`: códigos CNES que formam uma só unidade. FAMEMA (Marília/SP): 2025523, o código da
+  lista oficial, e 2025507. A ficha da unidade reúne as habilitações dos dois códigos e indica, em cada linha, o
+  código em que a habilitação está registrada; a busca e o endereço `#CNES` aceitam qualquer um dos dois.
 - Grupos pela lista oficial de 09/09/2026, guardada em `lista_oficial_2026-09-09.csv` (115 CNES, planilha
   LISTA_MATERNIDADES_POR_GRUPO_09092026 da coordenação, conferida com os painéis em 29/10/2026, ver
   `relatorios/conferencia_lista_oficial_2026-10-29.md`). Unidades fora da lista ficam marcadas como anexo, com os grupos
   lidos dos painéis (Mortalidade, depois Internação, depois Nascimentos; "estrategica" vale como "apoiada").
-- `EXCLUIR` no `build_dados.py`: unidades retiradas deste painel por decisão da coordenação (Hospital do Rocio/PR, 30/10/2026).
+- `EXCLUIR` no `build_dados.py`: unidades retiradas só deste painel por decisão da coordenação. Está vazio desde
+  13/11/2026: o Hospital do Rocio/PR, retirado daqui em 30/10/2026, saiu também do painel de Mortalidade.
 - Ficha e habilitações: a cópia com a data de atualização do cadastro mais recente entre os três painéis.
 - Vigência: `dtCompFim` 99/9999 = sem prazo final; outra competência = vigente com prazo (todas as habilitações do
   serviço estavam vigentes na data da consulta; as encerradas não constam). Origem "P" = ato do gestor estadual ou

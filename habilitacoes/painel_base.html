@@ -213,7 +213,7 @@ body.dossie-aberto{overflow:hidden}
 .kpis-topo .k{background:rgba(255,255,255,.12); border-radius:10px; padding:.45rem .8rem; min-width:118px; text-align:right}
 .kpis-topo .k .n{font-size:1.35rem; font-weight:800; letter-spacing:-.02em; color:#FFF; line-height:1.1}
 .kpis-topo .k .t{font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:#C5E3CC; font-weight:700}
-.dossie-cards{display:grid; grid-template-columns:1fr; gap:1.1rem; margin-top:1.1rem}
+.dossie-cards{display:grid; grid-template-columns:minmax(0, 1fr); gap:1.1rem; margin-top:1.1rem}
 .cnes-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:.75rem 1.3rem; margin-top:.8rem}
 .cnes-item span{display:block; font-size:.62rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--texto-suave)}
 .cnes-item b{font-size:.92rem; font-weight:700; overflow-wrap:anywhere}
@@ -593,7 +593,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
         <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: maternidades apoiadas (estratégicas), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO 2026/2027. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
         <p id="notaAnexos"></p>
         <p id="notaPosicao"><b>Mapas:</b> o mapa de unidades (OpenStreetMap) usa as coordenadas do cadastro CNES, como o mapa de unidades dos outros painéis. A vista por território usa as mesmas malhas de estados, macrorregiões e regiões de saúde dos outros painéis e conta as unidades por território pelos ids de malha; os pontos sobre a malha são opcionais e aproximados (as coordenadas são convertidas por uma aproximação ajustada e, quando o ponto cai fora da região de saúde da unidade, ele é deslocado para dentro dela).</p>
-        <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) aparecem como duas linhas, porque as habilitações são registradas por código CNES; no Painel de Mortalidade os dois formam um único complexo.</p>
+        <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) formam um único complexo e aparecem como uma só unidade, como nos demais painéis. Na ficha, cada habilitação traz o código CNES em que está registrada.</p>
       </div>
       <div class="card">
         <h3>Como ler cada habilitação</h3>
@@ -622,8 +622,8 @@ table.local tfoot td.col-uf{background:var(--mint)}
   <div class="pd-topo">
     <div class="wrap pd-topo-linha">
       <button class="chip chip-acao" id="btnVoltarDossie">← Voltar ao painel</button>
-      <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center">
-        <select id="selUnidadePd" style="min-width:280px" aria-label="Trocar de unidade"></select>
+      <div style="display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; min-width:0; max-width:100%">
+        <select id="selUnidadePd" style="min-width:min(280px, 100%); max-width:100%" aria-label="Trocar de unidade"></select>
         <button class="chip chip-botao" id="btnCsvUnidade" title="Baixar as habilitações desta unidade em CSV">⬇ CSV</button>
         <button class="chip chip-botao" id="btnPdfDossie" title="Imprimir ou salvar a ficha em PDF">⬇ Baixar PDF</button>
       </div>

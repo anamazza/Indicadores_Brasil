@@ -56,7 +56,7 @@ const origemRot = o => o === "P" ? "gestor estadual ou municipal" : "Ministério
 const fimRot = h => ativaSemPrazo(h) ? "sem prazo final" : `até ${h.fim}`;
 MAT.forEach(mt => {
   mt._habs = new Map(); mt.habilitacoes.forEach(h => { if(!mt._habs.has(h.co)) mt._habs.set(h.co, []); mt._habs.get(h.co).push(h); });
-  mt._busca = normTxt(`${mt.nome} ${mt.municipio || ""} ${mt.uf || ""} ${UF_NOME[mt.uf] || ""} ${mt.cnes} ${(mt.ficha && mt.ficha.fantasia) || ""}`);
+  mt._busca = normTxt(`${mt.nome} ${mt.municipio || ""} ${mt.uf || ""} ${UF_NOME[mt.uf] || ""} ${mt.cnes} ${(mt.complexo || []).join(" ")} ${(mt.ficha && mt.ficha.fantasia) || ""}`);
   mt._grupoCor = ORDEM_GRUPO.find(g => mt.grupos.includes(g)) || "apoiada";
 });
 const temCodigo = (mt, co) => mt._habs.has(co);
@@ -75,7 +75,7 @@ function baixarCSV(nome, linhas){
 const hoje = () => new Date().toISOString().slice(0, 10);
 const cabecalhoCSV = recorte => [`Painel de Habilitações · consulta ao CNES em ${dataBR(DADOS.consultaCnes)} · ${recorte}`];
 const CAB_HAB = ["CNES", "Unidade", "Município", "UF", "Grupos", "Código", "Habilitação", "Competência inicial", "Competência final", "Portaria", "Data da portaria", "Leitos", "Origem"];
-const linhasCsvUnidade = mt => mt.habilitacoes.map(h => [mt.cnes, mt.nome, mt.municipio || "", mt.uf, mt.grupos.map(g => GRUPO_CURTO[g]).join(" + "), h.co, h.ds, h.ini, ativaSemPrazo(h) ? "sem prazo final" : h.fim, h.portaria || "", h.dtPortaria || "", h.leitos || 0, origemRot(h.origem)]);
+const linhasCsvUnidade = mt => mt.habilitacoes.map(h => [h.cnes || mt.cnes, mt.nome, mt.municipio || "", mt.uf, mt.grupos.map(g => GRUPO_CURTO[g]).join(" + "), h.co, h.ds, h.ini, ativaSemPrazo(h) ? "sem prazo final" : h.fim, h.portaria || "", h.dtPortaria || "", h.leitos || 0, origemRot(h.origem)]);
 function segmento(id, aoMudar){
   const el = document.getElementById(id);
   el.addEventListener("click", e => {
@@ -114,7 +114,7 @@ function montarCabecalho(){
   document.getElementById("statHgparSub").textContent = `de ${fmtInt(MAT.length)} unidades`;
   document.getElementById("notaConsulta").innerHTML = `<b>Data da consulta:</b> ${consulta}. As datas de atualização do cadastro de cada unidade no CNES aparecem na ficha. Habilitações encerradas antes da consulta não constam do serviço e, por isso, não aparecem aqui.`;
   const u = DADOS.unidadesPorPainel || {};
-  document.getElementById("notaUnidades").innerHTML = `<b>Unidades:</b> ${fmtInt(MAT.length)} códigos CNES, união das unidades dos painéis de Nascimentos (${fmtInt(u.nascimentos)}), Internação (${fmtInt(u.internacao)}) e Mortalidade (${fmtInt(u.mortalidade)}). Grupos: ${porGrupo}; uma unidade pode contar em mais de um grupo.`;
+  document.getElementById("notaUnidades").innerHTML = `<b>Unidades:</b> ${fmtInt(MAT.length)} unidades, as mesmas dos painéis de Nascimentos (${fmtInt(u.nascimentos)}), Internação (${fmtInt(u.internacao)}) e Mortalidade (${fmtInt(u.mortalidade)}). Grupos: ${porGrupo}; uma unidade pode contar em mais de um grupo.`;
   const anexos = MAT.filter(m => m.oficial === false);
   document.getElementById("notaAnexos").innerHTML = anexos.length
     ? `<b>Lista oficial e anexos:</b> a lista oficial de 09/09/2026 tem ${fmtInt(DADOS.listaOficialN || 115)} códigos CNES, todos presentes neste painel, com os grupos lidos da própria lista. As ${anexos.length} unidades fora dela (${anexos.map(a => `${a.nome}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis ou são o segundo código de um complexo; entram com as mesmas regras e aparecem marcadas como "anexo".${Object.keys(DADOS.excluidas || {}).length ? ` Retiradas deste painel a pedido da coordenação: ${Object.values(DADOS.excluidas).map(t => esc(t.split(":")[0])).join("; ")}.` : ""}` : "";
@@ -596,7 +596,7 @@ function abrirDossie(cnes){
     ["Painéis em que a unidade aparece", (mt.paineis || []).map(p => ({nascimentos: "Nascimentos", internacao: "Internação", mortalidade: "Mortalidade"}[p] || p)).join(", ")]].filter(i => i[1]);
   const habs = mt.habilitacoes.slice().sort((a, b) => (CODIGOS_MI.has(b.co) - CODIGOS_MI.has(a.co)) || a.co.localeCompare(b.co));
   const linhas = habs.map(h => `<tr class="${CODIGOS_MI.has(h.co) ? "destaque" : ""}">
-      <td class="c mono">${esc(h.co)}</td><td>${esc(h.ds)}${CODIGOS_MI.has(h.co) ? ` <span class="chip" style="font-size:.66rem; padding:.05rem .45rem; margin-left:.3rem">materno-infantil</span>` : ""}</td>
+      ${mt.complexo ? `<td class="c mono">${esc(h.cnes || mt.cnes)}</td>` : ""}<td class="c mono">${esc(h.co)}</td><td>${esc(h.ds)}${CODIGOS_MI.has(h.co) ? ` <span class="chip" style="font-size:.66rem; padding:.05rem .45rem; margin-left:.3rem">materno-infantil</span>` : ""}</td>
       <td class="c mono">${esc(h.ini || "—")}</td><td class="c mono">${ativaSemPrazo(h) ? "sem prazo final" : `<span class="pz">até ${esc(h.fim)}</span>`}</td>
       <td style="white-space:normal">${esc(h.portaria || "—")}${h.dtPortaria ? ` <span class="suave">(${esc(h.dtPortaria)})</span>` : ""}</td>
       <td class="r mono">${h.leitos ? h.leitos : "—"}</td><td class="c" style="font-size:.76rem">${esc(origemRot(h.origem))}</td></tr>`).join("");
@@ -626,8 +626,8 @@ function abrirDossie(cnes){
       <div class="card"><h3>Habilitações registradas no CNES <span class="chip">${n}</span></h3>
         <p class="suave" style="font-size:.82rem; margin-top:.3rem">Ordenadas com as habilitações de interesse materno e infantil primeiro e, depois, por código. "Sem prazo final" corresponde a 99/9999 no CNES; as habilitações com competência final definida estavam vigentes na data da consulta.</p>
         <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
-          <thead><tr><th style="text-align:center">Código</th><th>Habilitação</th><th style="text-align:center">Competência inicial</th><th style="text-align:center">Competência final</th><th>Portaria (data)</th><th style="text-align:right">Leitos</th><th style="text-align:center">Origem</th></tr></thead>
-          <tbody>${linhas || `<tr><td colspan="7" class="suave">Nenhuma habilitação registrada no CNES para este código na data da consulta.</td></tr>`}</tbody>
+          <thead><tr>${mt.complexo ? `<th style="text-align:center">CNES do registro</th>` : ""}<th style="text-align:center">Código</th><th>Habilitação</th><th style="text-align:center">Competência inicial</th><th style="text-align:center">Competência final</th><th>Portaria (data)</th><th style="text-align:right">Leitos</th><th style="text-align:center">Origem</th></tr></thead>
+          <tbody>${linhas || `<tr><td colspan="${mt.complexo ? 8 : 7}" class="suave">Nenhuma habilitação registrada no CNES para este código na data da consulta.</td></tr>`}</tbody>
         </table></div>
         <p class="fonte"><b>Dados baixados do serviço do CNES em:</b> ${dataBR(DADOS.consultaCnes)} · Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. Origem: "gestor estadual ou municipal" corresponde ao valor "P" do campo de origem do CNES.</p>
       </div>
@@ -646,7 +646,7 @@ function montarDossie(){
   document.getElementById("btnPdfDossie").addEventListener("click", () => window.print());
   document.getElementById("btnCsvUnidade").addEventListener("click", () => { if(dossieAtual) baixarCSV(`habilitacoes_${dossieAtual.cnes}_${hoje()}.csv`, [CAB_HAB, ...linhasCsvUnidade(dossieAtual)]); });
   document.addEventListener("keydown", e => { if(e.key === "Escape" && dossieAtual) fecharDossie(); });
-  const h = location.hash.replace("#", ""); if(/^\d{7}$/.test(h) && MAT.some(m => m.cnes === h)) abrirDossie(h);
+  const h = location.hash.replace("#", ""); const alvoHash = /^\d{7}$/.test(h) ? MAT.find(m => m.cnes === h || (m.complexo || []).includes(h)) : null; if(alvoHash) abrirDossie(alvoHash.cnes);
 }
 
 /* ---------------- trilho lateral ---------------- */

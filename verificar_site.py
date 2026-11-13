@@ -158,6 +158,30 @@ for pasta, (gemeo, minimo_kb, dados_js, min_unidades) in PAINEIS.items():
     except Exception as e:
         falha(f"{pasta}: atualizacao.json inválido ({e})")
 
+# mesmas unidades nos quatro painéis (13/11/2026, pedido da coordenação). Os dois códigos CNES do complexo da FAMEMA
+# contam como uma unidade: Nascimentos e Internação usam 2025507; Mortalidade e Habilitações, 2025523.
+print("== unidades iguais nos quatro painéis")
+COMPLEXOS = {"2025507": "2025523"}
+unidades = {}
+for pasta in PAINEIS:
+    try:
+        ms = json.load(open(os.path.join(RAIZ, pasta, "dados.json"), encoding="utf-8")).get("maternidades", [])
+        codigos = [COMPLEXOS.get(m["cnes"], m["cnes"]) for m in ms]
+        if len(codigos) != len(set(codigos)):
+            falha(f"{pasta}: unidade repetida no dados.json ({sorted(c for c in set(codigos) if codigos.count(c) > 1)})")
+        unidades[pasta] = {c: m.get("nome", "") for c, m in zip(codigos, ms)}
+    except Exception as e:
+        falha(f"{pasta}: não foi possível ler as unidades do dados.json ({e})")
+if len(unidades) == len(PAINEIS):
+    todas = set().union(*unidades.values())
+    for pasta, u in unidades.items():
+        faltam = sorted(todas - set(u))
+        if faltam:
+            nomes = [f"{c} {next(v[c] for v in unidades.values() if c in v)}" for c in faltam]
+            falha(f"{pasta}: faltam {len(faltam)} unidade(s) que estão em outro painel: {'; '.join(nomes)}")
+    if all(set(u) == todas for u in unidades.values()):
+        ok(f"as mesmas {len(todas)} unidades em {', '.join(PAINEIS)}")
+
 print()
 if avisos:
     print(f"{len(avisos)} aviso(s).")

@@ -33,6 +33,10 @@ FONTES = [                                                     # (arquivo, data 
     (os.path.join(SAIDA_SIH, "planilhas_corrigidas_v3.json"), "2026-09-10"),
     (os.path.join(SAIDA_SIH, "planilhas_adicionais_pe.json"), "2026-09-12"),
     (os.path.join(SAIDA_SIH, "planilhas_adicionais_ma_ce_sp.json"), "2026-09-23"),
+    # 13/11/2026: igualação das unidades entre os painéis (pedido da coordenação). A Unidade Hospitalar de Iauareté
+    # (2717387/AM) não tem nenhuma AIH no SIH de 2019 a 2026 (Extracao_SIH/68_unidade_iauarete.py): entra com a marca
+    # "semSIH" - contagens do SIH = 0, taxas e percentuais do SIH sem valor, linhas do SINASC calculadas.
+    (os.path.join(SAIDA_SIH, "planilhas_adicionais_iauarete.json"), "2026-11-13"),
 ]
 LISTA_OFICIAL = os.path.join(DOCS, "Mortalidade Indicadores", "lista_oficial_116.csv")
 PAINEL_NV = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Painel_2026_Novo")   # leitura apenas
@@ -204,7 +208,7 @@ for arq, data_tab in FONTES:
         cnes = cnes.zfill(7)
         if cnes in plan:
             print(f"    [aviso] {cnes} repetido em {os.path.basename(arq)} — mantida a primeira fonte"); continue
-        plan[cnes] = {"nome": u["nome"], "planilha": u["planilha"], "tabuladoEm": data_tab,
+        plan[cnes] = {"nome": u["nome"], "planilha": u["planilha"], "tabuladoEm": data_tab, "semSIH": bool(u.get("semSIH")),
                       "linhas": {l["rotulo"].strip(): [to_num(v) for v in l["valores"]] for l in u["linhas"]}}
 print(f"[3] {len(plan)} unidades com planilha de internação")
 
@@ -218,7 +222,7 @@ p11 = json.load(open(P11_PERIODO, encoding="utf-8")) if os.path.exists(P11_PERIO
 sem_tab, n_sinasc = [], 0
 for cnes, u in plan.items():
     t26 = tab26.get(cnes)
-    if t26 is None:
+    if t26 is None and not u.get("semSIH"):
         sem_tab.append(cnes)
     e11 = p11.get(cnes) or p11.get({"2025507": "2025523"}.get(cnes, ""))
     for rot, vals in u["linhas"].items():
@@ -230,6 +234,8 @@ for cnes, u in plan.items():
                 v = None if x is None else round(float(x), 2); n_sinasc += 1
         elif t26 is not None:
             v = to_num(t26.get(rot))
+        elif u.get("semSIH") and rot.startswith("Número"):
+            v = 0                      # nenhuma AIH também em 2026 (arquivos RD até ago/2026)
         u["linhas"][rot] = list(vals[:7]) + [v]
 print(f"[3b] coluna 1º sem. 2026: {len(tab26)} unidades tabuladas ({len(sem_tab)} sem tabulação: {sem_tab}), "
       f"{n_sinasc} linhas do SINASC preenchidas")
@@ -269,14 +275,17 @@ def motivos_abs(cnes):
     for a, ano in enumerate(ANOS):
         t = tot[a] if a < len(tot) else None
         ps = [p[a] if a < len(p) else None for p in pcts]
-        if t is None or any(x is None for x in ps):
+        if t is None:
             mot_stats["sem dado"] += 1
             continue
         t = int(t)
-        if t == 0:
+        if t == 0:                           # sem internações obstétricas no período: zero em todos os motivos
             mot_stats["total zero"] += 1
             for k in range(4):
                 out[k][a] = 0
+            continue
+        if any(x is None for x in ps):
+            mot_stats["sem dado"] += 1
             continue
         cands = [[n for n in range(max(0, math.floor(p * t / 100.0) - 2), math.ceil(p * t / 100.0) + 3)
                   if round(100.0 * n / t, 2) == p] for p in ps]
@@ -308,6 +317,8 @@ def blocos_de(cnes):
         vals = plan[cnes]["linhas"].get(rot)
         if vals is None:
             faltas.setdefault(rot, []).append(cnes); vals = [None] * len(ANOS)
+        if plan[cnes].get("semSIH") and fmt in ("pct", "dias") and rot not in LINHAS_SINASC:
+            vals = [None] * len(ANOS)          # unidade sem AIH: taxa, percentual e tempo médio do SIH não se aplicam
         bl.setdefault(bloco, []).append([curto, list(vals[:len(ANOS)]), fmt])
     bl["motivos_n"] = [[curto, vals, "int"] for curto, vals in zip(MOT_CURTO, motivos_abs(cnes))]
     return bl
@@ -336,6 +347,8 @@ for cnes in sorted(plan):
         "origem": plan[cnes]["planilha"], "tabuladoEm": plan[cnes]["tabuladoEm"],
         "blocos": blocos_de(cnes),
     })
+    if plan[cnes].get("semSIH"):
+        mats[-1]["semSIH"] = True
 conta = {}
 for m in mats:
     for c in m["conjuntos"]: conta[c] = conta.get(c, 0) + 1
