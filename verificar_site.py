@@ -16,7 +16,7 @@ PAINEIS = {
     "nascimentos": ("Painel_NV2026_Novo.html", 2500, "dados_nv2026.js", 100),
     "internacao":  ("Painel_Internacao_2026.html", 1200, "dados_internacao.js", 100),
     "mortalidade": ("Painel_Mortalidade_2026.html", 1800, "dados_mortalidade.js", 100),
-    "habilitacoes": ("Painel_Habilitacoes_2026.html", 400, "dados_habilitacoes.js", 110),   # 29/10/2026: consolida a união dos três
+    "habilitacoes": ("Painel_Habilitacoes_2026.html", 2000, "dados_habilitacoes.js", 110),  # unidades acompanhadas; as demais são conferidas abaixo
 }
 RAIZ_MIN_KB = 150          # a página principal embute a foto e as logos
 TAMANHO_MAX_KB = 12000
@@ -157,6 +157,22 @@ for pasta, (gemeo, minimo_kb, dados_js, min_unidades) in PAINEIS.items():
         falha(f"{pasta}: falta atualizacao.json (gerado pelo montar_painel.py)")
     except Exception as e:
         falha(f"{pasta}: atualizacao.json inválido ({e})")
+
+# painel de habilitações: além das unidades acompanhadas, as demais unidades com leitos obstétricos/neonatais SUS
+print("== habilitacoes/: demais unidades com leitos SUS")
+try:
+    dh = json.load(open(os.path.join(RAIZ, "habilitacoes", "dados.json"), encoding="utf-8"))
+    n_demais = len(dh.get("demais") or [])
+    if n_demais < 2500:
+        falha(f"habilitacoes: dados.json com {n_demais} unidades além das acompanhadas (esperadas mais de 2.500; falta o universo_cnes.json?)")
+    else:
+        repetidas = {u["c"] for u in dh["demais"]} & {m["cnes"] for m in dh["maternidades"]}
+        if repetidas:
+            falha(f"habilitacoes: unidades acompanhadas repetidas entre as demais: {sorted(repetidas)[:5]}")
+        else:
+            ok(f"habilitacoes: {n_demais} unidades além das {len(dh['maternidades'])} acompanhadas, competência {(dh.get('universo') or {}).get('competencia')}")
+except Exception as e:
+    falha(f"habilitacoes: não foi possível conferir as demais unidades ({e})")
 
 # mesmas unidades nos quatro painéis (13/11/2026, pedido da coordenação). Os dois códigos CNES do complexo da FAMEMA
 # contam como uma unidade: Nascimentos e Internação usam 2025507; Mortalidade e Habilitações, 2025523.

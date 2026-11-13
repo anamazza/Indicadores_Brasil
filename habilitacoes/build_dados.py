@@ -36,6 +36,16 @@ EXCLUIR = {}
 # secundário, valor = código principal (o da lista oficial). FAMEMA, Marília/SP: 2025507 (hospital adulto, usado nos
 # painéis de Nascimentos e de Internação) e 2025523 (materno-infantil, lista oficial e painel de Mortalidade).
 COMPLEXOS = {"2025507": "2025523"}
+# Universo (13/11/2026, pedido da coordenação): todos os estabelecimentos com leitos obstétricos e/ou neonatais SUS,
+# montado por build_universo.py a partir dos arquivos do CNES no DATASUS (leitos, habilitações e cadastro da mesma
+# competência). As unidades acompanhadas continuam em DADOS.maternidades, com a ficha e as habilitações da consulta ao
+# CNES; as demais vão para DADOS.demais, em formato compacto (ver README.md).
+UNIVERSO = os.path.join(BASE, "universo_cnes.json")
+LEITOS_OBST = ("10", "43")
+
+
+def _carrega_universo():
+    return json.load(open(UNIVERSO, encoding="utf-8")) if os.path.exists(UNIVERSO) else None
 
 
 def _carrega(painel):
@@ -234,16 +244,60 @@ def consolidar(verboso=True):
             if not reg.get("geo") or "rs" not in reg["geo"]:
                 r = _resolve_geo(geo, reg.get("uf"), reg.get("regiaoSaude"), reg.get("macro"))
                 reg["geo"] = {**r, **(reg.get("geo") or {})}
-    # catálogo dos tipos de habilitação (código -> descrição mais frequente, nº de unidades, leitos somados)
-    desc, n_unid, leitos = {}, Counter(), Counter()
+    # universo: leitos SUS, tipo e natureza jurídica das unidades acompanhadas; demais unidades em formato compacto
+    uni = _carrega_universo()
+    demais, municipios_usados = [], {}
+    if uni:
+        codigos_acomp = set()
+        for reg in unidades.values():
+            codigos = reg.get("complexo") or [reg["cnes"]]
+            codigos_acomp.update(codigos)
+            us = [uni["unidades"][c] for c in codigos if c in uni["unidades"]]
+            lt = Counter()
+            for u in us:
+                for cod, (_, sus) in u["l"].items():
+                    lt[cod] += sus
+            reg["leitos"] = {cod: n for cod, n in sorted(lt.items()) if n}
+            principal = uni["unidades"].get(reg["cnes"]) or (us[0] if us else None)
+            if principal:
+                reg["tipo"] = uni["tiposEstabelecimento"].get(principal["tp"])
+                reg["natureza"] = uni["esferas"].get(principal["nj"])
+        for c, u in sorted(uni["unidades"].items(), key=lambda kv: (kv[1]["uf"], kv[1]["n"] or "", kv[0])):
+            if c in codigos_acomp:
+                continue
+            municipios_usados[u["m"]] = uni["municipios"][u["m"]]
+            demais.append({"c": c, "n": u["n"], "u": u["uf"], "m": u["m"], "tp": u["tp"], "g": u["g"], "nj": u["nj"], "cep": u["cep"],
+                           "at": u["at"], "e": u["e"], "l": {cod: v[1] for cod, v in u["l"].items() if v[1]}, "h": u["h"]})
+
+    # catálogo dos tipos de habilitação: descrição (a da consulta ao CNES, quando existe; senão a da tabela do DATASUS),
+    # nº de unidades (todas e acompanhadas), leitos somados e origem (a mesma em todos os registros do código na consulta)
+    desc, n_unid, n_acomp, leitos, origens = {}, Counter(), Counter(), Counter(), {}
     for reg in unidades.values():
         vistos = set()
         for h in reg["habilitacoes"]:
             desc.setdefault(h["co"], Counter())[h["ds"]] += 1
             leitos[h["co"]] += h["leitos"]
+            origens.setdefault(h["co"], set()).add(h["origem"])
             if h["co"] not in vistos:
-                n_unid[h["co"]] += 1; vistos.add(h["co"])
-    tipos = [{"co": co, "ds": desc[co].most_common(1)[0][0], "n": n_unid[co], "leitos": leitos[co]} for co in sorted(desc)]
+                n_unid[h["co"]] += 1; n_acomp[h["co"]] += 1; vistos.add(h["co"])
+    mistas = sorted(co for co, o in origens.items() if len(o) > 1)
+    if mistas:
+        raise SystemExit(f"códigos com mais de uma origem na consulta ao CNES: {mistas}")
+    for u in demais:
+        vistos = set()
+        for h in u["h"]:
+            leitos[h[0]] += h[5]
+            if h[0] not in vistos:
+                n_unid[h[0]] += 1; vistos.add(h[0])
+    ds_datasus = (uni or {}).get("habilitacoes") or {}
+    tipos = []
+    for co in sorted(n_unid):
+        ds = desc[co].most_common(1)[0][0] if co in desc else ds_datasus.get(co)
+        tipos.append({"co": co, "ds": ds or "Descrição não disponível nas tabelas do CNES", "n": n_unid[co], "nAcomp": n_acomp[co],
+                      "leitos": leitos[co],
+                      # origem: "P" = gestor estadual ou municipal; "N" = demais registros da consulta (Ministério da Saúde);
+                      # None = código que não ocorre nas unidades acompanhadas (os arquivos do DATASUS não trazem o campo)
+                      "origem": ("P" if "P" in origens[co] else "N") if co in origens else None})
 
     lista = sorted(unidades.values(), key=lambda r: (r.get("uf") or "", r["nome"]))
     consulta = max(v for v in consultas.values() if v) if any(consultas.values()) else None
@@ -259,6 +313,12 @@ def consolidar(verboso=True):
         "tipos": tipos,
         "maternidades": lista,
     }
+    if uni:
+        DADOS["universo"] = {k: uni[k] for k in ("competencia", "baixadoEm", "publicadoNoFTP", "baseTerritorial", "criterio", "contagem")}
+        DADOS["tiposEstab"] = uni["tiposEstabelecimento"]
+        DADOS["esferas"] = uni["esferas"]
+        DADOS["municipios"] = municipios_usados          # código -> [nome, região de saúde, macrorregião, lat e lon da sede]
+        DADOS["demais"] = demais
     # cnes_dados.json consolidado (ficha completa, mesmo formato dos outros painéis)
     saida_cnes = {"_atualizado_em": consulta}
     for reg in lista:
@@ -285,6 +345,14 @@ def consolidar(verboso=True):
               f"{len(fichas)} fichas CNES, {n_habs} habilitações de {len(tipos)} tipos; consulta ao CNES em {consulta}")
         if sem:
             print("sem habilitação registrada:", "; ".join(sem))
+        if uni:
+            sem_leito = [r["nome"] for r in lista if not r.get("leitos")]
+            print(f"universo (competência {uni['competencia']}): {uni['contagem']['universo']} estabelecimentos com leitos obstétricos ou "
+                  f"neonatais SUS; {len(lista)} acompanhadas + {len(demais)} demais = {len(lista) + len(demais)} unidades no painel; "
+                  f"{sum(len(u['h']) for u in demais)} habilitações nas demais ({sum(1 for u in demais if not u['h'])} sem nenhuma); "
+                  f"{len(tipos)} tipos no catálogo; acompanhadas sem esses leitos no arquivo: {sem_leito}")
+        else:
+            print("AVISO: universo_cnes.json não encontrado; o painel fica só com as unidades acompanhadas")
         sem_geo = [f"{r['nome']} ({r['uf']})" for r in lista if not (r.get("geo") or {}).get("rs")]
         if sem_geo:
             print("AVISO: sem região de saúde na malha:", "; ".join(sem_geo))

@@ -1,8 +1,42 @@
 # Painel de Habilitações · Maternidades Estratégicas
 
-Painel de consulta das habilitações registradas no Cadastro Nacional de Estabelecimentos de Saúde (CNES) para
-todas as unidades dos três grupos (maternidades apoiadas, unidades EBSERH e QUALINEO 2026/2027), pedido pela
-coordenação em 29/10/2026. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
+Painel de consulta das habilitações registradas no Cadastro Nacional de Estabelecimentos de Saúde (CNES), pedido pela
+coordenação em 29/10/2026 para as unidades dos três grupos (maternidades apoiadas, unidades EBSERH e QUALINEO
+2026/2027) e ampliado em 13/11/2026 para **todas as unidades com leitos obstétricos e/ou neonatais SUS**, mantida a
+sinalização dos grupos acompanhados. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
+
+## Todas as unidades com leitos obstétricos ou neonatais SUS (13/11/2026)
+
+- **Critério**: pelo menos um leito SUS (`QT_SUS > 0`) nas especialidades 10 e 43 (obstetrícia cirúrgica e clínica) ou
+  41, 65, 80, 81, 82, 92 e 93 (neonatologia, unidade intermediária neonatal, UTI neonatal I, II e III, UCINCo e
+  UCINCa) do arquivo de leitos do CNES. Na competência 09/2026: 3.437 estabelecimentos (2.720 só obstétricos, 65 só
+  neonatais, 652 com os dois). Sem o código 41 seriam 3.426.
+- **Fonte**: arquivos do CNES no FTP do DATASUS, todos da mesma competência: `LT` (leitos), `HB` (habilitações), `ST`
+  (cadastro) e `TAB_CNES.zip` (nome fantasia, descrição das habilitações, tipo de estabelecimento). Território: base
+  territorial do DATASUS (município -> região de saúde e macrorregião, as mesmas das malhas) e nomes de município do
+  IBGE. Os arquivos brutos (cerca de 150 MB) ficam fora do repositório, em
+  `Projeto Apresentações Internação/Extracao_SIH/dados/brutos/cnes_{lt,hb,st,aux}`.
+- **Como atualizar** (no computador, quando sair uma competência nova):
+  1. `py -3.12 69_baixar_cnes_habilitacoes.py AAMM` na pasta `Extracao_SIH` (baixa só o que falta) e extrair de
+     `TAB_CNES.zip`, para `cnes_aux/TAB_CNES_AAMM`, os arquivos `CADGERBR.dbf`, `HABILITA.DBF`, `TP_ESTAB.CNV` e
+     `ESFERAJUR.CNV`;
+  2. `py -3.12 habilitacoes/build_universo.py AAMM` (grava `universo_cnes.json`, que vai para o repositório);
+  3. `py -3.12 habilitacoes/montar_painel.py`.
+  Na nuvem, o workflow "Atualizar CNES" só refaz as unidades acompanhadas e reaproveita o `universo_cnes.json`.
+- **Dados no painel**: `DADOS.maternidades` continua com as unidades acompanhadas (as mesmas dos outros três painéis,
+  ficha e habilitações da consulta ao CNES), agora com `leitos` (leitos SUS por especialidade), `tipo` e `natureza`.
+  `DADOS.demais` traz as outras unidades em formato compacto: `c` CNES, `n` nome fantasia, `u` UF, `m` município
+  (chave de `DADOS.municipios`), `tp` tipo de estabelecimento (chave de `DADOS.tiposEstab`), `g` gestão, `nj` natureza
+  jurídica (chave de `DADOS.esferas`), `cep`, `at` competência da última atualização do registro, `e` estruturas
+  (centro obstétrico, centro neonatal, centro cirúrgico, atendimento hospitalar, atendimento ambulatorial), `l` leitos
+  SUS por especialidade e `h` habilitações (`[código, início AAAAMM, fim AAAAMM ou 999999, portaria, data, leitos]`).
+- **Conferência entre as duas vias** (13/11/2026, unidades acompanhadas): o conjunto de habilitações do arquivo `HB`
+  de 09/2026 é igual ao da consulta de 11/10/2026 em 116 das 121 fichas; nas outras cinco a diferença é de data.
+  Competências e leitos coincidem nas 2.250 habilitações comparadas. Tipo de estabelecimento, CEP, centro
+  obstétrico, centro cirúrgico e atendimento hospitalar coincidem nas 120 unidades; a marca de centro neonatal
+  difere em 19 e, por isso, não é mostrada para as demais unidades, assim como o turno de atendimento e a data de
+  atualização, cujas tabelas de conversão não puderam ser conferidas.
+- **Posição no mapa**: as demais unidades não têm coordenadas nos arquivos utilizados e aparecem na sede do município.
 
 **Publicação:** https://anamazza.github.io/Indicadores_Brasil/habilitacoes/ · **Arquivo final:** `index.html`
 (idêntico a `Painel_Habilitacoes_2026.html`), HTML único e autocontido; só o mapa depende da internet (Leaflet e OpenStreetMap, como nos outros painéis).

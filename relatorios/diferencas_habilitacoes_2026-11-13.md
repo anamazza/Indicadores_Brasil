@@ -2,406 +2,594 @@
 
 Comparação de `habilitacoes/dados_habilitacoes.js` (pasta de trabalho espelhada) com a versão publicada (HEAD).
 
-- Unidades que entraram: 0 · saíram: 1 · com valores alterados: 5 · valores alterados: 386
-- Valores alterados por bloco: habilitacoes[10] (9), habilitacoes[11] (9), habilitacoes[12] (9), habilitacoes[13] (9), habilitacoes[14] (9), habilitacoes[15] (9), habilitacoes[16] (9), habilitacoes[17] (9), habilitacoes[18] (9), habilitacoes[19] (9), habilitacoes[20] (9), habilitacoes[21] (9), habilitacoes[22] (9), habilitacoes[23] (9), habilitacoes[24] (9)
+- Unidades que entraram: 0 · saíram: 0 · com valores alterados: 120 · valores alterados: 777
+- Valores alterados por bloco: leitos (537), natureza (120), tipo (120)
+- Detalhe limitado às primeiras 400 linhas.
 
-- Cabeçalho `excluidas`: {"0013846": "Hospital do Rocio (PR): ... → {}
+- Cabeçalho `demais`: null → [{"c": "5353947", "n": "HOSPITAL DA F...
+- Cabeçalho `esferas`: null → {"1015": "Administração pública feder...
+- Cabeçalho `municipios`: null → {"120032": ["Jordão", 12002, 1201, -9...
 - Cabeçalho `tipos`: [{"co": "0101", "ds": "CENTRO DE REFE... → [{"co": "0101", "ds": "CENTRO DE REFE...
-- Cabeçalho `unidadesPorPainel`: {"mortalidade": 120, "internacao": 11... → {"mortalidade": 120, "internacao": 12...
-- **Saiu** 2025507 · Hospital das Clínicas da FAMEMA (SP)
+- Cabeçalho `tiposEstab`: null → {"05": "HOSPITAL GERAL", "07": "HOSPI...
+- Cabeçalho `universo`: null → {"competencia": "2026-09", "baixadoEm...
 
-### 2025523 · Hospital das Clínicas da FAMEMA (complexo HCFAMEMA) (SP) — 374 valor(es)
-- `habilitacoes[0].cnes`: "∅" → "2025507"
-- `habilitacoes[10].cnes`: "∅" → "2025507"
-- `habilitacoes[10].co`: "∅" → "1301"
-- `habilitacoes[10].ds`: "∅" → "INTERNACAO DOMICILIAR"
-- `habilitacoes[10].dtPortaria`: "∅" → "05/01/2007"
-- `habilitacoes[10].fim`: "∅" → "99/9999"
-- `habilitacoes[10].ini`: "∅" → "08/2003"
-- `habilitacoes[10].leitos`: "∅" → 0
-- `habilitacoes[10].origem`: "∅" → null
-- `habilitacoes[10].portaria`: "∅" → "677"
-- `habilitacoes[11].cnes`: "∅" → "2025507"
-- `habilitacoes[11].co`: "∅" → "1404"
-- `habilitacoes[11].ds`: "∅" → "HOSPITAL AMIGO DA CRIANCA"
-- `habilitacoes[11].dtPortaria`: "∅" → "09/01/2019"
-- `habilitacoes[11].fim`: "∅" → "99/9999"
-- `habilitacoes[11].ini`: "∅" → "12/2018"
-- `habilitacoes[11].leitos`: "∅" → 0
-- `habilitacoes[11].origem`: "∅" → null
-- `habilitacoes[11].portaria`: "∅" → "PT SAS/MS N°23"
-- `habilitacoes[12].cnes`: "∅" → "2025507"
-- `habilitacoes[12].co`: "∅" → "1420"
-- `habilitacoes[12].ds`: "∅" → "HOSPITAL DE REFERENCIA A GESTACAO E ...
-- `habilitacoes[12].dtPortaria`: "∅" → "26/06/2025"
-- `habilitacoes[12].fim`: "∅" → "99/9999"
-- `habilitacoes[12].ini`: "∅" → "08/2025"
-- `habilitacoes[12].leitos`: "∅" → 1
-- `habilitacoes[12].origem`: "∅" → null
-- `habilitacoes[12].portaria`: "∅" → "2902/SAES/MS"
-- `habilitacoes[13].cnes`: "∅" → "2025507"
-- `habilitacoes[13].co`: "∅" → "1601"
-- `habilitacoes[13].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
-- `habilitacoes[13].dtPortaria`: "∅" → "10/11/2008"
-- `habilitacoes[13].fim`: "∅" → "99/9999"
-- `habilitacoes[13].ini`: "∅" → "01/2008"
-- `habilitacoes[13].leitos`: "∅" → 0
-- `habilitacoes[13].origem`: "∅" → null
-- `habilitacoes[13].portaria`: "∅" → "PT SAS 646"
-- `habilitacoes[14].cnes`: "∅" → "2025507"
-- `habilitacoes[14].co`: "∅" → "1615"
-- `habilitacoes[14].ds`: "∅" → "CENTRO DE ATENDIMENTO DE URGENCIA TI...
-- `habilitacoes[14].dtPortaria`: "∅" → "16/09/2015"
-- `habilitacoes[14].fim`: "∅" → "99/9999"
-- `habilitacoes[14].ini`: "∅" → "09/2015"
-- `habilitacoes[14].leitos`: "∅" → 0
-- `habilitacoes[14].origem`: "∅" → null
-- `habilitacoes[14].portaria`: "∅" → "SAS 870"
-- `habilitacoes[15].cnes`: "∅" → "2025507"
-- `habilitacoes[15].co`: "∅" → "1616"
-- `habilitacoes[15].ds`: "∅" → "CENTRO DE ATENDIMENTO DE URGENCIA TI...
-- `habilitacoes[15].dtPortaria`: "∅" → "29/05/2025"
-- `habilitacoes[15].fim`: "∅" → "99/9999"
-- `habilitacoes[15].ini`: "∅" → "05/1995"
-- `habilitacoes[15].leitos`: "∅" → 0
-- `habilitacoes[15].origem`: "∅" → null
-- `habilitacoes[15].portaria`: "∅" → "GM/MS 7031"
-- `habilitacoes[16].cnes`: "∅" → "2025507"
-- `habilitacoes[16].co`: "∅" → "1713"
-- `habilitacoes[16].ds`: "∅" → "CACON COM SERVICO DE ONCOLOGIA PEDIA...
-- `habilitacoes[16].dtPortaria`: "∅" → "28/03/2017"
-- `habilitacoes[16].fim`: "∅" → "99/9999"
-- `habilitacoes[16].ini`: "∅" → "03/2008"
-- `habilitacoes[16].leitos`: "∅" → 0
-- `habilitacoes[16].origem`: "∅" → null
-- `habilitacoes[16].portaria`: "∅" → "PT SAS 630"
-- `habilitacoes[17].cnes`: "∅" → "2025507"
-- `habilitacoes[17].co`: "∅" → "1901"
-- `habilitacoes[17].ds`: "∅" → "LAQUEADURA"
-- `habilitacoes[17].dtPortaria`: "∅" → "25/08/2014"
-- `habilitacoes[17].fim`: "∅" → "99/9999"
-- `habilitacoes[17].ini`: "∅" → "11/2000"
-- `habilitacoes[17].leitos`: "∅" → 0
-- `habilitacoes[17].origem`: "∅" → "P"
-- `habilitacoes[17].portaria`: "∅" → "PORT CPS-40 DE 16--11-2000"
-- `habilitacoes[18].cnes`: "∅" → "2025523"
-- `habilitacoes[18].co`: "∅" → "1901"
-- `habilitacoes[18].ds`: "∅" → "LAQUEADURA"
-- `habilitacoes[18].dtPortaria`: "∅" → "25/08/2014"
-- `habilitacoes[18].fim`: "∅" → "99/9999"
-- `habilitacoes[18].ini`: "∅" → "11/2000"
-- `habilitacoes[18].leitos`: "∅" → 0
-- `habilitacoes[18].origem`: "∅" → "P"
-- `habilitacoes[18].portaria`: "∅" → "PORT CPS-40 DE 16-11-2000"
-- `habilitacoes[19].cnes`: "∅" → "2025507"
-- `habilitacoes[19].co`: "∅" → "1902"
-- `habilitacoes[19].ds`: "∅" → "VASECTOMIA"
-- `habilitacoes[19].dtPortaria`: "∅" → "25/08/2014"
-- `habilitacoes[19].fim`: "∅" → "99/9999"
-- `habilitacoes[19].ini`: "∅" → "11/2000"
-- `habilitacoes[19].leitos`: "∅" → 0
-- `habilitacoes[19].origem`: "∅" → "P"
-- `habilitacoes[19].portaria`: "∅" → "PORT CPS-40 DE 16-11-2000"
-- `habilitacoes[1].cnes`: "∅" → "2025523"
-- `habilitacoes[1].co`: "1101" → "0101"
-- `habilitacoes[1].ds`: "SERVICO HOSPITALAR PARA TRATAMENTO A... → "CENTRO DE REFERENCIA EM ATENCAO A SA...
-- `habilitacoes[20].cnes`: "∅" → "2025507"
-- `habilitacoes[20].co`: "∅" → "2001"
-- `habilitacoes[20].ds`: "∅" → "PROGRAMA DE ASSISTENCIA VENTILADORA ...
-- `habilitacoes[20].dtPortaria`: "∅" → "16/11/2010"
-- `habilitacoes[20].fim`: "∅" → "99/9999"
-- `habilitacoes[20].ini`: "∅" → "11/2010"
-- `habilitacoes[20].leitos`: "∅" → 0
-- `habilitacoes[20].origem`: "∅" → null
-- `habilitacoes[20].portaria`: "∅" → "SAS 370"
-- `habilitacoes[21].cnes`: "∅" → "2025507"
-- `habilitacoes[21].co`: "∅" → "2201"
-- `habilitacoes[21].ds`: "∅" → "CENTRO DE REFERENCIA DE REABILITACAO...
-- `habilitacoes[21].dtPortaria`: "∅" → "09/01/2019"
-- `habilitacoes[21].fim`: "∅" → "99/9999"
-- `habilitacoes[21].ini`: "∅" → "12/2018"
-- `habilitacoes[21].leitos`: "∅" → 0
-- `habilitacoes[21].origem`: "∅" → null
-- `habilitacoes[21].portaria`: "∅" → "PT SAS/MS N°23"
-- `habilitacoes[22].cnes`: "∅" → "2025507"
-- `habilitacoes[22].co`: "∅" → "2204"
-- `habilitacoes[22].ds`: "∅" → "CENTRO DE REABILITAÇÃO AUDITIVA NA M...
-- `habilitacoes[22].dtPortaria`: "∅" → "30/12/2013"
-- `habilitacoes[22].fim`: "∅" → "99/9999"
-- `habilitacoes[22].ini`: "∅" → "01/2014"
-- `habilitacoes[22].leitos`: "∅" → 0
-- `habilitacoes[22].origem`: "∅" → null
-- `habilitacoes[22].portaria`: "∅" → "SAS 1462"
-- `habilitacoes[23].cnes`: "∅" → "2025507"
-- `habilitacoes[23].co`: "∅" → "2205"
-- `habilitacoes[23].ds`: "∅" → "CENTRO DE REABILITAÇÃO AUDITIVA NA A...
-- `habilitacoes[23].dtPortaria`: "∅" → "30/12/2013"
-- `habilitacoes[23].fim`: "∅" → "99/9999"
-- `habilitacoes[23].ini`: "∅" → "01/2014"
-- `habilitacoes[23].leitos`: "∅" → 0
-- `habilitacoes[23].origem`: "∅" → null
-- `habilitacoes[23].portaria`: "∅" → "SAS 1462"
-- `habilitacoes[24].cnes`: "∅" → "2025507"
-- `habilitacoes[24].co`: "∅" → "2301"
-- `habilitacoes[24].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
-- `habilitacoes[24].dtPortaria`: "∅" → "14/04/2009"
-- `habilitacoes[24].fim`: "∅" → "99/9999"
-- `habilitacoes[24].ini`: "∅" → "06/2009"
-- `habilitacoes[24].leitos`: "∅" → 0
-- `habilitacoes[24].origem`: "∅" → null
-- `habilitacoes[24].portaria`: "∅" → "SAS 120 RETIF"
-- `habilitacoes[25].cnes`: "∅" → "2025523"
-- `habilitacoes[25].co`: "∅" → "2301"
-- `habilitacoes[25].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
-- `habilitacoes[25].dtPortaria`: "∅" → "22/07/2010"
-- `habilitacoes[25].fim`: "∅" → "99/9999"
-- `habilitacoes[25].ini`: "∅" → "07/2010"
-- `habilitacoes[25].leitos`: "∅" → 0
-- `habilitacoes[25].origem`: "∅" → null
-- `habilitacoes[25].portaria`: "∅" → "SAS 349"
-- `habilitacoes[26].cnes`: "∅" → "2025507"
-- `habilitacoes[26].co`: "∅" → "2304"
-- `habilitacoes[26].ds`: "∅" → "ENTERAL E PARENTERAL"
-- `habilitacoes[26].dtPortaria`: "∅" → "14/04/2009"
-- `habilitacoes[26].fim`: "∅" → "99/9999"
-- `habilitacoes[26].ini`: "∅" → "01/2008"
-- `habilitacoes[26].leitos`: "∅" → 0
-- `habilitacoes[26].origem`: "∅" → null
-- `habilitacoes[26].portaria`: "∅" → "SAS 120 RETIF"
-- `habilitacoes[27].cnes`: "∅" → "2025523"
-- `habilitacoes[27].co`: "∅" → "2304"
-- `habilitacoes[27].ds`: "∅" → "ENTERAL E PARENTERAL"
-- `habilitacoes[27].dtPortaria`: "∅" → "22/07/2010"
-- `habilitacoes[27].fim`: "∅" → "99/9999"
-- `habilitacoes[27].ini`: "∅" → "07/2010"
-- `habilitacoes[27].leitos`: "∅" → 0
-- `habilitacoes[27].origem`: "∅" → null
-- `habilitacoes[27].portaria`: "∅" → "SAS 349"
-- `habilitacoes[28].cnes`: "∅" → "2025507"
-- `habilitacoes[28].co`: "∅" → "2407"
-- `habilitacoes[28].ds`: "∅" → "TRANSPLANTE DE CORNEA/ESCLERA"
-- `habilitacoes[28].dtPortaria`: "∅" → "07/10/2024"
-- `habilitacoes[28].fim`: "∅" → "10/2028"
-- `habilitacoes[28].ini`: "∅" → "12/2022"
-- `habilitacoes[28].leitos`: "∅" → 0
-- `habilitacoes[28].origem`: "∅" → null
-- `habilitacoes[28].portaria`: "∅" → "2147/SAES/MS"
-- `habilitacoes[29].cnes`: "∅" → "2025507"
-- `habilitacoes[29].co`: "∅" → "2413"
-- `habilitacoes[29].ds`: "∅" → "BANCO DE TECIDO OCULAR HUMANO"
-- `habilitacoes[29].dtPortaria`: "∅" → "26/02/2025"
-- `habilitacoes[29].fim`: "∅" → "02/2027"
-- `habilitacoes[29].ini`: "∅" → "01/2023"
-- `habilitacoes[29].leitos`: "∅" → 0
-- `habilitacoes[29].origem`: "∅" → null
-- `habilitacoes[29].portaria`: "∅" → "SAES/MS 2585"
-- `habilitacoes[2].cnes`: "∅" → "2025507"
-- `habilitacoes[2].co`: "1901" → "0203"
-- `habilitacoes[2].ds`: "LAQUEADURA" → "ASSISTÊNCIA DE ALTA COMPLEXIDADE AO ...
-- `habilitacoes[2].dtPortaria`: "25/08/2014" → "29/12/2016"
-- `habilitacoes[2].ini`: "11/2000" → "12/2016"
-- `habilitacoes[2].origem`: "P" → null
-- `habilitacoes[2].portaria`: "PORT CPS-40 DE 16-11-2000" → "PT GM 3252"
-- `habilitacoes[30].cnes`: "∅" → "2025507"
-- `habilitacoes[30].co`: "∅" → "2420"
-- `habilitacoes[30].ds`: "∅" → "RETIRADA DE ORGAOS E TECIDOS"
-- `habilitacoes[30].dtPortaria`: "∅" → "07/10/2024"
-- `habilitacoes[30].fim`: "∅" → "10/2028"
-- `habilitacoes[30].ini`: "∅" → "12/2010"
-- `habilitacoes[30].leitos`: "∅" → 0
-- `habilitacoes[30].origem`: "∅" → null
-- `habilitacoes[30].portaria`: "∅" → "2147/SAES/MS"
-- `habilitacoes[31].cnes`: "∅" → "2025507"
-- `habilitacoes[31].co`: "∅" → "2422"
-- `habilitacoes[31].ds`: "∅" → "TRANSPLANTE DE TECIDO MÚSCULO ESQUEL...
-- `habilitacoes[31].dtPortaria`: "∅" → "04/09/2023"
-- `habilitacoes[31].fim`: "∅" → "08/2027"
-- `habilitacoes[31].ini`: "∅" → "08/2019"
-- `habilitacoes[31].leitos`: "∅" → 0
-- `habilitacoes[31].origem`: "∅" → null
-- `habilitacoes[31].portaria`: "∅" → "709/SAES/MS"
-- `habilitacoes[32].cnes`: "∅" → "2025507"
-- `habilitacoes[32].co`: "∅" → "2501"
-- `habilitacoes[32].ds`: "∅" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
-- `habilitacoes[32].dtPortaria`: "∅" → "30/03/2009"
-- `habilitacoes[32].fim`: "∅" → "99/9999"
-- `habilitacoes[32].ini`: "∅" → "01/2008"
-- `habilitacoes[32].leitos`: "∅" → 0
-- `habilitacoes[32].origem`: "∅" → null
-- `habilitacoes[32].portaria`: "∅" → "SAS90RETF"
-- `habilitacoes[33].cnes`: "∅" → "2025507"
-- `habilitacoes[33].co`: "∅" → "2601"
-- `habilitacoes[33].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA ADULTO ...
-- `habilitacoes[33].dtPortaria`: "∅" → "04/08/2022"
-- `habilitacoes[33].fim`: "∅" → "99/9999"
-- `habilitacoes[33].ini`: "∅" → "08/2003"
-- `habilitacoes[33].leitos`: "∅" → 40
-- `habilitacoes[33].origem`: "∅" → null
-- `habilitacoes[33].portaria`: "∅" → "3209/GM/MS"
-- `habilitacoes[34].cnes`: "∅" → "2025507"
-- `habilitacoes[34].co`: "∅" → "2603"
-- `habilitacoes[34].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA PEDIÁTR...
-- `habilitacoes[34].dtPortaria`: "∅" → "09/01/2019"
-- `habilitacoes[34].fim`: "∅" → "99/9999"
-- `habilitacoes[34].ini`: "∅" → "12/2018"
-- `habilitacoes[34].leitos`: "∅" → 7
-- `habilitacoes[34].origem`: "∅" → null
-- `habilitacoes[34].portaria`: "∅" → "PT SAS/MS N°23"
-- `habilitacoes[35].cnes`: "∅" → "2025507"
-- `habilitacoes[35].co`: "∅" → "2608"
-- `habilitacoes[35].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA CORONAR...
-- `habilitacoes[35].dtPortaria`: "∅" → "28/03/2023"
-- `habilitacoes[35].fim`: "∅" → "99/9999"
-- `habilitacoes[35].ini`: "∅" → "03/2023"
-- `habilitacoes[35].leitos`: "∅" → 6
-- `habilitacoes[35].origem`: "∅" → null
-- `habilitacoes[35].portaria`: "∅" → "369/GM/MS"
-- `habilitacoes[36].cnes`: "∅" → "2025507"
-- `habilitacoes[36].co`: "∅" → "2610"
-- `habilitacoes[36].ds`: "∅" → "UNIDADE DE TERAPIA INTENSIVA NEONATA...
-- `habilitacoes[36].dtPortaria`: "∅" → "09/01/2019"
-- `habilitacoes[36].fim`: "∅" → "99/9999"
-- `habilitacoes[36].ini`: "∅" → "12/2018"
-- `habilitacoes[36].leitos`: "∅" → 8
-- `habilitacoes[36].origem`: "∅" → null
-- `habilitacoes[36].portaria`: "∅" → "PT SAS/MS N°23"
-- `habilitacoes[37].cnes`: "∅" → "2025507"
-- `habilitacoes[37].co`: "∅" → "2703"
-- `habilitacoes[37].ds`: "∅" → "HOSPITAL TIPO III EM URGENCIA"
-- `habilitacoes[37].dtPortaria`: "∅" → null
-- `habilitacoes[37].fim`: "∅" → "99/9999"
-- `habilitacoes[37].ini`: "∅" → "08/2003"
-- `habilitacoes[37].leitos`: "∅" → 0
-- `habilitacoes[37].origem`: "∅" → null
-- `habilitacoes[37].portaria`: "∅" → null
-- `habilitacoes[38].cnes`: "∅" → "2025523"
-- `habilitacoes[38].co`: "∅" → "2703"
-- `habilitacoes[38].ds`: "∅" → "HOSPITAL TIPO III EM URGENCIA"
-- `habilitacoes[38].dtPortaria`: "∅" → null
-- `habilitacoes[38].fim`: "∅" → "99/9999"
-- `habilitacoes[38].ini`: "∅" → "08/2003"
-- `habilitacoes[38].leitos`: "∅" → 0
-- `habilitacoes[38].origem`: "∅" → null
-- `habilitacoes[38].portaria`: "∅" → null
-- `habilitacoes[39].cnes`: "∅" → "2025507"
-- `habilitacoes[39].co`: "∅" → "2802"
-- `habilitacoes[39].ds`: "∅" → "UNIDADE DE CUIDADOS INTERMEDIARIOS N...
-- `habilitacoes[39].dtPortaria`: "∅" → "09/01/2019"
-- `habilitacoes[39].fim`: "∅" → "99/9999"
-- `habilitacoes[39].ini`: "∅" → "12/2018"
-- `habilitacoes[39].leitos`: "∅" → 8
-- `habilitacoes[39].origem`: "∅" → null
-- `habilitacoes[39].portaria`: "∅" → "PT SAS/MS N°23"
-- `habilitacoes[3].cnes`: "∅" → "2025507"
-- `habilitacoes[3].co`: "2301" → "0305"
-- `habilitacoes[3].ds`: "UNIDADE DE ASSISTENCIA DE ALTA COMPL... → "ATENCAO ESPECIALIZADA AS PESSOAS COM...
-- `habilitacoes[3].dtPortaria`: "22/07/2010" → "28/12/2018"
-- `habilitacoes[3].ini`: "07/2010" → "12/2018"
-- `habilitacoes[3].portaria`: "SAS 349" → "PT GM Nº 4421"
-- `habilitacoes[40].cnes`: "∅" → "2025507"
-- `habilitacoes[40].co`: "∅" → "2901"
-- `habilitacoes[40].ds`: "∅" → "VIDEOCIRURGIAS"
-- `habilitacoes[40].dtPortaria`: "∅" → "01/11/2006"
-- `habilitacoes[40].fim`: "∅" → "99/9999"
-- `habilitacoes[40].ini`: "∅" → "08/2003"
-- `habilitacoes[40].leitos`: "∅" → 0
-- `habilitacoes[40].origem`: "∅" → "P"
-- `habilitacoes[40].portaria`: "∅" → null
-- `habilitacoes[41].cnes`: "∅" → "2025507"
-- `habilitacoes[41].co`: "∅" → "3202"
-- `habilitacoes[41].ds`: "∅" → "LABORATÓRIO DE EXAMES CITOPATOLOGICO...
-- `habilitacoes[41].dtPortaria`: "∅" → "02/01/2014"
-- `habilitacoes[41].fim`: "∅" → "99/9999"
-- `habilitacoes[41].ini`: "∅" → "09/2014"
-- `habilitacoes[41].leitos`: "∅" → 0
-- `habilitacoes[41].origem`: "∅" → null
-- `habilitacoes[41].portaria`: "∅" → "GM/MS 2046/2014"
-- `habilitacoes[42].cnes`: "∅" → "2025507"
-- `habilitacoes[42].co`: "∅" → "3801"
-- `habilitacoes[42].ds`: "∅" → "PROGRAMA MAIS ACESSO A ESPECIALISTAS"
-- `habilitacoes[42].dtPortaria`: "∅" → "26/03/2025"
-- `habilitacoes[42].fim`: "∅" → "99/9999"
-- `habilitacoes[42].ini`: "∅" → "03/2025"
-- `habilitacoes[42].leitos`: "∅" → 0
-- `habilitacoes[42].origem`: "∅" → "P"
-- `habilitacoes[42].portaria`: "∅" → "PORTARIA 02/2025, 19 DE FEV 2025"
-- `habilitacoes[43].cnes`: "∅" → "2025507"
-- `habilitacoes[43].co`: "∅" → "3807"
-- `habilitacoes[43].ds`: "∅" → "COMPONENTE ACESSO A RADIOTERAPIA"
-- `habilitacoes[43].dtPortaria`: "∅" → "23/10/2025"
-- `habilitacoes[43].fim`: "∅" → "99/9999"
-- `habilitacoes[43].ini`: "∅" → "11/2025"
-- `habilitacoes[43].leitos`: "∅" → 0
-- `habilitacoes[43].origem`: "∅" → null
-- `habilitacoes[43].portaria`: "∅" → "GM/MS 8516"
-- `habilitacoes[4].cnes`: "∅" → "2025507"
-- `habilitacoes[4].co`: "2304" → "0508"
-- `habilitacoes[4].ds`: "ENTERAL E PARENTERAL" → "TRATAMENTO DO GLAUCOMA COM MEDICAMEN...
-- `habilitacoes[4].dtPortaria`: "22/07/2010" → "31/05/2016"
-- `habilitacoes[4].ini`: "07/2010" → "06/2016"
-- `habilitacoes[4].portaria`: "SAS 349" → "25000.083866/2016-44"
-- `habilitacoes[5].cnes`: "∅" → "2025507"
-- `habilitacoes[5].co`: "2703" → "0801"
-- `habilitacoes[5].ds`: "HOSPITAL TIPO III EM URGENCIA" → "UNIDADE DE ASSISTENCIA DE ALTA COMPL...
-- `habilitacoes[5].dtPortaria`: null → "28/09/2006"
-- `habilitacoes[5].ini`: "08/2003" → "10/2006"
-- `habilitacoes[5].portaria`: null → "SAS 721"
-- `habilitacoes[6].cnes`: "∅" → "2025507"
-- `habilitacoes[6].co`: "∅" → "0803"
-- `habilitacoes[6].ds`: "∅" → "CIRURGIA CARDIOVASCULAR E PROCEDIMEN...
-- `habilitacoes[6].dtPortaria`: "∅" → "18/10/2016"
-- `habilitacoes[6].fim`: "∅" → "99/9999"
-- `habilitacoes[6].ini`: "∅" → "10/2016"
-- `habilitacoes[6].leitos`: "∅" → 0
-- `habilitacoes[6].origem`: "∅" → null
-- `habilitacoes[6].portaria`: "∅" → "PT SAS 1448"
-- `habilitacoes[7].cnes`: "∅" → "2025507"
-- `habilitacoes[7].co`: "∅" → "0805"
-- `habilitacoes[7].ds`: "∅" → "CIRURGIA VASCULAR"
-- `habilitacoes[7].dtPortaria`: "∅" → "28/09/2006"
-- `habilitacoes[7].fim`: "∅" → "99/9999"
-- `habilitacoes[7].ini`: "∅" → "10/2006"
-- `habilitacoes[7].leitos`: "∅" → 0
-- `habilitacoes[7].origem`: "∅" → null
-- `habilitacoes[7].portaria`: "∅" → "SAS 721"
-- `habilitacoes[8].cnes`: "∅" → "2025507"
-- `habilitacoes[8].co`: "∅" → "1101"
-- `habilitacoes[8].ds`: "∅" → "SERVICO HOSPITALAR PARA TRATAMENTO A...
-- `habilitacoes[8].dtPortaria`: "∅" → null
-- `habilitacoes[8].fim`: "∅" → "99/9999"
-- `habilitacoes[8].ini`: "∅" → "08/2003"
-- `habilitacoes[8].leitos`: "∅" → 0
-- `habilitacoes[8].origem`: "∅" → null
-- `habilitacoes[8].portaria`: "∅" → null
-- `habilitacoes[9].cnes`: "∅" → "2025523"
-- `habilitacoes[9].co`: "∅" → "1101"
-- `habilitacoes[9].ds`: "∅" → "SERVICO HOSPITALAR PARA TRATAMENTO A...
-- `habilitacoes[9].dtPortaria`: "∅" → null
-- `habilitacoes[9].fim`: "∅" → "99/9999"
-- `habilitacoes[9].ini`: "∅" → "08/2003"
-- `habilitacoes[9].leitos`: "∅" → 0
-- `habilitacoes[9].origem`: "∅" → null
-- `habilitacoes[9].portaria`: "∅" → null
-- `paineis[0]`: "mortalidade" → "nascimentos"
-- `paineis[1]`: "∅" → "internacao"
-- `paineis[2]`: "∅" → "mortalidade"
+### 0000396 · Hospital das Clínicas (PE) — 6 valor(es)
+- `leitos.10`: "∅" → 37
+- `leitos.43`: "∅" → 9
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 5
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
 
-### 2495279 · Hospital Dr Claudionor Couto Roriz (RO) — 2 valor(es)
-- `listaOrigem`: "internacao" → "mortalidade"
-- `paineis[2]`: "∅" → "mortalidade"
+### 0000418 · Hospital Agamenon Magalhães (PE) — 7 valor(es)
+- `leitos.10`: "∅" → 50
+- `leitos.43`: "∅" → 23
+- `leitos.81`: "∅" → 15
+- `leitos.92`: "∅" → 15
+- `leitos.93`: "∅" → 8
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
 
-### 2711613 · CISAM - Centro Integrado de Saúde Amaury de Medeiros (PE) — 4 valor(es)
-- `paineis[0]`: "internacao" → "nascimentos"
-- `paineis[1]`: "mortalidade" → "internacao"
-- `paineis[2]`: "∅" → "mortalidade"
-- `regiaoSaude`: "I REGIÃO DE SAÚDE" → "RECIFE"
+### 0000434 · IMIP (PE) — 7 valor(es)
+- `leitos.10`: "∅" → 76
+- `leitos.41`: "∅" → 22
+- `leitos.43`: "∅" → 28
+- `leitos.65`: "∅" → 56
+- `leitos.82`: "∅" → 18
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0002232 · Hospital Santa Isabel (SE) — 6 valor(es)
+- `leitos.10`: "∅" → 18
+- `leitos.43`: "∅" → 37
+- `leitos.82`: "∅" → 20
+- `leitos.92`: "∅" → 20
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0003859 · Hospital Geral Roberto Santos (BA) — 8 valor(es)
+- `leitos.10`: "∅" → 32
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 32
+- `leitos.81`: "∅" → 25
+- `leitos.92`: "∅" → 23
+- `leitos.93`: "∅" → 5
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0004731 · Maternidade Climério de Oliveira (BA) — 8 valor(es)
+- `leitos.10`: "∅" → 29
+- `leitos.41`: "∅" → 7
+- `leitos.43`: "∅" → 18
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 5
+- `leitos.93`: "∅" → 10
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 0009709 · Hospital Universitário Maria Aparecida Pedrossian (MS) — 7 valor(es)
+- `leitos.10`: "∅" → 11
+- `leitos.41`: "∅" → 5
+- `leitos.43`: "∅" → 21
+- `leitos.81`: "∅" → 6
+- `leitos.92`: "∅" → 6
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0009725 · Hospital Regional de Mato Grosso do Sul (MS) — 7 valor(es)
+- `leitos.10`: "∅" → 16
+- `leitos.43`: "∅" → 14
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 20
+- `leitos.93`: "∅" → 5
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0010499 · Hospital Regional de Taguatinga (HRT) (DF) — 5 valor(es)
+- `leitos.10`: "∅" → 23
+- `leitos.43`: "∅" → 45
+- `leitos.81`: "∅" → 3
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0010510 · Hospital Universitário de Brasília (DF) — 5 valor(es)
+- `leitos.10`: "∅" → 10
+- `leitos.43`: "∅" → 6
+- `leitos.81`: "∅" → 10
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0010537 · Hospital Materno Infantil Dr Antônio Lisboa - HMIB (DF) — 6 valor(es)
+- `leitos.10`: "∅" → 45
+- `leitos.43`: "∅" → 30
+- `leitos.82`: "∅" → 30
+- `leitos.92`: "∅" → 15
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0012505 · Hospital Universitário Antônio Pedro (RJ) — 7 valor(es)
+- `leitos.10`: "∅" → 6
+- `leitos.43`: "∅" → 3
+- `leitos.81`: "∅" → 8
+- `leitos.92`: "∅" → 8
+- `leitos.93`: "∅" → 4
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0015369 · Complexo Hospitalar do Trabalhador (PR) — 6 valor(es)
+- `leitos.10`: "∅" → 33
+- `leitos.43`: "∅" → 2
+- `leitos.81`: "∅" → 8
+- `leitos.92`: "∅" → 10
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0026794 · Hospital Sofia Feldman (MG) — 8 valor(es)
+- `leitos.10`: "∅" → 85
+- `leitos.41`: "∅" → 57
+- `leitos.43`: "∅" → 12
+- `leitos.81`: "∅" → 50
+- `leitos.92`: "∅" → 40
+- `leitos.93`: "∅" → 20
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 0027049 · Hospital das Clínicas da UFMG (MG) — 8 valor(es)
+- `leitos.10`: "∅" → 23
+- `leitos.41`: "∅" → 1
+- `leitos.43`: "∅" → 12
+- `leitos.81`: "∅" → 17
+- `leitos.92`: "∅" → 10
+- `leitos.93`: "∅" → 4
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 0254460 · Hospital Geral Público Castelo dos Sonhos (PA) — 3 valor(es)
+- `leitos.10`: "∅" → 4
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2000296 · Hospital da Mulher e da Criança do Juruá (AC) — 4 valor(es)
+- `leitos.10`: "∅" → 12
+- `leitos.43`: "∅" → 12
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2000733 · Maternidade e Clínicas de Mulheres Bárbara Heliodora (AC) — 8 valor(es)
+- `leitos.10`: "∅" → 29
+- `leitos.41`: "∅" → 5
+- `leitos.43`: "∅" → 25
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 10
+- `leitos.93`: "∅" → 10
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2005050 · Hospital Regional de Arapiraca (AL) — 6 valor(es)
+- `leitos.10`: "∅" → 33
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 4
+- `leitos.93`: "∅" → 5
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2006197 · Hospital Universitário Prof Alberto Antunes (AL) — 6 valor(es)
+- `leitos.10`: "∅" → 30
+- `leitos.43`: "∅" → 30
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 19
+- `natureza`: "∅" → "Administração pública federal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2009250 · Maternidade Escola Santa Mônica (AL) — 7 valor(es)
+- `leitos.10`: "∅" → 22
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 18
+- `leitos.81`: "∅" → 27
+- `leitos.92`: "∅" → 27
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2012480 · Maternidade Municipal Dr Moura Tapajoz (AM) — 8 valor(es)
+- `leitos.10`: "∅" → 40
+- `leitos.41`: "∅" → 4
+- `leitos.43`: "∅" → 6
+- `leitos.81`: "∅" → 5
+- `leitos.92`: "∅" → 5
+- `leitos.93`: "∅" → 3
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2016141 · Hospital Regional de Tefé (AM) — 4 valor(es)
+- `leitos.10`: "∅" → 6
+- `leitos.43`: "∅" → 28
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2019558 · Maternidade Balbina Mestrinho (AM) — 8 valor(es)
+- `leitos.10`: "∅" → 30
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 24
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 20
+- `leitos.93`: "∅" → 10
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2020068 · SES AP Hospital da Mulher (AP) — 8 valor(es)
+- `leitos.10`: "∅" → 15
+- `leitos.41`: "∅" → 14
+- `leitos.43`: "∅" → 73
+- `leitos.81`: "∅" → 32
+- `leitos.92`: "∅" → 36
+- `leitos.93`: "∅" → 12
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2021064 · Hospital Estadual de Santana (AP) — 7 valor(es)
+- `leitos.10`: "∅" → 9
+- `leitos.41`: "∅" → 4
+- `leitos.43`: "∅" → 14
+- `leitos.92`: "∅" → 3
+- `leitos.93`: "∅" → 1
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2025523 · Hospital das Clínicas da FAMEMA (complexo HCFAMEMA) (SP) — 6 valor(es)
+- `leitos.10`: "∅" → 13
+- `leitos.43`: "∅" → 13
+- `leitos.81`: "∅" → 8
+- `leitos.92`: "∅" → 8
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2077396 · Hospital de Base de São José do Rio Preto (SP) — 6 valor(es)
+- `leitos.43`: "∅" → 35
+- `leitos.82`: "∅" → 16
+- `leitos.92`: "∅" → 16
+- `leitos.93`: "∅" → 8
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2077477 · Hospital Santa Marcelina (Itaquera) (SP) — 8 valor(es)
+- `leitos.10`: "∅" → 20
+- `leitos.41`: "∅" → 11
+- `leitos.43`: "∅" → 5
+- `leitos.82`: "∅" → 9
+- `leitos.92`: "∅" → 6
+- `leitos.93`: "∅" → 2
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2079186 · Maternidade Escola Dr Mário de Moraes Altenfelder Silva (Cachoeirinha) (SP) — 8 valor(es)
+- `leitos.10`: "∅" → 66
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 20
+- `leitos.81`: "∅" → 30
+- `leitos.92`: "∅" → 26
+- `leitos.93`: "∅" → 4
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2079720 · Hospital Guilherme Álvaro (SP) — 7 valor(es)
+- `leitos.10`: "∅" → 11
+- `leitos.43`: "∅" → 12
+- `leitos.81`: "∅" → 8
+- `leitos.92`: "∅" → 5
+- `leitos.93`: "∅" → 3
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2082187 · Hospital das Clínicas FAEPA Ribeirão Preto (SP) — 7 valor(es)
+- `leitos.10`: "∅" → 22
+- `leitos.43`: "∅" → 6
+- `leitos.82`: "∅" → 20
+- `leitos.92`: "∅" → 21
+- `leitos.93`: "∅" → 2
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2145960 · Santa Casa de Misericórdia de Araguari (MG) — 7 valor(es)
+- `leitos.10`: "∅" → 7
+- `leitos.43`: "∅" → 7
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 5
+- `leitos.93`: "∅" → 3
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2146355 · Hospital de Clínicas de Uberlândia (MG) — 8 valor(es)
+- `leitos.10`: "∅" → 28
+- `leitos.43`: "∅" → 20
+- `leitos.81`: "∅" → 10
+- `leitos.82`: "∅" → 10
+- `leitos.92`: "∅" → 16
+- `leitos.93`: "∅" → 6
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2149990 · Santa Casa de Montes Claros (MG) — 6 valor(es)
+- `leitos.10`: "∅" → 13
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 18
+- `leitos.81`: "∅" → 8
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2206595 · Hospital de Clínicas da UFTM (MG) — 5 valor(es)
+- `leitos.10`: "∅" → 16
+- `leitos.43`: "∅" → 6
+- `leitos.81`: "∅" → 16
+- `natureza`: "∅" → "Administração pública federal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2237571 · Hospital Nossa Senhora da Conceição SA (RS) — 7 valor(es)
+- `leitos.10`: "∅" → 41
+- `leitos.43`: "∅" → 21
+- `leitos.81`: "∅" → 30
+- `leitos.92`: "∅" → 20
+- `leitos.93`: "∅" → 10
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2244306 · Hospital Universitário de Santa Maria (RS) — 7 valor(es)
+- `leitos.10`: "∅" → 25
+- `leitos.43`: "∅" → 10
+- `leitos.81`: "∅" → 10
+- `leitos.92`: "∅" → 10
+- `leitos.93`: "∅" → 5
+- `natureza`: "∅" → "Administração pública federal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2246988 · Hospital São Vicente de Paulo (RS) — 7 valor(es)
+- `leitos.10`: "∅" → 24
+- `leitos.43`: "∅" → 5
+- `leitos.81`: "∅" → 18
+- `leitos.92`: "∅" → 10
+- `leitos.93`: "∅" → 5
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2252694 · Hospital Escola da UFPel (RS) — 5 valor(es)
+- `leitos.10`: "∅" → 15
+- `leitos.43`: "∅" → 10
+- `leitos.81`: "∅" → 9
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2265052 · Hospital Femina (RS) — 7 valor(es)
+- `leitos.10`: "∅" → 34
+- `leitos.43`: "∅" → 10
+- `leitos.82`: "∅" → 10
+- `leitos.92`: "∅" → 20
+- `leitos.93`: "∅" → 10
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2268922 · Hospital Municipal Desembargador Leal Junior - HMDLJ (RJ) — 4 valor(es)
+- `leitos.10`: "∅" → 14
+- `leitos.43`: "∅" → 14
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2269880 · Hospital Geral de Bonsucesso (RJ) — 5 valor(es)
+- `leitos.10`: "∅" → 25
+- `leitos.43`: "∅" → 20
+- `leitos.82`: "∅" → 12
+- `natureza`: "∅" → "Empresa pública ou sociedade de econ...
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2270021 · Maternidade Escola da UFRJ (RJ) — 8 valor(es)
+- `leitos.10`: "∅" → 17
+- `leitos.41`: "∅" → 4
+- `leitos.43`: "∅" → 8
+- `leitos.81`: "∅" → 16
+- `leitos.92`: "∅" → 6
+- `leitos.93`: "∅" → 4
+- `natureza`: "∅" → "Administração pública federal"
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2290227 · Hospital Municipal Adão Pereira Nunes (RJ) — 5 valor(es)
+- `leitos.10`: "∅" → 13
+- `leitos.43`: "∅" → 50
+- `leitos.81`: "∅" → 12
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2295415 · Hospital Universitário Gaffrée e Guinle (RJ) — 6 valor(es)
+- `leitos.10`: "∅" → 13
+- `leitos.41`: "∅" → 13
+- `leitos.43`: "∅" → 5
+- `leitos.81`: "∅" → 6
+- `natureza`: "∅" → "Administração pública federal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2298120 · SMS Hospital Municipal Albert Schweitzer AP 51 (RJ) — 7 valor(es)
+- `leitos.10`: "∅" → 3
+- `leitos.43`: "∅" → 41
+- `leitos.81`: "∅" → 11
+- `leitos.92`: "∅" → 10
+- `leitos.93`: "∅" → 2
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2309254 · Maternidade de Alta Complexidade do Maranhão (MA) — 7 valor(es)
+- `leitos.10`: "∅" → 44
+- `leitos.43`: "∅" → 55
+- `leitos.81`: "∅" → 38
+- `leitos.92`: "∅" → 38
+- `leitos.93`: "∅" → 19
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2311682 · Hospital Santa Helena (MT) — 8 valor(es)
+- `leitos.10`: "∅" → 29
+- `leitos.41`: "∅" → 1
+- `leitos.43`: "∅" → 22
+- `leitos.81`: "∅" → 18
+- `leitos.92`: "∅" → 4
+- `leitos.93`: "∅" → 3
+- `natureza`: "∅" → "Entidade sem fins lucrativos"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2323397 · Maternidade Dona Evangelina Rosa (PI) — 8 valor(es)
+- `leitos.10`: "∅" → 86
+- `leitos.41`: "∅" → 16
+- `leitos.43`: "∅" → 56
+- `leitos.81`: "∅" → 30
+- `leitos.92`: "∅" → 20
+- `leitos.93`: "∅" → 15
+- `natureza`: "∅" → "Administração pública estadual ou do...
+- `tipo`: "∅" → "HOSPITAL ESPECIALIZADO"
+
+### 2329905 · Hospital Municipal de Santarém (PA) — 4 valor(es)
+- `leitos.10`: "∅" → 24
+- `leitos.43`: "∅" → 20
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2330830 · Hospital Geral de Altamira São Rafael (HGA) (PA) — 6 valor(es)
+- `leitos.10`: "∅" → 24
+- `leitos.41`: "∅" → 10
+- `leitos.43`: "∅" → 9
+- `leitos.92`: "∅" → 10
+- `natureza`: "∅" → "Administração pública municipal"
+- `tipo`: "∅" → "HOSPITAL GERAL"
+
+### 2338424 · Hospital das Clínicas (GO) — 5 valor(es)
+- `leitos.10`: "∅" → 11
+- `leitos.43`: "∅" → 10
+
+### 2339196 · Hospital Estadual da Mulher Dr Jurandir do Nascimento (GO) — 5 valor(es)
+
+### 2362287 · Instituto de Saúde Elpídio de Almeida (PB) — 7 valor(es)
+
+### 2365146 · Hospital Regional Tibério Nunes (PI) — 5 valor(es)
+
+### 2376334 · Santa Casa de Corumbá (MS) — 4 valor(es)
+
+### 2384299 · Complexo do Hospital de Clínicas da UFPR (PR) — 8 valor(es)
+
+### 2396866 · Santa Casa de Rondonópolis (MT) — 8 valor(es)
+
+### 2399644 · Maternidade Cândida Vargas (PB) — 7 valor(es)
+
+### 2400243 · Hospital Universitário Lauro Wanderley (PB) — 6 valor(es)
+
+### 2408570 · Hospital Dr José Pedro Bezerra (RN) — 8 valor(es)
+
+### 2409208 · Maternidade Escola Januário Cicco (RN) — 7 valor(es)
+
+### 2410281 · Hospital Maternidade Almeida Castro (RN) — 8 valor(es)
+
+### 2427427 · Hospital Barão de Lucena (PE) — 7 valor(es)
+
+### 2430711 · Hospital Dom Malan (PE) — 7 valor(es)
+
+### 2436477 · Maternidade Darcy Vargas (SC) — 8 valor(es)
+
+### 2452383 · Maternidade de Alto Risco de Imperatriz (MA) — 7 valor(es)
+
+### 2453665 · Maternidade Carmosina Coutinho (MA) — 6 valor(es)
+
+### 2481286 · Maternidade Escola Assis Chateaubriand (Ebserh) (CE) — 8 valor(es)
+
+### 2495279 · Hospital Dr Claudionor Couto Roriz (RO) — 4 valor(es)
+
+### 2497654 · Hospital Geral de Fortaleza (HGF) (CE) — 8 valor(es)
+
+### 2499363 · Hospital Geral Dr César Cals (HGCC) (CE) — 5 valor(es)
+
+### 2506858 · Hospital e Maternidade Dona Íris (GO) — 7 valor(es)
+
+### 2522691 · Hospital e Maternidade Marieta Konder Bornhausen (SC) — 8 valor(es)
+
+### 2566168 · Hospital Materno Infantil N Sra de Nazareth (RR) — 8 valor(es)
+
+### 2655411 · Hospital Universitário Júlio Müller (MT) — 7 valor(es)
+
+### 2678179 · Hospital Infantil e Maternidade Alzir Bernardino Alves (ES) — 7 valor(es)
+
+### 2702886 · Complexo Hospitalar Materno Infantil do Maranhão (MA) — 8 valor(es)
+
+### 2705982 · Santa Casa de Franca (SP) — 6 valor(es)
+
+### 2707527 · Maternidade Frei Damião (PB) — 7 valor(es)
+
+### 2707675 · Hospital Universitário Dr Miguel Riet Corrêa Jr (RS) — 6 valor(es)
+
+### 2710935 · Hospital Universitário da Grande Dourados (MS) — 6 valor(es)
+
+### 2711613 · CISAM - Centro Integrado de Saúde Amaury de Medeiros (PE) — 8 valor(es)
+
+### 2715864 · Hospital e Maternidade Luísa de Marillac (PR) — 7 valor(es)
 
 ### 2717387 · Unidade Hospitalar de Iauareté (AM) — 2 valor(es)
-- `paineis[1]`: "mortalidade" → "internacao"
-- `paineis[2]`: "∅" → "mortalidade"
 
-### 7958838 · Hospital da Mulher do Recife (PE) — 4 valor(es)
-- `paineis[0]`: "internacao" → "nascimentos"
-- `paineis[1]`: "mortalidade" → "internacao"
-- `paineis[2]`: "∅" → "mortalidade"
-- `regiaoSaude`: "I REGIÃO DE SAÚDE" → "RECIFE"
+### 2726653 · Hospital Universitário da UFMA (MA) — 7 valor(es)
+
+### 2727064 · Maternidade Municipal Prof Wall Ferraz (PI) — 7 valor(es)
+
+### 2752700 · Santa Casa de Misericórdia do Pará (PA) — 7 valor(es)
+
+### 2755157 · Hospital e Maternidade D Regina S Campos de Palmas (TO) — 7 valor(es)
+
+### 2755165 · Hospital Dom Orione de Araguaína (TO) — 7 valor(es)
+
+### 2777746 · Hospital Regional Chagas Rodrigues (PI) — 4 valor(es)
+
+### 2792176 · Hospital Geral de Itapecerica da Serra (SP) — 8 valor(es)
+
+### 2798484 · Hospital Regional Adamastor Teixeira de Oliveira (RO) — 6 valor(es)
+
+### 2906635 · Maternidade Zona Norte Dra Euclélia Américo (AP) — 5 valor(es)
+
+### 3021114 · Santa Casa de Misericórdia de Sobral (CE) — 7 valor(es)
+
+### 3151794 · Maternidade de Referência Ana Braga (AM) — 8 valor(es)
+
+### 3157245 · Hospital Universitário Polydoro Ernani de São Thiago (SC) — 6 valor(es)
+
+### 3210243 · Hospital Regional Dr Jofre de Matos Cohen (AM) — 5 valor(es)
+
+### 3821978 · Maternidade Regional de Camaçari (BA) — 5 valor(es)
+
+### 3956369 · Maternidade Professor José Maria de Magalhães Neto (BA) — 7 valor(es)
+
+### 3972925 · Hospital do Oeste (BA) — 7 valor(es)
+
+### 4001303 · Hospital de Base Porto Velho (RO) — 7 valor(es)
+
+### 4014111 · Hospital Universitário Ana Bezerra (RN) — 6 valor(es)
+
+### 4044916 · Hospital Universitário Cassiano Antonio Moraes (HUCAM) (ES) — 7 valor(es)
+
+### 4099206 · Hospital da Mulher e Maternidade de Aracaju (HAMA) (SE) — 8 valor(es)
+
+### 4306945 · Hospital da Mulher do Agreste (PE) — 5 valor(es)
+
+### 5714397 · Maternidade Nossa Senhora de Lourdes (SE) — 7 valor(es)
+
+### 5717515 · Hospital Regional Santa Maria (DF) — 6 valor(es)
+
+### 6602533 · Hospital Estadual da Criança (BA) — 5 valor(es)
+
+### 6627595 · Instituto da Mulher Dona Lindu (AM) — 7 valor(es)
+
+### 6710158 · Hospital Regional Público do Marajó (PA) — 5 valor(es)
+
+### 6848710 · Hospital Regional Norte (CE) — 6 valor(es)
+
+### 6854729 · Hospital Municipal Ruth Cardoso (SC) — 6 valor(es)
+
+### 7257406 · Hospital Estadual Dr Jayme Santos Neves (ES) — 7 valor(es)
+
+### 7459831 · Maternidade Enfermeira Celina Villacrez Ruiz (AM) — 4 valor(es)
+
+### 7958838 · Hospital da Mulher do Recife (PE) — 7 valor(es)
+
+### 8015899 · Hospital Estadual Dirceu Arcoverde (PI) — 7 valor(es)
+
+### 9461493 · Hospital Regional Público Materno Infantil de Barcarena (PA) — 6 valor(es)
+
+### 9923837 · Hospital da Mulher Dra Nise da Silveira (AL) — 4 valor(es)

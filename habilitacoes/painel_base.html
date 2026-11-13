@@ -272,6 +272,28 @@ footer a{color:var(--verde-lima)}
   table.dados tbody tr{break-inside:avoid}
 }
 
+/* ---------------- recorte com todas as unidades (13/11/2026) ---------------- */
+.bola-demais{background:#9AA9B5; box-shadow:0 0 0 2px #5F7180 inset}
+.kpis-linha{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.8rem}
+.kpis-linha .k{background:var(--mint-card); border:1px solid var(--borda); border-radius:12px; padding:.5rem .8rem; min-width:150px; flex:1 1 150px; max-width:260px}
+.kpis-linha .k .n{font-size:1.5rem; font-weight:800; letter-spacing:-.02em; color:var(--verde-esmeralda); line-height:1.15}
+.kpis-linha .k .t{font-size:.74rem; color:var(--texto-suave); font-weight:600; line-height:1.3}
+.acoes-detalhe{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.9rem}
+.sub-detalhe{font-size:.86rem; font-weight:800; margin:1.1rem 0 .4rem; color:var(--texto)}
+.lista-colunas{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:.25rem 1.2rem; max-height:340px}
+.resumo-colunas{display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 2fr); gap:0 1.6rem}
+.kpi-lista.duas-colunas{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:.3rem 1.4rem}
+.rod-sub{font-weight:600; color:var(--texto-suave); font-size:.68rem}
+table.matriz td.cel.num{font-weight:700; color:var(--texto); font-variant-numeric:tabular-nums}
+.matriz-rodape{display:flex; gap:.6rem 1rem; flex-wrap:wrap; align-items:center; margin-top:.7rem; font-size:.84rem; color:var(--texto-suave)}
+.unidade.demais{border-top-color:#9AA9B5}
+.unidade .u-leitos{font-size:.76rem; color:var(--texto-suave); font-weight:600}
+.pop-lista{display:block; width:100%; text-align:left; margin-top:.3rem; font-size:.74rem; padding:.25rem .55rem}
+.busca-filtros{display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.7rem}
+.busca-filtros select{flex:1 1 180px; min-width:0}
+@media (max-width: 900px){ .resumo-colunas{grid-template-columns:1fr} .kpi-lista.duas-colunas{grid-template-columns:1fr} .lista-colunas{grid-template-columns:1fr}
+  .busca-res li button{flex-wrap:wrap} .busca-res li button span{flex:1 1 0; min-width:0} .busca-res li button small{margin-left:0; width:100%; white-space:normal} }
+
 /* ---------------- consulta individual ---------------- */
 .dossie-conjuntos{display:grid; gap:1.05rem}
 .dossie-conj{background:var(--mint-card); border:1px solid var(--borda); border-radius:14px; padding:.85rem 1rem}
@@ -373,7 +395,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
     </div>
     <p class="eyebrow">Painel de Habilitações · Cadastro Nacional de Estabelecimentos de Saúde (CNES) · <span id="heroConsulta">consulta ao CNES</span></p>
     <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
-    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para cada unidade dos três grupos, em um só lugar: consulta individual com a ficha completa, habilitações por grupo e por local, e mapa das unidades que têm cada habilitação.</p>
+    <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para todas as unidades com leitos obstétricos ou neonatais do SUS, com a identificação das unidades acompanhadas nos três grupos: consulta individual com a ficha de cada unidade, habilitações por grupo e por local, e mapa por território.</p>
     <div class="hero-blocos" id="heroGrupos">
       <span><i class="bolinha bola-apoiada"></i>Maternidades apoiadas (estratégicas)</span>
       <span><i class="bolinha bola-ebserh"></i>Unidades EBSERH</span>
@@ -388,14 +410,13 @@ table.local tfoot td.col-uf{background:var(--mint)}
 <!-- faixa de destaques -->
 <div class="wrap faixa-stats">
   <div class="stat"><div class="num" id="statUnid">—</div><div class="rot">Unidades</div><div class="sub" id="statUnidSub"></div></div>
+  <div class="stat"><div class="num" id="statAcomp">—</div><div class="rot">Unidades acompanhadas</div><div class="sub" id="statAcompSub"></div></div>
   <div class="stat"><div class="num" id="statHabs">—</div><div class="rot">Habilitações ativas</div><div class="sub" id="statHabsSub"></div></div>
-  <div class="stat"><div class="num" id="statTipos">—</div><div class="rot">Tipos de habilitação</div><div class="sub">códigos distintos no CNES</div></div>
+  <div class="stat"><div class="num" id="statTipos">—</div><div class="rot">Tipos de habilitação</div><div class="sub">códigos distintos nas unidades</div></div>
   <div class="stat"><div class="num" id="statUtin">—</div><div class="rot">Unidades com UTI neonatal</div><div class="sub" id="statUtinSub"></div></div>
   <div class="stat"><div class="num" id="statHgpar">—</div><div class="rot">Referência alto risco (HGPAR)</div><div class="sub" id="statHgparSub"></div></div>
   <button class="stat stat-btn" id="btnNotas" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
 </div>
-
-<nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
 
 <nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
 
@@ -404,8 +425,8 @@ table.local tfoot td.col-uf{background:var(--mint)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Consulta individual</p>
-      <h2>Escolha o grupo e a unidade para abrir a ficha de habilitações</h2>
-      <p style="max-width:none">A ficha abre em página própria, com o cadastro CNES da unidade e todas as habilitações registradas (código, descrição, competência inicial e final, portaria, leitos e origem), com download em PDF e em CSV. Uma unidade que pertence a mais de um grupo aparece em cada um deles.</p>
+      <h2>Ficha de habilitações de cada unidade</h2>
+      <p style="max-width:none">A ficha abre em página própria, com o cadastro CNES da unidade, os leitos SUS obstétricos e neonatais e todas as habilitações registradas (código, descrição, competência inicial e final, portaria, leitos e origem), com download em PDF e em CSV. As unidades acompanhadas podem ser escolhidas pelo grupo; qualquer unidade do painel pode ser localizada pela busca ou pelo município.</p>
     </div>
     <div class="grid-2">
       <div class="dossie-conjuntos">
@@ -424,8 +445,10 @@ table.local tfoot td.col-uf{background:var(--mint)}
       </div>
       <div class="card">
         <h3>Buscar unidade</h3>
-        <p class="suave" style="font-size:.84rem; margin-top:.3rem">Pelo nome, pelo município, pelo estado ou pelo código CNES, em todos os grupos.</p>
+        <p class="suave" style="font-size:.84rem; margin-top:.3rem">Pelo nome, pelo município, pelo estado ou pelo código CNES, entre todas as unidades do painel. As unidades acompanhadas aparecem primeiro, com a marca do grupo.</p>
         <input type="search" id="busca" placeholder="Ex.: Sofia Feldman, Recife, PE, 2000296…" style="width:100%; margin-top:.7rem"/>
+        <p class="suave" style="font-size:.84rem; margin-top:.8rem">Ou pela lista de unidades de um município:</p>
+        <div class="busca-filtros"><select id="selUFBusca" aria-label="Estado"><option value="">escolha o estado…</option></select><select id="selMunBusca" aria-label="Município" disabled><option value="">escolha o município…</option></select></div>
         <ul class="busca-res" id="buscaRes"></ul>
       </div>
     </div>
@@ -437,41 +460,38 @@ table.local tfoot td.col-uf{background:var(--mint)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Por grupo</p>
-      <h2>Habilitações dentro de cada grupo</h2>
-      <p style="max-width:none">Escolha o grupo para ver quantas unidades têm cada habilitação (foco materno-infantil ou as 20 mais frequentes). Toque em uma barra para listar, ao lado, as unidades do grupo que têm e as que não têm aquela habilitação. Abaixo, a matriz de cobertura do grupo, com os leitos habilitados em cada célula e download em CSV.</p>
+      <h2>Habilitações por grupo de unidades</h2>
+      <p style="max-width:none">Escolha o conjunto de unidades (todas as que têm leitos obstétricos ou neonatais SUS, as acompanhadas ou um dos três grupos), a região, o estado e o tipo de leito para ver quantas unidades têm cada habilitação (foco materno-infantil ou as 20 mais frequentes). Toque em uma barra para ver, logo abaixo, a distribuição por estado e as unidades que têm e as que não têm aquela habilitação. Em seguida vem a matriz de cobertura, com os leitos habilitados em cada célula e download em CSV.</p>
     </div>
-    <div class="mapa-controles">
-      <div class="seg" id="segGrupo">
-        <button data-grupo="apoiada" class="ativo"><i class="bolinha bola-apoiada"></i>Maternidades apoiadas</button>
-        <button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>Unidades EBSERH</button>
-        <button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO 2026/2027</button>
-        <button data-grupo="">Os três grupos</button>
-      </div>
-      <div class="seg" id="segFoco"><button data-foco="mi" class="ativo">Materno-infantil</button><button data-foco="todas">20 mais frequentes</button></div>
+    <div class="mapa-controles" style="align-items:end">
+      <label class="filtro" style="flex:0 0 auto; max-width:none"><span>Unidades</span><div class="seg" id="segGrupo"></div></label>
+      <label class="filtro" style="flex:0 0 auto; min-width:170px"><span>Região</span><select id="selRegiaoG"><option value="">Brasil</option></select></label>
+      <label class="filtro" style="flex:0 0 auto; min-width:210px"><span>Estado</span><select id="selUFG"><option value="">Todos os estados</option></select></label>
+      <label class="filtro" style="flex:0 0 auto; min-width:220px"><span>Leitos SUS</span><select id="selLeitoG"><option value="">Obstétricos ou neonatais</option><option value="obst">Com leitos obstétricos</option><option value="neo">Com leitos neonatais</option></select></label>
+      <label class="filtro" style="flex:0 0 auto; max-width:none"><span>Habilitações</span><div class="seg" id="segFoco"><button data-foco="mi" class="ativo">Materno-infantil</button><button data-foco="todas">20 mais frequentes</button></div></label>
     </div>
-    <div class="grid-2">
-      <div class="card">
-        <h3 id="barrasTitulo">Habilitações no grupo</h3>
-        <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
-        <div class="barras" id="barras"></div>
-        <p class="fonte">Cada barra conta as unidades do grupo com a habilitação registrada no CNES na data da consulta. Fonte: Ministério da Saúde - CNES.</p>
-      </div>
-      <div class="card painel-lateral" id="painelLateral"></div>
+    <div class="card">
+      <h3 id="barrasTitulo">Habilitações no recorte</h3>
+      <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
+      <div class="barras" id="barras"></div>
+      <p class="fonte">Cada barra conta as unidades do recorte com a habilitação registrada no CNES na data de referência de cada fonte (ver as notas metodológicas). Fonte: Ministério da Saúde - CNES.</p>
     </div>
-    <h3 style="margin:1.4rem 0 .6rem" id="matrizTitulo">Matriz de cobertura do grupo</h3>
+    <div class="card painel-lateral" id="painelDetalhe" style="margin-top:1.1rem"></div>
+    <h3 style="margin:1.4rem 0 .6rem" id="matrizTitulo">Matriz de cobertura</h3>
     <div class="matriz-controles">
       <select id="selAddCol" style="min-width:320px" aria-label="Acrescentar habilitação como coluna"><option value="">+ acrescentar habilitação como coluna…</option></select>
-      <div class="seg" id="segOrdem"><button data-ordem="uf" class="ativo">Ordenar por estado</button><button data-ordem="nome">Nome</button><button data-ordem="n">Nº de habilitações</button></div>
+      <div class="seg" id="segOrdem"><button data-ordem="uf" class="ativo">Ordenar por estado</button><button data-ordem="acomp">Acompanhadas primeiro</button><button data-ordem="nome">Nome</button><button data-ordem="n">Nº de habilitações</button></div>
       <button class="chip chip-botao" id="btnCsvMatriz">⬇ Baixar matriz (CSV)</button>
-      <button class="chip chip-botao" id="btnCsvTudo" title="Uma linha por habilitação de cada unidade do grupo">⬇ Todas as habilitações do grupo (CSV)</button>
+      <button class="chip chip-botao" id="btnCsvTudo" title="Uma linha por habilitação de cada unidade do recorte">⬇ Todas as habilitações do recorte (CSV)</button>
       <button class="chip chip-botao" id="btnColunasPadrao" hidden>↺ colunas padrão</button>
     </div>
     <div class="matriz-wrap"><table class="matriz" id="matriz"></table></div>
+    <div class="matriz-rodape"><span id="matrizResumo"></span><button class="chip chip-botao" id="btnMaisMatriz" hidden></button><button class="chip chip-botao" id="btnTodasMatriz" hidden></button></div>
     <div class="legenda">
       <span><i style="background:#E4F3E8"></i>habilitação registrada, sem prazo final</span>
-      <span><i style="background:#FFF3DB"></i>registrada com competência final definida (vigente na data da consulta)</span>
+      <span><i style="background:#FFF3DB"></i>registrada com competência final definida (vigente na data de referência)</span>
       <span><i style="background:#FFF"></i>sem a habilitação no CNES</span>
-      <span>Número na célula = leitos habilitados; II e III = tipo da UTI. Toque no nome da unidade para abrir a ficha.</span>
+      <span>Número na célula = leitos habilitados; II e III = tipo da UTI. As duas primeiras colunas trazem os leitos SUS obstétricos e neonatais cadastrados. Toque no nome da unidade para abrir a ficha.</span>
     </div>
   </div>
 </section>
@@ -482,15 +502,16 @@ table.local tfoot td.col-uf{background:var(--mint)}
     <div class="sec-head">
       <p class="eyebrow">Por local</p>
       <h2>Habilitações por região e estado</h2>
-      <p style="max-width:none">Cada linha é um estado e cada coluna, uma família de habilitações de interesse materno e infantil: a célula mostra quantas unidades do estado têm a habilitação, sobre o total de unidades do estado no recorte. Escolha a região, o estado e o grupo; abaixo da tabela ficam os cartões das unidades do local.</p>
+      <p style="max-width:none">Cada linha é um estado e cada coluna, uma família de habilitações de interesse materno e infantil: a célula mostra quantas unidades do estado têm a habilitação e o percentual sobre as unidades do estado no recorte. Com um estado escolhido, as linhas passam a ser as regiões de saúde dele. Abaixo da tabela ficam os cartões das unidades do local.</p>
     </div>
     <div class="mapa-controles">
       <label class="filtro" style="flex:0 0 auto; min-width:180px"><span>Região</span><select id="selRegiao"><option value="">Brasil</option></select></label>
       <label class="filtro" style="flex:0 0 auto; min-width:220px"><span>Estado</span><select id="selUF"><option value="">Todos os estados</option></select></label>
-      <label class="filtro" style="flex:0 0 auto"><span>Grupo</span>
-        <div class="seg" id="segGrupoLocal"><button data-grupo="" class="ativo">Os três</button><button data-grupo="apoiada"><i class="bolinha bola-apoiada"></i>Apoiadas</button><button data-grupo="ebserh"><i class="bolinha bola-ebserh"></i>EBSERH</button><button data-grupo="qualineo"><i class="bolinha bola-qualineo"></i>QUALINEO</button></div></label>
+      <label class="filtro" style="flex:0 0 auto; max-width:none"><span>Unidades</span><div class="seg" id="segGrupoLocal"></div></label>
+      <label class="filtro" style="flex:0 0 auto; min-width:220px"><span>Leitos SUS</span><select id="selLeitoLocal"><option value="">Obstétricos ou neonatais</option><option value="obst">Com leitos obstétricos</option><option value="neo">Com leitos neonatais</option></select></label>
       <button class="chip chip-botao" id="btnCsvLocal" style="align-self:end">⬇ Baixar tabela (CSV)</button>
     </div>
+    <h3 style="margin:.2rem 0 .6rem" id="localTitulo">Por estado</h3>
     <div class="local-wrap"><table class="local" id="tabelaLocal"></table></div>
     <div class="unidades-controles" style="margin-top:1.4rem">
       <span class="suave" id="unidadesResumo" style="font-size:.86rem"></span>
@@ -505,8 +526,8 @@ table.local tfoot td.col-uf{background:var(--mint)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Território</p>
-      <h2>Mapa do Brasil: habilitações das maternidades por território</h2>
-      <p>Escolha a habilitação, alterne o nível territorial e toque em um estado para dar zoom e filtrar · toque novamente para desfazer. A cor de cada território conta as unidades ali localizadas que têm a habilitação; o painel à direita lista essas unidades. O mapa de unidades, abaixo, marca cada maternidade com o nome, nas coordenadas do cadastro CNES.</p>
+      <h2>Mapa do Brasil: habilitações das unidades por território</h2>
+      <p>Escolha a habilitação, o conjunto de unidades e o nível territorial; toque em um estado para ampliar e filtrar, e novamente para desfazer. A cor de cada território conta as unidades ali localizadas que têm a habilitação, em classes ajustadas ao recorte; o quadro à direita resume o recorte e lista as unidades. O mapa de unidades, abaixo, localiza as unidades acompanhadas pelas coordenadas do cadastro CNES e as demais pela sede do município.</p>
     </div>
     <div class="filtros-grid filtros-topo">
       <label class="filtro"><span>Território</span>
@@ -523,13 +544,8 @@ table.local tfoot td.col-uf{background:var(--mint)}
           <option value="macro">Macrorregiões de saúde</option>
           <option value="rs">Regiões de saúde</option>
         </select></label>
-      <label class="filtro"><span>Grupo</span>
-        <select id="selGrupoMapa">
-          <option value="">Os três grupos</option>
-          <option value="apoiada">Maternidades apoiadas (estratégicas)</option>
-          <option value="ebserh">Unidades EBSERH</option>
-          <option value="qualineo">QUALINEO 2026/2027</option>
-        </select></label>
+      <label class="filtro"><span>Unidades</span>
+        <select id="selGrupoMapa"></select></label>
       <button class="chip chip-botao" id="btnResetMapa" hidden>✕ limpar seleção</button>
     </div>
     <div class="mapa-layout">
@@ -547,24 +563,25 @@ table.local tfoot td.col-uf{background:var(--mint)}
       <div class="col-dir">
         <div class="card"><h4 class="titulo-legenda" id="tituloLegenda">—</h4><div class="legenda legenda-v" id="legendaMapa"></div></div>
         <div class="card painel-lateral" id="mapaLateral"></div>
-        <label class="toggle" style="font-size:.78rem"><input type="checkbox" id="chkPontosMalha"/> pontos das unidades sobre a malha (posição aproximada)</label>
-        <p class="nota-mapa suave" style="font-size:.74rem" id="notaMapa">Malhas de estados, macrorregiões e regiões de saúde iguais às dos outros painéis. Cinza: sem unidade do painel (ou sem a habilitação) no território.</p>
+        <label class="toggle" style="font-size:.78rem"><input type="checkbox" id="chkPontosMalha"/> pontos das unidades acompanhadas sobre a malha (posição aproximada)</label>
+        <p class="nota-mapa suave" style="font-size:.74rem" id="notaMapa">Malhas de estados, macrorregiões e regiões de saúde iguais às dos outros painéis. Cinza: sem unidade do recorte (ou sem a habilitação) no território.</p>
       </div>
     </div>
 
     <details class="acordeao acordeao-mapa" id="detUnidades">
-      <summary>Mapa de unidades · localização das maternidades · toque para abrir</summary>
+      <summary>Mapa de unidades · localização das unidades do recorte · toque para abrir</summary>
       <div class="acordeao-corpo">
-        <p class="suave" style="margin-bottom:.55rem">Cada ponto é uma unidade do recorte acima (território, grupo e habilitação), nas coordenadas do cadastro CNES, com o nome ao lado. Toque em um ponto para ver o detalhe da habilitação e abrir a ficha. Precisa de internet para o fundo (OpenStreetMap).</p>
+        <p class="suave" style="margin-bottom:.55rem">Unidades do recorte acima (território, conjunto de unidades e habilitação). As unidades acompanhadas aparecem nas coordenadas do cadastro CNES, com o nome ao lado. As demais são reunidas em um ponto cinza por município, na sede municipal: o ponto cresce com o número de unidades e, ao ser tocado, lista as unidades para abrir a ficha. Precisa de internet para o fundo (OpenStreetMap).</p>
         <p class="legenda-pontos">
           <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
           <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
           <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
+          <span class="item"><span class="bolinha bola-demais"></span>demais unidades, por município</span>
           <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem</span>
         </p>
         <div class="filtros-mapa">
-          <input type="search" id="buscaUnidadeMapa" placeholder="Buscar maternidade…" style="flex:1; min-width:190px"/>
-          <label class="toggle"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes</label>
+          <input type="search" id="buscaUnidadeMapa" placeholder="Buscar unidade…" style="flex:1; min-width:190px"/>
+          <label class="toggle"><input type="checkbox" id="chkNomes" checked/> mostrar os nomes das acompanhadas</label>
           <button class="chip chip-botao" id="btnCsvMapa">⬇ Baixar a lista (CSV)</button>
         </div>
         <div id="mapaLeaflet"></div>
@@ -578,31 +595,36 @@ table.local tfoot td.col-uf{background:var(--mint)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Notas metodológicas</p>
-      <h2>Fontes, composição da lista e como ler as habilitações</h2>
+      <h2>Fontes, unidades do painel e leitura das habilitações</h2>
     </div>
     <div class="notas-grid">
       <div class="card">
         <h3>Fonte e data</h3>
-        <p><b>Habilitações</b> são os serviços que o SUS autoriza o estabelecimento a realizar, registrados no Cadastro Nacional de Estabelecimentos de Saúde (CNES). A ficha de cadastro de cada unidade vem do serviço de acesso automatizado (API) de Dados Abertos do Ministério da Saúde; as habilitações vêm do serviço do portal do CNES na internet (cnes.datasus.gov.br), o mesmo que alimenta a aba "Habilitações" da página de cada estabelecimento.</p>
+        <p><b>Habilitações</b> são os serviços que o SUS autoriza o estabelecimento a realizar, registrados no Cadastro Nacional de Estabelecimentos de Saúde (CNES). O painel usa duas vias de acesso ao mesmo cadastro:</p>
+        <ul>
+          <li><b>Unidades acompanhadas</b>: a ficha de cadastro vem do serviço de acesso automatizado (API) de Dados Abertos do Ministério da Saúde e as habilitações, do serviço do portal do CNES na internet (cnes.datasus.gov.br), o mesmo que alimenta a aba "Habilitações" da página de cada estabelecimento. A atualização é automática, em 1º de junho e 1º de dezembro, pelo processo que atualiza a ficha CNES dos painéis de Nascimentos, Internação e Mortalidade.</li>
+          <li><b>Demais unidades</b>: arquivos mensais do CNES distribuídos pelo DATASUS, todos da mesma competência: leitos por especialidade, habilitações e cadastro dos estabelecimentos, com as tabelas auxiliares (nome fantasia, descrição das habilitações e tipo de estabelecimento). O município, a região de saúde e a macrorregião seguem a base territorial do DATASUS, a mesma das malhas dos mapas.</li>
+        </ul>
         <p id="notaConsulta"></p>
-        <p>A atualização é automática, em 1º de junho e 1º de dezembro, pelo mesmo processo que atualiza a ficha CNES dos painéis de Nascimentos, Internação e Mortalidade; este painel consolida as cópias dos três.</p>
+        <p>As duas vias foram comparadas nas unidades acompanhadas: o conjunto de habilitações coincide em 116 das 121 fichas, e as diferenças das outras cinco correspondem ao intervalo entre as duas datas de referência; nas 2.250 habilitações comparadas campo a campo, competências e leitos são iguais.</p>
       </div>
       <div class="card">
         <h3>Unidades e grupos</h3>
+        <p id="notaUniverso"></p>
         <p id="notaUnidades"></p>
         <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: maternidades apoiadas (estratégicas), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO 2026/2027. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
         <p id="notaAnexos"></p>
-        <p id="notaPosicao"><b>Mapas:</b> o mapa de unidades (OpenStreetMap) usa as coordenadas do cadastro CNES, como o mapa de unidades dos outros painéis. A vista por território usa as mesmas malhas de estados, macrorregiões e regiões de saúde dos outros painéis e conta as unidades por território pelos ids de malha; os pontos sobre a malha são opcionais e aproximados (as coordenadas são convertidas por uma aproximação ajustada e, quando o ponto cai fora da região de saúde da unidade, ele é deslocado para dentro dela).</p>
+        <p id="notaPosicao"><b>Mapas:</b> a vista por território usa as mesmas malhas de estados, macrorregiões e regiões de saúde dos outros painéis e conta as unidades de cada território; as classes de cor mudam conforme o maior número de unidades do recorte. No mapa de unidades (OpenStreetMap), as unidades acompanhadas usam as coordenadas do cadastro CNES e as demais, que não têm coordenadas nos arquivos utilizados, aparecem na sede do município. Os pontos sobre a malha são opcionais, só das unidades acompanhadas, e aproximados (as coordenadas são convertidas por uma aproximação ajustada e, quando o ponto cai fora da região de saúde da unidade, ele é deslocado para dentro dela).</p>
         <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) formam um único complexo e aparecem como uma só unidade, como nos demais painéis. Na ficha, cada habilitação traz o código CNES em que está registrada.</p>
       </div>
       <div class="card">
         <h3>Como ler cada habilitação</h3>
         <ul>
           <li><b>Código e descrição</b>: como constam no CNES. O código de quatro dígitos identifica o grupo e o subgrupo da habilitação na tabela do SCNES; a descrição é reproduzida sem alteração.</li>
-          <li><b>Competência inicial e final</b>: mês e ano em que a habilitação passou a valer e em que deixa de valer. "Sem prazo final" corresponde ao valor 99/9999 do CNES. Todas as habilitações deste painel estavam vigentes na data da consulta; as que têm competência final definida aparecem em âmbar.</li>
+          <li><b>Competência inicial e final</b>: mês e ano em que a habilitação passou a valer e em que deixa de valer. "Sem prazo final" corresponde ao valor 99/9999 do CNES. Todas as habilitações deste painel estavam vigentes na data de referência da sua fonte; as que têm competência final definida aparecem em âmbar. Algumas já estão registradas com competência inicial posterior à data de referência.</li>
           <li><b>Portaria</b>: ato que concedeu a habilitação e a sua data, como registrados no CNES (abreviaturas do próprio cadastro).</li>
-          <li><b>Origem</b>: campo do serviço do CNES. Nos dados, as habilitações marcadas "P" correspondem a resoluções e deliberações de Comissões Intergestores Bipartite e a portarias de secretarias estaduais ("gestor estadual ou municipal"); as demais, a portarias do Ministério da Saúde (GM, SAS e SAES).</li>
-          <li><b>Leitos</b>: número de leitos habilitados, informado em habilitações como UTI neonatal, UTI adulto, UCINCo, UCINCa e referência à gestação de alto risco (HGPAR). Não é o total de leitos cadastrados da unidade.</li>
+          <li><b>Origem</b>: campo do serviço do CNES. Nos dados, as habilitações marcadas "P" correspondem a resoluções e deliberações de Comissões Intergestores Bipartite e a portarias de secretarias estaduais ("gestor estadual ou municipal"); as demais, a portarias do Ministério da Saúde (GM, SAS e SAES). Os arquivos do DATASUS não trazem esse campo: nas demais unidades, a origem mostrada é a do mesmo código nas unidades acompanhadas, e fica em branco quando o código não ocorre nelas.</li>
+          <li><b>Leitos</b>: na tabela de habilitações, é o número de leitos habilitados, informado em habilitações como UTI neonatal, UTI adulto, UCINCo, UCINCa e referência à gestação de alto risco (HGPAR). Os leitos SUS obstétricos e neonatais, mostrados à parte, são os leitos cadastrados nessas especialidades, que definem quais unidades entram no painel.</li>
         </ul>
       </div>
       <div class="card">

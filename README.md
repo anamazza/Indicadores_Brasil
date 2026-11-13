@@ -12,7 +12,7 @@ Cooperação em Saúde da Mulher, da Criança e do Adolescente (IFF/Fiocruz).
 | Nascimentos · Painel NV 2026 (SINASC) | https://anamazza.github.io/Indicadores_Brasil/nascimentos/ | `nascimentos/` |
 | Internação (SIH/SUS) | https://anamazza.github.io/Indicadores_Brasil/internacao/ | `internacao/` |
 | Mortalidade (SIM) | https://anamazza.github.io/Indicadores_Brasil/mortalidade/ | `mortalidade/` |
-| Habilitações (CNES, todas as unidades dos três grupos) | https://anamazza.github.io/Indicadores_Brasil/habilitacoes/ | `habilitacoes/` |
+| Habilitações (CNES, todas as unidades com leitos obstétricos ou neonatais SUS, com os três grupos sinalizados) | https://anamazza.github.io/Indicadores_Brasil/habilitacoes/ | `habilitacoes/` |
 
 Cada painel é um HTML único e autocontido (`index.html`), com um botão no cabeçalho que volta à página
 principal (os botões cruzados entre painéis foram retirados em 12/10/2026). Os repositórios antigos (Indicadores_NV e
