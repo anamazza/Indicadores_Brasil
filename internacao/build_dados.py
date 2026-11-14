@@ -102,18 +102,7 @@ MAPA = [
     ("parto",      "Nascidos vivos por parto vaginal após cesariana anterior (%)", "Porcentagem de nascidos vivos por partos vaginais pós-cesariana", "pct"),
     ("parto",      "Analgesia nas internações para parto vaginal (%)", "Porcentagem de realização de analgesia em internações para partos vaginais", "pct"),
     ("parto",      "Nascidos vivos com trabalho de parto induzido (%)", "Porcentagem de nascidos vivos com trabalho de parto induzido", "pct"),
-    ("mmg",        "Casos de MMG entre as internações obstétricas (%)", "Porcentagem de casos de morbidade materna grave", "pct"),
-    ("mmg_causas", "Hemorragia",                                       "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Hemorragia", "pct"),
-    ("mmg_causas", "Hipertensão",                                      "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Hipertensão", "pct"),
-    ("mmg_causas", "Infecção",                                         "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Infecção", "pct"),
-    ("mmg_causas", "Complicações tromboembólicas",                     "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Complicações tromboembólicas", "pct"),
-    ("mmg_causas", "Causas obstétricas indiretas",                     "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Causas obstétricas indiretas", "pct"),
-    ("mmg_causas", "Outras causas obstétricas",                        "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Outras causas obstétricas", "pct"),
-    ("mmg_causas", "Demais causas",                                    "Distribuição percentual dos casos de morbidade materna grave por grupo de causa - Demais causas", "pct"),
-    ("mmg_manejo", "Com internação em UTI",                            "Porcentagem de casos de morbidade materna grave com internação em UTI", "pct"),
-    ("mmg_manejo", "Com permanência prolongada pós-parto",             "Porcentagem de casos de morbidade materna grave com tempo de permanência prolongado pós-parto", "pct"),
-    ("mmg_manejo", "Com transfusão sanguínea",                         "Porcentagem de casos de morbidade materna grave com transfusão sanguínea", "pct"),
-    ("mmg_manejo", "Com histerectomia",                                "Porcentagem de casos de morbidade materna grave com realização de histerectomia", "pct"),
+    # morbidade materna grave: desde 14/11/2026 não vem mais da planilha (regra do OOBr); ver o passo 3e
     ("ocup_obst",  "Taxa de ocupação dos leitos obstétricos (%)",      "Taxa de Ocupação - Obstétricas", "pct"),
     ("tmp_obst",   "Geral",                                            "Tempo médio de permanência - geral", "dias"),
     ("tmp_obst",   "Parto vaginal",                                    "Tempo médio de permanência - parto vaginal", "dias"),
@@ -355,6 +344,60 @@ def causas_neo_abs(cnes):
     return out
 
 
+# ----------------------------------------------------------------------------- 3e. morbidade materna grave conforme a literatura
+# (14/11/2026, pedido da coordenação: "siga esta literatura") Casos pelos 22 critérios da OMS para condições
+# potencialmente ameaçadoras à vida operacionalizados no SIH/SUS por Domingues et al. (PLoS One 2026), sobre as
+# internações obstétricas de mulheres de 10 a 49 anos por episódio de cuidado (Domingues et al., Epidemiol Serv Saude
+# 2024). Calculado por Extracao_SIH/71_mmg_literatura.py (uma UF por arquivo em saida/mmg_literatura/). Substitui o
+# bloco anterior (script do OOBr sobre o universo de 10 a 59 anos, com 7 grupos de causa e 4 linhas de manejo).
+MMG_REFERENCIAS = [
+    "Domingues RMSM, Dias MAB, Guillen LCT, Pinheiro RS, Saraceni V, Coeli CM. Operationalization of Severe Maternal "
+    "Morbidity surveillance in administrative databases of the Brazilian public and private health systems: Brazil "
+    "2015-2022. PLoS One. 2026;21(4):e0331544. https://doi.org/10.1371/journal.pone.0331544",
+    "Domingues RMSM, Meijinhos LS, Guillen LCT, Dias MAB, Saraceni V, Pinheiro RS, Paiva NS, Coeli CM. Estudo de "
+    "validação das internações obstétricas no Sistema de Informações Hospitalares do Sistema Único de Saúde para a "
+    "vigilância da morbidade materna: Brasil, 2021-2022. Epidemiol Serv Saude. 2024;33:e20231252. "
+    "https://doi.org/10.1590/S2237-96222024v33e20231252.pt",
+]
+_pasta_mmg = os.path.join(SAIDA_SIH, "mmg_literatura")
+mmg_lit, MMG_GRUPOS, MMG_CRITERIOS = {}, None, None
+for _f in sorted(os.listdir(_pasta_mmg)) if os.path.isdir(_pasta_mmg) else []:
+    if not _f.endswith(".json"):
+        continue
+    _j = json.load(open(os.path.join(_pasta_mmg, _f), encoding="utf-8"))
+    _meta = _j.pop("_meta")
+    if MMG_GRUPOS is None:
+        MMG_GRUPOS, MMG_CRITERIOS = _meta["grupos"], _meta["criterios"]
+    elif (MMG_GRUPOS, MMG_CRITERIOS) != (_meta["grupos"], _meta["criterios"]):
+        sys.exit(f"ERRO: {_f} foi calculado com outra lista de critérios; refaça o 71_mmg_literatura.py")
+    for _c, _por_ano in _j.items():
+        mmg_lit[_c.zfill(7)] = _por_ano
+sem_mmg = sorted(c for c in plan if c not in mmg_lit)
+if sem_mmg or not MMG_CRITERIOS:
+    sys.exit(f"ERRO: morbidade materna grave sem cálculo para {sem_mmg or 'todas as unidades'}. "
+             "Rode Extracao_SIH/70_sp_atos_mmg.py e 71_mmg_literatura.py.")
+
+
+def blocos_mmg(cnes):
+    """Blocos de morbidade materna grave: casos sobre as internações obstétricas e, sobre os casos, os 4 grupos e os
+    22 critérios (um caso pode ter mais de um critério)."""
+    por_ano = mmg_lit[cnes]
+    conta = lambda chave: [int(por_ano.get(str(a), {}).get(chave, 0)) for a in ANOS]
+    pct = lambda num, den: [round(100.0 * n / d, 2) if d else None for n, d in zip(num, den)]
+    obst, casos = conta("obst"), conta("mmg")
+    bl = {"mmg_obst_n": [["Internações obstétricas de mulheres de 10 a 49 anos (nº)", obst, "int"]],
+          "mmg_n": [["Casos de morbidade materna grave", casos, "int"]],
+          "mmg": [["Casos de morbidade materna grave", pct(casos, obst), "pct"]],
+          "mmg_grupos": [], "mmg_grupos_n": [], "mmg_criterios": [], "mmg_criterios_n": []}
+    for g, rot in MMG_GRUPOS:
+        n = conta("g_" + g)
+        bl["mmg_grupos"].append([rot, pct(n, casos), "pct"]); bl["mmg_grupos_n"].append([rot, n, "int"])
+    for ch, rot, _g in MMG_CRITERIOS:
+        n = conta("c_" + ch)
+        bl["mmg_criterios"].append([rot, pct(n, casos), "pct"]); bl["mmg_criterios_n"].append([rot, n, "int"])
+    return bl
+
+
 faltas = {}
 def blocos_de(cnes):
     bl = {}
@@ -367,6 +410,7 @@ def blocos_de(cnes):
         bl.setdefault(bloco, []).append([curto, list(vals[:len(ANOS)]), fmt])
     bl["motivos_n"] = [[curto, vals, "int"] for curto, vals in zip(MOT_CURTO, motivos_abs(cnes))]
     bl["neo_causas_n"] = [[curto, vals, "int"] for (curto, _rot), vals in zip(NEO_LINHAS, causas_neo_abs(cnes))]
+    bl.update(blocos_mmg(cnes))
     return bl
 
 # ----------------------------------------------------------------------------- 4. maternidades
@@ -413,6 +457,8 @@ if mot_pendentes:
     sys.exit("ERRO: motivos de internação sem número absoluto determinado (cnes, ano, total, conjuntos possíveis): "
              f"{mot_pendentes}. Rode Extracao_SIH/67_motivos_absolutos.py UF ANO para esses casos e monte de novo.")
 print(f"[3d] causas das internações neonatais em números absolutos: {neo_stats}")
+print(f"[3e] morbidade materna grave conforme a literatura: {len(mmg_lit)} unidades, {len(MMG_CRITERIOS)} critérios em "
+      f"{len(MMG_GRUPOS)} grupos")
 if neo_pendentes:
     sys.exit("ERRO: causas das internações neonatais sem número absoluto determinado (cnes, ano, total, inteiros "
              f"possíveis por grupo): {neo_pendentes}. O número não é estimado: é preciso contar nos microdados do SIH.")
@@ -467,8 +513,8 @@ alvo = {m["cnes"] for m in mats}
 contexto = [p for p in pontos_nv if p["cnes"] not in alvo]
 print(f"[6] {len(contexto)} pontos de contexto (>=480 partos/ano, fora do painel)")
 
-# ----------------------------------------------------------------------------- 6b. dicionário de indicadores (Word final de 10/09/2026)
-DICIONARIO_DOCX = os.path.join(PROJ, "DICIONARIO_INDICADORES_AIH_versao_final_2026-09-10.docx")
+# ----------------------------------------------------------------------------- 6b. dicionário de indicadores (Word, versão de 14/11/2026)
+DICIONARIO_DOCX = os.path.join(PROJ, "DICIONARIO_INDICADORES_AIH_versao_2026-11-14.docx")   # versão final de 10/09/2026 + morbidade materna grave conforme a literatura
 dicionario = []
 if os.path.exists(DICIONARIO_DOCX):
     import zipfile, html
@@ -490,7 +536,9 @@ else:
 
 # ----------------------------------------------------------------------------- 7. saída
 dados = {"anos": ANOS, "preliminares": PRELIMINARES, "parciais": PARCIAIS, "periodos": PERIODOS,
-         "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()}, "regras": "v3 2026-09-09",
+         "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()},
+         "regras": "v3 2026-09-09; morbidade materna grave conforme Domingues et al. (2026 e 2024), 2026-11-14",
+         "mmg": {"grupos": MMG_GRUPOS, "criterios": MMG_CRITERIOS, "referencias": MMG_REFERENCIAS},
          "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026", "maternidades": mats}
 out = os.path.join(BASE, "dados_internacao.js")
 with open(out, "w", encoding="utf-8") as fh:

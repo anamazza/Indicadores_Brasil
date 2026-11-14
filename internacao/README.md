@@ -80,3 +80,23 @@ do painel de mortalidade. O dicionário de indicadores é lido do Word final de 
   deixa de ser citado como preliminar; a lista dos cinco anexos foi corrigida.
 - Os "Partos" da tabela de motivos contam só as internações do universo obstétrico. Partos com diagnóstico principal
   fora do capítulo XV (por exemplo Z30, na cesariana com laqueadura) ficam fora: ponto levado à coordenação.
+
+## Morbidade materna grave conforme a literatura (14/11/2026)
+
+A pedido da coordenação, o indicador segue Domingues et al., PLoS One 2026 (22 critérios da OMS para condições
+potencialmente ameaçadoras à vida operacionalizados no SIH/SUS, Tabela 2) e Domingues et al., Epidemiol Serv Saude 2024
+(internação obstétrica de mulheres de 10 a 49 anos por CID do capítulo XV ou procedimento obstétrico, contada por
+episódio de cuidado).
+
+- Cálculo: `Extracao_SIH/70_sp_atos_mmg.py` (atos profissionais por código) e `71_mmg_literatura.py` (episódios e
+  critérios), com saída em `Extracao_SIH/saida/mmg_literatura/<UF>.json`; o `build_dados.py` lê no passo 3e e para se
+  faltar alguma unidade.
+- Blocos no painel: `mmg_obst_n` (denominador), `mmg_n` e `mmg` (casos, nº e %), `mmg_grupos` e `mmg_grupos_n` (4 grupos de
+  critérios), `mmg_criterios` e `mmg_criterios_n` (22 critérios). Rótulos e referências em `DADOS.mmg`.
+- O denominador do indicador não é o `obst_n` do painel (mulheres de 10 a 59 anos, cada AIH); a nota da tabela explica.
+- Dicionário: `DICIONARIO_INDICADORES_AIH_versao_2026-11-14.docx` (gerado por `Extracao_SIH/72_dicionario_2026-11-14.py`),
+  com a seção de morbidade materna reescrita e as referências completas.
+- Regra anterior (até 13/11/2026): script do OOBr sobre o universo de 10 a 59 anos, por AIH, com 7 grupos de causa e 4
+  linhas de manejo. Planilhas e apresentações de setembro de 2026 continuam com ela.
+- Comparação antes e depois por unidade: `Extracao_SIH/saida/mmg_literatura_comparacao_2026-11-14.csv`
+  (`73_compara_mmg.py`).

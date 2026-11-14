@@ -57,8 +57,11 @@ const CAUSAS_NEO = ["Asfixia/Hipóxia", "Infecções perinatais", "Transtornos c
   "Afecções respiratórias do RN", "Condições relacionadas a fatores maternos", "Prematuridade e baixo peso ao nascer",
   "Transtornos metabólicos e endócrinos", "Anomalias congênitas", "Causas mal definidas",
   "Outras afecções do período perinatal", "Demais causas"];
-const MMG_CAUSAS = ["Hemorragia", "Hipertensão", "Infecção", "Complicações tromboembólicas",
-  "Causas obstétricas indiretas", "Outras causas obstétricas", "Demais causas"];
+/* Morbidade materna grave conforme a literatura indicada pela coordenação em 14/11/2026: os 4 grupos e os 22
+   critérios vêm dos dados (DADOS.mmg), na ordem da Tabela 2 de Domingues et al. (PLoS One 2026). */
+const MMG = DADOS.mmg || {grupos: [], criterios: [], referencias: []};
+const iCritMMG = chave => MMG.criterios.findIndex(c => c[0] === chave);
+const minuscula = s => s.charAt(0).toLowerCase() + s.slice(1);
 const I = (id, eixo, rot, curto, bloco, i, fmt, sentido, fonte) => ({id, eixo, rot, curto, bloco, i, fmt, sentido, fonte});
 const INDS = [
   I("obst_n", "obst", "Internações obstétricas (nº)", "Internações obstétricas", "obst_n", 0, "int", "neutro", "SIH"),
@@ -77,11 +80,11 @@ const INDS = [
   I("analg", "parto", "Analgesia nas internações para parto vaginal (%)", "Analgesia no parto vaginal", "parto", 1, "pct", "maior", "SIH"),
   I("induz", "parto", "Nascidos vivos com trabalho de parto induzido (%)", "Trabalho de parto induzido", "parto", 2, "pct", "neutro", "SINASC"),
   I("mmg", "mmg", "Casos de morbidade materna grave entre as internações obstétricas (%)", "Casos de MMG", "mmg", 0, "pct", "menor", "SIH"),
-  ...MMG_CAUSAS.map((c, k) => I("mmgc" + k, "mmg", "MMG por grupo de causa: " + c + " (%)", "MMG · " + c, "mmg_causas", k, "pct", "neutro", "SIH")),
-  I("mmg_uti", "mmg", "Casos de MMG com internação em UTI (%)", "MMG com UTI", "mmg_manejo", 0, "pct", "neutro", "SIH"),
-  I("mmg_perm", "mmg", "Casos de MMG com permanência prolongada pós-parto (%)", "MMG com permanência prolongada", "mmg_manejo", 1, "pct", "neutro", "SIH"),
-  I("mmg_transf", "mmg", "Casos de MMG com transfusão sanguínea (%)", "MMG com transfusão", "mmg_manejo", 2, "pct", "neutro", "SIH"),
-  I("mmg_hist", "mmg", "Casos de MMG com histerectomia (%)", "MMG com histerectomia", "mmg_manejo", 3, "pct", "neutro", "SIH"),
+  ...MMG.grupos.map((g, k) => I("mmgg" + k, "mmg", "Casos de MMG com " + minuscula(g[1]) + " (%)", "MMG · " + minuscula(g[1]), "mmg_grupos", k, "pct", "neutro", "SIH")),
+  I("mmg_uti", "mmg", "Casos de MMG com internação em UTI (%)", "MMG com UTI", "mmg_criterios", iCritMMG("uti"), "pct", "neutro", "SIH"),
+  I("mmg_perm", "mmg", "Casos de MMG com permanência prolongada após o parto (%)", "MMG com permanência prolongada", "mmg_criterios", iCritMMG("permanencia_prolongada"), "pct", "neutro", "SIH"),
+  I("mmg_transf", "mmg", "Casos de MMG com transfusão de hemoderivados (%)", "MMG com transfusão", "mmg_criterios", iCritMMG("transfusao"), "pct", "neutro", "SIH"),
+  I("mmg_hist", "mmg", "Casos de MMG com histerectomia (%)", "MMG com histerectomia", "mmg_criterios", iCritMMG("histerectomia"), "pct", "neutro", "SIH"),
   I("ocup_obst", "ocup", "Taxa de ocupação dos leitos obstétricos (%)", "Ocupação obstétrica", "ocup_obst", 0, "pct", "neutro", "SIH e CNES"),
   I("tmp_geral", "ocup", "Tempo médio de permanência: geral (dias)", "Permanência geral", "tmp_obst", 0, "dias", "neutro", "SIH"),
   I("tmp_pv", "ocup", "Tempo médio de permanência: parto vaginal (dias)", "Permanência: parto vaginal", "tmp_obst", 1, "dias", "neutro", "SIH"),
@@ -339,6 +342,25 @@ function tabelaNumPct(mt, bloco, blocoTot, cab, rotTotal){
     <thead><tr><th>${esc(cab)} (nº e %)</th>${thsAno(true)}</tr></thead>
     <tbody>${rows}${total}</tbody></table></div>`;
 }
+/* casos de morbidade materna grave por critério, agrupados nos 4 grupos da OMS: número de casos com o critério e,
+   abaixo, o percentual sobre o total de casos (um caso pode ter mais de um critério) */
+function tabelaCriteriosMMG(mt){
+  const b = mt.blocos.mmg_criterios, bn = mt.blocos.mmg_criterios_n, tot = (mt.blocos.mmg_n || [])[0];
+  if(!b || !bn || !tot) return "<p class='suave'>Sem dados.</p>";
+  const cel = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${fmtPct(p)}</small></td>`;
+  let rows = "";
+  MMG.grupos.forEach(g => {
+    rows += `<tr class="subgrupo"><td colspan="${ANOS.length + 1}">${esc(g[1])}</td></tr>`;
+    MMG.criterios.forEach((c, ri) => {
+      if(c[2] !== g[0]) return;
+      rows += `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(b[ri][0])}</td>${b[ri][1].map((p, a) => cel(bn[ri][1][a], p)).join("")}</tr>`;
+    });
+  });
+  const total = `<tr class="total"><td>Total de casos de morbidade materna grave</td>${tot[1].map(v => `<td class="mono duplo"><b>${fmtInt(v)}</b><small>${v ? "100,0%" : "—"}</small></td>`).join("")}</tr>`;
+  return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="mmg_criterios" data-dist="1">
+    <thead><tr><th>Critério (nº e %)</th>${thsAno(true)}</tr></thead>
+    <tbody>${rows}${total}</tbody></table></div>`;
+}
 
 /* ---------------- modal: gráfico da distribuição de um ano ---------------- */
 function abrirGraficoAno(tbl, a, tituloCard){
@@ -504,11 +526,9 @@ function desenhaDossie(){
     ${card(`Presença de acompanhante (%), ${periodo}`, tabelaBloco(mt, "acomp", "Internações com acompanhante (%)"), FONTE_SIH, "Internações com registro de diária de acompanhante.")}
     ${card(`Partos no Centro de Parto Normal, ${periodo}`, tabelaBloco(mt, "cpn", "Centro de Parto Normal"), FONTE_SIH)}
     ${card(`Assistência ao parto, ${periodo}`, tabelaBloco(mt, "parto", "Assistência ao parto (%)"), FONTE_MISTA, "Parto vaginal após cesariana e trabalho de parto induzido pelo SINASC; analgesia pelas AIH de parto vaginal (SIH/SUS).")}
-    <div class="card full"><h3>Morbidade materna grave por grupo de causas (%), ${periodo} ${notaPrelim}</h3>
-      ${tabelaBloco(mt, "mmg", "Casos de MMG (%)")}
-      <div style="margin-top:.8rem">${tabelaBloco(mt, "mmg_causas", "Grupos de causas (% dos casos de MMG)")}</div>
-      <p class="fonte">${FONTE_SIH} Critérios de morbidade materna grave conforme o Observatório Obstétrico Brasileiro (OOBr); os grupos de causas não são exclusivos, por isso não somam 100%.</p></div>
-    ${card(`Morbidade materna grave por manejo (%), ${periodo}`, tabelaBloco(mt, "mmg_manejo", "Manejo (% dos casos de MMG)"), FONTE_SIH)}
+    ${card(`Morbidade materna grave (nº e %), ${periodo}`, tabelaNumPct(mt, "mmg", "mmg_obst_n", "Morbidade materna grave", "Internações obstétricas de mulheres de 10 a 49 anos"), FONTE_SIH, "Em cada célula, o número de casos e, abaixo, o percentual sobre as internações obstétricas. Caso: internação obstétrica com pelo menos um dos 22 critérios da Organização Mundial da Saúde para condições potencialmente ameaçadoras à vida, operacionalizados no SIH/SUS conforme Domingues et al. (2026). Internação obstétrica de mulheres de 10 a 49 anos, contada por episódio de cuidado, conforme Domingues et al. (2024); por isso o total desta tabela difere do número de internações obstétricas do início do perfil, que considera mulheres de 10 a 59 anos e cada AIH.")}
+    ${card(`Casos de morbidade materna grave por grupo de critérios (nº e %), ${periodo}`, tabelaNumPct(mt, "mmg_grupos", "mmg_n", "Grupo de critérios", "Total de casos de morbidade materna grave"), FONTE_SIH, "Em cada célula, o número de casos com pelo menos um critério do grupo e, abaixo, o percentual sobre o total de casos. Um caso pode ter critérios de mais de um grupo; por isso os percentuais não somam 100%. Grupos de critérios da Organização Mundial da Saúde, conforme Domingues et al. (2026).")}
+    ${card(`Casos de morbidade materna grave por critério (nº e %), ${periodo}`, tabelaCriteriosMMG(mt), FONTE_SIH, "Em cada célula, o número de casos com o critério e, abaixo, o percentual sobre o total de casos. Um caso pode ter mais de um critério. Critérios e códigos na Metodologia, conforme Domingues et al. (2026).")}
     <div class="card full"><h3>Taxa de ocupação e tempo médio de permanência na obstetrícia, ${periodo} ${notaPrelim}</h3>
       ${tabelaBloco(mt, "ocup_obst", "Taxa de ocupação (%)")}
       <div style="margin-top:.8rem">${tabelaBloco(mt, "tmp_obst", "Tempo médio de permanência (dias)")}</div>
@@ -719,7 +739,7 @@ function desenhaEvolucao(){
 }
 
 /* ============================================================
-   PÁGINA DE METODOLOGIA — dicionário final de indicadores (10/09/2026)
+   PÁGINA DE METODOLOGIA — dicionário de indicadores (versão de 14/11/2026)
    ============================================================ */
 let _metodoPronta = false;
 const normDic = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
@@ -733,7 +753,8 @@ function desenhaMetodologia(){
     ["CNES · leitos (LT)", "Arquivos LT<UF><aaaamm>.dbc: leitos existentes por competência. Leitos-dia obstétricos (códigos 10 e 43) e de UTI neonatal tipo II e III (códigos 81 e 82) são os denominadores das taxas de ocupação."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2025 preliminar; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
     ["CNES · identificação das unidades", "Código de identificação de cada unidade e coordenadas georreferenciadas a partir do cadastro. A ficha de cadastro e as habilitações das unidades estão no Painel de Habilitações."],
-    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (grupos Apoiadas, HU Brasil e QUALINEO) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
+    ["Morbidade materna grave · literatura", "Desde 14/11/2026 o indicador segue a literatura indicada pela coordenação: casos pelos 22 critérios da Organização Mundial da Saúde para condições potencialmente ameaçadoras à vida, sobre as internações obstétricas de mulheres de 10 a 49 anos contadas por episódio de cuidado. Substitui a regra anterior (mulheres de 10 a 59 anos, por AIH, com 7 grupos de causas). Referências: " + MMG.referencias.join(" · ")],
+    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (grupos Apoiadas, HU Brasil e QUALINEO) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
   ];
   const dic = (typeof DICIONARIO !== "undefined" ? DICIONARIO : []).filter(d => !/^PERFIL/i.test(d.secao));
   const secoes = [...new Set(dic.map(d => d.secao))];
@@ -741,13 +762,13 @@ function desenhaMetodologia(){
       <h3>${esc(d.ind)}</h3>
       <p class="suave" style="font-size:.88rem; margin-top:.4rem">${esc(d.desc)}</p>
       <p style="font-size:.86rem; margin-top:.5rem; white-space:pre-line"><b>Variáveis e regra:</b> ${esc(d.regra)}</p>
-      <p class="fonte">Dicionário de indicadores de internação · versão final de 10/09/2026 · dados sujeitos a revisão.</p>
+      <p class="fonte">Dicionário de indicadores de internação · versão de 14/11/2026 · dados sujeitos a revisão.</p>
     </div>`;
   document.getElementById("metodoConteudo").innerHTML = `
     <div class="sec-head" style="margin-top:.7rem">
       <p class="eyebrow">Metodologia</p>
       <h2>De onde vem cada número</h2>
-      <p style="max-width:none">As bases oficiais utilizadas no painel e, abaixo, a ficha de cada indicador conforme o dicionário final de indicadores de internação (10/09/2026), o mesmo das apresentações. Os valores são os das planilhas retabuladas com as regras aprovadas pela coordenação em 09/09/2026, em versão para validação.</p>
+      <p style="max-width:none">As bases oficiais utilizadas no painel e, abaixo, a ficha de cada indicador conforme o dicionário de indicadores de internação (versão de 14/11/2026). Os valores são os das planilhas retabuladas com as regras aprovadas pela coordenação em 09/09/2026, em versão para validação, exceto a morbidade materna grave, recalculada em 14/11/2026 conforme a literatura; as apresentações de setembro de 2026 trazem a regra anterior desse indicador.</p>
     </div>
     <div class="grid-3">
       ${fontes.map(f => `<div class="card"><h3>${f[0]}</h3><p class="suave" style="font-size:.88rem; margin-top:.5rem">${f[1]}</p></div>`).join("")}
