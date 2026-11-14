@@ -343,12 +343,13 @@ table.dados.tab-verde th{
 table.dados.tab-verde th:first-child{border-radius:8px 0 0 0}
 table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
 table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
-table.dados.tab-verde tr.taxa td{font-weight:800; color:var(--verde-esmeralda)}
 table.dados.tab-verde tr.total td{background:var(--mint)}
 /* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
 table.dados td.duplo{line-height:1.25}
 table.dados td.duplo b{display:block; font-weight:700}
 table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
+/* razão e taxas (por 100 mil e por mil) abaixo do número de óbitos: em destaque, por serem o indicador */
+table.dados td.duplo small.taxa{font-size:.8rem; font-weight:800; color:var(--verde-esmeralda)}
 
 /* ---------------- comparador ---------------- */
 .comp-sel{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem}
@@ -33745,17 +33746,24 @@ function thsAno(comTotal = true){
 }
 const notaPrelim = `<span class="chip chip-prelim" title="${[...PRELIM].map(a => ROTULO_ANO[a] || a).join(", ")}: dados preliminares do DATASUS${PARCIAIS.size ? ". " + NOTA_PARCIAL : ""}">* preliminar</span>`;
 
-/* tabela de série: óbitos, denominador e taxa (como nos slides "Razão/Taxa de Mortalidade …") */
+/* Tabela de série: em cada célula, o número de óbitos e, abaixo, a razão ou a taxa do período, no mesmo formato das
+   tabelas de distribuição (pedido da coordenação em 14/11/2026). A razão e as taxas não são percentuais: são por
+   100 mil ou por mil, conforme a unidade do indicador, que vai no cabeçalho e na nota. A linha do denominador vem
+   em seguida. Antes eram três linhas (óbitos, denominador e taxa); os valores são os mesmos. */
+const nomeTaxa = ind => /^Razão/.test(ind.rot) ? "razão" : "taxa";
+const UNIDADE_EXTENSO = {"por 100 mil NV":"por 100 mil nascidos vivos", "por mil NV":"por mil nascidos vivos",
+                         "por mil nascimentos":"por mil nascimentos (nascidos vivos + óbitos fetais)"};
+function notaSerie(ind){
+  return `Em cada célula, o número de óbitos e, abaixo, a ${nomeTaxa(ind)} ${UNIDADE_EXTENSO[ind.unidade] || ind.unidade}.`;
+}
 function tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind){
   const n = linha(mt, bloco, rotN) || [], d = linha(mt, bloco, rotD) || [];
-  const taxa = ANOS.map((_, i) => valorUnidade(mt, ind, i)).concat([valorUnidade(mt, ind, NT)]);
-  const td = (v, f) => `<td class="mono">${f(v)}</td>`;
+  const cel = (v, i) => `<td class="mono duplo"><b>${fmtInt(v)}</b><small class="taxa">${fmtTaxa(valorUnidade(mt, ind, i))}</small></td>`;
   return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-serie="${ind.id}">
-    <thead><tr><th></th>${thsAno()}</tr></thead>
+    <thead><tr><th>Óbitos (nº e ${nomeTaxa(ind)} ${esc(ind.unidade)})</th>${thsAno()}</tr></thead>
     <tbody>
-      <tr><td class="rot-click" data-row="0" title="Ver a evolução, ${SERIE_ROT}">${esc(rotN)}</td>${n.map(v => td(v, fmtInt)).join("")}</tr>
-      <tr><td class="rot-click" data-row="1" title="Ver a evolução, ${SERIE_ROT}">${esc(rotD)}</td>${d.map(v => td(v, fmtInt)).join("")}</tr>
-      <tr class="taxa"><td class="rot-click" data-row="taxa" title="Ver a evolução, ${SERIE_ROT}">${esc(rotTaxa)}</td>${taxa.map(v => td(v, fmtTaxa)).join("")}</tr>
+      <tr><td class="rot-click" data-row="taxa" title="Ver a evolução: ${esc(rotTaxa)}, ${SERIE_ROT}">${esc(rotN)}</td>${n.map(cel).join("")}</tr>
+      <tr><td class="rot-click" data-row="1" title="Ver a evolução, ${SERIE_ROT}">${esc(rotD)}</td>${d.map(v => `<td class="mono">${fmtInt(v)}</td>`).join("")}</tr>
     </tbody></table></div>`;
 }
 /* Tabelas de distribuição dos óbitos: em cada célula, o número absoluto e, abaixo, o percentual sobre o total do
@@ -33961,7 +33969,7 @@ function cardGrafTab(id, titulo, mt, bloco, rotN, rotD, rotTaxa, indId, fonteExt
     <h3>${esc(titulo)}, ${SERIE_ROT} ${notaPrelim}</h3>
     <div id="${id}" style="max-width:820px; margin:.7rem auto 0"></div>
     <div style="margin-top:.9rem">${tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind)}</div>
-    <p class="fonte">${FONTE_SIM_SINASC}${fonteExtra ? " " + fonteExtra : ""}</p></div>`;
+    <p class="fonte">${FONTE_SIM_SINASC} ${notaSerie(ind)}${fonteExtra ? " " + fonteExtra : ""}</p></div>`;
 }
 
 function desenhaDossie(){
@@ -34030,10 +34038,10 @@ function desenhaDossie(){
       "Óbitos de 0 a 27 dias de vida ocorridos na unidade.")}
     <div class="card full"><h3>Taxa de Mortalidade Neonatal Precoce ${notaPrelim}</h3>
       ${tabelaSerie(mt, "neo_precoce", R.obPrec, R.nv, "Taxa de Mortalidade Neonatal Precoce (por 1.000 NV)", indPorId("tmnp"))}
-      <p class="fonte">${FONTE_SIM_SINASC} Óbitos de 0 a 6 dias de vida.</p></div>
+      <p class="fonte">${FONTE_SIM_SINASC} ${notaSerie(indPorId("tmnp"))} Óbitos de 0 a 6 dias de vida.</p></div>
     <div class="card full"><h3>Taxa de Mortalidade Neonatal Tardia ${notaPrelim}</h3>
       ${tabelaSerie(mt, "neo_tardia", R.obTard, R.nv, "Taxa de Mortalidade Neonatal Tardia (por 1.000 NV)", indPorId("tmnt"))}
-      <p class="fonte">${FONTE_SIM_SINASC} Óbitos de 7 a 27 dias de vida.</p></div>
+      <p class="fonte">${FONTE_SIM_SINASC} ${notaSerie(indPorId("tmnt"))} Óbitos de 7 a 27 dias de vida.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos neonatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "neo_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "neo_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
     <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas evitáveis ${notaPrelim}</h3>${tabelaNPct(mt, "neo_lbe", {cab:"Lista Brasileira de Causas Evitáveis (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Lista Brasileira de Causas de Mortes Evitáveis por intervenções do SUS, menores de 5 anos (Malta et al., 2007/2010), aplicada aos óbitos neonatais.</p></div>

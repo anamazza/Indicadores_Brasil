@@ -343,12 +343,13 @@ table.dados.tab-verde th{
 table.dados.tab-verde th:first-child{border-radius:8px 0 0 0}
 table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
 table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
-table.dados.tab-verde tr.taxa td{font-weight:800; color:var(--verde-esmeralda)}
 table.dados.tab-verde tr.total td{background:var(--mint)}
 /* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
 table.dados td.duplo{line-height:1.25}
 table.dados td.duplo b{display:block; font-weight:700}
 table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
+/* razão e taxas (por 100 mil e por mil) abaixo do número de óbitos: em destaque, por serem o indicador */
+table.dados td.duplo small.taxa{font-size:.8rem; font-weight:800; color:var(--verde-esmeralda)}
 
 /* ---------------- comparador ---------------- */
 .comp-sel{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem}
