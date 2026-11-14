@@ -2091,7 +2091,9 @@ window.removeComp = c => { estado.comparar = estado.comparar.filter(x => x !== c
 function addComp(cnes){
   if(!cnes || estado.comparar.includes(cnes)) return;
   if(estado.comparar.length >= 4){ alert("Máximo de 4 unidades no comparador."); return; }
-  estado.comparar.push(cnes);
+  // as unidades ficam sempre antes da coluna do grupo, mesmo quando o grupo foi incluído primeiro (14/11/2026)
+  const iGrupo = estado.comparar.findIndex(x => String(x).startsWith("media:"));
+  if(iGrupo < 0) estado.comparar.push(cnes); else estado.comparar.splice(iGrupo, 0, cnes);
   desenhaChipsComp(); desenhaComparador();
   document.getElementById("secComparar").scrollIntoView({behavior:"smooth"});
 }
