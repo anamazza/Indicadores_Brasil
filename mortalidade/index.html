@@ -345,11 +345,10 @@ table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
 table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
 table.dados.tab-verde tr.taxa td{font-weight:800; color:var(--verde-esmeralda)}
 table.dados.tab-verde tr.total td{background:var(--mint)}
-/* tabelas n | % (uma dupla de colunas por ano, como na apresentação) */
-table.dados.tab-npct th.sub{font-size:.68rem; font-weight:600; background:var(--verde-profundo); padding:.25rem .45rem; border-radius:0 !important}
-table.dados.tab-npct td.p{color:var(--texto-suave); font-style:italic; padding-left:.2rem; border-right:1px solid var(--borda)}
-table.dados.tab-npct td.n{padding-right:.25rem}
-table.dados.tab-npct th.par{border-right:1px solid rgba(255,255,255,.35)}
+/* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
+table.dados td.duplo{line-height:1.25}
+table.dados td.duplo b{display:block; font-weight:700}
+table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
 
 /* ---------------- comparador ---------------- */
 .comp-sel{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem}
@@ -33738,10 +33737,8 @@ const FONTE_SIM = "Fonte: Ministério da Saúde - Sistema de Informações sobre
 const FONTE_SIM_SINASC = "Fonte: Ministério da Saúde - SIM e SINASC · dados sujeitos a revisão.";
 
 /* cabeçalhos de ano como botões (abre o gráfico do ano) */
-function thsAno(comTotal = true, npct = false){
-  const th = (i, rot) => npct
-    ? `<th class="th-ano par" data-a="${i}" colspan="2"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`
-    : `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`;
+function thsAno(comTotal = true){
+  const th = (i, rot) => `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`;
   let s = ANOS.map((a, i) => th(i, nomeAno(i) + (PRELIM.has(a) ? "*" : ""))).join("");
   if(comTotal) s += th(NT, "Total");
   return s;
@@ -33761,44 +33758,34 @@ function tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind){
       <tr class="taxa"><td class="rot-click" data-row="taxa" title="Ver a evolução, ${SERIE_ROT}">${esc(rotTaxa)}</td>${taxa.map(v => td(v, fmtTaxa)).join("")}</tr>
     </tbody></table></div>`;
 }
-/* tabela de números absolutos por ano com linhas de % opcionais (bloco materno) */
+/* Tabelas de distribuição dos óbitos: em cada célula, o número absoluto e, abaixo, o percentual sobre o total do
+   período, no formato da tabela de motivos do Painel de Internação (pedido da coordenação em 14/11/2026). Antes o
+   percentual vinha em linhas à parte (bloco materno) ou numa segunda coluna por ano (demais blocos); os valores são
+   os mesmos. A linha de total fica por último. */
+const celDupla = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${p == null ? "—" : fmtPct(p)}</small></td>`;
+function linhasDuplas(mt, bloco, rotTot, ehTotal, omite){
+  const b = mt.blocos[bloco], tot = linha(mt, bloco, rotTot) || [];
+  const tr = r => {
+    const t = ehTotal(r[0]);
+    const tds = r[1].map((v, i) => celDupla(v, t ? (v ? 100 : null) : (v != null && tot[i] ? v / tot[i] * 100 : null))).join("");
+    return `<tr class="${t ? "total" : ""}"><td class="rot-click" data-row="${b.indexOf(r)}" title="Ver a evolução, ${SERIE_ROT}">${esc(r[0].replace(/ \(nº\)$/, ""))}</td>${tds}</tr>`;
+  };
+  const vis = b.filter(r => !(omite && omite.includes(r[0]) && r[1].every(v => !v)));
+  return vis.filter(r => !ehTotal(r[0])).map(tr).join("") + vis.filter(r => ehTotal(r[0])).map(tr).join("");
+}
+/* bloco materno: percentual sobre a linha de total indicada em pctDe */
 function tabelaN(mt, bloco, opts = {}){
-  const b = mt.blocos[bloco];
-  if(!b) return "<p class='suave'>Sem dados.</p>";
-  const rows = b.map((r, ri) => {
-    const ehTotal = /^total/i.test(r[0]);
-    return `<tr class="${ehTotal ? "total" : ""}"><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(r[0])}</td>${r[1].map(v => `<td class="mono">${fmtInt(v)}</td>`).join("")}</tr>`;
-  }).join("");
-  let pctRows = "";
-  if(opts.pctDe){
-    const tot = linha(mt, bloco, opts.pctDe) || [];
-    pctRows = b.filter(r => !/^total/i.test(r[0])).map(r => {
-      const tds = r[1].map((v, i) => `<td class="mono">${(v != null && tot[i]) ? fmtPct(v / tot[i] * 100) : "—"}</td>`).join("");
-      return `<tr class="pct"><td>% ${esc(r[0].replace(/ \(nº\)$/, ""))}</td>${tds}</tr>`;
-    }).join("");
-  }
+  if(!mt.blocos[bloco]) return "<p class='suave'>Sem dados.</p>";
   return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-pctde="${opts.pctDe || ""}">
     <thead><tr><th>${esc(opts.cab || "")}</th>${thsAno()}</tr></thead>
-    <tbody>${rows}${pctRows}</tbody></table></div>`;
+    <tbody>${linhasDuplas(mt, bloco, opts.pctDe, rot => /^total/i.test(rot))}</tbody></table></div>`;
 }
-/* tabela n | % por ano (uma dupla de colunas por ano + Total), como nos slides de distribuição */
+/* distribuições por peso, momento do óbito e causas: percentual sobre a linha Total */
 function tabelaNPct(mt, bloco, opts = {}){
-  const b = mt.blocos[bloco];
-  if(!b) return "<p class='suave'>Sem dados.</p>";
-  const tot = linha(mt, bloco, "Total") || [];
-  const rows = b.filter(r => !(opts.omiteZero && opts.omiteZero.includes(r[0]) && r[1].every(v => !v))).map((r, ri) => {
-    const ehTotal = /^total$/i.test(r[0]);
-    const tds = r[1].map((v, i) => {
-      const p = ehTotal ? (v ? 100 : null) : (v != null && tot[i] ? v / tot[i] * 100 : null);
-      return `<td class="mono n">${fmtInt(v)}</td><td class="mono p">${p == null ? "—" : fmtPct(p)}</td>`;
-    }).join("");
-    const idx = b.indexOf(r);
-    return `<tr class="${ehTotal ? "total" : ""}"><td class="rot-click" data-row="${idx}" title="Ver a evolução, ${SERIE_ROT}">${esc(r[0])}</td>${tds}</tr>`;
-  }).join("");
-  const sub = [...ANOS, "T"].map(() => `<th class="sub">n</th><th class="sub">%</th>`).join("");
-  return `<div class="tab-wrap"><table class="dados tab-verde tab-npct" data-bloco="${bloco}" data-npct="1">
-    <thead><tr><th rowspan="2" style="vertical-align:bottom">${esc(opts.cab || "")}</th>${thsAno(true, true)}</tr><tr>${sub}</tr></thead>
-    <tbody>${rows}</tbody></table></div>`;
+  if(!mt.blocos[bloco]) return "<p class='suave'>Sem dados.</p>";
+  return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-npct="1">
+    <thead><tr><th>${esc(opts.cab || "")}</th>${thsAno()}</tr></thead>
+    <tbody>${linhasDuplas(mt, bloco, "Total", rot => /^total$/i.test(rot), opts.omiteZero)}</tbody></table></div>`;
 }
 
 /* ---------------- modal: gráfico da distribuição de um ano ---------------- */
@@ -34014,31 +34001,31 @@ function desenhaDossie(){
     ${cardGrafTab("gRMM", "Razão de Mortalidade Materna", mt, "mat_serie", R.obMat, R.nv, "Razão de Mortalidade Materna (por 100.000 NV)", "rmm",
       "Óbito materno segundo a definição do Ministério da Saúde (IDB, Anexo I); razão por estabelecimento de ocorrência.")}
     <div class="card full"><h3>Óbitos maternos por causas obstétricas diretas e indiretas, ${SERIE_ROT} ${notaPrelim}</h3>
-      ${tabelaN(mt, "mat_tipo", {cab:"Tipo de causa obstétrica", pctDe:R.totMat})}
-      <p class="fonte">${FONTE_SIM} Diretas: O00-O08, O11-O23, O24.4, O26-O92 (e A34, D39.2, E23.0, F53, M83.0); indiretas: O10, O24, O25, O94, O98, O99, B20-B24; inespecíficas: O95. Percentuais sobre o total de óbitos maternos.</p></div>
+      ${tabelaN(mt, "mat_tipo", {cab:"Tipo de causa obstétrica (nº e %)", pctDe:R.totMat})}
+      <p class="fonte">${FONTE_SIM} Diretas: O00-O08, O11-O23, O24.4, O26-O92 (e A34, D39.2, E23.0, F53, M83.0); indiretas: O10, O24, O25, O94, O98, O99, B20-B24; inespecíficas: O95. Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total de óbitos maternos.</p></div>
     <div class="card full"><h3>Óbitos maternos diretos por grupo de causas ${notaPrelim}</h3>
-      ${tabelaN(mt, "mat_diretas", {cab:"Causas diretas", pctDe:R.totDir})}
-      <p class="fonte">${FONTE_SIM} Percentuais sobre o total de causas diretas.</p></div>
+      ${tabelaN(mt, "mat_diretas", {cab:"Causas diretas (nº e %)", pctDe:R.totDir})}
+      <p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total de causas diretas.</p></div>
     <div class="card full"><h3>Óbitos maternos indiretos por grupo de causas ${notaPrelim}</h3>
-      ${tabelaN(mt, "mat_indiretas", {cab:"Causas indiretas", pctDe:R.totInd})}
-      <p class="fonte">${FONTE_SIM} Percentuais sobre o total de causas indiretas.</p></div>
+      ${tabelaN(mt, "mat_indiretas", {cab:"Causas indiretas (nº e %)", pctDe:R.totInd})}
+      <p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total de causas indiretas.</p></div>
 
     ${sep("Mortalidade fetal")}
     ${cardGrafTab("gTMF", "Taxa de Mortalidade Fetal", mt, "fet_serie", R.obFet, R.nasc, "Taxa de Mortalidade Fetal (por 1.000 nasc.)", "tmf",
       "Óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais.")}
-    <div class="card full"><h3>Distribuição dos óbitos fetais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "fet_peso", {cab:"Peso ao nascer"})}<p class="fonte">${FONTE_SIM}</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos fetais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "fet_momento", {cab:"Momento do óbito", omiteZero:[R.apos]})}<p class="fonte">${FONTE_SIM} Momento em relação ao parto (campo OBITOPARTO da DO fetal).</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos fetais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "fet_causas", {cab:"Grupo de causas (CID-10)"})}<p class="fonte">${FONTE_SIM} Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos fetais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "fet_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos fetais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "fet_momento", {cab:"Momento do óbito (nº e %)", omiteZero:[R.apos]})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Momento em relação ao parto (campo OBITOPARTO da DO fetal).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos fetais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "fet_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
 
     ${sep("Mortalidade perinatal")}
     ${cardGrafTab("gTMP", "Taxa de Mortalidade Perinatal", mt, "per_serie", R.obPer, R.nasc, "Taxa de Mortalidade Perinatal (por 1.000 nasc.)", "tmp",
       "Óbitos fetais (≥22 semanas ou ≥500 g) + óbitos neonatais precoces (0 a 6 dias).")}
-    <div class="card full"><h3>Distribuição dos óbitos perinatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "per_peso", {cab:"Peso ao nascer"})}<p class="fonte">${FONTE_SIM}</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos perinatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "per_momento", {cab:"Componente"})}<p class="fonte">${FONTE_SIM} Fetal (DOFET) e neonatal precoce (DO, 0 a 6 dias de vida).</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos perinatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "per_causas", {cab:"Grupo de causas (CID-10)"})}<p class="fonte">${FONTE_SIM} Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos perinatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "per_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos perinatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "per_momento", {cab:"Componente (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Fetal (DOFET) e neonatal precoce (DO, 0 a 6 dias de vida).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos perinatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "per_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
 
     ${sep("Mortalidade neonatal")}
-    <div class="card full"><h3>Distribuição dos óbitos neonatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "neo_momento", {cab:"Dias de vida"})}<p class="fonte">${FONTE_SIM} 0 dias = óbito nas primeiras 24 horas de vida.</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos neonatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "neo_momento", {cab:"Dias de vida (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. 0 dias = óbito nas primeiras 24 horas de vida.</p></div>
     ${cardGrafTab("gTMN", "Taxa de Mortalidade Neonatal", mt, "neo_serie", R.obNeo, R.nv, "Taxa de Mortalidade Neonatal (por 1.000 NV)", "tmn",
       "Óbitos de 0 a 27 dias de vida ocorridos na unidade.")}
     <div class="card full"><h3>Taxa de Mortalidade Neonatal Precoce ${notaPrelim}</h3>
@@ -34047,9 +34034,9 @@ function desenhaDossie(){
     <div class="card full"><h3>Taxa de Mortalidade Neonatal Tardia ${notaPrelim}</h3>
       ${tabelaSerie(mt, "neo_tardia", R.obTard, R.nv, "Taxa de Mortalidade Neonatal Tardia (por 1.000 NV)", indPorId("tmnt"))}
       <p class="fonte">${FONTE_SIM_SINASC} Óbitos de 7 a 27 dias de vida.</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos neonatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "neo_peso", {cab:"Peso ao nascer"})}<p class="fonte">${FONTE_SIM}</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "neo_causas", {cab:"Grupo de causas (CID-10)"})}<p class="fonte">${FONTE_SIM} Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas evitáveis ${notaPrelim}</h3>${tabelaNPct(mt, "neo_lbe", {cab:"Lista Brasileira de Causas Evitáveis"})}<p class="fonte">${FONTE_SIM} Lista Brasileira de Causas de Mortes Evitáveis por intervenções do SUS, menores de 5 anos (Malta et al., 2007/2010), aplicada aos óbitos neonatais.</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos neonatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "neo_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "neo_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas evitáveis ${notaPrelim}</h3>${tabelaNPct(mt, "neo_lbe", {cab:"Lista Brasileira de Causas Evitáveis (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Lista Brasileira de Causas de Mortes Evitáveis por intervenções do SUS, menores de 5 anos (Malta et al., 2007/2010), aplicada aos óbitos neonatais.</p></div>
   </div>`;
 
   const serie = (id, indId) => {

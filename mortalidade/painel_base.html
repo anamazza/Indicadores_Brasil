@@ -345,11 +345,10 @@ table.dados.tab-verde th:last-child{border-radius:0 8px 0 0}
 table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
 table.dados.tab-verde tr.taxa td{font-weight:800; color:var(--verde-esmeralda)}
 table.dados.tab-verde tr.total td{background:var(--mint)}
-/* tabelas n | % (uma dupla de colunas por ano, como na apresentação) */
-table.dados.tab-npct th.sub{font-size:.68rem; font-weight:600; background:var(--verde-profundo); padding:.25rem .45rem; border-radius:0 !important}
-table.dados.tab-npct td.p{color:var(--texto-suave); font-style:italic; padding-left:.2rem; border-right:1px solid var(--borda)}
-table.dados.tab-npct td.n{padding-right:.25rem}
-table.dados.tab-npct th.par{border-right:1px solid rgba(255,255,255,.35)}
+/* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
+table.dados td.duplo{line-height:1.25}
+table.dados td.duplo b{display:block; font-weight:700}
+table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
 
 /* ---------------- comparador ---------------- */
 .comp-sel{display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem}

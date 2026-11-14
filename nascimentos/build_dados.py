@@ -227,6 +227,25 @@ import csv as _csv
 with open(os.path.join(BASE, "ajustes_auditoria_2026-11-14.csv"), "w", encoding="utf-8-sig", newline="") as fh:
     w = _csv.writer(fh, delimiter=";"); w.writerow(["cnes", "unidade", "bloco", "linha", "coluna", "antes", "depois", "motivo"]); w.writerows(alt_aud)
 
+# ---------- 2e. rótulos das faixas de consultas de pré-natal (14/11/2026) ----------
+# A planilha de uma unidade (Maternidade Escola da UFRJ) traz as faixas de consultas com outra redação ("de 1 a 3",
+# "de 4 a 6", "7 e mais"). Os números são os mesmos, mas o indicador "7 ou mais consultas" procura a linha pelo
+# rótulo padrão e ficava sem valor para a unidade. Aqui os rótulos são igualados aos das demais.
+ROTULOS_PRENATAL = {"de 1 a 3": "1-3 consultas", "de 4 a 6": "4-6 consultas", "7 e mais": "7 e + consultas"}
+PRENATAL_PADRAO = ["Nenhuma", "1-3 consultas", "4-6 consultas", "7 e + consultas", "Ignorado", "Total"]
+igualados = []
+for mt in mats:
+    bl = mt.get("blocos", {}).get("prenatal")
+    if not bl:
+        continue
+    for linha_pn in bl:
+        if linha_pn[0] in ROTULOS_PRENATAL:
+            linha_pn[0] = ROTULOS_PRENATAL[linha_pn[0]]
+            if mt["cnes"] not in igualados: igualados.append(mt["cnes"])
+    if [l[0] for l in bl] != PRENATAL_PADRAO:
+        sys.exit(f"ERRO: faixas de consultas de pré-natal fora do padrão em {mt['cnes']} {mt['nome']}: {[l[0] for l in bl]}")
+print(f"[2e] rótulos de consultas de pré-natal igualados em: {igualados or 'nenhuma unidade'}")
+
 # ---------- 3. GEO compactado da referência ----------
 ref = open(REF_PAGE, encoding="utf-8").read()
 m = re.search(r'const GEO = (\{.*?\});', ref, re.S)

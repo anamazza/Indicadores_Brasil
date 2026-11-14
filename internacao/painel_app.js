@@ -402,19 +402,20 @@ function tabelaBloco(mt, bloco, cab){
     <thead><tr><th>${esc(cab || "")}</th>${thsAno(uniforme)}</tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 }
-/* motivos de internação: número absoluto e, abaixo, o percentual sobre o total de internações obstétricas
-   (números absolutos incluídos a pedido da coordenação em 13/11/2026; bloco motivos_n do build_dados.py).
-   O clique no rótulo e no ano continua abrindo os gráficos do bloco de percentuais. */
-function tabelaMotivos(mt){
-  const b = mt.blocos.motivos, bn = mt.blocos.motivos_n, tot = (mt.blocos.obst_n || [])[0];
+/* tabelas de distribuição com o número absoluto e, abaixo, o percentual sobre o total: motivos das internações
+   obstétricas (13/11/2026) e grupos de causas das internações neonatais (14/11/2026), a pedido da coordenação.
+   Os números absolutos vêm dos blocos motivos_n e neo_causas_n do build_dados.py. O clique no rótulo e no ano
+   continua abrindo os gráficos do bloco de percentuais. */
+function tabelaNumPct(mt, bloco, blocoTot, cab, rotTotal){
+  const b = mt.blocos[bloco], bn = mt.blocos[bloco + "_n"], tot = (mt.blocos[blocoTot] || [])[0];
   if(!b || !b.length) return "<p class='suave'>Sem dados.</p>";
-  if(!bn) return tabelaBloco(mt, "motivos", "Motivos de internação (%)");
+  if(!bn) return tabelaBloco(mt, bloco, cab + " (%)");
   const cel = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${fmtPct(p)}</small></td>`;
   const rows = b.map((l, ri) =>
     `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(l[0])}</td>${l[1].map((p, a) => cel(bn[ri] ? bn[ri][1][a] : null, p)).join("")}</tr>`).join("");
-  const total = tot ? `<tr class="total"><td>Total de internações obstétricas</td>${tot[1].map(v => `<td class="mono duplo"><b>${fmtInt(v)}</b><small>${v ? "100,0%" : "—"}</small></td>`).join("")}</tr>` : "";
-  return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="motivos" data-dist="1">
-    <thead><tr><th>Motivos de internação (nº e %)</th>${thsAno(true)}</tr></thead>
+  const total = tot ? `<tr class="total"><td>${esc(rotTotal)}</td>${tot[1].map(v => `<td class="mono duplo"><b>${fmtInt(v)}</b><small>${v ? "100,0%" : "—"}</small></td>`).join("")}</tr>` : "";
+  return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-dist="1">
+    <thead><tr><th>${esc(cab)} (nº e %)</th>${thsAno(true)}</tr></thead>
     <tbody>${rows}${total}</tbody></table></div>`;
 }
 
@@ -577,7 +578,7 @@ function desenhaDossie(){
       <div id="gObst" style="max-width:820px; margin:.7rem auto 0"></div>
       <div style="margin-top:.9rem">${tabelaBloco(mt, "obst_n", "Internações")}</div>
       <p class="fonte">${FONTE_SIH} Internações de mulheres de 10 a 59 anos com diagnóstico do capítulo XV da CID-10 (O00 a O99) em qualquer campo de diagnóstico da AIH, pelo ano da data de internação.</p></div>
-    ${card(`Internações obstétricas por motivo de internação (nº e %), ${periodo}`, tabelaMotivos(mt), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações obstétricas. Parto, aborto e intercorrências clínicas classificados pelo procedimento realizado; a linha Outros reúne os demais procedimentos e completa 100%.")}
+    ${card(`Internações obstétricas por motivo de internação (nº e %), ${periodo}`, tabelaNumPct(mt, "motivos", "obst_n", "Motivos de internação", "Total de internações obstétricas"), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações obstétricas. Parto, aborto e intercorrências clínicas classificados pelo procedimento realizado; a linha Outros reúne os demais procedimentos e completa 100%.")}
     ${card(`Interrupção da gestação em casos previstos em lei, ${periodo}`, tabelaBloco(mt, "aborto_legal", "Internações"), FONTE_SIH)}
     ${card(`Uso de AMIU nos procedimentos de esvaziamento uterino (%), ${periodo}`, tabelaBloco(mt, "amiu", "AMIU"), FONTE_SIH, "Aspiração manual intrauterina entre todos os esvaziamentos uterinos (AMIU + curetagens pós-abortamento), sem a curetagem semiótica.")}
     ${card(`Presença de acompanhante (%), ${periodo}`, tabelaBloco(mt, "acomp", "Internações com acompanhante (%)"), FONTE_SIH, "Internações com registro de diária de acompanhante.")}
@@ -598,7 +599,7 @@ function desenhaDossie(){
       <div id="gNeo" style="max-width:820px; margin:.7rem auto 0"></div>
       <div style="margin-top:.9rem">${tabelaBloco(mt, "neo_n", "Internações")}</div>
       <p class="fonte">${FONTE_SIH} AIH próprias de recém-nascidos com 0 a 27 dias de vida, pelo ano da data de internação.</p></div>
-    ${card(`Internações neonatais por grupo de causas (%), ${periodo}`, tabelaBloco(mt, "neo_causas", "Grupo de causas (% das internações neonatais)"), FONTE_SIH, "Grupo pelo diagnóstico principal da AIH; categorias exclusivas.")}
+    ${card(`Internações neonatais por grupo de causas (nº e %), ${periodo}`, tabelaNumPct(mt, "neo_causas", "neo_n", "Grupo de causas", "Total de internações neonatais"), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações neonatais. Grupo pelo diagnóstico principal da AIH; categorias exclusivas.")}
     ${card(`Internações em UTI neonatal (%), ${periodo}`, tabelaBloco(mt, "neo_utin", "UTI neonatal"), FONTE_SIH, "Internações neonatais com diária em UTI neonatal tipo II ou III (leitos 81 e 82).")}
     ${card(`Morbidade neonatal (%), ${periodo}`, tabelaBloco(mt, "morb_neo", "Morbidade neonatal"), FONTE_SINASC, "Peso ao nascer abaixo de 1.500 g, idade gestacional abaixo de 32 semanas ou Apgar no 5º minuto abaixo de 7.")}
     <div class="card full"><h3>Taxa de ocupação e tempo médio de permanência na UTI neonatal, ${periodo} ${notaPrelim}</h3>

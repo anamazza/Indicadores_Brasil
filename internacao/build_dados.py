@@ -310,6 +310,51 @@ def motivos_abs(cnes):
     return out
 
 
+# ----------------------------------------------------------------------------- 3d. causas das internações neonatais em números absolutos
+# (14/11/2026, pedido da coordenação: mesmo formato da tabela de motivos) A tabulação guarda o total de internações
+# neonatais e o percentual de cada grupo de causas com 2 casas, calculado como round(100 * n / total, 2). Para cada
+# unidade e período, procura-se em cada grupo o inteiro que reproduz o percentual; o conjunto vale quando é único e
+# soma o total. Com menos de 10 mil internações no período só existe um inteiro por percentual. Se algum período
+# ficar sem conjunto único, a montagem para: não há recontagem pronta para este bloco e o número não é estimado.
+NEO_LINHAS = [(curto, rot) for bloco, curto, rot, fmt in MAPA if bloco == "neo_causas"]
+neo_stats = {"conjunto único": 0, "sem dado": 0, "total zero": 0}
+neo_pendentes = []
+
+
+def causas_neo_abs(cnes):
+    """Uma série por grupo de causas com o número absoluto em cada período, ou None onde não há dado."""
+    linhas = plan[cnes]["linhas"]
+    tot = linhas.get("Número de internações neonatais")
+    pcts = [linhas.get(rot) for _curto, rot in NEO_LINHAS]
+    out = [[None] * len(ANOS) for _ in NEO_LINHAS]
+    if tot is None or any(p is None for p in pcts):
+        return out
+    for a, ano in enumerate(ANOS):
+        t = tot[a] if a < len(tot) else None
+        ps = [p[a] if a < len(p) else None for p in pcts]
+        if t is None:
+            neo_stats["sem dado"] += 1
+            continue
+        t = int(t)
+        if t == 0:                           # sem internações neonatais no período: zero em todos os grupos
+            neo_stats["total zero"] += 1
+            for k in range(len(NEO_LINHAS)):
+                out[k][a] = 0
+            continue
+        if any(x is None for x in ps):
+            neo_stats["sem dado"] += 1
+            continue
+        cands = [[n for n in range(max(0, math.floor(p * t / 100.0) - 2), math.ceil(p * t / 100.0) + 3)
+                  if round(100.0 * n / t, 2) == p] for p in ps]
+        if all(len(c) == 1 for c in cands) and sum(c[0] for c in cands) == t:
+            neo_stats["conjunto único"] += 1
+            for k, c in enumerate(cands):
+                out[k][a] = c[0]
+        else:
+            neo_pendentes.append((cnes, ano, t, [len(c) for c in cands]))
+    return out
+
+
 faltas = {}
 def blocos_de(cnes):
     bl = {}
@@ -321,6 +366,7 @@ def blocos_de(cnes):
             vals = [None] * len(ANOS)          # unidade sem AIH: taxa, percentual e tempo médio do SIH não se aplicam
         bl.setdefault(bloco, []).append([curto, list(vals[:len(ANOS)]), fmt])
     bl["motivos_n"] = [[curto, vals, "int"] for curto, vals in zip(MOT_CURTO, motivos_abs(cnes))]
+    bl["neo_causas_n"] = [[curto, vals, "int"] for (curto, _rot), vals in zip(NEO_LINHAS, causas_neo_abs(cnes))]
     return bl
 
 # ----------------------------------------------------------------------------- 4. maternidades
@@ -366,6 +412,10 @@ print(f"[3c] motivos de internação em números absolutos: {mot_stats}")
 if mot_pendentes:
     sys.exit("ERRO: motivos de internação sem número absoluto determinado (cnes, ano, total, conjuntos possíveis): "
              f"{mot_pendentes}. Rode Extracao_SIH/67_motivos_absolutos.py UF ANO para esses casos e monte de novo.")
+print(f"[3d] causas das internações neonatais em números absolutos: {neo_stats}")
+if neo_pendentes:
+    sys.exit("ERRO: causas das internações neonatais sem número absoluto determinado (cnes, ano, total, inteiros "
+             f"possíveis por grupo): {neo_pendentes}. O número não é estimado: é preciso contar nos microdados do SIH.")
 
 # ----------------------------------------------------------------------------- 5. ficha CNES
 API = "https://apidadosabertos.saude.gov.br/cnes/estabelecimentos/{}"

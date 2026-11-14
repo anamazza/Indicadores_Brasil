@@ -984,33 +984,53 @@ function cardHabilitacoesHTML(mt){
 function cardTrimestreHTML(mt){
   const b = mt.blocos.trimestre;
   const lin = rot => b.find(r => r[0] === rot)?.[1] || [];
-  const prim = lin("Primeiro Trimestre"), tot = lin("Total");
+  const tot = lin("Total");
   const ordem = ["Primeiro Trimestre","Segundo Trimestre","Terceiro Trimestre","Ignorado","Total"];
+  // percentual de cada linha sobre o total da tabela, que inclui os ignorados: a base que a apresentação usa
+  // na linha do primeiro trimestre (ver a ficha própria na Metodologia)
   const linhas = ordem.map(rot => {
     const v = lin(rot);
-    const tds = ANOS.map((_, a) => `<td class="mono">${fmtInt(v[a])}</td>`).join("");
+    const tds = ANOS.map((_, a) => celDupla(v[a], (v[a] != null && tot[a]) ? v[a]/tot[a]*100 : null)).join("");
     return `<tr class="${rot === "Total" ? "total" : ""}"><td>${rot}</td>${tds}</tr>`;
   }).join("");
-  const pct = ANOS.map((_, a) =>
-    `<td class="mono">${(prim[a] != null && tot[a]) ? fmtPct(prim[a]/tot[a]*100) : "—"}</td>`).join("");
   return `
     <h3>Pré-natal: trimestre de início</h3>
     <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde" data-bloco="trimestre">
-      <thead><tr><th>Trimestre da 1ª Consulta</th>${thsAno(false)}</tr></thead>
-      <tbody>${linhas}<tr class="pct"><td>% Primeiro Trimestre</td>${pct}</tr></tbody>
+      <thead><tr><th>Trimestre da 1ª Consulta (nº e %)</th>${thsAno(false)}</tr></thead>
+      <tbody>${linhas}</tbody>
     </table></div>
-    <p class="fonte">Nota: Exclui os registros de nascidos vivos sem nenhuma consulta de pré-natal. ${FONTE_SINASC}</p>`;
+    <p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total da tabela, que inclui a linha "Ignorado". Exclui os registros de nascidos vivos sem nenhuma consulta de pré-natal. ${FONTE_SINASC}</p>`;
 }
 
 /* ============================================================
    DOSSIÊ — cards espelhando a apresentação
    ============================================================ */
+/* Tabelas de distribuição (opts.dist): em cada célula, o número absoluto e, abaixo, o percentual, no formato da
+   tabela de motivos do Painel de Internação (pedido da coordenação em 14/11/2026). A base do percentual é a do
+   indicador correspondente do painel: ficam fora dela as linhas de informação ignorada listadas abaixo, que
+   aparecem só com o número, assim como o Total nesses casos. Sem linha ignorada, o Total mostra 100%. */
+const FORA_DA_BASE = {prenatal:["Ignorado"], peso:[], gestacao:["N Inf"], via:["Ignorado"],
+                      assistencia:["Ignorado"], apgar:["N Inf", "Ign"], robson_n:[]};
+const celDupla = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${p == null ? "—" : fmtPct(p)}</small></td>`;
 function tabelaBloco(mt, bloco, opts = {}){
   const b = mt.blocos[bloco];
   if(!b) return "<p class='suave'>Sem dados.</p>";
+  const fora = opts.dist ? (FORA_DA_BASE[bloco] || []) : null;
+  // base = soma das categorias com informação: é o denominador do indicador (total menos os ignorados) sempre que a
+  // tabela fecha com o total; nos raros períodos em que a origem não fecha, os percentuais continuam somando 100%
+  const cats = fora ? b.filter(r => !/total/i.test(r[0]) && !fora.includes(r[0])) : [];
+  const base = fora ? (b[0] ? b[0][1] : []).map((_, a) => {
+    let s = 0, tem = false;
+    cats.forEach(r => { if(r[1][a] != null){ s += r[1][a]; tem = true; } });
+    return tem ? s : null; }) : null;
   const rows = b.map((r, ri) => {
     const rot = opts.rotulos ? (opts.rotulos[r[0]] ?? r[0]) : r[0];
     const tds = r[1].map((v, i) => {
+      if(fora){
+        const total = /total/i.test(r[0]);
+        if(fora.includes(r[0]) || (total && fora.length)) return `<td class="mono">${fmtInt(v)}</td>`;
+        return celDupla(v, total ? (v ? 100 : null) : (v != null && base[i] ? v / base[i] * 100 : null));
+      }
       let cls = "";
       if(opts.metaCol && opts.metas && opts.metas[r[0]] != null && i < NT){
         cls = v != null && v <= opts.metas[r[0]] ? "meta-ok" : "meta-ruim";
@@ -1021,17 +1041,8 @@ function tabelaBloco(mt, bloco, opts = {}){
     return `<tr class="${ehTotal ? "total" : ""}"><td class="rot-click" data-row="${ri}" title="Ver a evolução deste indicador, ${SERIE_ROT}">${esc(rot)}</td>${tds}</tr>`;
   }).join("");
   return `<div class="tab-wrap"><table class="dados" data-bloco="${bloco}"${opts.pct ? ' data-pct="1"' : ""}>
-    <thead><tr><th></th>${thsAno()}</tr></thead>
-    <tbody>${rows}${opts.rodape || ""}</tbody></table></div>`;
-}
-/* Via de nascimento: percentual de cesariana e de parto vaginal em cada período e no acumulado. Mesmo cálculo do
-   indicador "% de cesariana": denominador = nascidos vivos com via de nascimento informada (exclui "Ignorado"). */
-function linhasPctVia(mt){
-  const vag = linha(mt, "via", "Parto Vaginal") || [], ces = linha(mt, "via", "Cesariana") || [];
-  const tot = linha(mt, "via", "Total") || [], ign = linha(mt, "via", "Ignorado") || [];
-  const cel = num => tot.map((t, a) => { const den = t == null ? null : t - (ign[a] || 0);
-    return `<td class="mono">${num[a] != null && den ? fmtPct(num[a] / den * 100) : "—"}</td>`; }).join("");
-  return `<tr class="pct"><td>% Cesariana</td>${cel(ces)}</tr><tr class="pct"><td>% Parto vaginal</td>${cel(vag)}</tr>`;
+    <thead><tr><th>${esc(opts.cab || "")}</th>${thsAno()}</tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
 }
 /* cabeçalhos de ano como botões (abre o gráfico do ano) */
 function thsAno(comTotal = true){
@@ -1407,14 +1418,14 @@ function desenhaDossie(){
       </div>
       <div id="dTerr"></div>
     </div>
-    <div class="card"><h3>Pré-natal: número de consultas</h3>${tabelaBloco(mt, "prenatal")}<p class="fonte">${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Pré-natal: número de consultas</h3>${tabelaBloco(mt, "prenatal", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com número de consultas informado (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
     <div class="card">${cardTrimestreHTML(mt)}</div>
-    <div class="card"><h3>Peso ao nascer</h3>${tabelaBloco(mt, "peso")}<p class="fonte">${FONTE_SINASC}</p></div>
-    <div class="card"><h3>Idade gestacional</h3>${tabelaBloco(mt, "gestacao")}<p class="fonte">${FONTE_SINASC}</p></div>
-    <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via", {rodape: linhasPctVia(mt)})}<p class="fonte">Percentuais sobre os nascidos vivos com via de nascimento informada (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
-    <div class="card"><h3>Assistência ao parto vaginal</h3>${tabelaBloco(mt, "assistencia")}<p class="fonte">${FONTE_SINASC} Somente partos vaginais. Meta: ≥50% por enfermeira/obstetriz.</p></div>
-    <div class="card"><h3>Apgar no 5º minuto</h3>${tabelaBloco(mt, "apgar")}<p class="fonte">${FONTE_SINASC} Somente ≥2500 g e sem anomalias congênitas.</p></div>
-    <div class="card"><h3>Grupos de Robson: nascidos vivos</h3>${tabelaBloco(mt, "robson_n")}<p class="fonte">${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Peso ao nascer</h3>${tabelaBloco(mt, "peso", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total de nascidos vivos. ${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Idade gestacional</h3>${tabelaBloco(mt, "gestacao", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com idade gestacional informada (exclui "N Inf", não informada). ${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com via de nascimento informada (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
+    <div class="card"><h3>Assistência ao parto vaginal</h3>${tabelaBloco(mt, "assistencia", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de partos vaginais e, abaixo, o percentual sobre os partos vaginais com profissional informado (exclui "Ignorado"). ${FONTE_SINASC} Somente partos vaginais. Meta: ≥50% por enfermeira/obstetriz.</p></div>
+    <div class="card"><h3>Apgar no 5º minuto</h3>${tabelaBloco(mt, "apgar", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com Apgar informado (exclui "N Inf" e "Ign"). ${FONTE_SINASC} Somente ≥2500 g e sem anomalias congênitas.</p></div>
+    <div class="card"><h3>Grupos de Robson: nascidos vivos</h3>${tabelaBloco(mt, "robson_n", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total de nascidos vivos. ${FONTE_SINASC}</p></div>
     <div class="card full"><h3>Taxa de cesariana segundo grupo de Robson</h3>
       ${tabelaBloco(mt, "robson_taxa", {pct:true, metaCol:true, metas:{"Grupo 1":10,"Grupo 2":35,"Grupo 3":3,"Grupo 4":15}})}
       <p class="fonte">${FONTE_SINASC} Metas: G1 ≤10% · G2 ≤35% · G3 ≤3% · G4 ≤15% (verde = na meta, vermelho = acima).</p></div>
@@ -1611,7 +1622,7 @@ const CALCULOS = {
   resRS:{n:"Nascidos vivos da unidade cuja mãe reside na região de saúde da própria unidade.", d:"Nascidos vivos ocorridos na unidade."},
   pn7:{n:"Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal.", d:"Nascidos vivos totais, excluídos os registros com número de consultas ignorado."},
   tri1:{n:"Nascidos vivos com pré-natal iniciado no primeiro trimestre.", d:"Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado.",
-    obs:"Atenção: a linha \"% Primeiro Trimestre\" da tabela do perfil da unidade segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."},
+    obs:"Atenção: o percentual da linha \"Primeiro Trimestre\" na tabela do perfil da unidade segue a apresentação e usa denominador diferente (inclui os ignorados) — veja a ficha própria abaixo."},
   ces:{n:"Partos cesáreos.", d:"Nascidos vivos totais, excluídos os registros com via de nascimento ignorada."},
   enf:{n:"Partos vaginais assistidos por enfermeira ou obstetriz.", d:"Partos vaginais, excluídos os registros com profissional ignorado."},
   p2500:{n:"Nascidos vivos com menos de 2500 g.", d:"Nascidos vivos com peso ao nascer informado."},
@@ -1637,9 +1648,14 @@ const FICHAS_EXTRAS = [
    n:"Nascidos vivos ocorridos na maternidade.",
    d:"Nascidos vivos ocorridos no território (município, região de saúde, macro ou UF).",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + ". Também calculado para os nascidos vivos <1500 g."},
-  {rot:"% Primeiro Trimestre (tabela de trimestre do perfil da unidade)",
-   desc:"Linha percentual da tabela de trimestre de início de pré-natal, no formato da apresentação.",
-   n:"Nascidos vivos com pré-natal iniciado no primeiro trimestre.",
+  {rot:"Percentuais das tabelas de distribuição do perfil da unidade (número de consultas, peso ao nascer, idade gestacional, via de nascimento, assistência ao parto vaginal, Apgar e grupos de Robson)",
+   desc:"Em cada célula dessas tabelas aparecem o número absoluto e, abaixo, o percentual da categoria.",
+   n:"Nascidos vivos da categoria (na assistência ao parto vaginal, partos vaginais da categoria).",
+   d:"A mesma base do indicador correspondente: nascidos vivos com a informação preenchida, sem as linhas de informação ignorada ou não informada, que aparecem só com o número. Em peso ao nascer e nos grupos de Robson a base é o total de nascidos vivos.",
+   fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."},
+  {rot:"Percentuais da tabela de trimestre de início do pré-natal (perfil da unidade)",
+   desc:"Percentual de cada linha da tabela de trimestre de início do pré-natal, com a base usada na apresentação.",
+   n:"Nascidos vivos de cada linha da tabela (primeiro, segundo ou terceiro trimestre, ou ignorado).",
    d:"Total de nascidos vivos com ao menos uma consulta, incluindo os registros com trimestre ignorado (por isso pode diferir do indicador \"% com pré-natal iniciado no 1º trimestre\" dos mapas, que exclui os ignorados).",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."},
   {rot:"% de NV ocorridos no território de residência (Comparativo entre anos)",
