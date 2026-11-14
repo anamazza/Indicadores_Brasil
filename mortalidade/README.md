@@ -26,7 +26,7 @@ unidades (Leaflet/OpenStreetMap).
 - **Mapa de unidades**: as 120 maternidades (Leaflet), coloridas por grupo (Apoiadas, HU Brasil,
   QUALINEO), com filtros, busca, resumo de 2025 no popup e pontos de contexto
   (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
-- **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as
+- **Perfil da unidade**: página própria com as
   23 seções da apresentação de indicadores de mortalidade (razão de mortalidade materna e causas
   obstétricas; taxas fetal, perinatal e neonatal; faixa de peso, momento do óbito, grupos de causas
   e causas evitáveis). Anos clicáveis abrem o gráfico do ano; rótulos clicáveis abrem a evolução
@@ -67,7 +67,7 @@ Mortalidade e Habilitações passam a ter as mesmas 120 unidades):
 | O quê | Como |
 |---|---|
 | Indicadores (novo recálculo do SIM/SINASC) | rodar o pipeline em `../Pipeline_Python` (gera `indicadores_recalculados.csv`) e depois `py build_dados.py` |
-| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
+| Ficha CNES + habilitações (não aparecem neste painel desde 14/11/2026; alimentam o Painel de Habilitações) | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Mortalidade_2026.html` e `index.html` e espelha esta pasta na subpasta `mortalidade/` do repositório Indicadores_Brasil) |
 
 `build_dados.py` lê, somente para leitura, o painel NV local (`Pojeto Apresentações NV_2026/Painel_2026_Novo`):

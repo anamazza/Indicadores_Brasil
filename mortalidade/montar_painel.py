@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Monta o painel em arquivo único: embute dados, ficha CNES, app e logos no HTML.
+"""Monta o painel em arquivo único: embute dados, app e logos no HTML.
 Saída: Painel_Mortalidade_2026.html e index.html (idênticos).
 
 Publicação (desde 11/10/2026): os três painéis e a página principal estão reunidos no repositório
@@ -48,11 +48,10 @@ try:
 except Exception as e:
     print("aviso: dados.json não gerado:", e)
 
-# ficha CNES + habilitações (build_dados.py / atualizar_cnes.py)
-cnes_path = os.path.join(BASE, "cnes_dados.json")
+# Ficha de cadastro CNES e habilitações: desde 14/11/2026 só o Painel de Habilitações mostra (pedido da coordenação).
+# O cnes_dados.json continua nesta pasta e segue atualizado na nuvem, porque o Painel de Habilitações é montado a
+# partir dele; só deixou de ser embutido neste HTML.
 cnes_js = ""
-if os.path.exists(cnes_path):
-    cnes_js = "\nconst CNES_INFO = " + open(cnes_path, encoding="utf-8").read() + ";"
 
 html = html.replace('<script src="dados_mortalidade.js"></script>', "<script>\n" + dados + cnes_js + "\n</script>")
 html = html.replace('<script src="painel_app.js"></script>', "<script>\n" + app + "\n</script>")

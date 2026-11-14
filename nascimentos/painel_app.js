@@ -4,6 +4,10 @@
    ============================================================ */
 "use strict";
 
+/* A ficha de cadastro CNES e as habilitações saíram do perfil da unidade em 14/11/2026 (pedido da coordenação):
+   ficam só no Painel de Habilitações, que abre direto na unidade pelo endereço com o código CNES. */
+const HAB_URL = "https://anamazza.github.io/Indicadores_Brasil/habilitacoes/";
+
 const ANOS = DADOS.anos;                 // [2019..2025, 2026] — 2026 = 1º semestre (período parcial, desde 18/10/2026)
 const NT = ANOS.length;                  // índice da coluna Total (acumulado dos anos completos) nos blocos
 const ROTULO_ANO = DADOS.rotulosAno || {};          // {2026: "1º sem. 2026"}
@@ -889,96 +893,6 @@ function montaTerritorioHTML(mt, rec, persp){
 }
 
 /* ============================================================
-   CARD — ficha de cadastro CNES (dados da API oficial de Dados Abertos)
-   ============================================================ */
-function cardCnesHTML(mt){
-  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnesFicha || mt.cnes];
-  if(!temInfo){
-    return `<h3>Ficha de cadastro CNES</h3>
-      <p class="suave" style="margin-top:.5rem">Cadastro não embutido nesta versão do painel: rode <code>atualizar_cnes.py</code> e depois <code>montar_painel.py</code>.</p>`;
-  }
-  const info = CNES_INFO[mt.cnesFicha || mt.cnes];
-  const gest = {M:"Municipal", E:"Estadual", D:"Dupla"}[(info.tipo_gestao || "").trim()] || info.tipo_gestao || null;
-  const cep = info.codigo_cep_estabelecimento ? String(info.codigo_cep_estabelecimento).replace(/^(\d{5})(\d{3})$/, "$1-$2") : null;
-  let end = [info.endereco_estabelecimento, info.numero_estabelecimento].filter(Boolean).join(", ");
-  if(end && info.bairro_estabelecimento) end += " · " + info.bairro_estabelecimento;
-  if(end && cep) end += " · CEP " + cep;
-  const cnpj = info.numero_cnpj || info.numero_cnpj_entidade;
-  const badges = [];
-  if(info.estabelecimento_possui_centro_obstetrico) badges.push("Centro obstétrico");
-  if(info.estabelecimento_possui_centro_neonatal) badges.push("Centro neonatal");
-  if(info.estabelecimento_possui_centro_cirurgico) badges.push("Centro cirúrgico");
-  if(info.estabelecimento_possui_atendimento_hospitalar) badges.push("Atendimento hospitalar");
-  if(info.estabelecimento_faz_atendimento_ambulatorial_sus === "SIM") badges.push("Atendimento SUS");
-  const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
-  const consulta = CNES_INFO._atualizado_em;
-  const linhasFicha = [
-    ["Código CNES", mt.cnesComplexo ? mt.cnesComplexo.join(" + ") + " (complexo)" : mt.cnes],
-    ["Razão social", info.nome_razao_social],
-    ["Nome fantasia", info.nome_fantasia],
-    ["CNPJ", cnpj],
-    ["Esfera administrativa", info.descricao_esfera_administrativa],
-    ["Gestão", gest],
-    ["Endereço", end],
-    ["Turno de atendimento", info.descricao_turno_atendimento],
-    ["Estruturas cadastradas", badges.join(" · ")]
-  ].filter(l => l[1]);
-  return `<h3>Ficha de cadastro CNES</h3>
-    <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde tab-ficha">
-      <thead><tr><th style="width:230px">Ficha do estabelecimento</th><th style="text-align:left">CNES / DATASUS</th></tr></thead>
-      <tbody>${linhasFicha.map(l => `<tr><td style="font-weight:700">${l[0]}</td><td style="text-align:left; white-space:normal">${esc(l[1])}</td></tr>`).join("")}</tbody>
-    </table></div>
-    <p class="fonte" style="font-size:.8rem">
-      <b>Última atualização do cadastro no CNES:</b> ${dataBR(info.data_atualizacao)} ·
-      <b>Dados baixados da API oficial em:</b> ${dataBR(consulta)} ·
-      atualização automática semestral. Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.
-    </p>`;
-}
-
-/* ============================================================
-   CARD — habilitações ativas no CNES (serviço oficial do site)
-   ============================================================ */
-function cardHabilitacoesHTML(mt){
-  // complexo com mais de um código CNES (HCFAMEMA): habilitações de todos os códigos, com o código em cada linha
-  const cods = mt.cnesComplexo || [mt.cnes];
-  const comHab = typeof CNES_INFO !== "undefined" ? cods.filter(c => CNES_INFO[c] && Array.isArray(CNES_INFO[c].habilitacoes)) : [];
-  const habs = comHab.length ? comHab.flatMap(c => CNES_INFO[c].habilitacoes.map(h => ({...h, _cnes: c}))) : null;
-  const varios = cods.length > 1;
-  if(!habs) return "";
-  // ativa = competência final em aberto (99/9999)
-  const ativas = habs.filter(h => h.dtCompFim === "99/9999")
-    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)) || String(a._cnes).localeCompare(String(b._cnes)));
-  const origem = v => !v ? "Nacional" : (v === "P" ? "Local" : v);
-  const consulta = CNES_INFO._atualizado_em;
-  const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
-  const corpo = ativas.length
-    ? ativas.map(h => `<tr>
-        <td class="mono" style="font-weight:700">${esc(h.coGrupo)}</td>
-        <td style="text-align:left; white-space:normal">${esc(h.dsGrupo)}</td>
-        <td style="text-align:center">${esc(origem(h.tpOrigem))}</td>
-        <td class="mono" style="text-align:center">${esc(h.dtCompInicio || "—")}</td>
-        ${varios ? `<td class="mono" style="text-align:center">${esc(h._cnes)}</td>` : ""}
-      </tr>`).join("")
-    : `<tr><td colspan="${varios ? 5 : 4}" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
-  return `<h3>Habilitações ativas no CNES</h3>
-    <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
-      <thead><tr>
-        <th style="width:90px; text-align:center">Código</th>
-        <th style="text-align:left">Descrição</th>
-        <th style="width:110px; text-align:center">Origem</th>
-        <th style="width:150px; text-align:center">Competência Inicial</th>
-        ${varios ? `<th style="width:110px; text-align:center">CNES</th>` : ""}
-      </tr></thead>
-      <tbody>${corpo}</tbody>
-    </table></div>
-    <p class="fonte" style="font-size:.8rem">
-      ${varios ? `Complexo com ${cods.length} códigos CNES (${cods.join(" e ")}): a ficha de cadastro é a do código ${esc(mt.cnesFicha || mt.cnes)} e as habilitações reúnem os códigos, com o código indicado em cada linha. ` : ""}
-      <b>Dados baixados do CNES em:</b> ${dataBR(consulta)} · atualização automática semestral ·
-      Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.
-    </p>`;
-}
-
-/* ============================================================
    CARD — trimestre de início de pré-natal (espelho da apresentação)
    ============================================================ */
 function cardTrimestreHTML(mt){
@@ -1398,8 +1312,7 @@ function desenhaDossie(){
     </div>
   </div>
   <div class="dossie-cards">
-    <div class="card full">${cardCnesHTML(mt)}</div>
-    ${cardHabilitacoesHTML(mt) ? `<div class="card full">${cardHabilitacoesHTML(mt)}</div>` : ""}
+    <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Habilitações →</a></p></div>
     <div class="card full"><h3>Nascidos vivos ocorridos, ${SERIE_ROT}</h3><div id="dNV"></div><p class="fonte">${FONTE_SINASC}${PARCIAIS.size ? " " + esc(NOTA_PARCIAL) : ""}</p></div>
     <div class="full">
       <p class="eyebrow titulo-linha" style="margin:.4rem 0 .2rem">Abrangência territorial: da região à unidade</p>
@@ -1682,7 +1595,7 @@ function desenhaMetodologia(){
   const fontes = [
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025 e 1º semestre de 2026, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
-    ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES, com atualização automática semestral (1º de junho e 1º de dezembro)."],
+    ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil: código de identificação de cada unidade. A ficha de cadastro e as habilitações das unidades estão no Painel de Habilitações."],
     ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
     ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Apoiadas, HU Brasil e/ou QUALINEO. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
     ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],

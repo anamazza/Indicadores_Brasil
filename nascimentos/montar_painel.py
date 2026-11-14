@@ -48,11 +48,10 @@ try:
 except Exception as e:
     print("aviso: dados.json não gerado:", e)
 
-# ficha CNES (busca oficial via atualizar_cnes.py)
-cnes_path = os.path.join(BASE, "cnes_dados.json")
+# Ficha de cadastro CNES e habilitações: desde 14/11/2026 só o Painel de Habilitações mostra (pedido da coordenação).
+# O cnes_dados.json continua nesta pasta e segue atualizado na nuvem, porque o Painel de Habilitações é montado a
+# partir dele; só deixou de ser embutido neste HTML.
 cnes_js = ""
-if os.path.exists(cnes_path):
-    cnes_js = "\nconst CNES_INFO = " + open(cnes_path, encoding="utf-8").read() + ";"
 
 # comparativo 2019 x 2024 (build_comparativo.py)
 comp_path = os.path.join(BASE, "comparativo_nv.js")

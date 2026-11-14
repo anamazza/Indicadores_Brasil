@@ -12,10 +12,12 @@ RAIZ = os.path.dirname(os.path.abspath(__file__))
 SITE = "https://anamazza.github.io/Indicadores_Brasil/"
 
 # pasta: (arquivo gêmeo do index.html, tamanho mínimo do index.html em KB, arquivo de dados, mínimo de unidades)
+# Mínimos de Nascimentos, Internação e Mortalidade reduzidos em 14/11/2026: as páginas deixaram de embutir a ficha
+# CNES (cerca de 1.000 KB a menos em cada uma), que ficou só no Painel de Habilitações.
 PAINEIS = {
-    "nascimentos": ("Painel_NV2026_Novo.html", 2500, "dados_nv2026.js", 100),
-    "internacao":  ("Painel_Internacao_2026.html", 1200, "dados_internacao.js", 100),
-    "mortalidade": ("Painel_Mortalidade_2026.html", 1800, "dados_mortalidade.js", 100),
+    "nascimentos": ("Painel_NV2026_Novo.html", 1900, "dados_nv2026.js", 100),
+    "internacao":  ("Painel_Internacao_2026.html", 650, "dados_internacao.js", 100),
+    "mortalidade": ("Painel_Mortalidade_2026.html", 1200, "dados_mortalidade.js", 100),
     "habilitacoes": ("Painel_Habilitacoes_2026.html", 2000, "dados_habilitacoes.js", 110),  # unidades acompanhadas; as demais são conferidas abaixo
 }
 RAIZ_MIN_KB = 150          # a página principal embute a foto e as logos
@@ -290,6 +292,23 @@ for p in PAINEIS:
         falha(f"{p}: não foi possível ler os nomes das unidades ({e})")
 if achados: falha(f"nome antigo de grupo em {len(achados)} lugar(es): {'; '.join(achados[:6])}")
 else: ok("grupos com os nomes Apoiadas, HU Brasil e QUALINEO nos quatro painéis e na página principal")
+
+# ficha de cadastro CNES e habilitações (14/11/2026, pedido da coordenação): só o Painel de Habilitações mostra. O
+# cnes_dados.json continua nas pastas dos outros três painéis, porque o de Habilitações é montado a partir deles.
+print("== ficha e habilitações só no Painel de Habilitações")
+achados = []
+for p in ("nascimentos", "internacao", "mortalidade"):
+    try:
+        app = open(os.path.join(RAIZ, p, "painel_app.js"), encoding="utf-8").read()
+        pag = open(os.path.join(RAIZ, p, "index.html"), encoding="utf-8").read()
+    except Exception as e:
+        falha(f"{p}: não foi possível ler ({e})"); continue
+    if "Ficha de cadastro CNES</h3>" in app or "Habilitações ativas no CNES</h3>" in app:
+        achados.append(f"{p}: quadro de ficha ou de habilitações no perfil da unidade")
+    if "const CNES_INFO" in pag: achados.append(f"{p}: ficha CNES embutida no index.html")
+    if "/habilitacoes/" not in app: achados.append(f"{p}: sem o link para o Painel de Habilitações")
+if achados: falha("; ".join(achados))
+else: ok("ficha de cadastro e habilitações fora dos perfis de Nascimentos, Internação e Mortalidade, com link para o Painel de Habilitações")
 
 print()
 if avisos:

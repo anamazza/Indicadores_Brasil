@@ -20,7 +20,7 @@ pronto para o GitHub Pages. Requer internet só para o mapa de fundo do mapa de 
 - **Mapa de unidades** (abertura do painel): as 119 maternidades (Leaflet), coloridas por grupo (Apoiadas,
   HU Brasil, QUALINEO), com filtros, busca, resumo de 2025 no popup e pontos de contexto
   (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
-- **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as 15 seções
+- **Perfil da unidade**: página própria com as 15 seções
   da apresentação de indicadores de internação (gera_deck_v4): internações obstétricas, motivos, interrupção
   da gestação prevista em lei, AMIU, acompanhante, Centro de Parto Normal, assistência ao parto, morbidade
   materna grave por causas e por manejo, ocupação e permanência na obstetrícia; internações neonatais, grupos
@@ -52,7 +52,7 @@ marcadas como anexo quando não constam da lista oficial.
 | O quê | Como |
 |---|---|
 | Indicadores (nova rodada das planilhas) | rerodar a esteira em `../Extracao_SIH` (55/56 ou 61) e depois `py build_dados.py` |
-| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
+| Ficha CNES + habilitações (não aparecem neste painel desde 14/11/2026; alimentam o Painel de Habilitações) | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Coluna de período parcial (1º sem. 2026, desde 18/10/2026) | em `../Extracao_SIH`: `py -3.12 63_baixar_2026.py` (RD/SP/LT de 2026), `py -3.12 66_sp_marcas_2026.py` (marcas SP de 2026), `py -3.12 extrai_leitos_periodo.py 2026S1`, `py -3.12 gera_tabula_periodo.py` e `py -3.12 tabula_periodo.py 2026S1` (checkpoint em `saida/tabulacao_2026S1/`; apagar para refazer); no projeto NV, `py 11_perfil_obstetrico_novos.py --periodo 2026S1` (linhas do SINASC); depois `py build_dados.py` aqui (passo 3b). Regressão do tabulador: `tabula_periodo.py 2024 AC SE PE` = 506/506 células da v3. Período parcial: fora das tendências, padrão dos seletores = último ano completo; refazer quando o SIH publicar as competências até 2026-12 |
 | Remontar o painel | `py montar_painel.py` (gera `Painel_Internacao_2026.html` e `index.html` e espelha esta pasta na subpasta `internacao/` do repositório Indicadores_Brasil) |
 | Estrutura/estilo da página | editar `painel_base.html` (ou regerar do painel de mortalidade com `_gera_base.py`) |

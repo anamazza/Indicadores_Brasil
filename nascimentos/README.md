@@ -14,7 +14,7 @@ pronto para GitHub Pages. Requer internet para os mapas de fundo (Leaflet/CARTO)
   maternidades de cada território.
 - **Mapa de unidades**: as 59 maternidades estratégicas (Leaflet), com filtros, busca e pontos de
   contexto (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
-- **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial),
+- **Perfil da unidade**: página própria com
   todas as tabelas da apresentação (anos clicáveis abrem gráficos) e download em PDF.
 - **Comparador**: entre unidades (2 a 4, por ano) e da mesma unidade entre anos (variação e
   tendência; variação clicável abre o gráfico).
@@ -31,7 +31,7 @@ via serviço do site do CNES) · SIH/AIH 2025 · malhas de macrorregiões e regi
 
 | O quê | Como |
 |---|---|
-| Ficha CNES + habilitações | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
+| Ficha CNES + habilitações (não aparecem neste painel desde 14/11/2026; alimentam o Painel de Habilitações) | atualizada **na nuvem** (GitHub Actions, workflow "Atualizar CNES", 1º jun e 1º dez, ou disparo manual na aba Actions do Indicadores_Brasil); o `montar_painel.py` resgata o `cnes_dados.json` do repositório. Só em emergência: `py atualizar_cnes.py` aqui |
 | Comparativo 2019×2024 | `py build_comparativo.py "planilha_macro.xlsx" "planilha_regiao.xlsx"` |
 | Dados SINASC das unidades | `py build_dados.py` (extrai do painel anterior + coordenadas; a lista `ADICIONAIS` registra as planilhas das unidades acrescentadas depois; `blocos_adicionais.py` monta o bloco de perfil das mães a partir do JSON v3 das planilhas de indicadores, `carregar_v3`, e dos JSON das unidades avulsas, `carregar`; as planilhas xlsx de 31/08 servem só de molde) |
 
