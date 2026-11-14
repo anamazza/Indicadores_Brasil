@@ -58,3 +58,22 @@ Atalho local: `atualizar_painel.bat` roda CNES + montagem e registra em `atualiz
 - `painel_app.js` — lógica do painel (fonte editável)
 - `dados_nv2026.js`, `cnes_dados.json`, `comparativo_nv.js` — dados gerados pelos scripts
 - `foto_hero.jpg`, `logos_institucionais.png` — imagens embutidas na montagem
+
+## Auditoria entre painéis (14/11/2026)
+
+Pedido da coordenação: o mesmo indicador tem de ter o mesmo valor em todos os painéis. `ajustes_auditoria.py`, chamado
+pelo `build_dados.py` (passo 2c2), aplica as correções e grava cada célula alterada em `ajustes_auditoria_2026-11-14.csv`:
+
+- **Grupos** pela lista oficial de 09/09/2026 (`lista_oficial_2026-09-09.csv`, cópia da que o painel de Habilitações usa):
+  apoiadas (59), EBSERH (25) e QUALINEO 2026/2027 (86), como nos outros três painéis; a chave antiga "estrategica"
+  passou a "apoiada" no `painel_app.js`.
+- **Totais de território** (município, região de saúde, macrorregião e UF; ocorrência e residência; todos e < 1.500 g)
+  pelos microdados do SINASC com a regionalização vigente (jun/2026), inclusive nos anos anteriores à abertura da unidade.
+- **Complexo HCFAMEMA**: soma dos nascimentos dos dois códigos CNES (2025507 e 2025523), campos `cnesComplexo` e
+  `cnesFicha`; o `cnes_dados.json` e o `atualizar_cnes.py` trazem a ficha dos dois códigos.
+- **Coluna Total** refeita como soma dos anos completos.
+- Saiu do cabeçalho do perfil o número "partos/ano (SIH 2025)": os partos do SIH ficam só no painel de Internação.
+
+O `verificar_site.py` do repositório falha se os nascidos vivos, os grupos, o nome ou os códigos de uma unidade
+diferirem entre os painéis, se o mesmo território tiver totais diferentes ou se a coluna Total não fechar.
+Não corrigido (fora do pedido): a tabela de Apgar das planilhas oficiais difere da extração própria em parte das células.

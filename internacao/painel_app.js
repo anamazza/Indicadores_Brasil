@@ -300,12 +300,12 @@ function grafBarrasH(linhas, fmt, pctMax){
    ============================================================ */
 const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
 function cardCnesHTML(mt){
-  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnes];
+  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnesFicha || mt.cnes];
   if(!temInfo){
     return `<h3>Ficha de cadastro CNES</h3>
       <p class="suave" style="margin-top:.5rem">Cadastro não embutido nesta versão do painel: rode <code>atualizar_cnes.py</code> e depois <code>montar_painel.py</code>.</p>`;
   }
-  const info = CNES_INFO[mt.cnes];
+  const info = CNES_INFO[mt.cnesFicha || mt.cnes];
   const gest = {M:"Municipal", E:"Estadual", D:"Dupla"}[(info.tipo_gestao || "").trim()] || info.tipo_gestao || null;
   const cep = info.codigo_cep_estabelecimento ? String(info.codigo_cep_estabelecimento).replace(/^(\d{5})(\d{3})$/, "$1-$2") : null;
   let end = [info.endereco_estabelecimento, info.numero_estabelecimento].filter(Boolean).join(", ");
@@ -320,7 +320,7 @@ function cardCnesHTML(mt){
   if(info.estabelecimento_faz_atendimento_ambulatorial_sus === "SIM") badges.push("Atendimento SUS");
   const consulta = CNES_INFO._atualizado_em;
   const linhasFicha = [
-    ["Código CNES", mt.cnes],
+    ["Código CNES", mt.cnesComplexo ? mt.cnesComplexo.join(" + ") + " (complexo)" : mt.cnes],
     ["Razão social", info.nome_razao_social],
     ["Nome fantasia", info.nome_fantasia],
     ["CNPJ", cnpj],
@@ -341,11 +341,14 @@ function cardCnesHTML(mt){
     </p>`;
 }
 function cardHabilitacoesHTML(mt){
-  const info = typeof CNES_INFO !== "undefined" ? CNES_INFO[mt.cnes] : null;
-  const habs = info && Array.isArray(info.habilitacoes) ? info.habilitacoes : null;
+  // complexo com mais de um código CNES (HCFAMEMA): habilitações de todos os códigos, com o código em cada linha
+  const cods = mt.cnesComplexo || [mt.cnes];
+  const comHab = typeof CNES_INFO !== "undefined" ? cods.filter(c => CNES_INFO[c] && Array.isArray(CNES_INFO[c].habilitacoes)) : [];
+  const habs = comHab.length ? comHab.flatMap(c => CNES_INFO[c].habilitacoes.map(h => ({...h, _cnes: c}))) : null;
+  const varios = cods.length > 1;
   if(!habs) return "";
   const ativas = habs.filter(h => h.dtCompFim === "99/9999")
-    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)));
+    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)) || String(a._cnes).localeCompare(String(b._cnes)));
   const origem = v => !v ? "Nacional" : (v === "P" ? "Local" : v);
   const consulta = CNES_INFO._atualizado_em;
   const corpo = ativas.length
@@ -354,8 +357,9 @@ function cardHabilitacoesHTML(mt){
         <td style="text-align:left; white-space:normal">${esc(h.dsGrupo)}</td>
         <td style="text-align:center">${esc(origem(h.tpOrigem))}</td>
         <td class="mono" style="text-align:center">${esc(h.dtCompInicio || "—")}</td>
+        ${varios ? `<td class="mono" style="text-align:center">${esc(h._cnes)}</td>` : ""}
       </tr>`).join("")
-    : `<tr><td colspan="4" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
+    : `<tr><td colspan="${varios ? 5 : 4}" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
   return `<h3>Habilitações ativas no CNES</h3>
     <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
       <thead><tr>
@@ -363,10 +367,12 @@ function cardHabilitacoesHTML(mt){
         <th style="text-align:left">Descrição</th>
         <th style="width:110px; text-align:center">Origem</th>
         <th style="width:150px; text-align:center">Competência Inicial</th>
+        ${varios ? `<th style="width:110px; text-align:center">CNES</th>` : ""}
       </tr></thead>
       <tbody>${corpo}</tbody>
     </table></div>
     <p class="fonte" style="font-size:.8rem">
+      ${varios ? `Complexo com ${cods.length} códigos CNES (${cods.join(" e ")}): a ficha de cadastro é a do código ${esc(mt.cnesFicha || mt.cnes)} e as habilitações reúnem os códigos, com o código indicado em cada linha. ` : ""}
       <b>Dados baixados do CNES em:</b> ${dataBR(consulta)} ·
       Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.
     </p>`;
@@ -547,7 +553,7 @@ function desenhaDossie(){
       <p class="eyebrow" style="color:#A5D6A7">${esc(t.uf)} · ${esc(mt.regiao)}</p>
       <h2 style="color:#FFF">${esc(mt.nome)}</h2>
       <div class="meta">
-        <span>CNES ${mt.cnes}</span><span>${esc(t.municipio)} · ${mt.uf}</span>
+        <span>CNES ${mt.cnesComplexo ? mt.cnesComplexo.join(" + ") : mt.cnes}</span><span>${esc(t.municipio)} · ${mt.uf}</span>
         ${t.regiao_saude ? `<span>Região de saúde: ${esc(t.regiao_saude)}</span>` : ""}${t.macro ? `<span>${esc(t.macro)}</span>` : ""}
         <span>${esc(rotuloConjuntos(mt))}</span>
         ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 09/09/2026</span>` : ""}
@@ -570,8 +576,8 @@ function desenhaDossie(){
     <div class="card full"><h3>Internações obstétricas, ${periodo} ${notaPrelim}</h3>
       <div id="gObst" style="max-width:820px; margin:.7rem auto 0"></div>
       <div style="margin-top:.9rem">${tabelaBloco(mt, "obst_n", "Internações")}</div>
-      <p class="fonte">${FONTE_SIH} Internações de mulheres de 10 a 59 anos com diagnóstico ou procedimento obstétrico, pelo ano da data de internação.</p></div>
-    ${card(`Internações obstétricas por motivo de internação (nº e %), ${periodo}`, tabelaMotivos(mt), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações obstétricas. Parto, aborto e intercorrências clínicas classificados pelo procedimento realizado e pelo diagnóstico principal; a linha Outros completa 100%.")}
+      <p class="fonte">${FONTE_SIH} Internações de mulheres de 10 a 59 anos com diagnóstico do capítulo XV da CID-10 (O00 a O99) em qualquer campo de diagnóstico da AIH, pelo ano da data de internação.</p></div>
+    ${card(`Internações obstétricas por motivo de internação (nº e %), ${periodo}`, tabelaMotivos(mt), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações obstétricas. Parto, aborto e intercorrências clínicas classificados pelo procedimento realizado; a linha Outros reúne os demais procedimentos e completa 100%.")}
     ${card(`Interrupção da gestação em casos previstos em lei, ${periodo}`, tabelaBloco(mt, "aborto_legal", "Internações"), FONTE_SIH)}
     ${card(`Uso de AMIU nos procedimentos de esvaziamento uterino (%), ${periodo}`, tabelaBloco(mt, "amiu", "AMIU"), FONTE_SIH, "Aspiração manual intrauterina entre todos os esvaziamentos uterinos (AMIU + curetagens pós-abortamento), sem a curetagem semiótica.")}
     ${card(`Presença de acompanhante (%), ${periodo}`, tabelaBloco(mt, "acomp", "Internações com acompanhante (%)"), FONTE_SIH, "Internações com registro de diária de acompanhante.")}
@@ -773,13 +779,13 @@ function desenhaMetodologia(){
   if(_metodoPronta) return;
   _metodoPronta = true;
   const fontes = [
-    ["SIH/SUS · AIH reduzida (RD)", "Sistema de Informações Hospitalares do SUS, arquivos RD<UF><aaaamm>.dbc de todas as competências de 2019 a junho de 2026 (colunas 2019-2025) e até agosto de 2026 (1º semestre de 2026), das 27 UFs. Internações atribuídas ao CNES do estabelecimento e ao ano da data de internação; o universo obstétrico são as mulheres de 10 a 59 anos com diagnóstico ou procedimento obstétrico. Base do volume, motivos, acompanhante, CPN, permanência, morbidade materna grave, internações neonatais e UTI neonatal."],
+    ["SIH/SUS · AIH reduzida (RD)", "Sistema de Informações Hospitalares do SUS, arquivos RD<UF><aaaamm>.dbc de todas as competências de 2019 a junho de 2026 (colunas 2019-2025) e até agosto de 2026 (1º semestre de 2026), das 27 UFs. Internações atribuídas ao CNES do estabelecimento e ao ano da data de internação; o universo obstétrico são as internações de mulheres de 10 a 59 anos com diagnóstico do capítulo XV da CID-10 (O00 a O99) em qualquer campo de diagnóstico da AIH. Base do volume, motivos, acompanhante, CPN, permanência, morbidade materna grave, internações neonatais e UTI neonatal."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: ${p.descricao || "internações de janeiro a junho de 2026"}. Mesmas regras v3 das colunas 2019-2025 (o tabulador do período é gerado a partir do script da tabulação v3 e reproduziu a coluna de 2024). ${p.completude ? p.completude.charAt(0).toUpperCase() + p.completude.slice(1) + "." : ""} Taxas de ocupação com os leitos-dia de janeiro a junho de 2026. Período parcial e preliminar: fora das tendências; números absolutos não comparáveis com anos completos.${(p.unidadesSemDados || []).length ? " Sem AIH no período: " + p.unidadesSemDados.map(c => { const m = MAT.find(x => x.cnes === c); return m ? m.nome + " (CNES " + c + ")" : c; }).join("; ") + "." : ""}`; })()],
     ["SIH/SUS · serviços profissionais (SP)", "Arquivos SP<UF><aaaamm>.dbc: atos profissionais de cada AIH, usados para marcar analgesia, transfusão, histerectomia, admissão em UTI, AMIU e curetagens, diárias de acompanhante e demais critérios de morbidade materna grave."],
     ["CNES · leitos (LT)", "Arquivos LT<UF><aaaamm>.dbc: leitos existentes por competência. Leitos-dia obstétricos (códigos 10 e 43) e de UTI neonatal tipo II e III (códigos 81 e 82) são os denominadores das taxas de ocupação."],
-    ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2024 e 2025 preliminares; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
+    ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2025 preliminar; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
     ["CNES · ficha e habilitações", "Ficha de cadastro pela API oficial de Dados Abertos do Ministério da Saúde e habilitações ativas pelo serviço do próprio site do CNES; coordenadas georreferenciadas a partir do cadastro."],
-    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (apoiadas, EBSERH e QUALINEO 2026/2027) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Unidades acrescentadas depois da lista (12 e 23/09/2026) entram como anexo, com as mesmas regras."]
+    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (apoiadas, EBSERH e QUALINEO 2026/2027) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
   ];
   const dic = (typeof DICIONARIO !== "undefined" ? DICIONARIO : []).filter(d => !/^PERFIL/i.test(d.secao));
   const secoes = [...new Set(dic.map(d => d.secao))];

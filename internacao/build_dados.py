@@ -349,6 +349,11 @@ for cnes in sorted(plan):
     })
     if plan[cnes].get("semSIH"):
         mats[-1]["semSIH"] = True
+    # 14/11/2026 (auditoria entre painéis): complexo HCFAMEMA com os dois códigos CNES, como nos outros painéis.
+    # As AIH estão todas no 2025507 (conferido no SIH-RD de SP em 2019, 2022 e 2025: nenhuma AIH no 2025523);
+    # a ficha de cadastro exibida é a do código da lista oficial (2025523) e as habilitações reúnem os dois.
+    if cnes in ALIAS_OFICIAL:
+        mats[-1]["cnesComplexo"] = sorted([cnes, ALIAS_OFICIAL[cnes]]); mats[-1]["cnesFicha"] = ALIAS_OFICIAL[cnes]
 conta = {}
 for m in mats:
     for c in m["conjuntos"]: conta[c] = conta.get(c, 0) + 1
@@ -378,8 +383,7 @@ saida_cnes_path = os.path.join(BASE, "cnes_dados.json")
 saida_cnes = json.load(open(saida_cnes_path, encoding="utf-8")) if os.path.exists(saida_cnes_path) else {}
 saida_cnes.setdefault("_atualizado_em", cnes_nv.get("_atualizado_em", date.today().isoformat()))
 buscadas = 0
-for m in mats:
-    c = m["cnes"]
+for m, c in [(m, c) for m in mats for c in (m.get("cnesComplexo") or [m["cnes"]])]:
     if c in saida_cnes:
         continue
     if c in cnes_nv:

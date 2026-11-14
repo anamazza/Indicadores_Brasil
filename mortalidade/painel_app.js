@@ -834,12 +834,12 @@ function grafBarrasH(linhas, fmt, pctMax){
    ============================================================ */
 const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
 function cardCnesHTML(mt){
-  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnes];
+  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnesFicha || mt.cnes];
   if(!temInfo){
     return `<h3>Ficha de cadastro CNES</h3>
       <p class="suave" style="margin-top:.5rem">Cadastro não embutido nesta versão do painel: rode <code>atualizar_cnes.py</code> e depois <code>montar_painel.py</code>.</p>`;
   }
-  const info = CNES_INFO[mt.cnes];
+  const info = CNES_INFO[mt.cnesFicha || mt.cnes];
   const gest = {M:"Municipal", E:"Estadual", D:"Dupla"}[(info.tipo_gestao || "").trim()] || info.tipo_gestao || null;
   const cep = info.codigo_cep_estabelecimento ? String(info.codigo_cep_estabelecimento).replace(/^(\d{5})(\d{3})$/, "$1-$2") : null;
   let end = [info.endereco_estabelecimento, info.numero_estabelecimento].filter(Boolean).join(", ");
@@ -875,11 +875,14 @@ function cardCnesHTML(mt){
     </p>`;
 }
 function cardHabilitacoesHTML(mt){
-  const info = typeof CNES_INFO !== "undefined" ? CNES_INFO[mt.cnes] : null;
-  const habs = info && Array.isArray(info.habilitacoes) ? info.habilitacoes : null;
+  // complexo com mais de um código CNES (HCFAMEMA): habilitações de todos os códigos, com o código em cada linha
+  const cods = mt.cnesComplexo || [mt.cnes];
+  const comHab = typeof CNES_INFO !== "undefined" ? cods.filter(c => CNES_INFO[c] && Array.isArray(CNES_INFO[c].habilitacoes)) : [];
+  const habs = comHab.length ? comHab.flatMap(c => CNES_INFO[c].habilitacoes.map(h => ({...h, _cnes: c}))) : null;
+  const varios = cods.length > 1;
   if(!habs) return "";
   const ativas = habs.filter(h => h.dtCompFim === "99/9999")
-    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)));
+    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)) || String(a._cnes).localeCompare(String(b._cnes)));
   const origem = v => !v ? "Nacional" : (v === "P" ? "Local" : v);
   const consulta = CNES_INFO._atualizado_em;
   const corpo = ativas.length
@@ -888,8 +891,9 @@ function cardHabilitacoesHTML(mt){
         <td style="text-align:left; white-space:normal">${esc(h.dsGrupo)}</td>
         <td style="text-align:center">${esc(origem(h.tpOrigem))}</td>
         <td class="mono" style="text-align:center">${esc(h.dtCompInicio || "—")}</td>
+        ${varios ? `<td class="mono" style="text-align:center">${esc(h._cnes)}</td>` : ""}
       </tr>`).join("")
-    : `<tr><td colspan="4" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
+    : `<tr><td colspan="${varios ? 5 : 4}" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
   return `<h3>Habilitações ativas no CNES</h3>
     <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
       <thead><tr>
@@ -897,10 +901,12 @@ function cardHabilitacoesHTML(mt){
         <th style="text-align:left">Descrição</th>
         <th style="width:110px; text-align:center">Origem</th>
         <th style="width:150px; text-align:center">Competência Inicial</th>
+        ${varios ? `<th style="width:110px; text-align:center">CNES</th>` : ""}
       </tr></thead>
       <tbody>${corpo}</tbody>
     </table></div>
     <p class="fonte" style="font-size:.8rem">
+      ${varios ? `Complexo com ${cods.length} códigos CNES (${cods.join(" e ")}): a ficha de cadastro é a do código ${esc(mt.cnesFicha || mt.cnes)} e as habilitações reúnem os códigos, com o código indicado em cada linha. ` : ""}
       <b>Dados baixados do CNES em:</b> ${dataBR(consulta)} ·
       Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.
     </p>`;
@@ -1401,7 +1407,7 @@ function desenhaEvolucao(){
     <div class="tab-wrap"><table class="comp">
       <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th></tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação entre o primeiro e o último ano marcados: taxas em diferença absoluta (por mil ou por 100 mil), percentuais em pontos percentuais, números absolutos em variação relativa. Verde = a mortalidade caiu; vermelho = subiu; sem cor = número absoluto ou indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2024 e 2025 preliminares. ${FONTE_SIM_SINASC}</p>
+    <p class="fonte">Variação entre o primeiro e o último ano marcados: taxas em diferença absoluta (por mil ou por 100 mil), percentuais em pontos percentuais, números absolutos em variação relativa. Verde = a mortalidade caiu; vermelho = subiu; sem cor = número absoluto ou indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2025 preliminar. ${FONTE_SIM_SINASC}</p>
   </div>`;
 }
 
@@ -1482,10 +1488,10 @@ function desenhaMetodologia(){
   if(_metodoPronta) return;
   _metodoPronta = true;
   const fontes = [
-    ["SIM · declarações de óbito (DO)", "Sistema de Informações sobre Mortalidade, Ministério da Saúde. Arquivos DO<UF><ano>.dbc de todas as 27 UFs (2019 a 2023 definitivos; 2024 e 2025 preliminares, extração de 10 e 11/09/2026 — as unidades acrescentadas em 23/09/2026, de MA, CE e SP, foram extraídas nessa data, com as mesmas regras; na mesma data, o Hospital Santa Marcelina/SP e o Hospital da Mulher do Recife/PE tiveram os óbitos neonatais de residentes em outras UFs incorporados). Os óbitos são atribuídos ao estabelecimento onde ocorreram (CODESTAB) e ao ano da data do óbito. Base dos óbitos maternos, neonatais e do componente neonatal precoce da mortalidade perinatal."],
+    ["SIM · declarações de óbito (DO)", "Sistema de Informações sobre Mortalidade, Ministério da Saúde. Arquivos DO<UF><ano>.dbc de todas as 27 UFs (2019 a 2024 definitivos; 2025 preliminar, extração de 10 e 11/09/2026 — as unidades acrescentadas em 23/09/2026, de MA, CE e SP, foram extraídas nessa data, com as mesmas regras; na mesma data, o Hospital Santa Marcelina/SP e o Hospital da Mulher do Recife/PE tiveram os óbitos neonatais de residentes em outras UFs incorporados). Os óbitos são atribuídos ao estabelecimento onde ocorreram (CODESTAB) e ao ano da data do óbito. Base dos óbitos maternos, neonatais e do componente neonatal precoce da mortalidade perinatal."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: óbitos de ${p.descricao || "janeiro a junho de 2026"}, pela data do óbito, dos arquivos preliminares DO<UF>2026.dbc das 27 UFs e DOFET26.dbc (${p.fonte || "SIM 2026 preliminar"}), com as mesmas regras das colunas 2019-2025 (o cálculo do período é gerado a partir do script do recálculo e reproduziu o ano de 2025 célula a célula). Nascidos vivos do período contados diretamente no SINASC 2026 preliminar, por estabelecimento de ocorrência. Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro no SINASC nem no SIM no período (coluna em branco): " + p.unidadesSemDados.map(c => { const m = MAT.find(x => x.cnes === c); return m ? m.nome + " (CNES " + c + ")" : c; }).join("; ") + "." : ""}`; })()],
     ["SIM · declarações de óbito fetal (DOFET)", "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025 (e DOFET26, preliminar, para o 1º semestre de 2026). Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."],
-    ["SINASC", "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal."],
+    ["SINASC", "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal. Desde 14/11/2026 são os mesmos nascidos vivos do Painel de Nascimentos, contados nos microdados nacionais do SINASC (OpenDataSUS) por estabelecimento de ocorrência, o que inclui os nascimentos de mães residentes em outros estados."],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES; coordenadas geográficas georreferenciadas a partir do cadastro."],
     ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Internação e de Habilitações."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização — as mesmas do Painel NV 2026."]
@@ -1535,7 +1541,7 @@ function desenhaMetodologia(){
         Ao agregar territórios ou grupos, somam-se numeradores e denominadores das maternidades da seleção (taxa agregada); a coluna Acumulado 2019-2025 usa a mesma regra ao longo dos anos.
         Nos mapas, as faixas são quintis calculados sobre os territórios visíveis no recorte atual, na rampa creme → vinho (mais escuro = maior mortalidade); no comparativo entre anos, os quintis são calculados sobre os dois anos juntos, para que as cores sejam comparáveis.
         Territórios em cinza não possuem maternidade do painel ou não têm óbitos/denominador no período.
-        2024, 2025 e o 1º semestre de 2026 são dados preliminares do DATASUS e os totais podem mudar nas próximas versões dos arquivos.
+        2025 e o 1º semestre de 2026 são dados preliminares do DATASUS e os totais podem mudar nas próximas versões dos arquivos.
         O 1º semestre de 2026 (óbitos de janeiro a junho, pela data do óbito) é período parcial: não entra na coluna Acumulado nem nas tendências, e os seus números absolutos não são comparáveis com anos completos (as taxas são).
       </p>
     </div>`;

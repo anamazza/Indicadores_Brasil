@@ -619,25 +619,25 @@ function iniciaLeaflet(){
   }).addTo(leaf);
   desenhaPontos();
 }
-/* conjuntos: as 59 estratégicas em verde; as unidades novas em tons de azul */
+/* grupos da lista oficial de 09/09/2026: apoiadas (estratégicas) em verde; EBSERH e QUALINEO em azuis */
 const CONJUNTOS = {
-  estrategica:{rot:"Maternidade estratégica", fundo:"#279261", borda:"#154A4B"},
+  apoiada:    {rot:"Maternidade apoiada (estratégica)", fundo:"#279261", borda:"#154A4B"},
   ebserh:     {rot:"Unidade EBSERH",          fundo:"#2471A3", borda:"#103B5E"},
   qualineo:   {rot:"QUALINEO 2026/2027",      fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
-const ORDEM_CONJ = ["estrategica", "ebserh", "qualineo"];
-/* uma unidade pode pertencer a mais de um conjunto (5 das novas já eram estratégicas).
+const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
+/* uma unidade pode pertencer a mais de um conjunto (lista oficial de 09/09/2026).
    Para não repeti-la em dois seletores, cada uma entra só no primeiro desta ordem —
    que é também a cor que ela recebe no mapa. */
 function conjuntoPrincipal(m){
-  const c = m.conjuntos || ["estrategica"];
-  return ORDEM_CONJ.find(k => c.includes(k)) || "estrategica";
+  const c = m.conjuntos || ["apoiada"];
+  return ORDEM_CONJ.find(k => c.includes(k)) || "apoiada";
 }
 function corDoConjunto(m){
   return CONJUNTOS[conjuntoPrincipal(m)];
 }
 function rotuloConjuntos(m){
-  const c = m.conjuntos || ["estrategica"];
+  const c = m.conjuntos || ["apoiada"];
   return ORDEM_CONJ.filter(k => c.includes(k)).map(k => CONJUNTOS[k].rot).join(" · ");
 }
 function passaFiltroPonto(p){
@@ -667,7 +667,7 @@ function desenhaPontos(){
     });
     leaf.addLayer(camadaCtx);
   }
-  // maternidades: verde para as estratégicas, tons de azul para as unidades novas
+  // maternidades: verde para as apoiadas, tons de azul para EBSERH e QUALINEO
   camadaEstr = L.markerClusterGroup({maxClusterRadius:30, disableClusteringAtZoom:7});
   const visiveis = [];
   MAT.filter(m => passaFiltroPonto({uf:m.uf, nome:m.nome})).forEach(m => {
@@ -863,12 +863,12 @@ function montaTerritorioHTML(mt, rec, persp){
    CARD — ficha de cadastro CNES (dados da API oficial de Dados Abertos)
    ============================================================ */
 function cardCnesHTML(mt){
-  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnes];
+  const temInfo = typeof CNES_INFO !== "undefined" && CNES_INFO[mt.cnesFicha || mt.cnes];
   if(!temInfo){
     return `<h3>Ficha de cadastro CNES</h3>
       <p class="suave" style="margin-top:.5rem">Cadastro não embutido nesta versão do painel: rode <code>atualizar_cnes.py</code> e depois <code>montar_painel.py</code>.</p>`;
   }
-  const info = CNES_INFO[mt.cnes];
+  const info = CNES_INFO[mt.cnesFicha || mt.cnes];
   const gest = {M:"Municipal", E:"Estadual", D:"Dupla"}[(info.tipo_gestao || "").trim()] || info.tipo_gestao || null;
   const cep = info.codigo_cep_estabelecimento ? String(info.codigo_cep_estabelecimento).replace(/^(\d{5})(\d{3})$/, "$1-$2") : null;
   let end = [info.endereco_estabelecimento, info.numero_estabelecimento].filter(Boolean).join(", ");
@@ -884,7 +884,7 @@ function cardCnesHTML(mt){
   const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
   const consulta = CNES_INFO._atualizado_em;
   const linhasFicha = [
-    ["Código CNES", mt.cnes],
+    ["Código CNES", mt.cnesComplexo ? mt.cnesComplexo.join(" + ") + " (complexo)" : mt.cnes],
     ["Razão social", info.nome_razao_social],
     ["Nome fantasia", info.nome_fantasia],
     ["CNPJ", cnpj],
@@ -910,12 +910,15 @@ function cardCnesHTML(mt){
    CARD — habilitações ativas no CNES (serviço oficial do site)
    ============================================================ */
 function cardHabilitacoesHTML(mt){
-  const info = typeof CNES_INFO !== "undefined" ? CNES_INFO[mt.cnes] : null;
-  const habs = info && Array.isArray(info.habilitacoes) ? info.habilitacoes : null;
+  // complexo com mais de um código CNES (HCFAMEMA): habilitações de todos os códigos, com o código em cada linha
+  const cods = mt.cnesComplexo || [mt.cnes];
+  const comHab = typeof CNES_INFO !== "undefined" ? cods.filter(c => CNES_INFO[c] && Array.isArray(CNES_INFO[c].habilitacoes)) : [];
+  const habs = comHab.length ? comHab.flatMap(c => CNES_INFO[c].habilitacoes.map(h => ({...h, _cnes: c}))) : null;
+  const varios = cods.length > 1;
   if(!habs) return "";
   // ativa = competência final em aberto (99/9999)
   const ativas = habs.filter(h => h.dtCompFim === "99/9999")
-    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)));
+    .sort((a, b) => String(a.coGrupo).localeCompare(String(b.coGrupo)) || String(a._cnes).localeCompare(String(b._cnes)));
   const origem = v => !v ? "Nacional" : (v === "P" ? "Local" : v);
   const consulta = CNES_INFO._atualizado_em;
   const dataBR = iso => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? `${m[3]}/${m[2]}/${m[1]}` : iso; };
@@ -925,8 +928,9 @@ function cardHabilitacoesHTML(mt){
         <td style="text-align:left; white-space:normal">${esc(h.dsGrupo)}</td>
         <td style="text-align:center">${esc(origem(h.tpOrigem))}</td>
         <td class="mono" style="text-align:center">${esc(h.dtCompInicio || "—")}</td>
+        ${varios ? `<td class="mono" style="text-align:center">${esc(h._cnes)}</td>` : ""}
       </tr>`).join("")
-    : `<tr><td colspan="4" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
+    : `<tr><td colspan="${varios ? 5 : 4}" class="suave" style="text-align:left">Nenhuma habilitação ativa registrada no CNES.</td></tr>`;
   return `<h3>Habilitações ativas no CNES</h3>
     <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
       <thead><tr>
@@ -934,10 +938,12 @@ function cardHabilitacoesHTML(mt){
         <th style="text-align:left">Descrição</th>
         <th style="width:110px; text-align:center">Origem</th>
         <th style="width:150px; text-align:center">Competência Inicial</th>
+        ${varios ? `<th style="width:110px; text-align:center">CNES</th>` : ""}
       </tr></thead>
       <tbody>${corpo}</tbody>
     </table></div>
     <p class="fonte" style="font-size:.8rem">
+      ${varios ? `Complexo com ${cods.length} códigos CNES (${cods.join(" e ")}): a ficha de cadastro é a do código ${esc(mt.cnesFicha || mt.cnes)} e as habilitações reúnem os códigos, com o código indicado em cada linha. ` : ""}
       <b>Dados baixados do CNES em:</b> ${dataBR(consulta)} · atualização automática semestral ·
       Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.
     </p>`;
@@ -1332,10 +1338,9 @@ function desenhaDossie(){
       <p class="eyebrow" style="color:#A5D6A7">${esc(t.uf)} · ${esc(mt.regiao)}</p>
       <h2 style="color:#FFF">${esc(mt.nome)}</h2>
       <div class="meta">
-        <span>CNES ${mt.cnes}</span><span>${esc(t.municipio)} · ${mt.uf}</span>
+        <span>CNES ${mt.cnesComplexo ? mt.cnesComplexo.join(" + ") : mt.cnes}</span><span>${esc(t.municipio)} · ${mt.uf}</span>
         <span>Região de saúde: ${esc(t.regiao_saude)}</span><span>${esc(t.macro)}</span>
         <span>${esc(rotuloConjuntos(mt))}</span>
-        ${mt.partosAIH ? `<span>${fmtInt(mt.partosAIH)} partos/ano (SIH 2025)</span>` : ""}
       </div>
     </div>
     <div style="text-align:right">
@@ -1405,11 +1410,11 @@ function desenhaDossie(){
    ============================================================ */
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
-const MEDIA_ROT = {estrategica:"Estratégicas", ebserh:"EBSERH", qualineo:"QUALINEO"};
+const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
 let anoComp = ULT;
-let grupoComp = "estrategica";   // grupo escolhido no filtro do comparador — só se compara dentro dele
+let grupoComp = "apoiada";   // grupo escolhido no filtro do comparador — só se compara dentro dele
 /* média do grupo: pseudo-coluna "media:<grupo>" — a unidade é comparada com o próprio grupo */
-function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["estrategica"]).includes(g)); }
+function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["apoiada"]).includes(g)); }
 function entradaComp(c){
   if(String(c).startsWith("media:")){
     const g = String(c).slice(6), lst = unidadesDoGrupo(g);
@@ -1619,7 +1624,7 @@ const FICHAS_EXTRAS = [
    d:"Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
    fonte:"Ministério da Saúde - SINASC, " + ANOS[ULT] + "."},
   {rot:"Média do grupo (comparador)",
-   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades apoiadas (estratégicas), unidades EBSERH ou QUALINEO 2026/2027, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    n:"Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    d:"Soma dos denominadores correspondentes nas mesmas unidades.",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."}
@@ -1633,7 +1638,9 @@ function desenhaMetodologia(){
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025 e 1º semestre de 2026, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES, com atualização automática semestral (1º de junho e 1º de dezembro)."],
-    ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem do volume anual de partos por estabelecimento e dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025)."],
+    ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
+    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
+    ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização."],
     ["Comparativo entre anos", "Microdados públicos do SINASC (OpenDataSUS), série 2019-2025, processados por território de residência e ocorrência: todos os nascidos vivos e <1500 g, por região de saúde, macro e UF. Nos níveis macro e UF, o percentual agrega os nascidos na própria região de saúde (todos) ou na própria macro (<1500 g), como nas planilhas oficiais. 2025 preliminar. Extração validada contra as planilhas NV por Região e NV por Macro (2019 e 2024)."],
     ["Localização das unidades", "Coordenadas geográficas (latitude e longitude) de cada estabelecimento, georreferenciadas a partir do cadastro CNES."]
@@ -1709,7 +1716,7 @@ function opcaoUnidades(sel, conjunto){
     `</optgroup>`).join("");
 }
 /* seletor com um optgroup por grupo (comparador); a UF entra no rótulo de cada opção */
-const GRUPO_ROT_PLURAL = {estrategica:"Maternidades estratégicas", ebserh:"Unidades EBSERH", qualineo:"QUALINEO 2026/2027"};
+const GRUPO_ROT_PLURAL = {apoiada:"Maternidades apoiadas (estratégicas)", ebserh:"Unidades EBSERH", qualineo:"QUALINEO 2026/2027"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
     const lst = MAT.filter(m => conjuntoPrincipal(m) === g)
@@ -1885,7 +1892,7 @@ function inicia(){
 
   // perfil da unidade — um seletor por conjunto + página sobreposta
   const sU = document.getElementById("selUnidade");
-  opcaoUnidades(sU, "estrategica");
+  opcaoUnidades(sU, "apoiada");
   sU.value = estado.cnes;
   sU.addEventListener("change", () => { estado.cnes = sU.value; });
   document.getElementById("btnAbrirDossie").addEventListener("click", () => abrirDossie(sU.value));
@@ -1898,7 +1905,7 @@ function inicia(){
     if(n) n.textContent = `(${MAT.filter(m => conjuntoPrincipal(m) === conj).length})`;
   });
   const nEstr = document.getElementById("nEstr");
-  if(nEstr) nEstr.textContent = `(${MAT.filter(m => conjuntoPrincipal(m) === "estrategica").length})`;
+  if(nEstr) nEstr.textContent = `(${MAT.filter(m => conjuntoPrincipal(m) === "apoiada").length})`;
   const sPd = document.getElementById("selUnidadePd");
   opcaoUnidades(sPd);
   sPd.value = estado.cnes;

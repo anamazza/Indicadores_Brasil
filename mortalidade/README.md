@@ -40,7 +40,7 @@ unidades (Leaflet/OpenStreetMap).
 
 ## Fontes
 
-SIM (DO e DOFET) 2019–2025 e SINASC 2019–2025 (2024 e 2025 preliminares, dados sujeitos a
+SIM (DO e DOFET) 2019–2025 e SINASC 2019–2025 (2025 preliminar, dados sujeitos a
 revisão) · CNES (ficha via API de Dados Abertos; habilitações via serviço do site do CNES) ·
 lista oficial de maternidades por grupo de 09/09/2026 · malhas de macrorregiões e regiões de saúde
 (as mesmas do Painel NV).
@@ -81,3 +81,14 @@ complexo HCFAMEMA (2025523), que o painel NV não usa, tem a ficha buscada na AP
 - `build_dados.py`, `atualizar_cnes.py`, `montar_painel.py` — scripts de dados e montagem
 - `dados_mortalidade.js`, `cnes_dados.json` — dados gerados pelos scripts
 - `logos_institucionais.png` — logos embutidos na montagem
+
+## Auditoria entre painéis (14/11/2026)
+
+- **Nascidos vivos**: passam a ser os do painel de Nascimentos (contagem nos microdados nacionais do SINASC por
+  estabelecimento de ocorrência; no complexo HCFAMEMA, soma dos dois códigos). O `build_dados.py` lê a linha Total da
+  tabela de via de nascimento do painel de Nascimentos e substitui os denominadores dos CSV do recálculo, cuja origem
+  (planilhas de validação) não incluía parte dos nascimentos de mães residentes em outras UFs: 83 células de 28
+  unidades. Os óbitos não mudam. As apresentações e planilhas de setembro mantêm os denominadores antigos.
+- **2024** deixa de ser marcado como preliminar (SIM e SINASC de 2024 estão nas pastas de dados definitivos do DATASUS,
+  arquivos de 23/12/2025); preliminares: 2025 e o 1º semestre de 2026, como nos outros painéis.
+- **Complexo HCFAMEMA**: habilitações dos dois códigos CNES na ficha da unidade, com o código em cada linha.

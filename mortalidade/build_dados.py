@@ -48,7 +48,10 @@ NV_DADOS = os.path.join(PAINEL_NV, "dados_nv2026.js")
 NV_CNES = os.path.join(PAINEL_NV, "cnes_dados.json")
 
 ANOS = list(range(2019, 2027))
-PRELIMINARES = [2024, 2025, 2026]
+# 14/11/2026 (auditoria entre painéis): 2024 é definitivo no SIM e no SINASC (arquivos de 23/12/2025 nas pastas de
+# dados definitivos do DATASUS, as mesmas de onde a extração leu 2024); só 2025 e 2026 são preliminares, como nos
+# painéis de Nascimentos e de Internação.
+PRELIMINARES = [2025, 2026]
 PARCIAIS = [2026]                   # períodos incompletos: fora do acumulado e das tendências
 PERIODOS = {"2026": {"rotulo": "1º sem. 2026", "meses": list(range(1, 7)), "descricao": "janeiro a junho de 2026",
                      "fonte": "SIM 2026 preliminar (FTP do DATASUS, arquivos de 28/09/2026) e SINASC 2026 preliminar (OpenDataSUS, 02/10/2026)",
@@ -235,6 +238,37 @@ for ano, lst in sem_dados_periodo.items():
     PERIODOS[ano]["unidadesSemDados"] = lst
     print(f"    período {ano}: sem registro no SINASC nem no SIM -> {lst}")
 
+# 14/11/2026 (auditoria entre painéis): os NASCIDOS VIVOS passam a ser os do painel de Nascimentos (contagem nos
+# microdados nacionais do SINASC por estabelecimento de ocorrência; no complexo HCFAMEMA, soma dos dois códigos).
+# Os CSV do recálculo trazem os nascidos vivos das planilhas de validação, cuja extração leu só parte das UFs de
+# residência da mãe (os arquivos DN<UF> do DATASUS são por UF de residência): faltavam nascimentos em 83 células de
+# 28 unidades. Os óbitos não mudam. Unidade sem nascimento no ano: 0, como em Nascimentos (as taxas ficam sem valor).
+SERIES_NV = [("mat_serie", "Nascidos vivos (denominador)"), ("neo_serie", "Nascidos vivos (denominador)"),
+             ("neo_precoce", "Nascidos vivos (denominador)"), ("neo_tardia", "Nascidos vivos (denominador)")]
+SERIES_NASC = [("fet_serie", "Número de óbitos fetais", "Nascimentos (NV + óbitos fetais)"),
+               ("per_serie", None, "Nascimentos (NV + óbitos fetais)")]
+nv_trocados = []
+for cnes, bl in por_cnes.items():
+    ref = nv.get(cnes) or nv.get(ALIAS_NV.get(cnes, ""))
+    if not ref:
+        sys.exit(f"ERRO: {cnes} não está no painel de Nascimentos; os nascidos vivos têm de vir de lá")
+    serie = next(l[1] for l in ref["blocos"]["via"] if l[0] == "Total")[:len(ANOS)]
+    antigo = list(bl["mat_serie"]["Nascidos vivos (denominador)"])
+    fetais = bl["fet_serie"]["Número de óbitos fetais"]
+    for i, v in enumerate(serie):
+        if str(ANOS[i]) in sem_dados_periodo and cnes in sem_dados_periodo[str(ANOS[i])]:
+            continue                                   # período sem registro algum: continua vazio
+        if v is None:
+            sys.exit(f"ERRO: {cnes} sem nascidos vivos no painel de Nascimentos em {ANOS[i]}")
+        if (antigo[i] or 0) != v:
+            nv_trocados.append((cnes, ANOS[i], antigo[i], v))
+        for k, rot in SERIES_NV:
+            bl[k][rot][i] = v
+        for k, _, rot in SERIES_NASC:
+            bl[k][rot][i] = v + (fetais[i] or 0)
+print(f"    nascidos vivos lidos do painel de Nascimentos: {len(nv_trocados)} células diferentes das planilhas de validação, "
+      f"em {len({c for c, *_ in nv_trocados})} unidades")
+
 # nascidos vivos ausentes (unidade ainda não existia): denominadores ficam nulos
 for cnes, bl in por_cnes.items():
     nv_serie = bl["mat_serie"]["Nascidos vivos (denominador)"]
@@ -356,8 +390,7 @@ saida_cnes.setdefault("_atualizado_em", cnes_nv.get("_atualizado_em", date.today
 for c in EXCLUIR:                                      # unidade retirada do painel: a ficha sai junto
     saida_cnes.pop(c, None)
 buscadas = 0
-for m in mats:
-    c = m["cnes"]
+for m, c in [(m, c) for m in mats for c in (m.get("cnesComplexo") or [m["cnes"]])]:   # no complexo, a ficha de cada código
     if c in saida_cnes:
         continue
     if c in cnes_nv:                                   # mesma unidade, mesma ficha

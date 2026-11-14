@@ -198,6 +198,76 @@ if len(unidades) == len(PAINEIS):
     if all(set(u) == todas for u in unidades.values()):
         ok(f"as mesmas {len(todas)} unidades em {', '.join(PAINEIS)}")
 
+# indicadores iguais nos painéis (14/11/2026, auditoria pedida pela coordenação): o mesmo indicador tem de ter o
+# mesmo valor em todos os painéis. Nascidos vivos (Nascimentos x denominador da Mortalidade), grupos, nome e códigos
+# de cada unidade, anos preliminares e, dentro de Nascimentos, os totais de território e a coluna Total.
+print("== indicadores iguais entre os painéis")
+try:
+    D = {p: json.load(open(os.path.join(RAIZ, p, "dados.json"), encoding="utf-8")) for p in PAINEIS}
+    por = {p: {COMPLEXOS.get(m["cnes"], m["cnes"]): m for m in D[p]["maternidades"]} for p in PAINEIS}
+
+    def linha(m, bloco, rot=None, idx=None):
+        ls = m["blocos"][bloco]
+        return ls[idx][1] if idx is not None else next((l[1] for l in ls if l[0] == rot), None)
+
+    def lista(itens, n=4):
+        return "; ".join(itens[:n]) + (f" e mais {len(itens) - n}" if len(itens) > n else "")
+
+    # nascidos vivos por unidade e período
+    dif = []
+    for c, m in por["nascimentos"].items():
+        mo = por["mortalidade"].get(c)
+        a = linha(m, "via", "Total"); b = linha(mo, "mat_serie", "Nascidos vivos (denominador)") if mo else None
+        if a != b:
+            dif.append(f"{c} {m['nome']}")
+        elif mo and any(linha(mo, k, "Nascidos vivos (denominador)") != b for k in ("neo_serie", "neo_precoce", "neo_tardia")):
+            dif.append(f"{c} {m['nome']} (denominadores da própria Mortalidade)")
+    if dif: falha(f"nascidos vivos diferentes entre Nascimentos e Mortalidade em {len(dif)} unidade(s): {lista(dif)}")
+    else: ok(f"nascidos vivos iguais em Nascimentos e Mortalidade ({len(por['nascimentos'])} unidades, {len(D['nascimentos']['anos'])} períodos)")
+
+    # grupo, nome e códigos CNES de cada unidade nos quatro painéis
+    def grupos(m): return sorted(m.get("conjuntos") or m.get("grupos") or [])
+    def codigos(m): return sorted(m.get("cnesComplexo") or m.get("complexo") or [m["cnes"]])
+    for rotulo, f in (("grupos", grupos), ("nome", lambda m: m.get("nome")), ("códigos CNES", codigos)):
+        dif = [f"{c} {m['nome']}" for c, m in por["nascimentos"].items()
+               if any(c in por[p] and f(por[p][c]) != f(m) for p in PAINEIS)]
+        if dif: falha(f"{rotulo} diferentes entre os painéis em {len(dif)} unidade(s): {lista(dif)}")
+        else: ok(f"{rotulo} iguais nos quatro painéis")
+
+    # períodos e anos preliminares (Nascimentos, Internação e Mortalidade)
+    tres = [p for p in PAINEIS if "preliminares" in D[p]]
+    for campo in ("anos", "preliminares", "parciais"):
+        vals = {p: D[p].get(campo) for p in tres}
+        if len({json.dumps(v) for v in vals.values()}) > 1: falha(f"{campo} diferentes entre os painéis: {vals}")
+        else: ok(f"{campo} iguais em {', '.join(tres)}")
+
+    # dentro de Nascimentos: mesmo território, mesmo total; coluna Total = soma dos anos completos
+    NV = D["nascimentos"]; nt = len(NV["anos"]); completos = [i for i, a in enumerate(NV["anos"]) if a not in (NV.get("parciais") or [])]
+    dif = []
+    for bloco in ("nv_territorio", "p1500_territorio"):
+        for nivel in ("municipio", "regiao_saude", "macro", "uf"):
+            vistos = {}
+            for m in NV["maternidades"]:
+                chave = (m["uf"], m["territorio"][nivel]) if nivel != "uf" else (m["uf"],)
+                v = json.dumps(linha(m, bloco, nivel))
+                if vistos.setdefault(chave, v) != v: dif.append(f"{bloco} {nivel} {'/'.join(chave)}")
+    for m in NV["maternidades"]:
+        if linha(m, "p1500_uf", idx=1) != linha(m, "p1500_territorio", "uf"): dif.append(f"{m['cnes']} peso < 1.500 g da UF")
+    if dif: falha(f"nascimentos: o mesmo total de território aparece com valores diferentes: {lista(sorted(set(dif)))}")
+    else: ok("nascimentos: totais de território iguais entre as unidades do mesmo território")
+    dif = []
+    for m in NV["maternidades"]:
+        for bloco, ls in m["blocos"].items():
+            if bloco == "robson_taxa": continue
+            for idx, (rot, v) in enumerate(ls):
+                if bloco == "p1500_uf" and idx == 2: continue
+                soma = [v[i] for i in completos if v[i] is not None]
+                if (sum(soma) if soma else None) != v[nt]: dif.append(f"{m['cnes']} {bloco} {rot}")
+    if dif: falha(f"nascimentos: coluna Total diferente da soma dos anos em {len(dif)} linha(s): {lista(dif)}")
+    else: ok("nascimentos: coluna Total igual à soma dos anos completos")
+except Exception as e:
+    falha(f"não foi possível conferir a consistência entre os painéis ({e})")
+
 print()
 if avisos:
     print(f"{len(avisos)} aviso(s).")

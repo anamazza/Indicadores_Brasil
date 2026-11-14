@@ -195,6 +195,18 @@ for cnes, b in assist.items():
 for a in avisos_a:
     print("     AVISO:", a)
 
+# ---------- 2c2. correções da auditoria entre painéis (14/11/2026) ----------
+# Grupos pela lista oficial de 09/09/2026, linhas de território pelos microdados (regionalização vigente), complexo
+# HCFAMEMA com os dois códigos CNES e coluna Total refeita. Ver ajustes_auditoria.py; as alterações ficam em
+# ajustes_auditoria_2026-11-14.csv.
+import ajustes_auditoria
+alt_aud, resumo_aud = ajustes_auditoria.aplicar(mats)
+print(f"[2c2] auditoria entre painéis: {len(alt_aud)} células alteradas | {resumo_aud}")
+conta = {}
+for m in mats:
+    for c in m["conjuntos"]: conta[c] = conta.get(c, 0) + 1
+print(f"      grupos pela lista oficial: {conta}")
+
 # ---------- 2d. 1º semestre de 2026 (18/10/2026): coluna extraída direto do microdado ----------
 # Extracao_SINASC: py 1_coleta_unidades.py 2026S1 -> py 2_tabelas_unidades.py 2026S1 ->
 # py 10_perfil_sociodemografico.py --periodo 2026S1 -> py 11_perfil_obstetrico_novos.py --periodo 2026S1.
@@ -207,6 +219,12 @@ for per, ano_p, rot_p, meses_p, desc_p, fonte_p, data_p in PERIODOS:
     av_p, sem_p = coluna_periodo.acrescentar(dados, per, ano_p, rot_p, meses_p, desc_p, fonte_p, data_p)
     print(f"[2d] coluna {rot_p} ({per}) acrescentada em {len(mats)} unidades | anos: {dados['anos']} | sem registros no período: {sem_p or 'nenhuma'}")
     for a in av_p: print("     AVISO:", a)
+    alt_p = ajustes_auditoria.territorio_do_periodo(mats, per, len(dados["anos"]) - 1, {s.split()[0] for s in sem_p})
+    alt_aud += alt_p
+    if alt_p: print(f"     território preenchido nas unidades sem registro no período: {len(alt_p)} células")
+import csv as _csv
+with open(os.path.join(BASE, "ajustes_auditoria_2026-11-14.csv"), "w", encoding="utf-8-sig", newline="") as fh:
+    w = _csv.writer(fh, delimiter=";"); w.writerow(["cnes", "unidade", "bloco", "linha", "coluna", "antes", "depois", "motivo"]); w.writerows(alt_aud)
 
 # ---------- 3. GEO compactado da referência ----------
 ref = open(REF_PAGE, encoding="utf-8").read()

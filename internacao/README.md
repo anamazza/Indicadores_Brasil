@@ -70,3 +70,13 @@ do painel de mortalidade. O dicionário de indicadores é lido do Word final de 
 - `build_dados.py`, `atualizar_cnes.py`, `montar_painel.py` — scripts de dados e montagem
 - `dados_internacao.js`, `cnes_dados.json` — dados gerados pelos scripts
 - `logos_institucionais.png` — logos embutidos na montagem
+
+## Auditoria entre painéis (14/11/2026)
+
+- **Complexo HCFAMEMA**: a unidade aparece com os dois códigos CNES (2025507 + 2025523), como nos outros painéis; as AIH
+  estão todas no 2025507 (conferido no SIH-RD de SP). Ficha de cadastro do 2025523 e habilitações dos dois códigos.
+- **Textos**: o universo obstétrico e a classificação dos motivos passam a ser descritos como no dicionário de
+  10/09/2026 (diagnóstico do capítulo XV em qualquer campo; motivos pelo procedimento realizado); o SINASC de 2024
+  deixa de ser citado como preliminar; a lista dos cinco anexos foi corrigida.
+- Os "Partos" da tabela de motivos contam só as internações do universo obstétrico. Partos com diagnóstico principal
+  fora do capítulo XV (por exemplo Z30, na cesariana com laqueadura) ficam fora: ponto levado à coordenação.

@@ -25,8 +25,11 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(BASE)
 SAIDA = os.path.join(PROJ, "Extracao_SINASC", "saida")
 
-# HCFAMEMA: o SINASC registra os nascimentos no CNES do Materno-Infantil (2025523); o painel usa 2025507
-FONTES_CNES = {"2025507": ["2025523"]}      # só o Materno-Infantil, como nas planilhas oficiais (validado em 2025)
+# HCFAMEMA: o SINASC registra quase todos os nascimentos no CNES do Materno-Infantil (2025523) e alguns no do
+# Hospital das Clínicas (2025507); o painel usa a chave 2025507. Desde 14/11/2026 (auditoria entre painéis) a
+# unidade é tratada como complexo e soma os nascimentos dos dois códigos, como nos painéis de Mortalidade e de
+# Habilitações. Até então entrava só o Materno-Infantil, como nas planilhas oficiais.
+FONTES_CNES = {"2025507": ["2025523", "2025507"]}
 
 ROBSON_GRUPOS = ["Grupo %d" % i for i in range(1, 11)] + ["Nao classificados"]
 # a extração escreve os nomes sem acento; as linhas novas de UF de residência entram com a grafia das planilhas
@@ -54,7 +57,8 @@ def _soma(d):
 
 
 def _junta(entradas):
-    """Soma as contagens de mais de um CNES de origem (complexo HCFAMEMA)."""
+    """Soma as contagens da unidade nos códigos de origem (complexo HCFAMEMA). Os totais do território
+    (oc_* e oc1500_*) não são da unidade: entram uma vez só e têm de ser iguais nos códigos do complexo."""
     if len(entradas) == 1:
         return entradas[0]
     out = {}
@@ -64,10 +68,12 @@ def _junta(entradas):
                 acc = out.setdefault(k, {})
                 for kk, vv in v.items():
                     acc[kk] = acc.get(kk, 0) + vv
-            elif isinstance(v, (int, float)) and k not in ("cnes",):
-                out[k] = out.get(k, 0) + v
-            else:
+            elif k.startswith("oc_") or k.startswith("oc1500_") or not isinstance(v, (int, float)):
+                if k.startswith("oc") and k in out and out[k] != v:
+                    raise ValueError(f"complexo com totais de território diferentes em {k}: {out[k]} x {v}")
                 out.setdefault(k, v)
+            else:
+                out[k] = out.get(k, 0) + v
     return out
 
 

@@ -1,0 +1,635 @@
+﻿cnes;unidade;bloco;linha;coluna;antes;depois;motivo
+2000296;Hospital da Mulher e da Criança do Juruá;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2000733;Maternidade e Clínicas de Mulheres Bárbara Heliodora;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+3151794;Maternidade de Referência Ana Braga;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2012480;Maternidade Municipal Dr Moura Tapajoz;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2020068;SES AP Hospital da Mulher;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2329905;Hospital Municipal de Santarém;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2752700;Santa Casa de Misericórdia do Pará;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2019;57798;59269;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2019;887;889;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2019;6867;6931;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2019;339;346;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2020;53945;55388;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2020;872;876;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2020;5850;5912;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2020;301;312;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2021;55419;57041;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2021;854;861;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2021;5777;5809;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2021;289;291;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2022;52125;53519;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2022;803;809;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2022;5113;5150;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2022;253;257;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2023;51227;52654;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2023;821;826;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2023;5605;5644;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2023;249;252;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2024;48453;49798;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2024;790;801;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2024;5738;5763;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;2024;244;245;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;2025;48344;49833;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;2025;832;840;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;2025;6075;6109;território pelos microdados
+2752700;Santa Casa de Misericórdia do Pará;nv_territorio;macro;Total;367311;377502;coluna Total refeita
+2752700;Santa Casa de Misericórdia do Pará;p1500_territorio;macro;Total;5859;5902;coluna Total refeita
+2752700;Santa Casa de Misericórdia do Pará;residentes_nv;macro;Total;41025;41318;coluna Total refeita
+2752700;Santa Casa de Misericórdia do Pará;residentes_p1500;macro;Total;1939;1967;coluna Total refeita
+4001303;Hospital de Base Porto Velho;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2798484;Hospital Regional Adamastor Teixeira de Oliveira;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2566168;Hospital Materno Infantil N Sra de Nazareth;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2755165;Hospital Dom Orione de Araguaína;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2755157;Hospital e Maternidade D Regina S Campos de Palmas;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2495279;Hospital Dr Claudionor Couto Roriz;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2005050;Hospital Regional de Arapiraca;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+9923837;Hospital da Mulher Dra Nise da Silveira;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+9923837;Hospital da Mulher Dra Nise da Silveira;p1500_uf;HOSPITAL DA MULHER DRA NISE DA SILVEIRA;2019;;0;célula vazia
+9923837;Hospital da Mulher Dra Nise da Silveira;p1500_territorio;HOSPITAL DA MULHER DRA NISE DA SILVEIRA;2019;;0;célula vazia
+9923837;Hospital da Mulher Dra Nise da Silveira;residentes_p1500;municipio;2021;;0;célula vazia
+3972925;Hospital do Oeste;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+6602533;Hospital Estadual da Criança;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+3956369;Maternidade Professor José Maria de Magalhães Neto;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+6848710;Hospital Regional Norte;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2481286;Maternidade Escola Assis Chateaubriand (Ebserh);(cadastro);grupos;;estrategica+ebserh;apoiada+ebserh+qualineo;grupos pela lista oficial
+2452383;Maternidade de Alto Risco de Imperatriz;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2452383;Maternidade de Alto Risco de Imperatriz;nv_territorio;macro;2024;20224;20225;território pelos microdados
+2452383;Maternidade de Alto Risco de Imperatriz;residentes_nv;macro;2024;5859;5861;território pelos microdados
+2452383;Maternidade de Alto Risco de Imperatriz;nv_territorio;macro;2025;20500;20501;território pelos microdados
+2452383;Maternidade de Alto Risco de Imperatriz;nv_territorio;macro;Total;151849;151851;coluna Total refeita
+2452383;Maternidade de Alto Risco de Imperatriz;residentes_nv;macro;Total;42751;42753;coluna Total refeita
+2309254;Maternidade de Alta Complexidade do Maranhão;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2362287;Instituto de Saúde Elpídio de Almeida;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2707527;Maternidade Frei Damião;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2430711;Hospital Dom Malan;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2427427;Hospital Barão de Lucena;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0000434;IMIP;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+8015899;Hospital Estadual Dirceu Arcoverde;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2323397;Maternidade Dona Evangelina Rosa;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2399644;Maternidade Cândida Vargas;(cadastro);grupos;;estrategica+qualineo;qualineo;grupos pela lista oficial
+2409208;Maternidade Escola Januário Cicco;(cadastro);grupos;;estrategica+ebserh;ebserh;grupos pela lista oficial
+5714397;Maternidade Nossa Senhora de Lourdes;(cadastro);grupos;;estrategica+qualineo;qualineo;grupos pela lista oficial
+0004731;Maternidade Climério de Oliveira;(cadastro);grupos;;estrategica+ebserh;ebserh;grupos pela lista oficial
+2410281;Hospital Maternidade Almeida Castro;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2408570;Hospital Dr José Pedro Bezerra;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0002232;Hospital Santa Isabel;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+5717515;Hospital Regional Santa Maria;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0010537;Hospital Materno Infantil Dr Antônio Lisboa - HMIB;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2339196;Hospital Estadual da Mulher Dr Jurandir do Nascimento;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0009725;Hospital Regional de Mato Grosso do Sul;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2376334;Santa Casa de Corumbá;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2311682;Hospital Santa Helena;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2396866;Santa Casa de Rondonópolis;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+7257406;Hospital Estadual Dr Jayme Santos Neves;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2149990;Santa Casa de Montes Claros;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0026794;Hospital Sofia Feldman;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0026794;Hospital Sofia Feldman;residentes_nv;macro;2019;9240;9236;território pelos microdados
+0026794;Hospital Sofia Feldman;nv_territorio;macro;2020;79043;79042;território pelos microdados
+0026794;Hospital Sofia Feldman;residentes_nv;macro;2022;9074;9073;território pelos microdados
+0026794;Hospital Sofia Feldman;nv_territorio;macro;2023;73149;73148;território pelos microdados
+0026794;Hospital Sofia Feldman;residentes_nv;macro;2023;8513;8511;território pelos microdados
+0026794;Hospital Sofia Feldman;residentes_nv;macro;2024;7673;7672;território pelos microdados
+0026794;Hospital Sofia Feldman;nv_territorio;macro;2025;71659;71658;território pelos microdados
+0026794;Hospital Sofia Feldman;nv_territorio;macro;Total;526280;526277;coluna Total refeita
+0026794;Hospital Sofia Feldman;residentes_nv;macro;Total;61880;61872;coluna Total refeita
+2290227;Hospital Municipal Adão Pereira Nunes;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2298120;SMS Hospital Municipal Albert Schweitzer AP 51;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2077396;Hospital de Base de São José do Rio Preto;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2019;28145;19495;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2019;428;308;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2019;5168;5139;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2020;26891;18944;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2020;353;265;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2020;5535;5510;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2021;25900;18122;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2021;375;257;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2021;5712;5674;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;2021;101;99;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2022;25085;17725;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2022;392;295;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2022;5491;5459;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;2022;141;140;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2023;25068;17750;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2023;406;311;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2023;5863;5814;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;2023;141;138;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2024;23476;16583;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2024;369;281;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2024;5753;5703;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;2024;116;111;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;2025;23909;17017;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;2025;359;267;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;2025;6167;6116;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;2025;121;117;território pelos microdados
+2077396;Hospital de Base de São José do Rio Preto;nv_territorio;macro;Total;178474;125636;coluna Total refeita
+2077396;Hospital de Base de São José do Rio Preto;p1500_territorio;macro;Total;2682;1984;coluna Total refeita
+2077396;Hospital de Base de São José do Rio Preto;residentes_nv;macro;Total;39689;39415;coluna Total refeita
+2077396;Hospital de Base de São José do Rio Preto;residentes_p1500;macro;Total;841;826;coluna Total refeita
+2082187;Hospital das Clínicas FAEPA Ribeirão Preto;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2269880;Hospital Geral de Bonsucesso;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2268922;Hospital Municipal Desembargador Leal Junior - HMDLJ;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+0015369;Complexo Hospitalar do Trabalhador;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2246988;Hospital São Vicente de Paulo;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2237571;Hospital Nossa Senhora da Conceição SA;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2522691;Hospital e Maternidade Marieta Konder Bornhausen;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2715864;Hospital e Maternidade Luísa de Marillac;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+2265052;Hospital Femina;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+6854729;Hospital Municipal Ruth Cardoso;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
+0000396;Hospital das Clínicas;p1500_uf;UF Pernambuco;2024;1774;1771;território pelos microdados
+0000396;Hospital das Clínicas;p1500_uf;UF Pernambuco;Total;12514;12511;coluna Total refeita
+0009709;Hospital Universitário Maria Aparecida Pedrossian;p1500_uf;UF Mato Grosso do Sul;2024;448;483;território pelos microdados
+0009709;Hospital Universitário Maria Aparecida Pedrossian;p1500_uf;UF Mato Grosso do Sul;Total;3614;3649;coluna Total refeita
+0010510;Hospital Universitário de Brasília;p1500_uf;UF Distrito Federal;2024;827;828;território pelos microdados
+0010510;Hospital Universitário de Brasília;p1500_uf;UF Distrito Federal;Total;6070;6071;coluna Total refeita
+0012505;Hospital Universitário Antônio Pedro;p1500_uf;UF Rio de Janeiro;2024;2739;2741;território pelos microdados
+0012505;Hospital Universitário Antônio Pedro;p1500_uf;UF Rio de Janeiro;Total;21316;21318;coluna Total refeita
+0027049;Hospital das Clínicas da UFMG;nv_territorio;macro;2020;79043;79042;território pelos microdados
+0027049;Hospital das Clínicas da UFMG;residentes_nv;macro;2020;1489;1488;território pelos microdados
+0027049;Hospital das Clínicas da UFMG;nv_territorio;macro;2023;73149;73148;território pelos microdados
+0027049;Hospital das Clínicas da UFMG;p1500_uf;UF Minas Gerais;2024;3301;3300;território pelos microdados
+0027049;Hospital das Clínicas da UFMG;p1500_uf;UF Minas Gerais;Total;25235;25234;coluna Total refeita
+0027049;Hospital das Clínicas da UFMG;nv_territorio;macro;Total;526279;526277;coluna Total refeita
+0027049;Hospital das Clínicas da UFMG;residentes_nv;macro;Total;10280;10279;coluna Total refeita
+2146355;Hospital de Clínicas de Uberlândia;p1500_uf;UF Minas Gerais;2024;3301;3300;território pelos microdados
+2146355;Hospital de Clínicas de Uberlândia;p1500_uf;UF Minas Gerais;Total;25235;25234;coluna Total refeita
+2206595;Hospital de Clínicas da UFTM;p1500_uf;UF Minas Gerais;2024;3301;3300;território pelos microdados
+2206595;Hospital de Clínicas da UFTM;p1500_uf;UF Minas Gerais;Total;25235;25234;coluna Total refeita
+2206595;Hospital de Clínicas da UFTM;residentes_nv;maternidade;Total;10192;10196;coluna Total refeita
+2244306;Hospital Universitário de Santa Maria;p1500_uf;UF Rio Grande do Sul;2024;1686;1669;território pelos microdados
+2244306;Hospital Universitário de Santa Maria;p1500_uf;UF Rio Grande do Sul;Total;12751;12734;coluna Total refeita
+2252694;Hospital Escola da UFPel;p1500_uf;UF  Rio Grande do Sul;2024;1686;1669;território pelos microdados
+2252694;Hospital Escola da UFPel;p1500_uf;UF  Rio Grande do Sul;Total;12751;12734;coluna Total refeita
+2270021;Maternidade Escola da UFRJ;p1500_uf;UF Rio de Janeiro;2024;2739;2741;território pelos microdados
+2270021;Maternidade Escola da UFRJ;p1500_uf;UF Rio de Janeiro;Total;21316;21318;coluna Total refeita
+2270021;Maternidade Escola da UFRJ;residentes_nv;maternidade;Total;10359;10362;coluna Total refeita
+2295415;Hospital Universitário Gaffrée e Guinle;p1500_uf;UF Rio de Janeiro;2024;2739;2741;território pelos microdados
+2295415;Hospital Universitário Gaffrée e Guinle;p1500_uf;UF Rio de Janeiro;Total;21316;21318;coluna Total refeita
+2338424;Hospital das Clínicas;p1500_uf;UF Goiás;2024;1161;1111;território pelos microdados
+2338424;Hospital das Clínicas;p1500_uf;HOSPITAL DAS CLINICAS;2024;0.0319;0.0333;território pelos microdados
+2338424;Hospital das Clínicas;p1500_uf;UF Goiás;Total;7633;7583;coluna Total refeita
+2338424;Hospital das Clínicas;p1500_uf;HOSPITAL DAS CLINICAS;Total;0.0265;0.0266;coluna Total refeita
+2384299;Complexo do Hospital de Clínicas da UFPR;p1500_uf;UF Paraná;2024;1883;1882;território pelos microdados
+2384299;Complexo do Hospital de Clínicas da UFPR;p1500_uf;UF Paraná;Total;14141;14140;coluna Total refeita
+2384299;Complexo do Hospital de Clínicas da UFPR;residentes_nv;maternidade;Total;22685;22690;coluna Total refeita
+2400243;Hospital Universitário Lauro Wanderley;p1500_uf;UF Paraíba;2024;606;607;território pelos microdados
+2400243;Hospital Universitário Lauro Wanderley;p1500_uf;UF Paraíba;Total;4640;4641;coluna Total refeita
+2655411;Hospital Universitário Júlio Müller;p1500_uf;UF Mato Grosso;2024;632;600;território pelos microdados
+2655411;Hospital Universitário Júlio Müller;p1500_uf;UF Mato Grosso;Total;4773;4741;coluna Total refeita
+2707675;Hospital Universitário Dr Miguel Riet Corrêa Jr;p1500_uf;UF Rio Grande do Sul;2024;1686;1669;território pelos microdados
+2707675;Hospital Universitário Dr Miguel Riet Corrêa Jr;p1500_uf;UF Rio Grande do Sul;Total;12751;12734;coluna Total refeita
+2710935;Hospital Universitário da Grande Dourados;p1500_uf;UF Mato Grosso do Sul;2024;448;483;território pelos microdados
+2710935;Hospital Universitário da Grande Dourados;p1500_uf;EBSERH HOSPITAL UNIVERSITARIO GRANDE DOURADOS;2024;0.2411;0.2236;território pelos microdados
+2710935;Hospital Universitário da Grande Dourados;p1500_uf;UF Mato Grosso do Sul;Total;3614;3649;coluna Total refeita
+2710935;Hospital Universitário da Grande Dourados;p1500_uf;EBSERH HOSPITAL UNIVERSITARIO GRANDE DOURADOS;Total;0.2014;0.1995;coluna Total refeita
+2726653;Hospital Universitário da UFMA;p1500_uf;UF Maranhão;2024;1222;1221;território pelos microdados
+2726653;Hospital Universitário da UFMA;p1500_uf;UF Maranhão;Total;9077;9076;coluna Total refeita
+2726653;Hospital Universitário da UFMA;residentes_nv;maternidade;Total;24707;24708;coluna Total refeita
+3157245;Hospital Universitário Polydoro Ernani de São Thiago;p1500_uf;UF Santa Catarina;2024;1205;1204;território pelos microdados
+3157245;Hospital Universitário Polydoro Ernani de São Thiago;p1500_uf;UF Santa Catarina;Total;8645;8644;coluna Total refeita
+4044916;Hospital Universitário Cassiano Antonio Moraes (HUCAM);p1500_uf;UF Espírito Santo;2024;728;729;território pelos microdados
+4044916;Hospital Universitário Cassiano Antonio Moraes (HUCAM);p1500_uf;UF Espírito Santo;Total;5204;5205;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA;(cadastro);nome;;Hospital das Clínicas da FAMEMA;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);complexo HCFAMEMA
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;2019;1564;1565;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;2019;1564;1565;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;4-6 consultas;2019;314;315;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Segundo Trimestre;2019;274;275;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;2019;1536;1537;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;3000g a 3999g;2019;781;782;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;37 a 41;2019;1142;1143;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Cesárea;2019;1140;1141;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;7 a 10;2019;1207;1208;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;Total;2019;1230;1231;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 4;2019;179;180;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 4;2019;57.5;57.8;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Total;2019;72.8;72.9;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;2019;1565;1566;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;municipio;2019;934;935;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;2019;1408;1409;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;2019;1560;1561;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;2019;1564;1565;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;7 e + consultas;2021;920;921;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Primeiro Trimestre;2021;1031;1032;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;2021;1324;1325;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;4000g e mais;2021;66;67;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;37 a 41;2021;948;949;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Cesárea;2021;815;816;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 5;2021;408;409;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;2021;1336;1337;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;2021;1187;1188;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;2021;1333;1334;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;2021;1336;1337;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;4-6 consultas;2023;252;253;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;7 e + consultas;2023;996;998;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Primeiro Trimestre;2023;1139;1142;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;2023;1347;1350;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;0g a 999g;2023;30;31;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;3000g a 3999g;2023;646;648;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_uf;HOSPITAL DAS CLINICAS HCFAMEMA;2023;75;76;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;22 a 27;2023;15;16;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;37 a 41;2023;982;984;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Parto Vaginal;2023;530;531;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Cesárea;2023;846;848;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Medico;2023;522;523;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Total;2023;530;531;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;7 a 10;2023;1034;1036;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;Total;2023;1050;1052;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 1;2023;74;75;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 9;2023;2;3;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 10;2023;284;285;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 1;2023;44.6;45.3;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 10;2023;51.1;50.9;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2023;75;76;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;2023;1376;1379;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;municipio;2023;762;763;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;2023;1207;1208;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;2023;1372;1375;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;2023;1376;1379;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;maternidade;2023;75;76;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;municipio;2023;32;33;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;regiao_saude;2023;57;58;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;macro;2023;75;76;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;uf;2023;75;76;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;4-6 consultas;2024;236;237;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Primeiro Trimestre;2024;1149;1150;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;2024;1280;1281;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;0g a 999g;2024;23;24;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_uf;HOSPITAL DAS CLINICAS HCFAMEMA;2024;53;54;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Menos 22;2024;3;4;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Parto Vaginal;2024;494;495;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Medico;2024;490;491;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Total;2024;494;495;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 10;2024;252;253;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 10;2024;45.2;45.1;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Total;2024;62;61.9;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2024;53;54;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;2024;1299;1300;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;2024;1139;1140;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;2024;1294;1295;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;2024;1299;1300;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;maternidade;2024;53;54;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;regiao_saude;2024;35;36;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;macro;2024;51;52;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;uf;2024;53;54;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;2025;1352;1358;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;2025;1352;1358;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;4-6 consultas;2025;235;236;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;7 e + consultas;2025;1032;1037;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Primeiro Trimestre;2025;1198;1204;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;2025;1339;1345;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;1000g a 1499g;2025;31;32;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;2500g a 2999g;2025;346;347;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;3000g a 3999g;2025;679;683;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_uf;HOSPITAL DAS CLINICAS HCFAMEMA;2025;59;60;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;28 a 31;2025;46;47;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;32 a 36;2025;281;282;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;37 a 41;2025;982;985;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;42 e +;2025;25;26;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Parto Vaginal;2025;506;510;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Cesárea;2025;847;849;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Medico;2025;500;504;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Total;2025;506;510;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;7 a 10;2025;1053;1058;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;Total;2025;1066;1071;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 2;2025;213;215;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 3;2025;117;118;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 6;2025;16;18;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 10;2025;283;284;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 2;2025;66.7;66.0;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 3;2025;21.4;21.2;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 10;2025;50.2;50.0;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Total;2025;62.6;62.5;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;2025;59;60;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;2025;1353;1359;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;municipio;2025;750;754;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;2025;1175;1181;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;2025;1343;1349;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;2025;1352;1358;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;maternidade;2025;59;60;complexo HCFAMEMA (soma dos dois códigos)
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;municipio;2025;24;25;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;regiao_saude;2025;46;47;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;macro;2025;57;58;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;uf;2025;59;60;território pelos microdados
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Região Sudeste;Total;9818;9830;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_regiao;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;São Paulo;Total;9818;9830;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);res_uf;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;4-6 consultas;Total;1923;1927;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;7 e + consultas;Total;6982;6990;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);prenatal;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Primeiro Trimestre;Total;8028;8039;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Segundo Trimestre;Total;1226;1227;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);trimestre;Total;Total;9662;9674;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;0g a 999g;Total;194;196;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;1000g a 1499g;Total;273;274;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;2500g a 2999g;Total;2426;2427;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;3000g a 3999g;Total;4894;4901;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;4000g e mais;Total;475;476;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);peso;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_uf;HOSPITAL DAS CLINICAS HCFAMEMA;Total;467;470;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Menos 22;Total;18;19;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;22 a 27;Total;148;149;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;28 a 31;Total;311;312;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;32 a 36;Total;2125;2126;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;37 a 41;Total;7078;7085;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;42 e +;Total;136;137;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);gestacao;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Parto Vaginal;Total;3487;3493;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Cesárea;Total;6333;6339;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);via;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Medico;Total;3440;3446;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);assistencia;Total;Total;3487;3493;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;7 a 10;Total;7561;7569;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);apgar;Total;Total;7678;7686;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 1;Total;548;549;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 2;Total;1411;1413;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 3;Total;820;821;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 4;Total;1194;1195;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 5;Total;2887;2888;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 6;Total;139;141;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 9;Total;22;23;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Grupo 10;Total;2050;2053;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_n;Total;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 1;Total;47.4;47.5;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 2;Total;68.5;68.4;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 6;Total;86.3;86.5;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 9;Total;90.9;91.3;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);robson_taxa;Grupo 10;Total;52.9;52.8;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);nv_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);p1500_territorio;HOSPITAL DAS CLINICAS HCFAMEMA;Total;467;470;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;maternidade;Total;9820;9832;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;municipio;Total;5618;5624;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;regiao_saude;Total;8676;8686;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;macro;Total;9780;9792;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_nv;uf;Total;9818;9830;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;maternidade;Total;467;470;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;municipio;Total;207;209;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;regiao_saude;Total;355;358;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;macro;Total;461;464;coluna Total refeita
+2025507;Hospital das Clínicas da FAMEMA (complexo HCFAMEMA);residentes_p1500;uf;Total;467;470;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_uf;UF Amapá;2019;0;240;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;municipio;2019;0;11825;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;regiao_saude;2019;0;12132;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;macro;2019;0;16902;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;uf;2019;0;16902;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;municipio;2019;0;202;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;regiao_saude;2019;0;202;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;macro;2019;0;240;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;uf;2019;0;240;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_uf;UF Amapá;2020;0;179;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;municipio;2020;0;11443;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;regiao_saude;2020;0;11766;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;macro;2020;0;15995;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;uf;2020;0;15995;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;municipio;2020;0;159;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;regiao_saude;2020;0;162;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;macro;2020;0;179;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;uf;2020;0;179;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_uf;UF Amapá;2021;0;210;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;municipio;2021;0;11419;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;regiao_saude;2021;0;11738;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;macro;2021;0;16389;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;uf;2021;0;16389;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;municipio;2021;0;174;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;regiao_saude;2021;0;177;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;macro;2021;0;210;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;uf;2021;0;210;território em ano sem nascimento na unidade
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_uf;UF Amapá;Total;803;1432;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;municipio;Total;41276;75963;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;regiao_saude;Total;42736;78372;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;macro;Total;57623;106909;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;nv_territorio;uf;Total;57623;106909;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;municipio;Total;678;1213;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;regiao_saude;Total;691;1232;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;macro;Total;803;1432;coluna Total refeita
+2906635;Maternidade Zona Norte Dra Euclélia Américo;p1500_territorio;uf;Total;803;1432;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;p1500_uf;UF Bahia;2019;0;2799;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;municipio;2019;0;2692;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;regiao_saude;2019;0;6185;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;macro;2019;0;59780;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;uf;2019;0;195050;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;municipio;2019;0;22;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;regiao_saude;2019;0;38;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;macro;2019;0;1113;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;uf;2019;0;2799;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_uf;UF Bahia;2020;0;2720;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;municipio;2020;0;2449;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;regiao_saude;2020;0;5710;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;macro;2020;0;55548;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;uf;2020;0;186103;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;municipio;2020;0;19;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;regiao_saude;2020;0;44;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;macro;2020;0;1110;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;uf;2020;0;2720;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_uf;UF Bahia;2021;0;2645;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;municipio;2021;0;2398;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;regiao_saude;2021;0;5384;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;macro;2021;0;53787;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;nv_territorio;uf;2021;0;182476;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;municipio;2021;0;22;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;regiao_saude;2021;0;30;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;macro;2021;0;1086;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_territorio;uf;2021;0;2645;território em ano sem nascimento na unidade
+3821978;Maternidade Regional de Camaçari;p1500_uf;UF Bahia;Total;10167;18331;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;nv_territorio;municipio;Total;15623;23162;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;nv_territorio;regiao_saude;Total;21949;39228;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;nv_territorio;macro;Total;190049;359164;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;nv_territorio;uf;Total;653735;1217364;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;p1500_territorio;municipio;Total;226;289;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;p1500_territorio;regiao_saude;Total;262;374;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;p1500_territorio;macro;Total;4024;7333;coluna Total refeita
+3821978;Maternidade Regional de Camaçari;p1500_territorio;uf;Total;10167;18331;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_uf;UF Sergipe;2019;0;544;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;municipio;2019;0;21553;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;regiao_saude;2019;0;21599;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;macro;2019;0;33724;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;uf;2019;0;33724;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;municipio;2019;0;488;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;regiao_saude;2019;0;489;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;macro;2019;0;544;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;uf;2019;0;544;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_uf;UF Sergipe;2020;0;548;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;municipio;2020;0;20166;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;regiao_saude;2020;0;20223;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;macro;2020;0;32805;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;uf;2020;0;32805;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;municipio;2020;0;494;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;regiao_saude;2020;0;497;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;macro;2020;0;548;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;uf;2020;0;548;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_uf;UF Sergipe;2021;0;453;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;municipio;2021;0;19657;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;regiao_saude;2021;0;19724;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;macro;2021;0;32283;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;uf;2021;0;32283;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;municipio;2021;0;386;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;regiao_saude;2021;0;387;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;macro;2021;0;453;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;uf;2021;0;453;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_uf;UF Sergipe;2022;0;491;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;municipio;2022;0;18088;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;regiao_saude;2022;0;18164;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;macro;2022;0;29514;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;uf;2022;0;29514;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;municipio;2022;0;434;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;regiao_saude;2022;0;436;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;macro;2022;0;491;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;uf;2022;0;491;território em ano sem nascimento na unidade
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_uf;UF Sergipe;Total;1329;3365;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;municipio;Total;52673;132137;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;regiao_saude;Total;52918;132628;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;macro;Total;89137;217463;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);nv_territorio;uf;Total;89137;217463;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;municipio;Total;1149;2951;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;regiao_saude;Total;1152;2961;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;macro;Total;1329;3365;coluna Total refeita
+4099206;Hospital da Mulher e Maternidade de Aracaju (HAMA);p1500_territorio;uf;Total;1329;3365;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2019;0;1885;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2019;0;9678;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2019;0;14381;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2019;0;21108;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2019;0;134419;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2019;0;72;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2019;0;98;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2019;0;124;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2019;0;1885;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2020;0;1814;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2020;0;8808;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2020;0;13114;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2020;0;19670;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2020;0;130272;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2020;0;64;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2020;0;86;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2020;0;107;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2020;0;1814;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2021;0;1810;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2021;0;10989;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2021;0;14530;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2021;0;20766;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2021;0;127916;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2021;0;54;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2021;0;73;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2021;0;99;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2021;0;1810;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2022;0;1817;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2022;0;10926;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2022;0;14348;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2022;0;20334;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2022;0;118135;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2022;0;75;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2022;0;99;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2022;0;128;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2022;0;1817;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2023;0;1749;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2023;0;11807;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2023;0;15281;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2023;0;19828;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2023;0;117336;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2023;0;79;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2023;0;102;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2023;0;134;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2023;0;1749;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;2024;0;1771;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;2024;0;11240;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;2024;0;14696;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;2024;0;19207;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;2024;0;112136;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;2024;0;79;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;2024;0;94;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;2024;0;131;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;2024;0;1771;território em ano sem nascimento na unidade
+4306945;Hospital da Mulher do Agreste;p1500_uf;UF Pernambuco;Total;1665;12511;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;nv_territorio;municipio;Total;11828;75276;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;nv_territorio;regiao_saude;Total;15233;101583;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;nv_territorio;macro;Total;19874;140787;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;nv_territorio;uf;Total;113818;854032;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;p1500_territorio;municipio;Total;148;571;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;p1500_territorio;regiao_saude;Total;162;714;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;p1500_territorio;macro;Total;180;903;coluna Total refeita
+4306945;Hospital da Mulher do Agreste;p1500_territorio;uf;Total;1665;12511;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_uf;UF Pará;2019;0;1577;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;municipio;2019;0;2615;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;regiao_saude;2019;0;6540;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;macro;2019;0;26457;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;uf;2019;0;136064;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;municipio;2019;0;33;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;regiao_saude;2019;0;62;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;macro;2019;0;293;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;uf;2019;0;1577;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_uf;UF Pará;2020;0;1509;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;municipio;2020;0;2412;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;regiao_saude;2020;0;6259;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;macro;2020;0;26025;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;uf;2020;0;130999;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;municipio;2020;0;33;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;regiao_saude;2020;0;51;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;macro;2020;0;255;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;uf;2020;0;1509;território em ano sem nascimento na unidade
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_uf;UF Pará;Total;7650;10736;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;municipio;Total;12770;17797;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;regiao_saude;Total;30090;42889;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;macro;Total;125723;178205;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;nv_territorio;uf;Total;619822;886885;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;municipio;Total;199;265;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;regiao_saude;Total;346;459;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;macro;Total;1522;2070;coluna Total refeita
+0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;uf;Total;7650;10736;coluna Total refeita
+2717387;Unidade Hospitalar de Iauareté;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2453665;Maternidade Carmosina Coutinho;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2705982;Santa Casa de Franca;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+3021114;Santa Casa de Misericórdia de Sobral;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2499363;Hospital Geral Dr César Cals (HGCC);p1500_uf;UF Ceará;2026S1;;720;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;municipio;2026S1;;18286;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;regiao_saude;2026S1;;25445;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;macro;2026S1;;25445;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;uf;2026S1;;49353;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);p1500_territorio;municipio;2026S1;;416;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);p1500_territorio;regiao_saude;2026S1;;441;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);p1500_territorio;macro;2026S1;;441;território em período sem registro na unidade
+2499363;Hospital Geral Dr César Cals (HGCC);p1500_territorio;uf;2026S1;;720;território em período sem registro na unidade

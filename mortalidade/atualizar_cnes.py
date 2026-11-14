@@ -24,8 +24,9 @@ mats = json.loads(m.group(1))["maternidades"]
 
 saida = {"_atualizado_em": date.today().isoformat()}
 erros = []
-for i, mt in enumerate(mats, 1):
-    cnes = mt["cnes"]
+# complexo com mais de um código CNES (HCFAMEMA): busca a ficha de cada código
+alvos = [(c, mt) for mt in mats for c in (mt.get("cnesComplexo") or [mt["cnes"]])]
+for i, (cnes, mt) in enumerate(alvos, 1):
     try:
         info = busca(API.format(int(cnes)))
         uid = info.get("codigo_estabelecimento_saude")
@@ -36,10 +37,10 @@ for i, mt in enumerate(mats, 1):
             print(f"      habilitações indisponíveis: {e2}")
         saida[cnes] = info
         nh = len(info.get("habilitacoes") or [])
-        print(f"[{i:3d}/{len(mats)}] {cnes} ok ({nh} habilitações) - {mt['nome']}")
+        print(f"[{i:3d}/{len(alvos)}] {cnes} ok ({nh} habilitações) - {mt['nome']}")
     except Exception as e:
         erros.append((cnes, mt["nome"], str(e)))
-        print(f"[{i:3d}/{len(mats)}] {cnes} ERRO: {e}")
+        print(f"[{i:3d}/{len(alvos)}] {cnes} ERRO: {e}")
     time.sleep(0.4)
 
 with open(os.path.join(BASE, "cnes_dados.json"), "w", encoding="utf-8") as fh:
