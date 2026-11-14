@@ -1,8 +1,7 @@
 # Painel de Habilitações · Maternidades Estratégicas
 
 Painel de consulta das habilitações registradas no Cadastro Nacional de Estabelecimentos de Saúde (CNES), pedido pela
-coordenação em 29/10/2026 para as unidades dos três grupos (maternidades apoiadas, unidades EBSERH e QUALINEO
-2026/2027) e ampliado em 13/11/2026 para **todas as unidades com leitos obstétricos e/ou neonatais SUS**, mantida a
+coordenação em 29/10/2026 para as unidades dos três grupos (Apoiadas, HU Brasil e QUALINEO) e ampliado em 13/11/2026 para **todas as unidades com leitos obstétricos e/ou neonatais SUS**, mantida a
 sinalização dos grupos acompanhados. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
 
 ## Todas as unidades com leitos obstétricos ou neonatais SUS (13/11/2026)
@@ -43,7 +42,7 @@ sinalização dos grupos acompanhados. Mesma identidade visual dos painéis de N
 
 ## O que o painel contém
 
-- **Consulta individual**: um seletor por grupo (apoiadas, EBSERH, QUALINEO) e busca por nome, município, estado
+- **Consulta individual**: um seletor por grupo (Apoiadas, HU Brasil, QUALINEO) e busca por nome, município, estado
   ou CNES; a ficha abre em página própria, com o cadastro CNES e a tabela completa de habilitações (código,
   descrição, competência inicial e final, portaria e data, leitos, origem), PDF pela impressão e CSV. O endereço
   `index.html#<CNES>` abre a ficha direto.

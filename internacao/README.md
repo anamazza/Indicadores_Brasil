@@ -17,8 +17,8 @@ pronto para o GitHub Pages. Requer internet só para o mapa de fundo do mapa de 
 
 ## O que o painel contém
 
-- **Mapa de unidades** (abertura do painel): as 119 maternidades (Leaflet), coloridas por grupo (apoiadas,
-  EBSERH, QUALINEO 2026/2027), com filtros, busca, resumo de 2025 no popup e pontos de contexto
+- **Mapa de unidades** (abertura do painel): as 119 maternidades (Leaflet), coloridas por grupo (Apoiadas,
+  HU Brasil, QUALINEO), com filtros, busca, resumo de 2025 no popup e pontos de contexto
   (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
 - **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as 15 seções
   da apresentação de indicadores de internação (gera_deck_v4): internações obstétricas, motivos, interrupção

@@ -268,6 +268,29 @@ try:
 except Exception as e:
     falha(f"não foi possível conferir a consistência entre os painéis ({e})")
 
+# nomes dos grupos (14/11/2026, pedido da coordenação): EBSERH passou a HU Brasil e os rótulos trazem só o nome do
+# grupo (Apoiadas, HU Brasil, QUALINEO). Razão social, nome fantasia e e-mail da ficha vêm do CNES e ficam como estão
+# no cadastro; por isso a conferência olha os textos dos painéis e o nome exibido das unidades, não as fichas.
+print("== nomes dos grupos")
+ROTULOS_ANTIGOS = ("EBSERH", "apoiadas (estratégicas)", "apoiada (estratégica)", "QUALINEO 2026/2027",
+                   ">Maternidades apoiadas<", "nidades QUALINEO", "nidades apoiadas")
+achados = []
+for rel in [os.path.join(p, a) for p in PAINEIS for a in ("painel_app.js", "painel_base.html")] + ["pagina_inicial.html"]:
+    try:
+        txt = open(os.path.join(RAIZ, rel), encoding="utf-8").read()
+    except Exception as e:
+        falha(f"{rel}: não foi possível ler ({e})"); continue
+    achados += [f"{rel}: {r}" for r in ROTULOS_ANTIGOS if r in txt]
+    if "HU Brasil" not in txt: achados.append(f"{rel}: sem o grupo HU Brasil")
+for p in PAINEIS:
+    try:
+        ms = json.load(open(os.path.join(RAIZ, p, "dados.json"), encoding="utf-8")).get("maternidades", [])
+        achados += [f"{p}: nome {m['nome']}" for m in ms if "ebserh" in (m.get("nome") or "").lower()]
+    except Exception as e:
+        falha(f"{p}: não foi possível ler os nomes das unidades ({e})")
+if achados: falha(f"nome antigo de grupo em {len(achados)} lugar(es): {'; '.join(achados[:6])}")
+else: ok("grupos com os nomes Apoiadas, HU Brasil e QUALINEO nos quatro painéis e na página principal")
+
 print()
 if avisos:
     print(f"{len(avisos)} aviso(s).")

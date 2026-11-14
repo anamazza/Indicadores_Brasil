@@ -12,7 +12,7 @@ cnes_dados.json (ficha CNES e habilitações, atualizados na nuvem pelo workflow
 
 Regras de composição (ver README.md):
 - A união dos três painéis define as unidades (um registro por código CNES).
-- Os grupos (apoiada, EBSERH, QUALINEO) vêm da lista oficial de maternidades por grupo de 09/09/2026, guardada em
+- Os grupos (Apoiadas, HU Brasil, QUALINEO) vêm da lista oficial de maternidades por grupo de 09/09/2026, guardada em
   lista_oficial_2026-09-09.csv (planilha LISTA_MATERNIDADES_POR_GRUPO_09092026 da coordenação, conferida em
   29/10/2026): TIPO_DE_APOIO "APOIADA", "APOIADA/EXTRA", "EBSERH", "QUALINEO" e combinações com "/". Unidade fora da
   lista (anexo) fica com oficial = false e com os grupos lidos dos painéis (Mortalidade, depois Internação, depois
@@ -27,7 +27,7 @@ from collections import Counter
 BASE = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(BASE)
 PAINEIS = ["mortalidade", "internacao", "nascimentos"]          # ordem de prioridade para grupos e nomes
-GRUPOS = {"apoiada": "Maternidades apoiadas (estratégicas)", "ebserh": "Unidades EBSERH", "qualineo": "QUALINEO 2026/2027"}
+GRUPOS = {"apoiada": "Apoiadas", "ebserh": "HU Brasil", "qualineo": "QUALINEO"}   # só o nome do grupo; EBSERH passou a HU Brasil (14/11/2026)
 NORMALIZA_GRUPO = {"estrategica": "apoiada", "apoiadas": "apoiada"}
 # Unidades retiradas deste painel por decisão da coordenação (continuam nos painéis de origem até serem retiradas lá).
 # (O Hospital do Rocio/PR, 0013846, foi retirado daqui em 30/10/2026 e, em 13/11/2026, também do painel de Mortalidade.)

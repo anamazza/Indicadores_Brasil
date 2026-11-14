@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="../icons/maos-180.png"/>
 <title>Painel de Habilitações · Maternidades Estratégicas · CNES</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<meta name="description" content="Habilitações registradas no CNES das maternidades estratégicas (apoiadas, EBSERH e QUALINEO 2026/2027): matriz de cobertura, consulta por unidade e por habilitação, ficha de cadastro e notas metodológicas."/>
+<meta name="description" content="Habilitações registradas no CNES das maternidades estratégicas (grupos Apoiadas, HU Brasil e QUALINEO): matriz de cobertura, consulta por unidade e por habilitação, ficha de cadastro e notas metodológicas."/>
 <style>
 :root{
   --verde-lima:#7CB342; --verde-claro:#8FBC4E; --verde-fiocruz:#279261; --verde-esmeralda:#1B5F51; --verde-profundo:#154A4B;
@@ -397,9 +397,9 @@ table.local tfoot td.col-uf{background:var(--mint)}
     <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
     <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · habilitações registradas no CNES para todas as unidades com leitos obstétricos ou neonatais do SUS, com a identificação das unidades acompanhadas nos três grupos: consulta individual com a ficha de cada unidade, habilitações por grupo e por local, e mapa por território.</p>
     <div class="hero-blocos" id="heroGrupos">
-      <span><i class="bolinha bola-apoiada"></i>Maternidades apoiadas (estratégicas)</span>
-      <span><i class="bolinha bola-ebserh"></i>Unidades EBSERH</span>
-      <span><i class="bolinha bola-qualineo"></i>QUALINEO 2026/2027</span>
+      <span><i class="bolinha bola-apoiada"></i>Apoiadas</span>
+      <span><i class="bolinha bola-ebserh"></i>HU Brasil</span>
+      <span><i class="bolinha bola-qualineo"></i>QUALINEO</span>
     </div>
     <div class="hero-links" aria-label="Navegação">
       <a href="https://anamazza.github.io/Indicadores_Brasil/">← Página principal</a>
@@ -431,15 +431,15 @@ table.local tfoot td.col-uf{background:var(--mint)}
     <div class="grid-2">
       <div class="dossie-conjuntos">
         <div class="dossie-conj">
-          <p class="rot-conj"><span class="bolinha bola-apoiada"></span>Maternidades apoiadas (estratégicas) <b id="nApoiada"></b></p>
+          <p class="rot-conj"><span class="bolinha bola-apoiada"></span>Apoiadas <b id="nApoiada"></b></p>
           <div class="mapa-controles"><select id="selUnidadeApoiada" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeApoiada">Abrir ficha →</button></div>
         </div>
         <div class="dossie-conj">
-          <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
+          <p class="rot-conj"><span class="bolinha bola-ebserh"></span>HU Brasil <b id="nEbserh"></b></p>
           <div class="mapa-controles"><select id="selUnidadeEbserh" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeEbserh">Abrir ficha →</button></div>
         </div>
         <div class="dossie-conj">
-          <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 <b id="nQualineo"></b></p>
+          <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO <b id="nQualineo"></b></p>
           <div class="mapa-controles"><select id="selUnidadeQualineo" style="min-width:340px; flex:1"></select><button class="chip chip-acao" data-sel="selUnidadeQualineo">Abrir ficha →</button></div>
         </div>
       </div>
@@ -573,9 +573,9 @@ table.local tfoot td.col-uf{background:var(--mint)}
       <div class="acordeao-corpo">
         <p class="suave" style="margin-bottom:.55rem">Unidades do recorte acima (território, conjunto de unidades e habilitação). As unidades acompanhadas aparecem nas coordenadas do cadastro CNES, com o nome ao lado. As demais são reunidas em um ponto cinza por município, na sede municipal: o ponto cresce com o número de unidades e, ao ser tocado, lista as unidades para abrir a ficha. Precisa de internet para o fundo (OpenStreetMap).</p>
         <p class="legenda-pontos">
-          <span class="item"><span class="bolinha bola-apoiada"></span>maternidades apoiadas (estratégicas)</span>
-          <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
-          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
+          <span class="item"><span class="bolinha bola-apoiada"></span>Apoiadas</span>
+          <span class="item"><span class="bolinha bola-ebserh"></span>HU Brasil</span>
+          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO</span>
           <span class="item"><span class="bolinha bola-demais"></span>demais unidades, por município</span>
           <span class="item suave">unidade em mais de um grupo recebe a cor do primeiro nesta ordem</span>
         </p>
@@ -612,7 +612,7 @@ table.local tfoot td.col-uf{background:var(--mint)}
         <h3>Unidades e grupos</h3>
         <p id="notaUniverso"></p>
         <p id="notaUnidades"></p>
-        <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: maternidades apoiadas (estratégicas), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO 2026/2027. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
+        <p>Os grupos seguem a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, como nos painéis de Internação e de Mortalidade: Apoiadas, HU Brasil e QUALINEO. Uma unidade pode pertencer a mais de um grupo e conta em todos eles.</p>
         <p id="notaAnexos"></p>
         <p id="notaPosicao"><b>Mapas:</b> a vista por território usa as mesmas malhas de estados, macrorregiões e regiões de saúde dos outros painéis e conta as unidades de cada território; as classes de cor mudam conforme o maior número de unidades do recorte. No mapa de unidades (OpenStreetMap), as unidades acompanhadas usam as coordenadas do cadastro CNES e as demais, que não têm coordenadas nos arquivos utilizados, aparecem na sede do município. Os pontos sobre a malha são opcionais, só das unidades acompanhadas, e aproximados (as coordenadas são convertidas por uma aproximação ajustada e, quando o ponto cai fora da região de saúde da unidade, ele é deslocado para dentro dela).</p>
         <p>Hospital das Clínicas da FAMEMA (Marília/SP): os códigos CNES 2025507 (hospital adulto) e 2025523 (unidade materno-infantil) formam um único complexo e aparecem como uma só unidade, como nos demais painéis. Na ficha, cada habilitação traz o código CNES em que está registrada.</p>

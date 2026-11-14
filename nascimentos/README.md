@@ -65,7 +65,7 @@ Pedido da coordenação: o mesmo indicador tem de ter o mesmo valor em todos os 
 pelo `build_dados.py` (passo 2c2), aplica as correções e grava cada célula alterada em `ajustes_auditoria_2026-11-14.csv`:
 
 - **Grupos** pela lista oficial de 09/09/2026 (`lista_oficial_2026-09-09.csv`, cópia da que o painel de Habilitações usa):
-  apoiadas (59), EBSERH (25) e QUALINEO 2026/2027 (86), como nos outros três painéis; a chave antiga "estrategica"
+  Apoiadas (59), HU Brasil (25) e QUALINEO (86), como nos outros três painéis; a chave antiga "estrategica"
   passou a "apoiada" no `painel_app.js`.
 - **Totais de território** (município, região de saúde, macrorregião e UF; ocorrência e residência; todos e < 1.500 g)
   pelos microdados do SINASC com a regionalização vigente (jun/2026), inclusive nos anos anteriores à abertura da unidade.

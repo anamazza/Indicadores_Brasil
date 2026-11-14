@@ -20,7 +20,7 @@ const TIPOS = DADOS.tipos;
 const DS = Object.fromEntries(TIPOS.map(t => [t.co, t.ds]));
 const ORIGEM = Object.fromEntries(TIPOS.map(t => [t.co, t.origem]));
 const GRUPOS = DADOS.grupos;                       // {apoiada, ebserh, qualineo} -> rótulo
-const GRUPO_CURTO = {apoiada: "Apoiadas", ebserh: "EBSERH", qualineo: "QUALINEO"};
+const GRUPO_CURTO = {apoiada: "Apoiadas", ebserh: "HU Brasil", qualineo: "QUALINEO"};
 const ORDEM_GRUPO = ["apoiada", "ebserh", "qualineo"];
 const COR_GRUPO = {apoiada: {fundo: "#279261", borda: "#154A4B"}, ebserh: {fundo: "#2471A3", borda: "#103B5E"}, qualineo: {fundo: "#5FB0D9", borda: "#1B6B8F"}};
 const COR_DEMAIS = {fundo: "#9AA9B5", borda: "#5F7180"};
@@ -117,7 +117,7 @@ const ESCOPOS = [
   {id: "todas", rot: "Todas as unidades", longo: "todas as unidades com leitos obstétricos ou neonatais SUS"},
   {id: "acomp", rot: "Acompanhadas", longo: "unidades acompanhadas (os três grupos)"},
   {id: "apoiada", rot: "Apoiadas", longo: GRUPOS.apoiada},
-  {id: "ebserh", rot: "EBSERH", longo: GRUPOS.ebserh},
+  {id: "ebserh", rot: "HU Brasil", longo: GRUPOS.ebserh},
   {id: "qualineo", rot: "QUALINEO", longo: GRUPOS.qualineo},
 ];
 const ESCOPO_POR = Object.fromEntries(ESCOPOS.map(e => [e.id, e]));

@@ -23,8 +23,8 @@ unidades (Leaflet/OpenStreetMap).
   filtros em cascata (território → estado), 5 blocos (visão geral, materna, fetal, perinatal,
   neonatal) e 38 indicadores; faixas por quintis recalculadas por recorte, tooltip com
   numerador/denominador e as maternidades de cada território; painel lateral com os totais da seleção.
-- **Mapa de unidades**: as 120 maternidades (Leaflet), coloridas por grupo (apoiadas, EBSERH,
-  QUALINEO 2026/2027), com filtros, busca, resumo de 2025 no popup e pontos de contexto
+- **Mapa de unidades**: as 120 maternidades (Leaflet), coloridas por grupo (Apoiadas, HU Brasil,
+  QUALINEO), com filtros, busca, resumo de 2025 no popup e pontos de contexto
   (estabelecimentos ≥480 partos/ano, SIH/AIH 2025).
 - **Perfil da unidade**: página própria com ficha CNES e habilitações ativas (API oficial) e as
   23 seções da apresentação de indicadores de mortalidade (razão de mortalidade materna e causas

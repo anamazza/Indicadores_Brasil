@@ -619,11 +619,11 @@ function iniciaLeaflet(){
   }).addTo(leaf);
   desenhaPontos();
 }
-/* grupos da lista oficial de 09/09/2026: apoiadas (estratégicas) em verde; EBSERH e QUALINEO em azuis */
+/* grupos da lista oficial de 09/09/2026: Apoiadas em verde; HU Brasil e QUALINEO em azuis */
 const CONJUNTOS = {
-  apoiada:    {rot:"Maternidade apoiada (estratégica)", fundo:"#279261", borda:"#154A4B"},
-  ebserh:     {rot:"Unidade EBSERH",          fundo:"#2471A3", borda:"#103B5E"},
-  qualineo:   {rot:"QUALINEO 2026/2027",      fundo:"#5FB0D9", borda:"#1B6B8F"},
+  apoiada:    {rot:"Apoiadas", fundo:"#279261", borda:"#154A4B"},
+  ebserh:     {rot:"HU Brasil",          fundo:"#2471A3", borda:"#103B5E"},
+  qualineo:   {rot:"QUALINEO",      fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
 const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
 /* uma unidade pode pertencer a mais de um conjunto (lista oficial de 09/09/2026).
@@ -667,7 +667,7 @@ function desenhaPontos(){
     });
     leaf.addLayer(camadaCtx);
   }
-  // maternidades: verde para as apoiadas, tons de azul para EBSERH e QUALINEO
+  // maternidades: verde para o grupo Apoiadas, tons de azul para HU Brasil e QUALINEO
   camadaEstr = L.markerClusterGroup({maxClusterRadius:30, disableClusteringAtZoom:7});
   const visiveis = [];
   MAT.filter(m => passaFiltroPonto({uf:m.uf, nome:m.nome})).forEach(m => {
@@ -1410,7 +1410,7 @@ function desenhaDossie(){
    ============================================================ */
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
-const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
+const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 let anoComp = ULT;
 let grupoComp = "apoiada";   // grupo escolhido no filtro do comparador — só se compara dentro dele
 /* média do grupo: pseudo-coluna "media:<grupo>" — a unidade é comparada com o próprio grupo */
@@ -1624,7 +1624,7 @@ const FICHAS_EXTRAS = [
    d:"Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
    fonte:"Ministério da Saúde - SINASC, " + ANOS[ULT] + "."},
   {rot:"Média do grupo (comparador)",
-   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades apoiadas (estratégicas), unidades EBSERH ou QUALINEO 2026/2027, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — Apoiadas, HU Brasil ou QUALINEO, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    n:"Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    d:"Soma dos denominadores correspondentes nas mesmas unidades.",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."}
@@ -1639,7 +1639,7 @@ function desenhaMetodologia(){
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES, com atualização automática semestral (1º de junho e 1º de dezembro)."],
     ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
-    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
+    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Apoiadas, HU Brasil e/ou QUALINEO. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
     ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização."],
     ["Comparativo entre anos", "Microdados públicos do SINASC (OpenDataSUS), série 2019-2025, processados por território de residência e ocorrência: todos os nascidos vivos e <1500 g, por região de saúde, macro e UF. Nos níveis macro e UF, o percentual agrega os nascidos na própria região de saúde (todos) ou na própria macro (<1500 g), como nas planilhas oficiais. 2025 preliminar. Extração validada contra as planilhas NV por Região e NV por Macro (2019 e 2024)."],
@@ -1716,7 +1716,7 @@ function opcaoUnidades(sel, conjunto){
     `</optgroup>`).join("");
 }
 /* seletor com um optgroup por grupo (comparador); a UF entra no rótulo de cada opção */
-const GRUPO_ROT_PLURAL = {apoiada:"Maternidades apoiadas (estratégicas)", ebserh:"Unidades EBSERH", qualineo:"QUALINEO 2026/2027"};
+const GRUPO_ROT_PLURAL = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
     const lst = MAT.filter(m => conjuntoPrincipal(m) === g)

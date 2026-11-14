@@ -29,7 +29,7 @@
   --alerta:#C0392B;
   --ambar:#D68910;
   --azul-meta:#2471A3;
-  --azul-ebserh:#2471A3;        /* pontos das unidades EBSERH no mapa */
+  --azul-ebserh:#2471A3;        /* pontos do grupo HU Brasil no mapa */
   --azul-ebserh-borda:#103B5E;
   --azul-qualineo:#5FB0D9;      /* pontos do QUALINEO */
   --azul-qualineo-borda:#1B6B8F;
@@ -496,9 +496,9 @@ footer a{color:var(--verde-lima)}
       <div class="acordeao-corpo">
         <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o perfil da unidade. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
         <p class="legenda-pontos">
-          <span class="item"><span class="bolinha bola-estr"></span>maternidades apoiadas (estratégicas)</span>
-          <span class="item"><span class="bolinha bola-ebserh"></span>unidades EBSERH</span>
-          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027</span>
+          <span class="item"><span class="bolinha bola-estr"></span>Apoiadas</span>
+          <span class="item"><span class="bolinha bola-ebserh"></span>HU Brasil</span>
+          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO</span>
           <span class="item"><span class="bolinha" style="background:#AEBFB4; box-shadow:0 0 0 2px #7A8C80 inset"></span>demais estabelecimentos</span>
         </p>
         <div class="filtros-mapa">
@@ -524,21 +524,21 @@ footer a{color:var(--verde-lima)}
     </div>
     <div class="dossie-conjuntos">
       <div class="dossie-conj">
-        <p class="rot-conj"><span class="bolinha bola-estr"></span>Maternidades apoiadas (estratégicas) <b id="nEstr"></b></p>
+        <p class="rot-conj"><span class="bolinha bola-estr"></span>Apoiadas <b id="nEstr"></b></p>
         <div class="mapa-controles">
           <select id="selUnidade" style="min-width:340px"></select>
           <button class="chip chip-acao" id="btnAbrirDossie">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
-        <p class="rot-conj"><span class="bolinha bola-ebserh"></span>Unidades EBSERH <b id="nEbserh"></b></p>
+        <p class="rot-conj"><span class="bolinha bola-ebserh"></span>HU Brasil <b id="nEbserh"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeEbserh" style="min-width:340px"></select>
           <button class="chip chip-acao" id="btnAbrirDossieEbserh">Abrir perfil da unidade →</button>
         </div>
       </div>
       <div class="dossie-conj">
-        <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 2026/2027 <b id="nQualineo"></b></p>
+        <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO <b id="nQualineo"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeQualineo" style="min-width:340px"></select>
           <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir perfil da unidade →</button>
@@ -554,7 +554,7 @@ footer a{color:var(--verde-lima)}
     <div class="sec-head">
       <p class="eyebrow">Comparador</p>
       <h2>Comparar unidades lado a lado</h2>
-      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (apoiadas, EBSERH ou QUALINEO) e compare de duas a quatro maternidades do grupo lado a lado, com a melhor posição destacada em cada indicador e a opção de incluir a <b>média do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador.</p>
+      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (Apoiadas, HU Brasil ou QUALINEO) e compare de duas a quatro maternidades do grupo lado a lado, com a melhor posição destacada em cada indicador e a opção de incluir a <b>média do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador.</p>
     </div>
     <div class="seg" id="segModoComp" style="margin-bottom:1rem">
       <button data-modo="unidades" class="ativo">Entre unidades</button>
@@ -562,9 +562,9 @@ footer a{color:var(--verde-lima)}
     </div>
     <div id="compModoUnidades">
       <div class="seg" id="segGrupoComp" style="margin-bottom:1rem">
-        <button data-grupo="apoiada" class="ativo">Maternidades apoiadas</button>
-        <button data-grupo="ebserh">Unidades EBSERH</button>
-        <button data-grupo="qualineo">QUALINEO 2026/2027</button>
+        <button data-grupo="apoiada" class="ativo">Apoiadas</button>
+        <button data-grupo="ebserh">HU Brasil</button>
+        <button data-grupo="qualineo">QUALINEO</button>
       </div>
       <div class="comp-sel">
         <select id="selAddComp" style="min-width:300px"></select>

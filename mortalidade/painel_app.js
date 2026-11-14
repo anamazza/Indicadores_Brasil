@@ -674,11 +674,11 @@ function iniciaLeaflet(){
   }).addTo(leaf);
   desenhaPontos();
 }
-/* grupos da lista oficial de 09/09/2026: apoiadas (estratégicas) em verde; EBSERH e QUALINEO em azuis */
+/* grupos da lista oficial de 09/09/2026: Apoiadas em verde; HU Brasil e QUALINEO em azuis */
 const CONJUNTOS = {
-  apoiada:  {rot:"Maternidade apoiada (estratégica)", fundo:"#279261", borda:"#154A4B"},
-  ebserh:   {rot:"Unidade EBSERH",                    fundo:"#2471A3", borda:"#103B5E"},
-  qualineo: {rot:"QUALINEO 2026/2027",                fundo:"#5FB0D9", borda:"#1B6B8F"},
+  apoiada:  {rot:"Apoiadas", fundo:"#279261", borda:"#154A4B"},
+  ebserh:   {rot:"HU Brasil",                    fundo:"#2471A3", borda:"#103B5E"},
+  qualineo: {rot:"QUALINEO",                fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
 const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
 /* uma unidade pode pertencer a mais de um grupo (ex.: APOIADA/QUALINEO). Para não repeti-la em
@@ -1246,7 +1246,7 @@ function desenhaDossie(){
    ============================================================ */
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
-const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
+const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 let anoComp = ULT;
 let grupoComp = "apoiada";
 function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["apoiada"]).includes(g)); }
@@ -1472,7 +1472,7 @@ const FICHAS_EXTRAS = [
    d:"Total de óbitos do bloco na unidade e no ano.",
    fonte:"Ministério da Saúde - SIM (DO e DOFET), " + SERIE_ROT + "."},
   {rot:"Agregado do grupo (comparador)",
-   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (apoiadas, EBSERH ou QUALINEO 2026/2027). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
+   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (Apoiadas, HU Brasil ou QUALINEO). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
    n:"Soma dos numeradores do indicador nas unidades do grupo com dado no ano (nos números absolutos, média por unidade).",
    d:"Soma dos denominadores correspondentes nas mesmas unidades — a mesma regra de agregação usada nos mapas e no painel lateral.",
    fonte:"Ministério da Saúde - SIM e SINASC, " + SERIE_ROT + "."},
@@ -1493,7 +1493,7 @@ function desenhaMetodologia(){
     ["SIM · declarações de óbito fetal (DOFET)", "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025 (e DOFET26, preliminar, para o 1º semestre de 2026). Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal. Desde 14/11/2026 são os mesmos nascidos vivos do Painel de Nascimentos, contados nos microdados nacionais do SINASC (OpenDataSUS) por estabelecimento de ocorrência, o que inclui os nascimentos de mães residentes em outros estados."],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde. A ficha de cadastro vem da API oficial de Dados Abertos do Ministério da Saúde e as habilitações ativas do serviço do próprio site do CNES; coordenadas geográficas georreferenciadas a partir do cadastro."],
-    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Internação e de Habilitações."],
+    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Apoiadas, HU Brasil e/ou QUALINEO. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Internação e de Habilitações."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização — as mesmas do Painel NV 2026."]
   ];
   const fichaHTML = (rot, desc, n, d, obs, fonte) => `
@@ -1576,7 +1576,7 @@ function opcaoUnidades(sel, conjunto){
     porUF[uf].sort((a,b) => a.nome.localeCompare(b.nome)).map(m => `<option value="${m.cnes}">${esc(m.nome)}</option>`).join("") +
     `</optgroup>`).join("");
 }
-const GRUPO_ROT_PLURAL = {apoiada:"Maternidades apoiadas (estratégicas)", ebserh:"Unidades EBSERH", qualineo:"QUALINEO 2026/2027"};
+const GRUPO_ROT_PLURAL = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
     const lst = MAT.filter(m => conjuntoPrincipal(m) === g)

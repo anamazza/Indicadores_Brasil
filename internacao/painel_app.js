@@ -124,9 +124,9 @@ function iniciaLeaflet(){
   desenhaPontos();
 }
 const CONJUNTOS = {
-  apoiada:  {rot:"Maternidade apoiada (estratégica)", fundo:"#279261", borda:"#154A4B"},
-  ebserh:   {rot:"Unidade EBSERH",                    fundo:"#2471A3", borda:"#103B5E"},
-  qualineo: {rot:"QUALINEO 2026/2027",                fundo:"#5FB0D9", borda:"#1B6B8F"},
+  apoiada:  {rot:"Apoiadas", fundo:"#279261", borda:"#154A4B"},
+  ebserh:   {rot:"HU Brasil",                    fundo:"#2471A3", borda:"#103B5E"},
+  qualineo: {rot:"QUALINEO",                fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
 const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
 function conjuntoPrincipal(m){
@@ -615,7 +615,7 @@ function desenhaDossie(){
    ============================================================ */
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
-const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"EBSERH", qualineo:"QUALINEO"};
+const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 let anoComp = ULT;
 let grupoComp = "apoiada";
 function unidadesDoGrupo(g){ return MAT.filter(m => (m.conjuntos || ["apoiada"]).includes(g)); }
@@ -785,7 +785,7 @@ function desenhaMetodologia(){
     ["CNES · leitos (LT)", "Arquivos LT<UF><aaaamm>.dbc: leitos existentes por competência. Leitos-dia obstétricos (códigos 10 e 43) e de UTI neonatal tipo II e III (códigos 81 e 82) são os denominadores das taxas de ocupação."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2025 preliminar; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
     ["CNES · ficha e habilitações", "Ficha de cadastro pela API oficial de Dados Abertos do Ministério da Saúde e habilitações ativas pelo serviço do próprio site do CNES; coordenadas georreferenciadas a partir do cadastro."],
-    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (apoiadas, EBSERH e QUALINEO 2026/2027) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
+    ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (grupos Apoiadas, HU Brasil e QUALINEO) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, morbidade materna grave conforme o Observatório Obstétrico Brasileiro, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
   ];
   const dic = (typeof DICIONARIO !== "undefined" ? DICIONARIO : []).filter(d => !/^PERFIL/i.test(d.secao));
   const secoes = [...new Set(dic.map(d => d.secao))];
@@ -848,7 +848,7 @@ function opcaoUnidades(sel, conjunto){
     porUF[uf].sort((a,b) => a.nome.localeCompare(b.nome)).map(m => `<option value="${m.cnes}">${esc(m.nome)}</option>`).join("") +
     `</optgroup>`).join("");
 }
-const GRUPO_ROT_PLURAL = {apoiada:"Maternidades apoiadas (estratégicas)", ebserh:"Unidades EBSERH", qualineo:"QUALINEO 2026/2027"};
+const GRUPO_ROT_PLURAL = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
     const lst = MAT.filter(m => conjuntoPrincipal(m) === g).sort((a, b) => a.uf.localeCompare(b.uf) || a.nome.localeCompare(b.nome));

@@ -30,6 +30,7 @@ dados = json.loads(m.group(1))
 mats = dados["maternidades"]
 for mt in mats:                      # nomes sem travessão (padrão tipográfico do painel)
     mt["nome"] = mt["nome"].replace("—", "-")
+    mt["nome"] = mt["nome"].replace("(Ebserh)", "(HU Brasil)")   # nome adotado pela rede em 03/2026 (pedido de 14/11/2026)
 print(f"[1] {len(mats)} maternidades extraídas do painel antigo")
 
 # ---------- 2. pontos com coordenadas ----------
