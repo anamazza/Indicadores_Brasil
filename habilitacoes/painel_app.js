@@ -572,7 +572,7 @@ function ajustaEscalaSvg(){
   const vbw = Number(svgEl.getAttribute("viewBox").split(" ")[2]), k = vbw / GEO.W;
   svgEl.querySelectorAll("circle.ponto").forEach(c => c.setAttribute("r", (5.2 * k).toFixed(2)));
   svgEl.querySelectorAll("text.rotulo").forEach(t => { t.setAttribute("font-size", (10.5 * k).toFixed(2)); t.setAttribute("x", (Number(t.dataset.x) + 7 * k).toFixed(1)); t.setAttribute("y", (Number(t.dataset.y) + 3.6 * k).toFixed(1)); });
-  svgEl.querySelectorAll("text.sigla").forEach(t => { t.setAttribute("font-size", (13 * k).toFixed(2)); t.setAttribute("y", (Number(t.dataset.cy) + 4.5 * k).toFixed(1)); });
+  svgEl.querySelectorAll("text.sigla").forEach(t => { t.setAttribute("font-size", (13 * k).toFixed(2)); t.setAttribute("y", (Number(t.dataset.cy) + 4.5 * k).toFixed(1)); t.style.display = Number(t.dataset.r) >= SIGLA_CABE * 13 * k ? "" : "none"; });
 }
 function zoomUFs(ufs, animar = true){
   if(!svgEl) return;
@@ -582,6 +582,45 @@ function zoomUFs(ufs, animar = true){
   const pad = Math.max(x1 - x0, y1 - y0) * 0.12, vb = [x0 - pad, y0 - pad, (x1 - x0) + 2 * pad, (y1 - y0) + 2 * pad];
   if(animar) animaViewBox(vb); else { svgEl.setAttribute("viewBox", vb.map(v => v.toFixed(1)).join(" ")); ajustaEscalaSvg(); }
 }
+/* ---------- ponto da sigla de cada UF ----------
+   A sigla fica no ponto interior mais afastado do contorno do estado: o centro do maior oval deitado (proporção de uma
+   sigla de duas letras) que cabe dentro dele. O centro da caixa envolvente, usado antes, saía do estado quando havia
+   ilha distante (Fernando de Noronha levava a sigla de PE para cima de PB e RN) ou contorno recortado (PI caía na
+   divisa com o MA). `r` é o meio-eixo vertical desse oval, na unidade da malha: serve para saber se a sigla cabe. */
+const SIGLA_AX = 0.5;        // altura/largura da sigla; o eixo x é comprimido para o círculo inscrito virar o oval
+const SIGLA_CABE = 0.45;     // a sigla aparece quando r >= SIGLA_CABE x tamanho da letra
+let _rotulosUF = null;
+function rotuloUF(uf){
+  if(!_rotulosUF){
+    const aneis = d => d.split(/(?=M)/).map(s => [...s.matchAll(/(-?\d+\.?\d*),(-?\d+\.?\d*)/g)].map(m => [+m[1] * SIGLA_AX, +m[2]])).filter(a => a.length > 2);
+    const area = a => Math.abs(a.reduce((s, p, i) => { const q = a[(i + 1) % a.length]; return s + p[0] * q[1] - q[0] * p[1]; }, 0)) / 2;
+    const caixa = a => a.reduce((b, p) => [Math.min(b[0], p[0]), Math.min(b[1], p[1]), Math.max(b[2], p[0]), Math.max(b[3], p[1])], [1e9, 1e9, -1e9, -1e9]);
+    const dentro = (a, x, y) => { let c = false; for(let i = 0, j = a.length - 1; i < a.length; j = i++){ const p = a[i], q = a[j]; if((p[1] > y) !== (q[1] > y) && x < (q[0] - p[0]) * (y - p[1]) / (q[1] - p[1]) + p[0]) c = !c; } return c; };
+    const dist2 = (a, x, y, lim) => { let m = 1e18; for(let i = 0, j = a.length - 1; i < a.length; j = i++){ const p = a[i], q = a[j], dx = q[0] - p[0], dy = q[1] - p[1], l = dx * dx + dy * dy; let t = l ? ((x - p[0]) * dx + (y - p[1]) * dy) / l : 0; t = t < 0 ? 0 : t > 1 ? 1 : t; const ex = x - p[0] - t * dx, ey = y - p[1] - t * dy, e = ex * ex + ey * ey; if(e < m){ m = e; if(m <= lim) return m; } } return m; };   // para assim que não supera o melhor
+    // de cada estado, o maior polígono (o continente); ilhas não entram
+    const ufs = GEO.niveis.uf.map(t => { const a = aneis(t.d).reduce((m, x) => area(x) > area(m) ? x : m); return {id: t.id, a, cx: caixa(a)}; });
+    _rotulosUF = {};
+    ufs.forEach(e => {
+      // estado encravado em outro (DF em GO): o contorno dele também limita a sigla do estado de fora
+      const enc = ufs.filter(o => o !== e && o.cx[0] >= e.cx[0] && o.cx[1] >= e.cx[1] && o.cx[2] <= e.cx[2] && o.cx[3] <= e.cx[3]).map(o => o.a);
+      let [x0, y0, x1, y1] = e.cx, melhor = null, md = -1;
+      for(let passo = 0; passo < 3; passo++){          // grade sobre o estado e dois refinamentos em volta do melhor ponto
+        const n = passo ? 8 : 24, w = (x1 - x0) / n, h = (y1 - y0) / n;
+        for(let i = 0; i < n; i++) for(let j = 0; j < n; j++){
+          const x = x0 + w * (i + .5), y = y0 + h * (j + .5);
+          if(!dentro(e.a, x, y) || enc.some(o => dentro(o, x, y))) continue;
+          const d = Math.min(dist2(e.a, x, y, md), ...enc.map(o => dist2(o, x, y, md)));
+          if(d > md){ md = d; melhor = [x, y]; }
+        }
+        if(!melhor) break;
+        x0 = melhor[0] - w; x1 = melhor[0] + w; y0 = melhor[1] - h; y1 = melhor[1] + h;
+      }
+      _rotulosUF[e.id] = melhor ? {x: melhor[0] / SIGLA_AX, y: melhor[1], r: Math.sqrt(md)} : null;
+    });
+  }
+  return _rotulosUF[uf];
+}
+
 function desenhaMapaSvg(){
   const box = $("mapaSvg");
   if(!TEM_GEO){ box.innerHTML = `<p class="suave" style="padding:1rem">Malhas não disponíveis nesta montagem.</p>`; return; }
@@ -611,7 +650,7 @@ function desenhaMapaSvg(){
   }
   svgEl.appendChild(g); box.appendChild(svgEl);
   if(MP.nivel === "uf"){
-    svgEl.querySelectorAll("path.t").forEach(p => { if(p.style.display === "none") return; const bb = p.getBBox(); if(bb.width < 14 && bb.height < 14) return; const tx = document.createElementNS(NS, "text"); tx.setAttribute("x", (bb.x + bb.width / 2).toFixed(1)); tx.dataset.cy = (bb.y + bb.height / 2).toFixed(1); tx.setAttribute("text-anchor", "middle"); tx.setAttribute("class", "sigla"); tx.setAttribute("fill", Number(p.dataset.cls) >= 3 ? "#FFFFFF" : "#0A213D"); tx.setAttribute("opacity", ".8"); tx.textContent = p.dataset.uf; g.appendChild(tx); });
+    svgEl.querySelectorAll("path.t").forEach(p => { if(p.style.display === "none") return; const c = rotuloUF(p.dataset.uf); if(!c) return; const tx = document.createElementNS(NS, "text"); tx.setAttribute("x", c.x.toFixed(1)); tx.dataset.cy = c.y.toFixed(1); tx.dataset.r = c.r.toFixed(1); tx.setAttribute("text-anchor", "middle"); tx.setAttribute("class", "sigla"); tx.setAttribute("fill", Number(p.dataset.cls) >= 3 ? "#FFFFFF" : "#0A213D"); tx.setAttribute("opacity", ".8"); tx.textContent = p.dataset.uf; g.appendChild(tx); });
   }
   if(MP.pontosMalha){
     const gp = document.createElementNS(NS, "g");
