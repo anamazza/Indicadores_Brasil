@@ -648,20 +648,45 @@ function sparkline(vals){
     <circle cx="${X(fim[0]).toFixed(1)}" cy="${Y(fim[1]).toFixed(1)}" r="2.6" fill="#1B5F51"/>
   </svg>`;
 }
+/* Grupo no modo "mesma unidade entre anos" (pedido da coordenação em 14/11/2026): colunas de referência com os
+   mesmos anos marcados, sempre depois dos números da unidade. A unidade pode pertencer a mais de um grupo: cada
+   grupo dela tem um botão, que liga ou desliga as colunas (um grupo por vez). O cálculo é o mesmo da coluna do
+   grupo no modo entre unidades (entradaComp e valorEntrada). */
+let evoGrupo = null;
+function gruposDaUnidade(mt){ return ORDEM_CONJ.filter(g => (mt.conjuntos || ["apoiada"]).includes(g)); }
+function desenhaBotoesGrupoEvo(mt){
+  const box = document.getElementById("evoGrupos");
+  if(!box) return;
+  const gs = gruposDaUnidade(mt);
+  if(evoGrupo && !gs.includes(evoGrupo)) evoGrupo = null;
+  box.innerHTML = gs.map(g => {
+    const rot = entradaComp("media:" + g).nome.replace(" · ", " do grupo ");
+    return `<button class="chip chip-ano ${evoGrupo === g ? "ativo" : ""}" data-grupo="${g}" title="Mostra, depois dos números da unidade, as colunas do grupo nos mesmos anos">${evoGrupo === g ? "✓" : "+"} ${esc(rot.charAt(0).toLowerCase() + rot.slice(1))}</button>`;
+  }).join("");
+  box.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    evoGrupo = evoGrupo === b.dataset.grupo ? null : b.dataset.grupo;
+    desenhaEvolucao();
+  }));
+}
 function desenhaEvolucao(){
   const mt = MAT.find(m => m.cnes === evoCnes) || MAT[0];
   const el = document.getElementById("evoConteudo");
+  desenhaBotoesGrupoEvo(mt);
   const anos = [...anosEvoSel].sort((a, b) => a - b);
   if(anos.length < 2){
     el.innerHTML = `<div class="card"><p class="suave">Marque pelo menos dois anos para ver a evolução.</p></div>`;
     return;
   }
+  const eg = evoGrupo ? entradaComp("media:" + evoGrupo) : null;       // colunas do grupo, depois das da unidade
+  const tdsGrupo = ind => eg ? anos.map((a, k) => { const v = valorEntrada(eg, ind, a);
+    return `<td class="mono col-grupo${k ? "" : " prim"}">${fmtInd(ind, v)}</td>`; }).join("") : "";
+  const thsGrupo = eg ? anos.map((a, k) => `<th class="col-grupo${k ? "" : " prim"}">${nomeAno(a) + (PRELIM.has(ANOS[a]) ? "*" : "")}<br><span style="font-weight:400">${esc(eg.nome)}</span></th>`).join("") : "";
   const a0 = anos[0], a1 = anos[anos.length - 1];
   const parcialSel = temParcial(anos);
   const extremoParcial = PARCIAIS.has(ANOS[a0]) || PARCIAIS.has(ANOS[a1]);   // número absoluto de período parcial não se compara
   let linhas = "";
   EIXOS.forEach(ex => {
-    linhas += `<tr class="grupo"><td colspan="${anos.length + 3}">${esc(ex.rot)}</td></tr>`;
+    linhas += `<tr class="grupo"><td colspan="${anos.length + 3 + (eg ? anos.length : 0)}">${esc(ex.rot)}</td></tr>`;
     INDS.filter(i => i.eixo === ex.id).forEach(ind => {
       const serie = ANOS.map((_, i) => valorUnidade(mt, ind, i));
       const tds = anos.map(a => `<td class="mono">${fmtInd(ind, serie[a])}</td>`).join("");
@@ -680,16 +705,16 @@ function desenhaEvolucao(){
         }
       }
       linhas += `<tr><td>${esc(ind.rot)}</td>
-        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1))}</td></tr>`;
+        ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1))}</td>${tdsGrupo(ind)}</tr>`;
     });
   });
   el.innerHTML = `
   <div class="card comp-grid">
-    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span></h3>
+    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span>${eg ? ` <span class="chip">${esc(eg.nome)} · ${esc(eg.sub)}</span>` : ""}</h3>
     <div class="tab-wrap"><table class="comp">
-      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th></tr></thead>
+      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}${PRELIM.has(ANOS[a]) ? "*" : ""}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th>${thsGrupo}</tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação entre o primeiro e o último ano marcados: percentuais em pontos percentuais, permanência em dias, números absolutos em variação relativa. Verde = melhorou (mais boas práticas ou menos morbidade); vermelho = piorou; sem cor = número absoluto, distribuição, ocupação ou permanência, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2025 parcial (competências até junho de 2026). ${FONTE_MISTA}</p>
+    <p class="fonte">Variação entre o primeiro e o último ano marcados: percentuais em pontos percentuais, permanência em dias, números absolutos em variação relativa. Verde = melhorou (mais boas práticas ou menos morbidade); vermelho = piorou; sem cor = número absoluto, distribuição, ocupação ou permanência, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação dos números absolutos não é calculada quando o período parcial é um dos extremos." : ""} * 2025 parcial (competências até junho de 2026). ${FONTE_MISTA}${eg ? ` A média do grupo é a média simples das unidades do grupo com dado no ano (as planilhas trazem só os indicadores calculados, sem numeradores e denominadores).` : ""}</p>
   </div>`;
 }
 

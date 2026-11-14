@@ -362,6 +362,8 @@ table.comp th{position:sticky; top:0; background:var(--branco)}
 table.comp td:first-child,table.comp th:first-child{text-align:left; font-weight:600}
 table.comp tr.grupo td{background:var(--mint); font-weight:800; color:var(--verde-esmeralda); font-size:.78rem; letter-spacing:.06em; text-transform:uppercase}
 table.comp .melhor{background:#E4F3E8; font-weight:800; border-radius:6px}
+table.comp .col-grupo{color:#5E716A}                       /* colunas do grupo no modo mesma unidade entre anos */
+table.comp .col-grupo.prim{border-left:2px solid var(--borda)}
 .chip-ano{cursor:pointer}
 .chip-ano.ativo{background:var(--verde-fiocruz); color:#FFF; border-color:var(--verde-fiocruz)}
 .var-click{cursor:pointer; text-decoration:underline dotted 1.5px; text-underline-offset:3px}
@@ -561,7 +563,7 @@ footer a{color:var(--verde-lima)}
     <div class="sec-head">
       <p class="eyebrow">Comparador</p>
       <h2>Comparar unidades lado a lado</h2>
-      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (Apoiadas, HU Brasil ou QUALINEO) e compare de duas a quatro maternidades do grupo lado a lado, com a menor mortalidade destacada em cada indicador e a opção de incluir a <b>taxa agregada do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador.</p>
+      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (Apoiadas, HU Brasil ou QUALINEO) e compare de duas a quatro maternidades do grupo lado a lado, com a menor mortalidade destacada em cada indicador e a opção de incluir a <b>taxa agregada do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador, também com a opção de incluir o agregado do grupo.</p>
     </div>
     <div class="seg" id="segModoComp" style="margin-bottom:1rem">
       <button data-modo="unidades" class="ativo">Entre unidades</button>
@@ -586,6 +588,7 @@ footer a{color:var(--verde-lima)}
       <div class="comp-sel">
         <select id="selUnidadeEvo" style="min-width:320px"></select>
         <div class="comp-chips" id="anosEvo"></div>
+        <div class="comp-chips" id="evoGrupos"></div>
       </div>
       <div id="evoConteudo"></div>
     </div>

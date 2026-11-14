@@ -1488,14 +1488,39 @@ function sparkline(vals, sentido){
   </svg>`;
 }
 
+/* Grupo no modo "mesma unidade entre anos" (pedido da coordenação em 14/11/2026): colunas de referência com os
+   mesmos anos marcados, sempre depois dos números da unidade. A unidade pode pertencer a mais de um grupo: cada
+   grupo dela tem um botão, que liga ou desliga as colunas (um grupo por vez). O cálculo é o mesmo da coluna do
+   grupo no modo entre unidades (entradaComp e valorEntrada). */
+let evoGrupo = null;
+function gruposDaUnidade(mt){ return ORDEM_CONJ.filter(g => (mt.conjuntos || ["apoiada"]).includes(g)); }
+function desenhaBotoesGrupoEvo(mt){
+  const box = document.getElementById("evoGrupos");
+  if(!box) return;
+  const gs = gruposDaUnidade(mt);
+  if(evoGrupo && !gs.includes(evoGrupo)) evoGrupo = null;
+  box.innerHTML = gs.map(g => {
+    const rot = entradaComp("media:" + g).nome.replace(" · ", " do grupo ");
+    return `<button class="chip chip-ano ${evoGrupo === g ? "ativo" : ""}" data-grupo="${g}" title="Mostra, depois dos números da unidade, as colunas do grupo nos mesmos anos">${evoGrupo === g ? "✓" : "+"} ${esc(rot.charAt(0).toLowerCase() + rot.slice(1))}</button>`;
+  }).join("");
+  box.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    evoGrupo = evoGrupo === b.dataset.grupo ? null : b.dataset.grupo;
+    desenhaEvolucao();
+  }));
+}
 function desenhaEvolucao(){
   const mt = MAT.find(m => m.cnes === evoCnes) || MAT[0];
   const el = document.getElementById("evoConteudo");
+  desenhaBotoesGrupoEvo(mt);
   const anos = [...anosEvoSel].sort((a, b) => a - b);
   if(anos.length < 2){
     el.innerHTML = `<div class="card"><p class="suave">Marque pelo menos dois anos para ver a evolução.</p></div>`;
     return;
   }
+  const eg = evoGrupo ? entradaComp("media:" + evoGrupo) : null;       // colunas do grupo, depois das da unidade
+  const tdsGrupo = ind => eg ? anos.map((a, k) => { const v = valorEntrada(eg, ind, a);
+    return `<td class="mono col-grupo${k ? "" : " prim"}">${(ind.tipo === "num" ? fmtInt(v) : fmtPct(v))}</td>`; }).join("") : "";
+  const thsGrupo = eg ? anos.map((a, k) => `<th class="col-grupo${k ? "" : " prim"}">${nomeAno(a)}<br><span style="font-weight:400">${esc(eg.nome)}</span></th>`).join("") : "";
   const a0 = anos[0], a1 = anos[anos.length - 1];
   const parcialSel = temParcial(anos);
   const linhas = INDS.map(ind => {
@@ -1516,15 +1541,15 @@ function desenhaEvolucao(){
       }
     }
     return `<tr><td>${esc(ind.rot)}${ind.meta != null ? ` <span class="suave">(meta ${ind.sentido === "menor" ? "≤" : "≥"}${ind.meta}%)</span>` : ""}</td>
-      ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1), ind.sentido)}</td></tr>`;
+      ${tds}<td class="${cls} var-click" data-ind="${ind.id}" title="Ver o gráfico da tendência" style="white-space:nowrap">${varTxt}</td><td>${sparkline(serie.slice(0, ULT + 1), ind.sentido)}</td>${tdsGrupo(ind)}</tr>`;
   }).join("");
   el.innerHTML = `
   <div class="card comp-grid">
-    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span></h3>
+    <h3>${esc(mt.nome)} · ${mt.uf} <span class="chip">variação de ${nomeAno(a0)} a ${nomeAno(a1)}</span>${eg ? ` <span class="chip">${esc(eg.nome)} · ${esc(eg.sub)}</span>` : ""}</h3>
     <div class="tab-wrap"><table class="comp">
-      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th></tr></thead>
+      <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th>${thsGrupo}</tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação em pontos percentuais entre o primeiro e o último ano marcados (nascidos vivos: variação relativa em %). Verde = evoluiu no sentido desejado do indicador; vermelho = piorou; sem cor = indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação de nascidos vivos não é calculada quando o período parcial é um dos extremos." : ""} ${FONTE_SINASC}</p>
+    <p class="fonte">Variação em pontos percentuais entre o primeiro e o último ano marcados (nascidos vivos: variação relativa em %). Verde = evoluiu no sentido desejado do indicador; vermelho = piorou; sem cor = indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação de nascidos vivos não é calculada quando o período parcial é um dos extremos." : ""} ${FONTE_SINASC}${eg ? ` A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade). Detalhes na Metodologia.` : ""}</p>
   </div>`;
 }
 
@@ -1584,7 +1609,7 @@ const FICHAS_EXTRAS = [
    d:"Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
    fonte:"Ministério da Saúde - SINASC, " + ANOS[ULT] + "."},
   {rot:"Média do grupo (comparador)",
-   desc:"Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — Apoiadas, HU Brasil ou QUALINEO, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   desc:"Coluna de referência do comparador, entre unidades e no modo mesma unidade entre anos: a maternidade é comparada com a média do seu próprio grupo — Apoiadas, HU Brasil ou QUALINEO, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    n:"Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    d:"Soma dos denominadores correspondentes nas mesmas unidades.",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."}
