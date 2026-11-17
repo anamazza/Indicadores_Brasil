@@ -1,0 +1,266 @@
+{
+ "geradoEm": "2026-11-17",
+ "criterio": "ponto a mais de 3 km fora do próprio município (malha municipal do IBGE); substituído pela sede do município (base territorial do Ministério da Saúde de 2026-06-22)",
+ "correcoes": {
+  "0002232": {
+   "nome": "Hospital Santa Isabel",
+   "uf": "SE",
+   "municipio": "Aracaju",
+   "lat": -10.9072,
+   "lon": -37.0482,
+   "lat_cadastro": -10.59211,
+   "lon_cadastro": -36.94162,
+   "motivo": "coordenada do cadastro cai em município 280330, a 32.3 km do limite de Aracaju; usada a sede do município"
+  },
+  "0806285": {
+   "nome": "Hospital Regional Do Alto Sertao",
+   "uf": "AL",
+   "municipio": "Delmiro Gouveia",
+   "lat": -9.3846,
+   "lon": -37.9992,
+   "lat_cadastro": -9.48971,
+   "lon_cadastro": -37.8067,
+   "motivo": "coordenada do cadastro cai em município 270580, a 9.6 km do limite de Delmiro Gouveia; usada a sede do município"
+  },
+  "2019736": {
+   "nome": "Ses Ap Hospital Maria Lucia Guimaraes Da Silva",
+   "uf": "AP",
+   "municipio": "Porto Grande",
+   "lat": 0.7126,
+   "lon": -51.4144,
+   "lat_cadastro": -0.56553,
+   "lon_cadastro": -51.71181,
+   "motivo": "coordenada do cadastro cai em Mazagão, a 88.3 km do limite de Porto Grande; usada a sede do município"
+  },
+  "2025507": {
+   "nome": "Hospital das Clínicas da FAMEMA (complexo HCFAMEMA)",
+   "uf": "SP",
+   "municipio": "Marília",
+   "lat": -22.2149,
+   "lon": -49.9516,
+   "lat_cadastro": -22.13029,
+   "lon_cadastro": -49.56218,
+   "motivo": "coordenada do cadastro cai em Pirajuí, a 23.2 km do limite de Marília; usada a sede do município"
+  },
+  "2025523": {
+   "nome": "Hospital das Clínicas da FAMEMA (complexo HCFAMEMA)",
+   "uf": "SP",
+   "municipio": "Marília",
+   "lat": -22.2149,
+   "lon": -49.9516,
+   "lat_cadastro": -22.13029,
+   "lon_cadastro": -49.56218,
+   "motivo": "coordenada do cadastro cai em Pirajuí, a 23.2 km do limite de Marília; usada a sede do município"
+  },
+  "2081695": {
+   "nome": "Conjunto Hospitalar Sorocaba",
+   "uf": "SP",
+   "municipio": "Sorocaba",
+   "lat": -23.4993,
+   "lon": -47.4579,
+   "lat_cadastro": -23.31237,
+   "lon_cadastro": -47.27408,
+   "motivo": "coordenada do cadastro cai em Itu, a 12.1 km do limite de Sorocaba; usada a sede do município"
+  },
+  "2083604": {
+   "nome": "Santa Casa De Avare",
+   "uf": "SP",
+   "municipio": "Avaré",
+   "lat": -23.1032,
+   "lon": -48.9233,
+   "lat_cadastro": -23.01438,
+   "lon_cadastro": -49.31334,
+   "motivo": "coordenada do cadastro cai em município 352860, a 24.5 km do limite de Avaré; usada a sede do município"
+  },
+  "2135124": {
+   "nome": "Fundacao Hospitalar Sao Vicente De Paulo",
+   "uf": "MG",
+   "municipio": "Capelinha",
+   "lat": -17.6954,
+   "lon": -42.5161,
+   "lat_cadastro": -18.23407,
+   "lon_cadastro": -42.26554,
+   "motivo": "coordenada do cadastro cai em município 310060, a 41.4 km do limite de Capelinha; usada a sede do município"
+  },
+  "2163829": {
+   "nome": "Ouro Preto Santa Casa De Ouro Preto",
+   "uf": "MG",
+   "municipio": "Ouro Preto",
+   "lat": -20.3868,
+   "lon": -43.5064,
+   "lat_cadastro": -20.14478,
+   "lon_cadastro": -43.34445,
+   "motivo": "coordenada do cadastro cai em município 310230, a 15.9 km do limite de Ouro Preto; usada a sede do município"
+  },
+  "2269880": {
+   "nome": "Hospital Geral de Bonsucesso",
+   "uf": "RJ",
+   "municipio": "Rio de Janeiro",
+   "lat": -22.8767,
+   "lon": -43.2279,
+   "lat_cadastro": -22.52825,
+   "lon_cadastro": -44.13013,
+   "motivo": "coordenada do cadastro cai em Volta Redonda, a 54.1 km do limite de Rio de Janeiro; usada a sede do município"
+  },
+  "2284634": {
+   "nome": "Hospital Municipal Sao Francisco Xavier",
+   "uf": "RJ",
+   "municipio": "Itaguaí",
+   "lat": -22.8713,
+   "lon": -43.775,
+   "lat_cadastro": -22.0909,
+   "lon_cadastro": -43.0909,
+   "motivo": "coordenada do cadastro cai em Três Rios, a 95.6 km do limite de Itaguaí; usada a sede do município"
+  },
+  "2386569": {
+   "nome": "Hospital Municipal Prof Magalhaes Neto",
+   "uf": "BA",
+   "municipio": "Brumado",
+   "lat": -14.2054,
+   "lon": -41.6671,
+   "lat_cadastro": -14.2037,
+   "lon_cadastro": -42.24599,
+   "motivo": "coordenada do cadastro cai em Ibiassucê, a 23.7 km do limite de Brumado; usada a sede do município"
+  },
+  "2392410": {
+   "nome": "Hospital Regional De Colider",
+   "uf": "MT",
+   "municipio": "Colíder",
+   "lat": -10.8041,
+   "lon": -55.4642,
+   "lat_cadastro": -10.48144,
+   "lon_cadastro": -55.27331,
+   "motivo": "coordenada do cadastro cai em município 510880, a 6.5 km do limite de Colíder; usada a sede do município"
+  },
+  "2456958": {
+   "nome": "Santa Casa",
+   "uf": "MA",
+   "municipio": "São Luís",
+   "lat": -2.5319,
+   "lon": -44.2979,
+   "lat_cadastro": -2.245,
+   "lon_cadastro": -44.6958,
+   "motivo": "coordenada do cadastro cai em Guimarães, a 49.5 km do limite de São Luís; usada a sede do município"
+  },
+  "2530236": {
+   "nome": "Hospital Regional Adelia Matos Fonseca",
+   "uf": "MA",
+   "municipio": "Itapecuru Mirim",
+   "lat": -3.399,
+   "lon": -44.3543,
+   "lat_cadastro": -3.26604,
+   "lon_cadastro": -44.61726,
+   "motivo": "coordenada do cadastro cai em Anajatuba, a 14.7 km do limite de Itapecuru Mirim; usada a sede do município"
+  },
+  "2560771": {
+   "nome": "Hospital Universitario Santa Terezinha",
+   "uf": "SC",
+   "municipio": "Joaçaba",
+   "lat": -27.1739,
+   "lon": -51.5067,
+   "lat_cadastro": -27.17278,
+   "lon_cadastro": -51.7348,
+   "motivo": "coordenada do cadastro cai em município 420860, a 4.7 km do limite de Joaçaba; usada a sede do município"
+  },
+  "2561433": {
+   "nome": "Hospital E Mat Venancio Raim De Sousa",
+   "uf": "CE",
+   "municipio": "Horizonte",
+   "lat": -4.0933,
+   "lon": -38.4942,
+   "lat_cadastro": -4.552,
+   "lon_cadastro": -38.2914,
+   "motivo": "coordenada do cadastro cai em Morada Nova, a 46.3 km do limite de Horizonte; usada a sede do município"
+  },
+  "2611295": {
+   "nome": "Hospital Municipal Doutor Amadeu Sa",
+   "uf": "CE",
+   "municipio": "Eusébio",
+   "lat": -3.887,
+   "lon": -38.4451,
+   "lat_cadastro": -3.55886,
+   "lon_cadastro": -38.95721,
+   "motivo": "coordenada do cadastro cai em São Gonçalo do Amarante, a 62.3 km do limite de Eusébio; usada a sede do município"
+  },
+  "2755165": {
+   "nome": "Hospital Dom Orione de Araguaína",
+   "uf": "TO",
+   "municipio": "Araguaína",
+   "lat": -7.1913,
+   "lon": -48.2087,
+   "lat_cadastro": -8.04201,
+   "lon_cadastro": -48.45947,
+   "motivo": "coordenada do cadastro cai em Colinas do Tocantins, a 55.3 km do limite de Araguaína; usada a sede do município"
+  },
+  "2764776": {
+   "nome": "Casa De Caridade De Carangola",
+   "uf": "MG",
+   "municipio": "Carangola",
+   "lat": -20.7326,
+   "lon": -42.0322,
+   "lat_cadastro": -20.80803,
+   "lon_cadastro": -42.00916,
+   "motivo": "coordenada do cadastro cai em município 312530, a 3.0 km do limite de Carangola; usada a sede do município"
+  },
+  "2765942": {
+   "nome": "Hospital Santa Lucinda Sorocaba",
+   "uf": "SP",
+   "municipio": "Sorocaba",
+   "lat": -23.4993,
+   "lon": -47.4579,
+   "lat_cadastro": -23.22212,
+   "lon_cadastro": -47.26824,
+   "motivo": "coordenada do cadastro cai em Salto, a 20.4 km do limite de Sorocaba; usada a sede do município"
+  },
+  "4306945": {
+   "nome": "Hospital da Mulher do Agreste",
+   "uf": "PE",
+   "municipio": "Caruaru",
+   "lat": -8.2859,
+   "lon": -35.9671,
+   "lat_cadastro": -8.36361,
+   "lon_cadastro": -36.69699,
+   "motivo": "coordenada do cadastro cai em Pesqueira, a 62.1 km do limite de Caruaru; usada a sede do município"
+  },
+  "5498465": {
+   "nome": "Hospital Regional Publico Do Araguaia",
+   "uf": "PA",
+   "municipio": "Redenção",
+   "lat": -8.0276,
+   "lon": -50.0296,
+   "lat_cadastro": -7.56527,
+   "lon_cadastro": -49.71766,
+   "motivo": "coordenada do cadastro cai em Floresta do Araguaia, a 45.3 km do limite de Redenção; usada a sede do município"
+  },
+  "6922902": {
+   "nome": "Hospital Materno Infantil",
+   "uf": "MA",
+   "municipio": "Bacabal",
+   "lat": -4.2315,
+   "lon": -44.7816,
+   "lat_cadastro": -4.87218,
+   "lon_cadastro": -44.87694,
+   "motivo": "coordenada do cadastro cai em Esperantinópolis, a 54.3 km do limite de Bacabal; usada a sede do município"
+  },
+  "7958838": {
+   "nome": "Hospital da Mulher do Recife",
+   "uf": "PE",
+   "municipio": "Recife",
+   "lat": -8.0628,
+   "lon": -34.8889,
+   "lat_cadastro": -8.23821,
+   "lon_cadastro": -34.98346,
+   "motivo": "coordenada do cadastro cai em Cabo de Santo Agostinho, a 11.6 km do limite de Recife; usada a sede do município"
+  },
+  "9336508": {
+   "nome": "Hospital Regional De Balsas",
+   "uf": "MA",
+   "municipio": "Balsas",
+   "lat": -7.5312,
+   "lon": -46.039,
+   "lat_cadastro": -7.35821,
+   "lon_cadastro": -46.60533,
+   "motivo": "coordenada do cadastro cai em Riachão, a 26.8 km do limite de Balsas; usada a sede do município"
+  }
+ }
+}

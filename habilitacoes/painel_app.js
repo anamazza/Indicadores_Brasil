@@ -497,16 +497,11 @@ function montarLocal(){
    lista do recorte; mapa de unidades (Leaflet) no acordeão, com o mesmo recorte.
    ============================================================ */
 const NS = "http://www.w3.org/2000/svg";
-/* Conversão aproximada lat/lon -> coordenadas da malha (polinômio de grau 3, habilitacoes/ajusta_projecao.js); usada só
-   para os pontos opcionais sobre a malha. Depois, cada ponto é encaixado dentro da própria região de saúde. */
-const PROJ = {lon0: -54, lat0: -14, deg: 3,
-  cx: [389.6693924797041,-25.669375918899323,2.2974764087746746,6.94771717316214,227.5848973996615,10.44407831174322,-15.59958425479866,2.614872436012288,11.203067014348914,-9.255000451100843],
-  cy: [384.79217286263037,-206.11315840845927,-1.297115372976244,0.4508034745453812,5.709727699623541,5.132886143071913,2.0589199190583702,3.9090790755116522,2.524876252788176,-5.129157042018251]};
-function projeta(lon, lat){
-  const u = (lon - PROJ.lon0) / 10, v = (lat - PROJ.lat0) / 10, t = [];
-  for(let a = 0; a <= PROJ.deg; a++) for(let b = 0; b <= PROJ.deg - a; b++) t.push(Math.pow(u, a) * Math.pow(v, b));
-  return [t.reduce((s, x, k) => s + x * PROJ.cx[k], 0), t.reduce((s, x, k) => s + x * PROJ.cy[k], 0)];
-}
+/* Conversão de latitude e longitude para a malha (17/11/2026): a malha é linear em longitude e latitude (cerca de
+   20,14 px por grau nos dois eixos); a relação abaixo foi aferida pelos extremos geográficos de 12 estados, com resíduo
+   de até 1 px (cerca de 5 km). Substitui a aproximação por polinômio de grau 3, que errava até 90 km na região Norte. */
+const PROJ = {ax: 20.1374, bx: 1489.96, ay: -20.1485, by: 106.00};
+function projeta(lon, lat){ return [PROJ.ax * lon + PROJ.bx, PROJ.ay * lat + PROJ.by]; }
 const terrId = (nivel, mt) => nivel === "uf" ? mt.uf : String((mt.geo || {})[nivel] ?? "");
 /* pontos sobre a malha: só as unidades acompanhadas, que têm coordenadas do próprio cadastro */
 function encaixaPontos(){
@@ -530,7 +525,12 @@ function encaixaPontos(){
     if(mt.lat == null || mt.lon == null){ mt._xy = null; return; }
     let xy = projeta(mt.lon, mt.lat), alvo = null;
     for(const n of ["rs", "macro", "uf"]){ const p = paths[n][terrId(n, mt)]; if(p){ alvo = p; break; } }
-    if(alvo && !dentro(alvo, xy)){ xy = interior(alvo); ajustados++; mt._ajustado = true; }
+    if(alvo && !dentro(alvo, xy)){
+      /* fora da própria região (limite simplificado da malha ou litoral): anda em linha reta até entrar, sem ir ao centro */
+      const c = interior(alvo); let q = c;
+      for(let k = 1; k <= 60; k++){ const f = k / 60, z = [xy[0] + (c[0] - xy[0]) * f, xy[1] + (c[1] - xy[1]) * f]; if(dentro(alvo, z)){ q = z; break; } }
+      xy = q; ajustados++; mt._ajustado = true;
+    }
     mt._xy = xy;
   });
   svg.remove();

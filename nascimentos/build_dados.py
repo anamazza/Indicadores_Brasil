@@ -59,6 +59,22 @@ for f in glob.glob(os.path.join(CSV_GEO_DIR, "*_GEO.csv")):
             }
 print(f"[2] {len(pontos)} estabelecimentos com coordenadas")
 
+# coordenadas corrigidas (17/11/2026): a auditoria pela malha municipal do IBGE (auditar_coordenadas.py, no repositório
+# do site) lista os estabelecimentos cuja coordenada do cadastro cai fora do próprio município; para eles vale a sede
+# do município. Os painéis de Internação, Mortalidade e Habilitações herdam estas coordenadas.
+for _cand in (os.path.join(BASE, "..", "coordenadas_corrigidas.json"),
+              os.path.join(os.path.dirname(os.path.dirname(BASE)), "Página principal", "coordenadas_corrigidas.json")):
+    if os.path.exists(_cand):
+        _corr = json.load(open(_cand, encoding="utf-8"))["correcoes"]
+        _n = 0
+        for _c, _v in _corr.items():
+            if _c in pontos:
+                pontos[_c]["lat"], pontos[_c]["lon"] = _v["lat"], _v["lon"]; _n += 1
+        print(f"[2b] {_n} coordenadas corrigidas para a sede do município (de {len(_corr)} na lista)")
+        break
+else:
+    print("   ATENÇÃO: coordenadas_corrigidas.json não encontrado; mantidas as coordenadas do cadastro")
+
 # coordenadas nas maternidades estratégicas
 sem = []
 for mt in mats:
