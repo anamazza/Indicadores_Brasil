@@ -499,7 +499,7 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
       <span><i style="background:#E4F3E8"></i>habilitação registrada, sem prazo final</span>
       <span><i style="background:#FFF3DB"></i>registrada com competência final definida (vigente na data de referência)</span>
       <span><i style="background:#FFF"></i>sem a habilitação no CNES</span>
-      <span>Número na célula = leitos habilitados; II e III = tipo da UTI. As duas primeiras colunas trazem os leitos SUS obstétricos e neonatais cadastrados. Toque no nome da unidade para abrir a ficha.</span>
+      <span>Número na célula = leitos habilitados. As duas primeiras colunas trazem os leitos SUS obstétricos e neonatais cadastrados. Toque no nome da unidade para abrir a ficha.</span>
     </div>
   </div>
 </section>
@@ -1037,10 +1037,10 @@ function celula(mt, col){
   const habs = col.codigos.flatMap(co => (mt._habs.get(co) || []).map(h => ({...h, _tipo: col.tipo ? col.tipo[co] : null})));
   if(!habs.length) return {html: `<td class="cel nao">·</td>`, texto: ""};
   const prazo = habs.some(h => !ativaSemPrazo(h)), leitos = habs.reduce((s, h) => s + (h.leitos || 0), 0);
-  const tipos = [...new Set(habs.map(h => h._tipo).filter(Boolean))].join("+");
+  /* (21/11/2026, coordenação) a matriz não diferencia o tipo da UTI (II ou III); o tipo continua na dica da célula */
   const tip = habs.map(h => `${h.co} ${h.ds} · desde ${h.ini} · ${fimRot(h)}${h.leitos ? ` · ${h.leitos} leitos` : ""}${h.portaria ? ` · ${h.portaria}` : ""}`).join("\n");
-  return {html: `<td class="cel ${prazo ? "prazo" : "sim"}" title="${esc(tip)}"><span class="ponto"></span>${tipos ? `<span class="tipo">${tipos}</span>` : ""}${leitos ? `<span class="leitos">${leitos}</span>` : ""}</td>`,
-    texto: [tipos, leitos ? `${leitos} leitos` : "", prazo ? "com prazo" : "sim"].filter(Boolean).join(" ")};
+  return {html: `<td class="cel ${prazo ? "prazo" : "sim"}" title="${esc(tip)}"><span class="ponto"></span>${leitos ? `<span class="leitos">${leitos}</span>` : ""}</td>`,
+    texto: [leitos ? `${leitos} leitos` : "", prazo ? "com prazo" : "sim"].filter(Boolean).join(" ")};
 }
 function ordenar(lista){
   const porNome = (a, b) => a.nome.localeCompare(b.nome, "pt-BR");

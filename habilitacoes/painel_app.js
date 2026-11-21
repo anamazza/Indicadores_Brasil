@@ -355,10 +355,10 @@ function celula(mt, col){
   const habs = col.codigos.flatMap(co => (mt._habs.get(co) || []).map(h => ({...h, _tipo: col.tipo ? col.tipo[co] : null})));
   if(!habs.length) return {html: `<td class="cel nao">·</td>`, texto: ""};
   const prazo = habs.some(h => !ativaSemPrazo(h)), leitos = habs.reduce((s, h) => s + (h.leitos || 0), 0);
-  const tipos = [...new Set(habs.map(h => h._tipo).filter(Boolean))].join("+");
+  /* (21/11/2026, coordenação) a matriz não diferencia o tipo da UTI (II ou III); o tipo continua na dica da célula */
   const tip = habs.map(h => `${h.co} ${h.ds} · desde ${h.ini} · ${fimRot(h)}${h.leitos ? ` · ${h.leitos} leitos` : ""}${h.portaria ? ` · ${h.portaria}` : ""}`).join("\n");
-  return {html: `<td class="cel ${prazo ? "prazo" : "sim"}" title="${esc(tip)}"><span class="ponto"></span>${tipos ? `<span class="tipo">${tipos}</span>` : ""}${leitos ? `<span class="leitos">${leitos}</span>` : ""}</td>`,
-    texto: [tipos, leitos ? `${leitos} leitos` : "", prazo ? "com prazo" : "sim"].filter(Boolean).join(" ")};
+  return {html: `<td class="cel ${prazo ? "prazo" : "sim"}" title="${esc(tip)}"><span class="ponto"></span>${leitos ? `<span class="leitos">${leitos}</span>` : ""}</td>`,
+    texto: [leitos ? `${leitos} leitos` : "", prazo ? "com prazo" : "sim"].filter(Boolean).join(" ")};
 }
 function ordenar(lista){
   const porNome = (a, b) => a.nome.localeCompare(b.nome, "pt-BR");
