@@ -174,6 +174,13 @@ for m in mats:
     for c in m["conjuntos"]: conta[c] = conta.get(c, 0) + 1
 print(f"[2b] {novas} unidades novas | total {len(mats)} | por conjunto: {conta}")
 
+# 21/11/2026 (coordenação): saem dos painéis a Unidade Hospitalar de Iauareté (2717387/AM) e o Hospital Dr. Claudionor
+# Couto Roriz (2495279/RO), que não constam da lista de maternidades por grupo de 21/11/2026.
+EXCLUIR = {"2717387", "2495279"}
+antes_exc = len(mats)
+mats[:] = [m for m in mats if m["cnes"].zfill(7) not in EXCLUIR]      # mats é a própria lista de dados["maternidades"]
+print(f"[2b2] unidades retiradas por decisão da coordenação: {antes_exc - len(mats)} | total {len(mats)}")
+
 # ---------- 2c. indicadores assistenciais (planilhas de 26/08/2026) ----------
 # Perfil sociodemografico (SINASC), internacoes obstetricas/neonatais (SIH) e
 # morbidade neonatal — ver Indicadores_Assistenciais/LEIA-ME.md.

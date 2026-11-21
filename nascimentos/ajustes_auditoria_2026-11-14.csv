@@ -42,7 +42,6 @@
 2566168;Hospital Materno Infantil N Sra de Nazareth;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2755165;Hospital Dom Orione de Araguaína;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2755157;Hospital e Maternidade D Regina S Campos de Palmas;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
-2495279;Hospital Dr Claudionor Couto Roriz;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
 2005050;Hospital Regional de Arapiraca;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 9923837;Hospital da Mulher Dra Nise da Silveira;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 9923837;Hospital da Mulher Dra Nise da Silveira;p1500_uf;HOSPITAL DA MULHER DRA NISE DA SILVEIRA;2019;;0;célula vazia
@@ -64,7 +63,7 @@
 2707527;Maternidade Frei Damião;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2430711;Hospital Dom Malan;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2427427;Hospital Barão de Lucena;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
-0000434;IMIP;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+0000434;IMIP;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 8015899;Hospital Estadual Dirceu Arcoverde;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2323397;Maternidade Dona Evangelina Rosa;(cadastro);grupos;;estrategica;apoiada+qualineo;grupos pela lista oficial
 2399644;Maternidade Cândida Vargas;(cadastro);grupos;;estrategica+qualineo;qualineo;grupos pela lista oficial
@@ -620,10 +619,9 @@
 0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;regiao_saude;Total;346;459;coluna Total refeita
 0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;macro;Total;1522;2070;coluna Total refeita
 0254460;Hospital Geral Público Castelo dos Sonhos;p1500_territorio;uf;Total;7650;10736;coluna Total refeita
-2717387;Unidade Hospitalar de Iauareté;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
-2453665;Maternidade Carmosina Coutinho;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
-2705982;Santa Casa de Franca;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
-3021114;Santa Casa de Misericórdia de Sobral;(cadastro);grupos;;estrategica;apoiada;grupos pela lista oficial
+2453665;Maternidade Carmosina Coutinho;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
+2705982;Santa Casa de Franca;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
+3021114;Santa Casa de Misericórdia de Sobral;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
 2499363;Hospital Geral Dr César Cals (HGCC);p1500_uf;UF Ceará;2026S1;;720;território em período sem registro na unidade
 2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;municipio;2026S1;;18286;território em período sem registro na unidade
 2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;regiao_saude;2026S1;;25445;território em período sem registro na unidade

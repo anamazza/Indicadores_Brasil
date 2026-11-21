@@ -152,7 +152,7 @@ def _resolve_geo(geo, uf, nome_rs, nome_macro):
 def _lista_oficial():
     """{cnes: {"grupos": [...], "tipo": str, "nome": str}} da lista oficial de 09/09/2026 (csv ao lado deste script)."""
     import csv
-    caminho = os.path.join(BASE, "lista_oficial_2026-09-09.csv")
+    caminho = os.path.join(BASE, "lista_oficial_2026-11-21.csv")      # lista de 21/11/2026 (antes, a de 09/09/2026)
     if not os.path.exists(caminho):
         return {}
     saida = {}
@@ -310,7 +310,7 @@ def consolidar(verboso=True):
         "painel": "habilitacoes",
         "consultaCnes": consulta,
         "consultasPorPainel": consultas,
-        "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026" if oficial else next((dados[p].get("listaOficial") for p in PAINEIS if dados[p].get("listaOficial")), None),
+        "listaOficial": "LISTA_MATERNIDADES_POR_GRUPO_21112026" if oficial else next((dados[p].get("listaOficial") for p in PAINEIS if dados[p].get("listaOficial")), None),
         "listaOficialN": len(oficial) or None,
         "excluidas": EXCLUIR,
         "unidadesPorPainel": {p: len(dados[p]["maternidades"]) for p in PAINEIS},

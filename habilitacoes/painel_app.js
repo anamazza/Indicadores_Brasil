@@ -211,7 +211,7 @@ function montarCabecalho(){
   }
   const anexos = ACOMP.filter(m => m.oficial === false);
   $("notaAnexos").innerHTML = anexos.length
-    ? `<b>Lista oficial e anexos:</b> a lista oficial de 09/09/2026 tem ${fmtInt(DADOS.listaOficialN || 115)} códigos CNES, todos presentes entre as unidades apoiadas, com os grupos lidos da própria lista. As ${anexos.length} unidades apoiadas fora dela (${anexos.map(a => `${esc(a.nome)}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis; entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
+    ? `<b>Lista oficial e anexos:</b> a lista oficial de 21/11/2026 tem ${fmtInt(DADOS.listaOficialN || 118)} códigos CNES, todos presentes entre as unidades apoiadas, com os grupos lidos da própria lista. As ${anexos.length} unidades apoiadas fora dela (${anexos.map(a => `${esc(a.nome)}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis; entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
   $("notaFamilias").innerHTML = FAMILIAS.map(f => `<li><b>${esc(f.rot)}</b>: ${f.codigos.map(co => `${co} ${esc(dsCurta(co))}`).join("; ")}.</li>`).join("");
   $("btnNotas").addEventListener("click", () => $("secNotas").scrollIntoView({behavior: "smooth"}));
 }
@@ -832,7 +832,7 @@ function abrirDossie(cnes){
           ${mt.grupos.map(g => `<span>${bolinha(g)}${esc(GRUPOS[g])}</span>`).join("")}
           ${mt.acomp ? "" : `<span>unidade fora dos três grupos</span>`}
           <span>${esc(mt.municipio || "")}${mt.municipio ? " · " : ""}${esc(UF_NOME[mt.uf] || mt.uf)}</span>
-          ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 09/09/2026</span>` : ""}
+          ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 21/11/2026</span>` : ""}
         </div>
       </div>
       <div class="kpis-topo">

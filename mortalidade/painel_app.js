@@ -1128,7 +1128,7 @@ function desenhaDossie(){
         <span>CNES ${mt.cnesComplexo ? mt.cnesComplexo.join(" + ") : mt.cnes}</span><span>${esc(t.municipio)} · ${mt.uf}</span>
         ${t.regiao_saude ? `<span>Região de saúde: ${esc(t.regiao_saude)}</span>` : ""}${t.macro ? `<span>${esc(t.macro)}</span>` : ""}
         <span>${esc(rotuloConjuntos(mt))}</span>
-        ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 09/09/2026</span>` : ""}
+        ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 21/11/2026</span>` : ""}
       </div>
     </div>
     <div class="kpis-topo">
@@ -1470,7 +1470,7 @@ function desenhaMetodologia(){
     ["SIM · declarações de óbito fetal (DOFET)", "Arquivo nacional DOFET<aa>.dbc, 2019 a 2025 (e DOFET26, preliminar, para o 1º semestre de 2026). Entram os óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais (CID-10, volume 2; IDB C.5). Base dos óbitos fetais e do componente fetal da mortalidade perinatal."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos. Nascidos vivos ocorridos em cada unidade (CODESTAB) por ano de nascimento: denominador da razão de mortalidade materna e das taxas neonatais e, somado aos óbitos fetais, das taxas fetal e perinatal. Desde 14/11/2026 são os mesmos nascidos vivos do Painel de Nascimentos, contados nos microdados nacionais do SINASC (OpenDataSUS) por estabelecimento de ocorrência, o que inclui os nascimentos de mães residentes em outros estados."],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde: código de identificação de cada unidade e coordenadas geográficas georreferenciadas a partir do cadastro. A ficha de cadastro e as habilitações das unidades estão no Painel de Perfil e Estrutura."],
-    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Estratégicas, HU Brasil e/ou QUALINEO 3. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Internação e de Habilitações."],
+    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 21/11/2026 (coordenação), com as unidades classificadas nos grupos Estratégicas, HU Brasil e/ou QUALINEO 3. O painel traz 118 unidades dessa lista, as mesmas dos painéis de Nascimentos, de Internação e de Perfil e Estrutura; as quatro unidades acrescentadas à lista em 21/11/2026 ainda não foram incluídas."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização — as mesmas do Painel NV 2026."]
   ];
   const fichaHTML = (rot, desc, n, d, obs, fonte) => `

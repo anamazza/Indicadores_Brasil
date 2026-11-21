@@ -38,7 +38,10 @@ FONTES = [                                                     # (arquivo, data 
     # "semSIH" - contagens do SIH = 0, taxas e percentuais do SIH sem valor, linhas do SINASC calculadas.
     (os.path.join(SAIDA_SIH, "planilhas_adicionais_iauarete.json"), "2026-11-13"),
 ]
-LISTA_OFICIAL = os.path.join(DOCS, "Mortalidade Indicadores", "lista_oficial_116.csv")
+# 21/11/2026 (coordenação): saem dos painéis a Unidade Hospitalar de Iauareté (2717387/AM) e o Hospital Dr. Claudionor
+# Couto Roriz (2495279/RO), que não constam da lista de maternidades por grupo de 21/11/2026.
+EXCLUIR = {"2717387", "2495279"}
+LISTA_OFICIAL = os.path.join(DOCS, "Mortalidade Indicadores", "lista_oficial_2026-11-21.csv")   # antes, lista_oficial_116.csv (09/09/2026)
 PAINEL_NV = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Painel_2026_Novo")   # leitura apenas
 NV_DADOS = os.path.join(PAINEL_NV, "dados_nv2026.js")
 NV_CNES = os.path.join(PAINEL_NV, "cnes_dados.json")
@@ -416,6 +419,8 @@ def blocos_de(cnes):
 # ----------------------------------------------------------------------------- 4. maternidades
 mats, avisos = [], []
 for cnes in sorted(plan):
+    if cnes in EXCLUIR:
+        continue
     ref = nv.get(cnes)
     of = oficial.get(cnes) or oficial.get(ALIAS_OFICIAL.get(cnes, ""))
     extra = EXTRA_META.get(cnes)
@@ -478,6 +483,8 @@ def busca(url):
 saida_cnes_path = os.path.join(BASE, "cnes_dados.json")
 saida_cnes = json.load(open(saida_cnes_path, encoding="utf-8")) if os.path.exists(saida_cnes_path) else {}
 saida_cnes.setdefault("_atualizado_em", cnes_nv.get("_atualizado_em", date.today().isoformat()))
+for c in EXCLUIR:                                      # unidade retirada do painel: a ficha sai junto
+    saida_cnes.pop(c, None)
 buscadas = 0
 for m, c in [(m, c) for m in mats for c in (m.get("cnesComplexo") or [m["cnes"]])]:
     if c in saida_cnes:
@@ -539,7 +546,7 @@ dados = {"anos": ANOS, "preliminares": PRELIMINARES, "parciais": PARCIAIS, "peri
          "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()},
          "regras": "v3 2026-09-09; morbidade materna grave conforme Domingues et al. (2026 e 2024), 2026-11-14",
          "mmg": {"grupos": MMG_GRUPOS, "criterios": MMG_CRITERIOS, "referencias": MMG_REFERENCIAS},
-         "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026", "maternidades": mats}
+         "listaOficial": "LISTA_MATERNIDADES_POR_GRUPO_21112026", "maternidades": mats}
 out = os.path.join(BASE, "dados_internacao.js")
 with open(out, "w", encoding="utf-8") as fh:
     fh.write("/* Gerado por build_dados.py — não editar à mão */\n")

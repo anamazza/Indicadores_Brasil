@@ -40,8 +40,10 @@ PERIODO_CSV = {os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv")} 
 # 13/11/2026: o Hospital do Rocio (PR, 0013846) sai do painel. Era a única unidade que só existia aqui; com a saída,
 # os quatro painéis (Nascimentos, Internação, Mortalidade e Habilitações) passam a ter as mesmas unidades.
 # As linhas dele continuam nos CSV de indicadores, apenas não entram no painel.
-EXCLUIR = {"0013846"}
-LISTA_OFICIAL = os.path.join(PROJ, "lista_oficial_116.csv")    # LISTA MATERNIDADES POR GRUPO_09092026
+# 21/11/2026 (coordenação): saem dos painéis a Unidade Hospitalar de Iauareté (2717387/AM) e o Hospital Dr. Claudionor
+# Couto Roriz (2495279/RO), que não constam da lista de maternidades por grupo de 21/11/2026.
+EXCLUIR = {"0013846", "2717387", "2495279"}
+LISTA_OFICIAL = os.path.join(PROJ, "lista_oficial_2026-11-21.csv")    # LISTA_MATERNIDADES_POR_GRUPO_21112026 (antes, lista_oficial_116.csv)
 RELATORIO = os.path.join(PROJ, "Apresentacoes_Mortalidade_2026-09", "relatorio_geracao.csv")
 PAINEL_NV = os.path.join(DOCS, "Pojeto Apresentações NV_2026", "Painel_2026_Novo")   # leitura apenas
 NV_DADOS = os.path.join(PAINEL_NV, "dados_nv2026.js")
@@ -430,7 +432,7 @@ print(f"[6] {len(contexto)} pontos de contexto (>=480 partos/ano, fora do painel
 # ----------------------------------------------------------------------------- 7. saída
 dados = {"anos": ANOS, "preliminares": PRELIMINARES, "parciais": PARCIAIS, "periodos": PERIODOS,
          "rotulosAno": {k: v["rotulo"] for k, v in PERIODOS.items()}, "extraidoEm": EXTRAIDO_EM,
-         "listaOficial": "LISTA MATERNIDADES POR GRUPO_09092026", "maternidades": mats}
+         "listaOficial": "LISTA_MATERNIDADES_POR_GRUPO_21112026", "maternidades": mats}
 out = os.path.join(BASE, "dados_mortalidade.js")
 with open(out, "w", encoding="utf-8") as fh:
     fh.write("/* Gerado por build_dados.py — não editar à mão */\n")

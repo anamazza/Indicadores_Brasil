@@ -29,7 +29,7 @@ import coluna_periodo as cp
 BASE = os.path.dirname(os.path.abspath(__file__))
 PROJ = os.path.dirname(BASE)
 EXT = os.path.join(PROJ, "Extracao_SINASC")
-LISTA = os.path.join(BASE, "lista_oficial_2026-09-09.csv")
+LISTA = os.path.join(BASE, "lista_oficial_2026-11-21.csv")      # lista de 21/11/2026 (antes, a de 09/09/2026)
 ANOS = [str(a) for a in range(2019, 2026)]
 COMPLEXOS = cp.FONTES_CNES                            # código usado no painel -> códigos que formam a unidade
 FICHA_COMPLEXO = {"2025507": "2025523"}
