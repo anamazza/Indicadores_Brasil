@@ -19,7 +19,7 @@
    "meta": null,
    "unidade": null,
    "fonte": null,
-   "desc": "Participação das maternidades estratégicas do território no total de nascidos vivos da UF.",
+   "desc": "Participação das maternidades apoiadas do território no total de nascidos vivos da UF.",
    "alias": null
   },
   {
@@ -184,7 +184,7 @@
    "obs": null
   },
   "shareUF": {
-   "n": "Nascidos vivos ocorridos nas maternidades estratégicas da seleção.",
+   "n": "Nascidos vivos ocorridos nas maternidades apoiadas da seleção.",
    "d": "Nascidos vivos totais da UF (com mais de uma unidade na seleção, o total da UF é contado uma única vez).",
    "obs": null
   },
@@ -283,7 +283,7 @@
   },
   {
    "rot": "% de NV ocorridos no território de residência (Comparativo entre anos)",
-   "desc": "Retenção territorial de nascimentos: das mães residentes em cada território, quantas pariram dentro do próprio território. Considera todos os nascimentos, não apenas maternidades estratégicas. Nos níveis macrorregião e UF, o percentual agrega os nascidos na própria região de saúde (recorte todos) ou na própria macro (recorte <1500 g), seguindo a semântica das planilhas oficiais.",
+   "desc": "Retenção territorial de nascimentos: das mães residentes em cada território, quantas pariram dentro do próprio território. Considera todos os nascimentos, não apenas maternidades apoiadas. Nos níveis macrorregião e UF, o percentual agrega os nascidos na própria região de saúde (recorte todos) ou na própria macro (recorte <1500 g), seguindo a semântica das planilhas oficiais.",
    "n": "Nascidos vivos de mães residentes que ocorreram no próprio território de residência (nível região de saúde; agregado nos níveis macro e UF).",
    "d": "Nascidos vivos de mães residentes no território, independentemente de onde ocorreu o parto.",
    "fonte": "Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025, com 2025 preliminar. Ambos os recortes (todos e <1500 g) por região de saúde, macro e UF. Extração própria validada contra as planilhas NV por Região e NV por Macro (2019 e 2024): diferenças médias de 0,1 a 0,4 ponto percentual."
@@ -297,7 +297,7 @@
   },
   {
    "rot": "Média do grupo (comparador)",
-   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com a média do seu próprio grupo — Estratégicas, HU Brasil ou QUALINEO 3. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    "d": "Soma dos denominadores correspondentes nas mesmas unidades.",
    "fonte": "Ministério da Saúde - SINASC, "

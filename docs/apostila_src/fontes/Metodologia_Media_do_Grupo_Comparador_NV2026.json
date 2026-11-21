@@ -22,7 +22,7 @@
  {
   "tipo": "p",
   "estilo": "",
-  "texto": "O comparador do painel (“Comparar unidades lado a lado”) passou a permitir que cada maternidade seja comparada com a média do seu próprio grupo. O usuário escolhe primeiro o grupo — maternidades estratégicas, unidades EBSERH ou QUALINEO 2026/2027 —, seleciona de uma a quatro maternidades desse grupo e pode incluir a coluna “Média do grupo” como referência. O filtro por grupo é obrigatório: o painel não permite comparar unidades de grupos diferentes entre si, nem uma unidade com a média de outro grupo."
+  "texto": "O comparador do painel (“Comparar unidades lado a lado”) passou a permitir que cada maternidade seja comparada com a média do seu próprio grupo. O usuário escolhe primeiro o grupo — Estratégicas, HU Brasil ou QUALINEO 3 —, seleciona de uma a quatro maternidades desse grupo e pode incluir a coluna “Média do grupo” como referência. O filtro por grupo é obrigatório: o painel não permite comparar unidades de grupos diferentes entre si, nem uma unidade com a média de outro grupo."
  },
  {
   "tipo": "p",
@@ -37,7 +37,7 @@
  {
   "tipo": "p",
   "estilo": "",
-  "texto": "Cada unidade do painel pertence a pelo menos um dos três grupos. Algumas unidades pertencem a dois (por exemplo, hospitais universitários EBSERH que também são maternidades estratégicas). Para efeito de exibição, cada unidade aparece uma única vez nos seletores, no primeiro grupo da ordem estratégicas → EBSERH → QUALINEO; para efeito de cálculo da média, a unidade conta em todos os grupos a que pertence."
+  "texto": "Cada unidade do painel pertence a pelo menos um dos três grupos. Algumas unidades pertencem a dois (por exemplo, hospitais universitários do grupo HU Brasil que também são do grupo Estratégicas). Para efeito de exibição, cada unidade aparece uma única vez nos seletores, no primeiro grupo da ordem Estratégicas → HU Brasil → QUALINEO 3; para efeito de cálculo da média, a unidade conta em todos os grupos a que pertence."
  },
  {
   "tipo": "tabela",
@@ -66,7 +66,7 @@
    ],
    [
     [
-     "Unidades EBSERH"
+     "HU Brasil"
     ],
     [
      "22"
@@ -77,7 +77,7 @@
    ],
    [
     [
-     "QUALINEO 2026/2027"
+     "QUALINEO 3"
     ],
     [
      "33"
@@ -166,7 +166,7 @@
  {
   "tipo": "p",
   "estilo": "",
-  "texto": "Percentual de cesárea do grupo EBSERH em 2025: as 25 unidades do grupo com dado no ano somaram 28.638 partos cesáreos em 50.084 nascidos vivos com via de nascimento informada."
+  "texto": "Percentual de cesárea do grupo HU Brasil em 2025: as 25 unidades do grupo com dado no ano somaram 28.638 partos cesáreos em 50.084 nascidos vivos com via de nascimento informada."
  },
  {
   "tipo": "p",
@@ -176,7 +176,7 @@
  {
   "tipo": "p",
   "estilo": "",
-  "texto": "No comparador, cada hospital EBSERH é comparado a essa referência de 57,2% — por exemplo, uma unidade com 64,4% de cesárea aparece 7,2 pontos percentuais acima da média do seu grupo no ano."
+  "texto": "No comparador, cada hospital HU Brasil é comparado a essa referência de 57,2% — por exemplo, uma unidade com 64,4% de cesárea aparece 7,2 pontos percentuais acima da média do seu grupo no ano."
  },
  {
   "tipo": "p",

@@ -1,4 +1,4 @@
-// Apostila dos Dicionários de Dados · versão 1.4 (18/10/2026: "dossiê" -> "perfil da unidade"; 1.3 sem a seção de documentos de origem e em registro formal; 1.2 = 1º semestre de 2026; 1.1 revisada pela banca de 11/10/2026).
+// Apostila dos Dicionários de Dados · versão 1.5 (21/11/2026: nomes dos grupos Estratégicas, HU Brasil e QUALINEO 3; 1.4 de 18/10/2026: "dossiê" -> "perfil da unidade"; 1.3 sem a seção de documentos de origem e em registro formal; 1.2 = 1º semestre de 2026; 1.1 revisada pela banca de 11/10/2026).
 // Uso: node gera_apostila_v2.js <pasta_fontes_json> <logo_png> <faixa_png> <saida.docx>
 const fs = require("fs");
 const path = require("path");
@@ -44,7 +44,7 @@ capa.push(P([{ t: "Qualificação do Modelo de Gestão em Maternidades Estratég
 capa.push(P([{ t: "Coordenação de Ações Nacionais e de Cooperação em Saúde da Mulher, da Criança e do Adolescente", size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Instituto Nacional de Saúde da Mulher, da Criança e do Adolescente Fernandes Figueira (IFF/Fiocruz)", size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Ministério da Saúde", size: 24 }], { spacing: { after: 600 } }));
-capa.push(P([{ t: "Versão 1.4 · Rio de Janeiro, 18 de outubro de 2026", bold: true, color: C.verdeTexto, size: 24 }], { spacing: { after: 80 } }));
+capa.push(P([{ t: "Versão 1.5 · Rio de Janeiro, 21 de novembro de 2026", bold: true, color: C.verdeTexto, size: 24 }], { spacing: { after: 80 } }));
 capa.push(P([{ t: "Documento de trabalho da equipe. Reproduz os dicionários e as páginas de metodologia aprovados em cada projeto (listados nas referências, seção 9), com as regras em vigor nos painéis publicados em ", color: C.suave, size: 20 }, link(SITE, SITE, 20), { t: ". Dados: bases públicas do Ministério da Saúde (SINASC, SIH/SUS, SIM e CNES), 2019 a 2025 e 1º semestre de 2026, sujeitos a revisão.", color: C.suave, size: 20 }], { spacing: { after: 0 } }));
 capa.push(quebra());
 
@@ -52,7 +52,7 @@ capa.push(quebra());
 const s1 = [
   H1("1. Apresentação"),
   H2("1.1 O que é esta apostila"),
-  P("Esta apostila reúne, em um único documento, as definições e as regras de cálculo dos indicadores dos três painéis das maternidades estratégicas, tal como registradas nos dicionários aprovados e nas páginas de metodologia dos painéis. Os painéis são: Nascimentos, com dados do Sistema de Informações sobre Nascidos Vivos (SINASC); Internação, com dados do Sistema de Informações Hospitalares do Sistema Único de Saúde (SIH/SUS); e Mortalidade, com dados do Sistema de Informações sobre Mortalidade (SIM)."),
+  P("Esta apostila reúne, em um único documento, as definições e as regras de cálculo dos indicadores dos três painéis das maternidades apoiadas, tal como registradas nos dicionários aprovados e nas páginas de metodologia dos painéis. Os painéis são: Nascimentos, com dados do Sistema de Informações sobre Nascidos Vivos (SINASC); Internação, com dados do Sistema de Informações Hospitalares do Sistema Único de Saúde (SIH/SUS); e Mortalidade, com dados do Sistema de Informações sobre Mortalidade (SIM)."),
   P("Ela foi escrita para toda a equipe, em linguagem direta. O objetivo é que qualquer pessoa consiga responder a uma pergunta frequente: de onde vem cada número do painel e da apresentação. As siglas são explicadas na primeira vez em que aparecem e estão reunidas no glossário (seção 8)."),
   P("O conteúdo reproduz os documentos aprovados em cada projeto. Nada foi criado fora deles. Quando um dicionário registra uma decisão da coordenação, a data da decisão aparece junto da regra. A apostila deve ser atualizada sempre que um dos documentos de origem mudar (seção 1.4). Os registros de auditoria, validação e revisão dos painéis ficam em documentos próprios e não fazem parte deste dicionário."),
   H2("1.2 Como usar"),
@@ -81,6 +81,7 @@ const s1 = [
     ["1.2", "18/10/2026", "Período parcial: os painéis passaram a trazer a coluna \"1º sem. 2026\" (janeiro a junho de 2026, dados preliminares). Atualizados o período na capa e na seção 2, a nota de dados preliminares e a tabela da seção 7.2, e acrescentada a nota \"Período parcial\" na seção 7.1. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
     ["1.3", "18/10/2026", "Retirada, a pedido da coordenação, a seção \"Documentos de origem\" (antiga 1.4); os documentos continuam citados nas referências (seção 9), e o controle de versões passou a ser a seção 1.4. Textos de ligação revisados para o registro formal, com citação das fontes oficiais e dos documentos aprovados no lugar das etapas internas de trabalho. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
     ["1.4", "18/10/2026", "A página de cada maternidade nos painéis, antes chamada \"dossiê\", passou a chamar-se \"perfil da unidade\", a pedido da coordenação; o termo foi atualizado nesta apostila. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
+    ["1.5", "21/11/2026", "Nomes dos grupos atualizados conforme definição da coordenação de 19/11/2026: Estratégicas, HU Brasil e QUALINEO 3. As unidades dos três grupos são as maternidades apoiadas. Nenhuma regra de cálculo mudou.", "Coordenação (equipe dos painéis)"],
   ]),
   P("Responsável pela atualização: a coordenação, por meio da equipe dos painéis, sempre que um documento de origem for alterado. Contato: pela coordenação, no IFF/Fiocruz."),
 ];
@@ -103,15 +104,15 @@ const tabGruposAgo = COMP.find((b) => b.tipo === "tabela" && b.linhas.length ===
 const s3 = [
   H1("3. Unidades e grupos"),
   H2("3.1 Os três grupos de maternidades"),
-  P("Cada unidade dos painéis pertence a pelo menos um de três grupos: maternidades estratégicas (rotuladas \"apoiadas\" na lista oficial e nos painéis de Internação e de Mortalidade), unidades da Empresa Brasileira de Serviços Hospitalares (EBSERH) e maternidades do QUALINEO, ciclo 2026/2027. Algumas unidades pertencem a dois ou três grupos, por exemplo, hospitais universitários da EBSERH que também são maternidades estratégicas."),
-  P("Nos painéis de Internação e de Mortalidade, as unidades e os grupos seguem, desde 9 de setembro de 2026, a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, com 115 estabelecimentos (códigos CNES distintos). Uma unidade classificada como \"apoiada/QUALINEO\" conta nos dois grupos. O Painel de Nascimentos mantém a composição de grupos definida em agosto de 2026; por isso, a média do grupo de uma mesma unidade pode diferir entre os painéis."),
+  P("As unidades dos painéis são maternidades apoiadas, isto é, recebem apoio técnico do IFF/Fiocruz. Cada uma pertence a pelo menos um de três grupos, conforme o tipo de apoio: Estratégicas, HU Brasil e QUALINEO 3. Algumas unidades pertencem a dois ou três grupos, por exemplo, hospitais universitários do grupo HU Brasil que também são do grupo Estratégicas."),
+  P("Nos painéis de Internação e de Mortalidade, as unidades e os grupos seguem, desde 9 de setembro de 2026, a lista oficial de maternidades por grupo definida pela coordenação em 9 de setembro de 2026, com 115 estabelecimentos (códigos CNES distintos). Uma unidade classificada em dois grupos, por exemplo Estratégicas e QUALINEO 3, conta nos dois. O Painel de Nascimentos mantém a composição de grupos definida em agosto de 2026; por isso, a média do grupo de uma mesma unidade pode diferir entre os painéis."),
   ...tabelaL("Unidades por grupo em cada painel, em 11 de outubro de 2026 (uma unidade pode contar em mais de um grupo)", [3200, 2146, 2146, 2146], ["Grupo", "Painel de Nascimentos", "Painel de Internação", "Painel de Mortalidade"], [
-    ["Maternidades estratégicas (apoiadas)", "63", "58", "59"],
-    ["Unidades EBSERH", "25", "25", "25"],
-    ["QUALINEO 2026/2027", "35", "86", "86"],
+    ["Estratégicas", "63", "58", "59"],
+    ["HU Brasil", "25", "25", "25"],
+    ["QUALINEO 3", "35", "86", "86"],
     ["Total de unidades no painel", "118", "119", "120"],
   ], { tamanho: 20 }),
-  nota("Fonte: dados publicados dos painéis em 11/10/2026. Em agosto de 2026, a nota metodológica do comparador do Painel de Nascimentos registrava 60 maternidades estratégicas, 25 unidades EBSERH e 35 do QUALINEO no cálculo da média (60, 22 e 33 nos seletores, porque cada unidade aparece uma única vez no seletor); a lista de referência das maternidades estratégicas do Painel de Nascimentos tem 59 unidades."),
+  nota("Fonte: dados publicados dos painéis em 11/10/2026. Em agosto de 2026, a nota metodológica do comparador do Painel de Nascimentos registrava 60 unidades do grupo Estratégicas, 25 do HU Brasil e 35 do QUALINEO 3 no cálculo da média (60, 22 e 33 nos seletores, porque cada unidade aparece uma única vez no seletor); a lista de referência do grupo Estratégicas do Painel de Nascimentos tem 59 unidades."),
   P("As unidades pedidas pela coordenação depois da lista oficial entram nos painéis com as mesmas regras. Quando não constam da lista oficial, aparecem identificadas como acrescentadas (\"anexo\"). Em 11 de outubro de 2026, a situação era a seguinte:"),
   item([b("Painel de Internação (119 unidades): "), "anexos Maternidade Carmosina Coutinho (Caxias/MA, CNES 2453665), Santa Casa de Misericórdia de Sobral (CE, CNES 3021114), Santa Casa de Franca (SP, CNES 2705982) e Hospital Dr. Claudionor Couto Roriz (RO, CNES 2495279). O CISAM e o Hospital da Mulher do Recife (PE), acrescentados em 12 de setembro de 2026, constam da lista oficial e não são anexo."]),
   item([b("Painel de Mortalidade (120 unidades): "), "anexos Carmosina Coutinho, Santa Casa de Sobral e Santa Casa de Franca (acrescentadas em 23 de setembro de 2026), Hospital do Rocio (PR, CNES 0013846) e Unidade Hospitalar de Iauaretê (AM, CNES 2717387)."]),
@@ -126,7 +127,7 @@ const s3 = [
   item([b("Volume de nascidos vivos: "), "por ser um número absoluto, usa a média por unidade: total de nascidos vivos do grupo dividido pelo número de unidades com dados no ano."]),
   item([b("Só o próprio grupo: "), "o filtro impede comparar unidades de grupos diferentes ou uma unidade com a média de outro grupo. Unidade sem dados no ano fica fora da média daquele ano. Unidade que pertence a mais de um grupo conta na média de todos eles."]),
   item([b("A coluna da média é só referência: "), "não participa do destaque de melhor posição, que compara apenas as unidades entre si."]),
-  P("Exemplo da nota: em 2025, as 25 unidades do grupo EBSERH com dados somaram 28.638 partos cesáreos em 50.084 nascidos vivos com via de nascimento informada, o que resulta em 57,2% de cesárea para o grupo. Uma unidade com 64,4% aparece 7,2 pontos percentuais acima da média do seu grupo."),
+  P("Exemplo da nota: em 2025, as 25 unidades do grupo HU Brasil com dados somaram 28.638 partos cesáreos em 50.084 nascidos vivos com via de nascimento informada, o que resulta em 57,2% de cesárea para o grupo. Uma unidade com 64,4% aparece 7,2 pontos percentuais acima da média do seu grupo."),
   H3("Painel de Internação: média simples das unidades"),
   P("No Painel de Internação, a referência é a média simples dos indicadores das unidades do grupo com dados no ano, porque, para os indicadores de internação, o painel publica os valores calculados de cada unidade, sem numeradores e denominadores. O destaque marca o maior valor nos indicadores de boas práticas (AMIU, acompanhante, parto vaginal após cesariana e analgesia) e o menor nos indicadores de morbidade (casos de morbidade materna grave e condições potencialmente ameaçadoras à vida). Fonte: página \"Metodologia\" do Painel de Internação."),
   H3("Painel de Mortalidade: agregado do grupo"),
@@ -261,7 +262,7 @@ const glossario = [
   ["ANS e QUALISS", "Agência Nacional de Saúde Suplementar e seu Programa de Qualificação dos Prestadores de Serviços de Saúde, citado na ficha de taxa de ocupação (E-EFI-02)."],
   ["Apgar", "Escore de vitalidade do recém-nascido; o painel usa o Apgar do 5º minuto (campo APGAR5)."],
   ["API", "Serviço de acesso automatizado a dados pela internet (do inglês application programming interface)."],
-  ["Apoiadas", "Rótulo das maternidades estratégicas na lista oficial e nos painéis de Internação e de Mortalidade."],
+  ["Apoiadas", "Maternidades que recebem apoio técnico do IFF/Fiocruz. São as unidades dos painéis, distribuídas nos grupos Estratégicas, HU Brasil e QUALINEO 3."],
   ["CAUSABAS", "Causa básica do óbito, código CID-10, na Declaração de Óbito."],
   ["CID-10", "Classificação Internacional de Doenças, 10ª revisão. Códigos de diagnóstico e de causa básica de óbito."],
   ["CNES", "Cadastro Nacional de Estabelecimentos de Saúde. O código CNES de 7 dígitos identifica cada unidade."],
@@ -278,9 +279,10 @@ const glossario = [
   ["DN", "Declaração de Nascido Vivo, documento de origem do SINASC."],
   ["DO e DOFET", "Declaração de Óbito e Declaração de Óbito Fetal, documentos de origem do SIM."],
   ["Perfil da unidade", "Página de detalhe de cada maternidade no painel (seção 1.3)."],
-  ["EBSERH", "Empresa Brasileira de Serviços Hospitalares; grupo dos hospitais universitários federais do painel."],
+  ["Estratégicas", "Nos painéis, um dos três grupos de maternidades apoiadas."],
   ["FTP", "Servidor de arquivos do DATASUS na internet (do inglês file transfer protocol)."],
   ["Habilitações", "Serviços que o SUS autoriza o estabelecimento a realizar, registrados no CNES."],
+  ["HU Brasil", "Nos painéis, grupo dos hospitais universitários federais apoiados."],
   ["ICD-PM", "Classificação da OMS para causas de óbitos perinatais (CID-PM), citada no dicionário de mortalidade."],
   ["IDB", "Indicadores e Dados Básicos para a Saúde, da Rede Interagencial de Informações para a Saúde (RIPSA), publicados pelo DATASUS; fichas C.1.1, C.1.2, C.3 e C.5."],
   ["IDENT", "Campo da AIH que identifica o tipo de AIH (5 = longa permanência)."],
@@ -297,7 +299,7 @@ const glossario = [
   ["OpenDataSUS", "Portal de dados abertos do Ministério da Saúde."],
   ["OPM", "Órteses, próteses e materiais especiais (na SIGTAP)."],
   ["PROC_REA", "Procedimento realizado, registrado na AIH (código SIGTAP)."],
-  ["QUALINEO", "Nos painéis, grupo das maternidades participantes do ciclo 2026/2027 do QUALINEO, do Ministério da Saúde."],
+  ["QUALINEO 3", "Nos painéis, grupo das maternidades apoiadas participantes do QUALINEO 3."],
   ["RD e SP", "Arquivos do SIH/SUS: AIH reduzida (RD, um registro por internação) e serviços profissionais (SP, um registro por procedimento ou ato)."],
   ["Regionalização", "Divisão do território em regiões e macrorregiões de saúde, conforme a base territorial do DATASUS."],
   ["RMM", "Razão de mortalidade materna: óbitos maternos por 100.000 nascidos vivos."],

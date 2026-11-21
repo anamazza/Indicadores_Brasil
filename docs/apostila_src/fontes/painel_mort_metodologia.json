@@ -615,7 +615,7 @@
   },
   {
    "rot": "Agregado do grupo (comparador)",
-   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (apoiadas, EBSERH ou QUALINEO 2026/2027). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
+   "desc": "Coluna de referência do comparador de unidades: a maternidade é comparada com o conjunto do seu grupo (Estratégicas, HU Brasil ou QUALINEO 3). Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. O agregado não participa do destaque de menor valor.",
    "n": "Soma dos numeradores do indicador nas unidades do grupo com dado no ano (nos números absolutos, média por unidade).",
    "d": "Soma dos denominadores correspondentes nas mesmas unidades — a mesma regra de agregação usada nos mapas e no painel lateral.",
    "fonte": "Ministério da Saúde - SIM e SINASC, "
@@ -647,7 +647,7 @@
   ],
   [
    "Lista de maternidades",
-   "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como apoiadas (estratégicas), EBSERH e/ou QUALINEO 2026/2027. O painel inclui ainda, como anexo, o Hospital do Rocio (PR) e a Unidade Hospitalar de Iauaretê (AM)."
+   "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas como Estratégicas, HU Brasil e/ou QUALINEO 3. O painel inclui ainda, como anexo, o Hospital do Rocio (PR) e a Unidade Hospitalar de Iauaretê (AM)."
   ],
   [
    "Malhas territoriais",
