@@ -382,6 +382,14 @@ table.local tfoot td.col-uf{background:var(--mint)}
 .legenda-pontos span.item{display:flex; align-items:center; gap:.4rem}
 @media (max-width: 1080px){ .mapa-grid{grid-template-columns:1fr} }
 @media (max-width: 900px){ #mapaLeaflet{height:460px} }
+/* ficha da unidade: tabela de leitos por categoria e tabela de habilitações com ordenação e filtro (21/11/2026) */
+table.dados tr.grupo-leito td{background:#E8F3EC; font-weight:800; font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; color:#1B5F51; text-align:left}
+table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
+#tabHabs th[data-col]{cursor:pointer; user-select:none; white-space:nowrap}
+#tabHabs th[data-col]::after{content:" " attr(data-ordem); font-size:.72em; opacity:.8}
+#tabHabs tr.filtros th{background:#F4F8F5; padding:.25rem .3rem}
+#tabHabs tr.filtros input{width:100%; min-width:3.2rem; box-sizing:border-box; font:inherit; font-size:.74rem; font-weight:400; padding:.2rem .35rem; border:1px solid #C9D8CE; border-radius:6px; background:#FFF; color:#1D3229}
+@media print{ #tabHabs tr.filtros, #btnOrdemHab{display:none} }
 </style>
 </head>
 <body>

@@ -258,6 +258,11 @@ def consolidar(verboso=True):
                 for cod, (_, sus) in u["l"].items():
                     lt[cod] += sus
             reg["leitos"] = {cod: n for cod, n in sorted(lt.items()) if n}
+            todos = {}                                   # todos os leitos da unidade: {código: [existentes, SUS]}
+            for u in us:
+                for cod, (ex, sus) in (u.get("lt") or {}).items():
+                    v = todos.setdefault(cod, [0, 0]); v[0] += ex; v[1] += sus
+            reg["leitosTodos"] = dict(sorted(todos.items()))
             principal = uni["unidades"].get(reg["cnes"]) or (us[0] if us else None)
             if principal:
                 reg["tipo"] = uni["tiposEstabelecimento"].get(principal["tp"])
@@ -267,7 +272,7 @@ def consolidar(verboso=True):
                 continue
             municipios_usados[u["m"]] = uni["municipios"][u["m"]]
             demais.append({"c": c, "n": u["n"], "u": u["uf"], "m": u["m"], "tp": u["tp"], "g": u["g"], "nj": u["nj"], "cep": u["cep"],
-                           "at": u["at"], "e": u["e"], "l": {cod: v[1] for cod, v in u["l"].items() if v[1]}, "h": u["h"]})
+                           "at": u["at"], "e": u["e"], "l": {cod: v[1] for cod, v in u["l"].items() if v[1]}, "lt": u.get("lt") or {}, "h": u["h"]})
 
     # catálogo dos tipos de habilitação: descrição (a da consulta ao CNES, quando existe; senão a da tabela do DATASUS),
     # nº de unidades (todas e apoiadas), leitos somados e origem (a mesma em todos os registros do código na consulta)
@@ -317,6 +322,9 @@ def consolidar(verboso=True):
         DADOS["universo"] = {k: uni[k] for k in ("competencia", "baixadoEm", "publicadoNoFTP", "baseTerritorial", "criterio", "contagem")}
         DADOS["tiposEstab"] = uni["tiposEstabelecimento"]
         DADOS["esferas"] = uni["esferas"]
+        cat = os.path.join(BASE, "leitos_catalogo.json")     # descrição e categoria de cada código de leito (tabela das apresentações)
+        if os.path.exists(cat):
+            DADOS["leitosCatalogo"] = json.load(open(cat, encoding="utf-8"))
         DADOS["municipios"] = municipios_usados          # código -> [nome, região de saúde, macrorregião, lat e lon da sede]
         DADOS["demais"] = demais
     # cnes_dados.json consolidado (ficha completa, mesmo formato dos outros painéis)

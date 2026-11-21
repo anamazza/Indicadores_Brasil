@@ -104,11 +104,14 @@ apoiadas |= set(COMPLEXOS) | set(COMPLEXOS.values())
 print(f"competência {COMP} | códigos CNES das unidades apoiadas: {len(apoiadas)}")
 
 # ------------------------------------------------------------------ 1. leitos (critério de entrada)
-leitos = defaultdict(dict)          # cnes -> {cod: [existentes, SUS]}
+leitos = defaultdict(dict)          # cnes -> {cod: [existentes, SUS]}, só as especialidades do critério
+leitos_todos = defaultdict(dict)    # cnes -> {cod: [existentes, SUS]}, todas as especialidades (ficha da unidade, 21/11/2026)
 mun_de = {}
 for uf in UFS:
     for r in registros_dbf(dbc("LT", "cnes_lt", uf), ("CNES", "CODUFMUN", "CODLEITO", "QT_EXIST", "QT_SUS")):
         cod = r["CODLEITO"].zfill(2)
+        vt = leitos_todos[r["CNES"]].setdefault(cod, [0, 0])
+        vt[0] += inteiro(r["QT_EXIST"]); vt[1] += inteiro(r["QT_SUS"])
         if cod in OBST or cod in NEO:
             v = leitos[r["CNES"]].setdefault(cod, [0, 0])
             v[0] += inteiro(r["QT_EXIST"]); v[1] += inteiro(r["QT_SUS"])
@@ -224,7 +227,8 @@ for c in sorted(alvo):
     u = {"n": nomes.get(c), "m": s["CODUFMUN"], "uf": s["uf"], "tp": s["TP_UNID"], "g": s["TPGESTAO"] or None, "nj": s["NAT_JUR"] or None,
          "cep": s["COD_CEP"] or None, "at": s["DT_ATUAL"] or None, "sus": s["VINC_SUS"] == "1",
          "e": [int(s[k] == "1") for k in ("CENTROBS", "CENTRNEO", "CENTRCIR", "ATENDHOS", "ATENDAMB")],
-         "l": {k: v for k, v in sorted(leitos.get(c, {}).items())}, "h": hb.get(c, [])}
+         "l": {k: v for k, v in sorted(leitos.get(c, {}).items())},
+         "lt": {k: v for k, v in sorted(leitos_todos.get(c, {}).items()) if v[0] or v[1]}, "h": hb.get(c, [])}
     if c not in universo:
         u["fora"] = True                      # unidade apoiada sem leitos obstétricos/neonatais SUS no arquivo
     unidades[c] = u

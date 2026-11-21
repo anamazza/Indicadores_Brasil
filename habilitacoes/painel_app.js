@@ -84,7 +84,7 @@ const DEMAIS = (DADOS.demais || []).map(u => {
   return {cnes: u.c, nome: u.n || `CNES ${u.c}`, uf: u.u, regiao: REGIAO_DA_UF[u.u] || "", municipio: mun[0] || null, codMun: u.m,
     geo: {rs: mun[1] ?? null, macro: mun[2] ?? null}, lat: mun[3] ?? null, lon: mun[4] ?? null, posMun: true,
     grupos: [], acomp: false, oficial: null, paineis: [],
-    tipo: (DADOS.tiposEstab || {})[u.tp] || null, natureza: (DADOS.esferas || {})[u.nj] || null, leitos: u.l || {},
+    tipo: (DADOS.tiposEstab || {})[u.tp] || null, natureza: (DADOS.esferas || {})[u.nj] || null, leitos: u.l || {}, leitosTodos: u.lt || {},
     ficha: {fantasia: u.n, gestao: u.g, cep: u.cep ? String(u.cep).replace(/^(\d{5})(\d{3})$/, "$1-$2") : null,
       estruturas: ESTRUTURAS.filter(([i]) => u.e && u.e[i]).map(x => x[1])},
     habilitacoes: (u.h || []).map(h => ({co: h[0], ds: DS[h[0]] || "", ini: mesAno(h[1]), fim: mesAno(h[2]), portaria: h[3], dtPortaria: h[4], leitos: h[5] || 0, origem: ORIGEM[h[0]] || null}))};
@@ -335,14 +335,12 @@ function renderDetalhe(){
       <div class="kpis-linha">
         <div class="k"><div class="n">${fmtInt(base.length)}</div><div class="t">unidades · ${plural(ufs.size, "estado", "estados")}</div></div>
         <div class="k"><div class="n">${fmtInt(base.filter(m => m.acomp).length)}</div><div class="t">apoiadas</div></div>
-        <div class="k"><div class="n">${fmtInt(nHabs)}</div><div class="t">habilitações registradas</div></div>
-        <div class="k"><div class="n">${fmtInt(semHab.length)}</div><div class="t">unidades sem nenhuma habilitação</div></div>
         <div class="k"><div class="n">${fmtInt(base.reduce((s, m) => s + m._lo, 0))}</div><div class="t">leitos obstétricos SUS</div></div>
         <div class="k"><div class="n">${fmtInt(base.reduce((s, m) => s + m._ln, 0))}</div><div class="t">leitos neonatais SUS</div></div>
       </div>
       <div class="resumo-colunas">
         <div><h4 class="sub-detalhe">Unidades apoiadas no recorte, por grupo</h4><div class="kpi-lista">${grupos}</div></div>
-        <div><h4 class="sub-detalhe">Unidades com ao menos um código de cada família materno-infantil</h4><div class="kpi-lista duas-colunas">${familias}</div></div>
+        <div><h4 class="sub-detalhe">Unidades com ao menos um código de cada grupo materno-infantil</h4><div class="kpi-lista duas-colunas">${familias}</div></div>
       </div>
       <p class="fonte">Toque em uma barra, acima, para ver as unidades que têm e as que não têm a habilitação, por estado.</p>`;
   }
@@ -802,13 +800,22 @@ function abrirDossie(cnes){
     ["Tipo de estabelecimento", mt.tipo ? titulo(mt.tipo) : null], ["Natureza jurídica", mt.natureza], ["Esfera administrativa", f.esfera], ["Gestão", gest], [f.endereco || f.bairro ? "Endereço" : "CEP", f.endereco || f.bairro ? endereco : f.cep], ["Telefone", f.telefone], ["E-mail", f.email], ["Turno de atendimento", f.turno],
     ["Município / UF", `${mt.municipio || "—"} / ${UF_NOME[mt.uf] || mt.uf}`], ["Região de saúde", nomeRS(mt)], ["Macrorregião de saúde", nomeMacro(mt)],
     ["Painéis em que a unidade aparece", (mt.paineis || []).map(p => ({nascimentos: "Nascimentos", internacao: "Internação", mortalidade: "Mortalidade"}[p] || p)).join(", ")]].filter(i => i[1]);
-  const codLeitos = [...COD_OBST, ...COD_NEO].filter(k => mt.leitos[k]);
-  const habs = mt.habilitacoes.slice().sort((a, b) => (CODIGOS_MI.has(b.co) - CODIGOS_MI.has(a.co)) || a.co.localeCompare(b.co));
-  const linhas = habs.map(h => `<tr class="${CODIGOS_MI.has(h.co) ? "destaque" : ""}">
+  /* todos os leitos da unidade (21/11/2026): existentes e SUS, agrupados como na tabela das apresentações */
+  const CAT = DADOS.leitosCatalogo || {categorias: [], codigos: {}}, lt = mt.leitosTodos || {};
+  const CAT_ROT = {"COMPLEMENTAR": "Complementar", "ESPEC - CIRURGICO": "Especialidade cirúrgica", "ESPEC - CLINICO": "Especialidade clínica", "OBSTETRICO": "Obstétrico", "PEDIATRICO": "Pediátrico", "OUTRAS ESPECIALIDADES": "Outras especialidades", "HOSPITAL DIA": "Hospital-dia"};
+  const somaLT = (cods, i) => cods.reduce((s, k) => s + (lt[k] ? lt[k][i] : 0), 0);
+  const todosCods = Object.keys(lt).sort(), totEx = somaLT(todosCods, 0), totSus = somaLT(todosCods, 1);
+  const catDe = k => (CAT.codigos[k] || [null, "OUTROS"])[1];
+  const linhasLeitos = [...CAT.categorias, "OUTROS"].map(c => { const ks = todosCods.filter(k => catDe(k) === c); if(!ks.length) return "";
+    return `<tr class="grupo-leito"><td colspan="3">${esc(CAT_ROT[c] || "Outros")}</td></tr>` + ks.map(k => `<tr><td>${k} - ${esc((CAT.codigos[k] || [`código ${k}`])[0])}</td><td class="r mono">${fmtInt(lt[k][0])}</td><td class="r mono">${fmtInt(lt[k][1])}</td></tr>`).join(""); }).join("");
+  const chipLeitos = (rot, cods) => `<span class="chip">${rot}: ${fmtInt(somaLT(cods, 0))} existentes · ${fmtInt(somaLT(cods, 1))} SUS</span>`;
+  const habsBase = mt.habilitacoes.slice().sort((a, b) => (CODIGOS_MI.has(b.co) - CODIGOS_MI.has(a.co)) || a.co.localeCompare(b.co));
+  const linhaHab = h => `<tr class="${CODIGOS_MI.has(h.co) ? "destaque" : ""}">
       ${mt.complexo ? `<td class="c mono">${esc(h.cnes || mt.cnes)}</td>` : ""}<td class="c mono">${esc(h.co)}</td><td>${esc(h.ds)}${CODIGOS_MI.has(h.co) ? ` <span class="chip" style="font-size:.66rem; padding:.05rem .45rem; margin-left:.3rem">materno-infantil</span>` : ""}</td>
       <td class="c mono">${esc(h.ini || "—")}</td><td class="c mono">${ativaSemPrazo(h) ? "sem prazo final" : `<span class="pz">até ${esc(h.fim)}</span>`}</td>
       <td style="white-space:normal">${esc(h.portaria || "—")}${h.dtPortaria ? ` <span class="suave">(${esc(h.dtPortaria)})</span>` : ""}</td>
-      <td class="r mono">${h.leitos ? h.leitos : "—"}</td><td class="c" style="font-size:.76rem">${esc(origemRot(h.origem))}</td></tr>`).join("");
+      <td class="r mono">${h.leitos ? h.leitos : "—"}</td><td class="c" style="font-size:.76rem">${esc(origemRot(h.origem))}</td></tr>`;
+  const ncolHab = mt.complexo ? 8 : 7;
   const p = UNI ? UNI.publicadoNoFTP || {} : {};
   const fonteCadastro = mt.acomp
     ? `<b>Última atualização do cadastro no CNES:</b> ${dataBR(f.atualizacao)} · <b>Dados baixados da API oficial em:</b> ${dataBR(DADOS.consultaCnes)}${UNI ? ` · tipo de estabelecimento e natureza jurídica: arquivo de cadastro do CNES no DATASUS, competência ${COMPETENCIA}` : ""}. Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.`
@@ -831,8 +838,8 @@ function abrirDossie(cnes){
       <div class="kpis-topo">
         <div class="k"><div class="n">${n}</div><div class="t">habilitações</div></div>
         <div class="k"><div class="n">${fmtInt(leitos)}</div><div class="t">leitos habilitados</div></div>
-        <div class="k"><div class="n">${fmtInt(mt._lo)}</div><div class="t">leitos obstétricos SUS</div></div>
-        <div class="k"><div class="n">${fmtInt(mt._ln)}</div><div class="t">leitos neonatais SUS</div></div>
+        <div class="k"><div class="n">${fmtInt(somaLT(COD_OBST, 0))} · ${fmtInt(somaLT(COD_OBST, 1))}</div><div class="t">leitos obstétricos: existentes · SUS</div></div>
+        <div class="k"><div class="n">${fmtInt(somaLT(COD_NEO, 0))} · ${fmtInt(somaLT(COD_NEO, 1))}</div><div class="t">leitos neonatais: existentes · SUS</div></div>
       </div>
     </div>
     <div class="dossie-cards">
@@ -841,21 +848,39 @@ function abrirDossie(cnes){
         ${f.estruturas && f.estruturas.length ? `<div class="badges">${f.estruturas.map(e => `<span class="badge-sim">${esc(e)}</span>`).join("")}</div>` : ""}
         <p class="fonte">${fonteCadastro}</p>
       </div>
-      ${UNI ? `<div class="card"><h3>Leitos SUS obstétricos e neonatais <span class="chip">${fmtInt(mt._lo + mt._ln)}</span></h3>
-        ${codLeitos.length ? `<div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde"><thead><tr><th style="text-align:center">Código</th><th>Especialidade do leito</th><th>Grupo</th><th style="text-align:right">Leitos SUS</th></tr></thead>
-          <tbody>${codLeitos.map(k => `<tr><td class="c mono">${k}</td><td>${esc(LEITO_ROT[k] || "")}</td><td>${COD_OBST.includes(k) ? "obstétrico" : "neonatal"}</td><td class="r mono">${fmtInt(mt.leitos[k])}</td></tr>`).join("")}</tbody></table></div>`
-          : `<p class="suave" style="font-size:.86rem; margin-top:.5rem">Nenhum leito SUS de especialidade obstétrica ou neonatal no cadastro da competência ${COMPETENCIA}.</p>`}
-        <p class="fonte"><b>Arquivo de leitos do CNES no DATASUS, competência ${COMPETENCIA}</b> (publicado em ${dataBR(p.leitos)})${mt.complexo ? `, soma dos códigos ${mt.complexo.join(" e ")}` : ""}. São os leitos cadastrados para o SUS em cada especialidade, que não se confundem com os leitos habilitados da tabela abaixo.</p>
+      ${UNI ? `<div class="card"><h3>Leitos no CNES ${chipLeitos("obstétricos", COD_OBST)} ${chipLeitos("neonatais", COD_NEO)}</h3>
+        ${linhasLeitos ? `<div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde"><thead><tr><th>Descrição</th><th style="text-align:right">Leitos existentes</th><th style="text-align:right">Leitos SUS</th></tr></thead>
+          <tbody>${linhasLeitos}<tr class="total"><td>Total</td><td class="r mono">${fmtInt(totEx)}</td><td class="r mono">${fmtInt(totSus)}</td></tr></tbody></table></div>`
+          : `<p class="suave" style="font-size:.86rem; margin-top:.5rem">Nenhum leito no cadastro da competência ${COMPETENCIA}.</p>`}
+        <p class="fonte"><b>Arquivo de leitos do CNES no DATASUS, competência ${COMPETENCIA}</b> (publicado em ${dataBR(p.leitos)})${mt.complexo ? `, soma dos códigos ${mt.complexo.join(" e ")}` : ""}. Leitos existentes e leitos SUS de cada especialidade, que não se confundem com os leitos habilitados da tabela abaixo.</p>
       </div>` : ""}
-      <div class="card"><h3>Habilitações registradas no CNES <span class="chip">${n}</span></h3>
-        <p class="suave" style="font-size:.82rem; margin-top:.3rem">Ordenadas com as habilitações de interesse materno e infantil primeiro e, depois, por código. "Sem prazo final" corresponde a 99/9999 no CNES; as habilitações com competência final definida estavam vigentes na data de referência.</p>
-        <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde">
-          <thead><tr>${mt.complexo ? `<th style="text-align:center">CNES do registro</th>` : ""}<th style="text-align:center">Código</th><th>Habilitação</th><th style="text-align:center">Competência inicial</th><th style="text-align:center">Competência final</th><th>Portaria (data)</th><th style="text-align:right">Leitos</th><th style="text-align:center">Origem</th></tr></thead>
-          <tbody>${linhas || `<tr><td colspan="${mt.complexo ? 8 : 7}" class="suave">Nenhuma habilitação registrada no CNES para este código na data de referência.</td></tr>`}</tbody>
+      <div class="card"><h3>Habilitações registradas no CNES <span class="chip">${n}</span> <span class="chip" id="contaHabs" hidden></span></h3>
+        <p class="suave" style="font-size:.82rem; margin-top:.3rem">As habilitações de interesse materno e infantil vêm primeiro e, depois, por código. Toque no título de uma coluna para ordenar e use a linha abaixo dos títulos para filtrar. "Sem prazo final" corresponde a 99/9999 no CNES.</p>
+        <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde" id="tabHabs">
+          <thead><tr>${mt.complexo ? `<th style="text-align:center">CNES do registro</th>` : ""}<th data-col="co" style="text-align:center">Código</th><th data-col="ds">Habilitação</th><th data-col="ini" style="text-align:center">Competência inicial</th><th data-col="fim" style="text-align:center">Competência final</th><th data-col="portaria">Portaria (data)</th><th data-col="leitos" style="text-align:right">Leitos</th><th data-col="origem" style="text-align:center">Origem</th></tr>
+          <tr class="filtros">${mt.complexo ? "<th></th>" : ""}${["co", "ds", "ini", "fim", "portaria", "leitos", "origem"].map(c => `<th><input data-f="${c}" placeholder="filtrar" aria-label="Filtrar a coluna"/></th>`).join("")}</tr></thead>
+          <tbody id="corpoHabs"></tbody>
         </table></div>
+        <p style="margin-top:.5rem"><button class="chip" id="btnOrdemHab" style="cursor:pointer">↺ ordem inicial e sem filtros</button></p>
         <p class="fonte">${fonteHab}</p>
       </div>
     </div>`;
+  /* ordenar e filtrar a tabela de habilitações (21/11/2026); a ordem inicial mantém as materno-infantis no início */
+  const estHab = {col: null, dir: 1, f: {}};
+  const mesNum = s => { const m = /^(\d{2})\/(\d{4})$/.exec(s || ""); return m ? +m[2] * 100 + +m[1] : 0; };
+  const valorHab = {co: h => h.co, ds: h => normTxt(h.ds), ini: h => mesNum(h.ini), fim: h => ativaSemPrazo(h) ? 999999 : mesNum(h.fim), portaria: h => normTxt(h.portaria || ""), leitos: h => h.leitos || 0, origem: h => origemRot(h.origem)};
+  const textoHab = {co: h => h.co, ds: h => h.ds + (CODIGOS_MI.has(h.co) ? " materno-infantil" : ""), ini: h => h.ini || "", fim: h => ativaSemPrazo(h) ? "sem prazo final" : "até " + h.fim, portaria: h => `${h.portaria || ""} ${h.dtPortaria || ""}`, leitos: h => String(h.leitos || ""), origem: h => origemRot(h.origem)};
+  const desenhaHabs = () => {
+    let l = habsBase.filter(h => Object.entries(estHab.f).every(([c, q]) => !q || normTxt(textoHab[c](h)).includes(q)));
+    if(estHab.col) l = l.slice().sort((a, b) => { const x = valorHab[estHab.col](a), y = valorHab[estHab.col](b); return (x < y ? -1 : x > y ? 1 : 0) * estHab.dir; });
+    $("corpoHabs").innerHTML = l.map(linhaHab).join("") || `<tr><td colspan="${ncolHab}" class="suave">${habsBase.length ? "Nenhuma habilitação com esse filtro." : "Nenhuma habilitação registrada no CNES para este código na data de referência."}</td></tr>`;
+    const c = $("contaHabs"); c.hidden = l.length === habsBase.length; c.textContent = `mostrando ${l.length}`;
+    document.querySelectorAll("#tabHabs th[data-col]").forEach(th => { th.dataset.ordem = th.dataset.col === estHab.col ? (estHab.dir > 0 ? "▲" : "▼") : "↕"; });
+  };
+  document.querySelectorAll("#tabHabs th[data-col]").forEach(th => th.addEventListener("click", () => { estHab.dir = estHab.col === th.dataset.col ? -estHab.dir : 1; estHab.col = th.dataset.col; desenhaHabs(); }));
+  document.querySelectorAll("#tabHabs input[data-f]").forEach(inp => inp.addEventListener("input", () => { estHab.f[inp.dataset.f] = normTxt(inp.value.trim()); desenhaHabs(); }));
+  $("btnOrdemHab").addEventListener("click", () => { estHab.col = null; estHab.dir = 1; estHab.f = {}; document.querySelectorAll("#tabHabs input[data-f]").forEach(inp => { inp.value = ""; }); desenhaHabs(); });
+  desenhaHabs();
   const pg = $("paginaDossie");
   pg.hidden = false; document.body.classList.add("dossie-aberto"); pg.scrollTop = 0;
   if(location.hash !== "#" + cnes) history.replaceState(null, "", "#" + cnes);

@@ -1,0 +1,253 @@
+{
+ "categorias": [
+  "COMPLEMENTAR",
+  "ESPEC - CIRURGICO",
+  "ESPEC - CLINICO",
+  "OBSTETRICO",
+  "PEDIATRICO",
+  "OUTRAS ESPECIALIDADES",
+  "HOSPITAL DIA"
+ ],
+ "codigos": {
+  "01": [
+   "BUCO MAXILO FACIAL",
+   "ESPEC - CIRURGICO"
+  ],
+  "02": [
+   "CARDIOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "03": [
+   "CIRURGIA GERAL",
+   "ESPEC - CIRURGICO"
+  ],
+  "04": [
+   "ENDOCRINOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "05": [
+   "GASTROENTEROLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "06": [
+   "GINECOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "07": [
+   "CIRURGICO/DIAGNOSTICO/TERAPEUTICO",
+   "HOSPITAL DIA"
+  ],
+  "08": [
+   "NEFROLOGIAUROLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "09": [
+   "NEUROCIRURGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "10": [
+   "OBSTETRICIA CIRURGICA",
+   "OBSTETRICO"
+  ],
+  "11": [
+   "OFTALMOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "12": [
+   "ONCOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "13": [
+   "ORTOPEDIATRAUMATOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "14": [
+   "OTORRINOLARINGOLOGIA",
+   "ESPEC - CIRURGICO"
+  ],
+  "15": [
+   "PLASTICA",
+   "ESPEC - CIRURGICO"
+  ],
+  "16": [
+   "TORACICA",
+   "ESPEC - CIRURGICO"
+  ],
+  "31": [
+   "AIDS",
+   "ESPEC - CLINICO"
+  ],
+  "32": [
+   "CARDIOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "33": [
+   "CLINICA GERAL",
+   "ESPEC - CLINICO"
+  ],
+  "34": [
+   "CRONICOS",
+   "OUTRAS ESPECIALIDADES"
+  ],
+  "35": [
+   "DERMATOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "36": [
+   "GERIATRIA",
+   "ESPEC - CLINICO"
+  ],
+  "37": [
+   "HANSENOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "38": [
+   "HEMATOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "40": [
+   "NEFROUROLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "41": [
+   "NEONATOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "42": [
+   "NEUROLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "43": [
+   "OBSTETRICIA CLINICA",
+   "OBSTETRICO"
+  ],
+  "44": [
+   "ONCOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "45": [
+   "PEDIATRIA CLINICA",
+   "PEDIATRICO"
+  ],
+  "46": [
+   "PNEUMOLOGIA",
+   "ESPEC - CLINICO"
+  ],
+  "47": [
+   "PSIQUIATRIA",
+   "OUTRAS ESPECIALIDADES"
+  ],
+  "48": [
+   "REABILITACAO",
+   "OUTRAS ESPECIALIDADES"
+  ],
+  "49": [
+   "PNEUMOLOGIA SANITARIA",
+   "OUTRAS ESPECIALIDADES"
+  ],
+  "65": [
+   "UNIDADE INTERMEDIARIA NEONATAL",
+   "COMPLEMENTAR"
+  ],
+  "66": [
+   "UNIDADE ISOLAMENTO",
+   "COMPLEMENTAR"
+  ],
+  "67": [
+   "TRANSPLANTE",
+   "ESPEC - CIRURGICO"
+  ],
+  "68": [
+   "PEDIATRIA CIRURGICA",
+   "PEDIATRICO"
+  ],
+  "69": [
+   "AIDS",
+   "HOSPITAL DIA"
+  ],
+  "70": [
+   "FIBROSE CISTICA",
+   "HOSPITAL DIA"
+  ],
+  "71": [
+   "INTERCORRENCIA POS-TRANSPLANTE",
+   "HOSPITAL DIA"
+  ],
+  "72": [
+   "GERIATRIA",
+   "HOSPITAL DIA"
+  ],
+  "73": [
+   "SAUDE MENTAL",
+   "HOSPITAL DIA"
+  ],
+  "75": [
+   "UTI-A TIPO II",
+   "COMPLEMENTAR"
+  ],
+  "76": [
+   "UTI-A TIPO III",
+   "COMPLEMENTAR"
+  ],
+  "78": [
+   "UTI PEDIATRICA - TIPO II",
+   "COMPLEMENTAR"
+  ],
+  "79": [
+   "UTI-PED TIPO III",
+   "COMPLEMENTAR"
+  ],
+  "81": [
+   "UTI NEONATAL - TIPO II",
+   "COMPLEMENTAR"
+  ],
+  "82": [
+   "UTI NEONATAL - TIPO III",
+   "COMPLEMENTAR"
+  ],
+  "83": [
+   "UTI-Q",
+   "COMPLEMENTAR"
+  ],
+  "85": [
+   "UCO TIPO II",
+   "COMPLEMENTAR"
+  ],
+  "86": [
+   "UCO TIPO III",
+   "COMPLEMENTAR"
+  ],
+  "87": [
+   "SAUDE MENTAL",
+   "ESPEC - CLINICO"
+  ],
+  "90": [
+   "QUEIMADO ADULTO",
+   "ESPEC - CIRURGICO"
+  ],
+  "91": [
+   "QUEIMADO PEDIATRICO",
+   "ESPEC - CIRURGICO"
+  ],
+  "92": [
+   "UNIDADE DE CUIDADOS INTERMEDIARIOS NEONATAL CONVENCIONAL",
+   "COMPLEMENTAR"
+  ],
+  "93": [
+   "UNIDADE DE CUIDADOS INTERMEDIARIOS NEONATAL CANGURU",
+   "COMPLEMENTAR"
+  ],
+  "94": [
+   "UCI-PED",
+   "COMPLEMENTAR"
+  ],
+  "95": [
+   "UCI-A",
+   "COMPLEMENTAR"
+  ],
+  "96": [
+   "SUPORTE VENTILATORIO PULMONAR",
+   "COMPLEMENTAR"
+  ]
+ }
+}
