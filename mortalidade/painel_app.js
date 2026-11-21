@@ -715,8 +715,10 @@ const CONJUNTOS = {
   qualineo: {rot:"QUALINEO 3",                fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
 const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
-/* uma unidade pode pertencer a mais de um grupo (ex.: Estratégicas e QUALINEO 3). Para não repeti-la em
-   dois seletores, cada uma entra só no primeiro desta ordem — que é também a cor que recebe no mapa. */
+/* uma unidade pode pertencer a mais de um grupo (ex.: Estratégicas e QUALINEO 3). Nos seletores e botões de grupo
+   ela aparece em todos os grupos a que pertence (21/11/2026), como já acontecia na média do grupo. O grupo
+   principal, o primeiro desta ordem, define só a cor do ponto no mapa. */
+function noGrupo(m, g){ return (m.conjuntos || ["apoiada"]).includes(g); }
 function conjuntoPrincipal(m){
   const c = m.conjuntos || ["apoiada"];
   return ORDEM_CONJ.find(k => c.includes(k)) || "apoiada";
@@ -1073,8 +1075,11 @@ document.addEventListener("keydown", e => { if(e.key === "Escape") fecharModalGr
 
 function abrirDossie(cnes){
   estado.cnes = cnes;
-  const sel = document.getElementById("selUnidade" + {apoiada:"", ebserh:"Ebserh", qualineo:"Qualineo"}[conjuntoPrincipal(MAT.find(m => m.cnes === cnes) || MAT[0])]);
-  if(sel) sel.value = cnes;
+  const mtSel = MAT.find(m => m.cnes === cnes) || MAT[0];
+  [["apoiada", ""], ["ebserh", "Ebserh"], ["qualineo", "Qualineo"]].forEach(([g, suf]) => {
+    const sel = document.getElementById("selUnidade" + suf);
+    if(sel && noGrupo(mtSel, g)) sel.value = cnes;      // marca a unidade em cada grupo a que ela pertence
+  });
   document.getElementById("selUnidadePd").value = cnes;
   desenhaDossie();
   const pg = document.getElementById("paginaDossie");
@@ -1541,7 +1546,7 @@ function fecharMetodo(voltarHistorico = true){
    ============================================================ */
 function opcaoUnidades(sel, conjunto){
   const porUF = {};
-  const lista = conjunto ? MAT.filter(m => conjuntoPrincipal(m) === conjunto) : MAT;
+  const lista = conjunto ? MAT.filter(m => noGrupo(m, conjunto)) : MAT;
   lista.forEach(m => { (porUF[m.uf] = porUF[m.uf] || []).push(m); });
   sel.innerHTML = Object.keys(porUF).sort().map(uf =>
     `<optgroup label="${UF_NOME[uf]}">` +
@@ -1551,7 +1556,7 @@ function opcaoUnidades(sel, conjunto){
 const GRUPO_ROT_PLURAL = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
-    const lst = MAT.filter(m => conjuntoPrincipal(m) === g)
+    const lst = MAT.filter(m => noGrupo(m, g))
       .sort((a, b) => a.uf.localeCompare(b.uf) || a.nome.localeCompare(b.nome));
     if(!lst.length) return "";
     return `<optgroup label="${GRUPO_ROT_PLURAL[g]} (${lst.length})">` +
@@ -1727,10 +1732,10 @@ function inicia(){
     opcaoUnidades(s, conj);
     document.getElementById("btnAbrirDossie" + sufixo).addEventListener("click", () => abrirDossie(s.value));
     const n = document.getElementById(elN);
-    if(n) n.textContent = `(${MAT.filter(m => conjuntoPrincipal(m) === conj).length})`;
+    if(n) n.textContent = `(${MAT.filter(m => noGrupo(m, conj)).length})`;
   });
   const nAp = document.getElementById("nApoiada");
-  if(nAp) nAp.textContent = `(${MAT.filter(m => conjuntoPrincipal(m) === "apoiada").length})`;
+  if(nAp) nAp.textContent = `(${MAT.filter(m => noGrupo(m, "apoiada")).length})`;
   const sPd = document.getElementById("selUnidadePd");
   opcaoUnidades(sPd);
   sPd.value = estado.cnes;
@@ -1742,7 +1747,7 @@ function inicia(){
   const sC = document.getElementById("selAddComp");
   opcaoUnidades(sC, grupoComp);
   document.querySelectorAll("#segGrupoComp button").forEach(b => {
-    b.textContent += ` (${MAT.filter(m => conjuntoPrincipal(m) === b.dataset.grupo).length})`;
+    b.textContent += ` (${MAT.filter(m => noGrupo(m, b.dataset.grupo)).length})`;
     b.addEventListener("click", () => {
       if(b.dataset.grupo === grupoComp) return;
       document.querySelectorAll("#segGrupoComp button").forEach(x => x.classList.remove("ativo"));
