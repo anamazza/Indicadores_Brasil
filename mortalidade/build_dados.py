@@ -35,7 +35,11 @@ CSVS_IND = [(os.path.join(PROJ, "Pipeline_Python", "indicadores_recalculados.csv
             # Roriz (2495279, Ji-Paraná/RO), que já estava nos painéis de Nascimentos e de Internação: 2019 a 2025 e
             # 1º semestre de 2026, SIM das 27 UFs + DOFET, mesmas regras (calcula_adicional_2026-11.py, que confere
             # antes a unidade de controle 4001303 contra os valores publicados).
-            (os.path.join(PROJ, "Pipeline_Python", "indicadores_adicional_2026-11.csv"), "2026-11-13")]
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_adicional_2026-11.csv"), "2026-11-13"),
+            # 21/11/2026: Hospital de Clínicas de Porto Alegre (2237601) e Hospital Materno Infantil Dr Joaquim Sampaio
+            # (2415844, Ilhéus/BA), do grupo QUALINEO 3, incluídos na lista de maternidades por grupo de 21/11/2026: 2019 a
+            # 2025 e 1º semestre de 2026, mesmas regras (calcula_adicional_2026-11b.py; controle 2237571)
+            (os.path.join(PROJ, "Pipeline_Python", "indicadores_adicional_2026-11b.csv"), "2026-11-21")]
 PERIODO_CSV = {os.path.join(PROJ, "Pipeline_Python", "indicadores_2026S1.csv")}   # não sobrescreve o extraidoEm das unidades
 # 13/11/2026: o Hospital do Rocio (PR, 0013846) sai do painel. Era a única unidade que só existia aqui; com a saída,
 # os quatro painéis (Nascimentos, Internação, Mortalidade e Habilitações) passam a ter as mesmas unidades.
@@ -344,6 +348,8 @@ GEO_AJUSTES = {   # cnes: {"rs": id, "macro": id}
     "2453665": {"rs": 21005, "macro": 2111},                       # Caxias/MA (códigos do município na base territorial)
     "3021114": {"rs": 23011, "macro": 2309},                       # Sobral/CE
     "2705982": {"rs": 35081, "macro": 3530},                       # Franca/SP (Três Colinas / RRAS13)
+    "2237601": {"rs": 43010, "macro": 4313},                       # Porto Alegre/RS (Região 10 / Metropolitana)
+    "2415844": {"rs": 29009, "macro": 2910},                       # Ilhéus/BA (Ilhéus / Sul - NBS Ilhéus)
 }
 def _uf_da_malha(t):
     mm = re.search(r"-\s*([A-Z]{2})\s*$", t.get("nome", ""))

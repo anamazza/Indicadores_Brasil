@@ -37,6 +37,9 @@ FONTES = [                                                     # (arquivo, data 
     # (2717387/AM) não tem nenhuma AIH no SIH de 2019 a 2026 (Extracao_SIH/68_unidade_iauarete.py): entra com a marca
     # "semSIH" - contagens do SIH = 0, taxas e percentuais do SIH sem valor, linhas do SINASC calculadas.
     (os.path.join(SAIDA_SIH, "planilhas_adicionais_iauarete.json"), "2026-11-13"),
+    # 21/11/2026: Hospital de Clínicas de Porto Alegre (2237601) e Hospital Materno Infantil Dr Joaquim Sampaio (2415844),
+    # do grupo QUALINEO 3, incluídos na lista de maternidades por grupo de 21/11/2026 (74_unidades_adicionais_rs_ba.py)
+    (os.path.join(SAIDA_SIH, "planilhas_adicionais_rs_ba.json"), "2026-11-21"),
 ]
 # 21/11/2026 (coordenação): saem dos painéis a Unidade Hospitalar de Iauareté (2717387/AM) e o Hospital Dr. Claudionor
 # Couto Roriz (2495279/RO), que não constam da lista de maternidades por grupo de 21/11/2026.

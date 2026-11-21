@@ -622,6 +622,33 @@
 2453665;Maternidade Carmosina Coutinho;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
 2705982;Santa Casa de Franca;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
 3021114;Santa Casa de Misericórdia de Sobral;(cadastro);grupos;;estrategica;qualineo;grupos pela lista oficial
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_uf;UF Bahia;2019;0;2799;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;municipio;2019;0;3171;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;regiao_saude;2019;0;3582;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;macro;2019;0;21099;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;uf;2019;0;195050;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;municipio;2019;0;30;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;regiao_saude;2019;0;34;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;macro;2019;0;288;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;uf;2019;0;2799;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_uf;UF Bahia;2020;0;2720;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;municipio;2020;0;3051;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;regiao_saude;2020;0;3548;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;macro;2020;0;19698;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;uf;2020;0;186103;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;municipio;2020;0;27;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;regiao_saude;2020;0;31;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;macro;2020;0;249;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;uf;2020;0;2720;território em ano sem nascimento na unidade
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_uf;UF Bahia;Total;12812;18331;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;municipio;Total;15788;22010;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;regiao_saude;Total;17816;24946;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;macro;Total;87298;128095;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;nv_territorio;uf;Total;836211;1217364;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;municipio;Total;219;276;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;regiao_saude;Total;245;310;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;macro;Total;1317;1854;coluna Total refeita
+2415844;Hospital Materno Infantil Dr Joaquim Sampaio;p1500_territorio;uf;Total;12812;18331;coluna Total refeita
 2499363;Hospital Geral Dr César Cals (HGCC);p1500_uf;UF Ceará;2026S1;;720;território em período sem registro na unidade
 2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;municipio;2026S1;;18286;território em período sem registro na unidade
 2499363;Hospital Geral Dr César Cals (HGCC);nv_territorio;regiao_saude;2026S1;;25445;território em período sem registro na unidade

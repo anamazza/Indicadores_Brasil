@@ -115,6 +115,9 @@ ADICIONAIS = [
     # Recife constam da lista oficial de 09/09 (QUALINEO) e ja estavam nos paineis de Internacao e de Mortalidade;
     # a planilha de indicadores e os perfis foram gerados em 12/09 (lote ADICIONAIS PE), mas nao tinham entrado aqui
     ("qualineo", "INDICADORES MATERNIDADES ADICIONAIS PE_2019_2025.xlsx", "_config_adicionais_pe"),
+    # 21/11/2026: Hospital de Clínicas de Porto Alegre (2237601) e Hospital Materno Infantil Dr Joaquim Sampaio (2415844,
+    # Ilhéus/BA), do grupo QUALINEO 3, incluídos na lista de maternidades por grupo de 21/11/2026 (coordenação)
+    ("qualineo", "INDICADORES MATERNIDADES ADICIONAIS RS BA_2019_2025.xlsx", "_config_adicionais_rs_ba"),
 ]
 # nome de exibicao igual ao ja publicado nos paineis de Internacao e de Mortalidade
 NOME_NO_PAINEL = {"2711613": "CISAM - Centro Integrado de Saúde Amaury de Medeiros"}
