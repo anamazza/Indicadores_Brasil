@@ -1,8 +1,8 @@
-# Painel de Habilitações · Maternidades Estratégicas
+# Painel de Perfil e Estrutura · Maternidades Estratégicas
 
 Painel de consulta das habilitações registradas no Cadastro Nacional de Estabelecimentos de Saúde (CNES), pedido pela
 coordenação em 29/10/2026 para as unidades dos três grupos (Estratégicas, HU Brasil e QUALINEO 3) e ampliado em 13/11/2026 para **todas as unidades com leitos obstétricos e/ou neonatais SUS**, mantida a
-sinalização dos grupos acompanhados. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
+sinalização dos grupos apoiados. Mesma identidade visual dos painéis de Nascimentos, Internação e Mortalidade.
 
 ## Todas as unidades com leitos obstétricos ou neonatais SUS (13/11/2026)
 
@@ -21,15 +21,15 @@ sinalização dos grupos acompanhados. Mesma identidade visual dos painéis de N
      `ESFERAJUR.CNV`;
   2. `py -3.12 habilitacoes/build_universo.py AAMM` (grava `universo_cnes.json`, que vai para o repositório);
   3. `py -3.12 habilitacoes/montar_painel.py`.
-  Na nuvem, o workflow "Atualizar CNES" só refaz as unidades acompanhadas e reaproveita o `universo_cnes.json`.
-- **Dados no painel**: `DADOS.maternidades` continua com as unidades acompanhadas (as mesmas dos outros três painéis,
+  Na nuvem, o workflow "Atualizar CNES" só refaz as unidades apoiadas e reaproveita o `universo_cnes.json`.
+- **Dados no painel**: `DADOS.maternidades` continua com as unidades apoiadas (as mesmas dos outros três painéis,
   ficha e habilitações da consulta ao CNES), agora com `leitos` (leitos SUS por especialidade), `tipo` e `natureza`.
   `DADOS.demais` traz as outras unidades em formato compacto: `c` CNES, `n` nome fantasia, `u` UF, `m` município
   (chave de `DADOS.municipios`), `tp` tipo de estabelecimento (chave de `DADOS.tiposEstab`), `g` gestão, `nj` natureza
   jurídica (chave de `DADOS.esferas`), `cep`, `at` competência da última atualização do registro, `e` estruturas
   (centro obstétrico, centro neonatal, centro cirúrgico, atendimento hospitalar, atendimento ambulatorial), `l` leitos
   SUS por especialidade e `h` habilitações (`[código, início AAAAMM, fim AAAAMM ou 999999, portaria, data, leitos]`).
-- **Conferência entre as duas vias** (13/11/2026, unidades acompanhadas): o conjunto de habilitações do arquivo `HB`
+- **Conferência entre as duas vias** (13/11/2026, unidades apoiadas): o conjunto de habilitações do arquivo `HB`
   de 09/2026 é igual ao da consulta de 11/10/2026 em 116 das 121 fichas; nas outras cinco a diferença é de data.
   Competências e leitos coincidem nas 2.250 habilitações comparadas. Tipo de estabelecimento, CEP, centro
   obstétrico, centro cirúrgico e atendimento hospitalar coincidem nas 120 unidades; a marca de centro neonatal

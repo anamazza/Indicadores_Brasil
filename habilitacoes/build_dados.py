@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Consolida as unidades dos três painéis e as suas habilitações do CNES para o Painel de Habilitações.
+"""Consolida as unidades dos três painéis e as suas habilitações do CNES para o Painel de Perfil e Estrutura.
 
     py build_dados.py           (ou, de uma vez, py montar_painel.py, que chama esta consolidação)
 
@@ -38,7 +38,7 @@ EXCLUIR = {}
 COMPLEXOS = {"2025507": "2025523"}
 # Universo (13/11/2026, pedido da coordenação): todos os estabelecimentos com leitos obstétricos e/ou neonatais SUS,
 # montado por build_universo.py a partir dos arquivos do CNES no DATASUS (leitos, habilitações e cadastro da mesma
-# competência). As unidades acompanhadas continuam em DADOS.maternidades, com a ficha e as habilitações da consulta ao
+# competência). As unidades apoiadas continuam em DADOS.maternidades, com a ficha e as habilitações da consulta ao
 # CNES; as demais vão para DADOS.demais, em formato compacto (ver README.md).
 UNIVERSO = os.path.join(BASE, "universo_cnes.json")
 LEITOS_OBST = ("10", "43")
@@ -244,7 +244,7 @@ def consolidar(verboso=True):
             if not reg.get("geo") or "rs" not in reg["geo"]:
                 r = _resolve_geo(geo, reg.get("uf"), reg.get("regiaoSaude"), reg.get("macro"))
                 reg["geo"] = {**r, **(reg.get("geo") or {})}
-    # universo: leitos SUS, tipo e natureza jurídica das unidades acompanhadas; demais unidades em formato compacto
+    # universo: leitos SUS, tipo e natureza jurídica das unidades apoiadas; demais unidades em formato compacto
     uni = _carrega_universo()
     demais, municipios_usados = [], {}
     if uni:
@@ -270,7 +270,7 @@ def consolidar(verboso=True):
                            "at": u["at"], "e": u["e"], "l": {cod: v[1] for cod, v in u["l"].items() if v[1]}, "h": u["h"]})
 
     # catálogo dos tipos de habilitação: descrição (a da consulta ao CNES, quando existe; senão a da tabela do DATASUS),
-    # nº de unidades (todas e acompanhadas), leitos somados e origem (a mesma em todos os registros do código na consulta)
+    # nº de unidades (todas e apoiadas), leitos somados e origem (a mesma em todos os registros do código na consulta)
     desc, n_unid, n_acomp, leitos, origens = {}, Counter(), Counter(), Counter(), {}
     for reg in unidades.values():
         vistos = set()
@@ -296,7 +296,7 @@ def consolidar(verboso=True):
         tipos.append({"co": co, "ds": ds or "Descrição não disponível nas tabelas do CNES", "n": n_unid[co], "nAcomp": n_acomp[co],
                       "leitos": leitos[co],
                       # origem: "P" = gestor estadual ou municipal; "N" = demais registros da consulta (Ministério da Saúde);
-                      # None = código que não ocorre nas unidades acompanhadas (os arquivos do DATASUS não trazem o campo)
+                      # None = código que não ocorre nas unidades apoiadas (os arquivos do DATASUS não trazem o campo)
                       "origem": ("P" if "P" in origens[co] else "N") if co in origens else None})
 
     lista = sorted(unidades.values(), key=lambda r: (r.get("uf") or "", r["nome"]))
@@ -348,11 +348,11 @@ def consolidar(verboso=True):
         if uni:
             sem_leito = [r["nome"] for r in lista if not r.get("leitos")]
             print(f"universo (competência {uni['competencia']}): {uni['contagem']['universo']} estabelecimentos com leitos obstétricos ou "
-                  f"neonatais SUS; {len(lista)} acompanhadas + {len(demais)} demais = {len(lista) + len(demais)} unidades no painel; "
+                  f"neonatais SUS; {len(lista)} apoiadas + {len(demais)} demais = {len(lista) + len(demais)} unidades no painel; "
                   f"{sum(len(u['h']) for u in demais)} habilitações nas demais ({sum(1 for u in demais if not u['h'])} sem nenhuma); "
-                  f"{len(tipos)} tipos no catálogo; acompanhadas sem esses leitos no arquivo: {sem_leito}")
+                  f"{len(tipos)} tipos no catálogo; apoiadas sem esses leitos no arquivo: {sem_leito}")
         else:
-            print("AVISO: universo_cnes.json não encontrado; o painel fica só com as unidades acompanhadas")
+            print("AVISO: universo_cnes.json não encontrado; o painel fica só com as unidades apoiadas")
         sem_geo = [f"{r['nome']} ({r['uf']})" for r in lista if not (r.get("geo") or {}).get("rs")]
         if sem_geo:
             print("AVISO: sem região de saúde na malha:", "; ".join(sem_geo))

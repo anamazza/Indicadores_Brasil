@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""Universo do Painel de Habilitações: todos os estabelecimentos com leitos obstétricos e/ou neonatais SUS.
+"""Universo do Painel de Perfil e Estrutura: todos os estabelecimentos com leitos obstétricos e/ou neonatais SUS.
 
     py -3.12 build_universo.py [AAMM]        (padrão 2609 = setembro/2026)
 
 Pedido da coordenação em 13/11/2026: o painel de habilitações passa a cobrir todas as unidades que tenham leitos
-obstétricos e/ou neonatais para o SUS, mantendo a sinalização dos grupos acompanhados. Este script lê os arquivos do
+obstétricos e/ou neonatais para o SUS, mantendo a sinalização dos grupos apoiados. Este script lê os arquivos do
 CNES distribuídos pelo DATASUS (baixados por Extracao_SIH/69_baixar_cnes_habilitacoes.py) e grava, ao lado,
 universo_cnes.json, que o build_dados.py junta às unidades dos outros três painéis. O arquivo de saída vai para o
 repositório; os arquivos brutos (cerca de 150 MB) ficam fora dele.
@@ -23,7 +23,7 @@ Critério de entrada: pelo menos um leito SUS (QT_SUS > 0) em uma destas especia
   obstétricos  10 Obstetrícia cirúrgica, 43 Obstetrícia clínica
   neonatais    41 Neonatologia, 65 Unidade intermediária neonatal, 80/81/82 UTI neonatal tipos I, II e III,
                92 UCINCo (cuidados intermediários neonatal convencional), 93 UCINCa (canguru)
-Entram também, mesmo sem esses leitos, os códigos CNES das unidades acompanhadas nos outros painéis.
+Entram também, mesmo sem esses leitos, os códigos CNES das unidades apoiadas nos outros painéis.
 """
 import csv, io, json, os, re, struct, sys, zipfile
 from collections import Counter, defaultdict
@@ -95,13 +95,13 @@ def cnv(nome):
     return saida
 
 
-# ------------------------------------------------------------------ unidades acompanhadas (entram sempre)
-acompanhadas = set()
+# ------------------------------------------------------------------ unidades apoiadas (entram sempre)
+apoiadas = set()
 for p in PAINEIS:
     for m in json.load(open(os.path.join(RAIZ, p, "dados.json"), encoding="utf-8"))["maternidades"]:
-        acompanhadas.add(m["cnes"]); acompanhadas.update(m.get("cnesComplexo") or [])
-acompanhadas |= set(COMPLEXOS) | set(COMPLEXOS.values())
-print(f"competência {COMP} | códigos CNES das unidades acompanhadas: {len(acompanhadas)}")
+        apoiadas.add(m["cnes"]); apoiadas.update(m.get("cnesComplexo") or [])
+apoiadas |= set(COMPLEXOS) | set(COMPLEXOS.values())
+print(f"competência {COMP} | códigos CNES das unidades apoiadas: {len(apoiadas)}")
 
 # ------------------------------------------------------------------ 1. leitos (critério de entrada)
 leitos = defaultdict(dict)          # cnes -> {cod: [existentes, SUS]}
@@ -118,8 +118,8 @@ universo = {c for c in leitos if sus(c, OBST) + sus(c, NEO) > 0}
 so_obst = sum(1 for c in universo if sus(c, OBST) and not sus(c, NEO))
 so_neo = sum(1 for c in universo if sus(c, NEO) and not sus(c, OBST))
 print(f"[1] com leitos obstétricos ou neonatais SUS: {len(universo)} (só obstétricos {so_obst}, só neonatais {so_neo}, "
-      f"os dois {len(universo) - so_obst - so_neo}) | acompanhadas fora do critério: {sorted(acompanhadas - universo)}")
-alvo = universo | acompanhadas
+      f"os dois {len(universo) - so_obst - so_neo}) | apoiadas fora do critério: {sorted(apoiadas - universo)}")
+alvo = universo | apoiadas
 
 # ------------------------------------------------------------------ 2. cadastro (ST)
 CAMPOS_ST = ("CNES", "CODUFMUN", "COD_CEP", "VINC_SUS", "TPGESTAO", "TP_UNID", "NAT_JUR", "CENTRCIR", "CENTROBS", "CENTRNEO",
@@ -226,7 +226,7 @@ for c in sorted(alvo):
          "e": [int(s[k] == "1") for k in ("CENTROBS", "CENTRNEO", "CENTRCIR", "ATENDHOS", "ATENDAMB")],
          "l": {k: v for k, v in sorted(leitos.get(c, {}).items())}, "h": hb.get(c, [])}
     if c not in universo:
-        u["fora"] = True                      # unidade acompanhada sem leitos obstétricos/neonatais SUS no arquivo
+        u["fora"] = True                      # unidade apoiada sem leitos obstétricos/neonatais SUS no arquivo
     unidades[c] = u
 
 registro = {}
@@ -250,7 +250,7 @@ saida = {
     "baseTerritorial": "%04d-%02d-%02d" % data_terr[:3],
     "criterio": {"obstetricos": OBST, "neonatais": NEO},
     "contagem": {"universo": len(universo), "soObstetricos": so_obst, "soNeonatais": so_neo, "osDois": len(universo) - so_obst - so_neo,
-                 "acompanhadasForaDoCriterio": sorted(acompanhadas - universo)},
+                 "acompanhadasForaDoCriterio": sorted(apoiadas - universo)},
     "habilitacoes": {co: ds_hab.get(co) for co in cod_usados},
     "tiposEstabelecimento": {k: tp_estab.get(k) for k in sorted({u["tp"] for u in unidades.values()})},
     "esferas": {k: esfera(k) for k in sorted({u["nj"] for u in unidades.values() if u["nj"]})},

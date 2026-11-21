@@ -1,7 +1,7 @@
 /* ============================================================
-   Painel de Habilitações · Maternidades Estratégicas — app
+   Painel de Perfil e Estrutura · Maternidades Estratégicas — app
    Dados: const DADOS (dados_habilitacoes.js, gerado por build_dados.py):
-     DADOS.maternidades[] = unidades acompanhadas (as mesmas dos painéis de Nascimentos, Internação e Mortalidade):
+     DADOS.maternidades[] = unidades apoiadas (as mesmas dos painéis de Nascimentos, Internação e Mortalidade):
         {cnes, nome, uf, regiao, municipio, lat, lon, grupos[], oficial, paineis[], complexo?, ficha{}, habilitacoes[],
          leitos{código: leitos SUS}, tipo, natureza}; ficha e habilitações da consulta ao CNES (API)
      DADOS.demais[] = demais unidades com leitos obstétricos ou neonatais SUS, em formato compacto (arquivos do CNES no
@@ -73,7 +73,7 @@ const ativaSemPrazo = h => h.fim === SEM_PRAZO;
 const origemRot = o => o === "P" ? "gestor estadual ou municipal" : o === "N" ? "Ministério da Saúde" : "—";
 const fimRot = h => ativaSemPrazo(h) ? "sem prazo final" : `até ${h.fim}`;
 
-/* ---------------- unidades: acompanhadas + demais (expandidas do formato compacto) ---------------- */
+/* ---------------- unidades: apoiadas + demais (expandidas do formato compacto) ---------------- */
 const COD_OBST = UNI ? Object.keys(UNI.criterio.obstetricos) : ["10", "43"];
 const COD_NEO = UNI ? Object.keys(UNI.criterio.neonatais) : ["41", "65", "80", "81", "82", "92", "93"];
 const LEITO_ROT = UNI ? {...UNI.criterio.obstetricos, ...UNI.criterio.neonatais} : {};
@@ -105,7 +105,7 @@ const temFamilia = (mt, f) => f.codigos.some(co => mt._habs.has(co));
 const corDe = mt => mt._grupoCor ? COR_GRUPO[mt._grupoCor] : COR_DEMAIS;
 const bolinha = g => `<i class="bolinha bola-${g}" title="${esc(GRUPOS[g])}"></i>`;
 const bolinhas = mt => mt.grupos.map(bolinha).join("");
-const gruposTxt = mt => mt.grupos.length ? mt.grupos.map(g => GRUPO_CURTO[g]).join(" + ") : "não acompanhada";
+const gruposTxt = mt => mt.grupos.length ? mt.grupos.map(g => GRUPO_CURTO[g]).join(" + ") : "não apoiada";
 const nomeRS = mt => (mt.geo && NOME_TERR.rs[mt.geo.rs]) || mt.regiaoSaude || null;
 const nomeMacro = mt => (mt.geo && NOME_TERR.macro[mt.geo.macro]) || mt.macro || null;
 const leitosTxt = mt => `${fmtInt(mt._lo)} obstétricos · ${fmtInt(mt._ln)} neonatais`;
@@ -115,7 +115,7 @@ const porAcompUFNome = (a, b) => (b.acomp - a.acomp) || porUFNome(a, b);
 /* recorte comum às seções: grupo de unidades, região, estado e tipo de leito SUS */
 const ESCOPOS = [
   {id: "todas", rot: "Todas as unidades", longo: "todas as unidades com leitos obstétricos ou neonatais SUS"},
-  {id: "acomp", rot: "Acompanhadas", longo: "unidades acompanhadas (os três grupos)"},
+  {id: "acomp", rot: "Apoiadas", longo: "unidades apoiadas (os três grupos)"},
   {id: "apoiada", rot: "Estratégicas", longo: GRUPOS.apoiada},
   {id: "ebserh", rot: "HU Brasil", longo: GRUPOS.ebserh},
   {id: "qualineo", rot: "QUALINEO 3", longo: GRUPOS.qualineo},
@@ -138,8 +138,8 @@ function baixarCSV(nome, linhas){
   a.download = nome; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
 }
 const hoje = () => new Date().toISOString().slice(0, 10);
-const fonteTxt = () => `unidades acompanhadas: consulta ao CNES em ${dataBR(DADOS.consultaCnes)}${UNI ? `; demais unidades: arquivos do CNES no DATASUS, competência ${COMPETENCIA}` : ""}`;
-const cabecalhoCSV = rec => [`Painel de Habilitações · ${fonteTxt()} · ${rec}`];
+const fonteTxt = () => `unidades apoiadas: consulta ao CNES em ${dataBR(DADOS.consultaCnes)}${UNI ? `; demais unidades: arquivos do CNES no DATASUS, competência ${COMPETENCIA}` : ""}`;
+const cabecalhoCSV = rec => [`Painel de Perfil e Estrutura · ${fonteTxt()} · ${rec}`];
 const CAB_HAB = ["CNES", "Unidade", "Município", "UF", "Grupos", "Código", "Habilitação", "Competência inicial", "Competência final", "Portaria", "Data da portaria", "Leitos", "Origem"];
 const linhasCsvUnidade = mt => mt.habilitacoes.map(h => [h.cnes || mt.cnes, mt.nome, mt.municipio || "", mt.uf, gruposTxt(mt), h.co, h.ds, h.ini, ativaSemPrazo(h) ? "sem prazo final" : h.fim, h.portaria || "", h.dtPortaria || "", h.leitos || 0, origemRot(h.origem)]);
 function segmento(id, aoMudar){
@@ -194,30 +194,30 @@ function montarCabecalho(){
   $("statUtinSub").textContent = `${fmtInt(leitosUtin)} leitos habilitados (tipos II e III)`;
   const comHgpar = MAT.filter(m => temFamilia(m, hgpar));
   $("statHgpar").textContent = fmtInt(comHgpar.length);
-  $("statHgparSub").textContent = `${fmtInt(comHgpar.filter(m => m.acomp).length)} entre as acompanhadas`;
+  $("statHgparSub").textContent = `${fmtInt(comHgpar.filter(m => m.acomp).length)} entre as apoiadas`;
 
   /* notas */
   const p = UNI ? UNI.publicadoNoFTP || {} : {};
-  $("notaConsulta").innerHTML = `<b>Datas de referência:</b> ${UNI ? `arquivos do DATASUS da competência ${COMPETENCIA}, publicados em ${dataBR(p.habilitacoes)} e baixados em ${dataBR(UNI.baixadoEm)}; ` : ""}consulta ao CNES das unidades acompanhadas em ${consulta}. As habilitações encerradas antes dessas datas não constam das fontes e, por isso, não aparecem no painel.`;
+  $("notaConsulta").innerHTML = `<b>Datas de referência:</b> ${UNI ? `arquivos do DATASUS da competência ${COMPETENCIA}, publicados em ${dataBR(p.habilitacoes)} e baixados em ${dataBR(UNI.baixadoEm)}; ` : ""}consulta ao CNES das unidades apoiadas em ${consulta}. As habilitações encerradas antes dessas datas não constam das fontes e, por isso, não aparecem no painel.`;
   if(UNI){
     const c = UNI.contagem, cr = UNI.criterio;
     const lst = o => Object.entries(o).map(([k, v]) => `${k} ${esc(v)}`).join("; ");
     $("notaUniverso").innerHTML = `<b>Unidades do painel:</b> ${fmtInt(c.universo)} estabelecimentos tinham, na competência ${COMPETENCIA}, pelo menos um leito SUS em especialidade obstétrica ou neonatal no CNES: ${fmtInt(c.soObstetricos)} só com leitos obstétricos, ${fmtInt(c.soNeonatais)} só com leitos neonatais e ${fmtInt(c.osDois)} com os dois. Especialidades consideradas, pelo código do CNES: obstétricos (${lst(cr.obstetricos)}); neonatais (${lst(cr.neonatais)}). O número de leitos mostrado em cada unidade é o de leitos SUS dessas especialidades na mesma competência.`;
     const fora = ACOMP.filter(m => !m._lo && !m._ln);
-    $("notaUnidades").innerHTML = `<b>Unidades acompanhadas:</b> ${fmtInt(ACOMP.length)} unidades, as mesmas dos painéis de Nascimentos, Internação e Mortalidade (${porGrupoTxt()}; uma unidade pode contar em mais de um grupo). ${fmtInt(ACOMP.length - fora.length)} delas fazem parte do conjunto acima${fora.length ? `; ${fora.map(m => esc(m.nome)).join(" e ")} não ${fora.length === 1 ? "tem" : "têm"} leitos SUS dessas especialidades no cadastro da competência e ${fora.length === 1 ? "permanece" : "permanecem"} no painel por ${fora.length === 1 ? "ser acompanhada" : "serem acompanhadas"}` : ""}. Total do painel: ${fmtInt(MAT.length)} unidades.`;
+    $("notaUnidades").innerHTML = `<b>Unidades apoiadas:</b> ${fmtInt(ACOMP.length)} unidades, as mesmas dos painéis de Nascimentos, Internação e Mortalidade (${porGrupoTxt()}; uma unidade pode contar em mais de um grupo). ${fmtInt(ACOMP.length - fora.length)} delas fazem parte do conjunto acima${fora.length ? `; ${fora.map(m => esc(m.nome)).join(" e ")} não ${fora.length === 1 ? "tem" : "têm"} leitos SUS dessas especialidades no cadastro da competência e ${fora.length === 1 ? "permanece" : "permanecem"} no painel por ${fora.length === 1 ? "ser apoiada" : "serem apoiadas"}` : ""}. Total do painel: ${fmtInt(MAT.length)} unidades.`;
   } else {
     $("notaUniverso").innerHTML = "";
     $("notaUnidades").innerHTML = `<b>Unidades:</b> ${fmtInt(ACOMP.length)} unidades, as mesmas dos painéis de Nascimentos, Internação e Mortalidade. Grupos: ${porGrupoTxt()}; uma unidade pode contar em mais de um grupo.`;
   }
   const anexos = ACOMP.filter(m => m.oficial === false);
   $("notaAnexos").innerHTML = anexos.length
-    ? `<b>Lista oficial e anexos:</b> a lista oficial de 09/09/2026 tem ${fmtInt(DADOS.listaOficialN || 115)} códigos CNES, todos presentes entre as unidades acompanhadas, com os grupos lidos da própria lista. As ${anexos.length} unidades acompanhadas fora dela (${anexos.map(a => `${esc(a.nome)}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis; entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
+    ? `<b>Lista oficial e anexos:</b> a lista oficial de 09/09/2026 tem ${fmtInt(DADOS.listaOficialN || 115)} códigos CNES, todos presentes entre as unidades apoiadas, com os grupos lidos da própria lista. As ${anexos.length} unidades apoiadas fora dela (${anexos.map(a => `${esc(a.nome)}, ${a.uf}`).join("; ")}) foram acrescentadas pela coordenação aos outros painéis; entram com as mesmas regras e aparecem marcadas como "anexo".` : "";
   $("notaFamilias").innerHTML = FAMILIAS.map(f => `<li><b>${esc(f.rot)}</b>: ${f.codigos.map(co => `${co} ${esc(dsCurta(co))}`).join("; ")}.</li>`).join("");
   $("btnNotas").addEventListener("click", () => $("secNotas").scrollIntoView({behavior: "smooth"}));
 }
 
 /* ============================================================
-   1. CONSULTA INDIVIDUAL — um seletor por grupo acompanhado, busca em todas as unidades e lista por município
+   1. CONSULTA INDIVIDUAL — um seletor por grupo apoiado, busca em todas as unidades e lista por município
    ============================================================ */
 function montarConsulta(){
   const sels = {apoiada: "selUnidadeApoiada", ebserh: "selUnidadeEbserh", qualineo: "selUnidadeQualineo"};
@@ -320,7 +320,7 @@ function renderDetalhe(){
         <tfoot><tr><td class="col-uf">Total</td><td>${fmtInt(base.length)}</td><td>${fmtInt(com.length)}</td><td>${pct(com.length, base.length)}</td><td>${leitos ? fmtInt(leitos) : "—"}</td></tr></tfoot></table></div>
       <h4 class="sub-detalhe">Unidades com a habilitação (${fmtInt(com.length)})</h4>${lista(com, "com")}
       <h4 class="sub-detalhe">Unidades sem a habilitação (${fmtInt(sem.length)})</h4>${lista(sem, "sem")}
-      <p class="fonte">As unidades acompanhadas aparecem primeiro, com a marca do grupo. Toque no nome para abrir a ficha.</p>`;
+      <p class="fonte">As unidades apoiadas aparecem primeiro, com a marca do grupo. Toque no nome para abrir a ficha.</p>`;
     $("btnTiraHab").addEventListener("click", () => { G.hab = ""; G.listaCheia = ""; renderBarras(); renderDetalhe(); });
     $("btnCsvHab").addEventListener("click", () => baixarCSV(`unidades_habilitacao_${co}_${hoje()}.csv`, [cabecalhoCSV(`${co} ${DS[co]} · ${rotGrupo()}`),
       ["CNES", "Unidade", "Município", "UF", "Grupos", "Leitos obstétricos SUS", "Leitos neonatais SUS", "Tem a habilitação", "Leitos habilitados", "Competência inicial", "Competência final"],
@@ -334,14 +334,14 @@ function renderDetalhe(){
       <h3 style="margin-top:.2rem">${esc(rotGrupo())}</h3>
       <div class="kpis-linha">
         <div class="k"><div class="n">${fmtInt(base.length)}</div><div class="t">unidades · ${plural(ufs.size, "estado", "estados")}</div></div>
-        <div class="k"><div class="n">${fmtInt(base.filter(m => m.acomp).length)}</div><div class="t">acompanhadas</div></div>
+        <div class="k"><div class="n">${fmtInt(base.filter(m => m.acomp).length)}</div><div class="t">apoiadas</div></div>
         <div class="k"><div class="n">${fmtInt(nHabs)}</div><div class="t">habilitações registradas</div></div>
         <div class="k"><div class="n">${fmtInt(semHab.length)}</div><div class="t">unidades sem nenhuma habilitação</div></div>
         <div class="k"><div class="n">${fmtInt(base.reduce((s, m) => s + m._lo, 0))}</div><div class="t">leitos obstétricos SUS</div></div>
         <div class="k"><div class="n">${fmtInt(base.reduce((s, m) => s + m._ln, 0))}</div><div class="t">leitos neonatais SUS</div></div>
       </div>
       <div class="resumo-colunas">
-        <div><h4 class="sub-detalhe">Unidades acompanhadas no recorte, por grupo</h4><div class="kpi-lista">${grupos}</div></div>
+        <div><h4 class="sub-detalhe">Unidades apoiadas no recorte, por grupo</h4><div class="kpi-lista">${grupos}</div></div>
         <div><h4 class="sub-detalhe">Unidades com ao menos um código de cada família materno-infantil</h4><div class="kpi-lista duas-colunas">${familias}</div></div>
       </div>
       <p class="fonte">Toque em uma barra, acima, para ver as unidades que têm e as que não têm a habilitação, por estado.</p>`;
@@ -442,7 +442,7 @@ function renderLocal(){
   const th = FAMILIAS.map(f => `<th title="${esc(f.codigos.map(co => `${co} ${DS[co] || ""}`).join("\n"))}"><span class="th-rot">${esc(f.rot)}</span></th>`).join("");
   const corpo = linhas.map(l => `<tr><td class="col-uf">${esc(l.nome)}${l.sub ? `<small>${esc(l.sub)}</small>` : ""}</td><td class="cel">${fmtInt(l.n)}</td><td class="cel ${l.acomp ? "" : "zero"}">${fmtInt(l.acomp)}</td>${l.fam.map(n => `<td class="cel ${n ? "" : "zero"}">${n ? `<b>${fmtInt(n)}</b> <small>${pct(n, l.n)}</small>` : "0"}</td>`).join("")}</tr>`).join("");
   const tot = FAMILIAS.map(f => base.filter(m => temFamilia(m, f)).length);
-  tab.innerHTML = `<thead><tr><th class="col-uf">${porRS ? `Região de saúde · ${esc(UF_NOME[LOC.uf])}` : "Estado"}</th><th><span class="th-rot">Unidades</span></th><th><span class="th-rot">Acompanhadas</span></th>${th}</tr></thead>
+  tab.innerHTML = `<thead><tr><th class="col-uf">${porRS ? `Região de saúde · ${esc(UF_NOME[LOC.uf])}` : "Estado"}</th><th><span class="th-rot">Unidades</span></th><th><span class="th-rot">Apoiadas</span></th>${th}</tr></thead>
     <tbody>${corpo || `<tr><td class="col-uf suave" colspan="${FAMILIAS.length + 3}">Nenhuma unidade no recorte.</td></tr>`}</tbody>
     <tfoot><tr><td class="col-uf">Total</td><td>${fmtInt(base.length)}</td><td>${fmtInt(base.filter(m => m.acomp).length)}</td>${tot.map(n => `<td>${fmtInt(n)} <small style="font-weight:600; color:var(--texto-suave)">${pct(n, base.length)}</small></td>`).join("")}</tr></tfoot>`;
   $("localTitulo").textContent = `${porRS ? "Por região de saúde" : "Por estado"} · ${rotLocal()}`;
@@ -450,13 +450,13 @@ function renderLocal(){
 }
 function csvLocal(){
   const {base, linhas, porRS} = linhasLocal();
-  baixarCSV(`habilitacoes_por_${porRS ? "regiao_de_saude" : "estado"}_${hoje()}.csv`, [cabecalhoCSV(rotLocal()), [porRS ? "Região de saúde" : "Estado", "UF", "Região", "Unidades", "Acompanhadas", ...FAMILIAS.map(f => `${f.rot} (${f.codigos.join("/")})`)],
+  baixarCSV(`habilitacoes_por_${porRS ? "regiao_de_saude" : "estado"}_${hoje()}.csv`, [cabecalhoCSV(rotLocal()), [porRS ? "Região de saúde" : "Estado", "UF", "Região", "Unidades", "Apoiadas", ...FAMILIAS.map(f => `${f.rot} (${f.codigos.join("/")})`)],
     ...linhas.map(l => [l.nome, l.uf, l.regiao, l.n, l.acomp, ...l.fam]), ["Total", "", "", base.length, base.filter(m => m.acomp).length, ...FAMILIAS.map(f => base.filter(m => temFamilia(m, f)).length)]]);
 }
 function renderCartoes(sel){
   const todas = sel.slice().sort(porAcompUFNome), el = $("gradeUnidades");
   const lista = todas.slice(0, LOC.cartoes);
-  $("unidadesResumo").textContent = `${plural(todas.length, "unidade", "unidades")} · ${rotLocal()}${lista.length < todas.length ? ` · mostrando as ${lista.length} primeiras (acompanhadas na frente)` : ""}`;
+  $("unidadesResumo").textContent = `${plural(todas.length, "unidade", "unidades")} · ${rotLocal()}${lista.length < todas.length ? ` · mostrando as ${lista.length} primeiras (apoiadas na frente)` : ""}`;
   const btn = $("btnMaisCartoes");
   btn.hidden = todas.length <= lista.length;
   btn.textContent = `mostrar mais ${Math.min(48, todas.length - lista.length)} unidades`;
@@ -503,7 +503,7 @@ const NS = "http://www.w3.org/2000/svg";
 const PROJ = {ax: 20.1374, bx: 1489.96, ay: -20.1485, by: 106.00};
 function projeta(lon, lat){ return [PROJ.ax * lon + PROJ.bx, PROJ.ay * lat + PROJ.by]; }
 const terrId = (nivel, mt) => nivel === "uf" ? mt.uf : String((mt.geo || {})[nivel] ?? "");
-/* pontos sobre a malha: só as unidades acompanhadas, que têm coordenadas do próprio cadastro */
+/* pontos sobre a malha: só as unidades apoiadas, que têm coordenadas do próprio cadastro */
 function encaixaPontos(){
   if(!TEM_GEO) return 0;
   const svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", `0 0 ${GEO.W} ${GEO.H}`);
@@ -638,7 +638,7 @@ function desenhaMapaSvg(){
     const cls = classeMapa(us.length, esc4); p.setAttribute("fill", cls < 0 ? "#E4EBE5" : RAMPA_MAPA[cls]); p.dataset.cls = cls;
     const nome = MP.nivel === "uf" ? UF_NOME[t.id] : t.nome, max = 8, nAc = us.filter(m => m.acomp).length;
     const ord = us.slice().sort(porAcompUFNome);
-    const tip = `<div class="tm-titulo">${esc(nome)}</div><div class="tm-valor">${us.length ? plural(us.length, "unidade", "unidades") + (MP.hab ? ` com ${esc(MP.hab.rot)}` : "") + (nAc && nAc < us.length ? ` · ${nAc} ${nAc === 1 ? "acompanhada" : "acompanhadas"}` : "") : (MP.hab ? `Nenhuma unidade com ${esc(MP.hab.rot)}` : "Sem unidade do recorte")}</div>` +
+    const tip = `<div class="tm-titulo">${esc(nome)}</div><div class="tm-valor">${us.length ? plural(us.length, "unidade", "unidades") + (MP.hab ? ` com ${esc(MP.hab.rot)}` : "") + (nAc && nAc < us.length ? ` · ${nAc} ${nAc === 1 ? "apoiada" : "apoiadas"}` : "") : (MP.hab ? `Nenhuma unidade com ${esc(MP.hab.rot)}` : "Sem unidade do recorte")}</div>` +
       (us.length ? `<ul>${ord.slice(0, max).map(m => `<li>${esc(m.nome)}</li>`).join("")}${us.length > max ? `<li>+ ${fmtInt(us.length - max)} outras</li>` : ""}</ul>` : "");
     p.addEventListener("mousemove", e => mostraTipMapa(e, tip)); p.addEventListener("mouseleave", escondeTipMapa);
     p.addEventListener("click", () => { escondeTipMapa(); if(!uf) return; cliqueUF(uf); });
@@ -699,7 +699,7 @@ function renderPainelSelecao(){
     ${MP.hab && MP.hab.codigos.length ? `<p class="suave" style="font-size:.76rem; margin-top:.2rem">${MP.hab.codigos.map(co => `${co} ${esc(dsCurta(co))}`).join("; ")}</p>` : ""}
     <div class="num-grande" style="margin-top:.6rem">${fmtInt(com.length)} <span style="font-size:1rem; font-weight:700; color:var(--texto-suave)">${MP.hab ? `de ${fmtInt(base.length)} unidades` : "unidades"}</span></div>
     <div class="kpi-lista">${porGrupo}${leitos ? `<div class="kpi"><span>Leitos habilitados</span><span class="v">${fmtInt(leitos)}</span></div>` : ""}<div class="kpi"><span>Estados</span><span class="v">${new Set(com.map(m => m.uf)).size}</span></div></div>
-    <p class="suave" style="font-size:.8rem; margin-top:.8rem"><b style="color:var(--texto)">Unidades</b>${lista.length > vis.length ? ` (${vis.length} de ${fmtInt(lista.length)}, acompanhadas primeiro)` : ""}:</p>
+    <p class="suave" style="font-size:.8rem; margin-top:.8rem"><b style="color:var(--texto)">Unidades</b>${lista.length > vis.length ? ` (${vis.length} de ${fmtInt(lista.length)}, apoiadas primeiro)` : ""}:</p>
     <ul class="lista-unid" style="max-height:360px">${vis.map(m => `<li>${bolinhas(m)}<button data-cnes="${m.cnes}">${esc(m.nome)}</button><small>${esc(m.uf)}</small></li>`).join("") || "<li class='suave'>nenhuma</li>"}</ul>
     ${lista.length > vis.length ? `<p class="suave" style="font-size:.74rem; margin-top:.5rem">A lista completa está no CSV do mapa de unidades, abaixo, e na seção Por local.</p>` : ""}`;
   el.querySelectorAll("button[data-cnes]").forEach(b => b.addEventListener("click", () => abrirDossie(b.dataset.cnes)));
@@ -731,7 +731,7 @@ function desenhaLeaflet(){
     mk.bindTooltip(`${m0.municipio || ""} · ${plural(us.length, "unidade", "unidades")}`, {direction: "right", offset: [6, 0], className: "rotulo-unid", opacity: 1});
     camadaPontos.addLayer(mk);
   });
-  /* unidades acompanhadas: coordenadas do cadastro, por cima */
+  /* unidades apoiadas: coordenadas do cadastro, por cima */
   vis.forEach(m => {
     if(!m.acomp || m.lat == null || m.lon == null) return;
     pontos.push([m.lat, m.lon]);
@@ -815,7 +815,7 @@ function abrirDossie(cnes){
     : `<b>Arquivo de cadastro do CNES no DATASUS, competência ${COMPETENCIA}</b> (publicado em ${dataBR(p.cadastro)}). Nome fantasia como consta no cadastro. Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.`;
   const fonteHab = mt.acomp
     ? `<b>Dados baixados do serviço do CNES em:</b> ${dataBR(DADOS.consultaCnes)} · Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil. Origem: "gestor estadual ou municipal" corresponde ao valor "P" do campo de origem do CNES.`
-    : `<b>Arquivo de habilitações do CNES no DATASUS, competência ${COMPETENCIA}</b> (publicado em ${dataBR(p.habilitacoes)}): habilitações vigentes na competência. A origem é a registrada para o mesmo código na consulta ao CNES das unidades acompanhadas; "—" quando o código não aparece nelas. Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.`;
+    : `<b>Arquivo de habilitações do CNES no DATASUS, competência ${COMPETENCIA}</b> (publicado em ${dataBR(p.habilitacoes)}): habilitações vigentes na competência. A origem é a registrada para o mesmo código na consulta ao CNES das unidades apoiadas; "—" quando o código não aparece nelas. Fonte: Ministério da Saúde - Cadastro Nacional dos Estabelecimentos de Saúde do Brasil.`;
   $("dossieConteudo").innerHTML = `
     <div class="dossie-topo">
       <div>
@@ -823,14 +823,13 @@ function abrirDossie(cnes){
         <h2 style="margin-top:.3rem; color:#FFF">${esc(mt.nome)}</h2>
         <div class="meta">
           ${mt.grupos.map(g => `<span>${bolinha(g)}${esc(GRUPOS[g])}</span>`).join("")}
-          ${mt.acomp ? "" : `<span>unidade não acompanhada pelos três grupos</span>`}
+          ${mt.acomp ? "" : `<span>unidade fora dos três grupos</span>`}
           <span>${esc(mt.municipio || "")}${mt.municipio ? " · " : ""}${esc(UF_NOME[mt.uf] || mt.uf)}</span>
           ${mt.oficial === false ? `<span class="anexo">anexo · fora da lista oficial de 09/09/2026</span>` : ""}
         </div>
       </div>
       <div class="kpis-topo">
         <div class="k"><div class="n">${n}</div><div class="t">habilitações</div></div>
-        <div class="k"><div class="n">${nPrazo}</div><div class="t">com prazo final</div></div>
         <div class="k"><div class="n">${fmtInt(leitos)}</div><div class="t">leitos habilitados</div></div>
         <div class="k"><div class="n">${fmtInt(mt._lo)}</div><div class="t">leitos obstétricos SUS</div></div>
         <div class="k"><div class="n">${fmtInt(mt._ln)}</div><div class="t">leitos neonatais SUS</div></div>

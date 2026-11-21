@@ -5,7 +5,7 @@
 "use strict";
 
 /* A ficha de cadastro CNES e as habilitações saíram do perfil da unidade em 14/11/2026 (pedido da coordenação):
-   ficam só no Painel de Habilitações, que abre direto na unidade pelo endereço com o código CNES. */
+   ficam só no Painel de Perfil e Estrutura, que abre direto na unidade pelo endereço com o código CNES. */
 const HAB_URL = "https://anamazza.github.io/Indicadores_Brasil/habilitacoes/";
 
 const ANOS = DADOS.anos;                 // [2019..2025, 2026] — 2026 = 1º semestre (período parcial, desde 18/10/2026)
@@ -1312,7 +1312,7 @@ function desenhaDossie(){
     </div>
   </div>
   <div class="dossie-cards">
-    <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Habilitações →</a></p></div>
+    <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Perfil e Estrutura →</a></p></div>
     <div class="card full"><h3>Nascidos vivos ocorridos, ${SERIE_ROT}</h3><div id="dNV"></div><p class="fonte">${FONTE_SINASC}${PARCIAIS.size ? " " + esc(NOTA_PARCIAL) : ""}</p></div>
     <div class="full">
       <p class="eyebrow titulo-linha" style="margin:.4rem 0 .2rem">Abrangência territorial: da região à unidade</p>
@@ -1622,7 +1622,7 @@ function desenhaMetodologia(){
   const fontes = [
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025 e 1º semestre de 2026, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
-    ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil: código de identificação de cada unidade. A ficha de cadastro e as habilitações das unidades estão no Painel de Habilitações."],
+    ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil: código de identificação de cada unidade. A ficha de cadastro e as habilitações das unidades estão no Painel de Perfil e Estrutura."],
     ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
     ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Estratégicas, HU Brasil e/ou QUALINEO 3. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
     ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],

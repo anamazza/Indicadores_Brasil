@@ -622,7 +622,7 @@ const DICIONARIO = [{"secao":"PERFIL SÓCIO-DEMOGRÁFICO (SINASC)","ind":"Distri
 "use strict";
 
 /* A ficha de cadastro CNES e as habilitações saíram do perfil da unidade em 14/11/2026 (pedido da coordenação):
-   ficam só no Painel de Habilitações, que abre direto na unidade pelo endereço com o código CNES. */
+   ficam só no Painel de Perfil e Estrutura, que abre direto na unidade pelo endereço com o código CNES. */
 const HAB_URL = "https://anamazza.github.io/Indicadores_Brasil/habilitacoes/";
 
 const ANOS = DADOS.anos;                 // [2019..2025]
@@ -1126,7 +1126,7 @@ function desenhaDossie(){
   </div>
   <div class="dossie-cards">
     ${mt.semSIH ? `<div class="card full aviso-sih"><p><b>Unidade sem internações registradas no SIH/SUS.</b> Não há nenhuma Autorização de Internação Hospitalar (AIH) desta unidade de 2019 a 2026. Por isso os números de internações são zero, e as taxas, os percentuais e os tempos médios calculados com o SIH não se aplicam. Os indicadores calculados com o SINASC aparecem normalmente.</p></div>` : ""}
-    <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Habilitações →</a></p></div>
+    <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Perfil e Estrutura →</a></p></div>
 
     ${sep("Internações obstétricas")}
     <div class="card full"><h3>Internações obstétricas, ${periodo} ${notaPrelim}</h3>
@@ -1365,7 +1365,7 @@ function desenhaMetodologia(){
     ["SIH/SUS · serviços profissionais (SP)", "Arquivos SP<UF><aaaamm>.dbc: atos profissionais de cada AIH, usados para marcar analgesia, transfusão, histerectomia, admissão em UTI, AMIU e curetagens, diárias de acompanhante e demais critérios de morbidade materna grave."],
     ["CNES · leitos (LT)", "Arquivos LT<UF><aaaamm>.dbc: leitos existentes por competência. Leitos-dia obstétricos (códigos 10 e 43) e de UTI neonatal tipo II e III (códigos 81 e 82) são os denominadores das taxas de ocupação."],
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos: nascidos vivos ocorridos na unidade (CODESTAB) por ano de nascimento. Base do parto vaginal após cesariana, do trabalho de parto induzido e das condições potencialmente ameaçadoras à vida; 2025 preliminar; 1º semestre de 2026 = nascidos de janeiro a junho de 2026 (SINASC 2026 preliminar)."],
-    ["CNES · identificação das unidades", "Código de identificação de cada unidade e coordenadas georreferenciadas a partir do cadastro. A ficha de cadastro e as habilitações das unidades estão no Painel de Habilitações."],
+    ["CNES · identificação das unidades", "Código de identificação de cada unidade e coordenadas georreferenciadas a partir do cadastro. A ficha de cadastro e as habilitações das unidades estão no Painel de Perfil e Estrutura."],
     ["Morbidade materna grave · literatura", "Desde 14/11/2026 o indicador segue a literatura indicada pela coordenação: casos pelos 22 critérios da Organização Mundial da Saúde para condições potencialmente ameaçadoras à vida, sobre as internações obstétricas de mulheres de 10 a 49 anos contadas por episódio de cuidado. Substitui a regra anterior (mulheres de 10 a 59 anos, por AIH, com 7 grupos de causas). Referências: " + MMG.referencias.join(" · ")],
     ["Lista de maternidades e regras", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (grupos Estratégicas, HU Brasil e QUALINEO 3) e regras de cálculo aprovadas pela coordenação em 09/09/2026 (dicionário final de 10/09/2026): universo de mulheres de 10 a 59 anos, AMIU sem a curetagem semiótica, procedimento 0409060313 como parto vaginal e causas neonatais pelo diagnóstico principal. Cinco unidades fora da lista entram como anexo, com as mesmas regras: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Nascimentos, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523); as internações estão registradas no 2025507."]
   ];

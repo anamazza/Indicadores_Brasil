@@ -13,7 +13,7 @@ SITE = "https://anamazza.github.io/Indicadores_Brasil/"
 
 # pasta: (arquivo gêmeo do index.html, tamanho mínimo do index.html em KB, arquivo de dados, mínimo de unidades)
 # Mínimos de Nascimentos, Internação e Mortalidade reduzidos em 14/11/2026: as páginas deixaram de embutir a ficha
-# CNES (cerca de 1.000 KB a menos em cada uma), que ficou só no Painel de Habilitações.
+# CNES (cerca de 1.000 KB a menos em cada uma), que ficou só no Painel de Perfil e Estrutura.
 PAINEIS = {
     "nascimentos": ("Painel_NV2026_Novo.html", 1900, "dados_nv2026.js", 100),
     "internacao":  ("Painel_Internacao_2026.html", 650, "dados_internacao.js", 100),
@@ -271,11 +271,12 @@ except Exception as e:
     falha(f"não foi possível conferir a consistência entre os painéis ({e})")
 
 # nomes dos grupos (19/11/2026, coordenação): Estratégicas, HU Brasil e QUALINEO 3. As três são maternidades
-# apoiadas; "maternidades estratégicas" deixou de nomear o conjunto todo (o título do projeto, com maiúsculas, fica).
+# apoiadas (no Painel de Perfil e Estrutura, "Apoiadas" é o conjunto das unidades dos três grupos; antes, "Acompanhadas");
+# "maternidades estratégicas" deixou de nomear o conjunto todo (o título do projeto, com maiúsculas, fica).
 # Razão social, nome fantasia e e-mail da ficha vêm do CNES e ficam como estão no cadastro; por isso a conferência
 # olha os textos dos painéis e o nome exibido das unidades, não as fichas.
 print("== nomes dos grupos")
-ROTULOS_ANTIGOS = ("EBSERH", "Apoiadas", "apoiadas (estratégicas)", "apoiada (estratégica)", "QUALINEO 2026/2027",
+ROTULOS_ANTIGOS = ("EBSERH", "Acompanhadas", "acompanhadas", "apoiadas (estratégicas)", "apoiada (estratégica)", "QUALINEO 2026/2027",
                    "maternidades estratégicas", "maternidade estratégica")
 achados = []
 for rel in [os.path.join(p, a) for p in PAINEIS for a in ("painel_app.js", "painel_base.html")] + ["pagina_inicial.html"]:
@@ -296,9 +297,9 @@ for p in PAINEIS:
 if achados: falha(f"nome antigo de grupo em {len(achados)} lugar(es): {'; '.join(achados[:6])}")
 else: ok("grupos com os nomes Estratégicas, HU Brasil e QUALINEO 3 nos quatro painéis e na página principal")
 
-# ficha de cadastro CNES e habilitações (14/11/2026, pedido da coordenação): só o Painel de Habilitações mostra. O
+# ficha de cadastro CNES e habilitações (14/11/2026, pedido da coordenação): só o Painel de Perfil e Estrutura mostra. O
 # cnes_dados.json continua nas pastas dos outros três painéis, porque o de Habilitações é montado a partir deles.
-print("== ficha e habilitações só no Painel de Habilitações")
+print("== ficha e habilitações só no Painel de Perfil e Estrutura")
 achados = []
 for p in ("nascimentos", "internacao", "mortalidade"):
     try:
@@ -309,9 +310,9 @@ for p in ("nascimentos", "internacao", "mortalidade"):
     if "Ficha de cadastro CNES</h3>" in app or "Habilitações ativas no CNES</h3>" in app:
         achados.append(f"{p}: quadro de ficha ou de habilitações no perfil da unidade")
     if "const CNES_INFO" in pag: achados.append(f"{p}: ficha CNES embutida no index.html")
-    if "/habilitacoes/" not in app: achados.append(f"{p}: sem o link para o Painel de Habilitações")
+    if "/habilitacoes/" not in app: achados.append(f"{p}: sem o link para o Painel de Perfil e Estrutura")
 if achados: falha("; ".join(achados))
-else: ok("ficha de cadastro e habilitações fora dos perfis de Nascimentos, Internação e Mortalidade, com link para o Painel de Habilitações")
+else: ok("ficha de cadastro e habilitações fora dos perfis de Nascimentos, Internação e Mortalidade, com link para o Painel de Perfil e Estrutura")
 
 print()
 if avisos:
