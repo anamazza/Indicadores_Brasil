@@ -32,7 +32,7 @@
   --azul-meta:#2471A3;
   --azul-ebserh:#2471A3;        /* pontos do grupo HU Brasil no mapa */
   --azul-ebserh-borda:#103B5E;
-  --azul-qualineo:#5FB0D9;      /* pontos do QUALINEO */
+  --azul-qualineo:#5FB0D9;      /* pontos do QUALINEO 3 */
   --azul-qualineo-borda:#1B6B8F;
   --borda:#D8E8DC;
   --sombra:0 2px 12px rgba(14,122,86,.10);
@@ -442,7 +442,7 @@ footer a{color:var(--verde-lima)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Território</p>
-      <h2>Mapa do Brasil: maternidades estratégicas por território</h2>
+      <h2>Mapa do Brasil: maternidades apoiadas por território</h2>
       <p>Alterne o nível territorial e toque em um estado para dar zoom e filtrar o painel · toque novamente para desfazer.</p>
     </div>
     <div class="filtros-grid filtros-topo">
@@ -479,7 +479,7 @@ footer a{color:var(--verde-lima)}
       <div class="col-dir">
         <div class="card"><h4 class="titulo-legenda" id="tituloLegenda">—</h4><div class="legenda legenda-v" id="legendaMapa"></div></div>
         <div class="card painel-lateral" id="painelSelecao"></div>
-        <p class="nota-mapa suave" style="font-size:.74rem">Verdes: faixas por quintis (mais escuro = maior). Cesariana: faixas fixas na meta de 35% (azul = na meta; vermelho = acima). Cinza: sem maternidade estratégica.</p>
+        <p class="nota-mapa suave" style="font-size:.74rem">Verdes: faixas por quintis (mais escuro = maior). Cesariana: faixas fixas na meta de 35% (azul = na meta; vermelho = acima). Cinza: sem maternidade apoiada.</p>
       </div>
     </div>
   </div>
@@ -497,9 +497,9 @@ footer a{color:var(--verde-lima)}
       <div class="acordeao-corpo">
         <p class="suave" style="margin-bottom:.55rem">Toque em um ponto para ver o resumo e abrir o perfil da unidade. Ative "mostrar demais estabelecimentos" para ver os pontos de contexto (≥480 partos/ano, SIH/AIH 2025), em cinza.</p>
         <p class="legenda-pontos">
-          <span class="item"><span class="bolinha bola-estr"></span>Apoiadas</span>
+          <span class="item"><span class="bolinha bola-estr"></span>Estratégicas</span>
           <span class="item"><span class="bolinha bola-ebserh"></span>HU Brasil</span>
-          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO</span>
+          <span class="item"><span class="bolinha bola-qualineo"></span>QUALINEO 3</span>
           <span class="item"><span class="bolinha" style="background:#AEBFB4; box-shadow:0 0 0 2px #7A8C80 inset"></span>demais estabelecimentos</span>
         </p>
         <div class="filtros-mapa">
@@ -525,7 +525,7 @@ footer a{color:var(--verde-lima)}
     </div>
     <div class="dossie-conjuntos">
       <div class="dossie-conj">
-        <p class="rot-conj"><span class="bolinha bola-estr"></span>Apoiadas <b id="nEstr"></b></p>
+        <p class="rot-conj"><span class="bolinha bola-estr"></span>Estratégicas <b id="nEstr"></b></p>
         <div class="mapa-controles">
           <select id="selUnidade" style="min-width:340px"></select>
           <button class="chip chip-acao" id="btnAbrirDossie">Abrir perfil da unidade →</button>
@@ -539,7 +539,7 @@ footer a{color:var(--verde-lima)}
         </div>
       </div>
       <div class="dossie-conj">
-        <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO <b id="nQualineo"></b></p>
+        <p class="rot-conj"><span class="bolinha bola-qualineo"></span>QUALINEO 3 <b id="nQualineo"></b></p>
         <div class="mapa-controles">
           <select id="selUnidadeQualineo" style="min-width:340px"></select>
           <button class="chip chip-acao" id="btnAbrirDossieQualineo">Abrir perfil da unidade →</button>
@@ -555,7 +555,7 @@ footer a{color:var(--verde-lima)}
     <div class="sec-head">
       <p class="eyebrow">Comparador</p>
       <h2>Comparar unidades lado a lado</h2>
-      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (Apoiadas, HU Brasil ou QUALINEO) e compare de duas a quatro maternidades do grupo lado a lado, com a melhor posição destacada em cada indicador e a opção de incluir a <b>média do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador, também com a opção de incluir a média do grupo.</p>
+      <p style="max-width:none">Dois modos: <b>entre unidades</b> — escolha primeiro o grupo (Estratégicas, HU Brasil ou QUALINEO 3) e compare de duas a quatro maternidades do grupo lado a lado, com a melhor posição destacada em cada indicador e a opção de incluir a <b>média do grupo</b> como referência; ou <b>a mesma unidade entre anos</b>, marcando os anos desejados para ver a variação e a tendência de cada indicador, também com a opção de incluir a média do grupo.</p>
     </div>
     <div class="seg" id="segModoComp" style="margin-bottom:1rem">
       <button data-modo="unidades" class="ativo">Entre unidades</button>
@@ -563,9 +563,9 @@ footer a{color:var(--verde-lima)}
     </div>
     <div id="compModoUnidades">
       <div class="seg" id="segGrupoComp" style="margin-bottom:1rem">
-        <button data-grupo="apoiada" class="ativo">Apoiadas</button>
+        <button data-grupo="apoiada" class="ativo">Estratégicas</button>
         <button data-grupo="ebserh">HU Brasil</button>
-        <button data-grupo="qualineo">QUALINEO</button>
+        <button data-grupo="qualineo">QUALINEO 3</button>
       </div>
       <div class="comp-sel">
         <select id="selAddComp" style="min-width:300px"></select>
@@ -593,7 +593,7 @@ footer a{color:var(--verde-lima)}
     <div class="sec-head">
       <p class="eyebrow">Cenários</p>
       <h2>Comparativo entre anos: nascimentos na região de residência</h2>
-      <p style="max-width:none">Percentual dos nascidos vivos que ocorreram no próprio território de residência da mãe, considerando todos os nascimentos (não apenas maternidades estratégicas). Escolha o recorte, o nível territorial, o filtro e o ano de cada mapa: os dois mapas reagem juntos.</p>
+      <p style="max-width:none">Percentual dos nascidos vivos que ocorreram no próprio território de residência da mãe, considerando todos os nascimentos (não apenas maternidades apoiadas). Escolha o recorte, o nível territorial, o filtro e o ano de cada mapa: os dois mapas reagem juntos.</p>
     </div>
     <div class="filtros-grid filtros-topo">
       <label class="filtro"><span>Recorte</span>
@@ -623,7 +623,7 @@ footer a{color:var(--verde-lima)}
     <div class="card" style="margin-top:1.1rem">
       <h4 class="titulo-legenda" id="tituloLegComp">% de NV ocorridos na região de residência</h4>
       <div class="legenda" id="legendaComp"></div>
-      <p class="fonte">Fonte: Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025 · todos os nascimentos do território (não apenas maternidades estratégicas) · 2025 preliminar · dados sujeitos a revisão.</p>
+      <p class="fonte">Fonte: Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025 · todos os nascimentos do território (não apenas maternidades apoiadas) · 2025 preliminar · dados sujeitos a revisão.</p>
     </div>
   </div>
 </section>
@@ -752,7 +752,7 @@ const INDS = [
    desc:"Total de nascidos vivos ocorridos na unidade (SINASC)."},
   {id:"shareUF", eixo:"geral", rot:"% dos nascimentos da UF ocorridos nas maternidades", curto:"% da UF", tipo:"pct", sentido:"neutro", denUnico:true,
    num:(m,a)=> m.blocos.nv_territorio[0][1][a], den:(m,a)=> m.blocos.nv_territorio[4][1][a],
-   desc:"Participação das maternidades estratégicas do território no total de nascidos vivos da UF."},
+   desc:"Participação das maternidades apoiadas do território no total de nascidos vivos da UF."},
   {id:"resRS", eixo:"geral", rot:"% de NV ocorridos na região de residência", curto:"% NV na região de residência", tipo:"pct", sentido:"neutro",
    num:(m,a)=> linha(m,"residentes_nv","regiao_saude")?.[a],
    den:(m,a)=> m.blocos.residentes_nv?.[0]?.[1]?.[a],
@@ -1005,7 +1005,7 @@ function desenhaMapa(){
     if(ufsVisiveis && !ufsVisiveis.includes(uf)) p.style.display = "none";
     const v = valorTerr[ti];
     p.setAttribute("fill", corIndicador(v, ind, lims));
-    // tooltip: território, valor do indicador e maternidades estratégicas dali
+    // tooltip: território, valor do indicador e maternidades apoiadas dali
     const nomeT = estado.nivel === "uf" ? UF_NOME[t.id] : t.nome;
     const lst = unidadesDoTerritorio(estado.nivel, ti);
     const maxLista = 7;
@@ -1014,8 +1014,8 @@ function desenhaMapa(){
     const tipHtml = `<div class="tm-titulo">${esc(nomeT)}</div>
       ${v != null ? `<div class="tm-valor">${esc(ind.curto)} · ${anoRotMapa}: ${ind.tipo === "num" ? fmtInt(v) : fmtPct(v)}</div>` : ""}
       ${lst.length
-        ? `Maternidade${lst.length > 1 ? "s" : ""} estratégica${lst.length > 1 ? "s" : ""} (${lst.length}):<ul>${nomes}</ul>`
-        : `<div class="tm-sem">Sem maternidade estratégica neste território.</div>`}`;
+        ? `Maternidade${lst.length > 1 ? "s" : ""} apoiada${lst.length > 1 ? "s" : ""} (${lst.length}):<ul>${nomes}</ul>`
+        : `<div class="tm-sem">Sem maternidade apoiada neste território.</div>`}`;
     p.addEventListener("mousemove", e => mostraTipMapa(e, tipHtml));
     p.addEventListener("mouseleave", escondeTipMapa);
     p.addEventListener("click", () => { escondeTipMapa(); cliqueTerritorio(t, p); });
@@ -1187,7 +1187,7 @@ function desenhaLegenda(ind, lims, vals){
       itens = use.map((c, i) => ({c, r:rot[i]}));
     }
   }
-  itens.push({c:"var(--sem-dado)", r:"sem maternidade estratégica"});
+  itens.push({c:"var(--sem-dado)", r:"sem maternidade apoiada"});
   el.innerHTML = itens.map(i => `<span><i style="background:${i.c}"></i>${i.r}</span>`).join("");
 }
 
@@ -1205,7 +1205,7 @@ function desenhaPainelSelecao(){
   el.innerHTML = `
     <p class="eyebrow">${esc(rotuloSelecao())} · ${nomeAno(a)}</p>
     <p style="margin-top:.15rem"><b class="mono" style="font-size:1.35rem; color:var(--verde-esmeralda)">${lst.length}</b>
-      <span class="suave" style="font-size:.85rem"> maternidade${lst.length > 1 ? "s" : ""} estratégica${lst.length > 1 ? "s" : ""} na seleção</span></p>
+      <span class="suave" style="font-size:.85rem"> maternidade${lst.length > 1 ? "s" : ""} apoiada${lst.length > 1 ? "s" : ""} na seleção</span></p>
     <div class="kpi-lista">${kpis}</div>
     <p class="fonte" style="margin-top:.5rem">Toque em um território para filtrar.</p>`;
 }
@@ -1344,11 +1344,11 @@ function iniciaLeaflet(){
   }).addTo(leaf);
   desenhaPontos();
 }
-/* grupos da lista oficial de 09/09/2026: Apoiadas em verde; HU Brasil e QUALINEO em azuis */
+/* grupos da lista oficial de 09/09/2026: Estratégicas em verde; HU Brasil e QUALINEO 3 em azuis */
 const CONJUNTOS = {
-  apoiada:    {rot:"Apoiadas", fundo:"#279261", borda:"#154A4B"},
+  apoiada:    {rot:"Estratégicas", fundo:"#279261", borda:"#154A4B"},
   ebserh:     {rot:"HU Brasil",          fundo:"#2471A3", borda:"#103B5E"},
-  qualineo:   {rot:"QUALINEO",      fundo:"#5FB0D9", borda:"#1B6B8F"},
+  qualineo:   {rot:"QUALINEO 3",      fundo:"#5FB0D9", borda:"#1B6B8F"},
 };
 const ORDEM_CONJ = ["apoiada", "ebserh", "qualineo"];
 /* uma unidade pode pertencer a mais de um conjunto (lista oficial de 09/09/2026).
@@ -1392,7 +1392,7 @@ function desenhaPontos(){
     });
     leaf.addLayer(camadaCtx);
   }
-  // maternidades: verde para o grupo Apoiadas, tons de azul para HU Brasil e QUALINEO
+  // maternidades: verde para o grupo Estratégicas, tons de azul para HU Brasil e QUALINEO 3
   camadaEstr = L.markerClusterGroup({maxClusterRadius:30, disableClusteringAtZoom:7});
   const visiveis = [];
   MAT.filter(m => passaFiltroPonto({uf:m.uf, nome:m.nome})).forEach(m => {
@@ -2055,7 +2055,7 @@ function desenhaDossie(){
    ============================================================ */
 const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
 const COR_MEDIA = "#5E716A";
-const MEDIA_ROT = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
+const MEDIA_ROT = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 let anoComp = ULT;
 let grupoComp = "apoiada";   // grupo escolhido no filtro do comparador — só se compara dentro dele
 /* média do grupo: pseudo-coluna "media:<grupo>" — a unidade é comparada com o próprio grupo */
@@ -2250,7 +2250,7 @@ function desenhaEvolucao(){
    ============================================================ */
 const CALCULOS = {
   nv:{n:"Soma dos nascidos vivos ocorridos na unidade no ano (contagem simples).", d:"Não se aplica: é um número absoluto, não uma taxa."},
-  shareUF:{n:"Nascidos vivos ocorridos nas maternidades estratégicas da seleção.", d:"Nascidos vivos totais da UF (com mais de uma unidade na seleção, o total da UF é contado uma única vez)."},
+  shareUF:{n:"Nascidos vivos ocorridos nas maternidades apoiadas da seleção.", d:"Nascidos vivos totais da UF (com mais de uma unidade na seleção, o total da UF é contado uma única vez)."},
   resRS:{n:"Nascidos vivos da unidade cuja mãe reside na região de saúde da própria unidade.", d:"Nascidos vivos ocorridos na unidade."},
   pn7:{n:"Nascidos vivos cujas mães fizeram 7 ou mais consultas de pré-natal.", d:"Nascidos vivos totais, excluídos os registros com número de consultas ignorado."},
   tri1:{n:"Nascidos vivos com pré-natal iniciado no primeiro trimestre.", d:"Nascidos vivos com ao menos uma consulta de pré-natal, excluídos os registros com trimestre ignorado.",
@@ -2291,7 +2291,7 @@ const FICHAS_EXTRAS = [
    d:"Total de nascidos vivos com ao menos uma consulta, incluindo os registros com trimestre ignorado (por isso pode diferir do indicador \"% com pré-natal iniciado no 1º trimestre\" dos mapas, que exclui os ignorados).",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."},
   {rot:"% de NV ocorridos no território de residência (Comparativo entre anos)",
-   desc:"Retenção territorial de nascimentos: das mães residentes em cada território, quantas pariram dentro do próprio território. Considera todos os nascimentos, não apenas maternidades estratégicas. Nos níveis macrorregião e UF, o percentual agrega os nascidos na própria região de saúde (recorte todos) ou na própria macro (recorte <1500 g), seguindo a semântica das planilhas oficiais.",
+   desc:"Retenção territorial de nascimentos: das mães residentes em cada território, quantas pariram dentro do próprio território. Considera todos os nascimentos, não apenas maternidades apoiadas. Nos níveis macrorregião e UF, o percentual agrega os nascidos na própria região de saúde (recorte todos) ou na própria macro (recorte <1500 g), seguindo a semântica das planilhas oficiais.",
    n:"Nascidos vivos de mães residentes que ocorreram no próprio território de residência (nível região de saúde; agregado nos níveis macro e UF).",
    d:"Nascidos vivos de mães residentes no território, independentemente de onde ocorreu o parto.",
    fonte:"Ministério da Saúde - SINASC, microdados públicos (OpenDataSUS), série 2019-2025, com 2025 preliminar. Ambos os recortes (todos e <1500 g) por região de saúde, macro e UF. Extração própria validada contra as planilhas NV por Região e NV por Macro (2019 e 2024): diferenças médias de 0,1 a 0,4 ponto percentual."},
@@ -2301,7 +2301,7 @@ const FICHAS_EXTRAS = [
    d:"Nascidos vivos totais da UF (SINASC) ou do Brasil — este obtido pela soma dos totais das 27 UFs.",
    fonte:"Ministério da Saúde - SINASC, " + ANOS[ULT] + "."},
   {rot:"Média do grupo (comparador)",
-   desc:"Coluna de referência do comparador, entre unidades e no modo mesma unidade entre anos: a maternidade é comparada com a média do seu próprio grupo — Apoiadas, HU Brasil ou QUALINEO, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
+   desc:"Coluna de referência do comparador, entre unidades e no modo mesma unidade entre anos: a maternidade é comparada com a média do seu próprio grupo — Estratégicas, HU Brasil ou QUALINEO 3, conforme a lista oficial de 09/09/2026. Unidades que pertencem a mais de um grupo contam em todos os grupos a que pertencem. Nos indicadores percentuais a média é a taxa agregada do grupo (soma dos numeradores dividida pela soma dos denominadores de todas as unidades do grupo, com as mesmas exclusões de ignorados de cada indicador), a mesma regra de agregação usada nos mapas e no panorama; nos grupos de Robson, a taxa agregada é ponderada pelo número de partos de cada unidade no grupo. No volume de nascidos vivos, mostra-se a média por unidade (total do grupo dividido pelo número de unidades com dado no ano). Unidades que pertencem a mais de um grupo contam na média de todos os grupos a que pertencem. A média do grupo não participa do destaque de melhor posição.",
    n:"Soma dos numeradores do indicador nas unidades do grupo com dado no ano.",
    d:"Soma dos denominadores correspondentes nas mesmas unidades.",
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."}
@@ -2316,7 +2316,7 @@ function desenhaMetodologia(){
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil: código de identificação de cada unidade. A ficha de cadastro e as habilitações das unidades estão no Painel de Habilitações."],
     ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
-    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Apoiadas, HU Brasil e/ou QUALINEO. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
+    ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 09/09/2026 (coordenação): 115 unidades classificadas nos grupos Estratégicas, HU Brasil e/ou QUALINEO 3. O painel inclui ainda, como anexo, cinco unidades fora dessa lista: Maternidade Carmosina Coutinho (MA), Santa Casa de Misericórdia de Sobral (CE), Santa Casa de Franca (SP), Unidade Hospitalar de Iauareté (AM) e Hospital Dr. Claudionor Couto Roriz (RO). São as mesmas 120 unidades dos painéis de Internação, de Mortalidade e de Habilitações. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
     ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização."],
     ["Comparativo entre anos", "Microdados públicos do SINASC (OpenDataSUS), série 2019-2025, processados por território de residência e ocorrência: todos os nascidos vivos e <1500 g, por região de saúde, macro e UF. Nos níveis macro e UF, o percentual agrega os nascidos na própria região de saúde (todos) ou na própria macro (<1500 g), como nas planilhas oficiais. 2025 preliminar. Extração validada contra as planilhas NV por Região e NV por Macro (2019 e 2024)."],
@@ -2347,7 +2347,7 @@ function desenhaMetodologia(){
     <div class="grid-3">
       ${fontes.map(f => `<div class="card"><h3>${f[0]}</h3><p class="suave" style="font-size:.88rem; margin-top:.5rem">${f[1]}</p></div>`).join("")}
     </div>
-    <h3 class="titulo-linha" style="margin:1.6rem 0 .7rem">Fichas dos indicadores das maternidades estratégicas</h3>
+    <h3 class="titulo-linha" style="margin:1.6rem 0 .7rem">Fichas dos indicadores das maternidades apoiadas</h3>
     <div class="grid-2">${fichas}</div>
     <h3 class="titulo-linha" style="margin:1.6rem 0 .7rem">Demais cálculos do painel</h3>
     <div class="grid-2">${extras}</div>
@@ -2358,7 +2358,7 @@ function desenhaMetodologia(){
         Nos mapas, os indicadores usam quintis calculados sobre os territórios visíveis no recorte atual, em escala de verdes (mais escuro = maior), com as faixas de valores exibidas na legenda.
         A taxa de cesariana usa faixas fixas ancoradas na meta de 35% (azul = na meta ou abaixo; vermelho = acima).
         A retenção no território de residência usa as faixas fixas &gt;95 · 90-95 · 75-89 · 50-74 · &lt;50.
-        Territórios em cinza não possuem maternidade estratégica ou não têm dados na planilha.
+        Territórios em cinza não possuem maternidade apoiada ou não têm dados na planilha.
       </p>
     </div>`;
 }
@@ -2393,7 +2393,7 @@ function opcaoUnidades(sel, conjunto){
     `</optgroup>`).join("");
 }
 /* seletor com um optgroup por grupo (comparador); a UF entra no rótulo de cada opção */
-const GRUPO_ROT_PLURAL = {apoiada:"Apoiadas", ebserh:"HU Brasil", qualineo:"QUALINEO"};
+const GRUPO_ROT_PLURAL = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 function opcaoUnidadesPorGrupo(sel){
   sel.innerHTML = ORDEM_CONJ.map(g => {
     const lst = MAT.filter(m => conjuntoPrincipal(m) === g)

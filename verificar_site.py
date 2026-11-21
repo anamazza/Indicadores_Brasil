@@ -270,12 +270,13 @@ try:
 except Exception as e:
     falha(f"não foi possível conferir a consistência entre os painéis ({e})")
 
-# nomes dos grupos (14/11/2026, pedido da coordenação): EBSERH passou a HU Brasil e os rótulos trazem só o nome do
-# grupo (Apoiadas, HU Brasil, QUALINEO). Razão social, nome fantasia e e-mail da ficha vêm do CNES e ficam como estão
-# no cadastro; por isso a conferência olha os textos dos painéis e o nome exibido das unidades, não as fichas.
+# nomes dos grupos (19/11/2026, coordenação): Estratégicas, HU Brasil e QUALINEO 3. As três são maternidades
+# apoiadas; "maternidades estratégicas" deixou de nomear o conjunto todo (o título do projeto, com maiúsculas, fica).
+# Razão social, nome fantasia e e-mail da ficha vêm do CNES e ficam como estão no cadastro; por isso a conferência
+# olha os textos dos painéis e o nome exibido das unidades, não as fichas.
 print("== nomes dos grupos")
-ROTULOS_ANTIGOS = ("EBSERH", "apoiadas (estratégicas)", "apoiada (estratégica)", "QUALINEO 2026/2027",
-                   ">Maternidades apoiadas<", "nidades QUALINEO", "nidades apoiadas")
+ROTULOS_ANTIGOS = ("EBSERH", "Apoiadas", "apoiadas (estratégicas)", "apoiada (estratégica)", "QUALINEO 2026/2027",
+                   "maternidades estratégicas", "maternidade estratégica")
 achados = []
 for rel in [os.path.join(p, a) for p in PAINEIS for a in ("painel_app.js", "painel_base.html")] + ["pagina_inicial.html"]:
     try:
@@ -283,7 +284,9 @@ for rel in [os.path.join(p, a) for p in PAINEIS for a in ("painel_app.js", "pain
     except Exception as e:
         falha(f"{rel}: não foi possível ler ({e})"); continue
     achados += [f"{rel}: {r}" for r in ROTULOS_ANTIGOS if r in txt]
-    if "HU Brasil" not in txt: achados.append(f"{rel}: sem o grupo HU Brasil")
+    if re.search(r"QUALINEO(?! 3)", txt): achados.append(f"{rel}: QUALINEO sem o 3")
+    for g in ("Estratégicas", "HU Brasil", "QUALINEO 3"):
+        if g not in txt and not (rel == "pagina_inicial.html" and g == "Estratégicas" and False): achados.append(f"{rel}: sem o grupo {g}")
 for p in PAINEIS:
     try:
         ms = json.load(open(os.path.join(RAIZ, p, "dados.json"), encoding="utf-8")).get("maternidades", [])
@@ -291,7 +294,7 @@ for p in PAINEIS:
     except Exception as e:
         falha(f"{p}: não foi possível ler os nomes das unidades ({e})")
 if achados: falha(f"nome antigo de grupo em {len(achados)} lugar(es): {'; '.join(achados[:6])}")
-else: ok("grupos com os nomes Apoiadas, HU Brasil e QUALINEO nos quatro painéis e na página principal")
+else: ok("grupos com os nomes Estratégicas, HU Brasil e QUALINEO 3 nos quatro painéis e na página principal")
 
 # ficha de cadastro CNES e habilitações (14/11/2026, pedido da coordenação): só o Painel de Habilitações mostra. O
 # cnes_dados.json continua nas pastas dos outros três painéis, porque o de Habilitações é montado a partir deles.
