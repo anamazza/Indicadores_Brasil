@@ -9,11 +9,17 @@ Extracao_SINASC/13_perfil_contagens.py, com as mesmas regras de classificação 
 Conferência célula a célula: o número só entra se reproduzir o percentual publicado sobre o total de nascidos vivos
 da unidade no período. Quando a contagem não reproduz o percentual (ocorre em poucas células do pré-natal adequado,
 por 1 a 4 registros), usa-se o único inteiro que reproduz o percentual publicado; se houver mais de um inteiro
-possível, ou nenhum, a montagem para."""
-import json, os, re
+possível, ou nenhum, a montagem para.
+
+Faixa de idade de 10 a 14 anos (22/11/2026, decisão da coordenação): as mães de 10 a 13 anos, que nas planilhas da
+coordenação eram contadas em "Ignorado", passam para a faixa "10 a 14 anos". As linhas "10 a 14 anos" e "Ignorado" do
+quadro de idade são recalculadas aqui a partir da contagem (percentual = número ÷ nascidos vivos da unidade no
+período), em todas as unidades e períodos; as células alteradas ficam em ajuste_idade_10a14_2026-11-22.csv."""
+import csv, json, os, re
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 CONTAGENS = os.path.join(os.path.dirname(BASE), "Extracao_SINASC", "saida", "perfil_contagens.json")
+IDADE_RECALCULADA = ("10 a 14 anos", "Ignorado")
 MAPA = [(re.compile(r"por idade da mãe - (.+)$"), "idade"),
         (re.compile(r"por raça/cor da mãe - (.+)$"), "raca"),
         (re.compile(r"por escolaridade da mãe - (.+)$"), "escolaridade"),
@@ -34,6 +40,7 @@ def acrescentar(dados, periodo_do_ano):
     pers = [periodo_do_ano.get(a, str(a)) for a in dados["anos"]]
     da_contagem = pelo_percentual = sem_nasc = sem_valor = 0
     avisos = []
+    ajustes_idade = []
     for m in dados["maternidades"]:
         if "assistenciais" not in m:
             continue
@@ -82,6 +89,12 @@ def acrescentar(dados, periodo_do_ano):
                         ns.append(0); sem_nasc += 1; continue
                     dec = casas_col[i]
                     tol = 0.5 * 10 ** (-dec) + 1e-9
+                    if g == "idade" and cat in IDADE_RECALCULADA:
+                        novo = round(100.0 * n / t, dec)
+                        if abs(novo - v) > 1e-9:
+                            ajustes_idade.append([m["cnes"], m["nome"], per, cat, v, novo, n, t])
+                            l["valores"] = list(l["valores"]); l["valores"][i] = novo
+                            v = novo
                     if abs(100.0 * n / t - v) <= tol:
                         ns.append(n); da_contagem += 1; continue
                     cand = [k for k in range(max(0, n - 25), min(t, n + 25) + 1) if abs(100.0 * k / t - v) <= tol]
@@ -91,5 +104,11 @@ def acrescentar(dados, periodo_do_ano):
                     ns.append(cand[0]); pelo_percentual += 1
                     avisos.append(f"{m['cnes']} {m['nome']} {per} {l['rotulo'][-60:]}: contagem {n}, publicado {v}% -> número {cand[0]} (de {t})")
                 l["n"] = ns
-    resumo = f"{da_contagem} células pela contagem | {pelo_percentual} pelo percentual publicado | {sem_nasc} sem nascimentos no período | {sem_valor} sem dado"
+    with open(os.path.join(BASE, "ajuste_idade_10a14_2026-11-22.csv"), "w", encoding="utf-8-sig", newline="") as fh:
+        w = csv.writer(fh, delimiter=";")
+        w.writerow(["cnes", "unidade", "periodo", "linha", "percentual_antes", "percentual_depois", "numero", "nascidos_vivos"])
+        w.writerows(ajustes_idade)
+    ups = len({(x[0], x[2]) for x in ajustes_idade})
+    resumo = (f"{da_contagem} células pela contagem | {pelo_percentual} pelo percentual publicado | {sem_nasc} sem nascimentos no período | "
+              f"{sem_valor} sem dado | faixa de 10 a 14 anos: {len(ajustes_idade)} células recalculadas em {ups} unidade-períodos")
     return resumo, avisos
