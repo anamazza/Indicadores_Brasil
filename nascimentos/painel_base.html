@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#279261"/>
 <link rel="icon" href="../icons/maos-192.png" type="image/png"/>
 <link rel="apple-touch-icon" href="../icons/maos-180.png"/>
-<title>Painel NV 2026 · Maternidades Estratégicas · Saúde Materna e Neonatal</title>
+<title>Perfil de Nascimentos das Maternidades Apoiadas pelo IFF</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css"/>
@@ -324,6 +324,13 @@ table.dados{border-collapse:collapse; width:100%; font-size:.83rem}
 table.dados th,table.dados td{padding:.34rem .55rem; text-align:right; white-space:nowrap}
 table.dados th{font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:var(--texto-suave); border-bottom:2px solid var(--borda)}
 table.dados td:first-child,table.dados th:first-child{text-align:left}
+/* 22/11/2026: no perfil da unidade o rótulo da linha quebra em mais de uma linha quando a tabela não cabe no quadro,
+   para que todos os anos apareçam sem rolagem lateral */
+.dossie-cards table.dados td:first-child,.dossie-cards table.dados th:first-child{white-space:normal; overflow-wrap:anywhere; min-width:5.2rem}
+.dossie-cards table.dados th,.dossie-cards table.dados td{padding-left:.3rem; padding-right:.3rem}
+.dossie-cards table.dados th.th-ano,.dossie-cards table.dados th.th-ano .btn-ano{white-space:normal; line-height:1.15}
+.dossie-cards table.dados th.th-ano .btn-ano{padding-left:.42rem; padding-right:.42rem}
+.dossie-cards table.dados.tab-verde th.th-ano{padding-left:.3rem; padding-right:.3rem}
 table.dados td.rot-click{cursor:pointer}
 table.dados td.rot-click:hover{text-decoration:underline dotted; color:var(--verde-esmeralda, #279261)}
 .btn-baixar-png{margin-top:.5rem; padding:.28rem .7rem; font-size:.78rem; font-weight:700; border:1.5px solid var(--verde-esmeralda, #279261); border-radius:99px; background:#FFF; color:var(--verde-esmeralda, #279261); cursor:pointer}
@@ -415,7 +422,7 @@ footer a{color:var(--verde-lima)}
       <img src="logos_institucionais.png" alt="IFF · Fiocruz · SUS · Ministério da Saúde" style="width:min(380px,100%); height:auto"/>
     </div>
     <p class="eyebrow">Painel de Indicadores · Saúde Materna e Neonatal · 2019 a 2025 e 1º semestre de 2026</p>
-    <h1 style="margin-top:.6rem">Qualificação do Modelo de Gestão em Maternidades Estratégicas</h1>
+    <h1 style="margin-top:.6rem">Perfil de Nascimentos das Maternidades Apoiadas pelo IFF</h1>
     <p class="sub">Rede de Atenção à Saúde Materna e Neonatal · nascidos vivos e perfil das mães segundo o SINASC 2019 a 2025 e 1º semestre de 2026 (preliminar), cadastro CNES e localização das unidades em todo o Brasil.</p>
     <div class="hero-links" aria-label="Navegação">
       <a href="https://anamazza.github.io/Indicadores_Brasil/">← Página principal</a>

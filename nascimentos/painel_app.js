@@ -819,14 +819,20 @@ function grafRanking(alvo, itens, opts = {}){
    ABRANGÊNCIA TERRITORIAL (bloco do perfil da unidade)
    ============================================================ */
 let dosRec = "nv", dosPersp = "res";
+/* séries das linhas da tabela de território em exibição (número e percentual), para o gráfico da evolução aberto
+   pelo clique no rótulo da linha (22/11/2026) */
+let _terrSeries = [];
+function textoSemHTML(s){ const x = document.createElement("textarea"); x.innerHTML = s; return x.value; }
 
 function montaTerritorioHTML(mt, rec, persp){
   const t = mt.territorio;
   const rotRec = rec === "nv" ? "Nascidos vivos" : "Nascidos vivos <1500g";
 
+  _terrSeries = [];
   const linhaTab = (rot, arr, opts = {}) => {
     const tds = arr.map((v, i) => `<td class="mono">${opts.pct ? (v == null ? "—" : fmtPct(v)) : fmtInt(v)}</td>`).join("");
-    return `<tr class="${opts.classe || ""}"><td>${rot}</td>${tds}</tr>`;
+    _terrSeries.push({rot: textoSemHTML(rot), vals: arr, pct: !!opts.pct});
+    return `<tr class="${opts.classe || ""}"><td class="rot-click" data-terr="${_terrSeries.length - 1}" title="Ver a evolução deste indicador, ${SERIE_ROT}">${rot}</td>${tds}</tr>`;
   };
 
   if(persp === "origem"){
@@ -906,7 +912,7 @@ function cardTrimestreHTML(mt){
   const linhas = ordem.map(rot => {
     const v = lin(rot);
     const tds = ANOS.map((_, a) => celDupla(v[a], (v[a] != null && tot[a]) ? v[a]/tot[a]*100 : null)).join("");
-    return `<tr class="${rot === "Total" ? "total" : ""}"><td>${rot}</td>${tds}</tr>`;
+    return `<tr class="${rot === "Total" ? "total" : ""}"><td class="rot-click" data-row="${b.findIndex(r => r[0] === rot)}" title="Ver a evolução deste indicador, ${SERIE_ROT}">${rot}</td>${tds}</tr>`;
   }).join("");
   return `
     <h3>Pré-natal: trimestre de início</h3>
@@ -926,6 +932,29 @@ function cardTrimestreHTML(mt){
    aparecem só com o número, assim como o Total nesses casos. Sem linha ignorada, o Total mostra 100%. */
 const FORA_DA_BASE = {prenatal:["Ignorado"], peso:[], gestacao:["N Inf"], via:["Ignorado"],
                       assistencia:["Ignorado"], apgar:["N Inf", "Ign"], robson_n:[]};
+/* percentuais das tabelas de número e percentual, linha a linha, com a mesma base mostrada na célula; null nas
+   linhas que a tabela mostra só com o número (informação ignorada e, havendo ignorados, o Total). Os gráficos dessas
+   tabelas mostram os valores em percentual (pedido da coordenação em 22/11/2026). */
+function pctLinhasBloco(mt, bloco){
+  const b = mt.blocos[bloco];
+  if(!b) return null;
+  if(bloco === "trimestre"){
+    const tot = (b.find(r => r[0] === "Total") || [null, []])[1];
+    return b.map(r => r[1].map((v, a) => (v != null && tot[a]) ? v / tot[a] * 100 : null));
+  }
+  const fora = FORA_DA_BASE[bloco];
+  if(!fora) return null;
+  const cats = b.filter(r => !/total/i.test(r[0]) && !fora.includes(r[0]));
+  const base = (b[0] ? b[0][1] : []).map((_, a) => {
+    let s = 0, tem = false;
+    cats.forEach(r => { if(r[1][a] != null){ s += r[1][a]; tem = true; } });
+    return tem ? s : null; });
+  return b.map(r => {
+    const total = /total/i.test(r[0]);
+    if(fora.includes(r[0]) || (total && fora.length)) return null;
+    return r[1].map((v, a) => total ? (v ? 100 : null) : (v != null && base[a] ? v / base[a] * 100 : null));
+  });
+}
 const celDupla = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${p == null ? "—" : fmtPct(p)}</small></td>`;
 function tabelaBloco(mt, bloco, opts = {}){
   const b = mt.blocos[bloco];
@@ -976,7 +1005,9 @@ function abrirGraficoAno(bloco, a, pct, tituloCard){
   const ehTerr = ["residentes_nv","residentes_p1500","nv_territorio","p1500_territorio"].includes(bloco);
   const t = mt.territorio;
   const rotTerr = [mt.nome, "Município - " + t.municipio, "Região de Saúde - " + t.regiao_saude, t.macro, "UF - " + t.uf];
-  const linhas = b.map((r, i) => [ehTerr ? (rotTerr[i] || r[0]) : r[0], r[1]])
+  const pcts = pctLinhasBloco(mt, bloco);          // tabelas de número e percentual: o gráfico mostra o percentual
+  if(pcts) pct = true;
+  const linhas = b.map((r, i) => [ehTerr ? (rotTerr[i] || r[0]) : r[0], pcts ? (pcts[i] || []) : r[1]])
     .filter(r => !/total/i.test(r[0]) && r[1][a] != null);
   if(!linhas.length) return;
   const anoRot = nomeAno(a);
@@ -1052,7 +1083,9 @@ document.addEventListener("click", e => {
   const tdr = e.target.closest("td.rot-click");
   if(tdr){
     const tituloCard = (tdr.closest(".card")?.querySelector("h3")?.textContent || "").trim();
-    if(tdr.dataset.acard){
+    if(tdr.dataset.terr !== undefined){
+      abrirTendenciaTerr(+tdr.dataset.terr);
+    } else if(tdr.dataset.acard){
       abrirTendenciaAssist(tdr.dataset.acard, +tdr.dataset.row, tituloCard);
     } else {
       const tb = tdr.closest("table[data-bloco]");
@@ -1087,11 +1120,11 @@ const FONTE_MISTA = "Fonte: Ministério da Saúde - SINASC e SIH/SUS · dados su
 /* 29/09/2026: só os 7 slides de perfil da mãe do deck de NV; os indicadores de internação (SIH)
    estão no Painel de Internação 2026 (mesma família), acessível pelos botões do cabeçalho. */
 const ASSIST_CARDS = [
-  {id:"idade",     h:"Idade da mãe (%)",                          fonte:"SINASC"},
-  {id:"raca",      h:"Raça/cor da mãe (%)",                       fonte:"SINASC"},
-  {id:"escola",    h:"Escolaridade da mãe (anos de estudo) (%)",  fonte:"SINASC"},
-  {id:"conjugal",  h:"Situação conjugal da mãe (%)",              fonte:"SINASC"},
-  {id:"ces_ant",   h:"Cesarianas anteriores da mãe (%)",          fonte:"SINASC"},
+  {id:"idade",     h:"Idade (%)",                                 fonte:"SINASC"},
+  {id:"raca",      h:"Raça/cor (%)",                              fonte:"SINASC"},
+  {id:"escola",    h:"Escolaridade (anos de estudo) (%)",         fonte:"SINASC"},
+  {id:"conjugal",  h:"Situação conjugal (%)",                     fonte:"SINASC"},
+  {id:"ces_ant",   h:"Cesarianas anteriores (%)",                 fonte:"SINASC"},
   {id:"tipo_gest", h:"Tipo de gestação (%)",                      fonte:"SINASC"},
   {id:"prenatal",  h:"Pré-natal adequado à idade gestacional (%)", fonte:"SINASC"},
 ];
@@ -1166,6 +1199,17 @@ function tabelaAssist(linhas, idCard){
   const attr = uniforme ? ` data-assist="${idCard}"` : "";
   return `<div class="tab-wrap"><table class="dados"${attr}><thead><tr><th></th>${ths}</tr></thead><tbody>${rows}</tbody></table></div>`;
 }
+/* 22/11/2026 (coordenação): o quadro de pré-natal adequado à idade gestacional fica junto das outras tabelas de
+   pré-natal do perfil da unidade, e não na seção Perfil das mães. */
+const ASSIST_JUNTO_AO_PRENATAL = ["prenatal"];
+function cardAssistHTML(grupos, c, classe){
+  if(!grupos || !c || !grupos[c.id]) return "";
+  const fonte = c.fonte === "SIH" ? FONTE_SIH : c.fonte === "MISTA" ? FONTE_MISTA : FONTE_SINASC;
+  return `<div class="card${classe ? " " + classe : ""}"><h3>${esc(c.h)}</h3>${tabelaAssist(grupos[c.id], c.id)}<p class="fonte">${fonte}</p></div>`;
+}
+function cardPrenatalAdequadoHTML(mt){
+  return cardAssistHTML(gruposAssist(mt), ASSIST_CARDS.find(c => c.id === "prenatal"), "full");
+}
 function assistenciaisHTML(mt){
   const sep = `<div class="full"><p class="eyebrow titulo-linha" style="margin:1rem 0 .2rem">Perfil das mães (SINASC)</p></div>`;
   const grupos = gruposAssist(mt);
@@ -1174,12 +1218,14 @@ function assistenciaisHTML(mt){
   }
   let html = sep;
   ASSIST_CARDS.forEach(c => {
-    if(!grupos[c.id]) return;
-    const fonte = c.fonte === "SIH" ? FONTE_SIH : c.fonte === "MISTA" ? FONTE_MISTA : FONTE_SINASC;
-    html += `<div class="card"><h3>${esc(c.h)}</h3>${tabelaAssist(grupos[c.id], c.id)}<p class="fonte">${fonte}</p></div>`;
+    if(ASSIST_JUNTO_AO_PRENATAL.includes(c.id)) return;
+    html += cardAssistHTML(grupos, c);
   });
-  html += `<div class="card full"><p class="suave" style="font-size:.9rem">Os indicadores de internação obstétrica e neonatal desta unidade (SIH/SUS: motivos, acompanhante, AMIU, Centro de Parto Normal, morbidade materna grave, ocupação e permanência, internações neonatais e UTI neonatal) estão no <a href="https://anamazza.github.io/Indicadores_Brasil/internacao/" target="_blank" rel="noopener">Painel de Internação 2026</a>.</p></div>`;
   return html;
+}
+/* fecha o perfil da unidade; o bloco do Perfil das mães subiu para logo abaixo do gráfico de nascidos vivos (22/11/2026) */
+function notaInternacaoHTML(){
+  return `<div class="card full"><p class="suave" style="font-size:.9rem">Os indicadores de internação obstétrica e neonatal desta unidade (SIH/SUS: motivos, acompanhante, AMIU, Centro de Parto Normal, morbidade materna grave, ocupação e permanência, internações neonatais e UTI neonatal) estão no <a href="https://anamazza.github.io/Indicadores_Brasil/internacao/" target="_blank" rel="noopener">Painel de Internação 2026</a>.</p></div>`;
 }
 /* clique no INDICADOR (rótulo da linha): evolução 2019-2025 (pedido da Tatiana, 28/08) */
 const METAS_ROBSON = {"Grupo 1": 10, "Grupo 2": 35, "Grupo 3": 3, "Grupo 4": 15};
@@ -1195,14 +1241,25 @@ function abrirTendenciaBloco(bloco, ri, pctTabela, tituloCard){
     const base = rotTerr[ri % 5] || rot;
     rot = (ri >= 5 ? "% " : "") + base;
   }
-  const vals = b[ri][1].slice(0, NT);
-  const pct = pctTabela || rot.trim().startsWith("%");
+  const pcts = pctLinhasBloco(mt, bloco);          // tabelas de número e percentual: o gráfico mostra o percentual
+  const seriePct = pcts && pcts[ri];
+  const vals = (seriePct || b[ri][1]).slice(0, NT);
+  const pct = !!seriePct || pctTabela || rot.trim().startsWith("%");
   const meta = bloco === "robson_taxa" ? METAS_ROBSON[b[ri][0]] : null;
   document.getElementById("mgTitulo").textContent =
     (tituloCard ? tituloCard + " · " : "") + rot + " · evolução " + SERIE_ROT;
   document.getElementById("mgSub").textContent = mt.nome + " - " + mt.uf + " · Fonte: SINASC, dados sujeitos a revisão.";
   document.getElementById("modalGrafico").hidden = false;
   grafLinhas("mgConteudo", [{nome: rot, cor: "#279261", vals}], {pct, meta: meta ?? undefined, legenda: false});
+}
+function abrirTendenciaTerr(i){
+  const s = _terrSeries[i];
+  if(!s) return;
+  const mt = MAT.find(m => m.cnes === estado.cnes) || MAT[0];
+  document.getElementById("mgTitulo").textContent = s.rot + " · evolução " + SERIE_ROT;
+  document.getElementById("mgSub").textContent = mt.nome + " - " + mt.uf + " · Fonte: SINASC, dados sujeitos a revisão.";
+  document.getElementById("modalGrafico").hidden = false;
+  grafLinhas("mgConteudo", [{nome: s.rot, cor: "#279261", vals: s.vals.slice(0, NT)}], {pct: s.pct, legenda: false});
 }
 function abrirTendenciaAssist(idCard, ri, tituloCard){
   const mt = MAT.find(m => m.cnes === estado.cnes) || MAT[0];
@@ -1318,7 +1375,8 @@ function desenhaDossie(){
   </div>
   <div class="dossie-cards">
     <div class="full"><p class="suave" style="font-size:.88rem; margin:0">Ficha de cadastro e habilitações desta unidade no CNES: <a href="${HAB_URL}#${mt.cnesFicha || mt.cnes}" target="_blank" rel="noopener">Painel de Perfil e Estrutura →</a></p></div>
-    <div class="card full"><h3>Nascidos vivos ocorridos, ${SERIE_ROT}</h3><div id="dNV"></div><p class="fonte">${FONTE_SINASC}${PARCIAIS.size ? " " + esc(NOTA_PARCIAL) : ""}</p></div>
+    <div class="card full"><h3>Nascidos vivos ocorridos, ${SERIE_ROT}</h3><div id="dNV" style="max-width:820px; margin:.7rem auto 0"></div><p class="fonte">${FONTE_SINASC}${PARCIAIS.size ? " " + esc(NOTA_PARCIAL) : ""}</p></div>
+    ${assistenciaisHTML(mt)}
     <div class="full">
       <p class="eyebrow titulo-linha" style="margin:.4rem 0 .2rem">Abrangência territorial: da região à unidade</p>
       <div class="filtros-grid filtros-topo" style="margin-bottom:.9rem">
@@ -1338,6 +1396,7 @@ function desenhaDossie(){
     </div>
     <div class="card"><h3>Pré-natal: número de consultas</h3>${tabelaBloco(mt, "prenatal", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com número de consultas informado (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
     <div class="card">${cardTrimestreHTML(mt)}</div>
+    ${cardPrenatalAdequadoHTML(mt)}
     <div class="card"><h3>Peso ao nascer</h3>${tabelaBloco(mt, "peso", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total de nascidos vivos. ${FONTE_SINASC}</p></div>
     <div class="card"><h3>Idade gestacional</h3>${tabelaBloco(mt, "gestacao", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com idade gestacional informada (exclui "N Inf", não informada). ${FONTE_SINASC}</p></div>
     <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com via de nascimento informada (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
@@ -1347,7 +1406,7 @@ function desenhaDossie(){
     <div class="card full"><h3>Taxa de cesariana segundo grupo de Robson</h3>
       ${tabelaBloco(mt, "robson_taxa", {pct:true, metaCol:true, metas:{"Grupo 1":10,"Grupo 2":35,"Grupo 3":3,"Grupo 4":15}})}
       <p class="fonte">${FONTE_SINASC} Metas: G1 ≤10% · G2 ≤35% · G3 ≤3% · G4 ≤15% (verde = na meta, vermelho = acima).</p></div>
-    ${assistenciaisHTML(mt)}
+    ${notaInternacaoHTML()}
   </div>`;
 
   grafBarras("dNV", ANOS.map((_, i) => nomeAno(i)), ANOS.map((_, a) => mt.blocos.nv_territorio[0][1][a]));
@@ -1620,6 +1679,35 @@ const FICHAS_EXTRAS = [
    fonte:"Ministério da Saúde - SINASC, " + SERIE_ROT + "."}
 ];
 
+/* quadros do Perfil das mães e de pré-natal adequado à idade gestacional (perfil da unidade): fichas acrescentadas em
+   22/11/2026, a pedido da coordenação. Regras do dicionário de indicadores (versão final de 10/09/2026), seções Perfil
+   sócio-demográfico (SINASC) e Perfil obstétrico (SINASC); o denominador é o que o painel usa. */
+const BASE_PERFIL = "Total de nascidos vivos da unidade no período. A linha \"Ignorado\" é uma categoria própria e entra no total, por isso as linhas somam 100%.";
+const FICHAS_PERFIL = [
+  {rot:"Perfil das mães: idade (%)",
+   desc:"Distribuição percentual dos nascidos vivos por idade da mãe, nas faixas de 10 a 14, 15 a 19, 20 a 34, 35 a 39 e 40 anos e mais.",
+   n:"Nascidos vivos em cada faixa etária da mãe.", d:BASE_PERFIL},
+  {rot:"Perfil das mães: raça/cor (%)",
+   desc:"Distribuição percentual dos nascidos vivos por raça/cor da mãe: branca, preta, amarela, parda e indígena. A raça/cor é autodeclarada.",
+   n:"Nascidos vivos em cada categoria de raça/cor da mãe.", d:BASE_PERFIL},
+  {rot:"Perfil das mães: escolaridade (anos de estudo) (%)",
+   desc:"Distribuição percentual dos nascidos vivos por escolaridade da mãe, em anos de estudo concluídos: até 3 anos, 4 a 7, 8 a 11 e 12 anos e mais.",
+   n:"Nascidos vivos em cada categoria de escolaridade da mãe.", d:BASE_PERFIL},
+  {rot:"Perfil das mães: situação conjugal (%)",
+   desc:"Distribuição percentual dos nascidos vivos por situação conjugal da mãe, em dois grupos: solteira, viúva ou separada; casada ou em união consensual.",
+   n:"Nascidos vivos em cada categoria de situação conjugal da mãe.", d:BASE_PERFIL},
+  {rot:"Perfil das mães: cesarianas anteriores (%)",
+   desc:"Distribuição percentual dos nascidos vivos por número de cesarianas anteriores da mãe: nenhuma, de 1 a 3, de 4 a 6, de 7 a 9 e 10 ou mais.",
+   n:"Nascidos vivos de mães em cada faixa de número de cesarianas anteriores.", d:BASE_PERFIL},
+  {rot:"Perfil das mães: tipo de gestação (%)",
+   desc:"Distribuição percentual dos nascidos vivos por tipo de gestação: única, dupla e tripla ou mais.",
+   n:"Nascidos vivos de cada tipo de gestação.", d:BASE_PERFIL},
+  {rot:"Pré-natal adequado à idade gestacional (%)",
+   desc:"Percentual de nascidos vivos cujas mães fizeram um número de consultas de pré-natal igual ou superior ao mínimo esperado para a idade gestacional no parto, segundo o calendário de 8 contatos da Organização Mundial da Saúde (2016).",
+   n:"Nascidos vivos cujas mães tiveram o número mínimo de consultas para a idade gestacional no parto: 1 consulta com menos de 20 semanas; 2 de 20 a 25 semanas; 3 de 26 a 29; 4 de 30 a 33; 5 de 34 a 35; 6 de 36 a 37; 7 de 38 a 39; 8 com 40 semanas ou mais.",
+   d:"Total de nascidos vivos da unidade no período. Os registros com número de consultas ignorado permanecem no total e não contam como adequados."}
+];
+
 let _metodoPronta = false;
 function desenhaMetodologia(){
   if(_metodoPronta) return;
@@ -1628,7 +1716,6 @@ function desenhaMetodologia(){
     ["SINASC", "Sistema de Informações sobre Nascidos Vivos, Ministério da Saúde. Base de todos os indicadores de nascimento: série 2019 a 2025 e 1º semestre de 2026, extraída por estabelecimento (CNES) e por território de residência e ocorrência. Dados sujeitos a revisão."],
     ["1º semestre de 2026", (() => { const p = (DADOS.periodos || {})[2026] || {}; return `Coluna acrescentada em ${p.extraidoEm ? p.extraidoEm.split("-").reverse().join("/") : "18/10/2026"}: nascidos vivos de ${p.descricao || "janeiro a junho de 2026"}, pela data de nascimento, extraídos diretamente do microdado preliminar (${p.fonte || "SINASC 2026 preliminar, OpenDataSUS"}) com as mesmas regras das colunas 2019-2025. Validação: o mesmo extrator reproduz a coluna de 2025 das planilhas oficiais em 99,9% das células (as diferenças restantes são de composição de macrorregião em duas unidades). Período parcial e preliminar: não entra no acumulado nem nas tendências; os números absolutos não são comparáveis com anos completos, os percentuais e as taxas são.${(p.unidadesSemDados || []).length ? " Sem registro de nascimento no período: " + p.unidadesSemDados.join("; ") + "." : ""}`; })()],
     ["CNES", "Cadastro Nacional dos Estabelecimentos de Saúde do Brasil: código de identificação de cada unidade. A ficha de cadastro e as habilitações das unidades estão no Painel de Perfil e Estrutura."],
-    ["SIH/AIH", "Sistema de Informações Hospitalares do SUS. Origem dos pontos de contexto do mapa de unidades (estabelecimentos com 480 ou mais partos/ano, produção de 2025). Os indicadores de internação das unidades estão no Painel de Internação."],
     ["Lista de maternidades", "LISTA MATERNIDADES POR GRUPO de 21/11/2026 (coordenação), com as unidades classificadas nos grupos Estratégicas, HU Brasil e/ou QUALINEO 3. O painel traz as 120 unidades dessa lista, as mesmas dos painéis de Internação, de Mortalidade e de Perfil e Estrutura. O Hospital das Clínicas da FAMEMA (Marília/SP) é um complexo com dois códigos CNES (2025507 e 2025523): os nascidos vivos dos dois códigos são somados."],
     ["Totais do território", "Nas tabelas do perfil da unidade, os totais de município, região de saúde, macrorregião e UF vêm dos microdados do SINASC (OpenDataSUS), com a regionalização vigente em junho de 2026, a mesma das malhas do painel. Unidades do mesmo território exibem o mesmo total."],
     ["Malhas territoriais", "Limites de estados, macrorregiões de saúde (121) e regiões de saúde (439) compactados em SVG a partir das malhas oficiais utilizadas nos projetos de regionalização."],
@@ -1650,6 +1737,7 @@ function desenhaMetodologia(){
     const meta = ind.meta != null ? `${ind.sentido === "menor" ? "≤" : "≥"} ${ind.meta}%` : null;
     return fichaHTML(ind.rot, ind.desc, c.n, c.d, meta, c.obs, "Ministério da Saúde - SINASC, " + SERIE_ROT);
   }).join("");
+  const fichasPerfil = FICHAS_PERFIL.map(f => fichaHTML(f.rot, f.desc, f.n, f.d, null, null, "Ministério da Saúde - SINASC, " + SERIE_ROT)).join("");
   const extras = FICHAS_EXTRAS.map(f => fichaHTML(f.rot, f.desc, f.n, f.d, null, null, f.fonte)).join("");
   document.getElementById("metodoConteudo").innerHTML = `
     <div class="sec-head" style="margin-top:.7rem">
@@ -1661,7 +1749,7 @@ function desenhaMetodologia(){
       ${fontes.map(f => `<div class="card"><h3>${f[0]}</h3><p class="suave" style="font-size:.88rem; margin-top:.5rem">${f[1]}</p></div>`).join("")}
     </div>
     <h3 class="titulo-linha" style="margin:1.6rem 0 .7rem">Fichas dos indicadores das maternidades apoiadas</h3>
-    <div class="grid-2">${fichas}</div>
+    <div class="grid-2">${fichas}${fichasPerfil}</div>
     <h3 class="titulo-linha" style="margin:1.6rem 0 .7rem">Demais cálculos do painel</h3>
     <div class="grid-2">${extras}</div>
     <div class="card" style="margin-top:1.4rem">
