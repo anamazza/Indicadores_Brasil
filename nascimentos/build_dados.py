@@ -272,6 +272,14 @@ for mt in mats:
         sys.exit(f"ERRO: faixas de consultas de pré-natal fora do padrão em {mt['cnes']} {mt['nome']}: {[l[0] for l in bl]}")
 print(f"[2e] rótulos de consultas de pré-natal igualados em: {igualados or 'nenhuma unidade'}")
 
+# ---------- 2f. números absolutos do Perfil das mães (22/11/2026) ----------
+# As tabelas do Perfil das mães e do pré-natal adequado mostravam só o percentual. Cada linha ganha o campo "n", da
+# contagem no SINASC (Extracao_SINASC: py 13_perfil_contagens.py); os percentuais não mudam. Ver perfil_contagens.py.
+import perfil_contagens
+resumo_pc, avisos_pc = perfil_contagens.acrescentar(dados, {ano_p: per for per, ano_p, *_ in PERIODOS})
+print(f"[2f] números absolutos do Perfil das mães: {resumo_pc}")
+for a in avisos_pc: print("     AVISO:", a)
+
 # ---------- 3. GEO compactado da referência ----------
 ref = open(REF_PAGE, encoding="utf-8").read()
 m = re.search(r'const GEO = (\{.*?\});', ref, re.S)

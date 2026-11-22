@@ -1182,7 +1182,7 @@ function gruposAssist(mt){
   mt.assistenciais.secoes.forEach(s => s.linhas.forEach(l => {
     for(const [re, id, rotFixo] of ASSIST_MAP){
       const m = l.rotulo.match(re);
-      if(m){ (grupos[id] = grupos[id] || []).push({rot: rotFixo || m[1], fmt: l.fmt, valores: l.valores}); return; }
+      if(m){ (grupos[id] = grupos[id] || []).push({rot: rotFixo || m[1], fmt: l.fmt, valores: l.valores, n: l.n}); return; }
     }
     (grupos.outros = grupos.outros || []).push({rot: l.rotulo, fmt: l.fmt, valores: l.valores});
   }));
@@ -1190,14 +1190,16 @@ function gruposAssist(mt){
 }
 function tabelaAssist(linhas, idCard){
   const rows = linhas.map((l, ri) =>
-    `<tr><td${idCard ? ` class="rot-click" data-acard="${idCard}" data-row="${ri}" title="Ver a evolução deste indicador, ${SERIE_ROT}"` : ""}>${esc(l.rot)}</td>${l.valores.map(v => `<td class="mono">${fmtAssist(v, l.fmt)}</td>`).join("")}</tr>`
+    `<tr><td${idCard ? ` class="rot-click" data-acard="${idCard}" data-row="${ri}" title="Ver a evolução deste indicador, ${SERIE_ROT}"` : ""}>${esc(l.rot)}</td>${l.valores.map((v, i) => (l.n && l.fmt === "pct") ? celDupla(l.n[i], v) : `<td class="mono">${fmtAssist(v, l.fmt)}</td>`).join("")}</tr>`
   ).join("");
+  // 22/11/2026: quadros do Perfil das mães com o número de nascidos vivos e, abaixo, o percentual (campo "n" da linha)
+  const comNumero = linhas.some(l => l.n && l.fmt === "pct");
   // ano clicavel (grafico do ano) so quando todas as linhas tem o mesmo formato —
   // nos cards mistos (nº + % + dias) a barra compararia grandezas diferentes
   const uniforme = idCard && linhas.every(l => l.fmt === linhas[0].fmt);
   const ths = uniforme ? thsAno(false) : ANOS.map((a, i) => `<th>${nomeAno(i)}</th>`).join("");
   const attr = uniforme ? ` data-assist="${idCard}"` : "";
-  return `<div class="tab-wrap"><table class="dados"${attr}><thead><tr><th></th>${ths}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  return `<div class="tab-wrap"><table class="dados"${attr}><thead><tr><th>${comNumero ? "Nº e %" : ""}</th>${ths}</tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 /* 22/11/2026 (coordenação): o quadro de pré-natal adequado à idade gestacional fica junto das outras tabelas de
    pré-natal do perfil da unidade, e não na seção Perfil das mães. */
