@@ -337,8 +337,9 @@ table.dados tr.total td{font-weight:800; border-top:2px solid var(--borda)}
 .card.aviso-sih{background:#FFF3DB !important; border-left:5px solid #D68910}
 .card.aviso-sih p{margin:0; font-size:.92rem}
 table.dados td.duplo{line-height:1.25}
-table.dados td.duplo b{display:block; font-weight:700}
-table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
+/* 23/11/2026 (coordenação): nas células com número e percentual, o destaque é do percentual */
+table.dados td.duplo b{display:block; font-size:.74rem; font-weight:500; color:var(--texto-suave)}
+table.dados td.duplo small{display:block; font-size:.86rem; font-weight:800; color:var(--texto)}
 
 /* tabela no estilo da apresentação (cabeçalho verde) */
 table.dados.tab-verde th{
@@ -442,7 +443,8 @@ footer a{color:var(--verde-lima)}
   <div class="stat"><div class="num" id="statUFs">—</div><div class="rot">Estados</div></div>
   <div class="stat"><div class="num" id="statObst">—</div><div class="rot">Internações obstétricas 2025</div><div class="sub" id="statObstSub"></div></div>
   <div class="stat"><div class="num" id="statNeo">—</div><div class="rot">Internações neonatais 2025</div><div class="sub" id="statNeoSub"></div></div>
-  <div class="stat"><div class="num" id="statMMG">—</div><div class="rot">Morbidade materna grave 2025</div><div class="sub" id="statMMGSub"></div></div>
+  <div class="stat"><div class="num" id="statMMG">—</div><div class="rot">Morbidade materna grave 2025</div></div>
+  <div class="stat"><div class="num" id="statCPAV">—</div><div class="rot">RN com CPAV 2025</div></div>
   <button class="stat stat-btn" id="btnMetodologia" title="Como cada número é calculado">
     <div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Metodologia</div>
   </button>

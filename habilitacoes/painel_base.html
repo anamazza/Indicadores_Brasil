@@ -423,7 +423,8 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
   <div class="stat"><div class="num" id="statTipos">—</div><div class="rot">Tipos de habilitação</div><div class="sub">códigos distintos nas unidades</div></div>
   <div class="stat"><div class="num" id="statUtin">—</div><div class="rot">Unidades com UTI neonatal</div><div class="sub" id="statUtinSub"></div></div>
   <div class="stat"><div class="num" id="statHgpar">—</div><div class="rot">Referência alto risco (HGPAR)</div><div class="sub" id="statHgparSub"></div></div>
-  <button class="stat stat-btn" id="btnNotas" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
+  <!-- 23/11/2026 (coordenação): notas metodológicas desabilitadas até a revisão dos textos; para reabilitar, tirar o style deste botão e o hidden da seção secNotas e voltar NOTAS_ATIVAS para true no painel_app.js -->
+  <button class="stat stat-btn" id="btnNotas" style="display:none" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
 </div>
 
 <nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
@@ -482,7 +483,7 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
       <h3 id="barrasTitulo">Habilitações no recorte</h3>
       <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
       <div class="barras" id="barras"></div>
-      <p class="fonte">Cada barra conta as unidades do recorte com a habilitação registrada no CNES na data de referência de cada fonte (ver as notas metodológicas). Fonte: Ministério da Saúde - CNES.</p>
+      <p class="fonte">Cada barra conta as unidades do recorte com a habilitação registrada no CNES na data de referência de cada fonte. Fonte: Ministério da Saúde - CNES.</p>
     </div>
     <div class="card painel-lateral" id="painelDetalhe" style="margin-top:1.1rem"></div>
     <h3 style="margin:1.4rem 0 .6rem" id="matrizTitulo">Matriz de cobertura</h3>
@@ -599,7 +600,7 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
 </section>
 
 <!-- ========================= NOTAS ========================= -->
-<section id="secNotas">
+<section id="secNotas" hidden style="display:none">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Notas metodológicas</p>

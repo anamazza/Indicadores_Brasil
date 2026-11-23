@@ -117,7 +117,7 @@ MAPA = [
     ("tmp_obst",   "Intercorrências clínicas",                         "Tempo médio de permanência - intercorrências clínicas", "dias"),
     ("neo_n",      "Internações neonatais (nº)",                       "Número de internações neonatais", "int"),
     ("neo_utin",   "Internações neonatais em UTI neonatal (%)",        "Porcentagem de internações neonatais em UTI neonatal", "pct"),
-    ("morb_neo",   "Nascidos vivos com condições potencialmente ameaçadoras à vida (%)", "Porcentagem de nascidos vivos com condições potencialmente ameaçadoras à vida", "pct"),
+    ("morb_neo",   "Recém-nascidos com condições potencialmente ameaçadoras à vida (%)", "Porcentagem de nascidos vivos com condições potencialmente ameaçadoras à vida", "pct"),
     ("ocup_utin",  "Taxa de ocupação da UTI neonatal (%)",             "Taxa de Ocupação - UTI neonatal", "pct"),
     ("tmp_utin",   "Tempo médio de permanência na UTI neonatal (dias)", "Tempo médio de permanência - UTI neonatal", "dias"),
 ]

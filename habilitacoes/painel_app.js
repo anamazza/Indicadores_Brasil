@@ -899,13 +899,16 @@ function montarDossie(){
 }
 
 /* ---------------- trilho lateral ---------------- */
+/* 23/11/2026 (coordenação): notas metodológicas desabilitadas até a revisão dos textos (ver o comentário no botão
+   btnNotas do painel_base.html) */
+const NOTAS_ATIVAS = false;
 const TRILHO = [
   {alvo: "inicio", rot: "Início", ico: '<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>'},
   {alvo: "secConsulta", rot: "Consulta individual", ico: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>'},
   {alvo: "secGrupo", rot: "Por grupo", ico: '<svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-5M12 15V7M16 15v-3"/></svg>'},
   {alvo: "secLocal", rot: "Por local", ico: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>'},
   {alvo: "secMapa", rot: "Mapa do Brasil e unidades", ico: '<svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>'},
-  {alvo: "secNotas", rot: "Notas metodológicas", ico: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>'},
+  ...(NOTAS_ATIVAS ? [{alvo: "secNotas", rot: "Notas metodológicas", ico: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>'}] : []),
 ];
 function montarTrilho(){
   const trilho = $("trilho");

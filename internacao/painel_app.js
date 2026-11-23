@@ -71,10 +71,10 @@ const INDS = [
   I("mot_outros", "obst", "Internações obstétricas por outros motivos (%)", "% outros motivos", "motivos", 3, "pct", "neutro", "SIH"),
   I("aborto_legal", "obst", "Internações para interrupção da gestação prevista em lei (nº)", "Interrupção prevista em lei", "aborto_legal", 0, "int", "neutro", "SIH"),
   I("amiu", "obst", "AMIU entre os procedimentos de esvaziamento uterino (%)", "AMIU", "amiu", 0, "pct", "maior", "SIH"),
-  I("acomp_parto", "obst", "Internações que resultaram em parto com acompanhante (%)", "Acompanhante no parto", "acomp", 0, "pct", "maior", "SIH"),
-  I("acomp_pv", "obst", "Partos vaginais com acompanhante (%)", "Acompanhante: parto vaginal", "acomp", 1, "pct", "maior", "SIH"),
-  I("acomp_ces", "obst", "Cesarianas com acompanhante (%)", "Acompanhante: cesariana", "acomp", 2, "pct", "maior", "SIH"),
-  I("acomp_ab", "obst", "Internações para aborto com acompanhante (%)", "Acompanhante: aborto", "acomp", 3, "pct", "maior", "SIH"),
+  I("acomp_parto", "obst", "Internações por parto com presença de acompanhante (%)", "Acompanhante no parto", "acomp", 0, "pct", "maior", "SIH"),
+  I("acomp_pv", "obst", "Internações por partos vaginais com presença de acompanhante (%)", "Acompanhante: parto vaginal", "acomp", 1, "pct", "maior", "SIH"),
+  I("acomp_ces", "obst", "Internações por cesarianas com presença de acompanhante (%)", "Acompanhante: cesariana", "acomp", 2, "pct", "maior", "SIH"),
+  I("acomp_ab", "obst", "Internações por aborto com presença de acompanhante (%)", "Acompanhante: aborto", "acomp", 3, "pct", "maior", "SIH"),
   I("cpn", "obst", "Partos no Centro de Parto Normal (nº)", "Partos em CPN", "cpn", 0, "int", "neutro", "SIH"),
   I("vbac", "parto", "Nascidos vivos por parto vaginal após cesariana anterior (%)", "Parto vaginal após cesariana", "parto", 0, "pct", "maior", "SINASC"),
   I("analg", "parto", "Analgesia nas internações para parto vaginal (%)", "Analgesia no parto vaginal", "parto", 1, "pct", "maior", "SIH"),
@@ -94,7 +94,7 @@ const INDS = [
   I("neo_n", "neo", "Internações neonatais (nº)", "Internações neonatais", "neo_n", 0, "int", "neutro", "SIH"),
   I("neo_utin", "neo", "Internações neonatais em UTI neonatal (%)", "Neonatais em UTI", "neo_utin", 0, "pct", "neutro", "SIH"),
   ...CAUSAS_NEO.map((c, k) => I("neoc" + k, "neo", "Internações neonatais por grupo de causa: " + c + " (%)", "Neonatal · " + c, "neo_causas", k, "pct", "neutro", "SIH")),
-  I("cpav", "neomorb", "Nascidos vivos com condições potencialmente ameaçadoras à vida (%)", "NV com condições ameaçadoras", "morb_neo", 0, "pct", "menor", "SINASC"),
+  I("cpav", "neomorb", "Recém-nascidos com condições potencialmente ameaçadoras à vida (%)", "RN com CPAV", "morb_neo", 0, "pct", "menor", "SINASC"),
   I("ocup_utin", "neomorb", "Taxa de ocupação da UTI neonatal (%)", "Ocupação da UTIN", "ocup_utin", 0, "pct", "neutro", "SIH e CNES"),
   I("tmp_utin", "neomorb", "Tempo médio de permanência na UTI neonatal (dias)", "Permanência na UTIN", "tmp_utin", 0, "dias", "neutro", "SIH"),
 ];
@@ -191,9 +191,9 @@ function desenhaPontos(){
       <div style="color:${cor.borda}; font-weight:700">${esc(rotuloConjuntos(m))}</div>
       <div style="margin-top:.25rem; font-weight:700">${nomeAno(a)}${PRELIM.has(ANOS[a]) ? " (parcial)" : ""}</div>
       ${li("obst_n", "Internações obstétricas")}
-      ${li("mot_parto", "Partos entre as internações")}
       ${li("mmg", "Morbidade materna grave")}
       ${li("neo_n", "Internações neonatais")}
+      ${li("cpav", "RN com CPAV")}
       <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
     camadaEstr.addLayer(mk);
@@ -209,7 +209,7 @@ function desenhaPontos(){
    ============================================================ */
 function grafLinhas(alvo, series, opts = {}){
   const comRotulos = opts.rotulos !== false && series.length === 1;
-  const W = 640, H = 320, mL = 52, mR = 22, mT = comRotulos ? 34 : 18, mB = 30;
+  const W = 640, H = 320, mL = 52, mR = 44, mT = comRotulos ? 34 : 18, mB = 30;
   const todos = series.flatMap(s => s.vals).filter(v => v != null);
   const el = document.getElementById(alvo);
   if(!todos.length){ el.innerHTML = "<p class='suave'>Sem dados.</p>"; return; }
@@ -334,13 +334,19 @@ function tabelaBloco(mt, bloco, cab){
    obstétricas (13/11/2026) e grupos de causas das internações neonatais (14/11/2026), a pedido da coordenação.
    Os números absolutos vêm dos blocos motivos_n e neo_causas_n do build_dados.py. O clique no rótulo e no ano
    continua abrindo os gráficos do bloco de percentuais. */
-function tabelaNumPct(mt, bloco, blocoTot, cab, rotTotal){
+/* ordem decrescente pelo número do último ano completo (23/11/2026, coordenação); em caso de empate, ordem alfabética */
+function ordemDecrescente(indices, numero, rotulo){
+  return [...indices].sort((x, y) => (numero(y) || 0) - (numero(x) || 0) || String(rotulo(x)).localeCompare(String(rotulo(y)), "pt-BR"));
+}
+function tabelaNumPct(mt, bloco, blocoTot, cab, rotTotal, decrescente){
   const b = mt.blocos[bloco], bn = mt.blocos[bloco + "_n"], tot = (mt.blocos[blocoTot] || [])[0];
   if(!b || !b.length) return "<p class='suave'>Sem dados.</p>";
   if(!bn) return tabelaBloco(mt, bloco, cab + " (%)");
   const cel = (n, p) => `<td class="mono duplo"><b>${fmtInt(n)}</b><small>${fmtPct(p)}</small></td>`;
-  const rows = b.map((l, ri) =>
-    `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(l[0])}</td>${l[1].map((p, a) => cel(bn[ri] ? bn[ri][1][a] : null, p)).join("")}</tr>`).join("");
+  let ordem = b.map((_, ri) => ri);
+  if(decrescente) ordem = ordemDecrescente(ordem, ri => bn[ri] ? bn[ri][1][ULT] : 0, ri => b[ri][0]);
+  const rows = ordem.map(ri => { const l = b[ri]; return (
+    `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(l[0])}</td>${l[1].map((p, a) => cel(bn[ri] ? bn[ri][1][a] : null, p)).join("")}</tr>`); }).join("");
   const total = tot ? `<tr class="total"><td>${esc(rotTotal)}</td>${tot[1].map(v => `<td class="mono duplo"><b>${fmtInt(v)}</b><small>${v ? "100,0%" : "—"}</small></td>`).join("")}</tr>` : "";
   return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-dist="1">
     <thead><tr><th>${esc(cab)} (nº e %)</th>${thsAno(true)}</tr></thead>
@@ -355,8 +361,9 @@ function tabelaCriteriosMMG(mt){
   let rows = "";
   MMG.grupos.forEach(g => {
     rows += `<tr class="subgrupo"><td colspan="${ANOS.length + 1}">${esc(g[1])}</td></tr>`;
-    MMG.criterios.forEach((c, ri) => {
-      if(c[2] !== g[0]) return;
+    // dentro de cada grupo, os critérios em ordem decrescente do número de casos no último ano completo
+    const doGrupo = MMG.criterios.map((c, ri) => ri).filter(ri => MMG.criterios[ri][2] === g[0]);
+    ordemDecrescente(doGrupo, ri => bn[ri][1][ULT], ri => b[ri][0]).forEach(ri => {
       rows += `<tr><td class="rot-click" data-row="${ri}" title="Ver a evolução, ${SERIE_ROT}">${esc(b[ri][0])}</td>${b[ri][1].map((p, a) => cel(bn[ri][1][a], p)).join("")}</tr>`;
     });
   });
@@ -386,7 +393,11 @@ function baixarPngModal(){
   const escala = 2.5;
   const W = Math.round(vb.width * escala), H = Math.round(vb.height * escala);
   const alto = 64 * (escala / 2);
-  const xml = new XMLSerializer().serializeToString(svg);
+  // 23/11/2026: a cópia leva a fonte da página; sem isso o PNG saía em fonte serifada, mais larga, e cortava
+  // o rótulo do último período na borda direita
+  const copia = svg.cloneNode(true);
+  copia.setAttribute("font-family", "Arial, Helvetica, sans-serif");
+  const xml = new XMLSerializer().serializeToString(copia);
   const url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml;charset=utf-8"}));
   const img = new Image();
   img.onload = () => {
@@ -515,7 +526,7 @@ function desenhaDossie(){
       ${k("obst_n", "Internações obstétricas", "partos: " + fmtPct(valorUnidade(mt, indPorId("mot_parto"), a)))}
       ${k("mmg", "Morbidade materna grave", "entre as internações obstétricas")}
       ${k("neo_n", "Internações neonatais", "em UTIN: " + fmtPct(valorUnidade(mt, indPorId("neo_utin"), a)))}
-      ${k("ocup_obst", "Ocupação obstétrica", "UTIN: " + fmtPct(valorUnidade(mt, indPorId("ocup_utin"), a)))}
+      ${k("cpav", "RN com CPAV", "")}
     </div>
   </div>
   <div class="dossie-cards">
@@ -535,7 +546,7 @@ function desenhaDossie(){
     ${card(`Assistência ao parto, ${periodo}`, tabelaBloco(mt, "parto", "Assistência ao parto (%)"), FONTE_MISTA, "Parto vaginal após cesariana e trabalho de parto induzido pelo SINASC; analgesia pelas AIH de parto vaginal (SIH/SUS).")}
     ${card(`Morbidade materna grave (nº e %), ${periodo}`, tabelaNumPct(mt, "mmg", "mmg_obst_n", "Morbidade materna grave", "Internações obstétricas de mulheres de 10 a 49 anos"), FONTE_SIH, "Em cada célula, o número de casos e, abaixo, o percentual sobre as internações obstétricas. Caso: internação obstétrica com pelo menos um dos 22 critérios da Organização Mundial da Saúde para condições potencialmente ameaçadoras à vida, operacionalizados no SIH/SUS conforme Domingues et al. (2026). Internação obstétrica de mulheres de 10 a 49 anos, contada por episódio de cuidado, conforme Domingues et al. (2024); por isso o total desta tabela difere do número de internações obstétricas do início do perfil, que considera mulheres de 10 a 59 anos e cada AIH.")}
     ${card(`Casos de morbidade materna grave por grupo de critérios (nº e %), ${periodo}`, tabelaNumPct(mt, "mmg_grupos", "mmg_n", "Grupo de critérios", "Total de casos de morbidade materna grave"), FONTE_SIH, "Em cada célula, o número de casos com pelo menos um critério do grupo e, abaixo, o percentual sobre o total de casos. Um caso pode ter critérios de mais de um grupo; por isso os percentuais não somam 100%. Grupos de critérios da Organização Mundial da Saúde, conforme Domingues et al. (2026).")}
-    ${card(`Casos de morbidade materna grave por critério (nº e %), ${periodo}`, tabelaCriteriosMMG(mt), FONTE_SIH, "Em cada célula, o número de casos com o critério e, abaixo, o percentual sobre o total de casos. Um caso pode ter mais de um critério. Critérios e códigos na Metodologia, conforme Domingues et al. (2026).")}
+    ${card(`Casos de morbidade materna grave por critério (nº e %), ${periodo}`, tabelaCriteriosMMG(mt), FONTE_SIH, "Em cada célula, o número de casos com o critério e, abaixo, o percentual sobre o total de casos. Um caso pode ter mais de um critério. Critérios e códigos conforme Domingues et al. (2026).")}
     <div class="card full"><h3>Taxa de ocupação e tempo médio de permanência na obstetrícia, ${periodo} ${notaPrelim}</h3>
       ${tabelaBloco(mt, "ocup_obst", "Taxa de ocupação (%)")}
       <div style="margin-top:.8rem">${tabelaBloco(mt, "tmp_obst", "Tempo médio de permanência (dias)")}</div>
@@ -546,7 +557,7 @@ function desenhaDossie(){
       <div id="gNeo" style="max-width:820px; margin:.7rem auto 0"></div>
       <div style="margin-top:.9rem">${tabelaBloco(mt, "neo_n", "Internações")}</div>
       <p class="fonte">${FONTE_SIH} AIH próprias de recém-nascidos com 0 a 27 dias de vida, pelo ano da data de internação.</p></div>
-    ${card(`Internações neonatais por grupo de causas (nº e %), ${periodo}`, tabelaNumPct(mt, "neo_causas", "neo_n", "Grupo de causas", "Total de internações neonatais"), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações neonatais. Grupo pelo diagnóstico principal da AIH; categorias exclusivas.")}
+    ${card(`Internações neonatais por grupo de causas (nº e %), ${periodo}`, tabelaNumPct(mt, "neo_causas", "neo_n", "Grupo de causas", "Total de internações neonatais", true), FONTE_SIH, "Em cada célula, o número de internações e, abaixo, o percentual sobre o total de internações neonatais. Grupo pelo diagnóstico principal da AIH; categorias exclusivas.")}
     ${card(`Internações em UTI neonatal (%), ${periodo}`, tabelaBloco(mt, "neo_utin", "UTI neonatal"), FONTE_SIH, "Internações neonatais com diária em UTI neonatal tipo II ou III (leitos 81 e 82).")}
     ${card(`Morbidade neonatal (%), ${periodo}`, tabelaBloco(mt, "morb_neo", "Morbidade neonatal"), FONTE_SINASC, "Peso ao nascer abaixo de 1.500 g, idade gestacional abaixo de 32 semanas ou Apgar no 5º minuto abaixo de 7.")}
     <div class="card full"><h3>Taxa de ocupação e tempo médio de permanência na UTI neonatal, ${periodo} ${notaPrelim}</h3>
@@ -561,7 +572,8 @@ function desenhaDossie(){
 /* ============================================================
    COMPARADOR
    ============================================================ */
-const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
+/* 23/11/2026 (coordenação): verde, laranja, azul e vermelho; antes a segunda cor era o azul-marinho, quase preto */
+const CORES_COMP = ["#279261","#D68910","#2471A3","#C0392B"];
 const COR_MEDIA = "#5E716A";
 const MEDIA_ROT = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 let anoComp = ULT;
@@ -794,7 +806,11 @@ function desenhaMetodologia(){
       </p>
     </div>`;
 }
+/* 23/11/2026 (coordenação): metodologia desabilitada em todos os painéis até a revisão dos textos. Para reabilitar,
+   trocar para true: voltam o botão do topo e o item do trilho lateral. */
+const METODOLOGIA_ATIVA = false;
 function abrirMetodo(){
+  if(!METODOLOGIA_ATIVA) return;
   desenhaMetodologia();
   const pg = document.getElementById("paginaMetodo");
   if(pg.hidden){
@@ -846,7 +862,7 @@ function inicia(){
   document.getElementById("statNeo").textContent = fmtInt(soma(MAT, indPorId("neo_n"), a));
   document.getElementById("statNeoSub").textContent = "em UTIN: " + fmtPct(media(MAT, indPorId("neo_utin"), a)) + " (média das unidades)";
   document.getElementById("statMMG").textContent = fmtPct(media(MAT, indPorId("mmg"), a));
-  document.getElementById("statMMGSub").textContent = "média das unidades · % das internações obstétricas";
+  document.getElementById("statCPAV").textContent = fmtPct(media(MAT, indPorId("cpav"), a));
 
   // trilho lateral
   const ICO = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
@@ -855,7 +871,7 @@ function inicia(){
     {alvo:"secUnidades", rot:"Mapa de unidades", ico:ICO('<path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>')},
     {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
-    {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
+    ...(METODOLOGIA_ATIVA ? [{alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}] : [])
   ];
   const trilho = document.getElementById("trilho");
   trilho.innerHTML = TRILHO.map(t => `<button data-alvo="${t.alvo}" data-rotulo="${t.rot}" aria-label="${t.rot}">${t.ico}</button>`).join("");
@@ -871,6 +887,7 @@ function inicia(){
   }, {rootMargin:"-40% 0px -55% 0px"});
   secs.forEach(s => spy.observe(s));
   document.getElementById("btnMetodologia").addEventListener("click", abrirMetodo);
+  if(!METODOLOGIA_ATIVA) document.getElementById("btnMetodologia").style.display = "none";
   document.getElementById("btnVoltarMetodo").addEventListener("click", () => fecharMetodo());
 
   // leaflet — filtros

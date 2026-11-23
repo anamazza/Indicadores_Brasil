@@ -346,8 +346,9 @@ table.dados.tab-verde tr.pct td{font-style:italic; font-weight:700}
 table.dados.tab-verde tr.total td{background:var(--mint)}
 /* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
 table.dados td.duplo{line-height:1.25}
-table.dados td.duplo b{display:block; font-weight:700}
-table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
+/* 23/11/2026 (coordenação): nas células com número e percentual, o destaque é do percentual */
+table.dados td.duplo b{display:block; font-size:.74rem; font-weight:500; color:var(--texto-suave)}
+table.dados td.duplo small{display:block; font-size:.86rem; font-weight:800; color:var(--texto)}
 /* razão e taxas (por 100 mil e por mil) abaixo do número de óbitos: em destaque, por serem o indicador */
 table.dados td.duplo small.taxa{font-size:.8rem; font-weight:800; color:var(--verde-esmeralda)}
 
@@ -828,9 +829,6 @@ const INDS = [
   {id:"fintra", eixo:"fetal", rot:"% de óbitos fetais intraparto", curto:"% intraparto", tipo:"pct", sentido:"menor",
    num:(m,a)=> linha(m,"fet_momento",R.intra)?.[a], den:(m,a)=> totalSem(m,"fet_momento",[R.momIgn],a), fonte:"SIM-DOFET",
    desc:"Entre os óbitos fetais com momento informado, proporção ocorrida durante o parto — óbitos potencialmente sensíveis à assistência ao parto."},
-  {id:"f1500", eixo:"fetal", rot:"% de óbitos fetais com peso <1500 g", curto:"% <1500 g", tipo:"pct", sentido:"neutro",
-   num:(m,a)=> somaLinhas(m,"fet_peso",[R.p1,R.p2],a), den:(m,a)=> totalSem(m,"fet_peso",[R.pIgn],a), fonte:"SIM-DOFET",
-   desc:"Entre os óbitos fetais com peso informado, proporção com menos de 1500 g."},
   {id:"f2500", eixo:"fetal", rot:"% de óbitos fetais com peso ≥2500 g", curto:"% ≥2500 g", tipo:"pct", sentido:"menor",
    num:(m,a)=> somaLinhas(m,"fet_peso",[R.p4,R.p5],a), den:(m,a)=> totalSem(m,"fet_peso",[R.pIgn],a), fonte:"SIM-DOFET",
    desc:"Entre os óbitos fetais com peso informado, proporção com 2500 g ou mais — fetos a termo ou próximos do termo, óbitos em geral mais evitáveis."},
@@ -847,12 +845,12 @@ const INDS = [
   {id:"pfet", eixo:"perinatal", rot:"% do componente fetal na mortalidade perinatal", curto:"% componente fetal", tipo:"pct", sentido:"neutro",
    num:(m,a)=> linha(m,"per_momento","Fetal")?.[a], den:(m,a)=> linha(m,"per_momento","Total")?.[a], fonte:"SIM-DOFET e SIM-DO",
    desc:"Entre os óbitos perinatais, proporção de óbitos fetais (o restante são óbitos neonatais precoces)."},
-  {id:"p1500", eixo:"perinatal", rot:"% de óbitos perinatais com peso <1500 g", curto:"% <1500 g", tipo:"pct", sentido:"neutro",
-   num:(m,a)=> somaLinhas(m,"per_peso",[R.p1,R.p2],a), den:(m,a)=> totalSem(m,"per_peso",[R.pIgn],a), fonte:"SIM-DOFET e SIM-DO",
-   desc:"Entre os óbitos perinatais com peso informado, proporção com menos de 1500 g."},
-  {id:"phip", eixo:"perinatal", rot:"% de óbitos perinatais por hipóxia/asfixia e transtornos respiratórios", curto:"% asfixia/respiratórios", tipo:"pct", sentido:"menor",
-   num:(m,a)=> linha(m,"per_causas",R.cHip)?.[a], den:(m,a)=> linha(m,"per_causas","Total")?.[a], fonte:"SIM-DOFET e SIM-DO",
-   desc:"Entre os óbitos perinatais, proporção por hipóxia/asfixia e transtornos respiratórios (P10 a P15, P20, P21, P24, P28)."},
+  {id:"p2500", eixo:"perinatal", rot:"% de óbitos perinatais com peso ≥2500 g", curto:"% ≥2500 g", tipo:"pct", sentido:"menor",
+   num:(m,a)=> somaLinhas(m,"per_peso",[R.p4,R.p5],a), den:(m,a)=> totalSem(m,"per_peso",[R.pIgn],a), fonte:"SIM-DOFET e SIM-DO",
+   desc:"Entre os óbitos perinatais com peso informado, proporção com 2500 g ou mais."},
+  {id:"pfat", eixo:"perinatal", rot:"% de óbitos perinatais por fatores maternos", curto:"% fatores maternos", tipo:"pct", sentido:"neutro",
+   num:(m,a)=> linha(m,"per_causas",R.cFat)?.[a], den:(m,a)=> linha(m,"per_causas","Total")?.[a], fonte:"SIM-DOFET e SIM-DO",
+   desc:"Entre os óbitos perinatais, proporção de fetos e recém-nascidos afetados por fatores maternos, placenta, cordão e membranas (P00 a P04)."},
   {id:"panom", eixo:"perinatal", rot:"% de óbitos perinatais por anomalias congênitas", curto:"% anomalias congênitas", tipo:"pct", sentido:"neutro",
    num:(m,a)=> linha(m,"per_causas",R.cAnom)?.[a], den:(m,a)=> linha(m,"per_causas","Total")?.[a], fonte:"SIM-DOFET e SIM-DO",
    desc:"Entre os óbitos perinatais, proporção por anomalias congênitas (capítulo XVII da CID-10)."},
@@ -872,9 +870,6 @@ const INDS = [
   {id:"n0d", eixo:"neonatal", rot:"% de óbitos neonatais no 1º dia de vida", curto:"% no 1º dia", tipo:"pct", sentido:"neutro",
    num:(m,a)=> linha(m,"neo_momento","0 dias")?.[a], den:(m,a)=> linha(m,"neo_momento","Total")?.[a], fonte:"SIM-DO",
    desc:"Entre os óbitos neonatais, proporção ocorrida nas primeiras 24 horas de vida."},
-  {id:"n1500", eixo:"neonatal", rot:"% de óbitos neonatais com peso <1500 g", curto:"% <1500 g", tipo:"pct", sentido:"neutro",
-   num:(m,a)=> somaLinhas(m,"neo_peso",[R.p1,R.p2],a), den:(m,a)=> totalSem(m,"neo_peso",[R.pIgn],a), fonte:"SIM-DO",
-   desc:"Entre os óbitos neonatais com peso informado, proporção com menos de 1500 g."},
   {id:"n2500", eixo:"neonatal", rot:"% de óbitos neonatais com peso ≥2500 g", curto:"% ≥2500 g", tipo:"pct", sentido:"menor",
    num:(m,a)=> somaLinhas(m,"neo_peso",[R.p4,R.p5],a), den:(m,a)=> totalSem(m,"neo_peso",[R.pIgn],a), fonte:"SIM-DO",
    desc:"Entre os óbitos neonatais com peso informado, proporção com 2500 g ou mais — recém-nascidos de peso adequado, óbitos em geral mais evitáveis."},
@@ -890,9 +885,6 @@ const INDS = [
   {id:"nrn", eixo:"neonatal", rot:"% de óbitos neonatais reduzíveis por atenção ao recém-nascido", curto:"% reduzíveis no RN", tipo:"pct", sentido:"menor",
    num:(m,a)=> linha(m,"neo_lbe",R.lRN)?.[a], den:(m,a)=> linha(m,"neo_lbe","Total")?.[a], fonte:"SIM-DO",
    desc:"Entre os óbitos neonatais, proporção por causas reduzíveis por adequada atenção ao recém-nascido (LBE)."},
-  {id:"nmal", eixo:"neonatal", rot:"% de óbitos neonatais por causas mal definidas", curto:"% mal definidas", tipo:"pct", sentido:"menor",
-   num:(m,a)=> linha(m,"neo_causas",R.cMal)?.[a], den:(m,a)=> linha(m,"neo_causas","Total")?.[a], fonte:"SIM-DO",
-   desc:"Entre os óbitos neonatais, proporção com causa básica mal definida (R00 a R99, P95) — qualidade da investigação do óbito."},
   {id:"nanom", eixo:"neonatal", rot:"% de óbitos neonatais por anomalias congênitas", curto:"% anomalias congênitas", tipo:"pct", sentido:"neutro",
    num:(m,a)=> linha(m,"neo_causas",R.cAnom)?.[a], den:(m,a)=> linha(m,"neo_causas","Total")?.[a], fonte:"SIM-DO",
    desc:"Entre os óbitos neonatais, proporção por anomalias congênitas (capítulo XVII da CID-10)."}
@@ -1020,11 +1012,11 @@ function simil(a, b){
 /* detalhe do valor no tooltip: numerador e denominador */
 const DEN_NOME = {
   mdir:"óbitos maternos", mind:"óbitos maternos", mhip:"óbitos maternos diretos", mhem:"óbitos maternos diretos", minf:"óbitos maternos diretos",
-  fante:"óbitos fetais com momento informado", fintra:"óbitos fetais com momento informado", f1500:"óbitos fetais com peso informado",
-  f2500:"óbitos fetais com peso informado", fmal:"óbitos fetais", pfet:"óbitos perinatais", p1500:"óbitos perinatais com peso informado",
-  phip:"óbitos perinatais", panom:"óbitos perinatais", n0d:"óbitos neonatais", n1500:"óbitos neonatais com peso informado",
+  fante:"óbitos fetais com momento informado", fintra:"óbitos fetais com momento informado",
+  f2500:"óbitos fetais com peso informado", fmal:"óbitos fetais", pfet:"óbitos perinatais", p2500:"óbitos perinatais com peso informado",
+  pfat:"óbitos perinatais", panom:"óbitos perinatais", n0d:"óbitos neonatais",
   n2500:"óbitos neonatais com peso informado", nevit:"óbitos neonatais", nges:"óbitos neonatais", npar:"óbitos neonatais",
-  nrn:"óbitos neonatais", nmal:"óbitos neonatais", nanom:"óbitos neonatais"
+  nrn:"óbitos neonatais", nanom:"óbitos neonatais"
 };
 function nomeDen(ind){
   if(ind.tipo === "taxa") return /NV/.test(ind.unidade || "") ? "nascidos vivos" : "nascimentos (NV + óbitos fetais)";
@@ -1480,7 +1472,7 @@ function desenhaPontos(){
 function grafLinhas(alvo, series, opts = {}){
   // series: [{nome, cor, vals:[…por ano…], dash}]
   const comRotulos = opts.rotulos !== false && series.length === 1;
-  const W = 640, H = 320, mL = 52, mR = 22, mT = comRotulos ? 34 : 18, mB = 30;
+  const W = 640, H = 320, mL = 52, mR = 44, mT = comRotulos ? 34 : 18, mB = 30;
   const todos = series.flatMap(s => s.vals).filter(v => v != null);
   const el = document.getElementById(alvo);
   if(!todos.length){ el.innerHTML = "<p class='suave'>Sem dados.</p>"; return; }
@@ -1564,11 +1556,11 @@ const FONTE_SIM = "Fonte: Ministério da Saúde - Sistema de Informações sobre
 const FONTE_SIM_SINASC = "Fonte: Ministério da Saúde - SIM e SINASC · dados sujeitos a revisão.";
 
 /* cabeçalhos de ano como botões (abre o gráfico do ano) */
-function thsAno(comTotal = true){
+/* 23/11/2026 (coordenação): as tabelas do perfil da unidade não trazem mais a coluna Total (o acumulado dos anos
+   completos); ficam só as colunas dos períodos. Os dados continuam com o acumulado, usado no mapa e no comparador. */
+function thsAno(){
   const th = (i, rot) => `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${rot}">${rot}</button></th>`;
-  let s = ANOS.map((a, i) => th(i, nomeAno(i) + (PRELIM.has(a) ? "*" : ""))).join("");
-  if(comTotal) s += th(NT, "Total");
-  return s;
+  return ANOS.map((a, i) => th(i, nomeAno(i) + (PRELIM.has(a) ? "*" : ""))).join("");
 }
 const notaPrelim = `<span class="chip chip-prelim" title="${[...PRELIM].map(a => ROTULO_ANO[a] || a).join(", ")}: dados preliminares do DATASUS${PARCIAIS.size ? ". " + NOTA_PARCIAL : ""}">* preliminar</span>`;
 
@@ -1583,7 +1575,7 @@ function notaSerie(ind){
   return `Em cada célula, o número de óbitos e, abaixo, a ${nomeTaxa(ind)} ${UNIDADE_EXTENSO[ind.unidade] || ind.unidade}.`;
 }
 function tabelaSerie(mt, bloco, rotN, rotD, rotTaxa, ind){
-  const n = linha(mt, bloco, rotN) || [], d = linha(mt, bloco, rotD) || [];
+  const n = (linha(mt, bloco, rotN) || []).slice(0, NT), d = (linha(mt, bloco, rotD) || []).slice(0, NT);
   const cel = (v, i) => `<td class="mono duplo"><b>${fmtInt(v)}</b><small class="taxa">${fmtTaxa(valorUnidade(mt, ind, i))}</small></td>`;
   return `<div class="tab-wrap"><table class="dados tab-verde" data-bloco="${bloco}" data-serie="${ind.id}">
     <thead><tr><th>Óbitos (nº e ${nomeTaxa(ind)} ${esc(ind.unidade)})</th>${thsAno()}</tr></thead>
@@ -1601,7 +1593,7 @@ function linhasDuplas(mt, bloco, rotTot, ehTotal, omite){
   const b = mt.blocos[bloco], tot = linha(mt, bloco, rotTot) || [];
   const tr = r => {
     const t = ehTotal(r[0]);
-    const tds = r[1].map((v, i) => celDupla(v, t ? (v ? 100 : null) : (v != null && tot[i] ? v / tot[i] * 100 : null))).join("");
+    const tds = r[1].slice(0, NT).map((v, i) => celDupla(v, t ? (v ? 100 : null) : (v != null && tot[i] ? v / tot[i] * 100 : null))).join("");
     return `<tr class="${t ? "total" : ""}"><td class="rot-click" data-row="${b.indexOf(r)}" title="Ver a evolução, ${SERIE_ROT}">${esc(r[0].replace(/ \(nº\)$/, ""))}</td>${tds}</tr>`;
   };
   const vis = b.filter(r => !(omite && omite.includes(r[0]) && r[1].every(v => !v)));
@@ -1662,7 +1654,11 @@ function baixarPngModal(){
   const escala = 2.5;
   const W = Math.round(vb.width * escala), H = Math.round(vb.height * escala);
   const alto = 64 * (escala / 2);
-  const xml = new XMLSerializer().serializeToString(svg);
+  // 23/11/2026: a cópia leva a fonte da página; sem isso o PNG saía em fonte serifada, mais larga, e cortava
+  // o rótulo do último período na borda direita
+  const copia = svg.cloneNode(true);
+  copia.setAttribute("font-family", "Arial, Helvetica, sans-serif");
+  const xml = new XMLSerializer().serializeToString(copia);
   const url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml;charset=utf-8"}));
   const img = new Image();
   img.onload = () => {
@@ -1851,14 +1847,14 @@ function desenhaDossie(){
       "Óbitos fetais com 22 semanas ou mais de gestação ou 500 g ou mais.")}
     <div class="card full"><h3>Distribuição dos óbitos fetais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "fet_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos fetais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "fet_momento", {cab:"Momento do óbito (nº e %)", omiteZero:[R.apos]})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Momento em relação ao parto (campo OBITOPARTO da DO fetal).</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos fetais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "fet_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos fetais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "fet_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10.</p></div>
 
     ${sep("Mortalidade perinatal")}
     ${cardGrafTab("gTMP", "Taxa de Mortalidade Perinatal", mt, "per_serie", R.obPer, R.nasc, "Taxa de Mortalidade Perinatal (por 1.000 nasc.)", "tmp",
       "Óbitos fetais (≥22 semanas ou ≥500 g) + óbitos neonatais precoces (0 a 6 dias).")}
     <div class="card full"><h3>Distribuição dos óbitos perinatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "per_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos perinatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "per_momento", {cab:"Componente (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Fetal (DOFET) e neonatal precoce (DO, 0 a 6 dias de vida).</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos perinatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "per_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos perinatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "per_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10.</p></div>
 
     ${sep("Mortalidade neonatal")}
     <div class="card full"><h3>Distribuição dos óbitos neonatais por momento do óbito ${notaPrelim}</h3>${tabelaNPct(mt, "neo_momento", {cab:"Dias de vida (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. 0 dias = óbito nas primeiras 24 horas de vida.</p></div>
@@ -1871,7 +1867,7 @@ function desenhaDossie(){
       ${tabelaSerie(mt, "neo_tardia", R.obTard, R.nv, "Taxa de Mortalidade Neonatal Tardia (por 1.000 NV)", indPorId("tmnt"))}
       <p class="fonte">${FONTE_SIM_SINASC} ${notaSerie(indPorId("tmnt"))} Óbitos de 7 a 27 dias de vida.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos neonatais por faixa de peso ${notaPrelim}</h3>${tabelaNPct(mt, "neo_peso", {cab:"Peso ao nascer (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período.</p></div>
-    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "neo_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10 (ver Metodologia).</p></div>
+    <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas ${notaPrelim}</h3>${tabelaNPct(mt, "neo_causas", {cab:"Grupo de causas (CID-10) (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Classificação própria por faixas da CID-10.</p></div>
     <div class="card full"><h3>Distribuição dos óbitos neonatais por grupo de causas evitáveis ${notaPrelim}</h3>${tabelaNPct(mt, "neo_lbe", {cab:"Lista Brasileira de Causas Evitáveis (nº e %)"})}<p class="fonte">${FONTE_SIM} Em cada célula, o número de óbitos e, abaixo, o percentual sobre o total do período. Lista Brasileira de Causas de Mortes Evitáveis por intervenções do SUS, menores de 5 anos (Malta et al., 2007/2010), aplicada aos óbitos neonatais.</p></div>
   </div>`;
 
@@ -1886,7 +1882,8 @@ function desenhaDossie(){
 /* ============================================================
    COMPARADOR
    ============================================================ */
-const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
+/* 23/11/2026 (coordenação): verde, laranja, azul e vermelho; antes a segunda cor era o azul-marinho, quase preto */
+const CORES_COMP = ["#279261","#D68910","#2471A3","#C0392B"];
 const COR_MEDIA = "#5E716A";
 const MEDIA_ROT = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 let anoComp = ULT;
@@ -2099,15 +2096,14 @@ const CALCULOS = {
   tmf_f:{n:"Óbitos fetais (regra acima).", d:"Nascimentos ocorridos na unidade: nascidos vivos (SINASC) + óbitos fetais, × 1.000 (IDB C.5)."},
   fante:{n:"Óbitos fetais com OBITOPARTO = 1 (antes do parto).", d:"Óbitos fetais com momento informado (exclui ignorado)."},
   fintra:{n:"Óbitos fetais com OBITOPARTO = 2 (durante o parto).", d:"Óbitos fetais com momento informado (exclui ignorado)."},
-  f1500:{n:"Óbitos fetais com peso de 100 a 1499 g.", d:"Óbitos fetais com peso informado (100 a 8.000 g)."},
   f2500:{n:"Óbitos fetais com peso de 2500 g ou mais.", d:"Óbitos fetais com peso informado (100 a 8.000 g)."},
   fmal:{n:"Óbitos fetais com causa básica R00-R99 ou P95.", d:"Total de óbitos fetais."},
   obp:{n:"Óbitos fetais (≥22 semanas ou ≥500 g) + óbitos de nascidos vivos com 0 a 6 dias de vida (SIM-DO) ocorridos na unidade.", d:"Não se aplica: é um número absoluto."},
   tmp_p:{n:"Óbitos perinatais (regra acima).", d:"Nascimentos ocorridos na unidade: nascidos vivos + óbitos fetais, × 1.000 (IDB C.5).",
     obs:"O componente neonatal precoce é atribuído pelo local do óbito; a DO não informa o estabelecimento de nascimento. Em maternidades com UTI neonatal, recém-nascidos nascidos em outro serviço entram no numerador sem entrar no denominador."},
   pfet:{n:"Óbitos fetais (componente fetal).", d:"Total de óbitos perinatais."},
-  p1500:{n:"Óbitos perinatais com peso de 100 a 1499 g.", d:"Óbitos perinatais com peso informado."},
-  phip:{n:"Óbitos perinatais com causa básica P10-P15, P20, P21, P24, P28.", d:"Total de óbitos perinatais."},
+  p2500:{n:"Óbitos perinatais com peso de 2500 g ou mais.", d:"Óbitos perinatais com peso informado."},
+  pfat:{n:"Óbitos perinatais com causa básica P00-P04 (feto e recém-nascido afetados por fatores maternos, placenta, cordão e membranas).", d:"Total de óbitos perinatais."},
   panom:{n:"Óbitos perinatais com causa básica Q00-Q99.", d:"Total de óbitos perinatais."},
   obn:{n:"Óbitos de nascidos vivos com 0 a 27 dias completos de vida ocorridos na unidade (SIM-DO). Idade = DTOBITO − DTNASC; sem DTNASC, recuperada do campo IDADE (minutos/horas = 0 dias; dias = quantidade).", d:"Não se aplica: é um número absoluto."},
   tmn_n:{n:"Óbitos neonatais (0 a 27 dias) ocorridos na unidade.", d:"Nascidos vivos ocorridos na unidade (SINASC), × 1.000.",
@@ -2115,13 +2111,11 @@ const CALCULOS = {
   tmnp:{n:"Óbitos de 0 a 6 dias de vida ocorridos na unidade.", d:"Nascidos vivos ocorridos na unidade, × 1.000 (IDB C.1.1)."},
   tmnt:{n:"Óbitos de 7 a 27 dias de vida ocorridos na unidade.", d:"Nascidos vivos ocorridos na unidade, × 1.000 (IDB C.1.2)."},
   n0d:{n:"Óbitos neonatais com 0 dias de vida (primeiras 24 horas).", d:"Total de óbitos neonatais."},
-  n1500:{n:"Óbitos neonatais com peso de 100 a 1499 g.", d:"Óbitos neonatais com peso informado."},
   n2500:{n:"Óbitos neonatais com peso de 2500 g ou mais.", d:"Óbitos neonatais com peso informado."},
   nevit:{n:"Óbitos neonatais nos seis grupos de causas evitáveis da Lista Brasileira (imunoprevenção; atenção à mulher na gestação; no parto; ao recém-nascido; diagnóstico e tratamento; promoção à saúde).", d:"Total de óbitos neonatais."},
   nges:{n:"Óbitos neonatais reduzíveis por atenção à mulher na gestação: A50, B20-B24, P00, P01, P02.2, P02.3, P02.7-P02.9, P04, P05, P07, P22.0, P26, P52, P55.0, P55.1, P55.8, P55.9, P56, P57, P77.", d:"Total de óbitos neonatais."},
   npar:{n:"Óbitos neonatais reduzíveis por atenção à mulher no parto: P02.0, P02.1, P02.4-P02.6, P03, P08, P10-P15, P20, P21, P24.0-P24.2, P24.8, P24.9.", d:"Total de óbitos neonatais."},
   nrn:{n:"Óbitos neonatais reduzíveis por atenção ao recém-nascido: P22.1, P22.8, P22.9, P23, P25, P27, P28, P35.1, P35.2, P35.4-P35.9, P36-P39, P50, P51, P53, P54, P58-P61, P70-P76, P78, P80-P83, P90-P94, P96.0-P96.8.", d:"Total de óbitos neonatais."},
-  nmal:{n:"Óbitos neonatais com causa básica R00-R99 ou P95.", d:"Total de óbitos neonatais."},
   nanom:{n:"Óbitos neonatais com causa básica Q00-Q99.", d:"Total de óbitos neonatais."}
 };
 const FICHAS_EXTRAS = [
@@ -2215,7 +2209,11 @@ function desenhaMetodologia(){
       </p>
     </div>`;
 }
+/* 23/11/2026 (coordenação): metodologia desabilitada em todos os painéis até a revisão dos textos. Para reabilitar,
+   trocar para true: voltam o botão do topo e o item do trilho lateral. */
+const METODOLOGIA_ATIVA = false;
 function abrirMetodo(){
+  if(!METODOLOGIA_ATIVA) return;
   desenhaMetodologia();
   const pg = document.getElementById("paginaMetodo");
   if(pg.hidden){
@@ -2280,7 +2278,7 @@ function inicia(){
     {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
     {alvo:"secComparativo", rot:"Comparativo entre anos", ico:ICO('<rect x="3" y="5" width="7.5" height="14" rx="1.5"/><rect x="13.5" y="5" width="7.5" height="14" rx="1.5"/>')},
-    {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
+    ...(METODOLOGIA_ATIVA ? [{alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}] : [])
   ];
   const trilho = document.getElementById("trilho");
   trilho.innerHTML = TRILHO.map(t =>
@@ -2303,6 +2301,7 @@ function inicia(){
   secs.forEach(s => spy.observe(s));
 
   document.getElementById("btnMetodologia").addEventListener("click", abrirMetodo);
+  if(!METODOLOGIA_ATIVA) document.getElementById("btnMetodologia").style.display = "none";
   document.getElementById("btnVoltarMetodo").addEventListener("click", () => fecharMetodo());
 
   // mapa svg — filtros

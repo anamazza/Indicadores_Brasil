@@ -423,7 +423,8 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
   <div class="stat"><div class="num" id="statTipos">—</div><div class="rot">Tipos de habilitação</div><div class="sub">códigos distintos nas unidades</div></div>
   <div class="stat"><div class="num" id="statUtin">—</div><div class="rot">Unidades com UTI neonatal</div><div class="sub" id="statUtinSub"></div></div>
   <div class="stat"><div class="num" id="statHgpar">—</div><div class="rot">Referência alto risco (HGPAR)</div><div class="sub" id="statHgparSub"></div></div>
-  <button class="stat stat-btn" id="btnNotas" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
+  <!-- 23/11/2026 (coordenação): notas metodológicas desabilitadas até a revisão dos textos; para reabilitar, tirar o style deste botão e o hidden da seção secNotas e voltar NOTAS_ATIVAS para true no painel_app.js -->
+  <button class="stat stat-btn" id="btnNotas" style="display:none" title="Fontes, datas e regras de leitura"><div class="num" style="font-size:1.5rem">ⓘ</div><div class="rot">Notas metodológicas</div></button>
 </div>
 
 <nav class="trilho" id="trilho" aria-label="Navegação do painel"></nav>
@@ -482,7 +483,7 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
       <h3 id="barrasTitulo">Habilitações no recorte</h3>
       <p class="suave" style="font-size:.82rem; margin-top:.3rem" id="barrasSub"></p>
       <div class="barras" id="barras"></div>
-      <p class="fonte">Cada barra conta as unidades do recorte com a habilitação registrada no CNES na data de referência de cada fonte (ver as notas metodológicas). Fonte: Ministério da Saúde - CNES.</p>
+      <p class="fonte">Cada barra conta as unidades do recorte com a habilitação registrada no CNES na data de referência de cada fonte. Fonte: Ministério da Saúde - CNES.</p>
     </div>
     <div class="card painel-lateral" id="painelDetalhe" style="margin-top:1.1rem"></div>
     <h3 style="margin:1.4rem 0 .6rem" id="matrizTitulo">Matriz de cobertura</h3>
@@ -599,7 +600,7 @@ table.dados tr.total td{font-weight:800; border-top:2px solid #1B5F51}
 </section>
 
 <!-- ========================= NOTAS ========================= -->
-<section id="secNotas">
+<section id="secNotas" hidden style="display:none">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Notas metodológicas</p>
@@ -1581,13 +1582,16 @@ function montarDossie(){
 }
 
 /* ---------------- trilho lateral ---------------- */
+/* 23/11/2026 (coordenação): notas metodológicas desabilitadas até a revisão dos textos (ver o comentário no botão
+   btnNotas do painel_base.html) */
+const NOTAS_ATIVAS = false;
 const TRILHO = [
   {alvo: "inicio", rot: "Início", ico: '<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>'},
   {alvo: "secConsulta", rot: "Consulta individual", ico: '<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>'},
   {alvo: "secGrupo", rot: "Por grupo", ico: '<svg viewBox="0 0 24 24"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15v-5M12 15V7M16 15v-3"/></svg>'},
   {alvo: "secLocal", rot: "Por local", ico: '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>'},
   {alvo: "secMapa", rot: "Mapa do Brasil e unidades", ico: '<svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>'},
-  {alvo: "secNotas", rot: "Notas metodológicas", ico: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>'},
+  ...(NOTAS_ATIVAS ? [{alvo: "secNotas", rot: "Notas metodológicas", ico: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>'}] : []),
 ];
 function montarTrilho(){
   const trilho = $("trilho");

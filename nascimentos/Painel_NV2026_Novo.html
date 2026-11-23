@@ -340,8 +340,9 @@ table.dados tbody tr:nth-child(odd){background:var(--mint-card)}
 table.dados tr.total td{font-weight:800; border-top:2px solid var(--borda)}
 /* célula com número absoluto e, abaixo, o percentual (mesmo formato do Painel de Internação) */
 table.dados td.duplo{line-height:1.25}
-table.dados td.duplo b{display:block; font-weight:700}
-table.dados td.duplo small{display:block; font-size:.74rem; font-weight:600; color:var(--texto-suave)}
+/* 23/11/2026 (coordenação): nas células com número e percentual, o destaque é do percentual */
+table.dados td.duplo b{display:block; font-size:.74rem; font-weight:500; color:var(--texto-suave)}
+table.dados td.duplo small{display:block; font-size:.86rem; font-weight:800; color:var(--texto)}
 table.dados td.meta-ok{color:var(--verde-fiocruz); font-weight:700}
 table.dados td.meta-ruim{color:var(--alerta); font-weight:700}
 
@@ -758,6 +759,9 @@ const INDS = [
    num:(m,a)=> (m.blocos.nv_territorio ? m.blocos.nv_territorio[0][1][a] : null), den:null,
    desc:"Total de nascidos vivos ocorridos na unidade (SINASC)."},
   {id:"shareUF", eixo:"geral", rot:"% dos nascimentos da UF ocorridos nas maternidades", curto:"% da UF", tipo:"pct", sentido:"neutro", denUnico:true,
+   // 23/11/2026 (coordenação): faixas fixas de 25 pontos na legenda, no lugar dos quintis
+   classifica:v => v < 25 ? "#DCEFE0" : v < 50 ? "#A9D8B4" : v < 75 ? "#2E9A63" : "#0A5C42",
+   legenda:[{c:"#DCEFE0", r:"< 25%"}, {c:"#A9D8B4", r:"25% a 50%"}, {c:"#2E9A63", r:"50% a 75%"}, {c:"#0A5C42", r:"> 75%"}],
    num:(m,a)=> m.blocos.nv_territorio[0][1][a], den:(m,a)=> m.blocos.nv_territorio[4][1][a],
    desc:"Participação das maternidades apoiadas do território no total de nascidos vivos da UF."},
   {id:"resRS", eixo:"geral", rot:"% de NV ocorridos na região de residência", curto:"% NV na região de residência", tipo:"pct", sentido:"neutro",
@@ -774,14 +778,14 @@ const INDS = [
    num:(m,a)=> linha(m,"trimestre","Primeiro Trimestre")?.[a],
    den:(m,a)=>{ const t=linha(m,"trimestre","Total")?.[a], i=linha(m,"trimestre","Ignorado")?.[a]||0; return t==null?null:t-i; },
    desc:"Entre quem fez ao menos uma consulta, proporção que começou no primeiro trimestre (exclui ignorados)."},
-  {id:"ces", eixo:"parto", rot:"% de cesariana", curto:"Cesariana", tipo:"pct", sentido:"menor", faixas:[30,35,45,55],
+  {id:"ces", eixo:"robson", rot:"% de cesariana", curto:"Cesariana", tipo:"pct", sentido:"menor", faixas:[30,35,45,55],
    num:(m,a)=> linha(m,"via","Cesariana")?.[a],
    den:(m,a)=>{ const t=linha(m,"via","Total")?.[a], i=linha(m,"via","Ignorado")?.[a]||0; return t==null?null:t-i; },
    desc:"Partos cesáreos sobre o total de nascidos vivos com via informada."},
-  {id:"enf", eixo:"parto", rot:"% de parto vaginal assistido por enfermeira ou obstetriz", curto:"Enfermeira/obstetriz", tipo:"pct", sentido:"maior", meta:50,
+  {id:"enf", eixo:"robson", rot:"% de parto vaginal assistido por enfermeira ou obstetriz", curto:"Enfermeira/obstetriz", tipo:"pct", sentido:"maior",
    num:(m,a)=> linha(m,"assistencia","Enferm/Obstetriz")?.[a],
    den:(m,a)=>{ const t=linha(m,"assistencia","Total")?.[a], i=linha(m,"assistencia","Ignorado")?.[a]||0; return t==null?null:t-i; },
-   desc:"Entre os partos vaginais, proporção assistida por enfermeira obstétrica ou obstetriz. Meta institucional ≥50%."},
+   desc:"Entre os partos vaginais, proporção assistida por enfermeira obstétrica ou obstetriz."},
   {id:"p2500", eixo:"rn", rot:"% de baixo peso (<2500 g)", curto:"<2500 g", tipo:"pct", sentido:"neutro",
    num:(m,a)=> somaLinhas(m,"peso",["0g a 999g","1000g a 1499g","1500g a 2499g"],a),
    den:(m,a)=> linha(m,"peso","Total")?.[a],
@@ -794,7 +798,7 @@ const INDS = [
    num:(m,a)=> somaLinhas(m,"gestacao",["Menos 22","22 a 27","28 a 31","32 a 36"],a),
    den:(m,a)=>{ const t=linha(m,"gestacao","Total")?.[a], i=linha(m,"gestacao","N Inf")?.[a]||0; return t==null?null:t-i; },
    desc:"Nascidos vivos com menos de 37 semanas de gestação (exclui idade gestacional não informada)."},
-  {id:"asf", eixo:"rn", rot:"% de Apgar <7 no 5º minuto", curto:"Apgar <7", tipo:"pct", sentido:"menor",
+  {id:"asf", eixo:"rn", rot:"% de Apgar <7 no 5º minuto", curto:"Apgar <7 e ≥2500 g", tipo:"pct", sentido:"menor",
    num:(m,a)=> somaLinhas(m,"apgar",["0 a 3","4 a 6"],a),
    den:(m,a)=>{ const t=linha(m,"apgar","Total")?.[a], ni=(linha(m,"apgar","N Inf")?.[a]||0)+(linha(m,"apgar","Ign")?.[a]||0); return t==null?null:t-ni; },
    desc:"Apgar de 0 a 6 no 5º minuto, entre nascidos com ≥2500 g e sem anomalias congênitas."},
@@ -811,9 +815,14 @@ const INDS = [
 ];
 const EIXOS = [
   {id:"geral", rot:"Visão geral"}, {id:"prenatal", rot:"Pré-natal"},
-  {id:"parto", rot:"Via de Nascimento"}, {id:"rn", rot:"Recém-nascido"}, {id:"robson", rot:"Grupos de Robson"}
+  {id:"rn", rot:"Recém-nascido"}, {id:"robson", rot:"Parto"}
 ];
+/* 23/11/2026 (coordenação): o eixo "Grupos de Robson" passa a se chamar "Parto" e reúne, nesta ordem, o % de cesariana,
+   o % de parto vaginal por enfermeira ou obstetriz e as taxas de cesariana dos grupos de Robson. O identificador
+   interno do eixo continua "robson". */
 const indPorId = id => INDS.find(i => i.id === id);
+/* 23/11/2026 (coordenação): o comparador não traz a taxa de cesariana no grupo 5 de Robson */
+const INDS_COMP = INDS.filter(i => i.id !== "rg5");
 
 /* valor de um indicador para UMA maternidade num ano (a = 0..NT) */
 function valorUnidade(mt, ind, a){
@@ -1416,7 +1425,7 @@ function desenhaPontos(){
       <div style="color:${cor.borda}; font-weight:700">${esc(rotuloConjuntos(m))}</div>
       <div style="margin-top:.25rem">Nascidos vivos ${nomeAno(ULT)}: <b>${fmtInt(nv)}</b></div>
       <div><u>Via de nascimento</u>: Cesariana <b>${fmtPct(ces)}</b> · Vaginal: <b>${ces == null ? "—" : fmtPct(100 - ces)}</b></div>
-      <div>Parto vaginal por enfermeira/obstetriz: <b>${fmtPct(enf)}</b> <span style="color:#4E6A5C">(meta ≥50%)</span></div>
+      <div>Parto vaginal por enfermeira/obstetriz: <b>${fmtPct(enf)}</b></div>
       <a class="pop-btn" href="#" onclick="abrirDossie('${m.cnes}');return false;">Abrir perfil da unidade →</a>`);
     mk.on("click", () => leaf.flyTo(mk.getLatLng(), Math.max(leaf.getZoom(), 11), {duration:.7}));
     camadaEstr.addLayer(mk);
@@ -1449,7 +1458,7 @@ function grafBarras(alvo, rotulos, valores, opts = {}){
 function grafLinhas(alvo, series, opts = {}){
   // series: [{nome, cor, vals:[…por ano…]}]
   const comRotulos = opts.rotulos !== false && series.length === 1;
-  const W = 640, H = 320, mL = 46, mR = 22, mT = comRotulos ? 34 : 18, mB = 30;
+  const W = 640, H = 320, mL = 46, mR = 44, mT = comRotulos ? 34 : 18, mB = 30;
   const todos = series.flatMap(s => s.vals).filter(v => v != null);
   if(!todos.length){ document.getElementById(alvo).innerHTML = "<p class='suave'>Sem dados.</p>"; return; }
   let max = Math.max(...todos), min = Math.min(...todos, opts.meta ?? Infinity);
@@ -1529,7 +1538,8 @@ function montaTerritorioHTML(mt, rec, persp){
 
   _terrSeries = [];
   const linhaTab = (rot, arr, opts = {}) => {
-    const tds = arr.map((v, i) => `<td class="mono">${opts.pct ? (v == null ? "—" : fmtPct(v)) : fmtInt(v)}</td>`).join("");
+    const tds = arr.map((v, i) => opts.n ? celDupla(opts.n[i], v)
+      : `<td class="mono">${opts.pct ? (v == null ? "—" : fmtPct(v)) : fmtInt(v)}</td>`).join("");
     _terrSeries.push({rot: textoSemHTML(rot), vals: arr, pct: !!opts.pct});
     return `<tr class="${opts.classe || ""}"><td class="rot-click" data-terr="${_terrSeries.length - 1}" title="Ver a evolução deste indicador, ${SERIE_ROT}">${rot}</td>${tds}</tr>`;
   };
@@ -1579,18 +1589,20 @@ function montaTerritorioHTML(mt, rec, persp){
     ? `${rotRec} ocorridos na maternidade e local de residência, ${SERIE_ROT} - ${esc(mt.nome)} - ${mt.uf}`
     : `${rec === "nv" ? "Total de nascidos vivos" : "Nascidos vivos <1500g"} ocorridos na maternidade e local de ocorrência, ${SERIE_ROT} - ${esc(mt.nome)} - ${mt.uf}`;
 
-  let corpo = linhaTab(persp === "res" ? "Nº Ocorridos no " + esc(mt.nome) : esc(mt.nome), vals.maternidade);
-  niveis.forEach(n => { if(vals[n.k]) corpo += linhaTab(esc(persp === "res" ? n.rotRes : n.rot), vals[n.k]); });
+  // 23/11/2026 (coordenação): em cada nível territorial, o número e o percentual na mesma célula, como nas demais
+  // tabelas, e sem a coluna Total. O clique no rótulo abre a evolução do percentual.
+  const anosTab = ANOS.map((_, i) => i);
+  let corpo = linhaTab(persp === "res" ? "Nº Ocorridos no " + esc(mt.nome) : esc(mt.nome), vals.maternidade.slice(0, NT));
   niveis.forEach(n => {
     if(!vals[n.k]) return;
-    corpo += linhaTab("% " + esc(persp === "res" ? n.rot.replace("Município - ", "Residentes no Município - ").replace("Região de Saúde - ", "Residentes na Região de Saúde - ").replace("Macrorregião de Saúde - ", "Residentes na Macrorregião de Saúde - ").replace("UF - ", "Residentes na UF - ") : n.rot),
-      todosAnos.map(a => pctDe(n.k, a)), {pct:true, classe:"pct"});
+    const rot = persp === "res" ? n.rot.replace("Município - ", "Residentes no Município - ").replace("Região de Saúde - ", "Residentes na Região de Saúde - ").replace("Macrorregião de Saúde - ", "Residentes na Macrorregião de Saúde - ").replace("UF - ", "Residentes na UF - ") : n.rot;
+    corpo += linhaTab(esc(rot), anosTab.map(a => pctDe(n.k, a)), {pct:true, n:vals[n.k]});
   });
 
   return `<div class="card">
       <h3>${titulo}</h3>
       <div class="tab-wrap" style="margin-top:.7rem"><table class="dados tab-verde" data-bloco="${bloco}">
-        <thead><tr><th>${cabecalho}</th>${thsAno()}</tr></thead>
+        <thead><tr><th>${cabecalho} (nº e %)</th>${thsAno()}</tr></thead>
         <tbody>${corpo}</tbody></table></div>
       <p class="fonte">${FONTE_SINASC} ${persp === "res"
         ? "Leitura: quanto maior o %, mais as gestantes atendidas moram perto da unidade."
@@ -1668,7 +1680,7 @@ function tabelaBloco(mt, bloco, opts = {}){
     return tem ? s : null; }) : null;
   const rows = b.map((r, ri) => {
     const rot = opts.rotulos ? (opts.rotulos[r[0]] ?? r[0]) : r[0];
-    const tds = r[1].map((v, i) => {
+    const tds = r[1].slice(0, NT).map((v, i) => {
       if(fora){
         const total = /total/i.test(r[0]);
         if(fora.includes(r[0]) || (total && fora.length)) return `<td class="mono">${fmtInt(v)}</td>`;
@@ -1688,11 +1700,11 @@ function tabelaBloco(mt, bloco, opts = {}){
     <tbody>${rows}</tbody></table></div>`;
 }
 /* cabeçalhos de ano como botões (abre o gráfico do ano) */
-function thsAno(comTotal = true){
-  let s = ANOS.map((a, i) =>
+/* 23/11/2026 (coordenação): nenhuma tabela do perfil da unidade traz mais a coluna Total (o acumulado dos anos
+   completos). Os dados continuam com o acumulado, usado nos mapas e no comparador. */
+function thsAno(){
+  return ANOS.map((a, i) =>
     `<th class="th-ano" data-a="${i}"><button class="btn-ano" title="Ver gráfico de ${nomeAno(i)}">${nomeAno(i)}</button></th>`).join("");
-  if(comTotal) s += `<th class="th-ano" data-a="${NT}"><button class="btn-ano" title="Ver gráfico do ${ROT_ACUM.toLowerCase()} (sem o período parcial)">Total</button></th>`;
-  return s;
 }
 
 /* ---------------- modal: gráfico da distribuição de um ano ---------------- */
@@ -1736,7 +1748,11 @@ function baixarPngModal(){
   const escala = 2.5;                      // resolucao boa para colar em documento
   const W = Math.round(vb.width * escala), H = Math.round(vb.height * escala);
   const alto = 64 * (escala / 2);          // faixa branca extra para titulo + subtitulo
-  const xml = new XMLSerializer().serializeToString(svg);
+  // 23/11/2026: a cópia leva a fonte da página; sem isso o PNG saía em fonte serifada, mais larga, e cortava
+  // o rótulo do último período na borda direita
+  const copia = svg.cloneNode(true);
+  copia.setAttribute("font-family", "Arial, Helvetica, sans-serif");
+  const xml = new XMLSerializer().serializeToString(copia);
   const url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml;charset=utf-8"}));
   const img = new Image();
   img.onload = () => {
@@ -2101,7 +2117,7 @@ function desenhaDossie(){
     <div class="card"><h3>Peso ao nascer</h3>${tabelaBloco(mt, "peso", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total de nascidos vivos. ${FONTE_SINASC}</p></div>
     <div class="card"><h3>Idade gestacional</h3>${tabelaBloco(mt, "gestacao", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com idade gestacional informada (exclui "N Inf", não informada). ${FONTE_SINASC}</p></div>
     <div class="card"><h3>Via de nascimento</h3>${tabelaBloco(mt, "via", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com via de nascimento informada (exclui "Ignorado"). ${FONTE_SINASC}</p></div>
-    <div class="card"><h3>Assistência ao parto vaginal</h3>${tabelaBloco(mt, "assistencia", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de partos vaginais e, abaixo, o percentual sobre os partos vaginais com profissional informado (exclui "Ignorado"). ${FONTE_SINASC} Somente partos vaginais. Meta: ≥50% por enfermeira/obstetriz.</p></div>
+    <div class="card"><h3>Assistência ao parto vaginal</h3>${tabelaBloco(mt, "assistencia", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de partos vaginais e, abaixo, o percentual sobre os partos vaginais com profissional informado (exclui "Ignorado"). ${FONTE_SINASC} Somente partos vaginais.</p></div>
     <div class="card"><h3>Apgar no 5º minuto</h3>${tabelaBloco(mt, "apgar", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre os nascidos vivos com Apgar informado (exclui "N Inf" e "Ign"). ${FONTE_SINASC} Somente ≥2500 g e sem anomalias congênitas.</p></div>
     <div class="card"><h3>Grupos de Robson: nascidos vivos</h3>${tabelaBloco(mt, "robson_n", {dist:true, cab:"Nº e %"})}<p class="fonte">Em cada célula, o número de nascidos vivos e, abaixo, o percentual sobre o total de nascidos vivos. ${FONTE_SINASC}</p></div>
     <div class="card full"><h3>Taxa de cesariana segundo grupo de Robson</h3>
@@ -2126,7 +2142,8 @@ function desenhaDossie(){
 /* ============================================================
    COMPARADOR
    ============================================================ */
-const CORES_COMP = ["#279261","#0A213D","#D68910","#C0392B"];
+/* 23/11/2026 (coordenação): verde, laranja, azul e vermelho; antes a segunda cor era o azul-marinho, quase preto */
+const CORES_COMP = ["#279261","#D68910","#2471A3","#C0392B"];
 const COR_MEDIA = "#5E716A";
 const MEDIA_ROT = {apoiada:"Estratégicas", ebserh:"HU Brasil", qualineo:"QUALINEO 3"};
 let anoComp = ULT;
@@ -2192,7 +2209,7 @@ function desenhaComparador(){
   const temMedia = lst.some(e => e.media);
   const a = anoComp;
   const rotAno = nomeAno(a);
-  const linhas = INDS.map(ind => {
+  const linhas = INDS_COMP.map(ind => {
     const vals = lst.map(m => valorEntrada(m, ind, a));
     const ok = vals.filter((v, j) => v != null && !lst[j].media);
     let melhor = null;
@@ -2211,14 +2228,14 @@ function desenhaComparador(){
     <div class="tab-wrap"><table class="comp">
       <thead><tr><th>Indicador</th>${lst.map((m, i) => `<th style="color:${cores[i]}">${esc(m.nome.length > 26 ? m.nome.slice(0,25) + "…" : m.nome)}<br><span class="suave" style="font-weight:400">${m.media ? m.sub : m.uf}</span></th>`).join("")}</tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">“Melhor” considera o sentido de cada indicador (menor taxa de cesariana é melhor; mais pré-natal é melhor). Indicadores de perfil (peso, prematuridade) não têm destaque.${temMedia ? " A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade) — e não participa do destaque. Detalhes na Metodologia." : ""}</p>
+    <p class="fonte">“Melhor” considera o sentido de cada indicador (menor taxa de cesariana é melhor; mais pré-natal é melhor). Indicadores de perfil (peso, prematuridade) não têm destaque.${temMedia ? " A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade) — e não participa do destaque." : ""}</p>
   </div>
   <div class="grid-2" style="margin-top:1.1rem">
     <div class="card"><h3 style="display:flex; justify-content:space-between; align-items:center; gap:.6rem">Série comparada <select id="selIndComp"></select></h3><div id="grafComp"></div></div>
     <div class="card"><h3>Nascidos vivos · ${rotAno}</h3><div id="grafCompNV"></div></div>
   </div>`;
   const sel = document.getElementById("selIndComp");
-  sel.innerHTML = INDS.filter(i => i.tipo !== "num").map(i => `<option value="${i.id}">${esc(i.curto)}</option>`).join("");
+  sel.innerHTML = INDS_COMP.filter(i => i.tipo !== "num").map(i => `<option value="${i.id}">${esc(i.curto)}</option>`).join("");
   sel.value = "ces";
   sel.addEventListener("change", desenhaGrafComp);
   desenhaGrafComp();
@@ -2288,7 +2305,7 @@ function desenhaEvolucao(){
   const thsGrupo = eg ? anos.map((a, k) => `<th class="col-grupo${k ? "" : " prim"}">${nomeAno(a)}<br><span style="font-weight:400">${esc(eg.nome)}</span></th>`).join("") : "";
   const a0 = anos[0], a1 = anos[anos.length - 1];
   const parcialSel = temParcial(anos);
-  const linhas = INDS.map(ind => {
+  const linhas = INDS_COMP.map(ind => {
     const serie = ANOS.map((_, i) => valorUnidade(mt, ind, i));
     const tds = anos.map(a => `<td class="mono">${ind.tipo === "num" ? fmtInt(serie[a]) : fmtPct(serie[a])}</td>`).join("");
     const v0 = serie[a0], v1 = serie[a1];
@@ -2314,7 +2331,7 @@ function desenhaEvolucao(){
     <div class="tab-wrap"><table class="comp">
       <thead><tr><th>Indicador</th>${anos.map(a => `<th>${nomeAno(a)}</th>`).join("")}<th>Variação</th><th>Tendência ${ANOS[0]}–${ANOS[ULT]}</th>${thsGrupo}</tr></thead>
       <tbody>${linhas}</tbody></table></div>
-    <p class="fonte">Variação em pontos percentuais entre o primeiro e o último ano marcados (nascidos vivos: variação relativa em %). Verde = evoluiu no sentido desejado do indicador; vermelho = piorou; sem cor = indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação de nascidos vivos não é calculada quando o período parcial é um dos extremos." : ""} ${FONTE_SINASC}${eg ? ` A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade). Detalhes na Metodologia.` : ""}</p>
+    <p class="fonte">Variação em pontos percentuais entre o primeiro e o último ano marcados (nascidos vivos: variação relativa em %). Verde = evoluiu no sentido desejado do indicador; vermelho = piorou; sem cor = indicador de perfil, sem julgamento. A tendência mostra os anos completos, ${ANOS[0]} a ${ANOS[ULT]}.${parcialSel ? " " + esc(NOTA_PARCIAL) + " Por isso a variação de nascidos vivos não é calculada quando o período parcial é um dos extremos." : ""} ${FONTE_SINASC}${eg ? ` A média do grupo é a taxa agregada das unidades do grupo — soma dos numeradores ÷ soma dos denominadores (Robson ponderado pelo nº de partos; no volume de nascidos vivos, média por unidade).` : ""}</p>
   </div>`;
 }
 
@@ -2464,7 +2481,11 @@ function desenhaMetodologia(){
       </p>
     </div>`;
 }
+/* 23/11/2026 (coordenação): metodologia desabilitada em todos os painéis até a revisão dos textos. Para reabilitar,
+   trocar para true: voltam o botão do topo e o item do trilho lateral. */
+const METODOLOGIA_ATIVA = false;
 function abrirMetodo(){
+  if(!METODOLOGIA_ATIVA) return;
   desenhaMetodologia();
   const pg = document.getElementById("paginaMetodo");
   if(pg.hidden){
@@ -2525,7 +2546,7 @@ function inicia(){
     {alvo:"secDossie", rot:"Perfil da unidade", ico:ICO('<path d="M5 21V8l7-4 7 4v13"/><path d="M9.5 21v-4.5h5V21"/><path d="M12 8v3.5M10.25 9.75h3.5"/><path d="M4 21h16"/>')},
     {alvo:"secComparar", rot:"Comparar unidades", ico:ICO('<path d="M6 3v18M18 3v18"/><path d="M6 8h5M13 8h5M6 13h5M13 13h5"/>')},
     {alvo:"secComparativo", rot:"Comparativo entre anos", ico:ICO('<rect x="3" y="5" width="7.5" height="14" rx="1.5"/><rect x="13.5" y="5" width="7.5" height="14" rx="1.5"/>')},
-    {alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}
+    ...(METODOLOGIA_ATIVA ? [{alvo:"__metodo", rot:"Metodologia", ico:ICO('<circle cx="12" cy="12" r="9"/><path d="M12 8h.01"/><path d="M11 12h1v4h1"/>')}] : [])
   ];
   const trilho = document.getElementById("trilho");
   trilho.innerHTML = TRILHO.map(t =>
@@ -2549,6 +2570,7 @@ function inicia(){
 
   // botão metodologia do hero abre a página própria
   document.getElementById("btnMetodologia").addEventListener("click", abrirMetodo);
+  if(!METODOLOGIA_ATIVA) document.getElementById("btnMetodologia").style.display = "none";
   document.getElementById("btnVoltarMetodo").addEventListener("click", () => fecharMetodo());
 
   // mapa svg — filtros em lista suspensa
@@ -2591,8 +2613,7 @@ function inicia(){
   const listaInds = document.getElementById("listaIndsMapa");
   listaInds.classList.add("pills-ind");
   const desenhaPillsEixo = () => {
-    // via de nascimento fica no mapa de unidades (popup dos pontos), não no coroplético
-    listaEixos.innerHTML = EIXOS.filter(e => e.id !== "parto").map(e =>
+    listaEixos.innerHTML = EIXOS.map(e =>
       `<button data-eixo="${e.id}" class="${e.id === estado.eixoMapa ? "ativo" : ""}">${ICO_EIXO[e.id] || ""}<span>${e.rot}</span></button>`).join("");
     listaEixos.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
       estado.eixoMapa = b.dataset.eixo;
